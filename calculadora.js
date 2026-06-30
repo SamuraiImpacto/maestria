@@ -39,7 +39,7 @@
     const economiaAno = economiaSemanaTotal * semanasAno;
     const valorMes = economiaMes * valorHora;
     const valorAno = economiaAno * valorHora;
-    const custoFull = 1997;
+    const custoFull = 297;
     const roi = valorAno > 0 ? (valorAno / custoFull).toFixed(0) : 0;
 
     document.getElementById('calc-result-h-semana').textContent = economiaSemanaTotal.toFixed(1) + 'h';
