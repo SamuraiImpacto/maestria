@@ -1291,3 +1291,55 @@ code {
   .prova-aspas { display: none; }
   .prova-card { padding: 26px 22px; }
 }
+
+/* ============== CONSELHEIROS ============== */
+.conselheiros { background: var(--bg); }
+
+.cons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 40px;
+  text-align: left;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cons-card {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  transition: transform 0.2s, border-color 0.2s;
+  min-width: 0;
+}
+
+.cons-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--vermelho-border);
+}
+
+.cons-card h4 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--vermelho);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.cons-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.cons-bonus {
+  background: var(--vermelho-bg);
+  border-color: var(--vermelho-border);
+  border-style: dashed;
+}
+
+.cons-bonus h4 {
+  color: var(--text);
+}
