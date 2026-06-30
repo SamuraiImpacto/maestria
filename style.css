@@ -974,20 +974,41 @@ section h2 {
 /* ============== BANCO VIVO ============== */
 .banco { background: var(--bg-card); }
 
-.banco-grid {
+.banco-grid, .banco-pontos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
   margin-top: 40px;
   text-align: left;
 }
 
-.banco-step {
+.banco-step, .banco-ponto {
   background: var(--bg-card-2);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 24px;
+  border-left: 3px solid var(--vermelho);
+  border-radius: var(--radius-sm);
+  padding: 22px 22px 22px 20px;
   min-width: 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.banco-ponto strong {
+  color: var(--vermelho);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+}
+
+.banco-ponto p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+  margin: 0;
+  padding-top: 4px;
 }
 
 .banco-step-num {
@@ -1141,7 +1162,9 @@ section h2 {
 @media (max-width: 720px) {
   section { padding: 60px 0; }
   .hero { padding: 70px 0 50px; }
-  .nav-links a:not(.btn-nav) { display: none; }
+  .nav-links { gap: 14px; }
+  .nav-links a:not(.btn-nav):not([href="#pacotes"]) { display: none; }
+  .nav-links a[href="#pacotes"]:not(.btn-nav) { display: inline; font-size: 13px; }
   .pack-card { padding: 26px 22px; }
   .destaque-calc-gold { grid-column: span 1; }
   .calc-wrapper { padding: 22px 18px; }
