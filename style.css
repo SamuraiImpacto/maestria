@@ -1148,3 +1148,71 @@ section h2 {
   .roadmap-timeline { padding: 18px; }
   .footer-cols { text-align: center; }
 }
+
+/* PRÉ-REQUISITO Claude */
+.prereq {
+  padding: 30px 0 0;
+  background: var(--bg);
+}
+.prereq-box {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: start;
+  background: var(--bg-card-2);
+  border: 1px solid var(--vermelho-border);
+  border-left: 4px solid var(--vermelho);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  text-align: left;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.prereq-icon { font-size: 32px; }
+.prereq-content h3 {
+  font-size: 17px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.prereq-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+.prereq-content strong { color: var(--text); }
+.prereq-content a { color: var(--vermelho); font-weight: 600; }
+.prereq-meta { font-size: 13px !important; }
+
+/* FULL UPSELL BOX */
+.full-upsell-box {
+  background: var(--bg-card-2);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin: 28px auto 0;
+  max-width: 720px;
+  text-align: center;
+}
+.full-upsell-box h3 {
+  font-size: 18px;
+  color: var(--vermelho);
+  margin-bottom: 10px;
+}
+.full-upsell-box p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.full-upsell-box strong { color: var(--text); }
+
+/* Code inline */
+code {
+  background: var(--bg-card-3);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--vermelho);
+  font-family: 'Courier New', monospace;
+}
