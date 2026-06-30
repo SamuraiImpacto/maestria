@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo à MaestrIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">Maestr<span>IA</span></a>
+    <div class="nav-links">
+      <a href="https://maestria.samurailab.com.br/membros" class="btn-nav">Área de membros</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="badges">
+      <span class="badge">COMPRA CONFIRMADA</span>
+    </div>
+    <h1>Bem-vindo à <span class="gold">MaestrIA</span>.<br>Próximas 30 minutos.</h1>
+    <p class="hero-sub">Sua compra foi confirmada. Recebe em até 2 minutos o email com o <strong>token de ativação</strong> e o <strong>link de download</strong> do pacote contratado. Enquanto isso, esse é o roteiro de instalação.</p>
+  </div>
+</header>
+
+<section class="problema">
+  <div class="container">
+    <span class="kicker">Passo 1 de 4</span>
+    <h2>Instalar o Claude Code (se ainda não tem)</h2>
+    <p class="lead">A MaestrIA roda dentro do Claude Code. Se você ainda não instalou, faça agora pelo link oficial.</p>
+    <ul class="diff-col diff-gold" style="list-style:none;padding:24px;">
+      <li>1. Acesse <a href="https://claude.ai/code" style="color:var(--gold);">claude.ai/code</a></li>
+      <li>2. Crie sua conta com email (mesmo email da compra MaestrIA, recomendado)</li>
+      <li>3. Baixe o aplicativo pra Windows ou Mac</li>
+      <li>4. Instale e abra uma vez (vai pedir login)</li>
+    </ul>
+    <p class="lead" style="margin-top:24px;">Tempo: <strong>10 minutos</strong>.</p>
+  </div>
+</section>
+
+<section class="solucao">
+  <div class="container">
+    <span class="kicker">Passo 2 de 4</span>
+    <h2>Baixar e instalar o pacote MaestrIA</h2>
+    <p class="lead">Quando o email chegar (até 2 minutos), você vai receber:</p>
+    <ul class="diff-col diff-gold" style="list-style:none;padding:24px;">
+      <li>✓ <strong>Token de ativação</strong> (formato MTR-XXXX-XXXX-XXXX)</li>
+      <li>✓ <strong>Link de download</strong> dos ZIPs do pacote</li>
+      <li>✓ <strong>Vídeo de 5 min</strong> mostrando instalação completa</li>
+    </ul>
+    <p class="lead" style="margin-top:24px;">Em cada ZIP:</p>
+    <ul class="diff-col diff-cinza" style="list-style:none;padding:24px;">
+      <li>Pasta <code>setup/</code> com <code>Instalar.bat</code> (Windows) ou <code>instalar.sh</code> (Mac/Linux)</li>
+      <li>Pasta <code>skill/</code> com toda a inteligência da skill</li>
+      <li><strong>Duplo clique no Instalar.bat</strong> e pronto. Ele copia tudo pra <code>~/.claude/&lt;skill&gt;/</code> e cria atalho em <code>Documentos\MaestrIA\</code>.</li>
+    </ul>
+    <p class="lead" style="margin-top:24px;">Tempo: <strong>5 minutos por skill</strong>. Você não precisa instalar todas de uma vez.</p>
+  </div>
+</section>
+
+<section class="pra-quem">
+  <div class="container">
+    <span class="kicker">Passo 3 de 4</span>
+    <h2>Ativar a licença em cada skill</h2>
+    <p class="lead">Abra o Claude Code, digite o nome da skill (ex: <code>/menu</code> dentro de qualquer skill) e rode:</p>
+    <pre style="background:var(--bg-card-2);padding:20px;border-radius:8px;color:var(--gold);font-size:14px;overflow-x:auto;">/ativar-licenca MTR-XXXX-XXXX-XXXX</pre>
+    <p class="lead" style="margin-top:24px;">Repete em cada skill do pacote. <strong>1 minuto por skill.</strong></p>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container">
+    <span class="kicker">Passo 4 de 4</span>
+    <h2>Setup rápido em 30 minutos</h2>
+    <p>Em cada skill, rode <code>/setup-rapido</code>. Ela vai te perguntar dados do escritório, tom de voz, te ajudar a calibrar com 1-2 modelos seus, e rodar um caso piloto. <strong>30 minutos. Uma vez.</strong></p>
+    <p style="margin-top:24px;color:var(--text-muted);">Depois disso, você gera petição, cálculo, briefing, audiência no padrão do seu escritório. Tudo salvo em <code>Documentos\MaestrIA\</code>.</p>
+    <a href="https://maestria.samurailab.com.br/membros" class="btn-primary btn-grande" style="margin-top:32px;">Ir pra área de membros</a>
+    <p class="cta-meta">Precisou de ajuda? Email <a href="mailto:suporte@samurailab.com.br" style="color:var(--gold);">suporte@samurailab.com.br</a> ou rode <code>/suporte</code> em qualquer skill.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 Samurai Lab. MaestrIA é skills de IA jurídica para advogados sérios.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

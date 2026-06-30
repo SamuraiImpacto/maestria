@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suporte - MaestrIA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .faq-item { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 12px; }
+    .faq-q { font-weight: 700; color: var(--gold); font-size: 16px; margin-bottom: 8px; cursor: pointer; }
+    .faq-a { color: var(--text-muted); line-height: 1.65; font-size: 14px; }
+    .canais-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 32px 0; }
+    .canal-card {
+      background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 24px; text-align: center;
+    }
+    .canal-card strong { display: block; font-size: 18px; color: var(--text); margin-bottom: 6px; }
+    .canal-card a { color: var(--gold); font-weight: 700; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">Maestr<span>IA</span></a>
+    <div class="nav-links">
+      <a href="https://maestria.samurailab.com.br/membros" class="btn-nav">Área de membros</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="badges"><span class="badge">SUPORTE MAESTRIA</span></div>
+    <h1>Travou? <span class="gold">A gente destrava.</span></h1>
+    <p class="hero-sub">3 canais de suporte, 3 tempos de resposta diferentes. Escolhe o que faz sentido pra você.</p>
+  </div>
+</header>
+
+<section class="solucao">
+  <div class="container">
+    <h2>Canais de suporte</h2>
+    <div class="canais-grid">
+      <div class="canal-card">
+        <strong>/suporte na skill</strong>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 12px 0;">Resposta em até 24h úteis. Mais rápido que email, mais simples.</p>
+        <a href="#">Como usar</a>
+      </div>
+      <div class="canal-card">
+        <strong>Email</strong>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 12px 0;">Resposta em até 48h úteis. Pra dúvidas mais longas com prints/anexos.</p>
+        <a href="mailto:suporte@samurailab.com.br">suporte@samurailab.com.br</a>
+      </div>
+      <div class="canal-card" style="border-color: var(--gold);">
+        <strong>Comunidade Diamond</strong>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 12px 0;">Plano Full e Diamond: grupo WhatsApp com Samurai e outros advogados. Resposta em horas.</p>
+        <a href="#">Solicitar acesso</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problema">
+  <div class="container">
+    <h2>Perguntas frequentes</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Eu preciso saber programar?</div>
+      <div class="faq-a">Não. A MaestrIA roda dentro do Claude Code com comandos em português puro. <code>/menu</code>, <code>/setup-rapido</code>, <code>/nova-peticao</code>. Não tem código. Você fala, ele responde.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Os dados do meu cliente saem do meu computador?</div>
+      <div class="faq-a">Não. CPF, RG, histórico médico, prontuário, qualquer dado pessoal fica 100% no seu PC. A skill nunca envia conteúdo do cliente pra servidor externo. O único contato com a internet é validar súmula/lei em fonte oficial (DataJud CNJ, e-Proc, INSS).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">A MaestrIA inventa jurisprudência?</div>
+      <div class="faq-a">Não. Toda citação que ela usa passa por validação automática em fonte oficial. Súmula que não tem na base do STJ/STF/TST é marcada [VERIFICAR FONTE OFICIAL] em vez de cravada. Esse é o nosso diferencial técnico principal.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Posso usar com modelos do MEU escritório?</div>
+      <div class="faq-a">Sim, é desenhado pra isso. No <code>/setup-rapido</code> você sobe 1-2 modelos seus (uma petição inicial, uma contestação). A MaestrIA preserva seu timbrado, seu estilo de redação, suas fórmulas. Nunca substitui pelo padrão dela.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Funciona offline?</div>
+      <div class="faq-a">Funcionalidade principal sim (geração de petição, cálculo, briefing). Conexão é só pra validar citações em fonte oficial. Se você está num voo, ela continua gerando e marca pontos a validar quando voltar à internet.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">E se eu quiser cancelar?</div>
+      <div class="faq-a">Cancela quando quiser via área de membros. Sem multa, sem ligação pra reter. Você continua usando até o fim do período pago e depois não renova. Tem reembolso de 7 dias se não bater com o que esperava.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Posso usar em mais de um computador?</div>
+      <div class="faq-a">Cada licença é pra 1 advogado em até 2 dispositivos (notebook + desktop, ou notebook + casa). Se o escritório tem 3+ advogados que vão usar, precisa de licença por pessoa. Há desconto progressivo a partir de 3 licenças.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">A MaestrIA assina o documento por mim?</div>
+      <div class="faq-a">Não. Ela gera o documento até 90% pronto, com tudo validado. Você revisa, ajusta o que quer, assina. Quem responde pelo conteúdo final no processo é você. A MaestrIA acelera, não substitui o advogado.</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container">
+    <h2>Não achou aqui?</h2>
+    <p>Mande pro <a href="mailto:suporte@samurailab.com.br" style="color: var(--gold);">suporte@samurailab.com.br</a> ou rode <code>/suporte</code> dentro de qualquer skill.</p>
+    <p class="cta-meta">Tempo médio de resposta: 18h úteis (skill), 36h úteis (email).</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 Samurai Lab. MaestrIA é skills de IA jurídica para advogados sérios.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
