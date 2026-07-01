@@ -1794,6 +1794,69 @@ code {
   .prova-card { padding: 26px 22px; }
 }
 
+/* ============== FORMULÁRIO DE CONTATO ============== */
+.form-contato {
+  max-width: 640px;
+  margin: 36px auto 0;
+  text-align: left;
+  display: grid;
+  gap: 16px;
+}
+
+.form-contato label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-contato input,
+.form-contato select,
+.form-contato textarea {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  width: 100%;
+  resize: vertical;
+}
+
+.form-contato input:focus,
+.form-contato select:focus,
+.form-contato textarea:focus {
+  outline: none;
+  border-color: var(--vermelho);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.form-contato button {
+  border: 0;
+  cursor: pointer;
+  margin-top: 8px;
+  justify-self: center;
+}
+
+.form-ok {
+  margin-top: 28px;
+  color: var(--verde-positivo);
+  font-weight: 700;
+  text-align: center;
+  font-size: 16px;
+}
+
 /* ============== PÁGINAS LEGAIS ============== */
 .legal-content {
   max-width: 780px;

@@ -48,9 +48,9 @@
         <p style="color: var(--text-muted); font-size: 13px; margin: 12px 0;">O canal principal. Pede ajuda de dentro da própria skill: ela abre um chamado direto e a correção chega automaticamente pra você.</p>
       </div>
       <div class="canal-card">
-        <strong>Email</strong>
-        <p style="color: var(--text-muted); font-size: 13px; margin: 12px 0;">Pra assuntos administrativos: reembolso, nota fiscal, troca de email da licença.</p>
-        <a href="mailto:suporte@samurailab.com.br">suporte@samurailab.com.br</a>
+        <strong>Mensagem direta</strong>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 12px 0;">Pra assuntos administrativos: reembolso, nota fiscal, troca de email da licença. Responde direto no seu email.</p>
+        <a href="#mensagem">Enviar mensagem</a>
       </div>
       <div class="canal-card" style="border-color: var(--gold);">
         <strong>Comunidade Diamond</strong>
@@ -108,13 +108,50 @@
   </div>
 </section>
 
-<section class="cta-final">
+<section class="solucao" id="mensagem">
   <div class="container">
-    <h2>Não achou aqui?</h2>
-    <p>Mande pro <a href="mailto:suporte@samurailab.com.br" style="color: var(--gold);">suporte@samurailab.com.br</a> ou rode <code>/suporte</code> dentro de qualquer skill.</p>
-    <p class="cta-meta">Tempo médio de resposta: 18h úteis (skill), 36h úteis (email).</p>
+    <h2>Manda sua mensagem</h2>
+    <p class="lead">Cai direto na caixa de quem resolve. A resposta chega no email que você informar.</p>
+    <form class="form-contato" action="https://formsubmit.co/rodrigo@samurailab.com.br" method="POST">
+      <input type="hidden" name="_subject" value="Contato MaestrIA (site)">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://maestria.samurailab.com.br/suporte.html?enviado=1">
+      <input type="text" name="_honey" style="display:none">
+      <div class="form-row">
+        <label>Seu nome
+          <input type="text" name="nome" required>
+        </label>
+        <label>Seu email
+          <input type="email" name="email" required>
+        </label>
+      </div>
+      <label>Assunto
+        <select name="assunto" required>
+          <option value="" disabled selected>Escolhe uma opção</option>
+          <option>Dúvida antes de comprar</option>
+          <option>Problema técnico</option>
+          <option>Reembolso</option>
+          <option>Nota fiscal ou dados da compra</option>
+          <option>Outro</option>
+        </select>
+      </label>
+      <label>Mensagem
+        <textarea name="mensagem" rows="5" required></textarea>
+      </label>
+      <button type="submit" class="btn-primary btn-grande">Enviar mensagem</button>
+    </form>
+    <p class="form-ok" id="form-ok" style="display:none">Mensagem enviada. A resposta chega no seu email.</p>
   </div>
 </section>
+
+<script>
+  if (location.search.indexOf('enviado=1') !== -1) {
+    document.getElementById('form-ok').style.display = 'block';
+    document.querySelector('.form-contato').style.display = 'none';
+    location.hash = '#mensagem';
+  }
+</script>
 
 <footer class="footer">
   <div class="container">
