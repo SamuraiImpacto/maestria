@@ -1567,8 +1567,9 @@ section h2 {
   line-height: 1.6;
 }
 
-.cta-meta {
-  margin-top: 44px;
+.cta-meta,
+.cta-final .cta-meta {
+  margin: 48px auto 0;
   font-size: 13px;
   color: var(--text-dim);
 }
