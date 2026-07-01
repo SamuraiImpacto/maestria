@@ -262,6 +262,109 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-muted);
 }
 
+/* ============== PROVA STRIP ============== */
+.prova-strip {
+  padding: 0;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.strip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 34px 0;
+}
+
+.strip-item { text-align: center; }
+
+.strip-item strong {
+  display: block;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--vermelho);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.strip-item span {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  display: block;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .strip-grid { grid-template-columns: 1fr; gap: 22px; padding: 28px 0; }
+}
+
+/* ============== TERMINAL MOCK ============== */
+.terminal-caption {
+  margin: 56px auto 0;
+  font-size: 19px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--text);
+}
+
+.terminal-mock {
+  max-width: 780px;
+  margin: 22px auto 0;
+  background: #0d0d0d;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 16px;
+  background: var(--bg-card-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.t-dot { width: 11px; height: 11px; border-radius: 50%; background: #333; }
+.t-dot:first-child { background: var(--vermelho); }
+
+.terminal-title {
+  margin-left: 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: 'Courier New', monospace;
+}
+
+.terminal-body {
+  padding: 22px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.terminal-body p { margin: 0 0 10px; }
+.terminal-body p:last-child { margin-bottom: 0; }
+
+.t-cmd { color: var(--text); font-weight: 700; }
+.t-prompt { color: var(--vermelho); margin-right: 8px; }
+.t-resp { color: var(--text-muted); }
+.t-ok { color: var(--verde-positivo); font-weight: 700; }
+.t-meta { color: var(--text-dim); font-size: 12.5px; }
+
+@media (max-width: 600px) {
+  .terminal-body { padding: 16px; font-size: 12px; }
+}
+
+/* ============== COMO FUNCIONA ============== */
+.como-funciona { background: var(--bg-card); }
+.como-funciona .prereq-box { margin-top: 44px; }
+
 /* ============== SEÇÕES BASE ============== */
 section {
   padding: 90px 0;
@@ -1380,8 +1483,8 @@ section h2 {
 
 .footer-cols {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 44px;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
   margin-bottom: 30px;
   text-align: left;
 }
@@ -1586,6 +1689,47 @@ code {
   .prova-aspas { display: none; }
   .prova-card { padding: 26px 22px; }
 }
+
+/* ============== PÁGINAS LEGAIS ============== */
+.legal-content {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 70px 0 40px;
+}
+
+.legal-content h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 8px;
+}
+
+.legal-updated {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin-bottom: 44px;
+}
+
+.legal-content h2 {
+  font-size: 20px;
+  margin: 38px 0 12px;
+  text-align: left;
+  max-width: none;
+}
+
+.legal-content p,
+.legal-content li {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.legal-content ul {
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.legal-content strong { color: var(--text); }
 
 /* ============== CONSELHEIROS ============== */
 .conselheiros { background: var(--bg); }
