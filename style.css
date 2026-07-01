@@ -411,6 +411,62 @@ a { color: inherit; text-decoration: none; }
 .como-funciona { background: var(--bg-card); }
 .como-funciona .prereq-box { margin-top: 44px; }
 
+.passos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.passo-card {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  min-width: 0;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.passo-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--vermelho-border);
+}
+
+.passo-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--vermelho);
+  color: var(--text);
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.passo-card h3 {
+  font-size: 16.5px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.passo-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 940px) {
+  .passos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .passos-grid { grid-template-columns: 1fr; }
+}
+
 /* ============== SEÇÕES BASE ============== */
 section {
   padding: 90px 0;
