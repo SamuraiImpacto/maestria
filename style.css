@@ -306,6 +306,34 @@ section h2 {
   line-height: 1.6;
 }
 
+.lead-narrativa {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.lead-narrativa p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.lead-narrativa p:last-child {
+  margin-bottom: 0;
+}
+
+.lead-narrativa .lead-fecho {
+  color: var(--text);
+  font-weight: 700;
+  font-size: clamp(17px, 1.8vw, 21px);
+  margin-top: 24px;
+}
+
+.lead-narrativa .lead-fecho strong {
+  color: var(--vermelho);
+}
+
 /* ============== PROBLEMA ============== */
 .problema { background: var(--bg-card); }
 
