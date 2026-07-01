@@ -9,10 +9,11 @@
   --bg-card-2: #131313;
   --bg-card-3: #1a1a1a;
   --text: #ffffff;
-  --text-muted: #999999;
-  --text-dim: #6b6b6b;
+  --text-muted: #bcbcbc;
+  --text-dim: #7d7d7d;
   --vermelho: #ef2727;
   --vermelho-soft: #ff5757;
+  --gold: #ef2727;
   --vermelho-bg: rgba(239, 39, 39, 0.08);
   --vermelho-border: rgba(239, 39, 39, 0.3);
   --verde-positivo: #4ade80;
@@ -32,7 +33,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.65;
+  line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -255,16 +256,26 @@ section {
 }
 
 .kicker {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--vermelho);
-  margin-bottom: 18px;
-  padding: 6px 14px;
+  margin-bottom: 20px;
+  padding: 6px 16px;
   background: var(--vermelho-bg);
   border-radius: 50px;
+}
+
+.kicker::before {
+  content: attr(data-num);
+  font-weight: 900;
+  color: var(--vermelho);
+  opacity: 0.7;
+  letter-spacing: 0;
 }
 
 section h2 {
@@ -281,7 +292,7 @@ section h2 {
   max-width: 720px;
   margin: 0 auto 48px;
   text-align: center;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 /* ============== PROBLEMA ============== */
@@ -323,7 +334,7 @@ section h2 {
 .dor-card p {
   font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* ============== SOLUÇÃO (Diff) ============== */
@@ -374,7 +385,7 @@ section h2 {
   position: relative;
   color: var(--text);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .diff-cinza li::before {
@@ -442,7 +453,7 @@ section h2 {
   padding: 8px 0 8px 26px;
   position: relative;
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .pq-sim li::before {
@@ -487,7 +498,7 @@ section h2 {
 .peticao-builder-badge span {
   color: var(--text-muted);
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .pacote-section-title {
@@ -538,6 +549,34 @@ section h2 {
 .pack-disponivel {
   border-color: var(--vermelho);
   box-shadow: 0 0 0 1px var(--vermelho-border);
+}
+
+.pack-destaque {
+  border-color: var(--vermelho);
+  box-shadow: 0 12px 40px rgba(239, 39, 39, 0.18), 0 0 0 2px var(--vermelho);
+  transform: translateY(-4px);
+  position: relative;
+}
+
+.pack-destaque:hover {
+  transform: translateY(-6px);
+}
+
+.pack-badge-top {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--vermelho);
+  color: var(--text);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(239, 39, 39, 0.4);
 }
 
 .pack-full {
@@ -619,7 +658,7 @@ section h2 {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 16px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .pack-features {
@@ -921,8 +960,58 @@ section h2 {
 
 .calc-resultado {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.calc-grupo {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+
+.calc-grupo-titulo {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.calc-grupo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.calc-roi-card {
+  background: var(--vermelho-bg);
+  border: 2px solid var(--vermelho);
+  border-radius: var(--radius-sm);
+  padding: 22px 18px;
+  text-align: center;
+}
+
+.calc-roi-card strong {
+  display: block;
+  color: var(--vermelho);
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+}
+
+.calc-roi-card span {
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
 }
 
 .calc-result-card {
@@ -1006,7 +1095,7 @@ section h2 {
 .banco-ponto p {
   font-size: 14px;
   color: var(--text);
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
   padding-top: 4px;
 }
@@ -1033,7 +1122,7 @@ section h2 {
 .banco-step p {
   font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* ============== COMPARATIVO ============== */
@@ -1200,7 +1289,7 @@ section h2 {
 .prereq-content p {
   font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
   margin-bottom: 8px;
 }
 .prereq-content strong { color: var(--text); }

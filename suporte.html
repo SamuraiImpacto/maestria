@@ -7,16 +7,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .faq-item { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 12px; }
-    .faq-q { font-weight: 700; color: var(--gold); font-size: 16px; margin-bottom: 8px; cursor: pointer; }
-    .faq-a { color: var(--text-muted); line-height: 1.65; font-size: 14px; }
+    .faq-q { font-weight: 700; color: var(--vermelho); font-size: 16px; margin-bottom: 10px; cursor: pointer; }
+    .faq-a { color: var(--text-muted); line-height: 1.6; font-size: 14px; }
     .canais-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 32px 0; }
     .canal-card {
-      background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 10px;
-      padding: 24px; text-align: center;
+      background: var(--bg-card-2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 24px; text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .canal-card strong { display: block; font-size: 18px; color: var(--text); margin-bottom: 6px; }
-    .canal-card a { color: var(--gold); font-weight: 700; text-decoration: none; }
+    .canal-card:hover { transform: translateY(-3px); border-color: var(--vermelho-border); }
+    .canal-card strong { display: block; font-size: 18px; color: var(--text); margin-bottom: 8px; }
+    .canal-card a { color: var(--vermelho); font-weight: 700; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -25,7 +26,7 @@
   <div class="container nav-inner">
     <a href="index.html" class="logo">Maestr<span>IA</span></a>
     <div class="nav-links">
-      <a href="https://maestria.samurailab.com.br/membros" class="btn-nav">Área de membros</a>
+      <a href="index.html#pacotes" class="btn-nav">Ver pacotes</a>
     </div>
   </div>
 </nav>
