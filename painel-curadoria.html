@@ -3,176 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>Painel de Curadoria - Banco Vivo MaestrIA</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .painel-wrap { max-width: 1200px; margin: 32px auto; padding: 0 24px; }
-    .painel-grid { display: grid; gap: 16px; }
-    .item-curadoria {
-      background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 10px;
-      padding: 20px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
-    }
-    .item-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
-    .item-meta span { padding: 3px 8px; border: 1px solid var(--border); border-radius: 4px; }
-    .item-title { font-weight: 700; color: var(--text); font-size: 16px; margin-bottom: 6px; }
-    .item-trecho {
-      background: var(--bg); border-left: 3px solid var(--gold); padding: 12px 14px;
-      font-style: italic; color: var(--text-muted); font-size: 14px; margin-top: 8px;
-      border-radius: 0 6px 6px 0;
-    }
-    .acoes { display: flex; flex-direction: column; gap: 8px; }
-    .btn-aprovar, .btn-rejeitar, .btn-revisar {
-      padding: 10px 18px; border-radius: 6px; border: 0; cursor: pointer;
-      font-weight: 700; font-size: 13px; min-width: 120px;
-    }
-    .btn-aprovar { background: var(--gold); color: var(--bg); }
-    .btn-aprovar:hover { background: #f5b53a; }
-    .btn-rejeitar { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-    .btn-revisar { background: var(--bg); color: var(--gold); border: 1px solid var(--gold); }
-    .status-pill {
-      display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700;
-    }
-    .status-pendente { background: rgba(245,166,35,0.15); color: var(--gold); }
-    .status-aprovado { background: rgba(40,180,99,0.15); color: #28b463; }
-    .filtros {
-      display: flex; gap: 10px; margin-bottom: 20px; padding: 16px; background: var(--bg-card-2);
-      border-radius: 8px; border: 1px solid var(--border);
-    }
-    .filtros select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 6px; }
-    .stats-curadoria {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 24px;
-    }
-    .stat-card {
-      background: var(--bg-card-2); border: 1px solid var(--border); padding: 16px; border-radius: 8px; text-align: center;
-    }
-    .stat-card strong { display: block; font-size: 24px; color: var(--gold); margin-bottom: 4px; }
-    .stat-card span { color: var(--text-muted); font-size: 12px; }
-  </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="container nav-inner">
-    <a href="index.html" class="logo">Maestr<span>IA</span></a>
-    <div class="nav-links">
-      <a href="index.html" class="btn-nav">Voltar</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" style="padding: 60px 0 40px;">
+<header class="hero" style="min-height: 60vh;">
   <div class="container">
-    <div class="badges"><span class="badge">PREVIEW - SAMURAI APROVA ANTES DE IR PRO HUB</span></div>
-    <h1 style="font-size: 38px;">Painel de Curadoria - <span class="gold">Banco Vivo</span></h1>
-    <p class="hero-sub">Cada contribuição de advogado passa por aqui antes de virar referência canônica. Você aprova, rejeita ou pede ajuste. Aprovado vira insight nas skills + ganha o advogado um mês de licença extra.</p>
+    <h1>Painel de Curadoria<br><span class="vermelho">em construção</span></h1>
+    <p class="hero-sub">Aqui vai morar a curadoria do Banco Vivo de Decisões: cada contribuição passa por revisão humana antes de entrar no banco. O painel abre junto com as primeiras contribuições dos assinantes.</p>
+    <a class="btn-primary" href="index.html">Voltar pra página principal</a>
   </div>
 </header>
-
-<div class="painel-wrap">
-
-  <div class="stats-curadoria">
-    <div class="stat-card"><strong>14</strong><span>aguardando curadoria</span></div>
-    <div class="stat-card"><strong>87</strong><span>aprovadas no mês</span></div>
-    <div class="stat-card"><strong>23</strong><span>colaboradores ativos</span></div>
-    <div class="stat-card"><strong>R$ 1.9k</strong><span>licenças extras concedidas</span></div>
-  </div>
-
-  <div class="filtros">
-    <select>
-      <option>Todas as áreas</option>
-      <option>Previdenciário</option>
-      <option>Trabalhista</option>
-      <option>Família</option>
-      <option>Criminal</option>
-      <option>Imobiliário</option>
-    </select>
-    <select>
-      <option>Todas as skills</option>
-      <option>auditor-previdenciario</option>
-      <option>quesitos-pericia</option>
-      <option>recurso-administrativo-inss</option>
-      <option>habeas-corpus</option>
-    </select>
-    <select>
-      <option>Status: Pendente</option>
-      <option>Status: Aprovado</option>
-      <option>Status: Rejeitado</option>
-    </select>
-  </div>
-
-  <div class="painel-grid">
-
-    <div class="item-curadoria">
-      <div>
-        <div class="item-meta">
-          <span>Skill: auditor-previdenciario</span>
-          <span>Área: Previdenciário</span>
-          <span>Por: Advogado #A237</span>
-          <span class="status-pill status-pendente">PENDENTE</span>
-        </div>
-        <div class="item-title">Decisão anonimizada: JF-PR concede aposentadoria especial mesmo com EPI eficaz comprovado</div>
-        <div class="item-trecho">"Apesar da comprovação de fornecimento de EPI eficaz pela empregadora, a especialidade do labor mantém-se reconhecida quando a exposição ao agente nocivo (ruído acima de 85dB) é habitual e permanente, conforme entendimento consolidado pela Súmula 9 da TNU e Tema 555 do STF (em ARE 664.335)..."</div>
-      </div>
-      <div class="acoes">
-        <button class="btn-aprovar">Aprovar</button>
-        <button class="btn-revisar">Pedir revisão</button>
-        <button class="btn-rejeitar">Rejeitar</button>
-      </div>
-    </div>
-
-    <div class="item-curadoria">
-      <div>
-        <div class="item-meta">
-          <span>Skill: quesitos-pericia</span>
-          <span>Área: Previdenciário</span>
-          <span>Por: Advogada #A089</span>
-          <span class="status-pill status-pendente">PENDENTE</span>
-        </div>
-        <div class="item-title">Quesito que destravou perícia em LER/DORT: "perito identifica nexo com atividade laboral?"</div>
-        <div class="item-trecho">"Quesito 7: Considerando o histórico ocupacional do periciado (jornada de 8h/dia em digitação contínua por 12 anos), o senhor perito identifica nexo causal entre o quadro de LER/DORT diagnosticado e a atividade laboral exercida na empresa-empregadora?"</div>
-      </div>
-      <div class="acoes">
-        <button class="btn-aprovar">Aprovar</button>
-        <button class="btn-revisar">Pedir revisão</button>
-        <button class="btn-rejeitar">Rejeitar</button>
-      </div>
-    </div>
-
-    <div class="item-curadoria">
-      <div>
-        <div class="item-meta">
-          <span>Skill: recurso-administrativo-inss</span>
-          <span>Área: Previdenciário</span>
-          <span>Por: Advogado #A412</span>
-          <span class="status-pill status-pendente">PENDENTE</span>
-        </div>
-        <div class="item-title">Argumento que derrubou indeferimento por "falta de qualidade de segurado"</div>
-        <div class="item-trecho">"O período de graça previsto no art. 15 da Lei 8.213/91 deve ser contado a partir da última contribuição, podendo ser estendido por até 24 meses quando comprovado desemprego involuntário registrado no MTE. No caso, o segurado mantém qualidade até..."</div>
-      </div>
-      <div class="acoes">
-        <button class="btn-aprovar">Aprovar</button>
-        <button class="btn-revisar">Pedir revisão</button>
-        <button class="btn-rejeitar">Rejeitar</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="margin-top: 40px; padding: 20px; background: var(--bg-card-2); border-radius: 8px; border: 1px solid var(--border); color: var(--text-muted); font-size: 13px;">
-    <strong style="color: var(--text); display: block; margin-bottom: 6px;">Como o curador decide:</strong>
-    Aprovar quando a peça é juridicamente sólida, anonimizada corretamente (sem CPF, RG, nome de partes, juízo, número de processo), traz argumento ou estratégia útil pra outros advogados da skill. Rejeitar se contém dado pessoal vazado, cita decisão inventada, ou só repete o óbvio.
-  </div>
-
-</div>
-
-<footer class="footer" style="margin-top: 60px;">
-  <div class="container">
-    <div class="footer-bottom">
-      <p>© 2026 Samurai Lab. Painel de curadoria do Banco Vivo da MaestrIA.</p>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>
