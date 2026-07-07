@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Área de membros | MaestrIA</title>
+  <meta name="description" content="Área de membros da MaestrIA: suas skills, downloads, licença e chamados de suporte.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="https://maestria.samurailab.com.br">Maestr<span>IA</span></a>
+    <div class="nav-links">
+      <a href="https://maestria.samurailab.com.br/instalacao.html">Guia de instalação</a>
+      <a href="https://maestria.samurailab.com.br/suporte.html">Suporte</a>
+      <button id="btn-sair" class="btn-ghost hidden" type="button">Sair</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ TELA DE LOGIN ============ -->
+<main id="tela-login" class="tela">
+  <section class="login-box">
+    <h1>Área de membros</h1>
+    <p class="sub">Entre com o código de ativação que chegou no seu email de compra e o CPF do titular.</p>
+
+    <form id="form-login" autocomplete="off">
+      <label for="inp-token">Código de ativação</label>
+      <input id="inp-token" type="text" inputmode="text" placeholder="Cole aqui o código do email de compra" required>
+
+      <label for="inp-cpf">CPF do titular</label>
+      <input id="inp-cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required>
+
+      <button type="submit" id="btn-entrar" class="btn-principal">Entrar</button>
+      <p id="login-erro" class="erro hidden"></p>
+    </form>
+
+    <details class="ajuda">
+      <summary>Onde encontro meu código de ativação?</summary>
+      <p>No email que você recebeu logo depois da compra (procure por "MaestrIA" na caixa de entrada e no spam). O código é uma sequência longa de letras e números. Não achou? Fale com o suporte: <a href="https://maestria.samurailab.com.br/suporte.html">central de suporte</a>.</p>
+    </details>
+  </section>
+</main>
+
+<!-- ============ PAINEL ============ -->
+<main id="tela-painel" class="tela hidden">
+  <header class="painel-header">
+    <div>
+      <h1 id="pl-saudacao">Bem-vindo</h1>
+      <p id="pl-plano" class="sub"></p>
+    </div>
+    <span id="pl-status" class="badge"></span>
+  </header>
+
+  <!-- Curso -->
+  <section class="bloco">
+    <h2>Comece pelo curso</h2>
+    <p class="bloco-sub">Do zero à primeira peça, no formato aula: instala, calibra e opera. <span id="pl-curso-progresso"></span></p>
+    <div id="pl-curso" class="c-cards"></div>
+  </section>
+
+  <!-- Minhas skills -->
+  <section class="bloco">
+    <h2>Minhas skills</h2>
+    <p class="bloco-sub">Baixe sempre por aqui: o link entrega a versão mais recente. Depois de instalada, a skill se atualiza sozinha com <code>/maestria atualizar tudo</code>.</p>
+    <div id="pl-skills" class="grid-skills"></div>
+  </section>
+
+  <!-- Como instalar -->
+  <section class="bloco">
+    <h2>Como instalar</h2>
+    <ol class="passos">
+      <li><strong>Instale o Claude Code</strong> no seu computador (uma vez só). <a href="https://maestria.samurailab.com.br/instalacao.html" target="_blank" rel="noopener">Guia passo a passo aqui</a>, feito pra quem nunca mexeu com isso.</li>
+      <li><strong>Baixe a skill</strong> no botão acima e <strong>arraste o arquivo ZIP pra conversa</strong> do Claude Code com a frase: <em>"instala essa skill pra mim"</em>. Ele instala sozinho.</li>
+      <li><strong>Ative sua licença</strong>: digite <code>/maestria ativar</code>, informe seu código de ativação e o CPF do titular. As demais skills do seu plano são oferecidas na sequência, automaticamente.</li>
+    </ol>
+  </section>
+
+  <!-- Licença -->
+  <section class="bloco">
+    <h2>Minha licença</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Situação</h3>
+        <p id="lic-situacao"></p>
+        <p id="lic-email" class="mini"></p>
+      </div>
+      <div class="card">
+        <h3>Computadores ativados <span id="lic-maquinas-contagem" class="mini"></span></h3>
+        <ul id="lic-maquinas" class="lista-limpa"></ul>
+        <p class="mini">Trocou de máquina e bateu no limite? Abra um chamado aqui embaixo que a gente libera.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chamados -->
+  <section class="bloco">
+    <h2>Meus chamados</h2>
+    <p class="bloco-sub">Dúvida, problema ou sugestão? Abra um chamado. A resposta aparece aqui e chega no seu email em até 48h úteis.</p>
+
+    <div id="pl-tickets" class="tickets"></div>
+
+    <details class="novo-chamado">
+      <summary class="btn-principal btn-inline">Abrir novo chamado</summary>
+      <form id="form-ticket">
+        <label for="tk-skill">Sobre qual skill?</label>
+        <select id="tk-skill" required></select>
+
+        <label for="tk-categoria">Tipo</label>
+        <select id="tk-categoria">
+          <option value="duvida">Dúvida de uso</option>
+          <option value="bug">Alguma coisa não funciona</option>
+          <option value="sugestao">Sugestão de melhoria</option>
+          <option value="conteudo">Conteúdo jurídico (citação, tese, cálculo)</option>
+          <option value="outro">Outro assunto</option>
+        </select>
+
+        <label for="tk-resumo">Resumo em uma frase</label>
+        <input id="tk-resumo" type="text" maxlength="300" required placeholder="Ex.: o cálculo de atrasados não abre o Excel">
+
+        <label for="tk-descricao">Conte com detalhes</label>
+        <textarea id="tk-descricao" rows="5" maxlength="8000" required placeholder="O que você tentou fazer, o que apareceu na tela e o que esperava que acontecesse. Importante: não cole dados de clientes seus aqui."></textarea>
+
+        <button type="submit" class="btn-principal">Enviar chamado</button>
+        <p id="ticket-msg" class="hidden"></p>
+      </form>
+    </details>
+  </section>
+
+  <footer class="rodape">
+    <p>MaestrIA by Samurai Lab · <a href="https://maestria.samurailab.com.br/suporte.html">Central de suporte</a> · <a href="https://maestria.samurailab.com.br/termos.html">Termos</a> · <a href="https://maestria.samurailab.com.br/privacidade.html">Privacidade</a></p>
+  </footer>
+</main>
+
+<!-- ============ TELA DO CURSO ============ -->
+<main id="tela-curso" class="tela tela-curso hidden"></main>
+
+<script src="app.js"></script>
+<script src="conteudo.js"></script>
+<script src="curso.js"></script>
+</body>
+</html>
