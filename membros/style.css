@@ -200,37 +200,8 @@ textarea { resize: vertical; }
 .rodape p { font-size: 13px; color: var(--text-dim); }
 
 
-/* ============ CURSO MAESTRIA (apêndice: sessão Fable 5, 07/07) ============ */
-.c-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-.c-card { display: flex; align-items: center; gap: 14px; text-align: left; background: var(--bg-card-2);
-  border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer;
-  color: var(--text); transition: border-color .15s, transform .15s; font: inherit; }
-.c-card:hover { border-color: var(--vermelho-border); transform: translateY(-2px); }
-.c-card.feito { border-color: rgba(74, 222, 128, .35); }
-.c-card-icone { font-size: 26px; }
-.c-card-textos { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-.c-card-textos small { color: var(--text-dim); line-height: 1.35; }
-.c-card-acao { color: var(--vermelho-soft); font-weight: 600; white-space: nowrap; }
-.c-card.feito .c-card-acao { color: var(--verde); }
-
-.tela-curso { display: flex; gap: 0; max-width: 1180px; margin: 0 auto; padding: 24px 16px 60px; align-items: flex-start; }
-.tela-curso.hidden { display: none; }
-
-.c-sidebar { position: sticky; top: 20px; width: 250px; flex-shrink: 0; background: var(--bg-card);
-  border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
-.c-side-titulo { font-weight: 800; padding: 6px 10px 12px; color: var(--text); letter-spacing: .3px; }
-.c-side-item { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none;
-  border: none; border-left: 3px solid transparent; border-radius: 8px; padding: 10px 10px; color: var(--text-muted);
-  cursor: pointer; font: inherit; font-size: 14px; }
-.c-side-item:hover { background: var(--bg-card-2); color: var(--text); }
-.c-side-item.ativo { border-left-color: var(--vermelho); background: var(--vermelho-bg); color: var(--text); font-weight: 600; }
-.c-side-item.feito .c-side-check { color: var(--verde); margin-left: auto; }
-.c-side-icone { font-size: 17px; }
-.c-voltar { margin-top: 12px; background: none; border: 1px solid var(--border); border-radius: 8px;
-  padding: 9px; color: var(--text-dim); cursor: pointer; font: inherit; font-size: 13px; }
-.c-voltar:hover { color: var(--text); border-color: var(--text-dim); }
-
-.c-aula { flex: 1; min-width: 0; padding: 8px 8px 8px 34px; }
+/* ============ CURSO MAESTRIA: componentes de aula ============ */
+.c-aula { min-width: 0; max-width: 760px; }
 .c-aula-modulo { color: var(--vermelho-soft); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
 .c-aula h2 { font-size: 30px; margin: 6px 0 8px; line-height: 1.2; }
 .c-aula-sub { color: var(--text-muted); font-size: 16px; margin-bottom: 26px; line-height: 1.5; }
@@ -285,8 +256,59 @@ textarea { resize: vertical; }
 .c-nav-prox { background: var(--vermelho); border: none; color: #fff; font-weight: 700; }
 .c-nav-prox:hover { background: var(--vermelho-soft); }
 
-@media (max-width: 860px) {
-  .tela-curso { flex-direction: column; }
-  .c-sidebar { position: static; width: 100%; }
-  .c-aula { padding-left: 4px; }
+/* ============ LAYOUT APP: menu lateral + conteúdo (v2, 07/07) ============ */
+.tela-app { max-width: 1240px; margin: 0 auto; padding: 24px 20px 60px; }
+.app-layout { display: flex; gap: 28px; align-items: flex-start; }
+
+.app-menu { position: sticky; top: 84px; width: 264px; flex-shrink: 0;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px 12px; display: flex; flex-direction: column; gap: 4px;
+  max-height: calc(100vh - 108px); overflow-y: auto; }
+
+.menu-user { display: flex; flex-direction: column; gap: 5px; padding: 6px 10px 14px;
+  border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.menu-user strong { font-size: 16px; }
+.menu-user .badge { align-self: flex-start; margin-top: 4px; }
+
+.menu-nav { display: flex; flex-direction: column; gap: 3px; }
+.menu-grupo { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--text-dim); padding: 14px 10px 6px; }
+
+.menu-item { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  background: none; border: none; border-left: 3px solid transparent; border-radius: 8px;
+  padding: 10px 10px; color: var(--text-muted); cursor: pointer; font: inherit; font-size: 14px; }
+.menu-item:hover { background: var(--bg-card-2); color: var(--text); }
+.menu-item.ativo { border-left-color: var(--vermelho); background: var(--vermelho-bg);
+  color: var(--text); font-weight: 600; }
+.menu-icone { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; }
+.menu-check { color: var(--verde); margin-left: auto; font-size: 13px; }
+
+.menu-toggle { display: none; position: fixed; bottom: 18px; right: 18px; z-index: 120;
+  background: var(--vermelho); color: #fff; border: none; border-radius: 999px;
+  padding: 13px 20px; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+  box-shadow: 0 6px 22px rgba(0,0,0,.55); }
+
+.app-conteudo { flex: 1; min-width: 0; }
+.view-titulo { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.view-sub { color: var(--text-muted); font-size: 14.5px; margin: 6px 0 20px; max-width: 640px; }
+
+.como-instalar { margin-top: 34px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 22px; }
+.como-instalar h3 { font-size: 16px; margin-bottom: 12px; }
+
+.upsell { margin-top: 38px; border-top: 1px solid var(--border); padding-top: 26px; }
+.upsell h3 { font-size: 18px; }
+.upsell .btn-inline { display: inline-block; margin-top: 18px; padding: 12px 26px; }
+.card-bloqueada { opacity: .75; border-style: dashed; }
+.card-bloqueada:hover { opacity: 1; }
+
+.rodape { margin-top: 48px; }
+
+@media (max-width: 900px) {
+  .app-layout { flex-direction: column; }
+  .app-menu { position: fixed; top: 0; left: 0; bottom: 0; z-index: 110; width: 290px;
+    max-height: none; border-radius: 0; transform: translateX(-102%); transition: transform .2s ease; }
+  .app-menu.aberto { transform: translateX(0); box-shadow: 30px 0 80px rgba(0,0,0,.6); }
+  .menu-toggle { display: block; }
+  .tela-app { padding: 18px 16px 60px; }
 }

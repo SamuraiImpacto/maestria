@@ -1,10 +1,10 @@
 // ============================================
 // CURSO MAESTRIA: renderizador e navegação
 // ============================================
-// Renderiza os módulos de window.CURSO_MAESTRIA (conteudo.js) no estilo
-// plataforma de curso: sidebar de módulos, aulas com terminal copiável,
-// caixas de DICA/ATENÇÃO/NUNCA, checklists persistentes e exercícios.
-// Não depende do app.js (dashboard): só compartilha o estilo.
+// Renderiza os módulos de window.CURSO_MAESTRIA (conteudo.js) no layout
+// de plataforma: os módulos viram itens do menu lateral principal
+// (#menu-aulas) e a aula abre na view #view-aula. Componentes: terminal
+// copiável, caixas de DICA/ATENÇÃO/NUNCA, checklists persistentes e exercícios.
 
 (function () {
   "use strict";
@@ -180,55 +180,59 @@
     return html.join("\n");
   }
 
-  // ---------- Navegação e telas ----------
+  // ---------- Menu lateral e navegação ----------
 
   function progresso() { return lerLS(LS_PROGRESSO); }
 
-  function montarSidebar(ativo) {
+  // Preenche o grupo Aulas do menu lateral principal
+  function montarMenu(ativo) {
+    var alvo = document.getElementById("menu-aulas");
+    if (!alvo) return;
     var prog = progresso();
-    return CURSO.map(function (mod) {
-      var cls = "c-side-item" + (mod.slug === ativo ? " ativo" : "") + (prog[mod.slug] ? " feito" : "");
+    alvo.innerHTML = CURSO.map(function (mod) {
+      var cls = "menu-item menu-aula" + (mod.slug === ativo ? " ativo" : "") + (prog[mod.slug] ? " feito" : "");
       return '<button type="button" class="' + cls + '" data-modulo="' + mod.slug + '">' +
-        '<span class="c-side-icone">' + mod.icone + "</span><span>" + esc(mod.titulo.split(":")[0]) + "</span>" +
-        (prog[mod.slug] ? '<span class="c-side-check">✓</span>' : "") + "</button>";
+        '<span class="menu-icone">' + mod.icone + "</span><span>" + esc(mod.titulo.split(":")[0]) + "</span>" +
+        (prog[mod.slug] ? '<span class="menu-check">✓</span>' : "") + "</button>";
     }).join("");
+    alvo.querySelectorAll("[data-modulo]").forEach(function (b) {
+      b.addEventListener("click", function () { abrirModulo(b.getAttribute("data-modulo")); });
+    });
   }
 
   function abrirModulo(slug) {
     var mod = CURSO.filter(function (m) { return m.slug === slug; })[0] || CURSO[0];
+    if (!mod) return;
     var idx = CURSO.indexOf(mod);
-    var tela = document.getElementById("tela-curso");
+    var tela = document.getElementById("view-aula");
     var anterior = CURSO[idx - 1];
     var proximo = CURSO[idx + 1];
 
     tela.innerHTML =
-      '<aside class="c-sidebar"><div class="c-side-titulo">Curso MaestrIA</div>' + montarSidebar(slug) +
-      '<button type="button" class="c-voltar" id="c-voltar-painel">← Voltar ao painel</button></aside>' +
-      '<article class="c-aula"><p class="c-aula-modulo">Módulo ' + mod.ordem + "</p>" +
+      '<article class="c-aula"><p class="c-aula-modulo">Aula ' + mod.ordem + " de " + (CURSO.length - 1) + "</p>" +
       "<h2>" + esc(mod.titulo) + "</h2><p class=\"c-aula-sub\">" + esc(mod.subtitulo) + "</p>" +
       render(mod.corpo, mod.slug) +
       '<div class="c-nav">' +
       (anterior ? '<button type="button" class="c-nav-ant" data-modulo="' + anterior.slug + '">← ' + esc(anterior.titulo.split(":")[0]) + "</button>" : "<span></span>") +
-      '<button type="button" class="c-nav-prox" data-modulo="' + (proximo ? proximo.slug : "") + '" data-fim="' + (proximo ? "" : "1") + '">' +
+      '<button type="button" class="c-nav-prox" data-modulo="' + (proximo ? proximo.slug : "") + '">' +
       (proximo ? "Concluir e ir pra próxima →" : "Concluir o curso ✓") + "</button></div></article>";
 
-    tela.scrollTop = 0;
-    window.scrollTo(0, 0);
+    montarMenu(mod.slug);
+    if (window.MAESTRIA_VIEW) window.MAESTRIA_VIEW.mostrar("aula");
 
-    // Eventos
-    tela.querySelectorAll("[data-modulo]").forEach(function (b) {
+    // Eventos: navegação anterior/próxima
+    tela.querySelectorAll(".c-nav-ant, .c-nav-prox").forEach(function (b) {
       b.addEventListener("click", function () {
-        if (b.classList.contains("c-nav-prox") || b.classList.contains("c-nav-ant")) {
-          if (b.classList.contains("c-nav-prox")) marcarConcluido(mod.slug);
-          var destino = b.getAttribute("data-modulo");
-          if (destino) { abrirModulo(destino); } else { voltarPainel(); }
+        if (b.classList.contains("c-nav-prox")) marcarConcluido(mod.slug);
+        var destino = b.getAttribute("data-modulo");
+        if (destino) {
+          abrirModulo(destino);
         } else {
-          abrirModulo(b.getAttribute("data-modulo"));
+          montarMenu(mod.slug); // atualiza o check da última aula
+          if (window.MAESTRIA_VIEW) window.MAESTRIA_VIEW.mostrar("downloads");
         }
       });
     });
-    var voltar = document.getElementById("c-voltar-painel");
-    if (voltar) voltar.addEventListener("click", voltarPainel);
 
     tela.querySelectorAll(".c-copiar").forEach(function (b) {
       b.addEventListener("click", function () {
@@ -253,41 +257,14 @@
     var prog = progresso();
     prog[slug] = true;
     gravarLS(LS_PROGRESSO, prog);
-    atualizarCardsPainel();
   }
 
-  function mostrarCurso(slug) {
-    document.getElementById("tela-painel").classList.add("hidden");
-    document.getElementById("tela-curso").classList.remove("hidden");
-    abrirModulo(slug || CURSO[0].slug);
-  }
-
-  function voltarPainel() {
-    document.getElementById("tela-curso").classList.add("hidden");
-    document.getElementById("tela-painel").classList.remove("hidden");
-    atualizarCardsPainel();
-    window.scrollTo(0, 0);
-  }
-
-  // Cards do curso dentro do painel (seção Comece pelo curso)
-  function atualizarCardsPainel() {
-    var alvo = document.getElementById("pl-curso");
-    if (!alvo) return;
+  // Primeira entrada: abre a primeira aula ainda não concluída
+  function abrirInicial() {
     var prog = progresso();
-    var feitos = CURSO.filter(function (m) { return prog[m.slug]; }).length;
-    var barra = document.getElementById("pl-curso-progresso");
-    if (barra) barra.textContent = feitos + " de " + CURSO.length + " módulos concluídos";
-    alvo.innerHTML = CURSO.map(function (mod) {
-      return '<button type="button" class="c-card' + (prog[mod.slug] ? " feito" : "") + '" data-abrir="' + mod.slug + '">' +
-        '<span class="c-card-icone">' + mod.icone + "</span>" +
-        '<span class="c-card-textos"><strong>' + esc(mod.titulo) + "</strong><small>" + esc(mod.subtitulo) + "</small></span>" +
-        '<span class="c-card-acao">' + (prog[mod.slug] ? "Rever ✓" : "Começar →") + "</span></button>";
-    }).join("");
-    alvo.querySelectorAll("[data-abrir]").forEach(function (b) {
-      b.addEventListener("click", function () { mostrarCurso(b.getAttribute("data-abrir")); });
-    });
+    var pendente = CURSO.filter(function (m) { return !prog[m.slug]; })[0];
+    abrirModulo((pendente || CURSO[0] || {}).slug);
   }
 
-  document.addEventListener("DOMContentLoaded", atualizarCardsPainel);
-  window.MAESTRIA_CURSO = { abrir: mostrarCurso, atualizarCards: atualizarCardsPainel };
+  window.MAESTRIA_CURSO = { abrir: abrirModulo, montarMenu: montarMenu, abrirInicial: abrirInicial };
 })();

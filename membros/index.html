@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Área de membros | MaestrIA</title>
-  <meta name="description" content="Área de membros da MaestrIA: suas skills, downloads, licença e chamados de suporte.">
+  <meta name="description" content="Área de membros da MaestrIA: aulas, downloads, licença e chamados de suporte.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,8 @@
 
     <form id="form-login" autocomplete="off">
       <label for="inp-token">Código de ativação</label>
-      <input id="inp-token" type="text" inputmode="text" placeholder="Cole aqui o código do email de compra" required>
+      <input id="inp-token" type="text" inputmode="text" placeholder="A sequência longa de letras e números do email" required>
+      <p class="mini" style="margin-top:-8px;margin-bottom:14px;">Não é o seu email: é o código que está DENTRO do email de compra.</p>
 
       <label for="inp-cpf">CPF do titular</label>
       <input id="inp-cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required>
@@ -44,103 +45,121 @@
 
     <details class="ajuda">
       <summary>Onde encontro meu código de ativação?</summary>
-      <p>No email que você recebeu logo depois da compra (procure por "MaestrIA" na caixa de entrada e no spam). O código é uma sequência longa de letras e números. Não achou? Fale com o suporte: <a href="https://maestria.samurailab.com.br/suporte.html">central de suporte</a>.</p>
+      <p>No email que você recebeu logo depois da compra (procure por "MaestrIA" na caixa de entrada e no spam). O código é uma sequência longa de letras e números, parecida com <code>a1b2c3d4-e5f6-...</code>. Não achou? Fale com o suporte: <a href="https://maestria.samurailab.com.br/suporte.html">central de suporte</a>.</p>
     </details>
   </section>
 </main>
 
-<!-- ============ PAINEL ============ -->
-<main id="tela-painel" class="tela hidden">
-  <header class="painel-header">
-    <div>
-      <h1 id="pl-saudacao">Bem-vindo</h1>
-      <p id="pl-plano" class="sub"></p>
-    </div>
-    <span id="pl-status" class="badge"></span>
-  </header>
+<!-- ============ PAINEL (menu lateral + conteúdo) ============ -->
+<main id="tela-painel" class="tela-app hidden">
+  <div class="app-layout">
 
-  <!-- Curso -->
-  <section class="bloco">
-    <h2>Comece pelo curso</h2>
-    <p class="bloco-sub">Do zero à primeira peça, no formato aula: instala, calibra e opera. <span id="pl-curso-progresso"></span></p>
-    <div id="pl-curso" class="c-cards"></div>
-  </section>
-
-  <!-- Minhas skills -->
-  <section class="bloco">
-    <h2>Minhas skills</h2>
-    <p class="bloco-sub">Baixe sempre por aqui: o link entrega a versão mais recente. Depois de instalada, a skill se atualiza sozinha com <code>/maestria atualizar tudo</code>.</p>
-    <div id="pl-skills" class="grid-skills"></div>
-  </section>
-
-  <!-- Como instalar -->
-  <section class="bloco">
-    <h2>Como instalar</h2>
-    <ol class="passos">
-      <li><strong>Instale o Claude Code</strong> no seu computador (uma vez só). <a href="https://maestria.samurailab.com.br/instalacao.html" target="_blank" rel="noopener">Guia passo a passo aqui</a>, feito pra quem nunca mexeu com isso.</li>
-      <li><strong>Baixe a skill</strong> no botão acima e <strong>arraste o arquivo ZIP pra conversa</strong> do Claude Code com a frase: <em>"instala essa skill pra mim"</em>. Ele instala sozinho.</li>
-      <li><strong>Ative sua licença</strong>: digite <code>/maestria ativar</code>, informe seu código de ativação e o CPF do titular. As demais skills do seu plano são oferecidas na sequência, automaticamente.</li>
-    </ol>
-  </section>
-
-  <!-- Licença -->
-  <section class="bloco">
-    <h2>Minha licença</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>Situação</h3>
-        <p id="lic-situacao"></p>
-        <p id="lic-email" class="mini"></p>
+    <aside class="app-menu" id="app-menu">
+      <div class="menu-user">
+        <strong id="pl-saudacao">Bem-vindo</strong>
+        <span id="pl-plano" class="mini"></span>
+        <span id="pl-status" class="badge"></span>
       </div>
-      <div class="card">
-        <h3>Computadores ativados <span id="lic-maquinas-contagem" class="mini"></span></h3>
-        <ul id="lic-maquinas" class="lista-limpa"></ul>
-        <p class="mini">Trocou de máquina e bateu no limite? Abra um chamado aqui embaixo que a gente libera.</p>
+
+      <nav class="menu-nav">
+        <div class="menu-grupo">Aulas</div>
+        <div id="menu-aulas"></div>
+
+        <div class="menu-grupo">Minha conta</div>
+        <button type="button" class="menu-item" data-view="downloads"><span class="menu-icone">⬇️</span><span>Downloads</span></button>
+        <button type="button" class="menu-item" data-view="licenca"><span class="menu-icone">🔑</span><span>Minha licença</span></button>
+        <button type="button" class="menu-item" data-view="chamados"><span class="menu-icone">💬</span><span>Chamados</span></button>
+      </nav>
+    </aside>
+
+    <button type="button" id="menu-toggle" class="menu-toggle">☰ Menu</button>
+
+    <section class="app-conteudo" id="app-conteudo">
+
+      <!-- Aula do curso (preenchida pelo curso.js) -->
+      <div id="view-aula" class="view"></div>
+
+      <!-- Downloads -->
+      <div id="view-downloads" class="view hidden">
+        <h2 class="view-titulo">Downloads</h2>
+        <p class="view-sub">Baixe suas skills sempre por aqui: o botão entrega a versão mais recente. Depois de instalada, ela se atualiza sozinha.</p>
+        <div id="dl-skills" class="grid-skills"></div>
+
+        <div class="como-instalar">
+          <h3>Como instalar (3 passos, sem mistério)</h3>
+          <ol class="passos">
+            <li><strong>Instale o Claude</strong> no seu computador (uma vez só). <a href="https://maestria.samurailab.com.br/instalacao.html" target="_blank" rel="noopener">O guia passo a passo está aqui</a>, feito pra quem nunca mexeu com isso.</li>
+            <li><strong>Baixe a skill</strong> no botão acima e <strong>arraste o arquivo pra conversa</strong> do Claude com a frase: <em>"instala essa skill pra mim"</em>. Ele faz o resto sozinho.</li>
+            <li><strong>Ative sua licença</strong>: digite <code>/maestria ativar</code>, informe o código de ativação e o CPF do titular. As outras skills do seu pacote se instalam sozinhas na sequência.</li>
+          </ol>
+        </div>
+
+        <div id="dl-upsell" class="upsell hidden">
+          <h3>Skills que ainda não estão no seu pacote</h3>
+          <p class="view-sub">Elas já existem, já funcionam, e entram na sua conta com o mesmo código de ativação de sempre assim que você adicionar o pacote.</p>
+          <div id="dl-bloqueadas" class="grid-skills"></div>
+          <a class="btn-principal btn-inline" href="https://maestria.samurailab.com.br/#pacotes" target="_blank" rel="noopener">Ver pacotes e valores</a>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Chamados -->
-  <section class="bloco">
-    <h2>Meus chamados</h2>
-    <p class="bloco-sub">Dúvida, problema ou sugestão? Abra um chamado. A resposta aparece aqui e chega no seu email em até 48h úteis.</p>
+      <!-- Licença -->
+      <div id="view-licenca" class="view hidden">
+        <h2 class="view-titulo">Minha licença</h2>
+        <p class="view-sub">Sua licença é pessoal: vale com o seu CPF, em até 3 computadores seus.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Situação</h3>
+            <p id="lic-situacao"></p>
+            <p id="lic-email" class="mini"></p>
+          </div>
+          <div class="card">
+            <h3>Computadores ativados <span id="lic-maquinas-contagem" class="mini"></span></h3>
+            <ul id="lic-maquinas" class="lista-limpa"></ul>
+            <p class="mini">Trocou de computador e bateu no limite? Abra um chamado na aba Chamados que a gente libera pra você.</p>
+          </div>
+        </div>
+      </div>
 
-    <div id="pl-tickets" class="tickets"></div>
+      <!-- Chamados -->
+      <div id="view-chamados" class="view hidden">
+        <h2 class="view-titulo">Chamados</h2>
+        <p class="view-sub">Dúvida, problema ou sugestão? Abra um chamado. A resposta aparece aqui e chega no seu email em até 48h úteis.</p>
 
-    <details class="novo-chamado">
-      <summary class="btn-principal btn-inline">Abrir novo chamado</summary>
-      <form id="form-ticket">
-        <label for="tk-skill">Sobre qual skill?</label>
-        <select id="tk-skill" required></select>
+        <div id="pl-tickets" class="tickets"></div>
 
-        <label for="tk-categoria">Tipo</label>
-        <select id="tk-categoria">
-          <option value="duvida">Dúvida de uso</option>
-          <option value="bug">Alguma coisa não funciona</option>
-          <option value="sugestao">Sugestão de melhoria</option>
-          <option value="conteudo">Conteúdo jurídico (citação, tese, cálculo)</option>
-          <option value="outro">Outro assunto</option>
-        </select>
+        <details class="novo-chamado">
+          <summary class="btn-principal btn-inline">Abrir novo chamado</summary>
+          <form id="form-ticket">
+            <label for="tk-skill">Sobre qual skill?</label>
+            <select id="tk-skill" required></select>
 
-        <label for="tk-resumo">Resumo em uma frase</label>
-        <input id="tk-resumo" type="text" maxlength="300" required placeholder="Ex.: o cálculo de atrasados não abre o Excel">
+            <label for="tk-categoria">Tipo</label>
+            <select id="tk-categoria">
+              <option value="duvida">Dúvida de uso</option>
+              <option value="bug">Alguma coisa não funciona</option>
+              <option value="sugestao">Sugestão de melhoria</option>
+              <option value="conteudo">Conteúdo jurídico (citação, tese, cálculo)</option>
+              <option value="outro">Outro assunto</option>
+            </select>
 
-        <label for="tk-descricao">Conte com detalhes</label>
-        <textarea id="tk-descricao" rows="5" maxlength="8000" required placeholder="O que você tentou fazer, o que apareceu na tela e o que esperava que acontecesse. Importante: não cole dados de clientes seus aqui."></textarea>
+            <label for="tk-resumo">Resumo em uma frase</label>
+            <input id="tk-resumo" type="text" maxlength="300" required placeholder="Ex.: o cálculo não abriu no Excel">
 
-        <button type="submit" class="btn-principal">Enviar chamado</button>
-        <p id="ticket-msg" class="hidden"></p>
-      </form>
-    </details>
-  </section>
+            <label for="tk-descricao">Conte com detalhes</label>
+            <textarea id="tk-descricao" rows="5" maxlength="8000" required placeholder="O que você tentou fazer, o que apareceu na tela e o que esperava que acontecesse. Importante: não cole dados de clientes seus aqui."></textarea>
 
-  <footer class="rodape">
-    <p>MaestrIA by Samurai Lab · <a href="https://maestria.samurailab.com.br/suporte.html">Central de suporte</a> · <a href="https://maestria.samurailab.com.br/termos.html">Termos</a> · <a href="https://maestria.samurailab.com.br/privacidade.html">Privacidade</a></p>
-  </footer>
+            <button type="submit" class="btn-principal">Enviar chamado</button>
+            <p id="ticket-msg" class="hidden"></p>
+          </form>
+        </details>
+      </div>
+
+      <footer class="rodape">
+        <p>MaestrIA by Samurai Lab · <a href="https://maestria.samurailab.com.br/suporte.html">Central de suporte</a> · <a href="https://maestria.samurailab.com.br/termos.html">Termos</a> · <a href="https://maestria.samurailab.com.br/privacidade.html">Privacidade</a></p>
+      </footer>
+    </section>
+  </div>
 </main>
-
-<!-- ============ TELA DO CURSO ============ -->
-<main id="tela-curso" class="tela tela-curso hidden"></main>
 
 <script src="app.js"></script>
 <script src="conteudo.js"></script>
