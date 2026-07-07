@@ -223,10 +223,10 @@ textarea { resize: vertical; }
 .c-terminal pre { margin: 0; padding: 14px 16px; overflow-x: auto; color: #d8d8d8; font-size: 13.5px; line-height: 1.55;
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace; white-space: pre-wrap; }
 
-.c-caixa { display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--border); border-left-width: 4px;
-  border-radius: 10px; padding: 13px 15px; margin: 14px 0; background: var(--bg-card); }
-.c-caixa p { margin: 0; }
-.c-caixa-tag { font-weight: 800; font-size: 11px; letter-spacing: 1.5px; padding-top: 3px; }
+.c-caixa { display: block; border: 1px solid var(--border); border-left-width: 4px;
+  border-radius: 10px; padding: 14px 16px; margin: 16px 0; background: var(--bg-card); }
+.c-caixa p { margin: 0; color: var(--text-muted); }
+.c-caixa-tag { display: block; font-weight: 800; font-size: 11px; letter-spacing: 1.8px; margin-bottom: 7px; }
 .c-caixa-dica { border-left-color: var(--verde); } .c-caixa-dica .c-caixa-tag { color: var(--verde); }
 .c-caixa-atencao { border-left-color: #eab308; } .c-caixa-atencao .c-caixa-tag { color: #eab308; }
 .c-caixa-nunca { border-left-color: var(--vermelho); } .c-caixa-nunca .c-caixa-tag { color: var(--vermelho-soft); }

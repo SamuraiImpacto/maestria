@@ -36,9 +36,9 @@
   }
 
   function caixaTipo(linha) {
-    if (/^\*\*DICA:?\*\*/i.test(linha)) return ["dica", "DICA"];
-    if (/^\*\*ATEN[ÇC][AÃ]O:?\*\*/i.test(linha)) return ["atencao", "ATENÇÃO"];
-    if (/^\*\*NUNCA:?\*\*/i.test(linha)) return ["nunca", "NUNCA"];
+    if (/^\*\*DICA:?\*\*/i.test(linha)) return ["dica", "💡 DICA"];
+    if (/^\*\*ATEN[ÇC][AÃ]O:?\*\*/i.test(linha)) return ["atencao", "⚠️ ATENÇÃO"];
+    if (/^\*\*NUNCA:?\*\*/i.test(linha)) return ["nunca", "⛔ NUNCA"];
     return null;
   }
 
@@ -110,6 +110,7 @@
         var tipo = caixaTipo(junto);
         if (tipo) {
           var corpoCaixa = junto.replace(/^\*\*[^*]+\*\*:?\s*/, "");
+          corpoCaixa = corpoCaixa.charAt(0).toUpperCase() + corpoCaixa.slice(1);
           html.push('<div class="c-caixa c-caixa-' + tipo[0] + '"><span class="c-caixa-tag">' + tipo[1] + "</span><p>" + inline(corpoCaixa) + "</p></div>");
         } else {
           html.push('<blockquote class="c-quote">' + inline(junto) + "</blockquote>");
