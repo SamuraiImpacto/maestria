@@ -7,7 +7,7 @@ const CORE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1";
 
 // Link do grupo de network (Comunidade Diamond). Preencher quando o grupo existir:
 // o card na aba Comunidade ativa o botão sozinho.
-const LINK_DIAMOND = "";
+const LINK_DIAMOND = "https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7";
 
 const $ = (id) => document.getElementById(id);
 
