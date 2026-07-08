@@ -1,4 +1,4 @@
-// Gerado de MAESTRIA-PRODUTO/area-membros/conteudo/ (nao editar na mao: regerar)
+// Gerado de MAESTRIA-PRODUTO/area-membros/conteudo/ (nao editar na mao: rodar gerar_conteudo.py)
 window.CURSO_MAESTRIA = [
  {
   "slug": "00-comece-aqui",
@@ -17,8 +17,16 @@ window.CURSO_MAESTRIA = [
   "corpo": "## 01. O que vamos instalar (e por quê)\n\nTrês coisas, nesta ordem: o **Claude Code** (o aplicativo da Anthropic onde a MaestrIA trabalha), a **sua primeira skill** (o arquivo que você baixou do email) e a **ativação da licença**. O pré-requisito único: assinatura do Claude (plano Pro ou Max), feita direto em claude.ai com o mesmo email da compra.\n\n> **ATENÇÃO:** se você ainda não tem a assinatura do Claude, faça agora em claude.ai antes de continuar. É o único custo fora da MaestrIA.\n\n## 02. Instalando o Claude Code\n\n### Aba: Windows\n\n1. Baixe o instalador oficial em **claude.com/claude-code** (botão de download pra Windows)\n2. Execute o instalador baixado e siga o assistente (Avançar, Avançar, Concluir)\n3. Abra o aplicativo **Claude Code** pelo menu Iniciar e entre com a MESMA conta do claude.ai\n\n### Aba: Mac\n\n1. Baixe o instalador oficial em **claude.com/claude-code** (versão pra macOS)\n2. Arraste o Claude Code pra pasta Aplicativos e abra\n3. Entre com a MESMA conta do claude.ai\n\n> **DICA:** deu qualquer coisa estranha na instalação? Fala com o Claude no chat do próprio app: \"me ajuda a terminar a configuração\". Ele te guia. E se travar de vez, o suporte da MaestrIA destrava: maestria.samurailab.com.br/suporte.html\n\n## 03. Instalando a sua skill (a parte que impressiona)\n\n1. Baixe o arquivo do seu pacote pelos links do email de compra (não precisa abrir o arquivo, é só baixar)\n2. Abra o Claude Code e **arraste o arquivo pra dentro da conversa**\n3. Escreva: **instala essa skill pra mim**\n4. Acompanhe: ele descompacta, instala, registra os comandos e te avisa quando terminar\n\n```\n> instala essa skill pra mim\nInstalando a MaestrIA Cálculo Previdenciário...\nSkill instalada. Comandos registrados.\nDigite /maestria pra abrir sua central.\n```\n\n> **NUNCA:** não instale skill da MaestrIA baixada de outro lugar que não seja o email oficial da compra ou esta área de membros. arquivo de fonte desconhecida pode ter sido alterado.\n\n## 04. Ativando a licença (e deixando o resto se instalar sozinho)\n\n1. Na mesma conversa, digite `/maestria ativar`\n2. Cole o código de ativação (veio no email) e informe o **seu CPF** (o mesmo da compra: é a trava que protege a SUA licença)\n3. A skill confirma a ativação e pergunta: \"seu pacote tem X skills e você só tem 1 instalada: instalo as outras agora?\" **Responda sim** e vá tomar um café: ela baixa e instala tudo\n\n> **DICA:** a licença vale em até 3 computadores SEUS. Trocou de máquina? Abre um chamado que a gente libera na hora.\n\n## 05. O teste dos 10 segundos\n\nFeche a conversa. Abra uma NOVA. Digite:\n\n```\n/maestria\n```\n\nAbriu a central com suas skills listadas? Instalação perfeita. Não abriu? Feche e reabra o Claude Code uma vez (o registro de comandos carrega na abertura) e teste de novo.\n\n## Checklist do módulo\n\n- [ ] Claude Code instalado e logado com a conta da assinatura\n- [ ] Primeira skill instalada arrastando o arquivo\n- [ ] Licença ativada com código + meu CPF\n- [ ] Deixei a auto-instalação completar o pacote\n- [ ] /maestria abre numa conversa NOVA\n\n## Exercício\n\nAbra uma conversa nova e digite `/maestria atualizar tudo`. Deve responder que está tudo na versão mais recente. Pronto: você acabou de aprender a receber TODA atualização futura do produto, pra sempre, com um comando."
  },
  {
-  "slug": "02-primeira-peca",
+  "slug": "01b-claude-code-basico",
   "ordem": 2,
+  "titulo": "Claude Code sem mistério: o essencial pra operar",
+  "subtitulo": "O aplicativo onde a MaestrIA vive, explicado pra quem nunca mexeu: abrir, escolher a pasta certa, conversar e mandar arquivos.",
+  "icone": "🧭",
+  "corpo": "## 01. O que é o Claude Code (e por que não é o site)\n\nVocê provavelmente conhece o claude.ai no navegador: um chat comum, que conversa mas não toca em nada seu. O **Claude Code é outra coisa**: um aplicativo instalado NO seu computador, que consegue **ler e criar arquivos nas suas pastas**. É por isso que a MaestrIA entrega Word pronto, lê o PDF do processo e salva tudo organizado na pasta do cliente.\n\nA comparação honesta: o site é conversar com alguém pelo telefone. O Claude Code é ter essa pessoa **sentada na sua mesa**, com acesso aos documentos que você deixar ali.\n\n- Mesma assinatura, mesmo login: a conta do claude.ai vale nos dois\n- Tudo que ele cria fica no SEU computador, nas SUAS pastas\n\n## 02. Como abrir o Claude Code\n\n### Aba: Windows\n\n1. Clique no menu **Iniciar** (o símbolo do Windows, canto inferior esquerdo)\n2. Digite **Claude** e clique no aplicativo **Claude Code**\n3. Facilite sua vida: clique com o botão direito no ícone dele na barra de tarefas e escolha **Fixar na barra de tarefas**. Vira um clique só, pra sempre\n\n### Aba: Mac\n\n1. Aperte **cmd + espaço** (abre a busca do Mac)\n2. Digite **Claude** e aperte Enter no **Claude Code**\n3. Facilite sua vida: com o app aberto, botão direito no ícone do Dock e **Opções > Manter no Dock**\n\n> **DICA:** na primeira abertura ele pede login. Entre com a MESMA conta da sua assinatura do claude.ai. Isso acontece uma vez só.\n\n## 03. A pasta de trabalho (o conceito que muda tudo)\n\nO Claude Code sempre trabalha **dentro de uma pasta**, como um estagiário sentado numa mesa: ele enxerga e organiza o que está NAQUELA mesa. Escolher a pasta certa é o passo que ninguém te explica, e é o que separa \"funciona redondo\" de \"cadê meus arquivos?\".\n\n**A receita MaestrIA (faça uma vez, use pra sempre):**\n\n1. Crie uma pasta chamada **Escritorio** dentro de Documentos (sem acento no nome, o computador agradece)\n2. Ao abrir o Claude Code, use a opção de **abrir pasta** (Open folder / Abrir pasta) e escolha Documentos > Escritorio\n3. Pronto: a MaestrIA cria as subpastas por cliente e por caso sozinha, sempre nesse lugar\n\nComo conferir qual pasta está aberta: o **nome dela aparece no topo da janela**. Pra trocar: menu **File (Arquivo) > Open folder** e escolha outra.\n\n> **ATENÇÃO:** se a skill parecer \"não achar\" seus documentos ou salvar em lugar estranho, 9 em 10 vezes a conversa foi aberta na pasta errada. Confira o topo da janela antes de qualquer outra coisa.\n\n## 04. Conversando: o básico de todo dia\n\n| O quê | Como |\n|---|---|\n| Enviar mensagem | Digite embaixo e aperte **Enter** |\n| Quebrar linha sem enviar | **Shift + Enter** |\n| Conversa nova | Botão de **nova conversa** (o +). Regra de ouro: **uma conversa por caso** |\n| Comandos | Digite **/** e a lista aparece. O seu é o `/maestria` |\n| Mandar arquivo | **Arraste e solte** em cima da conversa: PDF, foto, Word, áudio, tudo junto |\n| Copiar uma resposta | Botão de copiar que aparece junto à resposta |\n\n> **DICA:** conversa nova pra cada caso não é frescura. Conversa muito longa deixa qualquer IA mais lenta e mais dispersa. Terminou um assunto, abra outra: a skill e as configurações continuam lá.\n\n## 05. Quando ele pedir permissão\n\nDe vez em quando o Claude Code pergunta se pode fazer algo: criar um arquivo, salvar um documento, executar um passo. Isso é uma **proteção**, não um problema: ele não mexe em nada sem a sua autorização.\n\n- Quando é a MaestrIA trabalhando (gerar o Word da petição, salvar na pasta do cliente, transcrever um áudio), pode **permitir**: é exatamente o serviço que você pediu\n- Leia o que ele está pedindo: a pergunta sempre diz O QUE ele quer fazer\n\n> **NUNCA:** não autorize uma ação que você não pediu e não entendeu. Não vai acontecer com a MaestrIA, mas é o hábito certo pra qualquer ferramenta.\n\n## 06. Kit primeiros socorros\n\n| Sintoma | Remédio |\n|---|---|\n| A resposta parou no meio | Escreva **continua** e envie |\n| O /maestria não aparece na lista | Feche e abra o Claude Code, teste numa conversa nova |\n| \"Não acho seus arquivos\" | Confira a pasta aberta no topo da janela (seção 03) |\n| Ficou lento ou confuso | Abra uma conversa nova: contexto longo cansa |\n| Qualquer coisa além disso | `/maestria suporte`: resolve com você ou abre chamado |\n\n## Checklist do módulo\n\n- [ ] Sei abrir o Claude Code em um clique (fixei na barra/Dock)\n- [ ] Criei a pasta Escritorio e sei abrir ela no Claude Code\n- [ ] Sei conferir no topo da janela qual pasta está aberta\n- [ ] Sei criar conversa nova e por que criar uma por caso\n- [ ] Testei arrastar um arquivo pra dentro da conversa\n- [ ] Entendi o pedido de permissão (e quando permitir)\n\n## Exercício\n\nFeche tudo. Agora abra o Claude Code do zero, confira se a pasta Escritorio está aberta, crie uma conversa nova e digite `/maestria`. Cronometre. Quando esse caminho inteiro levar menos de 1 minuto, o aplicativo deixou de ser novidade e virou ferramenta sua."
+ },
+ {
+  "slug": "02-primeira-peca",
+  "ordem": 3,
   "titulo": "Sua primeira peça em 25 minutos",
   "subtitulo": "O momento em que a MaestrIA deixa de ser promessa. Do material do cliente ao Word aberto na tela, com você no comando.",
   "icone": "📄",
@@ -26,7 +34,7 @@ window.CURSO_MAESTRIA = [
  },
  {
   "slug": "03-skills-do-pacote",
-  "ordem": 3,
+  "ordem": 4,
   "titulo": "As skills do seu pacote, cada uma em um minuto",
   "subtitulo": "O cardápio completo: o que cada skill faz, quando usar e o comando que abre cada porta.",
   "icone": "🗂️",
@@ -34,7 +42,7 @@ window.CURSO_MAESTRIA = [
  },
  {
   "slug": "04-calibragem",
-  "ordem": 4,
+  "ordem": 5,
   "titulo": "Calibragem: a skill com a SUA cara",
   "subtitulo": "A diferença entre um robô genérico e o seu braço direito é uma tarde de calibragem. Feita uma vez, vale pra sempre.",
   "icone": "🎛️",
@@ -42,7 +50,7 @@ window.CURSO_MAESTRIA = [
  },
  {
   "slug": "05-atualizacoes-e-suporte",
-  "ordem": 5,
+  "ordem": 6,
   "titulo": "Atualizações e suporte: o produto que não te abandona",
   "subtitulo": "Como receber as melhorias da semana, abrir chamado sem burocracia e acompanhar tudo por aqui.",
   "icone": "🔄",
@@ -50,7 +58,7 @@ window.CURSO_MAESTRIA = [
  },
  {
   "slug": "06-praticas-avancadas",
-  "ordem": 6,
+  "ordem": 7,
   "titulo": "Práticas avançadas: o escritório operando em outro nível",
   "subtitulo": "Os fluxos que separam quem usa a MaestrIA de quem OPERA com ela: triagem por áudio, radar processual, mesa de conselheiros e o ciclo completo de um caso.",
   "icone": "🚀",
