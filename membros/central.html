@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Central de Suporte | MaestrIA</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filtros { display: flex; gap: 8px; margin: 18px 0; flex-wrap: wrap; }
+    .filtro { background: none; border: 1px solid var(--border-strong); color: var(--text-muted);
+      border-radius: 999px; padding: 6px 16px; font: inherit; font-size: 13px; cursor: pointer; }
+    .filtro.ativo { border-color: var(--vermelho); color: var(--text); background: var(--vermelho-bg); }
+    .tk-desc { white-space: pre-wrap; background: var(--bg-card-2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--text-muted); margin: 10px 0; }
+    .tk-responder textarea { margin-top: 8px; }
+    .tk-responder button { margin-top: 10px; }
+    .tag-prioridade { font-size: 11px; font-weight: 800; color: #eab308; letter-spacing: 0.06em; }
+    .central-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">Maestr<span>IA</span></a>
+    <div class="nav-links">
+      <span class="mini">Central de Suporte (staff)</span>
+      <button id="btn-sair" class="btn-ghost hidden" type="button">Sair</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Login staff -->
+<main id="tela-login" class="tela">
+  <section class="login-box">
+    <h1>Central de Suporte</h1>
+    <p class="sub">Área do staff. Entre com a chave de administração.</p>
+    <form id="form-login" autocomplete="off">
+      <label for="inp-chave">Chave de administração</label>
+      <input id="inp-chave" type="password" required placeholder="Cole a chave aqui">
+      <button type="submit" class="btn-principal">Entrar</button>
+      <p id="login-erro" class="erro hidden"></p>
+    </form>
+  </section>
+</main>
+
+<!-- Painel de chamados -->
+<main id="tela-central" class="tela hidden" style="max-width: 860px;">
+  <div class="central-head">
+    <h1 style="font-size:26px;font-weight:800;">Chamados</h1>
+    <button id="btn-atualizar" class="btn-ghost" type="button">Atualizar lista</button>
+  </div>
+  <div class="filtros">
+    <button class="filtro ativo" data-f="abertos" type="button">Abertos</button>
+    <button class="filtro" data-f="respondidos" type="button">Respondidos</button>
+    <button class="filtro" data-f="todos" type="button">Todos</button>
+  </div>
+  <div id="lista" class="tickets"></div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const CORE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1";
+  const $ = (id) => document.getElementById(id);
+  let CHAVE = sessionStorage.getItem("maestria_admin_key") || "";
+  let TICKETS = [];
+  let FILTRO = "abertos";
+
+  function esc(t) {
+    const d = document.createElement("div");
+    d.textContent = String(t ?? "");
+    return d.innerHTML;
+  }
+  function dataBr(iso) {
+    try { return new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }); }
+    catch { return ""; }
+  }
+
+  async function chamar(body) {
+    const resp = await fetch(CORE + "/admin-tickets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.assign({ admin_key: CHAVE }, body)),
+    });
+    const dados = await resp.json();
+    if (!resp.ok || !dados.ok) throw new Error(dados.erro || "falha");
+    return dados;
+  }
+
+  async function carregar() {
+    const dados = await chamar({ acao: "listar" });
+    TICKETS = dados.tickets || [];
+    render();
+  }
+
+  function render() {
+    const alvo = $("lista");
+    const visiveis = TICKETS.filter((t) => {
+      if (FILTRO === "abertos") return t.status !== "respondido";
+      if (FILTRO === "respondidos") return t.status === "respondido";
+      return true;
+    });
+    if (!visiveis.length) {
+      alvo.innerHTML = "<p class='vazio'>Nenhum chamado " + (FILTRO === "todos" ? "" : FILTRO) + " por aqui. Paz.</p>";
+      return;
+    }
+    alvo.innerHTML = visiveis.map((t) => {
+      const respondido = t.status === "respondido";
+      const quem = t.cliente
+        ? esc(t.cliente.nome || t.cliente.email) + (t.cliente.plano ? " · " + esc(t.cliente.plano) : "")
+        : esc(t.email_contato || "sem identificação");
+      return "<div class='ticket'>" +
+        "<div class='ticket-head'><strong>#" + t.numero + " · " + esc(t.resumo) + "</strong>" +
+        "<span class='ticket-status " + (respondido ? "respondido" : "aberto") + "'>" +
+        (respondido ? "Respondido" : "Aberto") + "</span></div>" +
+        "<p class='meta'>" + esc(t.skill_id) + " · " + esc(t.categoria) + " · " + esc(t.severidade) +
+        (t.prioridade ? " · <span class='tag-prioridade'>LICENÇA ATIVA</span>" : "") +
+        " · " + dataBr(t.created_at) + "<br>De: " + quem + "</p>" +
+        "<div class='tk-desc'>" + esc(t.descricao) + "</div>" +
+        (respondido
+          ? "<div class='resposta'><strong>Sua resposta em " + dataBr(t.respondido_em) + "</strong><br>" + esc(t.resposta) + "</div>"
+          : "<div class='tk-responder'>" +
+            "<textarea rows='4' id='resp-" + t.numero + "' placeholder='Escreva a resposta. Ela vai pra área de membros E pro email do cliente.'></textarea>" +
+            "<button class='btn-principal btn-inline' data-responder='" + t.numero + "' type='button'>Responder e enviar por email</button>" +
+            "<p class='mini hidden' id='msg-" + t.numero + "'></p></div>") +
+        "</div>";
+    }).join("");
+
+    alvo.querySelectorAll("[data-responder]").forEach((b) => {
+      b.addEventListener("click", async () => {
+        const numero = Number(b.getAttribute("data-responder"));
+        const texto = $("resp-" + numero).value.trim();
+        const msg = $("msg-" + numero);
+        if (!texto) { msg.textContent = "Escreva a resposta antes."; msg.classList.remove("hidden"); return; }
+        b.disabled = true;
+        b.textContent = "Enviando...";
+        try {
+          const r = await chamar({ acao: "responder", numero, resposta: texto });
+          msg.textContent = r.email_resposta && r.email_resposta.enviado
+            ? "Respondido e email enviado ao cliente."
+            : "Respondido (email não saiu: " + ((r.email_resposta && r.email_resposta.motivo) || "sem email do cliente") + ").";
+          msg.classList.remove("hidden");
+          await carregar();
+        } catch (e) {
+          msg.textContent = "Falhou: " + e.message + ". Tente de novo.";
+          msg.classList.remove("hidden");
+          b.disabled = false;
+          b.textContent = "Responder e enviar por email";
+        }
+      });
+    });
+  }
+
+  document.querySelectorAll(".filtro").forEach((b) => {
+    b.addEventListener("click", () => {
+      FILTRO = b.getAttribute("data-f");
+      document.querySelectorAll(".filtro").forEach((x) => x.classList.toggle("ativo", x === b));
+      render();
+    });
+  });
+
+  $("btn-atualizar").addEventListener("click", () => carregar().catch(() => {}));
+
+  $("form-login").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    CHAVE = $("inp-chave").value.trim();
+    const erro = $("login-erro");
+    erro.classList.add("hidden");
+    try {
+      await carregar();
+      sessionStorage.setItem("maestria_admin_key", CHAVE);
+      $("tela-login").classList.add("hidden");
+      $("tela-central").classList.remove("hidden");
+      $("btn-sair").classList.remove("hidden");
+    } catch (err) {
+      erro.textContent = err.message === "chave_invalida"
+        ? "Chave incorreta."
+        : "Não deu pra entrar: " + err.message;
+      erro.classList.remove("hidden");
+    }
+  });
+
+  $("btn-sair").addEventListener("click", () => {
+    sessionStorage.removeItem("maestria_admin_key");
+    location.reload();
+  });
+
+  // Sessão persistida na aba
+  if (CHAVE) {
+    carregar().then(() => {
+      $("tela-login").classList.add("hidden");
+      $("tela-central").classList.remove("hidden");
+      $("btn-sair").classList.remove("hidden");
+    }).catch(() => sessionStorage.removeItem("maestria_admin_key"));
+  }
+})();
+</script>
+</body>
+</html>
