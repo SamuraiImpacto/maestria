@@ -5,6 +5,10 @@
 
 const CORE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1";
 
+// Link do grupo de network (Comunidade Diamond). Preencher quando o grupo existir:
+// o card na aba Comunidade ativa o botão sozinho.
+const LINK_DIAMOND = "";
+
 const $ = (id) => document.getElementById(id);
 
 // ---------- utilitários ----------
@@ -51,7 +55,7 @@ let dadosAtuais = null;
 // ---------- navegação entre views ----------
 // Views: "aula" (curso), "downloads", "licenca", "chamados"
 function mostrarView(nome) {
-  ["aula", "downloads", "licenca", "chamados"].forEach((v) => {
+  ["aula", "downloads", "licenca", "chamados", "comunidade"].forEach((v) => {
     const el = $("view-" + v);
     if (el) el.classList.toggle("hidden", v !== nome);
   });
@@ -82,6 +86,17 @@ if (toggle) {
     $("app-menu").classList.toggle("aberto");
   });
 }
+
+// Card da Comunidade Diamond: botão só aparece com link configurado
+(function () {
+  const a = $("link-diamond");
+  const aviso = $("diamond-em-breve");
+  if (a && LINK_DIAMOND) {
+    a.href = LINK_DIAMOND;
+    a.style.display = "";
+    if (aviso) aviso.classList.add("hidden");
+  }
+})();
 
 // ---------- login ----------
 $("inp-cpf").addEventListener("input", (e) => {
