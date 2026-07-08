@@ -760,7 +760,7 @@ section h2 {
 .lead-mini {
   color: var(--text-muted);
   font-size: 14px;
-  margin: 0 auto 28px;
+  margin: 28px auto;
   max-width: 720px;
   text-align: center;
   line-height: 1.6;
