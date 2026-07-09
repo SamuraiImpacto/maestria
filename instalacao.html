@@ -155,10 +155,9 @@
         <li><a href="#passo1">Ter a assinatura do Claude</a> (5 min, pula se já tem)</li>
         <li><a href="#passo2">Instalar o Claude Code no computador</a> (5 min)</li>
         <li><a href="#passo3">Escolher a pasta de trabalho</a> (2 min)</li>
-        <li><a href="#passo4">Baixar o arquivo da sua MaestrIA</a> (2 min)</li>
-        <li><a href="#passo5">Instalar a MaestrIA</a> (3 min)</li>
+        <li><a href="#passo4">Baixar o instalador da MaestrIA (um arquivo só)</a> (1 min)</li>
+        <li><a href="#passo5">Deixar ele instalar TUDO sozinho</a> (15 min, você só informa código e CPF)</li>
         <li><a href="#passo6">Abrir uma conversa nova</a> (30 segundos, e é aqui que muita gente trava)</li>
-        <li><a href="#passo7">Ativar a sua licença</a> (2 min)</li>
         <li><a href="#passo8">Calibrar com o seu escritório</a> (30 min, e nunca mais)</li>
       </ol>
     </div>
@@ -249,57 +248,69 @@
       <div class="passo-topo">
         <div class="passo-bola">4</div>
         <div>
-          <h3>Baixar o arquivo da sua MaestrIA</h3>
-          <span class="passo-tempo">2 minutos</span>
+          <h3>Baixar o instalador da MaestrIA (um arquivo só)</h3>
+          <span class="passo-tempo">1 minuto</span>
         </div>
       </div>
       <ol>
-        <li>Abra o email <strong>"Sua MaestrIA chegou"</strong> (o que tem o seu código de ativação) OU entre na <a href="https://maestria.samurailab.com.br/membros/" style="color:var(--gold);">área de membros</a> com o código + CPF e vá na aba <strong>Downloads</strong>.</li>
-        <li>Clique no link da skill do seu pacote. Se o seu pacote tem várias, <strong>baixe só a primeira por enquanto</strong> (as outras se instalam sozinhas no passo 7).</li>
-        <li>O arquivo termina em <strong>.zip</strong> e cai na pasta <strong>Downloads</strong> do computador.</li>
+        <li>Abra o email <strong>"Sua MaestrIA chegou"</strong> (o que tem o seu código de ativação).</li>
+        <li>Clique no botão <strong>"Baixar o instalador da MaestrIA"</strong>. É UM arquivo só, e serve pro seu pacote inteiro: ele vai instalar todas as suas skills sozinho no próximo passo.</li>
+        <li>O arquivo (<em>maestria-instalador.zip</em>) cai na pasta <strong>Downloads</strong> do computador.</li>
       </ol>
       <figure class="print-real">
-        <img src="img/guia/passo4-zip.png" alt="Pasta Downloads com o arquivo ZIP da skill" loading="lazy" onerror="this.closest('figure').style.display='none'">
-        <figcaption>Tela real: o ZIP da skill na pasta Downloads. É esse arquivo inteiro que você vai arrastar.</figcaption>
+        <img src="img/guia/passo4-zip.png" alt="Pasta Downloads com o instalador da MaestrIA" loading="lazy" onerror="this.closest('figure').style.display='none'">
+        <figcaption>Tela real: o instalador na pasta Downloads. É esse arquivo inteiro que você vai arrastar.</figcaption>
       </figure>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> tem um arquivo tipo <em>maestria-calculo-previdenciario-v1.6.3.zip</em> na sua pasta Downloads.</div>
-      <div class="caixa-socorro"><strong>NÃO dê dois cliques no ZIP e não descompacte.</strong> Ele vai ser usado inteiro, do jeito que está, no próximo passo.</div>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o arquivo <em>maestria-instalador.zip</em> está na sua pasta Downloads.</div>
+      <div class="caixa-socorro"><strong>NÃO dê dois cliques no ZIP e não descompacte.</strong> Ele vai ser usado inteiro, do jeito que está, no próximo passo. E deixe o email aberto: você vai precisar do código de ativação daqui a pouco.</div>
     </div>
 
     <div class="passo-bloco" id="passo5">
       <div class="passo-topo">
         <div class="passo-bola">5</div>
         <div>
-          <h3>Instalar a MaestrIA</h3>
-          <span class="passo-tempo">3 minutos · o Claude faz sozinho</span>
+          <h3>Deixar ele instalar TUDO sozinho</h3>
+          <span class="passo-tempo">15 minutos · você só informa o código e o CPF</span>
         </div>
       </div>
       <ol>
         <li>Abra a pasta <strong>Downloads</strong> numa janela, e o <strong>Claude Code</strong> (passo 3) na outra.</li>
-        <li><strong>Arraste o arquivo .zip</strong> da pasta Downloads pra dentro da conversa do Claude e solte.</li>
+        <li><strong>Arraste o arquivo maestria-instalador.zip</strong> pra dentro da conversa do Claude e solte.</li>
         <li>Escreva a frase abaixo e aperte Enter:</li>
       </ol>
       <div class="caixa-comando">
         <span class="rotulo">Escreva na conversa</span>
-        <code>instala essa skill pra mim</code>
+        <code>instala pra mim</code>
         <button class="btn-copiar" type="button">copiar</button>
       </div>
+      <ol start="4">
+        <li>Ele vai pedir o <strong>código de ativação</strong> (aquele código comprido do email): copie e cole.</li>
+        <li>Ele vai pedir o <strong>CPF do titular da compra</strong>: digite o seu.</li>
+        <li>Agora é só acompanhar: ele baixa e instala <strong>todas as skills do seu pacote</strong>, uma a uma, mostrando o progresso. Vá tomar um café.</li>
+      </ol>
       <div class="tela-mock">
         <div class="tm-barra">Claude Code</div>
         <div class="tm-corpo">
-          <p class="tm-voce">📎 maestria-calculo-previdenciario-v1.6.3.zip<br><b>instala essa skill pra mim</b></p>
-          <p class="tm-claude">Deixa comigo. Descompactando e instalando a skill...</p>
-          <p class="tm-claude">Preparando os componentes... (se faltar algo no computador, eu mesmo instalo)</p>
-          <p class="tm-ok">✓ Skill instalada! Feche esta conversa e abra uma nova pra usar o /maestria.</p>
+          <p class="tm-voce">📎 maestria-instalador.zip<br><b>instala pra mim</b></p>
+          <p class="tm-claude">Deixa comigo: vou ativar a sua licença e instalar todas as skills do seu pacote. Cola aqui o código de ativação do email:</p>
+          <p class="tm-voce">b2b1497b-xxxx-xxxx-xxxx-xxxxxxxxxxxx</p>
+          <p class="tm-claude">E o CPF do titular da compra:</p>
+          <p class="tm-voce">000.000.000-00</p>
+          <p class="tm-claude">Licença ativada! Seu pacote tem 9 skills. Instalando 1 de 9: Cálculo Previdenciário...</p>
+          <p class="tm-ok">✓ Tudo instalado! Agora feche esta conversa e abra uma NOVA pra usar o /maestria.</p>
         </div>
       </div>
-      <p class="tm-legenda">O texto exato varia, mas o final é esse: instalada, e um aviso pra abrir conversa nova.</p>
+      <p class="tm-legenda">O texto exato varia, mas o fluxo é esse: código, CPF, e ele instala tudo sozinho.</p>
       <figure class="print-real">
-        <img src="img/guia/passo5-instalando.png" alt="ZIP arrastado pra conversa e instalação em andamento" loading="lazy" onerror="this.closest('figure').style.display='none'">
-        <figcaption>Tela real: o ZIP na conversa e o Claude instalando sozinho.</figcaption>
+        <img src="img/guia/passo5-instalando.png" alt="Instalador arrastado pra conversa e instalação em andamento" loading="lazy" onerror="this.closest('figure').style.display='none'">
+        <figcaption>Tela real: o instalador na conversa e o Claude instalando o pacote sozinho.</figcaption>
       </figure>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o Claude disse que instalou. Ele demora uns 2 a 5 minutos e vai "falando" o que está fazendo. Só espere.</div>
-      <div class="caixa-socorro"><strong>Ele fez uma pergunta no meio?</strong> Normal. Leia com calma e responda (geralmente é só confirmar com "sim" ou apertar Enter). Ele nunca faz nada destrutivo sem avisar.</div>
+      <figure class="print-real">
+        <img src="img/guia/passo7-ativar.png" alt="Instalador pedindo o código de ativação" loading="lazy" onerror="this.closest('figure').style.display='none'">
+        <figcaption>Tela real: o momento em que ele pede o código e o CPF.</figcaption>
+      </figure>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> ele confirmou a ativação e foi instalando skill por skill até avisar que terminou. Demora uns 15 minutos e ele vai "falando" o que está fazendo. Só espere.</div>
+      <div class="caixa-socorro"><strong>Ele fez uma pergunta no meio?</strong> Normal. Leia com calma e responda (geralmente é só confirmar com "sim" ou apertar Enter). Ele nunca faz nada destrutivo sem avisar. <strong>Deu "licença não encontrada"?</strong> Confira se copiou o código INTEIRO (sem espaços sobrando) e se o CPF é o mesmo da compra.</div>
     </div>
 
     <div class="passo-bloco" id="passo6">
@@ -331,41 +342,9 @@
       <div class="caixa-socorro"><strong>Digitou /maestria e nada?</strong> 9 em cada 10 vezes é porque a conversa é a mesma da instalação. Feche o aplicativo TODO, abra de novo, conversa nova, /maestria. Se ainda assim nada: volte ao passo 5 e arraste o ZIP de novo.</div>
     </div>
 
-    <div class="passo-bloco" id="passo7">
-      <div class="passo-topo">
-        <div class="passo-bola">7</div>
-        <div>
-          <h3>Ativar a sua licença</h3>
-          <span class="passo-tempo">2 minutos · pega o código no email</span>
-        </div>
-      </div>
-      <ol>
-        <li>Na conversa nova, escreva <strong>/maestria ativar</strong> e aperte Enter.</li>
-        <li>Ele vai pedir o <strong>código de ativação</strong>: está no email "Sua MaestrIA chegou" (é aquele código comprido, tipo <em>b2b1497b-...</em>). Copie e cole.</li>
-        <li>Ele vai pedir o <strong>CPF do titular da compra</strong>: digite o seu.</li>
-      </ol>
-      <div class="tela-mock">
-        <div class="tm-barra">Claude Code</div>
-        <div class="tm-corpo">
-          <p class="tm-voce"><b>/maestria ativar</b></p>
-          <p class="tm-claude">Me passa o código de ativação do email de compra:</p>
-          <p class="tm-voce">b2b1497b-xxxx-xxxx-xxxx-xxxxxxxxxxxx</p>
-          <p class="tm-claude">E o CPF do titular:</p>
-          <p class="tm-voce">000.000.000-00</p>
-          <p class="tm-ok">✓ Licença ativada! Seu pacote tem mais skills: quer que eu baixe e instale as outras agora?</p>
-        </div>
-      </div>
-      <figure class="print-real">
-        <img src="img/guia/passo7-ativar.png" alt="Ativação da licença com código e CPF" loading="lazy" onerror="this.closest('figure').style.display='none'">
-        <figcaption>Tela real: a ativação pedindo o código do email e o CPF.</figcaption>
-      </figure>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> ele confirmou a ativação. E se o seu pacote tem mais skills, ele se oferece pra instalar as outras sozinho: responda <strong>sim</strong> e vá tomar um café.</div>
-      <div class="caixa-socorro"><strong>Deu "licença não encontrada"?</strong> Confira se copiou o código INTEIRO (sem espaços sobrando) e se o CPF é o mesmo usado na compra. Persiste? <a href="suporte.html" style="color:var(--vermelho);">Chamado no suporte</a> que a gente resolve rápido.</div>
-    </div>
-
     <div class="passo-bloco" id="passo8">
       <div class="passo-topo">
-        <div class="passo-bola">8</div>
+        <div class="passo-bola">7</div>
         <div>
           <h3>Calibrar com o seu escritório (última etapa!)</h3>
           <span class="passo-tempo">30 minutos · uma única vez na vida</span>

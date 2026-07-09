@@ -187,10 +187,25 @@ function renderizarPainel(dados) {
   }
 }
 
-// ---------- Downloads (liberadas + as que faltam) ----------
+// ---------- Downloads (instalador único no topo + liberadas + as que faltam) ----------
+const URL_INSTALADOR =
+  "https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-instalador.zip";
+
 function renderizarDownloads(dados) {
   const grid = $("dl-skills");
   grid.innerHTML = "";
+
+  // Card destaque: o jeito recomendado (um arquivo instala o pacote inteiro)
+  const inst = document.createElement("div");
+  inst.className = "card";
+  inst.style.borderColor = "var(--vermelho, #e33)";
+  inst.innerHTML =
+    "<h3>⬇ Instalador único (recomendado)</h3>" +
+    "<p>UM arquivo que instala TODAS as skills do seu pacote de uma vez: arrasta pro Claude Code, escreve \"instala pra mim\" e informa o código de ativação + CPF quando ele pedir. As skills abaixo são os downloads individuais, pra quem precisar de uma específica.</p>" +
+    "<a class='btn-baixar' href='" + URL_INSTALADOR + "'>Baixar o instalador</a>" +
+    "<p class='mini' style='margin-top:8px;'>Sempre instala as versões mais recentes. Travou? O <a href='https://maestria.samurailab.com.br/instalacao.html' target='_blank' style='color:inherit;text-decoration:underline;'>guia passo a passo</a> te destrava.</p>";
+  grid.appendChild(inst);
+
   (dados.skills || []).forEach((s) => {
     const card = document.createElement("div");
     card.className = "card";
