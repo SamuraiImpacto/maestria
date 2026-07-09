@@ -9,6 +9,10 @@ COPY *.js ./
 # Área de membros (login por código de ativação + CPF, curso, chamados)
 COPY membros/ ./membros/
 
+# Landing pages segmentadas por área (campanhas de WhatsApp)
+COPY prev/ ./prev/
+COPY trab/ ./trab/
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
