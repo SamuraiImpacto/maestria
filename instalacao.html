@@ -4,27 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guia de instalação | MaestrIA</title>
-  <meta name="description" content="Guia de instalação da MaestrIA passo a passo, feito pra quem nunca mexeu com programação. Windows e Mac.">
+  <meta name="description" content="Guia de instalação da MaestrIA passo a passo, feito pra quem nunca mexeu com programação. Cada passo mostra o que fazer e o que deve aparecer na tela.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .so-tabs { display: flex; gap: 10px; justify-content: center; margin: 28px 0 8px; }
-    .so-tab {
-      background: var(--bg-card-2); color: var(--text-muted);
-      border: 1px solid var(--border-strong); border-radius: 8px;
-      padding: 10px 26px; font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: inherit;
-    }
-    .so-tab.ativo { background: var(--vermelho); color: #fff; border-color: var(--vermelho); }
-    .so-painel { display: none; }
-    .so-painel.ativo { display: block; }
     .caixa-comando {
       background: var(--bg-card-2); border: 1px solid var(--border-strong);
       border-radius: 8px; padding: 18px 20px; margin: 14px 0;
       text-align: left; position: relative;
     }
     .caixa-comando code {
-      color: var(--gold); font-size: 14px; word-break: break-all;
+      color: var(--gold); font-size: 15px; word-break: break-all;
       background: none; border: none; padding: 0;
     }
     .caixa-comando .rotulo {
@@ -38,20 +28,69 @@
       padding: 4px 12px; font-size: 12px; cursor: pointer; font-family: inherit;
     }
     .btn-copiar:hover { color: var(--text); }
-    .passo-lista { list-style: none; padding: 24px; text-align: left; }
-    .passo-lista li { margin-bottom: 14px; }
-    .passo-lista li strong { color: var(--text); }
-    .nota {
-      background: var(--vermelho-bg); border: 1px solid var(--vermelho-border);
-      border-radius: 8px; padding: 14px 18px; font-size: 14px;
-      color: var(--text-muted); margin-top: 18px; text-align: left;
+
+    .passo-bloco {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px; margin: 26px auto; max-width: 800px;
+      text-align: left;
     }
+    .passo-bloco h3 { font-size: 21px; margin-bottom: 4px; }
+    .passo-topo { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .passo-bola {
+      min-width: 44px; height: 44px; border-radius: 50%;
+      background: var(--vermelho); color: #fff; font-weight: 900; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .passo-tempo { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+    .passo-bloco p, .passo-bloco li { color: var(--text-muted); font-size: 15px; line-height: 1.65; }
+    .passo-bloco ol { padding-left: 22px; margin: 10px 0; }
+    .passo-bloco ol li { margin-bottom: 10px; }
+    .passo-bloco strong { color: var(--text); }
+
+    .caixa-sucesso {
+      background: rgba(46, 160, 67, 0.08); border: 1px solid rgba(46, 160, 67, 0.4);
+      border-radius: 8px; padding: 14px 18px; margin-top: 16px; font-size: 14px;
+      color: var(--text-muted);
+    }
+    .caixa-sucesso strong { color: #4ade80; }
+    .caixa-socorro {
+      background: var(--vermelho-bg); border: 1px solid var(--vermelho-border);
+      border-radius: 8px; padding: 14px 18px; margin-top: 10px; font-size: 14px;
+      color: var(--text-muted);
+    }
+    .caixa-socorro strong { color: var(--vermelho); }
+
+    .tela-mock {
+      background: #0d0d0d; border: 1px solid var(--border-strong); border-radius: 10px;
+      margin: 16px 0 4px; overflow: hidden;
+    }
+    .tela-mock .tm-barra {
+      background: #1a1a1a; padding: 8px 14px; font-size: 11px; color: var(--text-dim);
+      border-bottom: 1px solid var(--border-strong);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .tela-mock .tm-corpo { padding: 16px 18px; font-size: 13.5px; line-height: 1.7; }
+    .tm-voce { color: #e8e8e8; }
+    .tm-voce b { color: var(--gold); }
+    .tm-claude { color: #9fb3c8; }
+    .tm-ok { color: #4ade80; font-weight: 700; }
+    .tm-legenda { font-size: 12px; color: var(--text-dim); margin: 4px 0 0; text-align: center; }
+
+    .nomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 28px; }
+    .indice-passos {
+      max-width: 800px; margin: 24px auto 0; text-align: left;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 28px;
+    }
+    .indice-passos li { margin-bottom: 6px; color: var(--text-muted); font-size: 15px; }
+    .indice-passos a { color: var(--text); text-decoration: none; }
+    .indice-passos a:hover { color: var(--vermelho); }
     .faq-inst details {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 10px; padding: 16px 20px; margin-bottom: 10px; text-align: left;
     }
     .faq-inst summary { cursor: pointer; font-weight: 700; font-size: 15px; }
     .faq-inst p { margin-top: 10px; color: var(--text-muted); font-size: 14px; }
+    .rota-b { max-width: 800px; margin: 0 auto; text-align: left; }
   </style>
 </head>
 <body>
@@ -70,142 +109,328 @@
   <div class="container">
     <div class="badges">
       <span class="badge">GUIA DE INSTALAÇÃO</span>
+      <span class="badge">FEITO PRA QUEM NUNCA MEXEU COM ISSO</span>
     </div>
-    <h1>Do zero ao primeiro documento,<br><span class="vermelho">sem saber programar.</span></h1>
-    <p class="hero-sub">Este guia foi escrito pra advogado, não pra programador. Siga na ordem, copie e cole o que estiver nas caixas, e em <strong>10 a 15 minutos</strong> o Claude Code está instalado e pronto pra receber a sua MaestrIA.</p>
+    <h1>Do zero ao primeiro documento,<br><span class="vermelho">um passo de cada vez.</span></h1>
+    <p class="hero-sub">Siga na ordem, sem pular. Cada passo diz <strong>o que fazer</strong>, mostra <strong>o que deve aparecer na sua tela</strong> e o que fazer <strong>se não aparecer</strong>. Você não precisa saber programar e não tem como estragar nada: na dúvida, é só continuar.</p>
   </div>
 </header>
 
-<section class="problema">
+<!-- OS 3 NOMES -->
+<section class="o-que-e">
   <div class="container">
-    <span class="kicker">Antes de começar</span>
-    <h2>Você só precisa de 3 coisas</h2>
-    <ul class="passo-lista diff-col diff-gold">
-      <li><strong>1. Um computador</strong> com Windows 10 ou 11, ou um Mac.</li>
-      <li><strong>2. Assinatura Claude Pro ou Max ativa</strong> (a partir de US$ 17/mês, contratada em <a href="https://claude.ai" style="color:var(--gold);">claude.ai</a>). É o cérebro que a MaestrIA usa. Sem assinatura, o Claude Code não funciona.</li>
-      <li><strong>3. O ZIP da sua skill</strong>, baixado do email de compra ou da <a href="https://maestria.samurailab.com.br/membros/" style="color:var(--gold);">área de membros</a>.</li>
-    </ul>
+    <span class="kicker">Antes de tudo: os 3 nomes que você vai ver</span>
+    <h2>Claude, Claude Code e MaestrIA. <span class="vermelho">Quem é quem?</span></h2>
+    <div class="nomes-grid">
+      <div class="dor-card">
+        <div class="dor-icon">🧠</div>
+        <h3>Claude</h3>
+        <p>A inteligência artificial (tipo o ChatGPT, só que da Anthropic). É a assinatura que você paga no site claude.ai. Pense nele como <strong>um estagiário genial</strong>.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">💻</div>
+        <h3>Claude Code</h3>
+        <p>O programa que coloca esse estagiário <strong>dentro do seu computador</strong>, com acesso às suas pastas (é assim que ele lê os documentos do cliente e salva o Word pronto).</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">⚖️</div>
+        <h3>MaestrIA</h3>
+        <p>O <strong>treinamento jurídico</strong> desse estagiário: o que você comprou. Um arquivo que ensina o Claude a calcular, escrever e citar como o SEU escritório.</p>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:26px;">Ou seja: você vai <strong>1)</strong> ter a assinatura do Claude, <strong>2)</strong> instalar o Claude Code e <strong>3)</strong> entregar a MaestrIA pra ele. É exatamente isso que os passos abaixo fazem.</p>
+
+    <div class="indice-passos">
+      <strong style="color:var(--text);">O caminho completo (30 a 40 minutos, uma única vez):</strong>
+      <ol style="margin-top:12px; padding-left:22px;">
+        <li><a href="#passo1">Ter a assinatura do Claude</a> (5 min, pula se já tem)</li>
+        <li><a href="#passo2">Instalar o aplicativo Claude no computador</a> (5 min)</li>
+        <li><a href="#passo3">Abrir o Claude Code dentro do aplicativo</a> (2 min)</li>
+        <li><a href="#passo4">Baixar o arquivo da sua MaestrIA</a> (2 min)</li>
+        <li><a href="#passo5">Instalar a MaestrIA</a> (3 min)</li>
+        <li><a href="#passo6">Abrir uma conversa nova</a> (30 segundos, e é aqui que muita gente trava)</li>
+        <li><a href="#passo7">Ativar a sua licença</a> (2 min)</li>
+        <li><a href="#passo8">Calibrar com o seu escritório</a> (30 min, e nunca mais)</li>
+      </ol>
+    </div>
   </div>
 </section>
 
+<!-- PASSOS -->
 <section class="solucao">
   <div class="container">
-    <span class="kicker">Passo 1</span>
-    <h2>Instalar o Claude Code</h2>
-    <p class="lead">Escolha o seu sistema:</p>
 
-    <div class="so-tabs">
-      <button class="so-tab ativo" data-so="windows" type="button">Windows</button>
-      <button class="so-tab" data-so="mac" type="button">Mac</button>
+    <div class="passo-bloco" id="passo1">
+      <div class="passo-topo">
+        <div class="passo-bola">1</div>
+        <div>
+          <h3>Ter a assinatura do Claude</h3>
+          <span class="passo-tempo">5 minutos · pule se já tem Claude Pro ou Max</span>
+        </div>
+      </div>
+      <ol>
+        <li>Abra o site <strong>claude.ai</strong> no seu navegador.</li>
+        <li>Crie a conta com o seu email de trabalho (pode usar a conta do Google pra facilitar).</li>
+        <li>Assine o plano <strong>Pro</strong> (US$ 20/mês, ou US$ 17/mês pagando o ano) ou <strong>Max</strong>. É o único custo além da MaestrIA.</li>
+      </ol>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> você consegue entrar em claude.ai e conversar com o Claude por lá.</div>
+      <div class="caixa-socorro"><strong>Importante:</strong> anote qual email você usou. Vai precisar dele no passo 2, e tem que ser O MESMO.</div>
     </div>
 
-    <!-- ===== WINDOWS ===== -->
-    <div class="so-painel ativo" id="painel-windows">
-      <ul class="passo-lista diff-col diff-gold">
-        <li><strong>1. Abra o PowerShell.</strong> Clique no menu Iniciar, digite <em>powershell</em> e aperte Enter. Vai abrir uma janela azul ou preta de texto: é ali que você cola o comando.</li>
-        <li><strong>2. Cole o comando oficial de instalação</strong> (botão copiar na caixa abaixo), aperte Enter e aguarde terminar:
-          <div class="caixa-comando">
-            <span class="rotulo">PowerShell (Windows)</span>
-            <code>irm https://claude.ai/install.ps1 | iex</code>
-            <button class="btn-copiar" type="button">copiar</button>
-          </div>
-        </li>
-        <li><strong>3. Feche e abra o PowerShell de novo</strong> (isso atualiza os atalhos).</li>
-        <li><strong>4. Digite</strong> <code>claude</code> <strong>e aperte Enter.</strong> Na primeira vez, o navegador abre pedindo login: entre com a conta da sua assinatura Claude e autorize. Pronto, volta pro PowerShell e o Claude está conversando com você.</li>
-      </ul>
-      <div class="nota"><strong>Prefere não usar comando nenhum?</strong> O Claude também tem aplicativo de área de trabalho pra Windows com a aba "Code" embutida: baixe em <a href="https://claude.ai/download" style="color:var(--gold);">claude.ai/download</a>, instale com dois cliques e faça login. O resto do guia funciona igual.</div>
+    <div class="passo-bloco" id="passo2">
+      <div class="passo-topo">
+        <div class="passo-bola">2</div>
+        <div>
+          <h3>Instalar o aplicativo Claude no computador</h3>
+          <span class="passo-tempo">5 minutos · instala como qualquer programa</span>
+        </div>
+      </div>
+      <ol>
+        <li>Abra <strong>claude.ai/download</strong> e baixe a versão pro seu sistema (Windows ou Mac).</li>
+        <li>O arquivo baixado fica na pasta <strong>Downloads</strong>. Dê dois cliques nele e siga o instalador (avançar, avançar, concluir). É um programa comum, da Anthropic.</li>
+        <li>Abra o aplicativo <strong>Claude</strong> que apareceu no computador e <strong>entre com o MESMO email do passo 1</strong>.</li>
+      </ol>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o aplicativo abriu e mostra uma tela de conversa com o Claude, com o seu nome ou email no canto.</div>
+      <div class="caixa-socorro"><strong>O antivírus reclamou?</strong> O instalador é oficial da Anthropic, baixado do site deles. Clique em "permitir" ou "executar assim mesmo".</div>
     </div>
 
-    <!-- ===== MAC ===== -->
-    <div class="so-painel" id="painel-mac">
-      <ul class="passo-lista diff-col diff-gold">
-        <li><strong>1. Abra o Terminal.</strong> Aperte Command + Espaço, digite <em>terminal</em> e aperte Enter.</li>
-        <li><strong>2. Cole o comando oficial de instalação</strong> (botão copiar na caixa abaixo), aperte Enter e aguarde terminar:
-          <div class="caixa-comando">
-            <span class="rotulo">Terminal (Mac)</span>
-            <code>curl -fsSL https://claude.ai/install.sh | bash</code>
-            <button class="btn-copiar" type="button">copiar</button>
-          </div>
-        </li>
-        <li><strong>3. Feche e abra o Terminal de novo.</strong></li>
-        <li><strong>4. Digite</strong> <code>claude</code> <strong>e aperte Enter.</strong> Na primeira vez, o navegador abre pedindo login: entre com a conta da sua assinatura Claude e autorize.</li>
-      </ul>
-      <div class="nota"><strong>Prefere não usar comando nenhum?</strong> O Claude também tem aplicativo de área de trabalho pra Mac com a aba "Code" embutida: baixe em <a href="https://claude.ai/download" style="color:var(--gold);">claude.ai/download</a>, instale e faça login. O resto do guia funciona igual.</div>
+    <div class="passo-bloco" id="passo3">
+      <div class="passo-topo">
+        <div class="passo-bola">3</div>
+        <div>
+          <h3>Abrir o Claude Code dentro do aplicativo</h3>
+          <span class="passo-tempo">2 minutos</span>
+        </div>
+      </div>
+      <p>Dentro do aplicativo Claude, procure a palavra <strong>"Code"</strong> (fica no menu, geralmente na lateral ou no topo). Clique nela. É essa área que dá ao Claude acesso às pastas do computador.</p>
+      <ol>
+        <li>Clique em <strong>Code</strong>.</li>
+        <li>Se ele pedir pra escolher uma pasta pra trabalhar, escolha <strong>Documentos</strong> e confirme.</li>
+        <li>Se aparecer uma pergunta de confiança ou permissão ("do you trust...?" / "confia nesta pasta?"), responda <strong>sim</strong>. É o Claude pedindo licença pra trabalhar nas suas pastas.</li>
+      </ol>
+      <div class="tela-mock">
+        <div class="tm-barra">Claude Code</div>
+        <div class="tm-corpo">
+          <p class="tm-claude">O que vamos fazer hoje?</p>
+          <p class="tm-voce">│ Digite aqui...</p>
+        </div>
+      </div>
+      <p class="tm-legenda">É mais ou menos isso que você vai ver: uma conversa esperando você digitar.</p>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> apareceu uma conversa nova, com um campo pra você digitar, dentro da área Code.</div>
+      <div class="caixa-socorro"><strong>Não achou o "Code"?</strong> Atualize o aplicativo (feche e abra de novo; ele se atualiza sozinho) ou tire uma foto da tela e mande no <a href="suporte.html" style="color:var(--vermelho);">suporte</a>, que a gente te aponta o botão. Tem também o caminho alternativo pelo PowerShell no fim desta página.</div>
     </div>
 
-    <p class="lead" style="margin-top:24px;">Pra conferir que deu certo: digite <code>claude --version</code> e aperte Enter. Apareceu um número de versão? Instalado.</p>
+    <div class="passo-bloco" id="passo4">
+      <div class="passo-topo">
+        <div class="passo-bola">4</div>
+        <div>
+          <h3>Baixar o arquivo da sua MaestrIA</h3>
+          <span class="passo-tempo">2 minutos</span>
+        </div>
+      </div>
+      <ol>
+        <li>Abra o email <strong>"Sua MaestrIA chegou"</strong> (o que tem o seu código de ativação) OU entre na <a href="https://maestria.samurailab.com.br/membros/" style="color:var(--gold);">área de membros</a> com o código + CPF e vá na aba <strong>Downloads</strong>.</li>
+        <li>Clique no link da skill do seu pacote. Se o seu pacote tem várias, <strong>baixe só a primeira por enquanto</strong> (as outras se instalam sozinhas no passo 7).</li>
+        <li>O arquivo termina em <strong>.zip</strong> e cai na pasta <strong>Downloads</strong> do computador.</li>
+      </ol>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> tem um arquivo tipo <em>maestria-calculo-previdenciario-v1.6.3.zip</em> na sua pasta Downloads.</div>
+      <div class="caixa-socorro"><strong>NÃO dê dois cliques no ZIP e não descompacte.</strong> Ele vai ser usado inteiro, do jeito que está, no próximo passo.</div>
+    </div>
+
+    <div class="passo-bloco" id="passo5">
+      <div class="passo-topo">
+        <div class="passo-bola">5</div>
+        <div>
+          <h3>Instalar a MaestrIA</h3>
+          <span class="passo-tempo">3 minutos · o Claude faz sozinho</span>
+        </div>
+      </div>
+      <ol>
+        <li>Abra a pasta <strong>Downloads</strong> numa janela, e o <strong>Claude Code</strong> (passo 3) na outra.</li>
+        <li><strong>Arraste o arquivo .zip</strong> da pasta Downloads pra dentro da conversa do Claude e solte.</li>
+        <li>Escreva a frase abaixo e aperte Enter:</li>
+      </ol>
+      <div class="caixa-comando">
+        <span class="rotulo">Escreva na conversa</span>
+        <code>instala essa skill pra mim</code>
+        <button class="btn-copiar" type="button">copiar</button>
+      </div>
+      <div class="tela-mock">
+        <div class="tm-barra">Claude Code</div>
+        <div class="tm-corpo">
+          <p class="tm-voce">📎 maestria-calculo-previdenciario-v1.6.3.zip<br><b>instala essa skill pra mim</b></p>
+          <p class="tm-claude">Deixa comigo. Descompactando e instalando a skill...</p>
+          <p class="tm-claude">Preparando os componentes... (se faltar algo no computador, eu mesmo instalo)</p>
+          <p class="tm-ok">✓ Skill instalada! Feche esta conversa e abra uma nova pra usar o /maestria.</p>
+        </div>
+      </div>
+      <p class="tm-legenda">O texto exato varia, mas o final é esse: instalada, e um aviso pra abrir conversa nova.</p>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o Claude disse que instalou. Ele demora uns 2 a 5 minutos e vai "falando" o que está fazendo. Só espere.</div>
+      <div class="caixa-socorro"><strong>Ele fez uma pergunta no meio?</strong> Normal. Leia com calma e responda (geralmente é só confirmar com "sim" ou apertar Enter). Ele nunca faz nada destrutivo sem avisar.</div>
+    </div>
+
+    <div class="passo-bloco" id="passo6">
+      <div class="passo-topo">
+        <div class="passo-bola">6</div>
+        <div>
+          <h3>Feche a conversa e abra uma NOVA</h3>
+          <span class="passo-tempo">30 segundos · o passo que MAIS gente pula</span>
+        </div>
+      </div>
+      <p>O comando <strong>/maestria</strong> só passa a existir em conversa aberta DEPOIS da instalação. Então:</p>
+      <ol>
+        <li>Feche a conversa atual (ou o aplicativo inteiro, se preferir).</li>
+        <li>Abra uma <strong>conversa nova</strong> no Claude Code.</li>
+        <li>Digite <strong>/maestria</strong> e aperte Enter.</li>
+      </ol>
+      <div class="tela-mock">
+        <div class="tm-barra">Claude Code · conversa nova</div>
+        <div class="tm-corpo">
+          <p class="tm-voce"><b>/maestria</b></p>
+          <p class="tm-claude">🥋 MaestrIA · o que vamos fazer?<br>1. Nova petição &nbsp;2. Cálculo &nbsp;3. Ativar licença &nbsp;4. Suporte ...</p>
+        </div>
+      </div>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> apareceu o menu da MaestrIA, com as opções da sua área.</div>
+      <div class="caixa-socorro"><strong>Digitou /maestria e nada?</strong> 9 em cada 10 vezes é porque a conversa é a mesma da instalação. Feche o aplicativo TODO, abra de novo, conversa nova, /maestria. Se ainda assim nada: volte ao passo 5 e arraste o ZIP de novo.</div>
+    </div>
+
+    <div class="passo-bloco" id="passo7">
+      <div class="passo-topo">
+        <div class="passo-bola">7</div>
+        <div>
+          <h3>Ativar a sua licença</h3>
+          <span class="passo-tempo">2 minutos · pega o código no email</span>
+        </div>
+      </div>
+      <ol>
+        <li>Na conversa nova, escreva <strong>/maestria ativar</strong> e aperte Enter.</li>
+        <li>Ele vai pedir o <strong>código de ativação</strong>: está no email "Sua MaestrIA chegou" (é aquele código comprido, tipo <em>b2b1497b-...</em>). Copie e cole.</li>
+        <li>Ele vai pedir o <strong>CPF do titular da compra</strong>: digite o seu.</li>
+      </ol>
+      <div class="tela-mock">
+        <div class="tm-barra">Claude Code</div>
+        <div class="tm-corpo">
+          <p class="tm-voce"><b>/maestria ativar</b></p>
+          <p class="tm-claude">Me passa o código de ativação do email de compra:</p>
+          <p class="tm-voce">b2b1497b-xxxx-xxxx-xxxx-xxxxxxxxxxxx</p>
+          <p class="tm-claude">E o CPF do titular:</p>
+          <p class="tm-voce">000.000.000-00</p>
+          <p class="tm-ok">✓ Licença ativada! Seu pacote tem mais skills: quer que eu baixe e instale as outras agora?</p>
+        </div>
+      </div>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> ele confirmou a ativação. E se o seu pacote tem mais skills, ele se oferece pra instalar as outras sozinho: responda <strong>sim</strong> e vá tomar um café.</div>
+      <div class="caixa-socorro"><strong>Deu "licença não encontrada"?</strong> Confira se copiou o código INTEIRO (sem espaços sobrando) e se o CPF é o mesmo usado na compra. Persiste? <a href="suporte.html" style="color:var(--vermelho);">Chamado no suporte</a> que a gente resolve rápido.</div>
+    </div>
+
+    <div class="passo-bloco" id="passo8">
+      <div class="passo-topo">
+        <div class="passo-bola">8</div>
+        <div>
+          <h3>Calibrar com o seu escritório (última etapa!)</h3>
+          <span class="passo-tempo">30 minutos · uma única vez na vida</span>
+        </div>
+      </div>
+      <p>Escreva <strong>/maestria</strong> e escolha o <strong>setup rápido</strong>. A skill conversa com você em português:</p>
+      <ol>
+        <li>Pergunta os dados do escritório (nome, OAB, endereço).</li>
+        <li>Pede <strong>1 ou 2 peças suas em Word</strong> pra aprender o seu papel timbrado e o seu jeito de escrever (é só arrastar os arquivos pra conversa, igual fez com o ZIP).</li>
+        <li>Pergunta onde salvar os documentos: numa pasta do computador ou no seu Google Drive.</li>
+      </ol>
+      <div class="caixa-sucesso"><strong>✓ Terminou!</strong> Daqui em diante é rotina: <strong>/maestria</strong>, pede o que precisa, revisa o Word que sai pronto no seu timbrado. A primeira peça num caso real é o melhor teste.</div>
+    </div>
+
   </div>
 </section>
 
+<!-- ROTA ALTERNATIVA -->
 <section class="pra-quem">
   <div class="container">
-    <span class="kicker">Passo 2</span>
-    <h2>Instalar a sua skill MaestrIA</h2>
-    <p class="lead">Com o Claude Code aberto (a conversa esperando você digitar):</p>
-    <ul class="passo-lista diff-col diff-gold">
-      <li><strong>1. Baixe o ZIP</strong> da skill (email de compra ou <a href="https://maestria.samurailab.com.br/membros/" style="color:var(--gold);">área de membros</a>). Não precisa descompactar.</li>
-      <li><strong>2. Arraste o arquivo ZIP</strong> pra dentro da janela da conversa.</li>
-      <li><strong>3. Escreva:</strong> <em>"instala essa skill pra mim"</em> e aperte Enter.</li>
-    </ul>
-    <p class="lead" style="margin-top:24px;">O Claude descompacta, instala, registra os comandos e te avisa quando terminar. <strong>Você não configura nada.</strong> Cerca de 2 minutos.</p>
-    <div class="nota"><strong>Importante:</strong> depois de instalar, <strong>feche a conversa e abra uma nova</strong>. É isso que faz o comando <code>/maestria</code> aparecer. Na conversa nova, digite <code>/maestria</code> e o menu da sua MaestrIA abre.</div>
-  </div>
-</section>
-
-<section class="solucao">
-  <div class="container">
-    <span class="kicker">Passo 3</span>
-    <h2>Ativar a licença</h2>
-    <p class="lead">Na conversa nova, digite:</p>
-    <div class="caixa-comando" style="max-width:420px;margin:14px auto;">
-      <span class="rotulo">No Claude Code</span>
-      <code>/maestria ativar</code>
-      <button class="btn-copiar" type="button">copiar</button>
+    <span class="kicker">Caminho alternativo</span>
+    <h2>Prefere instalar sem o aplicativo? <span class="vermelho">Pelo PowerShell ou Terminal</span></h2>
+    <p class="lead">Só use este caminho se você não encontrou o "Code" no aplicativo (passo 3) ou se já se sente à vontade com janelas de comando. O resultado é o mesmo.</p>
+    <div class="rota-b">
+      <div class="passo-bloco">
+        <h3 style="margin-bottom:12px;">No Windows</h3>
+        <ol>
+          <li>Menu Iniciar → digite <strong>powershell</strong> → Enter. Abre uma janela de texto (azul ou preta). Pode parecer coisa de programador, mas você só vai colar UMA linha.</li>
+          <li>Cole o comando abaixo e aperte Enter. Espere terminar (uns 2 minutos):</li>
+        </ol>
+        <div class="caixa-comando">
+          <span class="rotulo">PowerShell (Windows)</span>
+          <code>irm https://claude.ai/install.ps1 | iex</code>
+          <button class="btn-copiar" type="button">copiar</button>
+        </div>
+        <ol start="3">
+          <li><strong>Feche a janela e abra o PowerShell de novo</strong> (isso atualiza os atalhos).</li>
+          <li>Digite <strong>claude</strong> e aperte Enter. O navegador abre pedindo login: entre com a conta da sua assinatura e autorize.</li>
+        </ol>
+        <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> digitando <code>claude --version</code> aparece um número de versão, e digitando <code>claude</code> abre a conversa. Daqui, volte ao <a href="#passo4" style="color:#4ade80;">passo 4</a> e siga normal.</div>
+      </div>
+      <div class="passo-bloco">
+        <h3 style="margin-bottom:12px;">No Mac</h3>
+        <ol>
+          <li>Command + Espaço → digite <strong>terminal</strong> → Enter.</li>
+          <li>Cole o comando abaixo e aperte Enter:</li>
+        </ol>
+        <div class="caixa-comando">
+          <span class="rotulo">Terminal (Mac)</span>
+          <code>curl -fsSL https://claude.ai/install.sh | bash</code>
+          <button class="btn-copiar" type="button">copiar</button>
+        </div>
+        <ol start="3">
+          <li>Feche e abra o Terminal de novo, digite <strong>claude</strong>, Enter, e faça o login no navegador.</li>
+          <li>Depois volte ao <a href="#passo4" style="color:var(--gold);">passo 4</a> e siga normal.</li>
+        </ol>
+      </div>
     </div>
-    <p class="lead">Informe o <strong>código de ativação</strong> (do email de compra) e o <strong>CPF do titular</strong>. A licença vale pra até <strong>3 computadores</strong>. Se o seu plano tem mais skills, o Claude oferece baixar e instalar as que faltam, sozinho.</p>
   </div>
 </section>
 
-<section class="pra-quem">
-  <div class="container">
-    <span class="kicker">Passo 4</span>
-    <h2>Configurar uma vez e usar pra sempre</h2>
-    <p class="lead">Digite <code>/maestria</code> e escolha o setup rápido: a skill pergunta os dados do seu escritório, aprende o seu padrão com 1 ou 2 modelos seus e roda um caso piloto com você. <strong>Uns 30 minutos, uma única vez.</strong> Depois disso é rotina: caso novo, documento no padrão do escritório, em minutos.</p>
-  </div>
-</section>
-
+<!-- SOCORRO -->
 <section class="cta-final">
   <div class="container">
     <span class="kicker">Deu algo errado?</span>
-    <h2>Problemas comuns (e a solução de cada um)</h2>
+    <h2>Os travamentos mais comuns (e a saída de cada um)</h2>
     <div class="faq-inst" style="max-width:760px;margin:28px auto 0;">
       <details>
-        <summary>Digitei claude e apareceu "não é reconhecido como comando"</summary>
-        <p>Feche a janela do PowerShell ou Terminal e abra uma nova (o atalho só vale em janela nova). Se persistir, rode o comando de instalação do Passo 1 de novo e observe se aparece alguma mensagem de erro em vermelho. Continua travado? Abra um chamado na <a href="suporte.html">central de suporte</a> com uma foto da tela.</p>
+        <summary>Não sei se tenho "conta do Claude". Como confirmo?</summary>
+        <p>Entre em claude.ai no navegador. Se abrir uma conversa com o seu nome no canto, você tem conta. Pra saber se a assinatura está ativa: clique no seu nome ou foto → Configurações → Plano. Tem que aparecer Pro ou Max. Aparecendo "Free", assine antes de continuar (passo 1).</p>
       </details>
       <details>
-        <summary>O navegador não abriu pra fazer login</summary>
-        <p>Na tela do Claude Code, aperte a tecla <strong>c</strong> pra copiar o endereço de login, cole no navegador e conclua por lá. Depois volte pro terminal.</p>
+        <summary>Baixei o ZIP e não sei onde ele foi parar</summary>
+        <p>Quase sempre está na pasta <strong>Downloads</strong>. No Windows: abra qualquer pasta e clique em "Downloads" na lateral esquerda. Outro jeito: no navegador, aperte Ctrl+J que ele mostra os últimos downloads, e clique em "mostrar na pasta".</p>
       </details>
       <details>
         <summary>Digitei /maestria e não apareceu nada</summary>
-        <p>Quase sempre é porque a conversa é a mesma da instalação. Feche a conversa (ou o programa) e abra uma nova: o comando aparece. Se mesmo assim não aparecer, arraste o ZIP de novo e peça "instala essa skill pra mim".</p>
+        <p>É o travamento número 1, e a causa é sempre a mesma: a conversa é a mesma da instalação. <strong>Feche o aplicativo inteiro, abra de novo, conversa nova</strong>, digite /maestria. Se ainda assim nada, arraste o ZIP de novo e peça "instala essa skill pra mim" (não tem problema instalar duas vezes).</p>
       </details>
       <details>
-        <summary>O antivírus reclamou do instalador</summary>
-        <p>O comando do Passo 1 baixa o instalador oficial da Anthropic (empresa do Claude), direto do site deles. Se o antivírus bloquear, autorize a execução ou use o aplicativo de área de trabalho (claude.ai/download), que instala como qualquer programa comum.</p>
+        <summary>O Claude fica me fazendo perguntas durante a instalação. Respondo o quê?</summary>
+        <p>Pode confiar e confirmar. Ele pede permissão antes de mexer em qualquer coisa (é uma trava de segurança do Claude Code). Pra instalação da MaestrIA, a resposta é "sim" / "yes" / Enter. Ele nunca apaga nada seu sem perguntar de forma explícita.</p>
       </details>
       <details>
-        <summary>Troquei de computador e a ativação diz que bati o limite</summary>
-        <p>A licença vale pra 3 computadores. Trocou de máquina? Abra um chamado na <a href="https://maestria.samurailab.com.br/membros/">área de membros</a> pedindo a liberação, que a gente troca o registro pra você.</p>
+        <summary>Digitei claude no PowerShell e diz que "não é reconhecido como comando"</summary>
+        <p>Feche a janela e abra uma NOVA (o atalho só passa a valer em janela nova). Se persistir, rode o comando de instalação de novo e repare se aparece erro em vermelho. Continua? Manda foto da tela pro <a href="suporte.html">suporte</a>.</p>
       </details>
       <details>
-        <summary>Preciso pagar algo além da MaestrIA?</summary>
-        <p>Sim, a assinatura do Claude (Pro ou Max), que é quem processa os seus documentos. É contratada direto com a Anthropic em claude.ai. A MaestrIA é a camada jurídica: seus modelos, seus padrões, suas calculadoras e a validação de citações em fonte oficial.</p>
+        <summary>O navegador não abriu pra fazer login</summary>
+        <p>Na tela do Claude Code aparece um endereço de login (ou a instrução de apertar a tecla <strong>c</strong> pra copiá-lo). Copie, cole no navegador, conclua o login por lá e volte.</p>
+      </details>
+      <details>
+        <summary>O antivírus bloqueou alguma coisa</summary>
+        <p>Tanto o aplicativo quanto o instalador do comando vêm do site oficial da Anthropic (claude.ai). Clique em "permitir" / "executar assim mesmo". Se o antivírus não der a opção, use o caminho do aplicativo (claude.ai/download), que instala como programa comum.</p>
+      </details>
+      <details>
+        <summary>Deu "licença não encontrada" ou "limite de computadores"</summary>
+        <p>Licença não encontrada: confira o código (copie inteiro, sem espaço no fim) e o CPF (o mesmo da compra). Limite: sua licença vale pra 3 computadores; trocou de máquina, abra um chamado na <a href="https://maestria.samurailab.com.br/membros/">área de membros</a> que a gente libera.</p>
+      </details>
+      <details>
+        <summary>Nada disso resolveu</summary>
+        <p>Tire uma <strong>foto da tela</strong> exatamente como ela está (pode ser com o celular mesmo) e abra um chamado na <a href="suporte.html">central de suporte</a> ou pela área de membros. Com a foto, a gente devolve o passo exato pra destravar. E se a skill já estiver instalada, o caminho mais rápido é escrever <strong>/maestria suporte</strong> na própria conversa.</p>
       </details>
     </div>
     <a href="suporte.html" class="btn-primary btn-grande" style="margin-top:36px;">Ainda travado? Fala com o suporte</a>
-    <p class="cta-meta">Ou escreva <code>/maestria suporte</code> dentro de qualquer skill instalada: o chamado chega direto pra gente.</p>
+    <p class="cta-meta">Manda uma foto da tela junto: resolve na primeira resposta em vez de na quinta.</p>
   </div>
 </section>
 
@@ -218,14 +443,6 @@
 </footer>
 
 <script>
-  document.querySelectorAll(".so-tab").forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      document.querySelectorAll(".so-tab").forEach(function (t) { t.classList.remove("ativo"); });
-      document.querySelectorAll(".so-painel").forEach(function (p) { p.classList.remove("ativo"); });
-      tab.classList.add("ativo");
-      document.getElementById("painel-" + tab.dataset.so).classList.add("ativo");
-    });
-  });
   document.querySelectorAll(".btn-copiar").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var codigo = btn.parentElement.querySelector("code").textContent;
