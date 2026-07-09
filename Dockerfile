@@ -13,6 +13,9 @@ COPY membros/ ./membros/
 COPY prev/ ./prev/
 COPY trab/ ./trab/
 
+# Imagens (prints reais do guia de instalação)
+COPY img/ ./img/
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
