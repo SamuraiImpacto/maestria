@@ -70,17 +70,17 @@
   }
   .topbar .row { display: flex; align-items: center; justify-content: space-between; height: 66px; }
   .brand { display: flex; align-items: baseline; gap: 12px; }
-  .brand .logo { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: 0.02em; }
-  .brand .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); border-left: 1px solid var(--line); padding-left: 12px; }
-  .nav { display: flex; align-items: center; gap: 26px; }
-  .nav a { font-size: 13.5px; color: var(--muted); text-decoration: none; transition: color .18s; }
+  .brand .logo { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+  .brand .tag { display: none; }
+  .nav { display: flex; align-items: center; gap: 22px; }
+  .nav a { font-size: 13.5px; color: var(--muted); text-decoration: none; transition: color .18s; white-space: nowrap; }
   .nav a:hover { color: var(--text); }
   .btn {
     display: inline-flex; align-items: center; gap: 9px;
     font-family: var(--sans); font-size: 14px; font-weight: 600;
     color: #fff; background: var(--brass);
     padding: 11px 18px; border-radius: 10px; border: 1px solid var(--brass);
-    text-decoration: none; cursor: pointer; transition: background .18s, transform .18s;
+    text-decoration: none; cursor: pointer; white-space: nowrap; transition: background .18s, transform .18s;
   }
   .btn:hover { background: var(--brass-strong); }
   .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
