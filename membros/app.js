@@ -187,7 +187,7 @@ function renderizarPainel(dados) {
   }
 }
 
-// ---------- Downloads (instalador único no topo + liberadas + as que faltam) ----------
+// ---------- Downloads (UM arquivo só: o instalador do pacote) ----------
 const URL_INSTALADOR =
   "https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-instalador.zip";
 
@@ -195,28 +195,35 @@ function renderizarDownloads(dados) {
   const grid = $("dl-skills");
   grid.innerHTML = "";
 
-  // Card destaque: o jeito recomendado (um arquivo instala o pacote inteiro)
+  // Card ÚNICO de download: um arquivo instala (e atualiza) o pacote inteiro.
+  // Decisão 09/07: NUNCA listar zips individuais aqui, comprador leigo se confunde.
   const inst = document.createElement("div");
   inst.className = "card";
   inst.style.borderColor = "var(--vermelho, #e33)";
   inst.innerHTML =
-    "<h3>⬇ Instalador único (recomendado)</h3>" +
-    "<p>UM arquivo que instala TODAS as skills do seu pacote de uma vez: arrasta pro Claude Code, escreve \"instala pra mim\" e informa o código de ativação + CPF quando ele pedir. As skills abaixo são os downloads individuais, pra quem precisar de uma específica.</p>" +
-    "<a class='btn-baixar' href='" + URL_INSTALADOR + "'>Baixar o instalador</a>" +
-    "<p class='mini' style='margin-top:8px;'>Sempre instala as versões mais recentes. Travou? O <a href='https://maestria.samurailab.com.br/instalacao.html' target='_blank' style='color:inherit;text-decoration:underline;'>guia passo a passo</a> te destrava.</p>";
+    "<h3>⬇ Seu pacote (um arquivo só)</h3>" +
+    "<p>Este arquivo instala TODAS as skills do seu pacote de uma vez, já nas versões mais recentes: baixa, arrasta pra conversa do Claude, escreve \"instala pra mim\" e informa o código de ativação + CPF quando ele pedir. Serve também pra ATUALIZAR: é só baixar e instalar de novo por cima, nada do que você configurou se perde.</p>" +
+    "<a class='btn-baixar' href='" + URL_INSTALADOR + "'>Baixar meu pacote</a>" +
+    "<p class='mini' style='margin-top:8px;'>Travou? O <a href='https://maestria.samurailab.com.br/instalacao.html' target='_blank' style='color:inherit;text-decoration:underline;'>guia passo a passo</a> te destrava.</p>";
   grid.appendChild(inst);
 
-  (dados.skills || []).forEach((s) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML =
-      "<h3>" + esc(s.nome) + "</h3>" +
-      "<p>" + esc((s.descricao || "").split(".")[0]) + ".</p>" +
-      "<a class='btn-baixar' href='" + esc(s.zip_url) + "'>Baixar</a>" +
-      "<p class='mini' style='margin-top:8px;'>versão " + esc(s.versao_atual) +
-      (s.changelog ? " · última melhoria: " + esc(s.changelog) : "") + "</p>";
-    grid.appendChild(card);
-  });
+  // Lista informativa do que vem dentro (SEM botão de download, só transparência)
+  const skills = dados.skills || [];
+  if (skills.length) {
+    const box = document.createElement("div");
+    box.className = "card";
+    let itens = "";
+    skills.forEach((s) => {
+      itens +=
+        "<li><strong>" + esc(s.nome) + "</strong>" +
+        " <span class='mini'>(versão " + esc(s.versao_atual) + ")</span></li>";
+    });
+    box.innerHTML =
+      "<h3>O que vem no seu pacote</h3>" +
+      "<p class='mini'>Tudo isso entra junto no instalador acima. Instalou, tá tudo dentro.</p>" +
+      "<ul style='margin:8px 0 0 18px; line-height:1.7;'>" + itens + "</ul>";
+    grid.appendChild(box);
+  }
 
   const bloqueadas = dados.skills_bloqueadas || [];
   const upsell = $("dl-upsell");
