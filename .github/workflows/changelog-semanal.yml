@@ -1,0 +1,21 @@
+# Digest semanal de atualizacoes da MaestrIA: toda segunda 09h (Brasilia),
+# a edge changelog-email envia a cada cliente ativo o que mudou nas skills
+# do plano dele. So dispara email se houve release na semana.
+name: changelog-semanal
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch: {}
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar a edge changelog-email
+        run: |
+          resp=$(curl -s -X POST "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/changelog-email" \
+            -H "x-cron-key: ${{ secrets.CHANGELOG_CRON_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"dias": 7}')
+          echo "$resp"
+          echo "$resp" | grep -q '"ok":true' || exit 1
