@@ -13,6 +13,9 @@ COPY membros/ ./membros/
 COPY prev/ ./prev/
 COPY trab/ ./trab/
 
+# Proposta de consultoria (Samurai Lab) para o Jardson
+COPY jardson/ ./jardson/
+
 # Imagens (prints reais do guia de instalação)
 COPY img/ ./img/
 
