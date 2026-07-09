@@ -144,8 +144,8 @@
       <strong style="color:var(--text);">O caminho completo (30 a 40 minutos, uma única vez):</strong>
       <ol style="margin-top:12px; padding-left:22px;">
         <li><a href="#passo1">Ter a assinatura do Claude</a> (5 min, pula se já tem)</li>
-        <li><a href="#passo2">Instalar o aplicativo Claude no computador</a> (5 min)</li>
-        <li><a href="#passo3">Abrir o Claude Code dentro do aplicativo</a> (2 min)</li>
+        <li><a href="#passo2">Instalar o Claude Code no computador</a> (5 min)</li>
+        <li><a href="#passo3">Escolher a pasta de trabalho</a> (2 min)</li>
         <li><a href="#passo4">Baixar o arquivo da sua MaestrIA</a> (2 min)</li>
         <li><a href="#passo5">Instalar a MaestrIA</a> (3 min)</li>
         <li><a href="#passo6">Abrir uma conversa nova</a> (30 segundos, e é aqui que muita gente trava)</li>
@@ -181,43 +181,43 @@
       <div class="passo-topo">
         <div class="passo-bola">2</div>
         <div>
-          <h3>Instalar o aplicativo Claude no computador</h3>
+          <h3>Instalar o Claude Code no computador</h3>
           <span class="passo-tempo">5 minutos · instala como qualquer programa</span>
         </div>
       </div>
       <ol>
-        <li>Abra <strong>claude.ai/download</strong> e baixe a versão pro seu sistema (Windows ou Mac).</li>
-        <li>O arquivo baixado fica na pasta <strong>Downloads</strong>. Dê dois cliques nele e siga o instalador (avançar, avançar, concluir). É um programa comum, da Anthropic.</li>
-        <li>Abra o aplicativo <strong>Claude</strong> que apareceu no computador e <strong>entre com o MESMO email do passo 1</strong>.</li>
+        <li>Abra <strong>claude.com/claude-code</strong> e baixe o instalador pro seu sistema (Windows ou Mac).</li>
+        <li>O arquivo baixado fica na pasta <strong>Downloads</strong>. Dê dois cliques nele e siga o instalador (avançar, avançar, concluir). É um programa comum, da Anthropic, a empresa do Claude.</li>
+        <li>Abra o aplicativo <strong>Claude Code</strong> que apareceu no computador (menu Iniciar no Windows; busca do Mac) e <strong>entre com o MESMO email do passo 1</strong>. O login acontece uma vez só.</li>
       </ol>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o aplicativo abriu e mostra uma tela de conversa com o Claude, com o seu nome ou email no canto.</div>
-      <div class="caixa-socorro"><strong>O antivírus reclamou?</strong> O instalador é oficial da Anthropic, baixado do site deles. Clique em "permitir" ou "executar assim mesmo".</div>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o aplicativo abriu, você fez o login e apareceu uma tela de conversa esperando você digitar.</div>
+      <div class="caixa-socorro"><strong>O antivírus reclamou?</strong> O instalador é oficial da Anthropic, baixado do site deles. Clique em "permitir" ou "executar assim mesmo". <strong>Dica extra:</strong> fixe o Claude Code na barra de tarefas (botão direito no ícone → Fixar) pra ele virar um clique só, pra sempre.</div>
     </div>
 
     <div class="passo-bloco" id="passo3">
       <div class="passo-topo">
         <div class="passo-bola">3</div>
         <div>
-          <h3>Abrir o Claude Code dentro do aplicativo</h3>
-          <span class="passo-tempo">2 minutos</span>
+          <h3>Escolher a pasta de trabalho (a mesa do estagiário)</h3>
+          <span class="passo-tempo">2 minutos · faça uma vez, use pra sempre</span>
         </div>
       </div>
-      <p>Dentro do aplicativo Claude, procure a palavra <strong>"Code"</strong> (fica no menu, geralmente na lateral ou no topo). Clique nela. É essa área que dá ao Claude acesso às pastas do computador.</p>
+      <p>O Claude Code sempre trabalha <strong>dentro de uma pasta</strong>, como um estagiário sentado numa mesa: ele enxerga e organiza o que está naquela mesa. A receita MaestrIA:</p>
       <ol>
-        <li>Clique em <strong>Code</strong>.</li>
-        <li>Se ele pedir pra escolher uma pasta pra trabalhar, escolha <strong>Documentos</strong> e confirme.</li>
-        <li>Se aparecer uma pergunta de confiança ou permissão ("do you trust...?" / "confia nesta pasta?"), responda <strong>sim</strong>. É o Claude pedindo licença pra trabalhar nas suas pastas.</li>
+        <li>Crie uma pasta chamada <strong>Escritorio</strong> (sem acento) dentro de <strong>Documentos</strong>.</li>
+        <li>No Claude Code, use a opção <strong>abrir pasta</strong> (Open folder / Abrir pasta) e escolha Documentos → Escritorio.</li>
+        <li>Se aparecer uma pergunta de confiança ("do you trust...?" / "confia nesta pasta?"), responda <strong>sim</strong>. É o Claude pedindo licença pra trabalhar ali.</li>
       </ol>
       <div class="tela-mock">
-        <div class="tm-barra">Claude Code</div>
+        <div class="tm-barra">Claude Code · Escritorio</div>
         <div class="tm-corpo">
           <p class="tm-claude">O que vamos fazer hoje?</p>
           <p class="tm-voce">│ Digite aqui...</p>
         </div>
       </div>
-      <p class="tm-legenda">É mais ou menos isso que você vai ver: uma conversa esperando você digitar.</p>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> apareceu uma conversa nova, com um campo pra você digitar, dentro da área Code.</div>
-      <div class="caixa-socorro"><strong>Não achou o "Code"?</strong> Atualize o aplicativo (feche e abra de novo; ele se atualiza sozinho) ou tire uma foto da tela e mande no <a href="suporte.html" style="color:var(--vermelho);">suporte</a>, que a gente te aponta o botão. Tem também o caminho alternativo pelo PowerShell no fim desta página.</div>
+      <p class="tm-legenda">Repare: o nome da pasta aberta aparece no topo da janela. É assim que você confere onde ele está trabalhando.</p>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> a conversa abriu e o nome <em>Escritorio</em> aparece no topo da janela.</div>
+      <div class="caixa-socorro"><strong>Não achou o "abrir pasta"?</strong> Procure no menu <strong>File (Arquivo)</strong> → Open folder. Se travar, tire uma foto da tela e mande no <a href="suporte.html" style="color:var(--vermelho);">suporte</a>, que a gente te aponta o botão. Tem também o caminho alternativo pelo PowerShell no fim desta página.</div>
     </div>
 
     <div class="passo-bloco" id="passo4">
@@ -418,7 +418,7 @@
       </details>
       <details>
         <summary>O antivírus bloqueou alguma coisa</summary>
-        <p>Tanto o aplicativo quanto o instalador do comando vêm do site oficial da Anthropic (claude.ai). Clique em "permitir" / "executar assim mesmo". Se o antivírus não der a opção, use o caminho do aplicativo (claude.ai/download), que instala como programa comum.</p>
+        <p>Tanto o aplicativo quanto o instalador do comando vêm do site oficial da Anthropic (claude.com / claude.ai). Clique em "permitir" / "executar assim mesmo". Se o antivírus não der a opção, use o instalador do aplicativo (claude.com/claude-code), que instala como programa comum.</p>
       </details>
       <details>
         <summary>Deu "licença não encontrada" ou "limite de computadores"</summary>
