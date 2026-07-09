@@ -70,6 +70,7 @@
 
         <div class="menu-grupo">Minha conta</div>
         <button type="button" class="menu-item" data-view="downloads"><span class="menu-icone">⬇️</span><span>Downloads</span></button>
+        <button type="button" class="menu-item" data-view="guia"><span class="menu-icone">📖</span><span>Guia das skills</span></button>
         <button type="button" class="menu-item" data-view="licenca"><span class="menu-icone">🔑</span><span>Minha licença</span></button>
         <button type="button" class="menu-item" data-view="chamados"><span class="menu-icone">💬</span><span>Chamados</span></button>
         <button type="button" class="menu-item" data-view="comunidade"><span class="menu-icone">🥋</span><span>Comunidade</span></button>
@@ -115,6 +116,13 @@
           <div id="dl-bloqueadas" class="grid-skills"></div>
           <a class="btn-principal btn-inline" href="https://maestria.samurailab.com.br/#pacotes" target="_blank" rel="noopener">Ver pacotes e valores</a>
         </div>
+      </div>
+
+      <!-- Guia das skills (o que cada função faz) -->
+      <div id="view-guia" class="view hidden">
+        <h2 class="view-titulo">Guia das skills</h2>
+        <p class="view-sub">Tudo que as skills do SEU pacote fazem, função por função. Você não precisa decorar nada disso: abra o Claude, digite <code>/maestria</code> e peça em português ("faz uma inicial de auxílio-doença", "calcula a RMI") que ele aciona a função certa. Esta página existe pra você descobrir o que dá pra pedir.</p>
+        <div id="guia-skills-lista"></div>
       </div>
 
       <!-- Comunidade -->
@@ -195,6 +203,7 @@
   </div>
 </main>
 
+<script src="guia-skills.js"></script>
 <script src="app.js"></script>
 <script src="conteudo.js"></script>
 <script src="curso.js"></script>

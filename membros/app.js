@@ -53,9 +53,9 @@ function limparCredenciais() {
 let dadosAtuais = null;
 
 // ---------- navegação entre views ----------
-// Views: "aula" (curso), "downloads", "licenca", "chamados"
+// Views: "aula" (curso), "downloads", "guia", "licenca", "chamados"
 function mostrarView(nome) {
-  ["aula", "downloads", "licenca", "chamados", "comunidade"].forEach((v) => {
+  ["aula", "downloads", "guia", "licenca", "chamados", "comunidade"].forEach((v) => {
     const el = $("view-" + v);
     if (el) el.classList.toggle("hidden", v !== nome);
   });
@@ -179,6 +179,7 @@ function renderizarPainel(dados) {
   renderizarLicenca(dados);
   renderizarTickets(dados.tickets || []);
   montarSelectChamado(dados);
+  renderizarGuia(dados);
 
   // Aulas na barra lateral + abre a primeira aula pendente
   if (window.MAESTRIA_CURSO) {
@@ -242,6 +243,57 @@ function renderizarDownloads(dados) {
       "<p>" + esc((s.descricao || "").split(".")[0]) + ".</p>";
     gridB.appendChild(card);
   });
+}
+
+// ---------- Guia das skills (o que cada função faz, só as do pacote) ----------
+function renderizarGuia(dados) {
+  const box = $("guia-skills-lista");
+  if (!box) return;
+  box.innerHTML = "";
+  const guia = window.MAESTRIA_GUIA || {};
+  const skills = dados.skills || [];
+  if (!skills.length) {
+    box.innerHTML = "<p class='vazio'>Nenhuma skill liberada ainda.</p>";
+    return;
+  }
+  skills.forEach((s, i) => {
+    const info = guia[s.skill_id];
+    const det = document.createElement("details");
+    det.className = "card";
+    if (i === 0) det.open = true;
+    let corpo = "";
+    if (info && info.funcoes && info.funcoes.length) {
+      corpo = "<ul style='margin:10px 0 0 18px; line-height:1.75;'>";
+      info.funcoes.forEach((f) => {
+        corpo +=
+          "<li><code>/" + esc(f.c) + "</code> · " + esc(f.d) + "</li>";
+      });
+      corpo += "</ul>";
+    } else {
+      corpo = "<p class='mini' style='margin-top:8px;'>" + esc(s.descricao || "") + "</p>";
+    }
+    det.innerHTML =
+      "<summary style='cursor:pointer; font-weight:700; font-size:1.05em;'>" +
+      esc(s.nome) +
+      " <span class='mini'>(" + ((info && info.funcoes) ? info.funcoes.length + " funções" : "resumo") + ")</span></summary>" +
+      "<p class='mini' style='margin-top:6px;'>" + esc((s.descricao || "").split(".")[0]) + ".</p>" +
+      corpo;
+    box.appendChild(det);
+  });
+  // bloco fixo: o que TODA skill tem
+  const fixo = document.createElement("div");
+  fixo.className = "card";
+  fixo.innerHTML =
+    "<h3>Em toda skill</h3>" +
+    "<ul style='margin:10px 0 0 18px; line-height:1.75;'>" +
+    "<li><code>/maestria</code> · Central de tudo: abre o menu e roteia seu pedido pra skill certa.</li>" +
+    "<li><code>/menu</code> · Cardápio da skill em cards clicáveis.</li>" +
+    "<li><code>/suporte</code> · Abre chamado direto pra gente (responde aqui na área de membros).</li>" +
+    "<li><code>/atualizar-skill</code> · Puxa correções e melhorias novas.</li>" +
+    "<li><code>/ativar-licenca</code> e <code>/minha-licenca</code> · Ativação e status da sua licença.</li>" +
+    "</ul>" +
+    "<p class='mini' style='margin-top:8px;'>Lembrete: você pode simplesmente ESCREVER o que precisa em português. Os comandos existem pra quem gosta de atalho.</p>";
+  box.appendChild(fixo);
 }
 
 // ---------- Licença ----------
