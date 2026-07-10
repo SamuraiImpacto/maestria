@@ -425,6 +425,10 @@
         <p>É o travamento número 1, e a causa é sempre a mesma: a conversa é a mesma da instalação. <strong>Feche o aplicativo inteiro, abra de novo, conversa nova</strong>, digite /maestria. Se ainda assim nada, arraste o ZIP de novo e peça "instala essa skill pra mim" (não tem problema instalar duas vezes).</p>
       </details>
       <details>
+        <summary>O aplicativo diz "Git é necessário para sessões locais" (ou continua pedindo Git depois que instalei)</summary>
+        <p>O Git instalou, o aplicativo é que ainda não percebeu: ele só enxerga programas novos quando abre de novo. Faz assim: <strong>feche o Claude completamente</strong> (feche a janela e, se houver um ícone dele perto do relógio, clique com o botão direito e saia) <strong>e abra de novo</strong>. O aviso some. Se persistir, <strong>reinicie o computador</strong> uma vez e abra o Claude: resolve sempre. E se você ainda NÃO instalou o Git: abra o PowerShell (menu Iniciar, digite powershell) e cole <code>winget install --id Git.Git -e --source winget</code>, depois feche e abra o Claude.</p>
+      </details>
+      <details>
         <summary>Apareceu um site em inglês chamado git-scm.com (Git). Posso confiar?</summary>
         <p>Pode. O Git é um programa de apoio gratuito que o Claude Code usa no Windows, e esse site é o oficial dele, usado por profissionais do mundo inteiro. Dois caminhos, os dois certos: <strong>(a) sem abrir site nenhum</strong>: abra o PowerShell e cole <code>winget install --id Git.Git -e --source winget</code>; <strong>(b) pelo site</strong>: clique no botão <strong>"Click here to download"</strong>, rode o arquivo baixado e vá clicando <strong>Next</strong> em tudo até o final (as opções sugeridas já são as certas). Depois volte ao ponto do manual em que você parou.</p>
       </details>
