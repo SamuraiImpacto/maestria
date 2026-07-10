@@ -6,6 +6,9 @@ COPY *.html ./
 COPY *.css ./
 COPY *.js ./
 
+# Preparador automático do PC (o manual de instalação manda baixar)
+COPY *.ps1 ./
+
 # Área de membros (login por código de ativação + CPF, curso, chamados)
 COPY membros/ ./membros/
 
