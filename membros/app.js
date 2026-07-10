@@ -256,6 +256,25 @@ function renderizarGuia(dados) {
     box.innerHTML = "<p class='vazio'>Nenhuma skill liberada ainda.</p>";
     return;
   }
+
+  // como usar (sempre no topo)
+  const intro = document.createElement("div");
+  intro.className = "card";
+  intro.innerHTML =
+    "<h3>Como usar qualquer função</h3>" +
+    "<ol style='margin:10px 0 0 18px; line-height:1.8;'>" +
+    "<li>Abra o <strong>Claude Code</strong> no seu computador.</li>" +
+    "<li>Digite o comando da função (ex: <code>/maestria:nova-peticao</code>) e aperte Enter. Ou digite só <code>/maestria</code> pra ver o menu geral e escolher por lá.</li>" +
+    "<li>A skill conduz o resto com perguntas, uma de cada vez. Pode responder em português normal e mandar documentos, prints e até áudio do cliente.</li>" +
+    "<li>O resultado sai em <strong>Word</strong>, salvo na pasta que você escolheu, pronto pra abrir com dois cliques.</li>" +
+    "</ol>" +
+    "<p class='mini' style='margin-top:8px;'>Não precisa decorar nada: escrever o que você quer em português na central <code>/maestria</code> também funciona. Os comandos existem pra quem gosta de atalho.</p>";
+  box.appendChild(intro);
+
+  const liFunc = (comando, texto) =>
+    "<li style='margin-bottom:10px;'><code>" + esc(comando) + "</code>" +
+    "<div class='mini' style='margin:2px 0 0 2px; line-height:1.55;'>" + esc(texto) + "</div></li>";
+
   skills.forEach((s, i) => {
     const info = guia[s.skill_id];
     const det = document.createElement("details");
@@ -263,10 +282,9 @@ function renderizarGuia(dados) {
     if (i === 0) det.open = true;
     let corpo = "";
     if (info && info.funcoes && info.funcoes.length) {
-      corpo = "<ul style='margin:10px 0 0 18px; line-height:1.75;'>";
+      corpo = "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>";
       info.funcoes.forEach((f) => {
-        corpo +=
-          "<li><code>/" + esc(f.c) + "</code> · " + esc(f.d) + "</li>";
+        corpo += liFunc("/maestria:" + f.c, f.d);
       });
       corpo += "</ul>";
     } else {
@@ -275,25 +293,45 @@ function renderizarGuia(dados) {
     det.innerHTML =
       "<summary style='cursor:pointer; font-weight:700; font-size:1.05em;'>" +
       esc(s.nome) +
-      " <span class='mini'>(" + ((info && info.funcoes) ? info.funcoes.length + " funções" : "resumo") + ")</span></summary>" +
-      "<p class='mini' style='margin-top:6px;'>" + esc((s.descricao || "").split(".")[0]) + ".</p>" +
+      " <span class='mini'>(" + ((info && info.funcoes) ? info.funcoes.length + (info.funcoes.length === 1 ? " função própria" : " funções próprias") : "resumo") + ")</span></summary>" +
+      "<p class='mini' style='margin-top:6px;'>" + esc((s.descricao || "").split(".")[0]) + ". Além das funções abaixo, esta skill tem todas as ferramentas dos blocos no fim da página.</p>" +
       corpo;
     box.appendChild(det);
   });
-  // bloco fixo: o que TODA skill tem
+
+  // bloco fixo 1: ferramentas presentes em TODA skill
   const fixo = document.createElement("div");
   fixo.className = "card";
   fixo.innerHTML =
-    "<h3>Em toda skill</h3>" +
-    "<ul style='margin:10px 0 0 18px; line-height:1.75;'>" +
-    "<li><code>/maestria</code> · Central de tudo: abre o menu e roteia seu pedido pra skill certa.</li>" +
-    "<li><code>/menu</code> · Cardápio da skill em cards clicáveis.</li>" +
-    "<li><code>/suporte</code> · Abre chamado direto pra gente (responde aqui na área de membros).</li>" +
-    "<li><code>/atualizar-skill</code> · Puxa correções e melhorias novas.</li>" +
-    "<li><code>/ativar-licenca</code> e <code>/minha-licenca</code> · Ativação e status da sua licença.</li>" +
-    "</ul>" +
-    "<p class='mini' style='margin-top:8px;'>Lembrete: você pode simplesmente ESCREVER o que precisa em português. Os comandos existem pra quem gosta de atalho.</p>";
+    "<h3>Em toda skill (peça pela central /maestria)</h3>" +
+    "<p class='mini' style='margin-top:4px;'>Estas ferramentas existem em todas as skills. Digite <code>/maestria</code> e peça em português (ex: \"quero abrir um chamado\", \"onde ficam meus arquivos?\").</p>" +
+    "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>" +
+    liFunc("menu", "Cardápio da skill em cards clicáveis, pra escolher o que fazer sem decorar comando.") +
+    liFunc("setup rápido", "Configuração inicial guiada (uns 30 minutos): dados do escritório, tom de voz e preferências. Roda uma vez só.") +
+    liFunc("configurar pastas", "Escolhe onde os documentos gerados ficam salvos: pasta do computador ou pasta do Google Drive sincronizado.") +
+    liFunc("editar estilo", "Define palavras e construções que a MaestrIA nunca deve usar nos seus textos. Ela escreve do SEU jeito.") +
+    liFunc("listar casos", "Mostra tudo o que você já gerou com a skill, organizado por caso.") +
+    liFunc("abrir", "Abre o arquivo ou a pasta gerada direto no Explorer, sem caçar caminho.") +
+    liFunc("economia", "Calcula quanto tempo e dinheiro a skill já te economizou, com base no seu valor por hora.") +
+    liFunc("atualizar skill", "Puxa as correções e melhorias mais novas. A skill também avisa sozinha quando tem novidade.") +
+    liFunc("suporte", "Abre um chamado direto pra gente. A resposta aparece aqui na sua área de membros.") +
+    liFunc("ativar licença / minha licença", "Ativação da skill com o código da compra e consulta de validade.") +
+    "</ul>";
   box.appendChild(fixo);
+
+  // bloco fixo 2: inteligencia juridica compartilhada
+  const intel = document.createElement("div");
+  intel.className = "card";
+  intel.innerHTML =
+    "<h3>Inteligência jurídica (também em toda skill)</h3>" +
+    "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>" +
+    liFunc("mesa", "Convoca TODOS os Conselheiros de uma vez pra debater seu caso ou sua peça. Cada um dá a opinião pela sua escola de pensamento e você vê o debate.") +
+    liFunc("conselheiro", "Consulta UM Conselheiro por vez, pra uma análise profunda de um ângulo específico do caso.") +
+    liFunc("consultar juízo", "Mostra a tendência decisória de um juízo específico num tema, com base no Banco Vivo de Decisões da MaestrIA.") +
+    liFunc("contribuir decisão", "Doa uma decisão favorável sua (com os nomes das partes removidos automaticamente) pro Banco Vivo. Quanto mais advogados contribuem, mais forte o radar de todos.") +
+    liFunc("ver insights", "Teses vencedoras, jurisprudência confirmada em fonte oficial e armadilhas conhecidas da sua área.") +
+    "</ul>";
+  box.appendChild(intel);
 }
 
 // ---------- Licença ----------
