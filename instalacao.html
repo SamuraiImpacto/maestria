@@ -373,22 +373,14 @@
         <h3 style="margin-bottom:12px;">No Windows</h3>
         <ol>
           <li>Menu Iniciar → digite <strong>powershell</strong> → Enter. Abre uma janela de texto (azul ou preta). Pode parecer coisa de programador, mas você só vai colar UMA linha.</li>
-          <li>Primeiro, um programa de apoio que o Claude Code usa no Windows (chama Git; é gratuito e oficial). Cole esta linha e aperte Enter (se pedir confirmação, digite <strong>Y</strong> e Enter):</li>
+          <li>Cole a linha abaixo e aperte Enter. Ela instala <strong>tudo</strong> o que o Claude Code precisa (Git, o próprio Claude Code e Python), sozinha, avisando cada passo em português. Se alguma janela do Windows pedir permissão, clique em SIM. Demora uns 5 minutos:</li>
         </ol>
         <div class="caixa-comando">
-          <span class="rotulo">PowerShell (Windows) · passo 1 de 2</span>
-          <code>winget install --id Git.Git -e --source winget</code>
+          <span class="rotulo">PowerShell (Windows) · o preparador faz tudo</span>
+          <code>iwr -useb https://maestria.samurailab.com.br/preparar.ps1 -OutFile "$env:TEMP\preparar.ps1"; powershell -ExecutionPolicy Bypass -File "$env:TEMP\preparar.ps1"</code>
           <button class="btn-copiar" type="button">copiar</button>
         </div>
         <ol start="3">
-          <li>Agora o Claude Code em si. Cole o comando abaixo e aperte Enter. Espere terminar (uns 2 minutos):</li>
-        </ol>
-        <div class="caixa-comando">
-          <span class="rotulo">PowerShell (Windows) · passo 2 de 2</span>
-          <code>irm https://claude.ai/install.ps1 | iex</code>
-          <button class="btn-copiar" type="button">copiar</button>
-        </div>
-        <ol start="5">
           <li><strong>Feche a janela e abra o PowerShell de novo</strong> (isso atualiza os atalhos).</li>
           <li>Digite <strong>claude</strong> e aperte Enter. O navegador abre pedindo login: entre com a conta da sua assinatura e autorize.</li>
         </ol>
