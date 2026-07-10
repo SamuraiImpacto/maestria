@@ -340,6 +340,10 @@ window.MAESTRIA_GUIA = {
     "d": "Convoca TODOS os Conselheiros da skill calculo-previdenciario pra debater um caso ou peça em conjunto."
    },
    {
+    "c": "planejamento-previdenciario",
+    "d": "Planejamento previdenciário completo pra vender como consultoria."
+   },
+   {
     "c": "setup-rapido",
     "d": "Setup rápido da skill calculo-previdenciario em até 30 minutos."
    },
