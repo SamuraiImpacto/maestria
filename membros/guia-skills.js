@@ -92,6 +92,10 @@ window.MAESTRIA_GUIA = {
  "briefing-do-caso": {
   "funcoes": [
    {
+    "c": "analisar-provas",
+    "d": "Análise probatória do caso: recebe os autos e documentos e devolve o mapa de provas por fato controvertido: o que cada prova sustenta, onde ela é frágil, como a parte contrária vai atacar, que prova falta produzir e o plano de ação (testemunha, perícia, juntada), entregue em Word."
+   },
+   {
     "c": "briefing",
     "d": "Conduz briefing estruturado por tipo de atendimento. UMA pergunta por vez. Gera o documento em Word ao final."
    },
@@ -334,6 +338,10 @@ window.MAESTRIA_GUIA = {
    {
     "c": "preparar",
     "d": "Prepara o advogado pra audiência. Gera roteiro de perguntas, checklist, posicionamento estratégico."
+   },
+   {
+    "c": "sustentacao-oral",
+    "d": "Monta o roteiro completo da sua sustentação oral em recurso (TRT, TRF, TJ ou turma recursal) a partir dos autos: tese central, os 2 ou 3 pontos que decidem o julgamento, respostas prontas pras perguntas prováveis dos julgadores e o texto cronometrado pro seu tempo de tribuna, entregue em Word."
    }
   ]
  },
