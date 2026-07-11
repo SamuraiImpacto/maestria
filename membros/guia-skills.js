@@ -304,6 +304,10 @@ window.MAESTRIA_GUIA = {
     "d": "Gera roteiro de vídeo (reel 60s, stories 15s, vídeo longo 5min) com gancho, desenvolvimento e CTA."
    },
    {
+    "c": "pesquisa-de-campanha",
+    "d": "Pesquisa de mercado com dados públicos oficiais (Portal da Transparência, CAGED, SmartLab do MPT, IBGE, DataJud) pra afiar a campanha da sua tese: descobre ONDE está o seu público, quantos são, como a dor aparece na região, e transforma isso em praças, ângulos de criativo e plano de segmentação."
+   },
+   {
     "c": "publicar-artigo",
     "d": "Publica no blog do seu site um artigo gerado pelo /novo-artigo: monta a página do post com SEO e GEO, atualiza o índice do blog e, no modo plugado, republica o site na hora, direto da conversa."
    },
