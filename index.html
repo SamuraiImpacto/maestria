@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260712b">
+  <link rel="stylesheet" href="style.css?v=20260712c">
   <link rel="preconnect" href="https://pay.kiwify.com.br">
   <script src="terminal.js" defer></script>
-  <script src="reveal.js?v=20260712b" defer></script>
+  <script src="reveal.js?v=20260712c" defer></script>
   <style>
     /* Pacotes clean (12/07): bullets âncora + acordeão, herança visível, rodapé único */
     .pacotes-grid { grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 16px; align-items: start; }
@@ -40,7 +40,10 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#" class="logo">Maestr<span>IA</span></a>
+    <a href="#" class="logo-mia" aria-label="MaestrIA">
+      <img class="logo-mia-sym" src="/img/logo-mia.svg" alt="">
+      <span class="logo-mia-txt"><span class="logo-mia-nome">MAESTR<i>IA</i></span></span>
+    </a>
     <div class="nav-links">
       <a href="#pra-quem">Pra quem é</a>
       <a href="#como-funciona">Como funciona</a>
@@ -412,7 +415,7 @@
   <div class="container">
     <span class="kicker" data-num="07">Pacotes</span>
     <h2>Escolha seu arsenal.<br><span class="vermelho">Lote fundador: 20 licenças</span>, depois o preço sobe.</h2>
-    <p class="lead">Previdenciário, Trabalhista e Marketing disponíveis hoje. Condição de fundador válida pras <strong>primeiras 20 licenças ou até 23/07</strong>, o que vier primeiro: R$ 697 por área, R$ 997 nas duplas, R$ 1.497 no Trio. Depois, cada pacote sobe pro preço cheio indicado no card.</p>
+    <p class="lead">Previdenciário, Trabalhista e Marketing disponíveis hoje, <strong>R$ 697 cada</strong> no lote fundador (primeiras 20 licenças ou até 23/07, o que vier primeiro; depois sobe pra R$ 997). Atende mais de uma área? Depois da compra você recebe a oferta pra somar as outras com desconto.</p>
 
     <h3 class="pacote-section-title">Pacotes por área</h3>
     <div class="pacotes-grid">
@@ -517,65 +520,7 @@
 
     </div>
 
-    <h3 class="pacote-section-title">Combinações (o fundador esperto olha aqui)</h3>
-    <div class="pacotes-grid">
-
-      <div class="pack-card pack-disponivel" id="pack-prev-trab">
-        <div class="pack-status">LOTE FUNDADOR</div>
-        <div class="pack-header">
-          <span class="pack-tag">DUPLA DE ÁREAS</span>
-          <h3>Previdenciário + Trabalhista</h3>
-        </div>
-        <div class="pack-price">
-          <span class="price-currency">R$</span><span class="price-value">997</span><span class="price-period">fundador (depois R$ 1.497)</span>
-        </div>
-        <p class="pack-saving">Atende as duas áreas? Os dois pacotes completos, do INSS à reclamatória, por R$ 397 a menos que comprar separado.</p>
-        <a href="https://pay.kiwify.com.br/Lvo0094" class="btn-pack" data-pacote="prev-trab">Quero as duas áreas por R$ 997</a>
-      </div>
-
-      <div class="pack-card pack-disponivel">
-        <div class="pack-status">LOTE FUNDADOR</div>
-        <div class="pack-header">
-          <span class="pack-tag">DUPLA</span>
-          <h3>Previdenciário + Marketing</h3>
-        </div>
-        <div class="pack-price">
-          <span class="price-currency">R$</span><span class="price-value">997</span><span class="price-period">fundador (depois R$ 1.497)</span>
-        </div>
-        <p class="pack-saving">O pacote completo do INSS mais a presença digital inteira: site no ar, Google Meu Negócio e conteúdo com a sua voz. R$ 397 a menos que comprar separado.</p>
-        <a href="https://pay.kiwify.com.br/zotD8nl" class="btn-pack" data-pacote="prev-marketing">Quero a dupla Prev + Marketing</a>
-      </div>
-
-      <div class="pack-card pack-disponivel">
-        <div class="pack-status">LOTE FUNDADOR</div>
-        <div class="pack-header">
-          <span class="pack-tag">DUPLA</span>
-          <h3>Trabalhista + Marketing</h3>
-        </div>
-        <div class="pack-price">
-          <span class="price-currency">R$</span><span class="price-value">997</span><span class="price-period">fundador (depois R$ 1.497)</span>
-        </div>
-        <p class="pack-saving">Cálculo, contestação e acordo no padrão do fórum, com site, Google Meu Negócio e conteúdo trabalhando junto. R$ 397 a menos que comprar separado.</p>
-        <a href="https://pay.kiwify.com.br/3J6V58l" class="btn-pack" data-pacote="trab-marketing">Quero a dupla Trab + Marketing</a>
-      </div>
-
-      <div class="pack-card pack-disponivel pack-destaque">
-        <div class="pack-badge-top">Melhor negócio</div>
-        <div class="pack-status">LOTE FUNDADOR</div>
-        <div class="pack-header">
-          <span class="pack-tag">TRIO</span>
-          <h3>MaestrIA Trio</h3>
-        </div>
-        <div class="pack-price">
-          <span class="price-currency">R$</span><span class="price-value">1.497</span><span class="price-period">fundador (depois R$ 1.997)</span>
-        </div>
-        <p class="pack-saving">Previdenciário + Trabalhista + Marketing: o arsenal completo de quem atende as duas áreas, com o escritório posicionado sem depender de ninguém. R$ 594 a menos que comprar separado.</p>
-        <a href="https://pay.kiwify.com.br/yuBMRUL" class="btn-pack" data-pacote="trio">Quero o Trio por R$ 1.497</a>
-      </div>
-
-    </div>
-
-    <p class="pack-rodape">Todos os pacotes incluem <strong>12 meses de acesso com atualizações semanais</strong>, licença no seu CPF válida em até 3 computadores e <strong>garantia incondicional de 7 dias</strong>.</p>
+    <p class="pack-rodape">Atende mais de uma área, ou quer captar mais clientes? Depois da compra você recebe a oferta pra somar as outras áreas com desconto. Todo pacote inclui <strong>12 meses de acesso com atualizações semanais</strong>, licença no seu CPF válida em até 3 computadores e <strong>garantia incondicional de 7 dias</strong>.</p>
 
     <div class="prereq-box">
       <div class="prereq-icon">⚙️</div>
@@ -787,7 +732,10 @@
   <div class="container">
     <div class="footer-cols">
       <div class="footer-col footer-brand">
-        <a href="#" class="logo">Maestr<span>IA</span></a>
+        <a href="#" class="logo-mia" aria-label="MaestrIA">
+      <img class="logo-mia-sym" src="/img/logo-mia.svg" alt="">
+      <span class="logo-mia-txt"><span class="logo-mia-nome">MAESTR<i>IA</i></span></span>
+    </a>
         <p>IA jurídica que roda no seu computador. Construída pra escritório crescer sem quebrar a entrega.</p>
         <p class="footer-by">Um produto Samurai Lab</p>
       </div>

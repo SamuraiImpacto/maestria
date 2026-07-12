@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 118" role="img" aria-label="Símbolo MaestrIA">
+  <defs>
+    <linearGradient id="miaRed" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#ff3535"/>
+      <stop offset="0.55" stop-color="#e11d1d"/>
+      <stop offset="1" stop-color="#8f1414"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#miaRed)">
+    <!-- perna esquerda (topo chanfrado) -->
+    <polygon points="6,26 26,6 34,6 34,112 6,112"/>
+    <!-- perna direita (topo chanfrado) -->
+    <polygon points="122,26 102,6 94,6 94,112 122,112"/>
+    <!-- chevron central (V) com espessura -->
+    <polygon points="34,6 64,54 94,6 78,6 64,30 50,6"/>
+    <polygon points="46,20 64,50 82,20 72,44 64,60 56,44"/>
+    <!-- ampulheta central -->
+    <polygon points="50,60 78,60 64,80"/>
+    <polygon points="50,104 78,104 64,84"/>
+  </g>
+</svg>

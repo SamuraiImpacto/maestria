@@ -15,6 +15,7 @@ COPY membros/ ./membros/
 # Landing pages segmentadas por área (campanhas de WhatsApp)
 COPY prev/ ./prev/
 COPY trab/ ./trab/
+COPY marketing/ ./marketing/
 
 # Proposta de consultoria (Samurai Lab) para o Jardson
 COPY jardson/ ./jardson/
