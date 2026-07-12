@@ -61,6 +61,12 @@ code {
 }
 .logo span { color: var(--vermelho); }
 .logo:hover { text-decoration: none; }
+.logo-mia { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mia-sym { height: 34px; width: auto; display: block; flex-shrink: 0; }
+.logo-mia-lockup { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+.logo-mia-word { height: 20px; width: auto; display: block; }
+.logo-mia-sub { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 8px; letter-spacing: 0.34em; color: #dcdcdc; margin-top: 5px; padding-left: 1px; }
+.logo-mia:hover { text-decoration: none; }
 .nav-links { display: flex; gap: 22px; align-items: center; }
 .nav-links a { color: var(--text-muted); font-weight: 500; font-size: 14px; }
 .nav-links a:hover { color: var(--text); text-decoration: none; }
