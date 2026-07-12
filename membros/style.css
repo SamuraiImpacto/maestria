@@ -297,9 +297,56 @@ textarea { resize: vertical; }
 .view-titulo { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
 .view-sub { color: var(--text-muted); font-size: 14.5px; margin: 6px 0 20px; max-width: 640px; }
 
-.como-instalar { margin-top: 34px; background: var(--bg-card); border: 1px solid var(--border);
+.como-instalar { margin-top: 26px; background: var(--bg-card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 20px 22px; }
 .como-instalar h3 { font-size: 16px; margin-bottom: 12px; }
+
+/* Acordeão (bloco recolhível pra tirar peso da tela) */
+.acordeao summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; }
+.acordeao summary::-webkit-details-marker { display: none; }
+.acordeao summary::after { content: "+"; margin-left: auto; font-size: 20px; color: var(--text-dim); font-weight: 700; }
+.acordeao[open] summary::after { content: "–"; }
+.acordeao summary h3 { margin-bottom: 0; }
+.acordeao[open] summary { margin-bottom: 12px; }
+
+/* Passos com número visual */
+.passos-visuais { display: grid; gap: 14px; margin-top: 16px; }
+.passo-visual { display: flex; gap: 14px; align-items: flex-start; font-size: 15px; color: var(--text-muted); }
+.passo-visual strong { color: var(--text); }
+.passo-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--vermelho-bg); border: 1px solid var(--vermelho-border); color: var(--vermelho-soft);
+  font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.link-aula { background: none; border: none; padding: 0; color: var(--vermelho-soft);
+  font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.link-aula:hover { color: var(--text); }
+
+/* ===== INÍCIO (dashboard) ===== */
+.inicio-hero { background: linear-gradient(135deg, rgba(239,39,39,.10), rgba(239,39,39,.02) 45%, transparent),
+  var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 30px 28px; margin-bottom: 22px; }
+.inicio-kicker { color: var(--vermelho-soft); font-weight: 800; font-size: 11px;
+  letter-spacing: 2.4px; text-transform: uppercase; }
+.inicio-titulo { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 900;
+  letter-spacing: -0.01em; margin: 6px 0 2px; line-height: 1.15; }
+.inicio-plano { color: var(--text-muted); font-size: 14.5px; margin-bottom: 20px; }
+.progresso-wrap { max-width: 480px; margin-bottom: 18px; }
+.progresso-info { display: flex; justify-content: space-between; font-size: 12.5px;
+  color: var(--text-dim); font-weight: 600; margin-bottom: 7px;
+  text-transform: uppercase; letter-spacing: .06em; }
+.progresso-trilho { height: 8px; background: var(--bg-card-2); border: 1px solid var(--border);
+  border-radius: 999px; overflow: hidden; }
+.progresso-barra { height: 100%; width: 0; background: linear-gradient(90deg, var(--vermelho), var(--vermelho-soft));
+  border-radius: 999px; transition: width .5s ease; }
+
+.grid-acoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.card-acao { display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 20px; cursor: pointer; font: inherit; color: var(--text); text-align: left;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease; }
+.card-acao:hover { transform: translateY(-3px); border-color: var(--vermelho-border); background: var(--bg-card-2); }
+.card-acao .acao-icone { font-size: 30px; line-height: 1; margin-bottom: 6px; }
+.card-acao strong { font-size: 15.5px; font-weight: 700; }
+.card-acao span:last-child { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
 .upsell { margin-top: 38px; border-top: 1px solid var(--border); padding-top: 26px; }
 .upsell h3 { font-size: 18px; }

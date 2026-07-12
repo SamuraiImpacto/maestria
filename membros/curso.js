@@ -185,10 +185,23 @@
 
   function progresso() { return lerLS(LS_PROGRESSO); }
 
+  // Resumo do progresso pro dashboard: total, feitas e a próxima aula pendente
+  function estado() {
+    var prog = progresso();
+    var feitas = CURSO.filter(function (m) { return prog[m.slug]; }).length;
+    var proxima = CURSO.filter(function (m) { return !prog[m.slug]; })[0] || null;
+    return { total: CURSO.length, feitas: feitas, proxima: proxima };
+  }
+
   // Preenche o grupo Aulas do menu lateral principal
   function montarMenu(ativo) {
     var alvo = document.getElementById("menu-aulas");
     if (!alvo) return;
+    var grupo = document.getElementById("menu-grupo-aulas");
+    if (grupo) {
+      var est = estado();
+      grupo.textContent = "Aulas · " + est.feitas + " de " + est.total;
+    }
     var prog = progresso();
     alvo.innerHTML = CURSO.map(function (mod) {
       var cls = "menu-item menu-aula" + (mod.slug === ativo ? " ativo" : "") + (prog[mod.slug] ? " feito" : "");
@@ -210,7 +223,7 @@
     var proximo = CURSO[idx + 1];
 
     tela.innerHTML =
-      '<article class="c-aula"><p class="c-aula-modulo">Aula ' + mod.ordem + " de " + (CURSO.length - 1) + "</p>" +
+      '<article class="c-aula"><p class="c-aula-modulo">Aula ' + (idx + 1) + " de " + CURSO.length + "</p>" +
       "<h2>" + esc(mod.titulo) + "</h2><p class=\"c-aula-sub\">" + esc(mod.subtitulo) + "</p>" +
       render(mod.corpo, mod.slug) +
       '<div class="c-nav">' +
@@ -230,7 +243,7 @@
           abrirModulo(destino);
         } else {
           montarMenu(mod.slug); // atualiza o check da última aula
-          if (window.MAESTRIA_VIEW) window.MAESTRIA_VIEW.mostrar("downloads");
+          if (window.MAESTRIA_VIEW) window.MAESTRIA_VIEW.mostrar("inicio");
         }
       });
     });
@@ -267,5 +280,5 @@
     abrirModulo((pendente || CURSO[0] || {}).slug);
   }
 
-  window.MAESTRIA_CURSO = { abrir: abrirModulo, montarMenu: montarMenu, abrirInicial: abrirInicial };
+  window.MAESTRIA_CURSO = { abrir: abrirModulo, montarMenu: montarMenu, abrirInicial: abrirInicial, estado: estado };
 })();

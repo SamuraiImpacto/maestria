@@ -53,9 +53,9 @@ function limparCredenciais() {
 let dadosAtuais = null;
 
 // ---------- navegação entre views ----------
-// Views: "aula" (curso), "downloads", "guia", "licenca", "chamados"
+// Views: "inicio" (dashboard), "aula" (curso), "downloads", "guia", "licenca", "chamados", "comunidade"
 function mostrarView(nome) {
-  ["aula", "downloads", "guia", "licenca", "chamados", "comunidade"].forEach((v) => {
+  ["inicio", "aula", "downloads", "guia", "licenca", "chamados", "comunidade"].forEach((v) => {
     const el = $("view-" + v);
     if (el) el.classList.toggle("hidden", v !== nome);
   });
@@ -66,6 +66,8 @@ function mostrarView(nome) {
   if (nome !== "aula") {
     document.querySelectorAll("#menu-aulas .menu-item").forEach((b) => b.classList.remove("ativo"));
   }
+  // O Início mostra progresso do curso: re-renderiza a cada visita pra refletir aulas concluídas
+  if (nome === "inicio" && dadosAtuais) renderizarInicio(dadosAtuais);
   fecharMenuMobile();
   window.scrollTo(0, 0);
 }
@@ -73,6 +75,17 @@ window.MAESTRIA_VIEW = { mostrar: mostrarView };
 
 document.querySelectorAll(".menu-item[data-view]").forEach((b) => {
   b.addEventListener("click", () => mostrarView(b.getAttribute("data-view")));
+});
+
+// Botões espalhados que abrem uma aula ou uma view (cards do Início, links internos)
+document.addEventListener("click", (e) => {
+  const abreAula = e.target.closest("[data-abrir-aula]");
+  if (abreAula && window.MAESTRIA_CURSO) {
+    window.MAESTRIA_CURSO.abrir(abreAula.getAttribute("data-abrir-aula"));
+    return;
+  }
+  const abreView = e.target.closest("[data-view-destino]");
+  if (abreView) mostrarView(abreView.getAttribute("data-view-destino"));
 });
 
 // Menu no celular: abre e fecha
@@ -181,10 +194,34 @@ function renderizarPainel(dados) {
   montarSelectChamado(dados);
   renderizarGuia(dados);
 
-  // Aulas na barra lateral + abre a primeira aula pendente
-  if (window.MAESTRIA_CURSO) {
-    window.MAESTRIA_CURSO.montarMenu();
-    window.MAESTRIA_CURSO.abrirInicial();
+  // Aulas na barra lateral + entrada pelo Início (dashboard)
+  if (window.MAESTRIA_CURSO) window.MAESTRIA_CURSO.montarMenu();
+  renderizarInicio(dados);
+  mostrarView("inicio");
+}
+
+// ---------- Início (dashboard) ----------
+function renderizarInicio(dados) {
+  const c = dados.cliente;
+  const primeiroNome = (c.nome || "").split(" ")[0];
+  $("ini-saudacao").textContent = primeiroNome ? "Olá, " + primeiroNome : "Bem-vindo";
+  $("ini-plano").textContent = (c.plano_legivel || "") +
+    (c.vitalicio ? " · licença vitalícia" : c.vence_em ? " · ativa até " + dataBr(c.vence_em) : "");
+
+  const est = window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.estado ? window.MAESTRIA_CURSO.estado() : null;
+  const btn = $("ini-continuar");
+  if (est && est.total) {
+    $("ini-progresso-label").textContent = est.feitas + " de " + est.total + " aulas concluídas";
+    $("ini-progresso-barra").style.width = Math.round((100 * est.feitas) / est.total) + "%";
+    if (est.proxima) {
+      btn.textContent = (est.feitas ? "Continuar: " : "Começar: ") + est.proxima.titulo.split(":")[0] + " →";
+      btn.onclick = () => window.MAESTRIA_CURSO.abrir(est.proxima.slug);
+    } else {
+      btn.textContent = "Curso completo ✓ Rever as aulas";
+      btn.onclick = () => window.MAESTRIA_CURSO.abrir(null);
+    }
+  } else if (btn) {
+    btn.classList.add("hidden");
   }
 }
 
@@ -205,7 +242,7 @@ function renderizarDownloads(dados) {
     "<h3>⬇ Seu pacote (um arquivo só)</h3>" +
     "<p>Este arquivo instala TODAS as skills do seu pacote de uma vez, já nas versões mais recentes: baixa, arrasta pra conversa do Claude, escreve \"instala pra mim\" e informa o código de ativação + CPF quando ele pedir. Serve também pra ATUALIZAR: é só baixar e instalar de novo por cima, nada do que você configurou se perde.</p>" +
     "<a class='btn-baixar' href='" + URL_INSTALADOR + "'>Baixar meu pacote</a>" +
-    "<p class='mini' style='margin-top:8px;'>Travou? O <a href='https://maestria.samurailab.com.br/instalacao.html' target='_blank' style='color:inherit;text-decoration:underline;'>guia passo a passo</a> te destrava.</p>";
+    "<p class='mini' style='margin-top:8px;'>Travou? <button type='button' class='link-aula' data-abrir-aula='01-instalacao'>A aula de instalação te destrava</button>, aqui mesmo.</p>";
   grid.appendChild(inst);
 
   // Lista informativa do que vem dentro (SEM botão de download, só transparência)

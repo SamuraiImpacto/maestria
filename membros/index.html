@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260710c">
+  <link rel="stylesheet" href="style.css?v=20260712">
 </head>
 <body>
 
@@ -18,7 +18,6 @@
   <div class="nav-inner">
     <a class="logo" href="https://maestria.samurailab.com.br">Maestr<span>IA</span></a>
     <div class="nav-links">
-      <a href="https://maestria.samurailab.com.br/instalacao.html">Guia de instalação</a>
       <a href="https://maestria.samurailab.com.br/suporte.html">Suporte</a>
       <button id="btn-sair" class="btn-ghost hidden" type="button">Sair</button>
     </div>
@@ -62,10 +61,9 @@
       </div>
 
       <nav class="menu-nav">
-        <div class="menu-grupo">Comece por aqui</div>
-        <a class="menu-item" href="https://maestria.samurailab.com.br/instalacao.html" target="_blank" rel="noopener" style="text-decoration:none;"><span class="menu-icone">🚀</span><span>Guia de instalação</span></a>
+        <button type="button" class="menu-item" data-view="inicio"><span class="menu-icone">🏠</span><span>Início</span></button>
 
-        <div class="menu-grupo">Aulas</div>
+        <div class="menu-grupo" id="menu-grupo-aulas">Aulas</div>
         <div id="menu-aulas"></div>
 
         <div class="menu-grupo">Minha conta</div>
@@ -81,8 +79,45 @@
 
     <section class="app-conteudo" id="app-conteudo">
 
+      <!-- Início (dashboard, preenchido pelo app.js) -->
+      <div id="view-inicio" class="view">
+        <div class="inicio-hero">
+          <p class="inicio-kicker">Área de membros</p>
+          <h2 id="ini-saudacao" class="inicio-titulo">Bem-vindo</h2>
+          <p id="ini-plano" class="inicio-plano"></p>
+          <div class="progresso-wrap">
+            <div class="progresso-info"><span>Seu curso</span><span id="ini-progresso-label">0 de 0 aulas</span></div>
+            <div class="progresso-trilho"><div id="ini-progresso-barra" class="progresso-barra"></div></div>
+          </div>
+          <button type="button" id="ini-continuar" class="btn-principal btn-inline">Continuar de onde parei →</button>
+        </div>
+
+        <div class="grid-acoes">
+          <button type="button" class="card-acao" data-abrir-aula="01-instalacao">
+            <span class="acao-icone">⚙️</span>
+            <strong>Guia de instalação</strong>
+            <span>A aula que te leva do zero ao /maestria funcionando, passo a passo, aqui dentro.</span>
+          </button>
+          <button type="button" class="card-acao" data-view-destino="downloads">
+            <span class="acao-icone">⬇️</span>
+            <strong>Baixar meu pacote</strong>
+            <span>Um arquivo só instala e atualiza todas as suas skills.</span>
+          </button>
+          <button type="button" class="card-acao" data-view-destino="guia">
+            <span class="acao-icone">📖</span>
+            <strong>O que dá pra pedir</strong>
+            <span>Todas as funções do seu pacote, explicadas sem tecniquês.</span>
+          </button>
+          <button type="button" class="card-acao" data-view-destino="chamados">
+            <span class="acao-icone">💬</span>
+            <strong>Precisa de ajuda?</strong>
+            <span>Abra um chamado: a resposta aparece aqui e no seu email.</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Aula do curso (preenchida pelo curso.js) -->
-      <div id="view-aula" class="view"></div>
+      <div id="view-aula" class="view hidden"></div>
 
       <!-- Downloads -->
       <div id="view-downloads" class="view hidden">
@@ -92,23 +127,32 @@
 
         <div class="como-instalar">
           <h3>Como instalar (3 passos, sem mistério)</h3>
-          <ol class="passos">
-            <li><strong>Instale o Claude</strong> no seu computador (uma vez só). <a href="https://maestria.samurailab.com.br/instalacao.html" target="_blank" rel="noopener">O guia passo a passo está aqui</a>, feito pra quem nunca mexeu com isso.</li>
-            <li><strong>Baixe o seu pacote</strong> no botão acima e <strong>arraste o arquivo pra conversa</strong> do Claude com a frase: <em>"instala pra mim"</em>. Ele faz o resto sozinho.</li>
-            <li><strong>Ative sua licença</strong>: digite <code>/maestria ativar</code>, informe o código de ativação e o CPF do titular. Todas as skills do seu pacote se instalam sozinhas na sequência.</li>
-          </ol>
-          <p class="mini" style="margin-top:8px;"><strong>Já tinha instalado antes e quer atualizar?</strong> Mesmo caminho: baixa o pacote de novo e manda "instala pra mim". Ele atualiza por cima sem perder nada que você configurou.</p>
+          <div class="passos-visuais">
+            <div class="passo-visual">
+              <span class="passo-num">1</span>
+              <div><strong>Instale o Claude</strong> no seu computador (uma vez só). <button type="button" class="link-aula" data-abrir-aula="01-instalacao">A aula de instalação te leva pela mão</button>, feita pra quem nunca mexeu com isso.</div>
+            </div>
+            <div class="passo-visual">
+              <span class="passo-num">2</span>
+              <div><strong>Baixe o seu pacote</strong> no botão acima e <strong>arraste o arquivo pra conversa</strong> do Claude com a frase: <em>"instala pra mim"</em>. Ele faz o resto sozinho.</div>
+            </div>
+            <div class="passo-visual">
+              <span class="passo-num">3</span>
+              <div><strong>Ative sua licença</strong>: digite <code>/maestria ativar</code>, informe o código de ativação e o CPF do titular. Todas as skills do seu pacote se instalam sozinhas na sequência.</div>
+            </div>
+          </div>
+          <p class="mini" style="margin-top:14px;"><strong>Já tinha instalado antes e quer atualizar?</strong> Mesmo caminho: baixa o pacote de novo e manda "instala pra mim". Ele atualiza por cima sem perder nada que você configurou.</p>
         </div>
 
-        <div class="como-instalar">
-          <h3>🖋 Petição saindo sem o SEU logo e timbrado?</h3>
+        <details class="como-instalar acordeao">
+          <summary><h3>🖋 Petição saindo sem o SEU logo e timbrado?</h3></summary>
           <p>A skill monta a petição com a identidade visual do seu escritório (logo, fonte e rodapé), mas pra isso ela precisa conhecer o seu modelo. Configura uma vez, vale pra sempre:</p>
           <ol class="passos">
             <li>Abra o Claude e digite <code>/maestria</code>.</li>
             <li>Peça: <em>"quero cadastrar meu papel timbrado e meu modelo de petição"</em>.</li>
             <li>Arraste pra conversa um <strong>.docx seu</strong> que tenha o seu logo e rodapé (uma petição sua pronta serve). A skill aprende sozinha e toda petição passa a sair com a sua cara.</li>
           </ol>
-        </div>
+        </details>
 
         <div id="dl-upsell" class="upsell hidden">
           <h3>Skills que ainda não estão no seu pacote</h3>
@@ -203,9 +247,9 @@
   </div>
 </main>
 
-<script src="guia-skills.js?v=20260710c"></script>
-<script src="app.js?v=20260710c"></script>
-<script src="conteudo.js"></script>
-<script src="curso.js"></script>
+<script src="guia-skills.js?v=20260712"></script>
+<script src="app.js?v=20260712"></script>
+<script src="conteudo.js?v=20260712"></script>
+<script src="curso.js?v=20260712"></script>
 </body>
 </html>
