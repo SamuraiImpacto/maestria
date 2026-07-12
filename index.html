@@ -10,9 +10,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260712">
   <link rel="preconnect" href="https://pay.kiwify.com.br">
   <script src="terminal.js" defer></script>
+  <script src="reveal.js?v=20260712" defer></script>
+  <style>
+    /* Pacotes clean (12/07): bullets âncora + acordeão, herança visível, rodapé único */
+    .pacotes-grid { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; align-items: start; }
+    .pack-herda { display: flex; align-items: center; gap: 8px; background: var(--vermelho-bg);
+      border: 1px solid var(--vermelho-border); border-radius: 10px; padding: 10px 14px;
+      font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+    .pack-herda span { color: var(--vermelho); font-size: 15px; }
+    .pack-mais { margin: -8px 0 20px; }
+    .pack-mais summary { cursor: pointer; list-style: none; font-size: 13px; font-weight: 700;
+      color: var(--text-muted); padding: 8px 0 8px 22px; position: relative; text-align: left; }
+    .pack-mais summary::-webkit-details-marker { display: none; }
+    .pack-mais summary::before { content: '+'; position: absolute; left: 0; color: var(--vermelho); font-weight: 800; font-size: 15px; }
+    .pack-mais[open] summary::before { content: '–'; }
+    .pack-mais summary:hover { color: var(--text); }
+    .pack-mais .pack-features { margin-bottom: 0; }
+    .pack-mais .pack-features li { font-size: 13px; color: var(--text-muted); padding-top: 6px; padding-bottom: 6px; }
+    .pack-rodape { text-align: center; color: var(--text-muted); font-size: 13.5px; margin: 26px auto 0;
+      max-width: 680px; line-height: 1.7; }
+    .pack-rodape strong { color: var(--text); }
+  </style>
 </head>
 <body>
 
@@ -391,7 +412,7 @@
   <div class="container">
     <span class="kicker" data-num="07">Pacotes</span>
     <h2>Escolha seu arsenal.<br><span class="vermelho">Lote fundador: 20 licenças</span>, depois o preço sobe.</h2>
-    <p class="lead">Previdenciário, Trabalhista e Marketing disponíveis hoje. Condição de fundador válida pras <strong>primeiras 20 licenças ou até 23/07</strong>, o que vier primeiro: R$ 697 por área, R$ 997 na dupla com Marketing, R$ 1.497 no Trio. Depois disso: R$ 997, R$ 1.497 e R$ 1.997. Todos com 12 meses de acesso e atualizações.</p>
+    <p class="lead">Previdenciário, Trabalhista e Marketing disponíveis hoje. Condição de fundador válida pras <strong>primeiras 20 licenças ou até 23/07</strong>, o que vier primeiro: R$ 697 por área, R$ 997 nas duplas, R$ 1.497 no Trio. Depois, cada pacote sobe pro preço cheio indicado no card.</p>
 
     <h3 class="pacote-section-title">Pacotes por área</h3>
     <div class="pacotes-grid">
@@ -406,27 +427,28 @@
         <div class="pack-price">
           <span class="price-currency">R$</span><span class="price-value">697</span><span class="price-period">fundador (depois R$ 997)</span>
         </div>
-        <p class="pack-saving">Pra escritório que vive do INSS: 9 skills cobrindo do primeiro áudio do cliente à audiência, tudo dentro do seu PC, com sua voz, citando fonte oficial.</p>
+        <p class="pack-saving">Pra escritório que vive do INSS: do primeiro áudio do cliente à audiência, com a sua voz, citando fonte oficial.</p>
         <ul class="pack-features">
-          <li><strong>Cálculo previdenciário completo:</strong> RMI, fator previdenciário, atrasados, conversão de tempo especial, simulação de aposentadoria</li>
-          <li><strong>Planejamento previdenciário completo:</strong> projeção ano a ano de quando cada regra de aposentadoria destrava, aposentar agora vs esperar (com a conta de quando a espera se paga), estratégia de contribuição até lá e relatório em Word pronto pra entregar ao cliente</li>
-          <li><strong>Auxílio-acidente de ponta a ponta:</strong> RMI direto da carta de concessão do auxílio-doença e o valor ATUAL do benefício, corrigido pelos reajustes oficiais do INSS até hoje</li>
-          <li><strong>Auditor de CNIS:</strong> identifica vínculos faltantes, períodos com erro, contribuições não computadas</li>
-          <li><strong>Recurso administrativo INSS:</strong> argumentação automática contra indeferimento</li>
-          <li><strong>Impugnação a PPP:</strong> ataque a Perfil Profissiográfico Previdenciário inconsistente</li>
-          <li><strong>Impugnação a laudo pericial:</strong> contrapõe perícia desfavorável</li>
-          <li><strong>Quesitos de perícia:</strong> roteiro de perguntas pro perito judicial</li>
-          <li><strong>Preparação do cliente pra perícia:</strong> guia da perícia médica e da avaliação social do BPC, em linguagem que o cliente entende</li>
-          <li><strong>Jurimetria oficial (base CNJ):</strong> taxa de procedência por vara, tempo até a sentença e comparação entre tribunais (federal x estadual) pra decidir onde ajuizar</li>
-          <li><strong>Triagem do primeiro contato:</strong> o textão ou o áudio de WhatsApp do cliente vira área do caso, alerta de prazo e prescrição, documentos a pedir e resposta pronta pra colar</li>
-          <li><strong>Radar processual (base CNJ):</strong> andamento em um comando, e autos em PDF viram ficha executiva com linha do tempo e prazos em risco</li>
-          <li><strong>Mapa de provas do caso:</strong> análise probatória fato a fato: a força de cada prova, onde o adversário vai atacar e o que ainda dá pra produzir</li>
-          <li><strong>Teses vinculantes na peça:</strong> temas repetitivos do STJ e repercussão geral do STF, com a tese validada na fonte oficial antes de entrar na petição</li>
-          <li><strong>Preparador de audiência:</strong> roteiro completo da audiência montado a partir dos autos do caso, e roteiro cronometrado de sustentação oral em recurso</li>
-          <li><strong>Gerador de documentos jurídicos:</strong> petição inicial, contestação, recurso, manifestação, contrato, procuração, declaração, parecer jurídico, notificação extrajudicial e aditivo contratual, tudo com o seu papel timbrado</li>
-          <li><strong>Revisor treinado nos SEUS critérios:</strong> aprende com as suas melhores peças e revisa o trabalho do estagiário e do associado antes de chegar em você</li>
-          <li>1 ano de acesso e atualizações</li>
+          <li><strong>Cálculo previdenciário completo:</strong> RMI, atrasados, tempo especial e simulação de aposentadoria</li>
+          <li><strong>Planejamento previdenciário:</strong> quando cada regra destrava, aposentar agora vs esperar, relatório em Word pra vender como consultoria</li>
+          <li><strong>Auditor de CNIS:</strong> vínculo faltante, período com erro e contribuição não computada, apontados em minutos</li>
+          <li><strong>Recurso contra indeferimento:</strong> argumentado com os dados do caso, no mesmo dia</li>
+          <li><strong>Perícia de ponta a ponta:</strong> quesitos, impugnação de PPP e de laudo, e o cliente preparado em linguagem que ele entende</li>
+          <li><strong>Jurimetria oficial do CNJ:</strong> em qual vara seu benefício tem mais chance, antes de ajuizar</li>
+          <li><strong>Petições no seu timbrado:</strong> gerador completo de documentos + revisor treinado nos SEUS critérios</li>
         </ul>
+        <details class="pack-mais">
+          <summary>Ver as outras 7 ferramentas do pacote</summary>
+          <ul class="pack-features">
+            <li><strong>Auxílio-acidente de ponta a ponta:</strong> RMI direto da carta de concessão e valor atual reajustado pelos índices oficiais</li>
+            <li><strong>Triagem do primeiro contato:</strong> o áudio de WhatsApp do cliente vira área, alerta de prazo e resposta pronta</li>
+            <li><strong>Radar processual (base CNJ):</strong> andamento em um comando; autos em PDF viram ficha executiva</li>
+            <li><strong>Mapa de provas:</strong> a força de cada prova, onde o adversário ataca e o que ainda dá pra produzir</li>
+            <li><strong>Teses vinculantes:</strong> repetitivos do STJ e repercussão geral do STF validados na fonte antes de entrar na peça</li>
+            <li><strong>Preparador de audiência:</strong> roteiro a partir dos autos + sustentação oral cronometrada</li>
+            <li><strong>Banco Vivo de Decisões:</strong> as skills aprendem o padrão decisório dos casos que você vence</li>
+          </ul>
+        </details>
         <a href="https://pay.kiwify.com.br/q5QEizf" class="btn-pack" data-pacote="prev">Quero o Previdenciário por R$ 697</a>
       </div>
 
@@ -439,24 +461,27 @@
         <div class="pack-price">
           <span class="price-currency">R$</span><span class="price-value">697</span><span class="price-period">fundador (depois R$ 997)</span>
         </div>
-        <p class="pack-saving">Pra escritório que vive de rescisão e hora extra: do primeiro áudio do cliente à audiência, no padrão do seu fórum.</p>
+        <p class="pack-saving">Pra escritório que vive de rescisão e hora extra: do primeiro áudio do cliente à audiência, dos dois lados do balcão.</p>
         <ul class="pack-features">
-          <li><strong>Cálculo de verbas rescisórias:</strong> aviso, 13º, férias, FGTS, multa 40%, com memória apresentável ao juízo</li>
-          <li><strong>HE com reflexos:</strong> hora extra e adicional noturno seguindo ADC 58 STF e Lei 14.905</li>
+          <li><strong>Verbas rescisórias completas:</strong> qualquer modalidade, FGTS + multa 40%, com memória apresentável ao juízo</li>
+          <li><strong>Hora extra com reflexos:</strong> HE e adicional noturno seguindo ADC 58 do STF e Lei 14.905</li>
           <li><strong>Insalubridade e periculosidade:</strong> argumentação técnica pra adicional negado</li>
-          <li><strong>Cálculo de FGTS + multa 40%:</strong> rescisão sem justa causa, indireta, justa causa revertida</li>
-          <li><strong>Contestação trabalhista:</strong> defesa empresarial em reclamatória</li>
-          <li><strong>Acordo trabalhista (art. 484-A CLT):</strong> minuta padrão MTE com cálculo de homologação</li>
-          <li><strong>Jurimetria oficial (base CNJ):</strong> taxa de procedência e de acordo por vara, tempo até a sentença e comparação entre TRTs pra calibrar a estratégia</li>
-          <li><strong>Triagem do primeiro contato:</strong> o textão ou o áudio de WhatsApp do cliente vira área do caso, alerta de prazo e prescrição, documentos a pedir e resposta pronta pra colar</li>
-          <li><strong>Radar processual (base CNJ):</strong> andamento em um comando, e autos em PDF viram ficha executiva com linha do tempo e prazos em risco</li>
-          <li><strong>Mapa de provas do caso:</strong> análise probatória fato a fato: a força de cada prova, onde o adversário vai atacar e o que ainda dá pra produzir</li>
-          <li><strong>Teses vinculantes na peça:</strong> temas repetitivos do STJ e repercussão geral do STF, com a tese validada na fonte oficial antes de entrar na petição</li>
-          <li><strong>Preparador de audiência:</strong> roteiro completo da audiência montado a partir dos autos, com pontos de atenção pro depoimento, e roteiro cronometrado de sustentação oral em recurso</li>
-          <li><strong>Gerador de documentos jurídicos:</strong> petição inicial, contestação, recurso, manifestação, contrato, procuração, declaração, parecer jurídico, notificação extrajudicial e aditivo contratual, tudo com o seu papel timbrado</li>
-          <li><strong>Revisor treinado nos SEUS critérios:</strong> aprende com as suas melhores peças e revisa o trabalho do estagiário e do associado antes de chegar em você</li>
-          <li>1 ano de acesso e atualizações</li>
+          <li><strong>Contestação trabalhista:</strong> defesa empresarial em reclamatória, tese a tese</li>
+          <li><strong>Acordo do art. 484-A:</strong> minuta padrão MTE com cálculo de homologação</li>
+          <li><strong>Jurimetria oficial do CNJ:</strong> taxa de procedência e de acordo por vara, comparação entre TRTs</li>
+          <li><strong>Petições no seu timbrado:</strong> gerador completo de documentos + revisor treinado nos SEUS critérios</li>
         </ul>
+        <details class="pack-mais">
+          <summary>Ver as outras 6 ferramentas do pacote</summary>
+          <ul class="pack-features">
+            <li><strong>Triagem do primeiro contato:</strong> o áudio de WhatsApp do cliente vira área, alerta de prazo e resposta pronta</li>
+            <li><strong>Radar processual (base CNJ):</strong> andamento em um comando; autos em PDF viram ficha executiva</li>
+            <li><strong>Mapa de provas:</strong> a força de cada prova, onde o adversário ataca e o que ainda dá pra produzir</li>
+            <li><strong>Teses vinculantes:</strong> repetitivos do STJ e repercussão geral do STF validados na fonte antes de entrar na peça</li>
+            <li><strong>Preparador de audiência:</strong> roteiro a partir dos autos, preparação de testemunha e sustentação oral cronometrada</li>
+            <li><strong>Banco Vivo de Decisões:</strong> as skills aprendem o padrão decisório dos casos que você vence</li>
+          </ul>
+        </details>
         <a href="https://pay.kiwify.com.br/zRpxcta" class="btn-pack" data-pacote="trab">Quero o Trabalhista por R$ 697</a>
       </div>
 
@@ -469,20 +494,24 @@
         <div class="pack-price">
           <span class="price-currency">R$</span><span class="price-value">697</span><span class="price-period">fundador (depois R$ 997)</span>
         </div>
-        <p class="pack-saving">Para escritório que precisa se posicionar sem virar refém de social mídia nem de web designer. Conteúdo com a sua voz, dentro do Provimento 205 da OAB, direto do seu computador.</p>
+        <p class="pack-saving">Pra escritório que precisa se posicionar sem virar refém de social mídia nem de web designer.</p>
         <ul class="pack-features">
-          <li><strong>Site profissional do escritório:</strong> a skill constrói, prepara pra Google e pras IAs (SEO + GEO) e te guia até o site no ar com seu domínio, hospedado de graça. Com blog que recebe seus artigos direto da skill</li>
-          <li><strong>Landing pages de campanha:</strong> páginas de captação que falam do problema do cliente (não do advogado), prontas pra receber anúncio, com Pixel e WhatsApp</li>
-          <li><strong>Google Meu Negócio completo:</strong> criação, otimização e a rotina que rankeia no "advogado perto de mim": posts, respostas a avaliações e pedido ético de avaliação, tudo gerado pela skill</li>
-          <li><strong>Mapa de personas do seu público:</strong> quem é seu cliente, a dor nas palavras dele, objeções e o tom que funciona com cada perfil</li>
-          <li><strong>Roteiros de reels e stories:</strong> gancho, desenvolvimento e CTA calibrados pra persona escolhida</li>
-          <li><strong>Carrosséis, estáticos e artigos:</strong> conteúdo de autoridade no seu tom, com direção de arte pronta (formato, cores, fontes)</li>
-          <li><strong>Arte direto no seu Canva:</strong> conecta com o Canva oficial e gera o design na sua conta, pronto pra ajustar e postar</li>
+          <li><strong>Site do escritório no ar:</strong> construído pela skill, com SEO + GEO e blog plugado, no seu domínio, hospedado de graça</li>
+          <li><strong>Google Meu Negócio completo:</strong> da criação à rotina que rankeia no "advogado perto de mim"</li>
+          <li><strong>Landing pages de campanha:</strong> prontas pra anúncio, com Pixel e WhatsApp</li>
+          <li><strong>Conteúdo com a sua voz:</strong> reels, carrosséis, estáticos e artigos calibrados nas suas personas</li>
+          <li><strong>Arte direto no seu Canva:</strong> conecta com o Canva oficial e gera o design na sua conta</li>
           <li><strong>Calendário editorial:</strong> mês inteiro de pauta da sua área em minutos</li>
-          <li><strong>Estilo calibrado:</strong> aprende com seus textos e escreve como você, não como robô</li>
-          <li><strong>Compliance OAB automático:</strong> todo CTA filtrado pelo Provimento 205 (sem promessa de resultado)</li>
-          <li>1 ano de acesso e atualizações</li>
+          <li><strong>Compliance OAB automático:</strong> todo CTA filtrado pelo Provimento 205</li>
         </ul>
+        <details class="pack-mais">
+          <summary>Ver as outras 3 ferramentas do pacote</summary>
+          <ul class="pack-features">
+            <li><strong>Mapa de personas:</strong> quem é seu cliente, a dor nas palavras dele e o tom que funciona com cada perfil</li>
+            <li><strong>Estilo calibrado:</strong> aprende com seus textos e escreve como você, não como robô</li>
+            <li><strong>Pesquisa de campanha com dados públicos:</strong> bases oficiais viram praças, tamanho de público e ângulos de criativo</li>
+          </ul>
+        </details>
         <a href="https://pay.kiwify.com.br/Ln4ErJJ" class="btn-pack" data-pacote="marketing">Quero o Marketing por R$ 697</a>
       </div>
 
@@ -490,6 +519,22 @@
 
     <h3 class="pacote-section-title">Combinações (o fundador esperto olha aqui)</h3>
     <div class="pacotes-grid">
+
+      <!-- Combo Prev + Trabalhista: PRONTO, aguardando o link do checkout na Kiwify.
+           Pra ativar: criar o produto "MaestrIA Previdenciário + Trabalhista" no painel,
+           colar o link no href abaixo e remover o atributo hidden. O webhook já reconhece o nome. -->
+      <div class="pack-card pack-disponivel" hidden id="pack-prev-trab">
+        <div class="pack-status">LOTE FUNDADOR</div>
+        <div class="pack-header">
+          <span class="pack-tag">DUPLA DE ÁREAS</span>
+          <h3>Previdenciário + Trabalhista</h3>
+        </div>
+        <div class="pack-price">
+          <span class="price-currency">R$</span><span class="price-value">997</span><span class="price-period">fundador (depois R$ 1.497)</span>
+        </div>
+        <p class="pack-saving">Atende as duas áreas? Os dois pacotes completos, do INSS à reclamatória, por R$ 397 a menos que comprar separado.</p>
+        <a href="#" class="btn-pack" data-pacote="prev-trab">Quero as duas áreas por R$ 997</a>
+      </div>
 
       <div class="pack-card pack-disponivel">
         <div class="pack-status">LOTE FUNDADOR</div>
@@ -532,6 +577,8 @@
       </div>
 
     </div>
+
+    <p class="pack-rodape">Todos os pacotes incluem <strong>12 meses de acesso com atualizações semanais</strong>, licença no seu CPF válida em até 3 computadores e <strong>garantia incondicional de 7 dias</strong>.</p>
 
     <div class="prereq-box">
       <div class="prereq-icon">⚙️</div>
@@ -683,7 +730,7 @@
 
     <details>
       <summary>Funciona pra direito do consumidor / tributário / empresarial?</summary>
-      <p>Ainda não. O catálogo abre por área: Previdenciário e Trabalhista hoje, Família em julho, Imobiliário em agosto, Criminal em setembro, Consumidor em outubro, Empresarial em novembro e Saúde em dezembro. Cada área nova sai no valor de primeiro lote pra quem entra cedo.</p>
+      <p>Ainda não. O catálogo abre por área: Previdenciário, Trabalhista e Marketing hoje, Família em agosto, Imobiliário em setembro, Criminal em outubro, Consumidor em novembro, Empresarial em dezembro e Saúde em janeiro/2027. Cada área nova sai no valor de primeiro lote pra quem entra cedo.</p>
     </details>
 
     <details>
