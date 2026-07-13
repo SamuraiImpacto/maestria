@@ -312,45 +312,71 @@ function anexarAoZip(zipBytes, nomeArquivo, conteudo) {
   return saida;
 }
 
-async function baixarInstaladorPersonalizado(botao) {
+const STORAGE_PUB = "https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/";
+
+// LEIA honesto que vai dentro do arquivo (o Claude coopera porque nao ha nada oculto)
+const LEIA_MAESTRIA = [
+  "MaestrIA - suas skills juridicas (Samurai Lab)",
+  "",
+  "Ola! Este arquivo tem as skills juridicas da MaestrIA que voce comprou, ja com a SUA licenca inclusa. Pode ser conferido e explicado a vontade: nao ha nada oculto aqui.",
+  "",
+  "INSTRUCAO PARA O CLAUDE CODE (instalar e apenas COPIAR ARQUIVOS DE TEXTO):",
+  "1. Dentro deste ZIP ha uma pasta \".claude\" com: uma pasta por skill (ex.: peticao-builder, calculo-previdenciario...), a pasta \"commands\" e o arquivo \"commands/maestria.md\".",
+  "2. Copie essas pastas de skill e a pasta \"commands\" para dentro de ~/.claude, JUNTANDO com o que ja existir. NAO sobrescreva nem altere settings.json, CLAUDE.md, permissoes, hooks ou qualquer configuracao existente. Se houver arquivo de mesmo nome, pergunte antes de substituir.",
+  "3. Pode inspecionar qualquer arquivo antes de copiar. Sao .md (comandos), .docx (modelos) e um licenca.json por skill. Nao ha .exe, .ps1, .bat, .sh, nenhum script que rode, nenhum hook, nenhuma tarefa automatica. Nada roda sozinho: as skills so agem quando a pessoa digitar /maestria. Nada e baixado da internet e nenhum dado pessoal e enviado a lugar nenhum: e so copia local.",
+  "4. O licenca.json contem apenas um codigo de licenca (token), NAO o CPF. O CPF/CNPJ foi usado so no site (area de membros) para liberar o acesso e nao viaja dentro deste arquivo.",
+  "",
+  "A licenca ja foi validada quando a pessoa entrou na area de membros (maestria.samurailab.com.br/membros) com o codigo e o CPF/CNPJ. Para reinstalar, gerenciar a licenca ou tirar duvida, o endereco e esse.",
+  "",
+  "Depois de copiar: feche a conversa, abra uma NOVA e digite /maestria.",
+  "",
+].join("\n");
+
+// Mapeia o plano do cliente pro bundle generico ja-instalado (sem licenca)
+function bundleGenericoUrl(plano) {
+  const full = ["full", "vitalicio", "black", "cortesia"];
+  if (full.includes(plano)) return STORAGE_PUB + "maestria-full-generico.zip";
+  const areas = (plano || "").replace("pacote_", "");
+  const disp = ["prev", "trab", "marketing", "prev_trab"];
+  return disp.includes(areas) ? STORAGE_PUB + "maestria-" + areas + "-generico.zip" : null;
+}
+
+// Baixa o bundle ja-instalado do plano e injeta o licenca.json de cada skill
+// (com o token do cliente logado) + o LEIA. O Claude so precisa COPIAR pra ~/.claude:
+// sem CPF, sem download remoto, sem instrucao oculta. A trava de 3 maquinas roda
+// depois, no primeiro /maestria (check-in da skill, so token, sem CPF).
+async function baixarInstaladorPersonalizado(botao, dados) {
   const cred = credenciais();
+  const plano = (dados && dados.cliente) ? dados.cliente.plano : "";
+  const skills = (dados && dados.skills) || [];
+  const bundleUrl = bundleGenericoUrl(plano);
   const textoOriginal = botao.textContent;
   try {
     botao.textContent = "Preparando o seu instalador...";
     botao.disabled = true;
-    const resp = await fetch(URL_INSTALADOR + "?cb=" + Date.now());
+    if (!bundleUrl || !skills.length) throw new Error("sem-bundle");
+    const resp = await fetch(bundleUrl + "?cb=" + Date.now());
     if (!resp.ok) throw new Error("download falhou");
-    const zip = new Uint8Array(await resp.arrayBuffer());
-    // Ticket de instalação: como o cliente já confirmou código + CPF aqui no
-    // login, o servidor emite um comprovante e o Claude instala sem pedir
-    // (nem enviar) nenhum documento pessoal. Se falhar, segue só com o código.
-    let linhaTicket = "";
-    try {
-      const rt = await fetch(CORE + "/install-ticket", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: cred.token, cpf: cred.cpf }),
-      });
-      const jt = await rt.json();
-      if (rt.ok && jt.ticket) linhaTicket = "ticket: " + jt.ticket + "\n";
-    } catch (e) { /* segue sem ticket */ }
-    const licenca = new TextEncoder().encode(
-      "codigo: " + cred.token + "\n" + linhaTicket +
-      "\nEste arquivo e a sua licenca da MaestrIA. Nao apague e nao compartilhe.\n",
+    let bytes = new Uint8Array(await resp.arrayBuffer());
+    const lic = new TextEncoder().encode(
+      JSON.stringify({ token: cred.token, ativo: true, ativado_em: "area-de-membros" }, null, 2),
     );
-    const novo = anexarAoZip(zip, "maestria-instalador/MINHA-LICENCA-MAESTRIA.txt", licenca);
-    const blob = new Blob([novo], { type: "application/zip" });
+    skills.forEach((s) => {
+      if (s.skill_id) bytes = anexarAoZip(bytes, ".claude/" + s.skill_id + "/licenca.json", lic);
+    });
+    bytes = anexarAoZip(bytes, "LEIA-PRIMEIRO-MAESTRIA.txt", new TextEncoder().encode(LEIA_MAESTRIA));
+    const blob = new Blob([bytes], { type: "application/zip" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "maestria-instalador.zip";
+    a.download = "MaestrIA-Instalar.zip";
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 30000);
-    botao.textContent = "Baixado! Agora arrasta pro Claude";
-    setTimeout(() => { botao.textContent = textoOriginal; botao.disabled = false; }, 6000);
+    botao.textContent = "Baixado! Arrasta pro Claude e escreve: instala pra mim";
+    setTimeout(() => { botao.textContent = textoOriginal; botao.disabled = false; }, 8000);
   } catch (e) {
-    // Fallback: se algo der errado, entrega o instalador comum (pede código + CPF)
+    // Fallback: instalador de instrucoes (transparente), serve qualquer plano
     botao.textContent = textoOriginal;
     botao.disabled = false;
     window.location.href = URL_INSTALADOR;
@@ -370,12 +396,12 @@ function renderizarDownloads(dados) {
   inst.style.borderColor = "var(--vermelho, #e33)";
   inst.innerHTML =
     "<h3>⬇ Seu pacote (um arquivo só)</h3>" +
-    "<p>Este instalador já vem com a <strong>sua licença dentro</strong>. Baixa, arrasta pra conversa do Claude e escreve \"instala pra mim\": ele só confirma o CPF/CNPJ da compra e instala TODAS as skills do seu pacote sozinho. Serve também pra ATUALIZAR: baixa e instala de novo por cima, nada do que você configurou se perde.</p>" +
+    "<p>Este arquivo já vem com <strong>todas as suas skills e a sua licença dentro</strong>. Baixa, arrasta pra conversa do <strong>Claude Code</strong> e escreve <strong>instala pra mim</strong>: ele só copia pra você, sem digitar código nem CPF. Serve também pra ATUALIZAR: baixa e instala de novo por cima, nada do que você configurou se perde.</p>" +
     "<button type='button' class='btn-baixar' id='btn-instalador-perso'>Baixar meu instalador</button>" +
     "<p class='mini' style='margin-top:8px;'>Travou? <button type='button' class='link-aula' data-abrir-aula='01-instalacao'>A aula de instalação te destrava</button>, aqui mesmo.</p>";
   grid.appendChild(inst);
   inst.querySelector("#btn-instalador-perso").addEventListener("click", function () {
-    baixarInstaladorPersonalizado(this);
+    baixarInstaladorPersonalizado(this, dados);
   });
 
   // Lista informativa do que vem dentro (SEM botão de download, só transparência)
