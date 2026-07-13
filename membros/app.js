@@ -557,13 +557,50 @@ function renderizarLicenca(dados) {
   const ul = $("lic-maquinas");
   ul.innerHTML = "";
   if (maquinas.length === 0) {
-    ul.innerHTML = "<li>Nenhum computador ativado ainda. No Claude, digite /maestria ativar.</li>";
+    ul.innerHTML = "<li>Nenhum computador ativado ainda. Baixe seu instalador em Downloads e abra o /maestria uma vez.</li>";
   } else {
     maquinas.forEach((m) => {
       const li = document.createElement("li");
-      li.textContent = m.hostname + (m.os_info ? " (" + m.os_info + ")" : "") + " desde " + dataBr(m.ativada_em);
+      const label = document.createElement("span");
+      label.textContent = m.hostname + (m.os_info ? " (" + m.os_info + ")" : "") + " desde " + dataBr(m.ativada_em);
+      li.appendChild(label);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "link-aula";
+      btn.style.marginLeft = "10px";
+      btn.textContent = "remover";
+      btn.addEventListener("click", function () { removerDispositivo(m.hostname, btn); });
+      li.appendChild(btn);
       ul.appendChild(li);
     });
+  }
+  const nota = $("lic-maquinas-nota");
+  if (nota) {
+    nota.textContent = "Trocou de computador? Remova o antigo aqui pra liberar a vaga. Precisa de mais de " +
+      (dados.limite_dispositivos || 3) + " máquinas? Fale com o suporte que a gente libera.";
+  }
+}
+
+// Remove um dispositivo da licença (libera uma vaga das 3). Exige token + CPF (login).
+async function removerDispositivo(hostname, botao) {
+  if (!window.confirm('Remover "' + hostname + '"? Isso libera uma vaga; você poderá instalar em outra máquina.')) return;
+  const cred = credenciais();
+  if (!cred) return;
+  botao.disabled = true;
+  botao.textContent = "removendo...";
+  try {
+    const resp = await fetch(CORE + "/remove-device", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: cred.token, cpf: cred.cpf, hostname: hostname }),
+    });
+    const d = await resp.json();
+    if (!resp.ok || !d.ok) throw new Error(d.erro || "erro");
+    await entrar(cred.token, cred.cpf, false); // recarrega a área e atualiza a lista
+  } catch (e) {
+    botao.disabled = false;
+    botao.textContent = "remover";
+    window.alert("Não deu pra remover agora. Tente de novo em instantes.");
   }
 }
 
