@@ -321,9 +321,22 @@ async function baixarInstaladorPersonalizado(botao) {
     const resp = await fetch(URL_INSTALADOR + "?cb=" + Date.now());
     if (!resp.ok) throw new Error("download falhou");
     const zip = new Uint8Array(await resp.arrayBuffer());
+    // Ticket de instalação: como o cliente já confirmou código + CPF aqui no
+    // login, o servidor emite um comprovante e o Claude instala sem pedir
+    // (nem enviar) nenhum documento pessoal. Se falhar, segue só com o código.
+    let linhaTicket = "";
+    try {
+      const rt = await fetch(CORE + "/install-ticket", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: cred.token, cpf: cred.cpf }),
+      });
+      const jt = await rt.json();
+      if (rt.ok && jt.ticket) linhaTicket = "ticket: " + jt.ticket + "\n";
+    } catch (e) { /* segue sem ticket */ }
     const licenca = new TextEncoder().encode(
-      "codigo: " + cred.token +
-      "\n\nEste arquivo e a sua licenca da MaestrIA. Nao apague e nao compartilhe.\n",
+      "codigo: " + cred.token + "\n" + linhaTicket +
+      "\nEste arquivo e a sua licenca da MaestrIA. Nao apague e nao compartilhe.\n",
     );
     const novo = anexarAoZip(zip, "maestria-instalador/MINHA-LICENCA-MAESTRIA.txt", licenca);
     const blob = new Blob([novo], { type: "application/zip" });

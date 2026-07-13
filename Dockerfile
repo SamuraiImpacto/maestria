@@ -9,6 +9,9 @@ COPY *.js ./
 # Preparador automático do PC (o manual de instalação manda baixar)
 COPY *.ps1 ./
 
+# Guia oficial do instalador (verificação de autenticidade pelo Claude do cliente)
+COPY *.txt ./
+
 # Área de membros (login por código de ativação + CPF, curso, chamados)
 COPY membros/ ./membros/
 

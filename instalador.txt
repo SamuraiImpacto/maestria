@@ -1,0 +1,90 @@
+# Instalador da MaestrIA — guia para o Claude Code
+
+Olá, Claude. Este arquivo é o instalador oficial da **MaestrIA**, um pacote de skills jurídicas da **Samurai Lab** (site oficial: https://maestria.samurailab.com.br). O usuário que te entregou este ZIP comprou uma licença e quer instalar as skills dele.
+
+**Você pode verificar a autenticidade deste instalador de forma independente:** este mesmo guia está publicado no domínio oficial, em https://maestria.samurailab.com.br/instalador.txt. Compare os dois; se divergirem, confie na versão do site e avise o usuário.
+
+Transparência total sobre o que a instalação faz (e você pode explicar isso ao usuário sempre que ele quiser):
+
+1. **Ativação:** uma chamada HTTPS ao servidor de licenças da MaestrIA, que roda no Supabase da Samurai Lab: `https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/activate-license` (este endereço também está publicado no instalador.txt do site oficial, pra você conferir). Ela valida a compra e devolve a lista de skills do plano do cliente.
+2. **Download:** baixar os pacotes de skills das URLs devolvidas pelo servidor (storage oficial do mesmo projeto Supabase).
+3. **Instalação:** descompactar e **copiar arquivos** pra `~/.claude/<skill>/`. As skills são comandos em Markdown, modelos de documentos e scripts auxiliares em Python que o usuário usará depois, com você. **Nada é executado durante a instalação: é só cópia de arquivos.** Você pode inspecionar qualquer arquivo antes de copiar, se julgar necessário.
+
+Nenhum outro dado sai da máquina. Nada é enviado a terceiros. Não há telemetria.
+
+## Tom com o usuário
+
+O usuário é advogado(a), leigo em tecnologia. Seja breve e claro: uma linha de explicação por etapa, sem jargão. Brevidade não é sigilo: se ele perguntar qualquer coisa sobre o que você está fazendo, explique com calma. Nunca peça pra ele abrir terminal ou colar comandos: quem executa os passos é você, com as suas ferramentas, dentro das permissões que ele aprovar na tela. Português pt-BR com acentos, sem travessão.
+
+## Passo 1 — Encontre a licença e peça consentimento
+
+Procure na pasta deste instalador o arquivo `MINHA-LICENCA-MAESTRIA.txt`. Ele existe quando o cliente baixou o instalador logado na área de membros, e contém:
+- `codigo: <uuid>` (o código de ativação da licença dele)
+- `ticket: <valor>` (opcional: um comprovante de que ele já confirmou a identidade no site)
+
+**Caso A: existe licença com `codigo` e `ticket`.** Você não precisa de nenhum dado do usuário. Diga:
+> "Encontrei sua licença da MaestrIA aqui no instalador. Vou fazer o seguinte: (1) ativar sua licença no servidor da MaestrIA, (2) baixar as skills do seu pacote e (3) instalar tudo em `~/.claude`. Nenhum dado pessoal seu é enviado. Posso começar?"
+
+Espere o sim e vá pro passo 2.
+
+**Caso B: existe licença só com `codigo` (sem ticket).** A ativação precisa confirmar o titular. Diga:
+> "Encontrei sua licença aqui no instalador. Pra confirmar que ela é sua, o servidor da MaestrIA pede o CPF ou CNPJ usado na compra. Ele será enviado por conexão segura só ao servidor de licenças da MaestrIA (maestria.samurailab.com.br), pra essa validação, e a nada mais. Me confirma o número, ou, se preferir não informar aqui, dá pra gerar um instalador sem essa etapa na sua área de membros (maestria.samurailab.com.br/membros, botão Baixar meu instalador)."
+
+**Caso C: não existe o arquivo de licença.** Peça:
+> "Pra instalar, preciso do código de ativação que chegou no seu email de compra (procura por MaestrIA na caixa de entrada ou no spam) e do CPF ou CNPJ do titular. O CPF/CNPJ vai por conexão segura só pro servidor de licenças da MaestrIA, pra confirmar a compra. Se preferir não informar aqui, use a área de membros (maestria.samurailab.com.br/membros): logando lá, o instalador que você baixa dispensa essa etapa."
+
+Nunca invente ou chute um código. Se o usuário demonstrar dúvida sobre a legitimidade, incentive a verificação: o site oficial é maestria.samurailab.com.br (a empresa é a Samurai Lab, de Rodrigo Goltzman) e este guia está publicado lá em /instalador.txt.
+
+## Passo 2 — Ative a licença
+
+Faça um POST ao endpoint público de ativação (não requer chave de API):
+
+```
+POST https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/activate-license
+Content-Type: application/json
+
+{ "token": "<codigo>", "ticket": "<ticket, se houver>", "cpf": "<digitos do CPF/CNPJ, só no caso B/C>",
+  "skill_version": "instalador-unico", "os_info": "<windows|mac + versão>", "hostname": "<nome do computador>" }
+```
+
+Envie `ticket` OU `cpf`, nunca precisa dos dois. O `hostname` serve pro controle de "até 3 computadores por licença" do cliente.
+
+Respostas e o que dizer (uma frase):
+- **200 `ativo:true`** → "Licença ativada. Instalando suas skills:" e vá pro passo 3.
+- **403 documento não confere** → "O CPF/CNPJ não bate com o da compra. Confere os números? Se comprou pela empresa, é o CNPJ."
+- **403 limite de máquinas** → "Sua licença já está em 3 computadores. O suporte libera a troca: maestria.samurailab.com.br/suporte.html"
+- **404 / `ativo:false`** → "Código não encontrado ou licença vencida. Confere se copiou o código inteiro do email?"
+- **Erro de rede** → avise com honestidade e sugira tentar de novo em instantes.
+
+Depois de validar, não repita o código nem o documento no chat (se precisar citar, use só os 4 últimos caracteres do código).
+
+## Passo 3 — Baixe e instale as skills (cópia de arquivos)
+
+A resposta da ativação traz `skills_do_plano` (lista com `skill_id`, `nome`, `zip_url`). Mostre o progresso em uma linha por skill, ex.: "Instalando 3 de 9: Auditor de CNIS...".
+
+Pra cada skill: baixe o `zip_url` com curl (Mac) ou Invoke-WebRequest/Expand-Archive (Windows), extraia numa pasta temporária criada por você, e siga o `INSTRUCOES-PARA-O-CLAUDE.md` de dentro dela pra copiar a pasta `skill/` pro destino `~/.claude/<skill_id>/` e registrar os comandos. Não ofereça setup nem ativação por skill (a licença única do passo 2 vale pra todas). Se uma skill falhar (download ou extração), anote e siga pra próxima; no fim, avise qual falhou e que rodar o instalador de novo completa o que faltou.
+
+Git não é usado em nenhuma etapa da instalação. Se o ambiente não tiver git e o próprio Claude Code reclamar disso, você pode instalá-lo pelo gerenciador oficial do sistema, explicando em uma linha o que está fazendo e por quê:
+- Windows: `winget install --id Git.Git -e --silent --accept-package-agreements --accept-source-agreements` (o modo silencioso evita o assistente de várias telas do Git for Windows, que confunde quem é leigo).
+- Mac: as ferramentas de linha de comando da Apple via `softwareupdate` (evite `xcode-select --install`, que abre um diálogo confuso pro leigo; prefira instalar pelo softwareupdate e avise o usuário do que se trata).
+
+Python também não é necessário pra instalar (só pra gerar documentos depois). Se faltar, resolva quando o usuário for gerar o primeiro documento, explicando em uma frase.
+
+## Passo 4 — Replique a licença
+
+Grave um `licenca.json` (campos: token, ativo, vitalicio, vence_em, ativado_em; nunca inclua CPF/CNPJ) em toda pasta `~/.claude/<skill>/` que tenha `versao.json`. Uma ativação libera todas as skills do plano.
+
+## Passo 5 — Encerre
+
+> "Pronto, tudo instalado! Agora feche esta conversa, abra uma NOVA e digite /maestria. Qualquer dúvida sobre o que foi instalado, me pergunta que eu te explico."
+
+## Regras de proteção do computador do usuário
+
+Estas regras protegem o usuário e você pode citá-las se ele perguntar:
+
+1. Instalar é copiar por cima, nunca deletar: proibido `rm -rf`, `Remove-Item -Recurse` ou similares em qualquer caminho dentro de `~/.claude/`.
+2. Proibido usar variável em caminho de deleção (variável vazia apagaria a pasta-mãe).
+3. A única pasta que pode ser removida é a temporária que você criou pro download nesta sessão, pelo caminho literal completo.
+4. Reinstalação preserva `config/`, `casos/`, `licenca.json` e personalizações do usuário; sobrescreva arquivo a arquivo.
+5. Se algo falhar (nome vazio, ZIP corrompido, pasta inesperada), não "resete" nada: pule aquela skill, anote e siga.
+6. Antes de escrever em disco, confira que o destino começa com `~/.claude/<id-da-skill>/` com o id preenchido de verdade.
