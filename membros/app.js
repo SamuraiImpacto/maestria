@@ -13,7 +13,14 @@ const $ = (id) => document.getElementById(id);
 
 // ---------- utilitários ----------
 function mascaraCpf(valor) {
-  const d = valor.replace(/\D/g, "").slice(0, 11);
+  // Aceita CPF (11 dígitos) e CNPJ (14 dígitos, compra pela empresa)
+  const d = valor.replace(/\D/g, "").slice(0, 14);
+  if (d.length > 11) {
+    // CNPJ: 00.000.000/0000-00
+    let s = d.slice(0, 2) + "." + d.slice(2, 5) + "." + d.slice(5, 8) + "/" + d.slice(8, 12);
+    if (d.length > 12) s += "-" + d.slice(12);
+    return s;
+  }
   if (d.length <= 3) return d;
   if (d.length <= 6) return d.slice(0, 3) + "." + d.slice(3);
   if (d.length <= 9) return d.slice(0, 3) + "." + d.slice(3, 6) + "." + d.slice(6);
@@ -229,21 +236,134 @@ function renderizarInicio(dados) {
 const URL_INSTALADOR =
   "https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-instalador.zip";
 
+// ---- Instalador personalizado: anexa a licença do cliente dentro do zip ----
+// O zip público é a fonte única; aqui só entra o MINHA-LICENCA-MAESTRIA.txt
+// com o código de quem está logado. Assim o Claude não pede o código: só o CPF.
+function crc32Zip(bytes) {
+  let table = crc32Zip.table;
+  if (!table) {
+    table = crc32Zip.table = new Uint32Array(256);
+    for (let i = 0; i < 256; i++) {
+      let c = i;
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+      table[i] = c >>> 0;
+    }
+  }
+  let crc = 0xffffffff;
+  for (let i = 0; i < bytes.length; i++) crc = table[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function anexarAoZip(zipBytes, nomeArquivo, conteudo) {
+  const dv = new DataView(zipBytes.buffer, zipBytes.byteOffset, zipBytes.byteLength);
+  let eocd = -1;
+  for (let i = zipBytes.length - 22; i >= Math.max(0, zipBytes.length - 22 - 65535); i--) {
+    if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error("zip invalido");
+  const totalEntradas = dv.getUint16(eocd + 10, true);
+  const tamCentral = dv.getUint32(eocd + 12, true);
+  const offCentral = dv.getUint32(eocd + 16, true);
+  const nome = new TextEncoder().encode(nomeArquivo);
+  const crc = crc32Zip(conteudo);
+
+  const lfh = new Uint8Array(30 + nome.length);
+  const lv = new DataView(lfh.buffer);
+  lv.setUint32(0, 0x04034b50, true);
+  lv.setUint16(4, 20, true);
+  lv.setUint16(6, 0x0800, true);
+  lv.setUint16(8, 0, true);
+  lv.setUint16(12, 0x5021, true);
+  lv.setUint32(14, crc, true);
+  lv.setUint32(18, conteudo.length, true);
+  lv.setUint32(22, conteudo.length, true);
+  lv.setUint16(26, nome.length, true);
+  lfh.set(nome, 30);
+
+  const cdh = new Uint8Array(46 + nome.length);
+  const cv = new DataView(cdh.buffer);
+  cv.setUint32(0, 0x02014b50, true);
+  cv.setUint16(4, 20, true);
+  cv.setUint16(6, 20, true);
+  cv.setUint16(8, 0x0800, true);
+  cv.setUint16(14, 0x5021, true);
+  cv.setUint32(16, crc, true);
+  cv.setUint32(20, conteudo.length, true);
+  cv.setUint32(24, conteudo.length, true);
+  cv.setUint16(28, nome.length, true);
+  cv.setUint32(42, offCentral, true);
+  cdh.set(nome, 46);
+
+  const eocdNovo = new Uint8Array(22);
+  const ev = new DataView(eocdNovo.buffer);
+  ev.setUint32(0, 0x06054b50, true);
+  ev.setUint16(8, totalEntradas + 1, true);
+  ev.setUint16(10, totalEntradas + 1, true);
+  ev.setUint32(12, tamCentral + cdh.length, true);
+  ev.setUint32(16, offCentral + lfh.length + conteudo.length, true);
+
+  const saida = new Uint8Array(offCentral + lfh.length + conteudo.length + tamCentral + cdh.length + 22);
+  saida.set(zipBytes.subarray(0, offCentral), 0);
+  saida.set(lfh, offCentral);
+  saida.set(conteudo, offCentral + lfh.length);
+  saida.set(zipBytes.subarray(offCentral, offCentral + tamCentral), offCentral + lfh.length + conteudo.length);
+  saida.set(cdh, offCentral + lfh.length + conteudo.length + tamCentral);
+  saida.set(eocdNovo, saida.length - 22);
+  return saida;
+}
+
+async function baixarInstaladorPersonalizado(botao) {
+  const cred = credenciais();
+  const textoOriginal = botao.textContent;
+  try {
+    botao.textContent = "Preparando o seu instalador...";
+    botao.disabled = true;
+    const resp = await fetch(URL_INSTALADOR + "?cb=" + Date.now());
+    if (!resp.ok) throw new Error("download falhou");
+    const zip = new Uint8Array(await resp.arrayBuffer());
+    const licenca = new TextEncoder().encode(
+      "codigo: " + cred.token +
+      "\n\nEste arquivo e a sua licenca da MaestrIA. Nao apague e nao compartilhe.\n",
+    );
+    const novo = anexarAoZip(zip, "maestria-instalador/MINHA-LICENCA-MAESTRIA.txt", licenca);
+    const blob = new Blob([novo], { type: "application/zip" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "maestria-instalador.zip";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+    botao.textContent = "Baixado! Agora arrasta pro Claude";
+    setTimeout(() => { botao.textContent = textoOriginal; botao.disabled = false; }, 6000);
+  } catch (e) {
+    // Fallback: se algo der errado, entrega o instalador comum (pede código + CPF)
+    botao.textContent = textoOriginal;
+    botao.disabled = false;
+    window.location.href = URL_INSTALADOR;
+  }
+}
+
 function renderizarDownloads(dados) {
   const grid = $("dl-skills");
   grid.innerHTML = "";
 
   // Card ÚNICO de download: um arquivo instala (e atualiza) o pacote inteiro.
   // Decisão 09/07: NUNCA listar zips individuais aqui, comprador leigo se confunde.
+  // Desde 13/07 o botão gera o instalador PERSONALIZADO (licença embutida):
+  // o Claude não pede código, só a confirmação do CPF/CNPJ.
   const inst = document.createElement("div");
   inst.className = "card";
   inst.style.borderColor = "var(--vermelho, #e33)";
   inst.innerHTML =
     "<h3>⬇ Seu pacote (um arquivo só)</h3>" +
-    "<p>Este arquivo instala TODAS as skills do seu pacote de uma vez, já nas versões mais recentes: baixa, arrasta pra conversa do Claude, escreve \"instala pra mim\" e informa o código de ativação + CPF quando ele pedir. Serve também pra ATUALIZAR: é só baixar e instalar de novo por cima, nada do que você configurou se perde.</p>" +
-    "<a class='btn-baixar' href='" + URL_INSTALADOR + "'>Baixar meu pacote</a>" +
+    "<p>Este instalador já vem com a <strong>sua licença dentro</strong>. Baixa, arrasta pra conversa do Claude e escreve \"instala pra mim\": ele só confirma o CPF/CNPJ da compra e instala TODAS as skills do seu pacote sozinho. Serve também pra ATUALIZAR: baixa e instala de novo por cima, nada do que você configurou se perde.</p>" +
+    "<button type='button' class='btn-baixar' id='btn-instalador-perso'>Baixar meu instalador</button>" +
     "<p class='mini' style='margin-top:8px;'>Travou? <button type='button' class='link-aula' data-abrir-aula='01-instalacao'>A aula de instalação te destrava</button>, aqui mesmo.</p>";
   grid.appendChild(inst);
+  inst.querySelector("#btn-instalador-perso").addEventListener("click", function () {
+    baixarInstaladorPersonalizado(this);
+  });
 
   // Lista informativa do que vem dentro (SEM botão de download, só transparência)
   const skills = dados.skills || [];
