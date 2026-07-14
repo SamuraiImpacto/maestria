@@ -344,15 +344,31 @@ textarea { resize: vertical; }
 .progresso-barra { height: 100%; width: 0; background: linear-gradient(90deg, var(--vermelho), var(--vermelho-soft));
   border-radius: 999px; transition: width .5s ease; }
 
-.grid-acoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-.card-acao { display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+.grid-acoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 620px) { .grid-acoes { grid-template-columns: 1fr; } }
+.card-acao { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 22px 20px; cursor: pointer; font: inherit; color: var(--text); text-align: left;
-  transition: transform .16s ease, border-color .16s ease, background .16s ease; }
-.card-acao:hover { transform: translateY(-3px); border-color: var(--vermelho-border); background: var(--bg-card-2); }
-.card-acao .acao-icone { font-size: 30px; line-height: 1; margin-bottom: 6px; }
-.card-acao strong { font-size: 15.5px; font-weight: 700; }
-.card-acao span:last-child { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  padding: 24px 22px; cursor: pointer; font: inherit; color: var(--text); text-align: left; overflow: hidden;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease; }
+.card-acao::after { content: "→"; position: absolute; top: 22px; right: 22px; font-size: 18px; font-weight: 700;
+  color: var(--text-dim); opacity: 0; transform: translateX(-5px);
+  transition: opacity .16s ease, transform .16s ease, color .16s ease; }
+.card-acao:hover { transform: translateY(-3px); border-color: var(--vermelho-border); background: var(--bg-card-2);
+  box-shadow: 0 12px 32px rgba(0,0,0,.38); }
+.card-acao:hover::after { opacity: 1; transform: translateX(0); color: var(--vermelho-soft); }
+.card-acao .acao-icone { display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 14px; font-size: 25px; line-height: 1; margin-bottom: 8px;
+  background: rgba(255,255,255,.045); border: 1px solid var(--border);
+  transition: background .16s ease, border-color .16s ease, transform .16s ease; }
+.card-acao:hover .acao-icone { background: rgba(239,39,39,.14); border-color: var(--vermelho-border); transform: scale(1.06); }
+.card-acao strong { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.card-acao span:last-child { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+/* acao primaria: baixar o pacote */
+.card-acao--destaque { border-color: var(--vermelho-border);
+  background: linear-gradient(162deg, rgba(239,39,39,.13), rgba(239,39,39,.02) 55%, var(--bg-card)); }
+.card-acao--destaque .acao-icone { background: rgba(239,39,39,.18); border-color: var(--vermelho-border); }
+.card-acao--destaque::after { color: var(--vermelho-soft); opacity: .55; transform: translateX(0); }
+.card-acao--destaque:hover::after { opacity: 1; }
 
 .upsell { margin-top: 38px; border-top: 1px solid var(--border); padding-top: 26px; }
 .upsell h3 { font-size: 18px; }
