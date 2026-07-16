@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico do Escritório Previdenciário | MaestrIA</title>
+<meta name="description" content="6 perguntas rápidas. No fim, a conta do seu escritório: quantas horas por mês ficam presas escrevendo petição, e o que dá pra fazer com elas.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Quanto do seu mês some escrevendo petição?">
+<meta property="og:description" content="6 perguntas. No fim, o número do SEU escritório, não a média do mercado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://pay.kiwify.com.br">
+<style>
+:root {
+  --bg: #000000;
+  --bg-card: #0a0a0a;
+  --bg-card-2: #131313;
+  --bg-card-3: #1a1a1a;
+  --text: #ffffff;
+  --text-muted: #bcbcbc;
+  --text-dim: #7d7d7d;
+  --vermelho: #ef2727;
+  --vermelho-soft: #ff5757;
+  --vermelho-bg: rgba(239, 39, 39, 0.08);
+  --vermelho-border: rgba(239, 39, 39, 0.3);
+  --verde-positivo: #4ade80;
+  --verde-cta: #14a44d;
+  --verde-cta-soft: #1cc25c;
+  --border: #1f1f1f;
+  --border-strong: #2a2a2a;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* barra de progresso */
+.progresso-wrap {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(0,0,0,.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.progresso-inner {
+  max-width: 640px; margin: 0 auto;
+  padding: 14px 20px 12px;
+  display: flex; align-items: center; gap: 14px;
+}
+.logo-d { height: 26px; width: auto; flex-shrink: 0; }
+.barra { flex: 1; height: 6px; background: var(--bg-card-3); border-radius: 999px; overflow: hidden; }
+.barra-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--vermelho), var(--vermelho-soft));
+  border-radius: 999px;
+  transition: width .45s cubic-bezier(.4,0,.2,1);
+}
+.passo-txt { font-size: 12px; color: var(--text-dim); font-weight: 600; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+
+/* palco */
+.palco {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 20px 48px;
+}
+.tela {
+  width: 100%; max-width: 640px;
+  display: none;
+  animation: entra .4s cubic-bezier(.16,1,.3,1);
+}
+.tela.ativa { display: block; }
+@keyframes entra {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tela, .barra-fill { animation: none; transition: none; }
+}
+
+.kicker {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--vermelho);
+  background: var(--vermelho-bg);
+  border: 1px solid var(--vermelho-border);
+  padding: 6px 12px; border-radius: 999px;
+  margin-bottom: 18px;
+}
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 6.2vw, 46px);
+  line-height: 1.12; font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+h2 {
+  font-size: clamp(21px, 4.4vw, 28px);
+  line-height: 1.3; font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+.sub { color: var(--text-muted); font-size: 16px; margin-bottom: 26px; }
+.sub-p { color: var(--text-dim); font-size: 14px; margin-top: 18px; }
+.vermelho { color: var(--vermelho); }
+
+/* opcoes do quiz */
+.opcoes { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+.opcao {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; text-align: left;
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 17px 18px;
+  color: var(--text);
+  font-family: inherit; font-size: 15.5px; font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: border-color .15s, background .15s, transform .1s;
+}
+.opcao:hover { border-color: var(--vermelho); background: var(--bg-card-3); }
+.opcao:active { transform: scale(.99); }
+.opcao .marca {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border: 2px solid var(--border-strong);
+  border-radius: 50%;
+  transition: border-color .15s, background .15s;
+}
+.opcao:hover .marca { border-color: var(--vermelho); }
+.opcao.sel { border-color: var(--vermelho); background: var(--vermelho-bg); }
+.opcao.sel .marca { border-color: var(--vermelho); background: var(--vermelho); box-shadow: inset 0 0 0 3px var(--bg-card-2); }
+
+/* botoes */
+.btn {
+  display: block; width: 100%;
+  background: var(--verde-cta); color: #fff;
+  border: 1px solid var(--verde-cta);
+  border-radius: var(--radius);
+  padding: 17px 20px;
+  font-family: inherit; font-size: 16.5px; font-weight: 800;
+  letter-spacing: .2px;
+  cursor: pointer; text-align: center; text-decoration: none;
+  box-shadow: 0 6px 18px rgba(20,164,77,.32);
+  transition: background .18s, transform .12s, box-shadow .18s;
+  margin-top: 24px;
+}
+.btn:hover { background: var(--verde-cta-soft); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(28,194,92,.45); }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-fantasma {
+  background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+  box-shadow: none; font-weight: 600; font-size: 14px;
+  padding: 13px; margin-top: 12px;
+}
+.btn-fantasma:hover { background: var(--bg-card-2); color: var(--text); border-color: var(--border-strong); transform: none; box-shadow: none; }
+.voltar {
+  background: none; border: none; color: var(--text-dim);
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; padding: 6px 0; margin-bottom: 14px;
+}
+.voltar:hover { color: var(--text-muted); }
+
+/* lista de bullets */
+.bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 22px 0; }
+.bullets li {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 15.5px; color: var(--text-muted);
+}
+.bullets li strong { color: var(--text); }
+.bullets .ic { flex-shrink: 0; font-size: 16px; line-height: 1.5; }
+
+/* captura */
+.campo { margin-bottom: 14px; }
+.campo label { display: block; font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 7px; }
+.campo input {
+  width: 100%;
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 15px 16px;
+  color: var(--text);
+  font-family: inherit; font-size: 16px;
+  transition: border-color .15s;
+}
+.campo input:focus { outline: none; border-color: var(--vermelho); }
+.campo input::placeholder { color: var(--text-dim); }
+.erro-campo { color: var(--vermelho-soft); font-size: 12.5px; margin-top: 6px; display: none; font-weight: 600; }
+.erro-campo.on { display: block; }
+.lgpd { font-size: 12.5px; color: var(--text-dim); margin-top: 16px; line-height: 1.5; }
+
+/* loading */
+.load-barra { height: 8px; background: var(--bg-card-3); border-radius: 999px; overflow: hidden; margin: 28px 0 14px; }
+.load-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--vermelho), var(--vermelho-soft)); border-radius: 999px; transition: width .3s linear; }
+.load-txt { color: var(--text-muted); font-size: 15px; text-align: center; min-height: 24px; }
+.load-pct { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 900; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* diagnostico */
+.card-num {
+  background: linear-gradient(162deg, var(--vermelho-bg), rgba(239,39,39,.02));
+  border: 1px solid var(--vermelho-border);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.num-gigante {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 13vw, 78px);
+  font-weight: 900; line-height: 1;
+  color: var(--vermelho);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2px;
+}
+.num-label { font-size: 15px; color: var(--text); font-weight: 700; margin-top: 6px; }
+.num-conta { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+
+.card-verde {
+  background: linear-gradient(162deg, rgba(20,164,77,.12), rgba(20,164,77,.02));
+  border: 1px solid rgba(20,164,77,.35);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: 16px;
+}
+.card-verde .valor {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 7.5vw, 44px);
+  font-weight: 900; color: var(--verde-positivo);
+  line-height: 1.1; font-variant-numeric: tabular-nums;
+}
+.card-verde .valor-label { font-size: 14.5px; color: var(--text); font-weight: 700; margin: 6px 0 12px; }
+.card-verde p { font-size: 14.5px; color: var(--text-muted); }
+
+.alerta {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--vermelho);
+  border-radius: var(--radius-sm);
+  padding: 18px 18px 18px 20px;
+  margin-bottom: 14px;
+}
+.alerta h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 8px; display: flex; gap: 8px; align-items: baseline; }
+.alerta p { font-size: 14.5px; color: var(--text-muted); }
+.alerta p + p { margin-top: 8px; }
+.alerta .eco { color: var(--text-dim); font-style: italic; font-size: 13.5px; }
+
+.sep { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* oferta */
+.oferta-box {
+  background: var(--bg-card-2);
+  border: 1px solid var(--vermelho-border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  margin: 22px 0;
+}
+.preco-linha { display: flex; align-items: baseline; gap: 8px; justify-content: center; margin: 4px 0 2px; }
+.preco-cifra { font-size: 22px; font-weight: 700; color: var(--text-muted); }
+.preco-valor { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -2px; }
+.preco-depois { text-align: center; font-size: 13.5px; color: var(--text-dim); margin-bottom: 4px; }
+.preco-parcela { text-align: center; font-size: 14.5px; color: var(--text-muted); font-weight: 600; }
+.prazo {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--vermelho-bg);
+  border: 1px solid var(--vermelho-border);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 13.5px; font-weight: 700; color: var(--vermelho-soft);
+  margin-bottom: 20px;
+}
+.garantia {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 18px;
+}
+.garantia p { font-size: 13.5px; color: var(--text-muted); }
+.garantia strong { color: var(--text); }
+.fecho { text-align: center; margin-top: 26px; }
+.fecho p { font-size: 16px; color: var(--text-muted); margin-bottom: 4px; }
+.fecho .punch { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; color: var(--text); margin-top: 12px; }
+
+.rodape { text-align: center; padding: 22px 20px 30px; font-size: 12px; color: var(--text-dim); }
+.rodape a { color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<div class="progresso-wrap">
+  <div class="progresso-inner">
+    <img src="/img/logo-sym.png" alt="MaestrIA" class="logo-d">
+    <div class="barra"><div class="barra-fill" id="barraFill"></div></div>
+    <span class="passo-txt" id="passoTxt">1 de 6</span>
+  </div>
+</div>
+
+<main class="palco">
+
+  <!-- TELA 0: ENTRADA -->
+  <section class="tela ativa" data-tela="abertura">
+    <span class="kicker">Diagnóstico · 1 minuto</span>
+    <h1>Quanto do seu mês <span class="vermelho">some</span> escrevendo petição?</h1>
+    <p class="sub">6 perguntas rápidas. No fim, a conta do <strong>seu</strong> escritório: quantas horas ficam presas na produção de peça, e quanto dá pra devolver pra advocacia de verdade. Não é média de mercado, é o seu número.</p>
+    <button class="btn" data-vai="q1">QUERO VER A MINHA CONTA</button>
+    <p class="sub-p">Leva 1 minuto. Não precisa de e-mail pra começar.</p>
+  </section>
+
+  <!-- Q1 -->
+  <section class="tela" data-tela="q1" data-passo="1">
+    <button class="voltar" data-volta="abertura">‹ voltar</button>
+    <h2>Hoje, quem escreve as petições do seu escritório?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-q="perfil" data-v="sozinho"><span class="marca"></span><span>Eu mesmo, do começo ao fim</span></button>
+      <button class="opcao" data-q="perfil" data-v="estagiario"><span class="marca"></span><span>Eu escrevo e o estagiário ajuda</span></button>
+      <button class="opcao" data-q="perfil" data-v="time"><span class="marca"></span><span>Tenho advogado no time que escreve</span></button>
+      <button class="opcao" data-q="perfil" data-v="terceiriza"><span class="marca"></span><span>Terceirizo com correspondente ou freelancer</span></button>
+    </div>
+  </section>
+
+  <!-- Q2 -->
+  <section class="tela" data-tela="q2" data-passo="2">
+    <button class="voltar" data-volta="q1">‹ voltar</button>
+    <h2>Quantas peças o escritório protocola por mês?</h2>
+    <p class="sub">Inicial, recurso, contestação, manifestação. Tudo que exige redação.</p>
+    <div class="opcoes">
+      <button class="opcao" data-q="volume" data-v="3"><span class="marca"></span><span>Até 5 por mês</span></button>
+      <button class="opcao" data-q="volume" data-v="10"><span class="marca"></span><span>De 6 a 15 por mês</span></button>
+      <button class="opcao" data-q="volume" data-v="22"><span class="marca"></span><span>De 16 a 30 por mês</span></button>
+      <button class="opcao" data-q="volume" data-v="40"><span class="marca"></span><span>Mais de 30 por mês</span></button>
+    </div>
+  </section>
+
+  <!-- Q3 -->
+  <section class="tela" data-tela="q3" data-passo="3">
+    <button class="voltar" data-volta="q2">‹ voltar</button>
+    <h2>Do zero ao protocolo, quanto tempo leva uma peça previdenciária?</h2>
+    <p class="sub">Contando tudo: ler o CNIS e o laudo, conferir o cálculo, procurar jurisprudência, escrever e revisar.</p>
+    <div class="opcoes">
+      <button class="opcao" data-q="tempo" data-v="0.75"><span class="marca"></span><span>Menos de 1 hora</span></button>
+      <button class="opcao" data-q="tempo" data-v="2"><span class="marca"></span><span>Entre 1 e 3 horas</span></button>
+      <button class="opcao" data-q="tempo" data-v="4.5"><span class="marca"></span><span>Entre 3 e 6 horas</span></button>
+      <button class="opcao" data-q="tempo" data-v="7"><span class="marca"></span><span>Mais de 6 horas</span></button>
+    </div>
+  </section>
+
+  <!-- Q4: a pergunta que ensina (receita) -->
+  <section class="tela" data-tela="q4" data-passo="4">
+    <button class="voltar" data-volta="q3">‹ voltar</button>
+    <h2>Chega um lead que sofreu acidente e ficou com sequela, mas está sem contribuir há 2 anos. O que você faz?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-q="graca" data-v="recuso"><span class="marca"></span><span>Recuso: 2 anos parado, perdeu a qualidade de segurado</span></button>
+      <button class="opcao" data-q="graca" data-v="duvida"><span class="marca"></span><span>Fico na dúvida, peço o CNIS e vejo depois</span></button>
+      <button class="opcao" data-q="graca" data-v="naosei"><span class="marca"></span><span>Confesso que não sei fazer essa conta</span></button>
+      <button class="opcao" data-q="graca" data-v="calculo"><span class="marca"></span><span>Calculo o período de graça antes de responder qualquer coisa</span></button>
+    </div>
+  </section>
+
+  <!-- Q5: a pergunta que ensina (risco) -->
+  <section class="tela" data-tela="q5" data-passo="5">
+    <button class="voltar" data-volta="q4">‹ voltar</button>
+    <h2>Quando você usa IA pra achar jurisprudência, confere se aquele acórdão existe mesmo?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-q="confere" data-v="nunca_usei"><span class="marca"></span><span>Nunca usei IA pra isso</span></button>
+      <button class="opcao" data-q="confere" data-v="confio"><span class="marca"></span><span>Uso e confio: vem com número, ementa, tudo certinho</span></button>
+      <button class="opcao" data-q="confere" data-v="porcima"><span class="marca"></span><span>Confiro por cima, quando dá tempo</span></button>
+      <button class="opcao" data-q="confere" data-v="umporum"><span class="marca"></span><span>Confiro um por um no site do tribunal</span></button>
+    </div>
+  </section>
+
+  <!-- Q6: emocional -->
+  <section class="tela" data-tela="q6" data-passo="6">
+    <button class="voltar" data-volta="q5">‹ voltar</button>
+    <h2>Pra fechar: qual frase é mais parecida com você?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-q="frase" data-v="madrugada"><span class="marca"></span><span>“Eu viro a madrugada pra dar conta das peças.”</span></button>
+      <button class="opcao" data-q="frase" data-v="perde_caso"><span class="marca"></span><span>“Eu perco caso bom porque não tenho tempo de analisar direito.”</span></button>
+      <button class="opcao" data-q="frase" data-v="ia_generica"><span class="marca"></span><span>“Eu tentei IA e voltei pro Word: saiu genérico demais.”</span></button>
+      <button class="opcao" data-q="frase" data-v="mais_rapido"><span class="marca"></span><span>“Eu dou conta, mas sei que dá pra ser muito mais rápido.”</span></button>
+    </div>
+  </section>
+
+  <!-- CAPTURA -->
+  <section class="tela" data-tela="captura">
+    <span class="kicker">Última etapa</span>
+    <h2>Seu diagnóstico está pronto.</h2>
+    <p class="sub">Deixa o contato que eu te mando ele por escrito no WhatsApp também, junto com o passo a passo pra resolver cada ponto que apareceu aqui.</p>
+    <div class="campo">
+      <label for="nome">Seu nome</label>
+      <input type="text" id="nome" placeholder="Como você quer ser chamado" autocomplete="given-name">
+      <div class="erro-campo" id="erroNome">Escreve seu nome pra eu saber com quem falo.</div>
+    </div>
+    <div class="campo">
+      <label for="zap">Seu WhatsApp (com DDD)</label>
+      <input type="tel" id="zap" placeholder="(51) 99999-9999" inputmode="tel" autocomplete="tel">
+      <div class="erro-campo" id="erroZap">Precisa ser um WhatsApp válido, com DDD.</div>
+    </div>
+    <button class="btn" id="btnCaptura">VER MEU DIAGNÓSTICO</button>
+    <p class="lgpd">Quem fala com você é o Rodrigo, do Samurai Lab, pelo WhatsApp dele. Nada de robô de spam: se você pedir pra parar, para na hora. Seus dados não são vendidos nem repassados. <a href="/privacidade.html" style="color:var(--text-muted);">Política de privacidade</a>.</p>
+  </section>
+
+  <!-- LOADING -->
+  <section class="tela" data-tela="load">
+    <div class="load-pct" id="loadPct">0%</div>
+    <div class="load-barra"><div class="load-fill" id="loadFill"></div></div>
+    <p class="load-txt" id="loadTxt">Somando as horas do seu mês...</p>
+  </section>
+
+  <!-- DIAGNOSTICO -->
+  <section class="tela" data-tela="resultado">
+    <span class="kicker">Seu diagnóstico</span>
+    <h1 id="tituloResultado">Aqui está a sua conta.</h1>
+    <p class="sub" id="subResultado"></p>
+
+    <div class="card-num">
+      <div class="num-gigante" id="horasMes">0</div>
+      <div class="num-label">horas por mês só produzindo peça</div>
+      <div class="num-conta" id="contaMes"></div>
+    </div>
+
+    <div class="card-verde">
+      <div class="valor" id="devolvidas"></div>
+      <div class="valor-label">é o que dá pra devolver por mês</div>
+      <p>A MaestrIA lê o CNIS, a carta de concessão e o laudo, faz o cálculo, busca a jurisprudência em fonte oficial e escreve no seu padrão. <strong style="color:var(--text)">A revisão continua sua, e tem que continuar</strong>: a peça é sua, a OAB é sua. O que sai da sua mesa é o trabalho braçal.</p>
+      <p style="margin-top:12px;" id="anoTxt"></p>
+    </div>
+
+    <div id="alertas"></div>
+
+    <div class="sep"></div>
+
+    <h2>O que faz esse número mudar</h2>
+    <p class="sub">São 9 skills que você instala no Claude, no seu computador. Você digita <strong style="color:var(--text)">/maestria</strong> e pede.</p>
+    <ul class="bullets">
+      <li><span class="ic">📄</span><span><strong>Petição do zero ao Word</strong>, no timbrado e no estilo do seu escritório, não no estilo do robô</span></li>
+      <li><span class="ic">🧮</span><span><strong>RMI, atrasados e revisão</strong> calculados e conferidos, com a memória de cálculo por parcela</span></li>
+      <li><span class="ic">🔍</span><span><strong>Auditor de CNIS</strong>: aponta o vínculo que falta, o tempo especial esquecido e o benefício antigo que ainda gera direito</span></li>
+      <li><span class="ic">⚖️</span><span><strong>Jurisprudência conferida em fonte oficial</strong>: se o acórdão não existe, ela não cita. Por construção, não por sorte</span></li>
+      <li><span class="ic">🎯</span><span><strong>Qualificador de lead de auxílio-acidente</strong>: o período de graça calculado antes de você dizer sim ou não</span></li>
+      <li><span class="ic">🔒</span><span><strong>CNIS, laudo e CPF não saem do seu computador</strong>: nada sobe pra nuvem de ninguém</span></li>
+    </ul>
+    <button class="btn" data-vai="oferta">CERTO, QUERO ISSO NO MEU ESCRITÓRIO</button>
+  </section>
+
+  <!-- OFERTA -->
+  <section class="tela" data-tela="oferta">
+    <div class="prazo" id="prazoBox">⏳ Lote fundador</div>
+    <h1>MaestrIA <span class="vermelho">Previdenciário</span></h1>
+    <p class="sub">As 9 skills, instaladas no seu computador em uns 30 minutos. Uma vez só, sem mensalidade.</p>
+
+    <div class="oferta-box">
+      <ul class="bullets" style="margin-top:0;">
+        <li><span class="ic">✅</span><span>As <strong>9 skills</strong> do Previdenciário, incluindo o qualificador de auxílio-acidente</span></li>
+        <li><span class="ic">✅</span><span><strong>Instalação guiada</strong>: você arrasta um arquivo e pede "instala pra mim". Sem terminal, sem código</span></li>
+        <li><span class="ic">✅</span><span><strong>Calibragem no seu padrão</strong>: seu timbrado, seu estilo, seus modelos</span></li>
+        <li><span class="ic">✅</span><span><strong>Atualizações incluídas</strong>: skill nova e melhoria entram sem custo</span></li>
+        <li><span class="ic">✅</span><span><strong>Pronto-socorro semanal ao vivo</strong> no Meet, pra tirar dúvida e pedir ajuste</span></li>
+        <li><span class="ic">✅</span><span><strong>Suporte direto</strong> pelo seu painel, com resposta de gente</span></li>
+      </ul>
+      <div class="sep" style="margin:22px 0;"></div>
+      <div class="preco-linha">
+        <span class="preco-cifra">R$</span><span class="preco-valor">697</span>
+      </div>
+      <p class="preco-depois" id="precoDepois">no lote fundador. Depois, R$ 997.</p>
+      <p class="preco-parcela">ou em até 12x no cartão</p>
+      <a href="https://pay.kiwify.com.br/q5QEizf?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO POR R$ 697</a>
+      <div class="garantia">
+        <span style="font-size:20px;">🛡️</span>
+        <p><strong>7 dias de garantia.</strong> Instala, roda numa peça de verdade e vê. Se não fizer sentido pro seu escritório, você pede o reembolso e pronto. Sem justificativa, sem estresse.</p>
+      </div>
+    </div>
+
+    <p class="sub" style="font-size:14.5px;">Precisa de <strong style="color:var(--text)">Claude Pro ou Max</strong> ativo (a assinatura da Anthropic, a partir de US$ 20/mês). É o único custo fora daqui, e não é comigo que você paga.</p>
+
+    <div class="fecho">
+      <p>Você acabou de ver a sua própria conta.</p>
+      <p>Dá pra continuar pagando ela todo mês em hora,</p>
+      <p>ou resolver hoje.</p>
+      <p class="punch">Não é motivacional, é aritmética.</p>
+    </div>
+    <button class="btn btn-fantasma" data-vai="resultado">‹ rever meu diagnóstico</button>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  © 2026 Samurai Lab · <a href="/">MaestrIA</a> · <a href="/suporte.html">Suporte</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
+  var FIM_LOTE = new Date(2026, 6, 23, 23, 59, 59); // 23/07/2026, mes 6 = julho
+  var TOTAL_PASSOS = 6;
+
+  var respostas = {};
+  var historico = [];
+  var telaAtual = "abertura";
+  var jaEnviou = false;
+
+  function $(s, ctx) { return (ctx || document).querySelector(s); }
+  function $$(s, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(s)); }
+  function tela(nome) { return $('[data-tela="' + nome + '"]'); }
+
+  function mostra(nome, semHistorico) {
+    var atual = tela(telaAtual);
+    var alvo = tela(nome);
+    if (!alvo) return;
+    if (!semHistorico && telaAtual !== nome) historico.push(telaAtual);
+    if (atual) atual.classList.remove("ativa");
+    alvo.classList.add("ativa");
+    telaAtual = nome;
+    atualizaProgresso(alvo);
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+
+  function atualizaProgresso(alvo) {
+    var passo = alvo.getAttribute("data-passo");
+    var fill = $("#barraFill");
+    var txt = $("#passoTxt");
+    var wrap = $(".progresso-wrap");
+    if (passo) {
+      wrap.style.visibility = "visible";
+      fill.style.width = (passo / TOTAL_PASSOS * 100) + "%";
+      txt.textContent = passo + " de " + TOTAL_PASSOS;
+    } else if (telaAtual === "abertura") {
+      wrap.style.visibility = "hidden";
+    } else {
+      wrap.style.visibility = "visible";
+      fill.style.width = "100%";
+      txt.textContent = telaAtual === "captura" ? "quase lá" : "pronto";
+    }
+  }
+
+  // navegacao por botao
+  $$("[data-vai]").forEach(function (b) {
+    b.addEventListener("click", function () { mostra(b.getAttribute("data-vai")); });
+  });
+  $$("[data-volta]").forEach(function (b) {
+    b.addEventListener("click", function () { mostra(b.getAttribute("data-volta"), true); });
+  });
+
+  // quiz: clique responde e avanca
+  var ORDEM = ["q1", "q2", "q3", "q4", "q5", "q6"];
+  $$(".opcao").forEach(function (op) {
+    op.addEventListener("click", function () {
+      var q = op.getAttribute("data-q");
+      var v = op.getAttribute("data-v");
+      respostas[q] = v;
+      $$('.opcao[data-q="' + q + '"]').forEach(function (o) { o.classList.remove("sel"); });
+      op.classList.add("sel");
+      var telaDaOpcao = op.closest("[data-tela]").getAttribute("data-tela");
+      var i = ORDEM.indexOf(telaDaOpcao);
+      setTimeout(function () {
+        if (i > -1 && i < ORDEM.length - 1) mostra(ORDEM[i + 1]);
+        else mostra("captura");
+      }, 220);
+    });
+  });
+
+  // captura
+  function soDigitos(s) { return (s || "").replace(/\D/g, ""); }
+  function zapValido(s) {
+    var d = soDigitos(s);
+    if (d.length === 13 && d.indexOf("55") === 0) d = d.slice(2);
+    if (d.length === 12 && d.indexOf("55") === 0) d = d.slice(2);
+    return d.length === 10 || d.length === 11;
+  }
+  $("#zap").addEventListener("input", function (e) {
+    var d = soDigitos(e.target.value).slice(0, 11);
+    var out = d;
+    if (d.length > 6) out = "(" + d.slice(0, 2) + ") " + d.slice(2, d.length > 10 ? 7 : 6) + "-" + d.slice(d.length > 10 ? 7 : 6);
+    else if (d.length > 2) out = "(" + d.slice(0, 2) + ") " + d.slice(2);
+    else if (d.length > 0) out = "(" + d;
+    e.target.value = out;
+  });
+
+  $("#btnCaptura").addEventListener("click", function () {
+    var nome = $("#nome").value.trim();
+    var zap = $("#zap").value.trim();
+    var ok = true;
+    $("#erroNome").classList.toggle("on", nome.length < 2);
+    if (nome.length < 2) ok = false;
+    $("#erroZap").classList.toggle("on", !zapValido(zap));
+    if (!zapValido(zap)) ok = false;
+    if (!ok) return;
+    enviaLead(nome, zap);
+    rodaLoading();
+  });
+
+  function enviaLead(nome, zap) {
+    if (jaEnviou) return;
+    jaEnviou = true;
+    var d = calcula();
+    var corpo = {
+      nome: nome,
+      whatsapp: soDigitos(zap),
+      origem: "diagnostico-prev",
+      respostas: respostas,
+      diagnostico: { horas_mes: d.horasMes, devolve_min: d.min, devolve_max: d.max },
+      utm: window.location.search || ""
+    };
+    // fire and forget: erro de rede NUNCA prende o diagnostico do cara
+    try {
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(corpo),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function calcula() {
+    var vol = parseFloat(respostas.volume || "10");
+    var tmp = parseFloat(respostas.tempo || "2");
+    var horasMes = vol * tmp;
+    return {
+      horasMes: Math.round(horasMes),
+      min: Math.round(horasMes * 0.55),
+      max: Math.round(horasMes * 0.7),
+      vol: vol,
+      tmp: tmp
+    };
+  }
+
+  var PASSOS_LOAD = [
+    "Somando as horas do seu mês...",
+    "Cruzando com o volume de peças...",
+    "Conferindo o que dá pra automatizar sem tirar a sua caneta...",
+    "Fechando a conta..."
+  ];
+  function rodaLoading() {
+    mostra("load");
+    var pct = 0, i = 0;
+    var t = setInterval(function () {
+      pct += Math.random() * 9 + 4;
+      if (pct >= 100) {
+        pct = 100;
+        clearInterval(t);
+        setTimeout(pintaResultado, 420);
+      }
+      $("#loadPct").textContent = Math.floor(pct) + "%";
+      $("#loadFill").style.width = pct + "%";
+      var novo = Math.min(Math.floor(pct / 25), PASSOS_LOAD.length - 1);
+      if (novo !== i) { i = novo; $("#loadTxt").textContent = PASSOS_LOAD[i]; }
+    }, 260);
+  }
+
+  function plural(n, um, muitos) { return n === 1 ? um : muitos; }
+  function horaTxt(h) {
+    if (h < 1) return "menos de 1 hora";
+    return h + " " + plural(h, "hora", "horas");
+  }
+
+  function pintaResultado() {
+    var d = calcula();
+    var nome = $("#nome").value.trim().split(" ")[0];
+
+    $("#tituloResultado").innerHTML = nome ? (nome + ", aqui está a sua conta.") : "Aqui está a sua conta.";
+    $("#subResultado").textContent = "Calculado com o que você respondeu, não com média de mercado.";
+
+    $("#horasMes").textContent = d.horasMes;
+    var volTxt = d.vol === 3 ? "até 5" : d.vol === 10 ? "de 6 a 15" : d.vol === 22 ? "de 16 a 30" : "mais de 30";
+    var tmpTxt = d.tmp === 0.75 ? "menos de 1h" : d.tmp === 2 ? "1 a 3h" : d.tmp === 4.5 ? "3 a 6h" : "mais de 6h";
+    $("#contaMes").textContent = "(" + volTxt + " peças por mês, " + tmpTxt + " em cada uma)";
+
+    $("#devolvidas").textContent = "de " + d.min + " a " + d.max + " horas";
+
+    var anoMin = d.min * 12, anoMax = d.max * 12;
+    var diasMin = Math.round(anoMin / 8), diasMax = Math.round(anoMax / 8);
+    $("#anoTxt").innerHTML = "Em 12 meses são <strong style='color:var(--text)'>" + anoMin + " a " + anoMax + " horas</strong>. Uns <strong style='color:var(--text)'>" + diasMin + " a " + diasMax + " dias úteis</strong> de volta pra advogar, atender ou simplesmente não trabalhar no domingo.";
+
+    // alertas condicionais
+    var html = "";
+    var g = respostas.graca;
+    if (g === "recuso" || g === "naosei" || g === "duvida") {
+      var eco = g === "recuso" ? "Você respondeu que recusaria o caso." : g === "naosei" ? "Você respondeu que não sabe fazer essa conta." : "Você respondeu que ficaria na dúvida.";
+      html += '<div class="alerta">' +
+        '<h3><span>🚨</span><span>Tem caso bom saindo pela sua porta</span></h3>' +
+        '<p class="eco">' + eco + '</p>' +
+        '<p>Sem contribuir há 2 anos <strong style="color:var(--text)">não significa</strong> sem qualidade de segurado. O período de graça é de 12 meses, vai a 24 com 120 contribuições, e a 36 se teve desemprego involuntário comprovado. Ainda tem a regra do dia 15, que costuma esticar o prazo por mais algumas semanas.</p>' +
+        '<p>Um caso que parece morto pode estar vivo. Quem não faz a conta na hora do atendimento não perde a causa: perde o cliente, antes de começar.</p>' +
+        '</div>';
+    }
+    var c = respostas.confere;
+    if (c === "confio" || c === "porcima") {
+      var eco2 = c === "confio" ? "Você respondeu que confia no que a IA entrega." : "Você respondeu que confere por cima, quando dá tempo.";
+      html += '<div class="alerta">' +
+        '<h3><span>⚠️</span><span>Você está assinando o que não conferiu</span></h3>' +
+        '<p class="eco">' + eco2 + '</p>' +
+        '<p>IA genérica inventa acórdão. Não é bug raro: ela devolve número, câmara, relator e ementa, tudo com cara de verdadeiro, para um julgado que nunca existiu. Já tem advogado respondendo por isso.</p>' +
+        '<p>Quem assina a peça é você. O nome na OAB é o seu.</p>' +
+        '</div>';
+    }
+    if (c === "umporum") {
+      html += '<div class="alerta" style="border-left-color:var(--verde-positivo)">' +
+        '<h3><span>👏</span><span>Você confere um por um. E isso custa caro</span></h3>' +
+        '<p>É a atitude certa, e é exatamente por isso que dói: conferir acórdão no site do tribunal é hora sua queimada em trabalho de conferência, todo mês.</p>' +
+        '<p>A conferência tem que existir. Ela só não precisa ser feita por você, à mão.</p>' +
+        '</div>';
+    }
+    var f = respostas.frase;
+    if (f === "ia_generica") {
+      html += '<div class="alerta">' +
+        '<h3><span>🎯</span><span>Você tentou IA e voltou pro Word</span></h3>' +
+        '<p>Faz sentido: ferramenta genérica não conhece o seu timbrado, o seu jeito de escrever nem os seus modelos. Ela devolve texto de robô, e aí você reescreve tudo. O trabalho dobra em vez de sumir.</p>' +
+        '<p>É a diferença entre uma IA que escreve <em>uma</em> petição e uma que escreve <strong style="color:var(--text)">a sua</strong>.</p>' +
+        '</div>';
+    }
+    $("#alertas").innerHTML = html;
+
+    // prazo do lote
+    var hoje = new Date();
+    var dias = Math.ceil((FIM_LOTE - hoje) / 86400000);
+    var box = $("#prazoBox");
+    if (dias > 1) box.textContent = "⏳ Lote fundador: faltam " + dias + " dias";
+    else if (dias === 1) box.textContent = "⏳ Lote fundador: último dia é amanhã";
+    else if (dias === 0) box.textContent = "⏳ Lote fundador: hoje é o último dia";
+    else { box.style.display = "none"; $("#precoDepois").textContent = "à vista"; }
+
+    mostra("resultado");
+  }
+
+  atualizaProgresso(tela("abertura"));
+})();
+</script>
+
+</body>
+</html>
