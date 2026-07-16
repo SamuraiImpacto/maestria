@@ -17,6 +17,8 @@
   --vermelho-bg: rgba(239, 39, 39, 0.08);
   --vermelho-border: rgba(239, 39, 39, 0.3);
   --verde-positivo: #4ade80;
+  --verde-cta: #14a44d;
+  --verde-cta-soft: #1cc25c;
   --border: #1f1f1f;
   --border-strong: #2a2a2a;
   --radius: 14px;
@@ -279,6 +281,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 .btn-grande { padding: 18px 48px; font-size: 17px; }
+
+/* faixa de CTA intermediária (entre seções, pontos de alta intenção) */
+.faixa-cta { text-align: center; padding: 4px 20px 46px; }
+.faixa-cta .cta-linha { color: var(--text-muted); font-size: 16px; margin: 0 auto 16px; max-width: 620px; }
+.faixa-cta .cta-linha strong { color: var(--text); }
 
 .hero-meta {
   display: grid;
@@ -986,31 +993,37 @@ section h2 {
 
 .btn-pack {
   display: block;
-  background: transparent;
-  color: var(--text);
+  background: var(--verde-cta);
+  color: #ffffff;
   text-align: center;
-  padding: 13px 20px;
+  padding: 16px 20px;
   border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 14px;
-  border: 1px solid var(--border-strong);
-  transition: background 0.2s, border-color 0.2s;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--verde-cta);
+  box-shadow: 0 6px 18px rgba(20, 164, 77, 0.32);
+  transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
   margin-top: auto;
 }
 
 .btn-pack:hover {
-  background: var(--bg-card-3);
-  border-color: var(--text-muted);
+  background: var(--verde-cta-soft);
+  border-color: var(--verde-cta-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(28, 194, 92, 0.45);
 }
 
+/* pacote em destaque: mesmo verde, brilho um pouco maior */
 .btn-pack-gold {
-  background: var(--vermelho);
-  border-color: var(--vermelho);
+  background: var(--verde-cta);
+  border-color: var(--verde-cta);
+  box-shadow: 0 8px 24px rgba(20, 164, 77, 0.45);
 }
 
 .btn-pack-gold:hover {
-  background: var(--vermelho-soft);
-  border-color: var(--vermelho-soft);
+  background: var(--verde-cta-soft);
+  border-color: var(--verde-cta-soft);
 }
 
 /* ============== ROADMAP ============== */
