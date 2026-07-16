@@ -505,8 +505,39 @@ h2 {
   "use strict";
 
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
-  var FIM_LOTE = new Date(2026, 6, 23, 23, 59, 59); // 23/07/2026, mes 6 = julho
   var TOTAL_PASSOS = 6;
+
+  // Lote fundador: 697 até 23/07/2026 (inclusive), 997 a partir do dia 24.
+  // A página vira o preço SOZINHA na virada. Sem isso, no dia 24 o funil estaria
+  // anunciando 697 e o checkout cobrando 997: o pior jeito possível de receber
+  // um cliente novo. Se o Samurai esticar o lote, muda só a data aqui.
+  var FIM_LOTE = new Date(2026, 6, 23); // mes 6 = julho
+  var PRECO_FUNDADOR = 697;
+  var PRECO_CHEIO = 997;
+
+  function diasAteFimDoLote() {
+    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    var fim = new Date(FIM_LOTE.getTime()); fim.setHours(0, 0, 0, 0);
+    return Math.round((fim - hoje) / 86400000);
+  }
+
+  function aplicaLote() {
+    var dias = diasAteFimDoLote();
+    var box = $("#prazoBox");
+    var dataTxt = ("0" + FIM_LOTE.getDate()).slice(-2) + "/" + ("0" + (FIM_LOTE.getMonth() + 1)).slice(-2);
+
+    if (dias < 0) {
+      // Lote virou: o preço cheio passa a valer em TODA a página, sozinho.
+      box.style.display = "none";
+      $(".preco-valor").textContent = PRECO_CHEIO;
+      $("#precoDepois").textContent = "à vista, ou parcelado";
+      $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + PRECO_CHEIO;
+      return;
+    }
+    if (dias === 0) box.textContent = "⏳ Lote fundador: hoje é o último dia (" + dataTxt + ")";
+    else if (dias === 1) box.textContent = "⏳ Lote fundador: termina amanhã (" + dataTxt + ")";
+    else box.textContent = "⏳ Lote fundador: faltam " + dias + " dias (até " + dataTxt + ")";
+  }
 
   var respostas = {};
   var historico = [];
@@ -725,15 +756,7 @@ h2 {
     }
     $("#alertas").innerHTML = html;
 
-    // prazo do lote
-    var hoje = new Date();
-    var dias = Math.ceil((FIM_LOTE - hoje) / 86400000);
-    var box = $("#prazoBox");
-    if (dias > 1) box.textContent = "⏳ Lote fundador: faltam " + dias + " dias";
-    else if (dias === 1) box.textContent = "⏳ Lote fundador: último dia é amanhã";
-    else if (dias === 0) box.textContent = "⏳ Lote fundador: hoje é o último dia";
-    else { box.style.display = "none"; $("#precoDepois").textContent = "à vista"; }
-
+    aplicaLote();
     mostra("resultado");
   }
 
