@@ -20,6 +20,9 @@ COPY prev/ ./prev/
 COPY trab/ ./trab/
 COPY marketing/ ./marketing/
 
+# Funil de diagnóstico do Previdenciário (quiz -> conta real -> captura -> oferta)
+COPY diagnostico/ ./diagnostico/
+
 # Proposta de consultoria (Samurai Lab) para o Jardson
 COPY jardson/ ./jardson/
 
