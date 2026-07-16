@@ -212,20 +212,38 @@ h2 {
   background: linear-gradient(162deg, var(--vermelho-bg), rgba(239,39,39,.02));
   border: 1px solid var(--vermelho-border);
   border-radius: var(--radius);
-  padding: 26px 22px;
+  padding: 24px 22px 26px;
   text-align: center;
   margin-bottom: 16px;
 }
+/* Anel: o número sozinho é abstrato. Dentro do anel, ele vira a FATIA do mês
+   que já foi embora, e isso o advogado sente na hora. */
+.anel-wrap { width: 200px; max-width: 62vw; margin: 4px auto 14px; }
+.anel { width: 100%; height: auto; display: block; transform: rotate(-90deg); }
+.anel-fundo { fill: none; stroke: rgba(255,255,255,.07); stroke-width: 13; }
+.anel-preenche {
+  fill: none; stroke: var(--vermelho); stroke-width: 13; stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1);
+}
+.anel-preenche.estourou { stroke: var(--vermelho-soft); }
+.anel-txt { transform: rotate(90deg); transform-origin: 100px 100px; }
 .num-gigante {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(52px, 13vw, 78px);
-  font-weight: 900; line-height: 1;
-  color: var(--vermelho);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -2px;
+  font-size: 60px; font-weight: 900;
+  fill: var(--vermelho);
+  font-variant-numeric: tabular-nums; letter-spacing: -2px;
 }
-.num-label { font-size: 15px; color: var(--text); font-weight: 700; margin-top: 6px; }
+.num-unidade { font-size: 15px; font-weight: 700; fill: var(--text-muted); font-family: 'Inter', sans-serif; }
+.num-pct { font-size: 12.5px; font-weight: 700; fill: var(--text-dim); font-family: 'Inter', sans-serif; }
+.num-label { font-size: 15.5px; color: var(--text); font-weight: 700; }
 .num-conta { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+.num-estouro {
+  margin-top: 14px; padding: 12px 14px;
+  background: rgba(239,39,39,.1); border: 1px solid var(--vermelho-border);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px; color: var(--text-muted); text-align: left;
+}
+.num-estouro strong { color: var(--vermelho-soft); }
 
 .card-verde {
   background: linear-gradient(162deg, rgba(20,164,77,.12), rgba(20,164,77,.02));
@@ -519,9 +537,21 @@ h2 {
     <p class="sub" id="subResultado"></p>
 
     <div class="card-num">
-      <div class="num-gigante" id="horasMes">0</div>
-      <div class="num-label">horas por mês só produzindo peça</div>
+      <div class="anel-wrap">
+        <svg class="anel" viewBox="0 0 200 200" role="img" aria-labelledby="tituloAnel">
+          <title id="tituloAnel">Fatia do seu mês útil presa na produção de peças</title>
+          <circle class="anel-fundo" cx="100" cy="100" r="85"></circle>
+          <circle class="anel-preenche" id="anelPreenche" cx="100" cy="100" r="85"></circle>
+          <g class="anel-txt">
+            <text class="num-gigante" id="horasMes" x="100" y="98" text-anchor="middle">0</text>
+            <text class="num-unidade" x="100" y="122" text-anchor="middle">horas por mês</text>
+            <text class="num-pct" id="anelPct" x="100" y="144" text-anchor="middle"></text>
+          </g>
+        </svg>
+      </div>
+      <div class="num-label">do seu mês vai embora só produzindo peça</div>
       <div class="num-conta" id="contaMes"></div>
+      <div class="num-estouro" id="numEstouro" style="display:none;"></div>
     </div>
 
     <!-- GRAFICO 1: a decomposicao. Mostra que a revisao NAO muda, e isso e o ponto. -->
@@ -577,6 +607,67 @@ h2 {
       <li><span class="ic">🎯</span><span><strong>Qualificador de lead de auxílio-acidente</strong>: o período de graça calculado antes de você dizer sim ou não</span></li>
       <li><span class="ic">🔒</span><span><strong>CNIS, laudo e CPF não saem do seu computador</strong>: nada sobe pra nuvem de ninguém</span></li>
     </ul>
+
+    <div class="sep"></div>
+
+    <h2>Não é achismo meu. É o que os dados mostram.</h2>
+    <p class="sub">Ainda não vou te mostrar depoimento de cliente. Vou te mostrar estudo com fonte, que você pode conferir agora.</p>
+
+    <div class="gfx">
+      <div class="gfx-titulo">IA jurídica paga também inventa acórdão</div>
+      <div class="gfx-sub">Stanford testou as maiores ferramentas do mundo em mais de 200 consultas jurídicas. O gráfico é a taxa de respostas corretas.</div>
+      <div id="barrasAluc"></div>
+      <p class="prova-fonte" style="margin-top:18px;">
+        Magesh, Surani, Dahl, Suzgun, Manning e Ho (Stanford RegLab e HAI). “Hallucination-Free? Assessing the Reliability of Leading AI Legal Research Tools”. <em>Journal of Empirical Legal Studies</em>, 2025.
+        <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jels.12413" target="_blank" rel="noopener">Ver o estudo</a>.
+        Mede pesquisa jurídica nos Estados Unidos, não peça previdenciária brasileira.
+      </p>
+    </div>
+
+    <p class="sub">Repara no que esse gráfico diz: <strong style="color:var(--text)">não adianta ser “IA jurídica”</strong>. A ferramenta paga mais bem colocada ainda erra 1 em cada 3. O problema não é a marca, é o método: <strong style="color:var(--text)">gerar texto que parece um acórdão</strong> em vez de <strong style="color:var(--text)">ir buscar o acórdão na fonte</strong>.</p>
+    <p class="sub" style="margin-top:14px;">A MaestrIA não gera citação. Ela busca, confere na fonte oficial e, se o julgado não existe, <strong style="color:var(--text)">ela não cita</strong>. Isso não é sorte nem esforço: é como ela foi construída.</p>
+
+    <div class="prova">
+      <div class="prova-num vermelho">1%</div>
+      <div class="prova-txt">do valor da causa foi a multa aplicada pelo <strong>TST</strong>, em março de 2026, à empresa <strong>e ao advogado</strong>, por citarem precedentes que não existem. Um dos julgados falsos era atribuído a uma <strong>ministra da própria Turma que julgava o caso</strong>. Para o relator, não era erro material: era “criação intencional de conteúdo jurídico fictício”.</div>
+      <div class="prova-fonte">
+        TST, 6ª Turma, RR-0000284-92.2024.5.06.0351.
+        <a href="https://www.tst.jus.br/en/-/empresa-e-advogado-sao-condenados-por-possivel-uso-de-ia-com-citacoes-falsas-de-jurisprudencia" target="_blank" rel="noopener">Notícia oficial do TST</a>.
+      </div>
+    </div>
+
+    <div class="prova">
+      <div class="prova-num">🍺</div>
+      <div class="prova-txt">Em outubro de 2025, a Justiça do Trabalho de Santa Catarina recebeu uma petição que citava um <strong>desembargador que não existe</strong>. O nome atribuído ao magistrado era, na verdade, de um <strong>dono de bar em outro estado</strong>. Resultado: multa, processo extinto e ofício à OAB.</div>
+      <div class="prova-fonte">
+        TRT da 12ª Região, Vara do Trabalho de Concórdia.
+        <a href="https://portal.trt12.jus.br/noticias/autora-de-acao-e-multada-apos-advogada-inventar-jurisprudencia-e-desembargador" target="_blank" rel="noopener">Notícia oficial do TRT-12</a>.
+      </div>
+    </div>
+
+    <p class="sub">O prejuízo de verdade não é a multa. É que <strong style="color:var(--text)">conferir é barato e o erro é público</strong>: o tribunal leva minutos pra descobrir, e o que sobra é um acórdão publicado, com o seu nome, dizendo que você citou um julgado que não existe.</p>
+
+    <div class="sep"></div>
+
+    <h2>E não, você não está atrasado. Você está no limite.</h2>
+    <div class="prova">
+      <div class="prova-num verde">76%</div>
+      <div class="prova-txt">dos profissionais do Direito no Brasil já usam IA generativa <strong>toda semana</strong>. Eram 55% na edição anterior da mesma pesquisa.</div>
+      <div class="prova-fonte">
+        Relatório sobre o Impacto da IA no Direito, edição 2026: Jusbrasil com seccionais da OAB (SP, PR, BA, GO, PE, ES) e ITS Rio, mais de 1.800 respostas.
+        <a href="https://sobre.jusbrasil.com.br/releases/uso-de-ia-generativa-por-profissionais-do-direito-salta-e-ja-atinge-76-no-brasil-segundo-estudo" target="_blank" rel="noopener">Ver a pesquisa</a>.
+        São respostas de quem se dispôs a responder, não medição de laboratório.
+      </div>
+    </div>
+
+    <div class="prova">
+      <div class="prova-num verde">45,8%</div>
+      <div class="prova-txt">dos tribunais e conselhos brasileiros <strong>já usavam IA generativa em 2024</strong>. Do outro lado do processo, a máquina já está ligada.</div>
+      <div class="prova-fonte">
+        CNJ e PNUD, “Pesquisa Inteligência Artificial no Judiciário 2024”, com 175 tribunais.
+        <a href="https://www.cnj.jus.br/wp-content/uploads/2025/09/relatorio-ia-2024-resumo-executivo-set2025.pdf" target="_blank" rel="noopener">Ver o relatório do CNJ</a>.
+      </div>
+    </div>
 
     <div class="sep"></div>
 
@@ -882,6 +973,41 @@ h2 {
     { nome: "Revisar e assinar", peso: 0.10, sobra: 1.00, igual: true },
   ];
 
+  // Mês útil de referência: 21 dias x 8h. Serve pra transformar "99 horas" em
+  // "59% do seu mês", que é o que dói. Quem estoura as 168h não está só ocupado:
+  // está tirando essas horas da noite e do fim de semana, e o texto fala isso.
+  var MES_UTIL = 168;
+
+  function pintaAnel(d) {
+    var C = 2 * Math.PI * 85;
+    var frac = d.horasMes / MES_UTIL;
+    var preenche = Math.min(frac, 1);
+    var anel = $("#anelPreenche");
+    anel.style.strokeDasharray = C.toFixed(1);
+    anel.style.strokeDashoffset = C.toFixed(1); // começa vazio e cresce
+    anel.classList.toggle("estourou", frac > 1);
+
+    $("#horasMes").textContent = d.horasMes;
+    $("#anelPct").textContent = frac > 1
+      ? "mais que o mês inteiro"
+      : Math.round(frac * 100) + "% do seu mês útil";
+
+    var estouro = $("#numEstouro");
+    if (frac > 1) {
+      var excedente = Math.round(d.horasMes - MES_UTIL);
+      estouro.style.display = "block";
+      estouro.innerHTML = "Um mês útil tem cerca de <strong>168 horas</strong> (21 dias de 8h). " +
+        "Você marcou <strong>" + d.horasMes + "</strong>, só em peça. " +
+        "Isso quer dizer que pelo menos <strong>" + excedente + " horas</strong> por mês estão saindo da sua noite, " +
+        "do seu fim de semana, ou do tempo que deveria ser de atender cliente e fechar contrato.";
+    } else {
+      estouro.style.display = "none";
+    }
+    setTimeout(function () {
+      anel.style.strokeDashoffset = (C * (1 - preenche)).toFixed(1);
+    }, 220);
+  }
+
   function pintaEtapas(d) {
     var maiorHoje = Math.max.apply(null, ETAPAS.map(function (e) { return e.peso * d.horasMes; }));
     var html = ETAPAS.map(function (e) {
@@ -907,6 +1033,38 @@ h2 {
         setTimeout(function () { b.style.width = b.getAttribute("data-w") + "%"; }, i * 90);
       });
     }, 120);
+  }
+
+  // Taxa de RESPOSTAS CORRETAS medida por Stanford (JELS 2025) em 200+ consultas.
+  // Números exatos do estudo: Lexis+ AI 65%, Westlaw AI-Assisted Research 41%,
+  // Ask Practical Law AI 19%. GPT-4 puro alucina de 58% a 82% em consultas
+  // jurídicas (Dahl et al.), então "correto" fica entre 18% e 42%: uso o piso, 18%,
+  // e a legenda deixa a faixa explícita. Nada de inventar precisão que o estudo não tem.
+  //
+  // A MaestrIA NÃO entra neste gráfico. Não existe estudo dela, e enfiar uma barra
+  // verde de 100% aqui seria exatamente a mentira que o gráfico denuncia. O gráfico
+  // é sobre o PROBLEMA. O texto embaixo é que faz a ponte.
+  var ALUCINACAO = [
+    { nome: "Lexis+ AI", sub: "a melhor colocada, paga", pct: 65 },
+    { nome: "Westlaw AI-Assisted Research", sub: "paga", pct: 41 },
+    { nome: "Ask Practical Law AI", sub: "paga", pct: 19 },
+    { nome: "ChatGPT puro", sub: "sem ferramenta jurídica", pct: 18, faixa: "18% a 42%" },
+  ];
+
+  function pintaProvas() {
+    var html = ALUCINACAO.map(function (f) {
+      return '<div class="etapa">' +
+        '<div class="etapa-nome"><span>' + f.nome + '</span><span style="color:var(--text-dim);font-weight:600;font-size:11.5px;">' + f.sub + '</span></div>' +
+        '<div class="barra-linha"><span class="barra-tag">correto</span>' +
+          '<div class="barra-trilho"><div class="barra-preenche barra-hoje" data-w="' + f.pct + '">' + (f.faixa || f.pct + "%") + '</div></div>' +
+        '</div></div>';
+    }).join("");
+    $("#barrasAluc").innerHTML = html;
+    setTimeout(function () {
+      $$("#barrasAluc .barra-preenche").forEach(function (b, i) {
+        setTimeout(function () { b.style.width = b.getAttribute("data-w") + "%"; }, i * 110);
+      });
+    }, 400);
   }
 
   function pintaArea(d) {
@@ -967,7 +1125,7 @@ h2 {
     $("#tituloResultado").innerHTML = nome ? (nome + ", aqui está a sua conta.") : "Aqui está a sua conta.";
     $("#subResultado").textContent = "Calculado com o que você respondeu, não com média de mercado.";
 
-    $("#horasMes").textContent = d.horasMes;
+    // #horasMes agora vive dentro do anel: quem escreve é pintaAnel().
     var volTxt = d.vol === 3 ? "até 5" : d.vol === 10 ? "de 6 a 15" : d.vol === 22 ? "de 16 a 30" : "mais de 30";
     var tmpTxt = d.tmp === 0.75 ? "menos de 1h" : d.tmp === 2 ? "1 a 3h" : d.tmp === 4.5 ? "3 a 6h" : "mais de 6h";
     $("#contaMes").textContent = "(" + volTxt + " peças por mês, " + tmpTxt + " em cada uma)";
@@ -1017,8 +1175,10 @@ h2 {
     }
     $("#alertas").innerHTML = html;
 
+    pintaAnel(d);
     pintaEtapas(d);
     pintaArea(d);
+    pintaProvas();
     aplicaLote();
     mostra("resultado");
   }
