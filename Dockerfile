@@ -20,7 +20,8 @@ COPY prev/ ./prev/
 COPY trab/ ./trab/
 COPY marketing/ ./marketing/
 
-# Funil de diagnóstico do Previdenciário (quiz -> conta real -> captura -> oferta)
+# Redirect do endereço antigo do diagnóstico (/diagnostico -> /prev/diagnostico).
+# O funil em si mora dentro de prev/, então já sobe no COPY prev/ lá em cima.
 COPY diagnostico/ ./diagnostico/
 
 # Proposta de consultoria (Samurai Lab) para o Jardson
