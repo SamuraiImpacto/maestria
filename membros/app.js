@@ -426,6 +426,19 @@ function renderizarDownloads(dados) {
   const grid = $("dl-skills");
   grid.innerHTML = "";
 
+  // Card PASSO 0 (Windows): preparador de 1 clique que instala Git + Python via winget,
+  // ANTES do Claude Code. Resolve o "Git é necessário para sessões locais" na raiz.
+  // Mac não precisa (Git vem com o sistema, Python o Claude instala on-demand).
+  const prep = document.createElement("div");
+  prep.className = "card";
+  prep.innerHTML =
+    "<h3>⚙ Passo 0 (Windows): prepare seu computador</h3>" +
+    "<p>No Windows, o Claude Code precisa do <strong>Git</strong> instalado (e as skills usam o <strong>Python</strong>). Este arquivo instala os dois sozinho, em 2 a 3 minutos, e sempre pega a versão mais nova. <strong>Rode ele ANTES de instalar o Claude Code.</strong></p>" +
+    "<p class='mini'>Vai aparecer um aviso azul do Windows: clique em <strong>Mais informações &gt; Executar assim mesmo</strong>. E uma janela pedindo permissão de administrador: clique em <strong>Sim</strong>. As duas são normais.</p>" +
+    "<a class='btn-baixar' href='/Preparar-meu-PC.bat' download>Baixar o preparador (Windows)</a>" +
+    "<p class='mini' style='margin-top:8px;'>No <strong>Mac</strong> você não precisa disto: o Git já vem no sistema. Pule pro seu instalador abaixo.</p>";
+  grid.appendChild(prep);
+
   // Card ÚNICO de download: um arquivo instala (e atualiza) o pacote inteiro.
   // Decisão 09/07: NUNCA listar zips individuais aqui, comprador leigo se confunde.
   // Desde 13/07 o botão gera o instalador PERSONALIZADO (licença embutida):

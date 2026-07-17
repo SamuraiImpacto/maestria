@@ -9,6 +9,9 @@ COPY *.js ./
 # Preparador automático do PC (o manual de instalação manda baixar)
 COPY *.ps1 ./
 
+# Preparador de 1 clique (instala Git + Python via winget antes do Claude Code)
+COPY *.bat ./
+
 # Guia oficial do instalador (verificação de autenticidade pelo Claude do cliente)
 COPY *.txt ./
 
