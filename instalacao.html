@@ -100,6 +100,25 @@
     .faq-inst summary { cursor: pointer; font-weight: 700; font-size: 15px; }
     .faq-inst p { margin-top: 10px; color: var(--text-muted); font-size: 14px; }
     .rota-b { max-width: 800px; margin: 0 auto; text-align: left; }
+
+    /* placeholder pros prints que só uma instalação real gera (a preencher) */
+    .print-pendente {
+      margin: 16px 0 4px; border: 1px dashed var(--border-strong); border-radius: 10px;
+      padding: 26px 20px; text-align: center; color: var(--text-dim); font-size: 13px;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px);
+    }
+    .print-pendente b { color: var(--text-muted); display: block; margin-bottom: 4px; }
+
+    /* avisos do Windows ilustrados (SmartScreen e administrador), que o Windows não deixa printar */
+    .aviso-win { border-radius: 10px; margin: 16px 0 4px; overflow: hidden; border: 1px solid var(--border-strong); text-align: left; }
+    .aviso-win .aw-topo { padding: 10px 16px; font-size: 13px; font-weight: 700; color: #fff; }
+    .aviso-win.smartscreen .aw-topo { background: #0b60b0; }
+    .aviso-win.uac .aw-topo { background: #1f1f24; }
+    .aviso-win .aw-corpo { background: #f3f3f3; color: #1a1a1a; padding: 16px; font-size: 13.5px; line-height: 1.6; }
+    .aviso-win .aw-corpo .aw-btns { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .aviso-win .aw-btn { padding: 6px 16px; border-radius: 4px; font-size: 13px; border: 1px solid #adadad; background: #e1e1e1; color: #1a1a1a; }
+    .aviso-win .aw-btn.destaque { background: var(--vermelho); border-color: var(--vermelho); color: #fff; font-weight: 700; }
+    .aviso-win .aw-legenda { font-size: 12px; color: var(--text-dim); padding: 8px 16px; background: #0d0d0d; }
   </style>
 </head>
 <body>
@@ -153,7 +172,8 @@
       <strong style="color:var(--text);">O caminho completo (uns 30 minutos, uma única vez):</strong>
       <ol style="margin-top:12px; padding-left:22px;">
         <li><a href="#passo1">Ter a assinatura do Claude</a> (5 min, pula se já tem)</li>
-        <li><a href="#passo2">Instalar o Claude Code no computador</a> (5 min)</li>
+        <li><a href="#passo2">Preparar o computador num clique</a> (3 min, Git e Python, o passo que trava todo mundo)</li>
+        <li><a href="#passo3-claude">Instalar o Claude Code no computador</a> (5 min)</li>
         <li><a href="#passo3">Baixar o seu instalador na área de membros</a> (2 min)</li>
         <li><a href="#passo4">Arrastar no Claude e pedir pra instalar</a> (2 min, sem código nem CPF)</li>
         <li><a href="#passo5">Fechar o Claude por completo e abrir o /maestria</a> (30 segundos, e é aqui que muita gente trava)</li>
@@ -192,6 +212,56 @@
       <div class="passo-topo">
         <div class="passo-bola">2</div>
         <div>
+          <h3>Preparar o computador (num clique)</h3>
+          <span class="passo-tempo">3 minutos · o passo que quase todo mundo esquece, e é o que trava a instalação</span>
+        </div>
+      </div>
+      <p>No Windows, o Claude Code precisa de um programa chamado <strong>Git</strong> pra trabalhar nas suas pastas, e as skills usam o <strong>Python</strong> pra gerar os documentos. Você <strong>não precisa entender o que são</strong>: baixa um arquivo, dá dois cliques, e ele instala os dois sozinho.</p>
+      <ol>
+        <li>Baixe o <strong><a href="/Preparar-meu-PC.bat" download style="color:var(--gold);">Preparar-meu-PC.bat</a></strong> (também está na sua área de membros, aba Downloads).</li>
+        <li>Dê <strong>dois cliques</strong> no arquivo baixado. Vai abrir uma telinha preta explicando o que vai fazer. Aperte uma tecla e espere.</li>
+      </ol>
+      <div class="tela-mock">
+        <div class="tm-barra">⬛ Preparar-meu-PC</div>
+        <div class="tm-corpo">
+          <p class="tm-claude">==================================================<br>&nbsp;&nbsp;&nbsp;MaestrIA - Preparando seu computador<br>==================================================<br><br>&nbsp;Este assistente instala o que o Claude Code precisa:<br>&nbsp;&nbsp;&nbsp;- Git&nbsp;&nbsp;&nbsp;&nbsp;(pra abrir suas pastas)<br>&nbsp;&nbsp;&nbsp;- Python (pra gerar seus documentos)<br><br>&nbsp;<span style="color:#e8e8e8;">Aperte uma tecla pra começar</span></p>
+          <p class="tm-ok">✓ Pronto! Seu computador está preparado.</p>
+        </div>
+      </div>
+      <p class="tm-legenda">É essa telinha que aparece. Aperta uma tecla, espera 2 a 3 minutos, e fecha.</p>
+
+      <p style="margin-top:22px;"><strong>Vão aparecer duas janelas do Windows. As duas são normais</strong>, e é aqui que a maioria trava por medo. Não tem perigo nenhum:</p>
+      <div class="aviso-win smartscreen">
+        <div class="aw-topo">🛡️ O Windows protegeu o seu PC</div>
+        <div class="aw-corpo">
+          O Microsoft Defender SmartScreen impediu a inicialização de um aplicativo não reconhecido.
+          <div class="aw-btns"><span class="aw-btn destaque">Mais informações</span><span class="aw-btn">Não executar</span></div>
+        </div>
+        <div class="aw-legenda">Clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b>. O arquivo é nosso, só não é "famoso" pro Windows ainda.</div>
+      </div>
+      <div class="aviso-win uac">
+        <div class="aw-topo">Controle de Conta de Usuário</div>
+        <div class="aw-corpo">
+          Deseja permitir que este aplicativo faça alterações no seu dispositivo? <strong>Git for Windows</strong>
+          <div class="aw-btns"><span class="aw-btn destaque">Sim</span><span class="aw-btn">Não</span></div>
+        </div>
+        <div class="aw-legenda">Clique em <b>Sim</b>. É a permissão pra instalar o Git. Só isso.</div>
+      </div>
+
+      <div class="print-real">
+        <figure>
+          <img src="img/guia/passo-git-download.png" alt="Página oficial de download do Git" loading="lazy" onerror="this.closest('figure').style.display='none'">
+          <figcaption>Se um dia precisar instalar o Git na mão, é aqui: git-scm.com/download/win (o download começa sozinho).</figcaption>
+        </figure>
+      </div>
+      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> a telinha preta escreveu "Seu computador está preparado" e fechou. Se algum item já estava instalado, ela só confirmou e seguiu. Isso é normal.</div>
+      <div class="caixa-socorro"><strong>No Mac você pula este passo:</strong> o Git já vem com o sistema, e o Python o Claude instala sozinho quando precisar. É só ir pro passo 3.</div>
+    </div>
+
+    <div class="passo-bloco" id="passo3-claude">
+      <div class="passo-topo">
+        <div class="passo-bola">3</div>
+        <div>
           <h3>Instalar o Claude Code no computador</h3>
           <span class="passo-tempo">5 minutos · instala como qualquer programa, sem terminal</span>
         </div>
@@ -215,7 +285,7 @@
 
     <div class="passo-bloco" id="passo3">
       <div class="passo-topo">
-        <div class="passo-bola">3</div>
+        <div class="passo-bola">4</div>
         <div>
           <h3>Baixar o seu instalador (na área de membros)</h3>
           <span class="passo-tempo">2 minutos · um arquivo só, com tudo dentro</span>
@@ -237,7 +307,7 @@
 
     <div class="passo-bloco" id="passo4">
       <div class="passo-topo">
-        <div class="passo-bola">4</div>
+        <div class="passo-bola">5</div>
         <div>
           <h3>Arrastar no Claude e pedir pra instalar</h3>
           <span class="passo-tempo">2 minutos · sem digitar código nem CPF</span>
@@ -270,7 +340,7 @@
 
     <div class="passo-bloco" id="passo5">
       <div class="passo-topo">
-        <div class="passo-bola">5</div>
+        <div class="passo-bola">6</div>
         <div>
           <h3>Feche o Claude por completo e abra o /maestria</h3>
           <span class="passo-tempo">30 segundos · o passo que MAIS gente pula</span>
@@ -299,7 +369,7 @@
 
     <div class="passo-bloco" id="passo6">
       <div class="passo-topo">
-        <div class="passo-bola">6</div>
+        <div class="passo-bola">7</div>
         <div>
           <h3>Calibrar com o seu escritório (última etapa!)</h3>
           <span class="passo-tempo">30 minutos · uma única vez na vida</span>
