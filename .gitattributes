@@ -1,0 +1,8 @@
+# .bat PRECISA de CRLF: o cmd.exe do Windows quebra com LF puro (labels goto,
+# linhas coladas). Sem isto, o autocrlf converte pra LF no commit e o preparador
+# chega quebrado na maquina do cliente.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# .ps1 tambem roda no Windows: CRLF por seguranca.
+*.ps1 text eol=crlf
