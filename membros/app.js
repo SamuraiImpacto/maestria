@@ -390,23 +390,49 @@ function bundleGenericoUrl(plano) {
   return disp.includes(areas) ? STORAGE_PUB + "maestria-" + areas + "-generico.zip" : null;
 }
 
+// Baixa o pacote com timeout + 1 retry, pra um soluco de rede numa maquina
+// travada nao derrubar tudo (foi o que travou o Jean na 2a maquina dele).
+async function fetchPacote(url, tentativas) {
+  let ultimoErro;
+  for (let i = 0; i < tentativas; i++) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 45000);
+    try {
+      const sep = url.includes("?") ? "&" : "?";
+      const resp = await fetch(url + sep + "cb=" + Date.now(), { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      return new Uint8Array(await resp.arrayBuffer());
+    } catch (e) {
+      clearTimeout(timer);
+      ultimoErro = e;
+    }
+  }
+  throw ultimoErro || new Error("download falhou");
+}
+
 // Baixa o bundle ja-instalado do plano e injeta o licenca.json de cada skill
 // (com o token do cliente logado) + o LEIA. O Claude so precisa COPIAR pra ~/.claude:
 // sem CPF, sem download remoto, sem instrucao oculta. A trava de 3 maquinas roda
 // depois, no primeiro /maestria (check-in da skill, so token, sem CPF).
+//
+// IMPORTANTE (instalar em outra maquina TEM que funcionar): alem de tentar o
+// download automatico, mostramos SEMPRE um link real e visivel. Maquina travada
+// (antivirus, politica de empresa, navegador restrito) bloqueia o clique
+// automatico SEM dar erro; o clique do proprio usuario no link nao e bloqueado.
 async function baixarInstaladorPersonalizado(botao, dados) {
   const cred = credenciais();
   const plano = (dados && dados.cliente) ? dados.cliente.plano : "";
   const skills = (dados && dados.skills) || [];
   const bundleUrl = bundleGenericoUrl(plano);
   const textoOriginal = botao.textContent;
+  const ajuda = $("dl-perso-ajuda");
+  if (ajuda) ajuda.innerHTML = "";
   try {
     botao.textContent = "Preparando o seu instalador...";
     botao.disabled = true;
     if (!bundleUrl || !skills.length) throw new Error("sem-bundle");
-    const resp = await fetch(bundleUrl + "?cb=" + Date.now());
-    if (!resp.ok) throw new Error("download falhou");
-    let bytes = new Uint8Array(await resp.arrayBuffer());
+    let bytes = await fetchPacote(bundleUrl, 2);
     const lic = new TextEncoder().encode(
       JSON.stringify({ token: cred.token, ativo: true, ativado_em: "area-de-membros" }, null, 2),
     );
@@ -415,20 +441,42 @@ async function baixarInstaladorPersonalizado(botao, dados) {
     });
     bytes = anexarAoZip(bytes, "LEIA-PRIMEIRO-MAESTRIA.txt", new TextEncoder().encode(LEIA_MAESTRIA));
     const blob = new Blob([bytes], { type: "application/zip" });
+    const blobUrl = URL.createObjectURL(blob);
+
+    // Link real e visivel: a rede de seguranca contra download automatico bloqueado.
+    if (ajuda) {
+      ajuda.innerHTML =
+        "<a class='btn-baixar' id='dl-perso-link' href='" + blobUrl + "' download='MaestrIA-Instalar.zip'>" +
+        "⬇ Clique aqui pra salvar o seu instalador</a>" +
+        "<p class='mini' style='margin-top:6px;'>Se o download não começou sozinho, use este botão. " +
+        "Depois arrasta o arquivo <strong>MaestrIA-Instalar.zip</strong> pra conversa do Claude Code e " +
+        "escreve <strong>instala pra mim</strong>.</p>";
+    }
+    // Tenta tambem o automatico (funciona na maioria das maquinas).
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = blobUrl;
     a.download = "MaestrIA-Instalar.zip";
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 30000);
-    botao.textContent = "Baixado! Arrasta pro Claude e escreve: instala pra mim";
+    // 10 minutos: tempo de sobra pro usuario achar/clicar o link manual acima.
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 600000);
+    botao.textContent = "Instalador pronto ✓";
     setTimeout(() => { botao.textContent = textoOriginal; botao.disabled = false; }, 8000);
   } catch (e) {
-    // Fallback: instalador de instrucoes (transparente), serve qualquer plano
+    // Plano B honesto: NAO joga o usuario pra fora nem entrega instalador sem
+    // licenca (que faria o Claude pedir o codigo). Fica na pagina e oferece
+    // tentar de novo: quase sempre e conexao instavel e resolve na 2a.
     botao.textContent = textoOriginal;
     botao.disabled = false;
-    window.location.href = URL_INSTALADOR;
+    if (ajuda) {
+      ajuda.innerHTML =
+        "<p class='mini' style='color:var(--vermelho,#e33);'>A conexão dessa máquina oscilou e não deu " +
+        "pra montar o seu instalador agora. Isso quase sempre resolve na segunda tentativa.</p>" +
+        "<button type='button' class='btn-baixar' id='dl-perso-retry'>Tentar de novo</button>";
+      const rb = $("dl-perso-retry");
+      if (rb) rb.addEventListener("click", function () { baixarInstaladorPersonalizado(botao, dados); });
+    }
   }
 }
 
@@ -460,6 +508,8 @@ function renderizarDownloads(dados) {
     "<h3>⬇ Seu pacote (um arquivo só)</h3>" +
     "<p>Este arquivo já vem com <strong>todas as suas skills e a sua licença dentro</strong>. Baixa, arrasta pra conversa do <strong>Claude Code</strong> e escreve <strong>instala pra mim</strong>: ele só copia pra você, sem digitar código nem CPF. Serve também pra ATUALIZAR: baixa e instala de novo por cima, nada do que você configurou se perde.</p>" +
     "<button type='button' class='btn-baixar' id='btn-instalador-perso'>Baixar meu instalador</button>" +
+    "<div id='dl-perso-ajuda' style='margin-top:10px;'></div>" +
+    "<p class='mini' style='margin-top:8px;'>Vai usar em <strong>outra máquina</strong>? É só entrar nesta área de membros no outro computador e baixar de novo, funciona igual. Chegou no limite de máquinas? Você mesmo libera uma na aba <strong>Licença</strong>, na hora.</p>" +
     "<p class='mini' style='margin-top:8px;'>Travou? <button type='button' class='link-aula' data-abrir-aula='01-instalacao'>A aula de instalação te destrava</button>, aqui mesmo.</p>";
   grid.appendChild(inst);
   inst.querySelector("#btn-instalador-perso").addEventListener("click", function () {
