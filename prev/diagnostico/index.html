@@ -791,11 +791,12 @@ h2 {
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
   var TOTAL_PASSOS = 6;
 
-  // Lote fundador: 697 até 23/07/2026 (inclusive), 997 a partir do dia 24.
-  // A página vira o preço SOZINHA na virada. Sem isso, no dia 24 o funil estaria
+  // Lote fundador: 697 até 31/07/2026 (inclusive), 997 a partir de 01/08.
+  // A página vira o preço SOZINHA na virada. Sem isso, na virada o funil estaria
   // anunciando 697 e o checkout cobrando 997: o pior jeito possível de receber
-  // um cliente novo. Se o Samurai esticar o lote, muda só a data aqui.
-  var FIM_LOTE = new Date(2026, 6, 23); // mes 6 = julho
+  // um cliente novo. Se o Samurai esticar o lote, muda só a data aqui
+  // (e garante no Kiwify que o checkout continua 697 ate a mesma data).
+  var FIM_LOTE = new Date(2026, 6, 31); // mes 6 = julho
   var PRECO_FUNDADOR = 697;
   var PRECO_CHEIO = 997;
 
