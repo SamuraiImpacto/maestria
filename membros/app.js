@@ -381,13 +381,27 @@ const LEIA_MAESTRIA = [
   "",
 ].join("\n");
 
-// Mapeia o plano do cliente pro bundle generico ja-instalado (sem licenca)
-function bundleGenericoUrl(plano) {
+// Mapeia o plano do cliente pro bundle generico ja-instalado (sem licenca).
+// Devolve uma LISTA de candidatos, do mais especifico pro mais abrangente.
+//
+// FURO QUE ISSO CORRIGE (23/07): a versao antiga so aceitava uma lista fixa
+// (prev, trab, marketing, prev_trab). O cliente de `pacote_prev_marketing`
+// caia fora dela, a funcao devolvia null e o download NUNCA funcionava, em
+// maquina nenhuma, com uma mensagem falsa de "conexao instavel". Agora qualquer
+// combinacao de areas e montada dinamicamente e, se faltar o arquivo, o full
+// (que contem tudo) segura: a licenca so e injetada nas skills do plano, entao
+// o cliente nunca fica travado por causa de uma combinacao nova de pacote.
+function bundlesCandidatos(plano) {
   const full = ["full", "vitalicio", "black", "cortesia"];
-  if (full.includes(plano)) return STORAGE_PUB + "maestria-full-generico.zip";
+  const urlDe = (n) => STORAGE_PUB + "maestria-" + n + "-generico.zip";
+  if (full.includes(plano)) return [urlDe("full")];
   const areas = (plano || "").replace("pacote_", "");
-  const disp = ["prev", "trab", "marketing", "prev_trab"];
-  return disp.includes(areas) ? STORAGE_PUB + "maestria-" + areas + "-generico.zip" : null;
+  if (!areas) return [urlDe("full")];
+  const partes = areas.split("_").filter(Boolean);
+  const cand = [areas];                                  // ordem exata do plano
+  if (partes.length > 1) cand.push(partes.slice().reverse().join("_"));  // ordem inversa
+  cand.push("full");                                     // rede de seguranca
+  return cand.map(urlDe);
 }
 
 // Baixa o pacote com timeout + 1 retry, pra um soluco de rede numa maquina
@@ -411,6 +425,21 @@ async function fetchPacote(url, tentativas) {
   throw ultimoErro || new Error("download falhou");
 }
 
+// Tenta os candidatos em ordem: se o bundle da combinacao exata nao existir no
+// Storage (404), cai pro proximo, e no fim pro full. So desiste se TODOS
+// falharem, e ai o erro e de verdade (rede), nao de plano sem arquivo.
+async function fetchPrimeiroDisponivel(urls) {
+  let ultimoErro;
+  for (const url of urls) {
+    try {
+      return await fetchPacote(url, 2);
+    } catch (e) {
+      ultimoErro = e;
+    }
+  }
+  throw ultimoErro || new Error("nenhum bundle disponivel");
+}
+
 // Baixa o bundle ja-instalado do plano e injeta o licenca.json de cada skill
 // (com o token do cliente logado) + o LEIA. O Claude so precisa COPIAR pra ~/.claude:
 // sem CPF, sem download remoto, sem instrucao oculta. A trava de 3 maquinas roda
@@ -424,15 +453,15 @@ async function baixarInstaladorPersonalizado(botao, dados) {
   const cred = credenciais();
   const plano = (dados && dados.cliente) ? dados.cliente.plano : "";
   const skills = (dados && dados.skills) || [];
-  const bundleUrl = bundleGenericoUrl(plano);
+  const candidatos = bundlesCandidatos(plano);
   const textoOriginal = botao.textContent;
   const ajuda = $("dl-perso-ajuda");
   if (ajuda) ajuda.innerHTML = "";
   try {
     botao.textContent = "Preparando o seu instalador...";
     botao.disabled = true;
-    if (!bundleUrl || !skills.length) throw new Error("sem-bundle");
-    let bytes = await fetchPacote(bundleUrl, 2);
+    if (!skills.length) throw new Error("sem-skills");
+    let bytes = await fetchPrimeiroDisponivel(candidatos);
     const lic = new TextEncoder().encode(
       JSON.stringify({ token: cred.token, ativo: true, ativado_em: "area-de-membros" }, null, 2),
     );
@@ -470,10 +499,16 @@ async function baixarInstaladorPersonalizado(botao, dados) {
     botao.textContent = textoOriginal;
     botao.disabled = false;
     if (ajuda) {
-      ajuda.innerHTML =
-        "<p class='mini' style='color:var(--vermelho,#e33);'>A conexão dessa máquina oscilou e não deu " +
-        "pra montar o seu instalador agora. Isso quase sempre resolve na segunda tentativa.</p>" +
-        "<button type='button' class='btn-baixar' id='dl-perso-retry'>Tentar de novo</button>";
+      // Mensagem HONESTA por causa: culpar a conexão quando o problema é o
+      // cadastro faz o advogado tentar de novo pra sempre, sem sair do lugar.
+      const semSkills = String(e && e.message) === "sem-skills";
+      ajuda.innerHTML = semSkills
+        ? "<p class='mini' style='color:var(--vermelho,#e33);'>Não achamos nenhuma skill liberada " +
+          "nesta licença, então não dá pra montar o instalador. Isso é com a gente, não com você: " +
+          "chama o suporte no WhatsApp que a gente resolve na hora.</p>"
+        : "<p class='mini' style='color:var(--vermelho,#e33);'>A conexão dessa máquina oscilou e não deu " +
+          "pra montar o seu instalador agora. Isso quase sempre resolve na segunda tentativa.</p>" +
+          "<button type='button' class='btn-baixar' id='dl-perso-retry'>Tentar de novo</button>";
       const rb = $("dl-perso-retry");
       if (rb) rb.addEventListener("click", function () { baixarInstaladorPersonalizado(botao, dados); });
     }
