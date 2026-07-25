@@ -33,6 +33,11 @@ COPY jardson/ ./jardson/
 # Imagens (prints reais do guia de instalação)
 COPY img/ ./img/
 
+# Meta Pixel (arquivo único carregado por todas as páginas públicas).
+# Sem este COPY o /js/pixel.js dá 404 e o pixel não dispara em lugar nenhum,
+# mesmo com a tag presente no HTML.
+COPY js/ ./js/
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
