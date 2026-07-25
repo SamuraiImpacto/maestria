@@ -333,6 +333,53 @@
   .flow p{margin-top:8px;font-size:13.5px;color:var(--muted);line-height:1.45}
   @media(max-width:820px){.flow{grid-template-columns:1fr 1fr}}
 
+  /* GRAFICO DA CONTA: 4 numeros soltos viraram 1 comparacao que se le num olhar */
+  .graf{margin-top:40px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:32px 30px}
+  .gf-linha{display:flex;align-items:center;gap:20px;margin-bottom:20px}
+  .gf-rot{flex:0 0 190px;font-size:14.5px;font-weight:700;color:var(--txt);line-height:1.3}
+  .gf-rot em{display:block;font-style:normal;font-size:12.5px;font-weight:500;color:var(--muted-2);margin-top:3px}
+  .gf-trilho{flex:1;height:46px;background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden}
+  .gf-barra{height:100%;width:0;border-radius:10px;display:flex;align-items:center;padding-left:18px;
+    transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+  .gf-barra span{font-size:15px;font-weight:800;color:#fff;white-space:nowrap}
+  .gf-ruim{background:linear-gradient(90deg,#8f1414,var(--red))}
+  .gf-bom{background:linear-gradient(90deg,#1f7a4d,var(--green))}
+  .gf-bom span{color:#06281a}
+  .gf-saldo{display:flex;align-items:center;gap:26px;margin-top:26px;padding-top:24px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .gf-saldo div{flex:1;min-width:180px}
+  .gf-saldo b{display:block;font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;color:var(--green);line-height:1}
+  .gf-saldo div:last-child b{color:var(--txt)}
+  .gf-saldo span{display:block;font-size:13.5px;color:var(--muted);margin-top:7px;line-height:1.45}
+  .gf-sep{flex:0 0 1px !important;min-width:1px !important;align-self:stretch;background:var(--line)}
+  @media(max-width:720px){.gf-linha{flex-direction:column;align-items:stretch;gap:9px}.gf-rot{flex:none}}
+
+  /* CICLO DO BANCO VIVO: 4 textos viraram um circuito com icone */
+  .ciclo{display:flex;align-items:stretch;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap}
+  .cic{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:22px 18px;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .cic-fim{border-color:rgba(239,39,39,.35);background:linear-gradient(180deg,var(--red-soft),var(--panel))}
+  .cic-ic{font-size:26px;margin-bottom:10px}
+  .cic b{font-size:15px;color:#fff;margin-bottom:5px}
+  .cic span:last-child{font-size:12.8px;color:var(--muted);line-height:1.45}
+  .cic-arr{align-self:center;color:var(--red-ink);font-size:19px;font-weight:700;flex:0 0 auto}
+  @media(max-width:860px){.cic-arr{display:none}.ciclo{gap:12px}.cic{min-width:calc(50% - 12px)}}
+
+  /* TRILHA DA INSTALACAO: 4 cards viraram uma linha do tempo com o relogio correndo */
+  .trilha{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px;text-align:center}
+  .tr-linha{position:absolute;top:46px;left:12%;right:12%;height:2px;
+    background:linear-gradient(90deg,var(--line),var(--red),var(--green));z-index:0}
+  .tr-passo{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+  .tr-t{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--red-ink);
+    background:var(--red-soft);padding:4px 11px;border-radius:999px;margin-bottom:12px}
+  .tr-bola{width:44px;height:44px;border-radius:50%;background:var(--panel);border:2px solid var(--line-strong);
+    display:grid;place-items:center;font-family:var(--serif);font-size:19px;font-weight:900;color:var(--txt);margin-bottom:14px}
+  .tr-fim .tr-bola{border-color:var(--green);color:var(--green);background:rgba(70,209,127,.1)}
+  .tr-fim .tr-t{color:var(--green);background:rgba(70,209,127,.14)}
+  .tr-passo b{font-size:15px;color:#fff;margin-bottom:6px;line-height:1.3}
+  .tr-d{font-size:13px;color:var(--muted);line-height:1.5;max-width:24ch}
+  @media(max-width:820px){.trilha{grid-template-columns:1fr 1fr;gap:30px 16px}.tr-linha{display:none}}
+  @media(max-width:460px){.trilha{grid-template-columns:1fr}}
+
   /* ANSIEDADE: primeira quebra de objecao. O inimigo nao e o concorrente,
      e a sensacao de estar atrasado que curso e mentoria vendem. */
   .ansiedade{padding-bottom:76px}
@@ -1009,11 +1056,32 @@
     <span class="kicker reveal">Do zero à primeira peça</span>
     <h2 class="sec reveal">Da compra à primeira petição <span class="red">no mesmo dia</span>.</h2>
     <p class="lead reveal">Sem consultor, sem TI. Você faz sozinho.</p>
-    <div class="steps">
-      <div class="step reveal"><div class="n">1</div><h3>Compre e receba no email</h3><p>Em até 2 minutos chega o código de ativação e o link do seu pacote.</p></div>
-      <div class="step reveal"><div class="n">2</div><h3>Jogue o arquivo na conversa</h3><p>Abra o Claude, arraste o arquivo e escreva: instala pra mim. Ele faz o resto.</p></div>
-      <div class="step reveal"><div class="n">3</div><h3>Calibre em 30 minutos</h3><p>A skill pergunta seus dados, seu tom e lê 1 ou 2 modelos seus.</p></div>
-      <div class="step reveal"><div class="n">4</div><h3>Gere a primeira peça</h3><p>Você pede, ela lê os documentos e entrega no seu timbrado, pronta pra revisão.</p></div>
+    <div class="trilha reveal">
+      <div class="tr-linha"></div>
+      <div class="tr-passo">
+        <span class="tr-t">2 min</span>
+        <span class="tr-bola">1</span>
+        <b>Compra e recebe no email</b>
+        <span class="tr-d">código de ativação e link do pacote</span>
+      </div>
+      <div class="tr-passo">
+        <span class="tr-t">1 min</span>
+        <span class="tr-bola">2</span>
+        <b>Arrasta o arquivo no Claude</b>
+        <span class="tr-d">escreve "instala pra mim" e ele faz o resto</span>
+      </div>
+      <div class="tr-passo">
+        <span class="tr-t">30 min</span>
+        <span class="tr-bola">3</span>
+        <b>Calibra com os seus modelos</b>
+        <span class="tr-d">seus dados, seu tom, suas pastas</span>
+      </div>
+      <div class="tr-passo tr-fim">
+        <span class="tr-t">no mesmo dia</span>
+        <span class="tr-bola">✓</span>
+        <b>Primeira peça pronta</b>
+        <span class="tr-d">no seu timbrado, pra sua revisão</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1022,13 +1090,24 @@
   <div class="wrap">
     <span class="kicker reveal">A conta</span>
     <h2 class="sec reveal">Quanto te custa <span class="red">fazer tudo na mão</span>?</h2>
-    <p class="lead reveal">Sua hora vale R$ 250. Uma peça de três horas repetitivas custa R$ 750, toda vez. Multiplique por 4 peças na semana, 48 semanas no ano.</p>
-    <div class="nums">
-      <div class="num hot reveal"><strong>R$ 144 a 288 mil</strong><span>o que a hora operacional consome do escritório por ano</span></div>
-      <div class="num reveal"><strong>576h+</strong><span>que somem do seu calendário todo ano</span></div>
-      <div class="num reveal"><strong>99,98%</strong><span>de convergência com a ferramenta paga, no caso conferido por um advogado</span></div>
-      <div class="num reveal"><strong>0</strong><span>acórdão inventado. Toda citação vem da fonte oficial</span></div>
+    <p class="lead reveal">Uma peça que toma 3 horas de trabalho repetido, 4 vezes por semana, 48 semanas no ano.</p>
+
+    <div class="graf reveal" id="graf">
+      <div class="gf-linha">
+        <span class="gf-rot">Na mão<em>hoje</em></span>
+        <div class="gf-trilho"><div class="gf-barra gf-ruim" data-w="100"><span>576 horas por ano</span></div></div>
+      </div>
+      <div class="gf-linha">
+        <span class="gf-rot">Com a MaestrIA<em>2,6h a menos por peça</em></span>
+        <div class="gf-trilho"><div class="gf-barra gf-bom" data-w="13"><span>77h</span></div></div>
+      </div>
+      <div class="gf-saldo">
+        <div><b>499 horas</b><span>voltam pro seu ano</span></div>
+        <div class="gf-sep"></div>
+        <div><b>R$ 124 mil</b><span>a hora de R$ 250 que estava indo embora</span></div>
+      </div>
     </div>
+
     <p class="lead-mini reveal">Projeção com a SUA hora. Dentro da skill, o comando <span class="cmd">/economia</span> refaz a conta com o seu valor e o seu volume real.</p>
   </div>
 </section>
@@ -1037,12 +1116,31 @@
   <div class="wrap">
     <span class="kicker reveal">O ativo que seu escritório ainda não construiu</span>
     <h2 class="sec reveal"><span class="red">Banco Vivo de Decisões</span>. O conhecimento do escritório virando patrimônio.</h2>
-    <p class="lead reveal">O melhor conhecimento da advocacia morre na cabeça das pessoas. Cada decisão que você contribui, anonimizada no seu computador antes de sair, entra no Banco Vivo. Quanto mais você usa, mais ela escreve como você.</p>
-    <div class="flow">
-      <div class="reveal"><strong>1.</strong><p>Você ganha um caso e contribui a decisão</p></div>
-      <div class="reveal"><strong>2.</strong><p>CPF, nomes e valores removidos no seu computador</p></div>
-      <div class="reveal"><strong>3.</strong><p>O banco agrupa por vara e por tema</p></div>
-      <div class="reveal"><strong>4.</strong><p>As próximas peças chegam no padrão do que vence ali</p></div>
+    <p class="lead reveal">O melhor conhecimento da advocacia morre na cabeça das pessoas. Aqui ele vira patrimônio do escritório.</p>
+    <div class="ciclo reveal">
+      <div class="cic">
+        <span class="cic-ic">🏆</span>
+        <b>Você vence</b>
+        <span>e contribui a decisão</span>
+      </div>
+      <span class="cic-arr">→</span>
+      <div class="cic">
+        <span class="cic-ic">🔒</span>
+        <b>Anonimiza</b>
+        <span>CPF e nomes saem no seu PC</span>
+      </div>
+      <span class="cic-arr">→</span>
+      <div class="cic">
+        <span class="cic-ic">🗂️</span>
+        <b>Agrupa</b>
+        <span>por vara e por tema</span>
+      </div>
+      <span class="cic-arr">→</span>
+      <div class="cic cic-fim">
+        <span class="cic-ic">✍️</span>
+        <b>Volta pra você</b>
+        <span>no padrão do que vence ali</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1367,6 +1465,22 @@
     // marca d'agua do hero entra logo apos o carregamento
     var art=document.getElementById('heroArt');
     if(art){requestAnimationFrame(function(){setTimeout(function(){art.classList.add('in')},120)});}
+
+    // grafico da conta: as barras crescem quando entram na tela
+    var graf = document.getElementById('graf');
+    if (graf) {
+      var oG = new IntersectionObserver(function(en){
+        en.forEach(function(e){
+          if (e.isIntersecting) {
+            graf.querySelectorAll('.gf-barra').forEach(function(b, i){
+              setTimeout(function(){ b.style.width = b.dataset.w + '%'; }, i * 260);
+            });
+            oG.disconnect();
+          }
+        });
+      }, {threshold:.35});
+      oG.observe(graf);
+    }
 
     // barras da jurimetria
     var card=document.getElementById('juriCard');
