@@ -354,10 +354,13 @@
     color:var(--red-ink);text-align:center}
   .vem-p{text-align:center;color:var(--muted);font-size:14.5px;line-height:1.6;max-width:62ch;margin:12px auto 0}
   .vem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;text-align:left}
-  .vem-item{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:15px 17px;
-    font-size:12.5px;color:var(--muted-2);line-height:1.4}
-  .vem-item b{display:block;font-size:14.5px;color:#fff;margin-bottom:4px}
-  .vem-fecho{text-align:center;color:var(--muted);font-size:14.5px;line-height:1.6;margin:24px auto 20px;max-width:60ch}
+  .vem-item{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:17px 18px;
+    font-size:13px;color:var(--muted);line-height:1.55}
+  .vem-item b{display:block;font-size:15px;color:#fff;margin-bottom:6px}
+  .vem-mais{text-align:center;color:var(--muted);font-size:14px;line-height:1.65;margin:22px auto 0;max-width:64ch;
+    padding-top:20px;border-top:1px solid var(--line)}
+  .vem-mais b{color:var(--txt)}
+  .vem-fecho{text-align:center;color:var(--muted);font-size:14.5px;line-height:1.6;margin:16px auto 20px;max-width:60ch}
   .vem-fecho b{color:#fff}
   .vem .btn{display:block;width:max-content;margin:0 auto}
   @media(max-width:820px){.vem-grid{grid-template-columns:1fr 1fr}}
@@ -998,7 +1001,6 @@
         <div class="ab-item"><b>Recurso contra indeferimento</b><span>argumentado com os dados do caso, no mesmo dia do corte</span></div>
         <div class="ab-item"><b>Qualificador de auxílio-acidente</b><span>seu comercial cola a conversa do lead e recebe o veredito com o período de graça calculado</span></div>
       </div>
-      <a class="ab-link" href="/prev/">Ver a página completa do Previdenciário <i>&rsaquo;</i></a>
     </div>
 
     <div class="ab-painel" id="ab-trab" role="tabpanel">
@@ -1011,7 +1013,6 @@
         <div class="ab-item"><b>Acordo do art. 484-A</b><span>minuta no padrão MTE, com o cálculo de homologação junto</span></div>
         <div class="ab-item"><b>Jurimetria por TRT</b><span>taxa de procedência e de acordo por vara, direto da base pública do CNJ</span></div>
       </div>
-      <a class="ab-link" href="/trab/">Ver a página completa do Trabalhista <i>&rsaquo;</i></a>
     </div>
 
     <div class="ab-painel" id="ab-mkt" role="tabpanel">
@@ -1024,7 +1025,6 @@
         <div class="ab-item"><b>Arte no seu Canva</b><span>conecta com a sua conta oficial e gera o design lá dentro</span></div>
         <div class="ab-item"><b>Compliance OAB automático</b><span>todo CTA filtrado pelo Provimento 205 antes de ir pro ar</span></div>
       </div>
-      <a class="ab-link" href="/marketing/">Ver a página completa do Marketing <i>&rsaquo;</i></a>
     </div>
 
     <div class="ab-todos reveal">
@@ -1045,14 +1045,33 @@
       <span class="vem-h">E o que ainda está por vir</span>
       <p class="vem-p">O catálogo abre por área, e cada uma só entra quando tem material real e alguém que milita nela para validar. Nenhuma sobe crua.</p>
       <div class="vem-grid">
-        <span class="vem-item"><b>Família</b>pensão, divórcio consensual</span>
-        <span class="vem-item"><b>Consumidor</b>CDC, dano moral</span>
-        <span class="vem-item"><b>Criminal</b>flagrante, habeas corpus</span>
-        <span class="vem-item"><b>Imobiliário</b>distrato, locação</span>
-        <span class="vem-item"><b>Saúde</b>medicamento, plano</span>
-        <span class="vem-item"><b>Empresarial</b>defesa trabalhista, tributário</span>
+        <span class="vem-item">
+          <b>Família</b>
+          Divórcio consensual com partilha e guarda, e ação de alimentos com o cálculo do binômio necessidade e possibilidade. Já segue a Resolução CNJ 571/2024.
+        </span>
+        <span class="vem-item">
+          <b>Consumidor</b>
+          Ação com base no CDC e o pedido de dano moral com a dosimetria fundamentada, em vez do valor chutado que o juiz corta.
+        </span>
+        <span class="vem-item">
+          <b>Criminal</b>
+          Defesa em audiência de custódia e flagrante, e habeas corpus com a coação ilegal apontada artigo por artigo.
+        </span>
+        <span class="vem-item">
+          <b>Imobiliário</b>
+          Distrato de compra e venda na tese da Súmula 543 do STJ, e ação de despejo e revisional de locação residencial.
+        </span>
+        <span class="vem-item">
+          <b>Saúde</b>
+          Ação de medicamento fora da lista e negativa de cobertura de plano, com o rol da ANS e a urgência endereçados.
+        </span>
+        <span class="vem-item">
+          <b>Empresarial</b>
+          Defesa trabalhista do lado da empresa e defesa tributária administrativa, pra quem atende o outro polo.
+        </span>
       </div>
-      <p class="vem-fecho">Comprando por área, cada pacote novo é vendido à parte. <b>Entrando como Embaixador, todos eles chegam sem você pagar de novo.</b></p>
+      <p class="vem-mais">Toda área nova nasce com o mesmo padrão das de hoje: as skills universais juntas, os Conselheiros da matéria, jurimetria do CNJ e o Banco Vivo. <b>E continua evoluindo depois de lançada</b>, exatamente como o Previdenciário e o Trabalhista evoluíram desde a primeira versão.</p>
+      <p class="vem-fecho">Comprando por área, cada pacote novo é vendido à parte, no valor da época. <b>Entrando como Embaixador, todos eles chegam sem você pagar de novo, com as atualizações junto.</b></p>
       <a href="#planos" class="btn btn-red">Ver o Embaixador</a>
     </div>
   </div>

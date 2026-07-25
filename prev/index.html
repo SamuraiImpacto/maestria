@@ -34,7 +34,31 @@
     .pack-rodape { text-align: center; color: var(--text-muted); font-size: 13.5px; margin: 26px auto 0;
       max-width: 680px; line-height: 1.7; }
     .pack-rodape strong { color: var(--text); }
-  </style>
+  
+    /* EMBAIXADOR nas paginas de area (24/07): quem cai aqui por campanha
+       precisa ver a oferta maior, senao so conhece o pacote de R$ 697 */
+    .emb-area { max-width: 720px; margin: 34px auto 0; padding: 30px 28px; text-align: center;
+      border: 1px solid var(--vermelho-border, rgba(239,39,39,.3)); border-radius: 18px;
+      background: linear-gradient(180deg, rgba(239,39,39,.10), transparent); }
+    .emb-area .ea-selo { display: inline-block; font-size: 11.5px; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--vermelho);
+      background: rgba(239,39,39,.14); padding: 6px 14px; border-radius: 999px; }
+    .emb-area h3 { font-size: 23px; font-weight: 800; margin: 14px 0 12px; color: var(--text); }
+    .emb-area .ea-txt { color: var(--text-muted); font-size: 15px; line-height: 1.65;
+      max-width: 58ch; margin: 0 auto; }
+    .emb-area .ea-txt strong { color: var(--text); }
+    .ea-bonus { display: grid; gap: 10px; margin: 20px auto 0; max-width: 620px; text-align: left; }
+    .ea-bonus span { display: block; font-size: 13.5px; color: var(--text-muted); line-height: 1.5;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 13px 16px; }
+    .ea-bonus b { display: block; color: var(--text); font-size: 14px; margin-bottom: 3px; }
+    .ea-btn { display: inline-block; margin-top: 22px; background: var(--vermelho); color: #fff;
+      font-weight: 700; font-size: 15.5px; padding: 14px 30px; border-radius: 999px;
+      text-decoration: none; box-shadow: 0 10px 30px -12px rgba(239,39,39,.7); }
+    .ea-btn:hover { filter: brightness(1.08); }
+    .ea-pe { margin-top: 14px; font-size: 13px; color: var(--text-muted); }
+    .ea-pe a { color: var(--vermelho); font-weight: 600; }
+</style>
   <link rel="icon" href="/img/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
@@ -430,6 +454,18 @@
     </div>
 
     <p class="pack-rodape">Atende trabalhista também, ou quer captar mais clientes? Depois da compra você recebe a oferta pra somar as outras áreas com desconto. Todo pacote inclui <strong>12 meses de acesso com todas as atualizações do período</strong>, <strong>suporte pela própria skill</strong>, com a correção chegando pra todo mundo no <code>/atualizar-skill</code> (e as funcionalidades são ajustadas a partir do feedback de quem usa), licença no seu CPF válida em até 3 computadores e <strong>garantia incondicional de 7 dias</strong>.</p>
+    <div class="emb-area">
+      <span class="ea-selo">🥷 Lote fundador</span>
+      <h3>Atende mais de uma área? Existe um caminho melhor.</h3>
+      <p class="ea-txt">O <strong>Full Embaixador</strong> leva todas as áreas da MaestrIA por <strong>R$ 1.997</strong>, e não só as três de hoje: Família, Consumidor, Criminal e as próximas entram sem você pagar de novo. Só as 3 áreas atuais, compradas soltas, já somam R$ 2.091.</p>
+      <div class="ea-bonus">
+        <span><b>☕ Café com MaestrIA</b> encontro semanal ao vivo com o Samurai e os outros Embaixadores</span>
+        <span><b>🎯 Call de implementação</b> até 1 hora, só sua, pra deixar tudo rodando no jeito do seu escritório</span>
+      </div>
+      <a href="/#planos" class="ea-btn">Ver o Full Embaixador</a>
+      <p class="ea-pe">Já comprou uma área? Você paga só a diferença. <a href="/suporte.html#mensagem">Fale com a gente</a>.</p>
+    </div>
+
 
     <div class="prereq-box">
       <div class="prereq-icon">⚙️</div>
