@@ -498,11 +498,24 @@
   .bonus-item{margin-bottom:20px}
 
   /* prazo e renovacao: condicao comercial nao pode ficar implicita */
-  .renov{margin:-6px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;
-    background:rgba(255,255,255,.03);text-align:left}
-  .rn-l{display:block;font-size:13.5px;color:#dcdce1;line-height:1.55}
-  .rn-l b{color:#fff}
-  .rn-p{display:block;margin-top:7px;font-size:12.5px;color:var(--muted-2);line-height:1.5}
+  .renov{margin:-4px 0 22px;padding:20px 18px;border:1px solid var(--line);border-radius:14px;
+    background:rgba(255,255,255,.03);text-align:center}
+  .rn-h{display:block;font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted-2);margin-bottom:16px}
+  .rn-linha{display:flex;align-items:stretch;justify-content:center;gap:12px}
+  .rn-box{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;
+    padding:15px 13px;display:flex;flex-direction:column;align-items:center}
+  .rn-box2{border-color:rgba(239,39,39,.3);background:linear-gradient(180deg,var(--red-soft),rgba(255,255,255,.02))}
+  .rn-ano{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2)}
+  .rn-box b{display:block;font-family:var(--serif);font-size:25px;font-weight:900;color:#fff;margin:7px 0 8px;line-height:1}
+  .rn-box b em{display:block;font-family:var(--sans);font-style:normal;font-size:11px;font-weight:600;
+    color:var(--muted-2);margin-top:5px;letter-spacing:.02em}
+  .rn-d{font-size:12.2px;color:var(--muted);line-height:1.45}
+  .rn-seta{align-self:center;color:var(--red-ink);font-size:19px;font-weight:700;flex:0 0 auto}
+  .rn-p{display:block;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted-2);line-height:1.6;text-align:center}
+  .rn-p b{color:var(--muted)}
+  @media(max-width:520px){.rn-linha{flex-direction:column}.rn-seta{transform:rotate(90deg)}}
 
   /* PACOTES POR AREA (checkout real) */
   .pacotes-titulo{text-align:center;font-family:var(--serif);font-size:22px;font-weight:700;margin:52px 0 0}
@@ -553,9 +566,6 @@
   details.faq[open] summary::after{transform:rotate(45deg)}
   details.faq .ans{padding:0 22px 20px;color:var(--muted);font-size:14.5px;line-height:1.65}
 
-  /* FAIXA CTA */
-  .faixa{text-align:center;background:linear-gradient(180deg,transparent,var(--red-soft),transparent)}
-  .faixa .lncta{font-family:var(--serif);font-size:clamp(1.4rem,2.6vw,2rem);font-weight:700;max-width:22ch;margin:0 auto 24px}
 
   /* CTA FINAL */
   .final{text-align:center}
@@ -1265,12 +1275,6 @@
   </div>
 </section>
 
-<section class="faixa">
-  <div class="wrap">
-    <p class="lncta reveal">Você acabou de ver o que ela faz. Agora escolha o seu arsenal.</p>
-    <a href="#planos" class="btn btn-red btn-lg reveal">Escolher meu plano</a>
-  </div>
-</section>
 
 
 
@@ -1292,8 +1296,21 @@
       </div>
       <p class="emb-parcel">ou 12x de R$ 197</p>
       <div class="renov">
-        <span class="rn-l"><b>Acesso de 12 meses.</b> Renovação por <b>metade do que você pagou</b>: R$ 998,50 no seu caso.</span>
-        <span class="rn-p">Quem entra agora trava esse valor. Quem entrar depois, no preço cheio, renova mais caro.</span>
+        <span class="rn-h">Como funciona o seu acesso</span>
+        <div class="rn-linha">
+          <div class="rn-box">
+            <span class="rn-ano">1º ano</span>
+            <b>R$ 1.997</b>
+            <span class="rn-d">tudo o que existe hoje, mais tudo o que sair nos 12 meses</span>
+          </div>
+          <span class="rn-seta">→</span>
+          <div class="rn-box rn-box2">
+            <span class="rn-ano">a partir do 2º</span>
+            <b>R$ 998,50<em>por ano</em></b>
+            <span class="rn-d">metade do que você pagou, só se quiser continuar recebendo o que vier</span>
+          </div>
+        </div>
+        <span class="rn-p">A renovação é sempre metade do <b>valor que você pagou</b>, não do preço que a MaestrIA tiver na época. Como o preço de fundador é o menor que vai existir, entrar agora barateia todos os anos seguintes. E não tem cobrança automática: se você não renovar, continua com tudo o que já instalou e só deixa de receber o que sair dali pra frente.</span>
       </div>
       <a href="suporte.html#mensagem" class="btn btn-red">Quero ser Embaixador</a>
       <div class="seals">
