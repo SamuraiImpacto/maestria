@@ -333,6 +333,25 @@
   .flow p{margin-top:8px;font-size:13.5px;color:var(--muted);line-height:1.45}
   @media(max-width:820px){.flow{grid-template-columns:1fr 1fr}}
 
+  /* ANSIEDADE: primeira quebra de objecao. O inimigo nao e o concorrente,
+     e a sensacao de estar atrasado que curso e mentoria vendem. */
+  .ansiedade{padding-bottom:76px}
+  .ans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}
+  .ans-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px;
+    position:relative;overflow:hidden}
+  .ans-card::after{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,var(--red),transparent)}
+  .ans-n{display:block;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--red-ink);margin-bottom:9px}
+  .ans-card h3{font-family:var(--serif);font-size:22px;font-weight:800;margin-bottom:12px;line-height:1.15}
+  .ans-card p{font-size:14px;color:var(--muted);line-height:1.65}
+  .ans-fecho{margin-top:34px;padding:30px 28px;border:1px solid rgba(239,39,39,.3);border-radius:18px;
+    background:linear-gradient(180deg,var(--red-soft),transparent);text-align:center}
+  .ans-fecho p{font-size:clamp(1.02rem,1.5vw,1.22rem);color:#e6e6ea;line-height:1.6;max-width:62ch;margin:0 auto}
+  .ans-fecho strong{color:#fff}
+  .ans-fecho-2{margin-top:14px !important;font-size:14.5px !important;color:var(--muted) !important}
+  @media(max-width:900px){.ans-grid{grid-template-columns:1fr}}
+
   /* AREAS EM ABAS: mostra o arsenal aqui, sem tirar o visitante da pagina
      onde esta a oferta. O link pra pagina da area vira saida opcional. */
   .ab-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:36px}
@@ -578,7 +597,38 @@
   </div>
 </div>
 
-<section id="o-que-faz">
+<section class="ansiedade" id="ansiedade">
+  <div class="wrap">
+    <span class="kicker reveal">Antes de qualquer coisa</span>
+    <h2 class="sec reveal">Você não está ficando pra trás. <span class="red">Estão te vendendo essa ideia.</span></h2>
+    <p class="lead reveal">Toda semana aparece uma IA nova, um curso de prompt, uma mentoria de milhares de reais e mais um post dizendo que o advogado que não usar IA vai desaparecer. Você lê, sente o aperto no peito, salva o link e não faz nada. E no fundo você já sabe por quê: quando terminasse o curso, já teria mudado tudo de novo.</p>
+
+    <div class="ans-grid">
+      <div class="ans-card reveal">
+        <span class="ans-n">O curso</span>
+        <h3>Nasce vencido</h3>
+        <p>Você aprende o prompt certo. Três meses depois o modelo mudou, aquela frase não funciona mais igual e você volta pra estaca zero. Estudar uma ferramenta que muda toda semana é correr em esteira: cansa e você continua no mesmo lugar.</p>
+      </div>
+      <div class="ans-card reveal">
+        <span class="ans-n">A mentoria</span>
+        <h3>Cobra justo o que falta</h3>
+        <p>De R$ 2 a 4 mil e oito semanas de encontros pra você aprender a montar a sua própria ferramenta. Só que você não tem oito semanas. Você tem prazo na sexta, audiência na terça e o cliente cobrando no WhatsApp agora.</p>
+      </div>
+      <div class="ans-card reveal">
+        <span class="ans-n">O prompt</span>
+        <h3>Virou commodity</h3>
+        <p>O advogado do escritório vizinho tem acesso exatamente ao mesmo ChatGPT e ao mesmo prompt que circula nos grupos. Se a sua vantagem é uma frase que qualquer um copia e cola, ela não é vantagem, é só o mínimo que todo mundo já tem.</p>
+      </div>
+    </div>
+
+    <div class="ans-fecho reveal">
+      <p>A MaestrIA parte do contrário: <strong>você não precisa aprender IA, precisa de uma ferramenta que já saiba o seu trabalho.</strong></p>
+      <p class="ans-fecho-2">Quem estuda o modelo, testa e apanha somos nós. Quando muda alguma coisa, quem refaz somos nós, e a melhoria chega na sua máquina com um comando. Você continua fazendo o que sempre fez: advogar. Só que sem as três horas de trabalho repetido no meio.</p>
+    </div>
+  </div>
+</section>
+
+<section id="o-que-faz" style="padding-top:0">
   <div class="wrap">
     <span class="kicker reveal">O que é, sem tecniquês</span>
     <h2 class="sec reveal">Comandos prontos que viram seu <span class="red">assistente jurídico</span> dentro do Claude.</h2>
@@ -607,7 +657,7 @@
 
 <section style="padding-top:0">
   <div class="wrap sec-center">
-    <span class="kicker reveal">A virada</span>
+    <span class="kicker reveal">O que muda no seu dia</span>
     <h2 class="sec reveal">Você aceita o próximo cliente <span class="red">sem o pavor de não entregar</span>.</h2>
     <p class="lead reveal">A MaestrIA blinda a entrega. A operação passa a aguentar o dobro sem quebrar. O ganho não é produtividade, é coragem pra dizer sim de novo.</p>
     <div class="cmp">
@@ -953,7 +1003,7 @@
 
 <section style="padding-top:0">
   <div class="wrap">
-    <span class="kicker reveal">Produto vivo, isso é changelog, não promessa</span>
+    <span class="kicker reveal">O que já chegou depois do lançamento</span>
     <h2 class="sec reveal">Tudo isso entrou <span class="red">depois que ela foi lançada</span>. Quem comprou antes, recebeu de graça.</h2>
     <p class="lead reveal">Skill parada é prompt caro. A MaestrIA continua evoluindo, e tudo o que sai durante o seu ano de acesso chega de graça com um comando. Sem cobrança nova, sem reinstalar nada.</p>
     <div class="grid g3">
