@@ -515,6 +515,27 @@
   .rn-p{display:block;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
     font-size:12.5px;color:var(--muted-2);line-height:1.6;text-align:center}
   .rn-p b{color:var(--muted)}
+
+  /* escada de preco: o que se paga hoje congela a renovacao pra sempre */
+  .escada{margin:0 0 22px;padding:20px 18px;border:1px solid rgba(239,39,39,.3);border-radius:14px;
+    background:linear-gradient(180deg,var(--red-soft),transparent)}
+  .escada .rn-h{color:var(--red-ink)}
+  .esc-tab{width:100%;border-collapse:collapse;font-size:13px}
+  .esc-tab th{text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted-2);padding:0 8px 9px;border-bottom:1px solid var(--line)}
+  .esc-tab th:not(:first-child),.esc-tab td:not(:first-child){text-align:right}
+  .esc-tab td{padding:11px 8px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top}
+  .esc-tab tr:last-child td{border-bottom:0}
+  .esc-tab td b{display:block;color:#dcdce1;font-size:14px;font-weight:700}
+  .esc-tab td span{display:block;font-size:10.5px;color:var(--muted-2);margin-top:2px}
+  .esc-hoje td{background:rgba(239,39,39,.09)}
+  .esc-hoje td:first-child{border-radius:8px 0 0 8px}
+  .esc-hoje td:last-child{border-radius:0 8px 8px 0}
+  .esc-hoje td b{color:#fff;font-size:15.5px}
+  .esc-hoje td:last-child b{color:var(--green)}
+  .esc-pe{display:block;margin-top:14px;padding-top:13px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted-2);line-height:1.6;text-align:center}
+  .esc-pe b{color:#fff}
   @media(max-width:520px){.rn-linha{flex-direction:column}.rn-seta{transform:rotate(90deg)}}
 
   /* PACOTES POR AREA (checkout real) */
@@ -1310,7 +1331,32 @@
             <span class="rn-d">metade do que você pagou, só se quiser continuar recebendo o que vier</span>
           </div>
         </div>
-        <span class="rn-p">A renovação é sempre metade do <b>valor que você pagou</b>, não do preço que a MaestrIA tiver na época. Como o preço de fundador é o menor que vai existir, entrar agora barateia todos os anos seguintes. E não tem cobrança automática: se você não renovar, continua com tudo o que já instalou e só deixa de receber o que sair dali pra frente.</span>
+        <span class="rn-p">Não tem cobrança automática: se você não renovar, continua com tudo o que já instalou e só deixa de receber o que sair dali pra frente.</span>
+      </div>
+
+      <div class="escada">
+        <span class="rn-h">O preço sobe em degraus. A sua renovação acompanha.</span>
+        <table class="esc-tab">
+          <thead><tr><th>Quando entra</th><th>Paga</th><th>E renova por</th></tr></thead>
+          <tbody>
+            <tr class="esc-hoje">
+              <td><b>Agora</b><span>lote fundador</span></td>
+              <td><b>R$ 1.997</b></td>
+              <td><b>R$ 998,50</b><span>por ano</span></td>
+            </tr>
+            <tr>
+              <td>Próximo lote</td>
+              <td>R$ 2.497</td>
+              <td>R$ 1.248,50<span>por ano</span></td>
+            </tr>
+            <tr>
+              <td>Preço cheio</td>
+              <td>R$ 2.997</td>
+              <td>R$ 1.498,50<span>por ano</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <span class="esc-pe">O valor que você paga hoje <b>congela a sua renovação pra sempre</b>. Quem entra agora não paga R$ 998,50 só no segundo ano: paga isso em todos os anos seguintes, mesmo quando a MaestrIA já custar R$ 2.997.</span>
       </div>
       <a href="suporte.html#mensagem" class="btn btn-red">Quero ser Embaixador</a>
       <div class="seals">
