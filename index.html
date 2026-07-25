@@ -601,6 +601,18 @@
   section + section > .wrap::before{content:"";display:block;width:34px;height:2px;
     background:linear-gradient(90deg,var(--red),transparent);margin:0 0 30px;border-radius:2px}
   .sec-center + section > .wrap::before,section > .wrap.sec-center::before{margin-left:auto;margin-right:auto}
+
+  /* icone ao lado do titulo do card (o Samurai pediu): o olho le o par
+     icone+titulo de uma vez, e o card fica mais baixo, o que ajuda no scroll */
+  .cardy .ic{display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:9px;background:var(--red-soft);
+    color:var(--red-ink);flex:0 0 auto;margin:0;font-size:0}
+  .cardy .ic svg{width:18px;height:18px}
+  .cardy .cab{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+  .cardy .cab h3,.cardy .cab h4{margin:0}
+  .cic-ic,.bonus-ic{display:inline-flex;align-items:center;justify-content:center;color:var(--red-ink)}
+  .cic-ic svg{width:26px;height:26px}
+  .bonus-ic svg{width:22px;height:22px}
 </style>
 
 <nav>
@@ -693,35 +705,33 @@
     <h2 class="sec reveal">Você recusou o último cliente porque sabia que <span class="red">não ia dar conta</span>.</h2>
     <p class="lead reveal">O problema nunca foi gerar demanda. É crescer sem virar madrugada no escritório.</p>
     <div class="grid g3">
-      <div class="cardy reveal"><span class="ic">🌙</span><h4>A conta mental do próximo cliente</h4><p>Você projeta as noites viradas antes mesmo de assinar. O medo chega antes do trabalho.</p></div>
-      <div class="cardy reveal"><span class="ic">🚪</span><h4>Clientes que você deixou passar</h4><p>Não foi orçamento, foi capacidade. E cada indicado foi alimentar o escritório do lado.</p></div>
-      <div class="cardy reveal"><span class="ic">⚠️</span><h4>A sombra da assinatura</h4><p>Você já ouviu falar de súmula inventada. A assinatura embaixo é sua.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span><h4>A conta mental do próximo cliente</h4></div><p>Você projeta as noites viradas antes mesmo de assinar. O medo chega antes do trabalho.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 4h3a2 2 0 0 1 2 2v14"/><path d="M2 20h3"/><path d="M13 20h9"/><path d="M10 12v.01"/><path d="M13 4.8v14.4a.6.6 0 0 1-.8.6l-6-1.7a.6.6 0 0 1-.4-.6V6.5a.6.6 0 0 1 .4-.6l6-1.7a.6.6 0 0 1 .8.6Z"/></svg></span><h4>Clientes que você deixou passar</h4></div><p>Não foi orçamento, foi capacidade. E cada indicado foi alimentar o escritório do lado.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span><h4>A sombra da assinatura</h4></div><p>Você já ouviu falar de súmula inventada. A assinatura embaixo é sua.</p></div>
     </div>
-  </div>
 
-<div class="cmp">
+    <div class="cmp">
       <div class="cmp-col cmp-bad reveal">
-        <h3>Sem MaestrIA</h3>
+        <h3>Como é hoje</h3>
         <ul>
           <li>Recusa cliente porque sabe que a agenda quebra</li>
           <li>Cada peça toma 2 horas de revisão neurótica</li>
           <li>Sábado no escritório virou rotina</li>
           <li>Cliente novo é ansiedade antes de ser oportunidade</li>
-          <li>Fatura trava no seu limite biológico</li>
         </ul>
       </div>
       <div class="cmp-col cmp-good reveal">
-        <h3>Com MaestrIA</h3>
+        <h3>Com a MaestrIA</h3>
         <ul>
-          <li>Aceita o cliente sabendo que a entrega está blindada</li>
+          <li>Aceita sabendo que a entrega está blindada</li>
           <li>Peça sai no seu estilo em minutos, não em tardes</li>
           <li>Sábado volta a ser sábado</li>
           <li>Cliente novo é margem, não peso</li>
-          <li>Fatura sobe sem inflar folha nem sacrificar você</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
@@ -1047,12 +1057,12 @@
     <h2 class="sec reveal">Tudo isso entrou <span class="red">depois que ela foi lançada</span>. Quem comprou antes, recebeu de graça.</h2>
     <p class="lead reveal">Tudo o que sai durante o seu ano de acesso chega de graça, com um comando.</p>
     <div class="grid g3">
-      <div class="cardy reveal"><span class="ic">🧭</span><h4>Jurimetria oficial do CNJ</h4><p>Taxa de procedência por vara e tempo até a sentença, de qualquer assunto em qualquer tribunal do país.</p></div>
-      <div class="cardy reveal"><span class="ic">🎯</span><h4>Triagem do primeiro contato</h4><p>Áudio do cliente vira área, alerta de prazo e resposta pronta pra colar.</p></div>
-      <div class="cardy reveal"><span class="ic">📡</span><h4>Radar processual</h4><p>Andamento em um comando e autos em PDF viram ficha executiva com prazos em risco.</p></div>
-      <div class="cardy reveal"><span class="ic">🧐</span><h4>Revisor nos SEUS critérios</h4><p>Aprende com as suas melhores peças e revisa o trabalho do estagiário antes de chegar em você.</p></div>
-      <div class="cardy reveal"><span class="ic">🩺</span><h4>Kit perícia previdenciária</h4><p>Prepara o seu cliente pra perícia médica e do BPC, e calcula a RMI do auxílio-acidente.</p></div>
-      <div class="cardy reveal"><span class="ic">🔄</span><h4>Chegou de graça</h4><p>Nada disso custou um real pra quem já tinha comprado. Chegou pelo <span class="cmd">/maestria atualizar</span>.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-2 6-4 2 2-6Z"/></svg></span><h4>Jurimetria oficial do CNJ</h4></div><p>Taxa de procedência por vara e tempo até a sentença, de qualquer assunto em qualquer tribunal do país.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><h4>Triagem do primeiro contato</h4></div><p>Áudio do cliente vira área, alerta de prazo e resposta pronta pra colar.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19a9 9 0 0 1 9-9"/><path d="M5 15a5 5 0 0 1 5-5"/><path d="M5 11a1 1 0 0 1 1-1"/><circle cx="5" cy="19" r="1.6"/><path d="M14 4h6v6"/><path d="m14 10 6-6"/></svg></span><h4>Radar processual</h4></div><p>Andamento em um comando e autos em PDF viram ficha executiva com prazos em risco.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="m9 11 1.6 1.6L14 9"/></svg></span><h4>Revisor nos SEUS critérios</h4></div><p>Aprende com as suas melhores peças e revisa o trabalho do estagiário antes de chegar em você.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3v6a5 5 0 0 0 10 0V3"/><path d="M4 3h2"/><path d="M12 3h2"/><path d="M9 14v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2.4"/></svg></span><h4>Kit perícia previdenciária</h4></div><p>Prepara o seu cliente pra perícia médica e do BPC, e calcula a RMI do auxílio-acidente.</p></div>
+      <div class="cardy reveal"><div class="cab"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></span><h4>Chegou de graça</h4></div><p>Nada disso custou um real pra quem já tinha comprado. Chegou pelo <span class="cmd">/maestria atualizar</span>.</p></div>
     </div>
   </div>
 </section>
@@ -1125,25 +1135,25 @@
     <p class="lead reveal">O melhor conhecimento da advocacia morre na cabeça das pessoas.</p>
     <div class="ciclo reveal">
       <div class="cic">
-        <span class="cic-ic">🏆</span>
+        <span class="cic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M7 6H4v1a3 3 0 0 0 3 3"/><path d="M17 6h3v1a3 3 0 0 1-3 3"/><path d="M12 14v3"/><path d="M9 20h6"/></svg></span>
         <b>Você vence</b>
         <span>e contribui a decisão</span>
       </div>
       <span class="cic-arr">→</span>
       <div class="cic">
-        <span class="cic-ic">🔒</span>
+        <span class="cic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
         <b>Anonimiza</b>
         <span>CPF e nomes saem no seu PC</span>
       </div>
       <span class="cic-arr">→</span>
       <div class="cic">
-        <span class="cic-ic">🗂️</span>
+        <span class="cic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M3 11h18"/></svg></span>
         <b>Agrupa</b>
         <span>por vara e por tema</span>
       </div>
       <span class="cic-arr">→</span>
       <div class="cic cic-fim">
-        <span class="cic-ic">✍️</span>
+        <span class="cic-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></span>
         <b>Volta pra você</b>
         <span>no padrão do que vence ali</span>
       </div>
@@ -1284,7 +1294,7 @@
         <div class="bonus-h">Dois bônus que só o Embaixador leva</div>
 
         <div class="bonus-item">
-          <span class="bonus-ic">☕</span>
+          <span class="bonus-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z"/><path d="M6 2v2"/><path d="M10 2v2"/><path d="M14 2v2"/></svg></span>
           <div>
             <b>Café com MaestrIA <em>· encontro semanal ao vivo</em></b>
             <span>Mesa de trabalho semanal com o Samurai e os outros Embaixadores. Não é aula gravada: é caso real na tela, com a dúvida que travou a sua semana.</span>
@@ -1293,7 +1303,7 @@
         </div>
 
         <div class="bonus-item">
-          <span class="bonus-ic">🎯</span>
+          <span class="bonus-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
           <div>
             <b>Call de implementação <em>· até 1 hora, só você</em></b>
             <span>Uma conversa só sua: calibramos com os seus modelos, ajustamos o tom pro seu, organizamos as pastas e rodamos um caso seu de verdade.</span>
