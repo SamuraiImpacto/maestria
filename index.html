@@ -360,6 +360,17 @@
   .alt-card .pv small{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:500}
   @media(max-width:560px){.alt{grid-template-columns:1fr}.emb{padding:34px 22px}.emb-price .val{font-size:60px}}
 
+  /* BONUS do Embaixador */
+  .bonus{margin-top:24px;padding:20px;border:1px solid rgba(239,39,39,.32);border-radius:14px;
+    background:linear-gradient(180deg,rgba(239,39,39,.10),transparent)}
+  .bonus-h{font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--red-ink);margin-bottom:15px}
+  .bonus-item{display:flex;gap:13px;align-items:flex-start;margin-bottom:14px}
+  .bonus-item:last-child{margin-bottom:0}
+  .bonus-ic{flex:0 0 auto;font-size:20px;line-height:1.2}
+  .bonus-item b{display:block;font-size:14.5px;color:#fff;margin-bottom:4px}
+  .bonus-item span{display:block;font-size:13.2px;color:var(--muted);line-height:1.55}
+
   /* PACOTES POR AREA (checkout real) */
   .pacotes-titulo{text-align:center;font-family:var(--serif);font-size:22px;font-weight:700;margin:52px 0 0}
   .pacotes-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin:24px auto 0}
@@ -370,7 +381,7 @@
   .pk-preco{font-family:var(--serif);font-size:40px;font-weight:900;line-height:1;margin-top:12px}
   .pk-preco small{font-family:var(--sans);font-size:16px;font-weight:700;margin-right:3px}
   .pk-nota{font-size:12px;color:var(--muted-2);margin-top:6px}
-  .pk-desc{font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:14px;flex:1}
+  .pk-desc{font-size:13.2px;color:var(--muted);line-height:1.6;margin-top:14px;flex:1}
   .pk-btn{margin-top:18px;text-align:center;background:rgba(239,39,39,.14);color:#fff;border:1px solid rgba(239,39,39,.45);
     border-radius:999px;padding:11px 14px;font-size:14px;font-weight:700}
   .pk:hover .pk-btn{background:var(--red);border-color:var(--red)}
@@ -439,8 +450,11 @@
   footer{border-top:1px solid var(--line);padding:44px 0}
   .foot-cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
   .foot-cols h4{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted-2);margin-bottom:14px}
-  .foot-cols a{display:block;color:var(--muted);font-size:14px;margin-bottom:9px}
-  .foot-cols a:hover{color:var(--txt)}
+  /* :not(.logo) e obrigatorio: sem isso o display:block vence a especificidade
+     do .logo e o simbolo empilha em cima da palavra no rodape */
+  .foot-cols a:not(.logo){display:block;color:var(--muted);font-size:14px;margin-bottom:9px}
+  .foot-cols a:not(.logo):hover{color:var(--txt)}
+  .foot-brand .logo{display:inline-flex;align-items:center;flex-wrap:nowrap;gap:10px}
   .foot-brand p{color:var(--muted);font-size:14px;margin-top:12px;max-width:32ch;line-height:1.55}
   .foot-brand .by{color:var(--muted-2);font-size:13px;margin-top:12px}
   .foot-bottom{border-top:1px solid var(--line);margin-top:30px;padding-top:20px;color:var(--muted-2);font-size:13px}
@@ -868,8 +882,8 @@
 <section style="padding-top:0">
   <div class="wrap">
     <span class="kicker reveal">Produto vivo, isso é changelog, não promessa</span>
-    <h2 class="sec reveal">Tudo isso entrou <span class="red">só esta semana</span>. Quem compra, recebe o que vier.</h2>
-    <p class="lead reveal">Skill parada é prompt caro. A MaestrIA recebe melhoria toda semana, e o que sai depois da sua compra chega de graça com um comando.</p>
+    <h2 class="sec reveal">Tudo isso entrou <span class="red">depois que ela foi lançada</span>. Quem comprou antes, recebeu de graça.</h2>
+    <p class="lead reveal">Skill parada é prompt caro. A MaestrIA continua evoluindo, e tudo o que sai durante o seu ano de acesso chega de graça com um comando. Sem cobrança nova, sem reinstalar nada.</p>
     <div class="grid g3">
       <div class="cardy reveal"><span class="ic">🧭</span><h4>Jurimetria oficial do CNJ</h4><p>Taxa de procedência por vara e tempo até a sentença, de qualquer assunto em qualquer tribunal do país.</p></div>
       <div class="cardy reveal"><span class="ic">🎯</span><h4>Triagem do primeiro contato</h4><p>Áudio do cliente vira área, alerta de prazo e resposta pronta pra colar.</p></div>
@@ -1004,13 +1018,31 @@
         <span class="from">R$ 2.091 comprando 3 áreas soltas</span>
         <span class="now"><span class="cur">R$</span><span class="val">1.997</span><span class="per">à vista</span></span>
       </div>
-      <p class="emb-parcel">ou 12x de R$ 197 &nbsp;·&nbsp; atendimento pessoal, uma vaga de cada vez</p>
+      <p class="emb-parcel">ou 12x de R$ 197</p>
       <a href="suporte.html#mensagem" class="btn btn-red">Quero ser Embaixador</a>
       <div class="seals">
         <span><span class="s-ck">✓</span> Compra segura</span>
         <span><span class="s-ck">✓</span> 7 dias de garantia</span>
         <span><span class="s-ck">✓</span> Suporte humano</span>
       </div>
+      <div class="bonus">
+        <div class="bonus-h">Só quem entra como Embaixador leva</div>
+        <div class="bonus-item">
+          <span class="bonus-ic">☕</span>
+          <div>
+            <b>Café com MaestrIA</b>
+            <span>Encontro ao vivo com o Samurai e os outros Embaixadores, de manhã, pra discutir estratégia e destravar dúvida. O sapo a gente engole cedo.</span>
+          </div>
+        </div>
+        <div class="bonus-item">
+          <span class="bonus-ic">🎯</span>
+          <div>
+            <b>Call de implementação, até 1 hora</b>
+            <span>Uma conversa só sua pra deixar a MaestrIA configurada no jeito do seu escritório: seus modelos, seu tom, suas pastas.</span>
+          </div>
+        </div>
+      </div>
+
       <div class="incl">
         <div class="h">O que entra</div>
         <ul>
@@ -1018,7 +1050,7 @@
           <li><span class="ck">✓</span><span><b>Família, Consumidor, Criminal e todas as próximas áreas</b> incluídas conforme liberamos, sem pagar de novo</span></li>
           <li><span class="ck">✓</span><span>As 3 skills universais em todo pacote: petição, briefing do caso e preparador de audiência</span></li>
           <li><span class="ck">✓</span><span>Jurimetria oficial do CNJ, Banco Vivo de Decisões e os Conselheiros</span></li>
-          <li><span class="ck">✓</span><span>Atualização toda semana por um comando, licença no seu CPF em 3 computadores</span></li>
+          <li><span class="ck">✓</span><span>Todas as atualizações do período por um comando, licença no seu CPF em 3 computadores</span></li>
           <li><span class="ck">✓</span><span>Canal prioritário no WhatsApp e garantia incondicional de 7 dias</span></li>
         </ul>
       </div>
@@ -1030,25 +1062,25 @@
         <span class="pk-tag">Previdenciário</span>
         <span class="pk-preco"><small>R$</small>697</span>
         <span class="pk-nota">fundador, depois R$ 997</span>
-        <span class="pk-desc">Cálculo e planejamento, auditor de CNIS, perícia de ponta a ponta e o kit do auxílio-acidente.</span>
+        <span class="pk-desc">Cálculo de RMI e atrasados, planejamento previdenciário pra vender como consultoria, auditor de CNIS, quesitos e impugnação de laudo e PPP, recurso administrativo e o qualificador de auxílio-acidente. Mais jurimetria do CNJ e as 3 skills universais.</span>
         <span class="pk-btn">Quero o Previdenciário</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/zRpxcta" data-pacote="trab">
         <span class="pk-tag">Trabalhista</span>
         <span class="pk-preco"><small>R$</small>697</span>
         <span class="pk-nota">fundador, depois R$ 997</span>
-        <span class="pk-desc">Verbas rescisórias, hora extra com reflexos, contestação e o acordo do art. 484-A.</span>
+        <span class="pk-desc">Verbas rescisórias de qualquer modalidade, hora extra e adicional noturno pela ADC 58, insalubridade e periculosidade, FGTS com multa, contestação tese a tese e o acordo do art. 484-A. Mais jurimetria do CNJ e as 3 skills universais.</span>
         <span class="pk-btn">Quero o Trabalhista</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/Ln4ErJJ" data-pacote="marketing">
         <span class="pk-tag">Marketing Jurídico</span>
         <span class="pk-preco"><small>R$</small>697</span>
         <span class="pk-nota">lote fundador</span>
-        <span class="pk-desc">Site no ar, Google Meu Negócio, conteúdo na sua voz e todo CTA no Provimento 205.</span>
+        <span class="pk-desc">Site do escritório no ar com SEO e blog, Google Meu Negócio, landing de campanha com Pixel, reels, carrosséis e artigos na sua voz, arte direto no seu Canva e calendário editorial. Todo CTA filtrado pelo Provimento 205.</span>
         <span class="pk-btn">Quero o Marketing</span>
       </a>
     </div>
-    <p class="pacotes-pe">Todo pacote inclui as skills universais (petição, briefing do caso e preparador de audiência), 12 meses de acesso com atualização semanal, licença no seu CPF válida em até 3 computadores e garantia incondicional de 7 dias. Já comprou uma área e quer virar Embaixador? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
+    <p class="pacotes-pe">Todo pacote inclui as skills universais (petição, briefing do caso e preparador de audiência), 12 meses de acesso com todas as atualizações do período, licença no seu CPF válida em até 3 computadores e garantia incondicional de 7 dias. Já comprou uma área e quer virar Embaixador? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
 
     <div class="road">
       <div class="road-item done reveal"><span class="mes">JUL/2026</span><span class="pac">Previdenciário + Trabalhista + Marketing</span><span class="st">No ar hoje</span></div>
@@ -1098,6 +1130,10 @@
     <details class="faq reveal"><summary>Funciona no meu computador?</summary><div class="ans">Windows e Mac. Você arrasta o arquivo do pacote pra conversa do Claude e pede pra instalar. Ele prepara tudo sozinho. Tem guia passo a passo com tudo copiável, feito pra quem nunca mexeu com isso.</div></details>
     <details class="faq reveal"><summary>O que é o Full Embaixador e o que entra?</summary><div class="ans">É a licença de fundador: você leva todas as áreas do MaestrIA por R$ 1.997. Hoje já recebe Previdenciário, Trabalhista e Marketing prontos. Família, Consumidor, Criminal e as próximas áreas entram sem custo conforme a gente libera. Quem já comprou uma área paga só a diferença.</div></details>
     <details class="faq reveal"><summary>A jurimetria serve pra minha área?</summary><div class="ans">O motor consulta a base pública do CNJ por assunto e por tribunal, então vale pra qualquer matéria que tramite na Justiça brasileira, não só previdenciário. Você pede o assunto do seu caso e ele devolve procedência por vara, tempo até a sentença e comparação entre tribunais.</div></details>
+    <details class="faq reveal"><summary>O que é o Café com MaestrIA?</summary><div class="ans">É um encontro ao vivo, de manhã, entre os Embaixadores e o Samurai. Não é aula: é mesa de trabalho pra discutir estratégia de uso, mostrar o que está funcionando no escritório de cada um e destravar quem travou. Quem entra como Embaixador recebe o convite e o dia fixo assim que a turma fecha.</div></details>
+
+    <details class="faq reveal"><summary>Com que frequência a MaestrIA é atualizada?</summary><div class="ans">Sempre que uma melhoria fica pronta e testada, e não numa data fixa: preferimos soltar quando está no ponto a soltar porque é terça. Durante os 12 meses de acesso, tudo o que sair chega pra você sem custo adicional, com o comando /atualizar-skill. Correção de bug entra na frente da fila.</div></details>
+
     <details class="faq reveal"><summary>Como se compara com consultoria e curso de IA?</summary><div class="ans">Consultoria monta uma plataforma e cobra R$ 30 a 55 mil por 6 meses. Curso te ensina a escrever prompt e o trabalho continua seu. A MaestrIA é produto pronto: instala em 30 minutos, roda no seu computador. Você não aprende a construir a ferramenta, você usa.</div></details>
   </div>
 </section>
