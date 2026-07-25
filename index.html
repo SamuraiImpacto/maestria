@@ -368,8 +368,12 @@
   .bonus-item{display:flex;gap:13px;align-items:flex-start;margin-bottom:14px}
   .bonus-item:last-child{margin-bottom:0}
   .bonus-ic{flex:0 0 auto;font-size:20px;line-height:1.2}
-  .bonus-item b{display:block;font-size:14.5px;color:#fff;margin-bottom:4px}
-  .bonus-item span{display:block;font-size:13.2px;color:var(--muted);line-height:1.55}
+  .bonus-item b{display:block;font-size:14.5px;color:#fff;margin-bottom:6px}
+  .bonus-item b em{font-style:normal;font-weight:600;color:var(--red-ink);font-size:12.5px;white-space:nowrap}
+  .bonus-item span{display:block;font-size:13.2px;color:var(--muted);line-height:1.6}
+  .bonus-extra{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.07);
+    font-size:12.5px !important;color:var(--muted-2) !important}
+  .bonus-item{margin-bottom:20px}
 
   /* PACOTES POR AREA (checkout real) */
   .pacotes-titulo{text-align:center;font-family:var(--serif);font-size:22px;font-weight:700;margin:52px 0 0}
@@ -1026,19 +1030,23 @@
         <span><span class="s-ck">✓</span> Suporte humano</span>
       </div>
       <div class="bonus">
-        <div class="bonus-h">Só quem entra como Embaixador leva</div>
+        <div class="bonus-h">Dois bônus que só o Embaixador leva</div>
+
         <div class="bonus-item">
           <span class="bonus-ic">☕</span>
           <div>
-            <b>Café com MaestrIA</b>
-            <span>Encontro ao vivo com o Samurai e os outros Embaixadores, de manhã, pra discutir estratégia e destravar dúvida. O sapo a gente engole cedo.</span>
+            <b>Café com MaestrIA <em>· encontro semanal ao vivo</em></b>
+            <span>Toda semana, de manhã, uma mesa de trabalho entre você, os outros Embaixadores e o Samurai. Não é aula gravada nem webinário: é caso real na tela. Você leva a dúvida que travou a sua semana, mostra o que já está funcionando no seu escritório e vê o que está funcionando no dos outros, todos usando a mesma ferramenta na sua área.</span>
+            <span class="bonus-extra">De manhã de propósito: o sapo a gente engole cedo, antes que a audiência e o prazo tomem o dia. O dia da semana é cravado quando a turma fechar, e você recebe o convite com o link fixo.</span>
           </div>
         </div>
+
         <div class="bonus-item">
           <span class="bonus-ic">🎯</span>
           <div>
-            <b>Call de implementação, até 1 hora</b>
-            <span>Uma conversa só sua pra deixar a MaestrIA configurada no jeito do seu escritório: seus modelos, seu tom, suas pastas.</span>
+            <b>Call de implementação <em>· até 1 hora, só você</em></b>
+            <span>Uma conversa individual pra MaestrIA sair do padrão e entrar no jeito do seu escritório: a gente calibra com os seus modelos de peça, ajusta o tom de escrita pro seu, organiza onde os documentos de cada cliente vão ficar e roda um caso seu de verdade, do começo ao fim.</span>
+            <span class="bonus-extra">O objetivo é você terminar a call com a primeira peça pronta na mão, em vez de terminar a semana ainda pensando em configurar.</span>
           </div>
         </div>
       </div>
