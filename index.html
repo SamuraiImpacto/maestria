@@ -497,6 +497,13 @@
     font-size:12.5px !important;color:var(--muted-2) !important}
   .bonus-item{margin-bottom:20px}
 
+  /* prazo e renovacao: condicao comercial nao pode ficar implicita */
+  .renov{margin:-6px 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;
+    background:rgba(255,255,255,.03);text-align:left}
+  .rn-l{display:block;font-size:13.5px;color:#dcdce1;line-height:1.55}
+  .rn-l b{color:#fff}
+  .rn-p{display:block;margin-top:7px;font-size:12.5px;color:var(--muted-2);line-height:1.5}
+
   /* PACOTES POR AREA (checkout real) */
   .pacotes-titulo{text-align:center;font-family:var(--serif);font-size:22px;font-weight:700;margin:52px 0 0}
   .pacotes-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin:24px auto 0}
@@ -1284,6 +1291,10 @@
         <span class="now"><span class="cur">R$</span><span class="val">1.997</span><span class="per">à vista</span></span>
       </div>
       <p class="emb-parcel">ou 12x de R$ 197</p>
+      <div class="renov">
+        <span class="rn-l"><b>Acesso de 12 meses.</b> Renovação por <b>metade do que você pagou</b>: R$ 998,50 no seu caso.</span>
+        <span class="rn-p">Quem entra agora trava esse valor. Quem entrar depois, no preço cheio, renova mais caro.</span>
+      </div>
       <a href="suporte.html#mensagem" class="btn btn-red">Quero ser Embaixador</a>
       <div class="seals">
         <span><span class="s-ck">✓</span> Compra segura</span>
@@ -1330,26 +1341,26 @@
       <a class="pk" href="https://pay.kiwify.com.br/q5QEizf" data-pacote="prev">
         <span class="pk-tag">Previdenciário</span>
         <span class="pk-preco"><small>R$</small>697</span>
-        <span class="pk-nota">fundador, depois R$ 997</span>
+        <span class="pk-nota">fundador por 12 meses, depois R$ 997</span>
         <span class="pk-desc">RMI e atrasados, planejamento, auditor de CNIS, perícia completa e recurso administrativo. Mais jurimetria e as 3 universais.</span>
         <span class="pk-btn">Quero o Previdenciário</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/zRpxcta" data-pacote="trab">
         <span class="pk-tag">Trabalhista</span>
         <span class="pk-preco"><small>R$</small>697</span>
-        <span class="pk-nota">fundador, depois R$ 997</span>
+        <span class="pk-nota">fundador por 12 meses, depois R$ 997</span>
         <span class="pk-desc">Rescisão, hora extra pela ADC 58, insalubridade, FGTS, contestação e acordo do 484-A. Mais jurimetria e as 3 universais.</span>
         <span class="pk-btn">Quero o Trabalhista</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/Ln4ErJJ" data-pacote="marketing">
         <span class="pk-tag">Marketing Jurídico</span>
         <span class="pk-preco"><small>R$</small>697</span>
-        <span class="pk-nota">lote fundador</span>
+        <span class="pk-nota">lote fundador, 12 meses</span>
         <span class="pk-desc">Site com SEO e blog, Google Meu Negócio, landing com Pixel, conteúdo na sua voz e arte no seu Canva. Todo CTA no Provimento 205.</span>
         <span class="pk-btn">Quero o Marketing</span>
       </a>
     </div>
-    <p class="pacotes-pe">Todo pacote inclui as 3 universais, 12 meses de acesso com as atualizações, licença em 3 computadores e garantia de 7 dias. Já comprou uma área? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
+    <p class="pacotes-pe">Todo pacote dá <b>12 meses de acesso</b> com todas as atualizações do período, as 3 skills universais, licença em 3 computadores e garantia de 7 dias. Depois do primeiro ano, a <b>renovação custa metade do que você pagou</b>: R$ 348,50 para quem entrou por R$ 697. Já comprou uma área? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
 
     <div class="road">
       <div class="road-item done reveal"><span class="mes">JUL/2026</span><span class="pac">Previdenciário + Trabalhista + Marketing</span><span class="st">No ar hoje</span></div>
@@ -1402,6 +1413,8 @@
     <details class="faq reveal"><summary>O que é o Café com MaestrIA?</summary><div class="ans">Encontro ao vivo, de manhã, entre os Embaixadores e o Samurai. Não é aula: é mesa de trabalho pra discutir estratégia e destravar quem travou. O dia fixo sai quando a turma fecha.</div></details>
 
     <details class="faq reveal"><summary>Com que frequência a MaestrIA é atualizada?</summary><div class="ans">Sempre que fica pronta e testada, não em data fixa. Durante os 12 meses, tudo o que sair chega sem custo com o /atualizar-skill. Correção de bug fura a fila.</div></details>
+
+    <details class="faq reveal"><summary>O acesso é pra sempre? E depois de 1 ano?</summary><div class="ans">A licença vale por <b>12 meses</b>, e nesse período tudo o que a gente lançar chega pra você sem custo. Passado o ano, você decide se renova, e a renovação sai por <b>metade do valor que você pagou</b>: quem entrou no Embaixador por R$ 1.997 renova por R$ 998,50; quem entrou numa área por R$ 697 renova por R$ 348,50. Não é cobrança automática nem pegadinha: se não renovar, você simplesmente para de receber as atualizações novas. E o preço da sua renovação é sempre calculado sobre o que você pagou, então entrar no lote fundador barateia todos os anos seguintes.</div></details>
 
     <details class="faq reveal"><summary>Como se compara com consultoria e curso de IA?</summary><div class="ans">Consultoria cobra R$ 30 a 55 mil por 6 meses. Curso ensina prompt e o trabalho continua seu. A MaestrIA é produto pronto: você não aprende a construir a ferramenta, você usa.</div></details>
   </div>
