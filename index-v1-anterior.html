@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Skills de IA jurídica que rodam no computador do advogado. Peça no padrão do escritório, citação validada em fonte oficial, jurimetria oficial do CNJ e dado de cliente 100% local. Previdenciário, Trabalhista e Marketing a partir de R$ 697 no lote fundador.">
+  <meta property="og:title" content="MaestrIA: cresça sem quebrar a entrega">
+  <meta property="og:description" content="IA jurídica instalada no seu computador. Nunca inventa jurisprudência. Previdenciário, Trabalhista e Marketing disponíveis hoje. Lote fundador de 20 licenças.">
+  <title>MaestrIA: IA jurídica que roda no seu computador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260715a">
+  <link rel="preconnect" href="https://pay.kiwify.com.br">
+  <script src="terminal.js" defer></script>
+  <script src="reveal.js?v=20260712d" defer></script>
+  <style>
+    /* Pacotes clean (12/07): bullets âncora + acordeão, herança visível, rodapé único */
+    .pacotes-grid { grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 16px; align-items: start; }
+    .pack-herda { display: flex; align-items: center; gap: 8px; background: var(--vermelho-bg);
+      border: 1px solid var(--vermelho-border); border-radius: 10px; padding: 10px 14px;
+      font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+    .pack-herda span { color: var(--vermelho); font-size: 15px; }
+    .pack-mais { margin: -8px 0 20px; }
+    .pack-mais summary { cursor: pointer; list-style: none; font-size: 13px; font-weight: 700;
+      color: var(--text-muted); padding: 8px 0 8px 22px; position: relative; text-align: left; }
+    .pack-mais summary::-webkit-details-marker { display: none; }
+    .pack-mais summary::before { content: '+'; position: absolute; left: 0; color: var(--vermelho); font-weight: 800; font-size: 15px; }
+    .pack-mais[open] summary::before { content: '–'; }
+    .pack-mais summary:hover { color: var(--text); }
+    .pack-mais .pack-features { margin-bottom: 0; }
+    .pack-mais .pack-features li { font-size: 13px; color: var(--text-muted); padding-top: 6px; padding-bottom: 6px; }
+    .pack-rodape { text-align: center; color: var(--text-muted); font-size: 13.5px; margin: 26px auto 0;
+      max-width: 680px; line-height: 1.7; }
+    .pack-rodape strong { color: var(--text); }
+
+    /* ÁREAS: cartões que levam pra página de venda de cada vertical (24/07) */
+    .areas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .area-card { display: flex; flex-direction: column; text-align: left; text-decoration: none;
+      background: var(--card-bg, #141417); border: 1px solid var(--border, rgba(255,255,255,.09));
+      border-radius: 16px; padding: 26px 24px; transition: border-color .18s, transform .18s; }
+    .area-card:hover { border-color: var(--vermelho); transform: translateY(-3px); }
+    .area-card .ac-tag { font-size: 11.5px; font-weight: 800; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--vermelho); }
+    .area-card h3 { font-size: 21px; font-weight: 800; margin: 10px 0 12px; color: var(--text); }
+    .area-card p { font-size: 14px; color: var(--text-muted); line-height: 1.55; flex: 1; margin: 0; }
+    .area-card .ac-link { margin-top: 18px; font-size: 14px; font-weight: 700; color: var(--text); }
+    @media (max-width: 820px) { .areas-grid { grid-template-columns: 1fr; } }
+  </style>
+  <link rel="icon" href="/img/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#0a0a0c">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://maestria.samurailab.com.br/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://maestria.samurailab.com.br/img/og-image.png">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo-mia" aria-label="MaestrIA">
+      <img class="logo-mia-sym" src="/img/logo-sym.png" alt="">
+      <span class="logo-mia-lockup"><img class="logo-mia-word" src="/img/logo-word.png" alt="MaestrIA"></span>
+    </a>
+    <div class="nav-links">
+      <a href="#pra-quem">Pra quem é</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#pacotes">Pacotes</a>
+      <a href="#areas">Áreas</a>
+      <a href="suporte.html">Suporte</a>
+      <a href="#faq">FAQ</a>
+      <a href="#pacotes" class="btn-nav">Ver pacotes</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="badges">
+      <span class="badge">NUNCA INVENTA JURISPRUDÊNCIA</span>
+      <span class="badge">DADOS SÓ NO SEU COMPUTADOR</span>
+      <span class="badge">INSTALA EM 30 MINUTOS</span>
+    </div>
+    <h1>Você recusou o último cliente<br>porque sabia que <span class="vermelho">não ia dar conta</span>.</h1>
+    <p class="hero-tagline">E estava <span class="vermelho">completamente certo</span>.</p>
+    <p class="hero-sub">A MaestrIA é um pacote de comandos jurídicos prontos que você instala no Claude, a IA mais avançada do mundo, direto no seu computador. Você digita <strong>/maestria</strong> e pede a peça: ela lê os documentos do cliente, escreve no seu padrão e entrega em Word, com cada citação conferida em fonte oficial.</p>
+    <div class="hero-cta">
+      <a href="#pacotes" class="btn-primary">Quero parar de recusar cliente</a>
+      <a href="#solucao" class="btn-secondary">Entender como funciona</a>
+    </div>
+  </div>
+</header>
+
+<!-- O QUE É -->
+<section class="o-que-e" id="o-que-e">
+  <div class="container">
+    <span class="kicker" data-num="00">O que é, sem tecniquês</span>
+    <h2>Comandos prontos que transformam o Claude <span class="vermelho">no seu assistente jurídico</span>.</h2>
+    <p class="lead">Não é mais um site pra aprender, não é curso, não é robô genérico. São comandos especializados por área do direito, instalados na IA mais usada do mundo, rodando na sua máquina.</p>
+
+    <div class="dores-grid">
+      <div class="dor-card">
+        <div class="dor-icon">📦</div>
+        <h3>O que é</h3>
+        <p>Um pacote de comandos jurídicos (as skills) que se instala no Claude no seu computador. Sem programa novo pra aprender: se você digita no WhatsApp, você opera. Pré-requisito: assinatura do Claude (<a href="#faq">a FAQ explica certinho</a>).</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">⌨️</div>
+        <h3>Como você usa</h3>
+        <p>Digita <strong>/maestria</strong> e pede: nova petição, cálculo, conselheiro. Ela lê os documentos do cliente na pasta, pergunta só o que faltou e escreve no estilo que aprendeu com os seus modelos.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">📄</div>
+        <h3>O que você recebe</h3>
+        <p>Documento em Word, no seu papel timbrado, salvo na pasta do cliente e aberto na sua tela. Jurisprudência conferida em fonte oficial antes de entrar na peça. Você revisa e protocola.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problema">
+  <div class="container">
+    <span class="kicker" data-num="01">O gargalo que ninguém confessa</span>
+    <h2>Crescer sem virar <span class="vermelho">madrugada no escritório</span>.</h2>
+    <div class="lead-narrativa">
+      <p>Todo advogado quer captar mais clientes. Até perceber que cada contrato novo também traz mais peças, mais prazos, mais responsabilidade e menos tempo.</p>
+      <p>O problema não é gerar demanda.</p>
+      <p>É conseguir crescer sem transformar sua rotina em uma sequência de madrugadas no escritório.</p>
+      <p class="lead-fecho">É esse gargalo que a <strong>MaestrIA</strong> resolve.</p>
+    </div>
+
+    <div class="dores-grid">
+      <div class="dor-card">
+        <div class="dor-icon">🌙</div>
+        <h3>A conta mental do próximo cliente</h3>
+        <p>Antes mesmo de assinar o contrato, você já projeta as noites viradas, a audiência marcada em cima de outra, o filho reclamando que você não vai no aniversário. O medo aparece antes do trabalho.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🚪</div>
+        <h3>Clientes que você deixou passar</h3>
+        <p>Cliente indicado chega, você olha a agenda, respira fundo e passa pra outro escritório. Não foi orçamento. Foi capacidade. E cada um deles alimenta o concorrente que já se equipou pra receber.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">📉</div>
+        <h3>Faturamento travado no teto pessoal</h3>
+        <p>Enquanto entregar depender da sua energia física de reler cada peça cinco vezes, o teto é o seu limite biológico. E biologia não escala.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">⚠</div>
+        <h3>A sombra da assinatura</h3>
+        <p>Já pensou em usar ChatGPT pra ganhar tempo. Já ouviu falar de súmula inventada, jurisprudência que não existe. Sabe que a assinatura embaixo é sua. Então volta a reler tudo cinco vezes. E a agenda continua sem espaço.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section class="solucao" id="solucao">
+  <div class="container">
+    <h2>Você aceita o próximo cliente <span class="vermelho">sem o pavor de não entregar</span>.</h2>
+    <p class="lead">A MaestrIA blinda a entrega. Você para de recusar cliente por medo da agenda porque a operação passa a aguentar o dobro sem quebrar. O ganho não é produtividade. É coragem pra dizer sim de novo.</p>
+
+    <div class="diff-grid">
+      <div class="diff-col diff-cinza">
+        <h3>Sem MaestrIA</h3>
+        <ul>
+          <li>Você recusa cliente porque sabe que a agenda quebra</li>
+          <li>Cada peça toma 2 horas de revisão neurótica</li>
+          <li>Sábado no escritório virou rotina</li>
+          <li>Cliente novo é ansiedade antes de ser oportunidade</li>
+          <li>Fatura trava no seu limite biológico</li>
+          <li>Cresce o escritório do concorrente que aceitou o que você passou</li>
+        </ul>
+      </div>
+      <div class="diff-col diff-gold">
+        <h3>Com MaestrIA</h3>
+        <ul>
+          <li>Você aceita o cliente sabendo que a entrega tá blindada</li>
+          <li>Peça sai calibrada com seu estilo em minutos, não em tardes</li>
+          <li>Sábado volta a ser sábado</li>
+          <li>Cliente novo é margem, não peso</li>
+          <li>Fatura sobe sem inflar folha nem sacrificar você</li>
+          <li>O escritório cresce no ritmo que você decide, não no que a sua energia permite</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="terminal-caption">Assim, na prática:</h3>
+    <div class="terminal-mock">
+      <div class="terminal-bar">
+        <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+        <span class="terminal-title">Claude Code: MaestrIA Trabalhista</span>
+      </div>
+      <div class="terminal-body">
+        <p class="t-cmd"><span class="t-prompt">&gt;</span> /maestria nova peticao</p>
+        <p class="t-resp">Lendo os documentos da pasta do cliente... 4 encontrados: CTPS, contracheques, controle de ponto, termo de rescisão.</p>
+        <p class="t-resp">Dados extraídos. Falta confirmar só a data de admissão: 03/02/2019?</p>
+        <p class="t-cmd"><span class="t-prompt">&gt;</span> sim</p>
+        <p class="t-resp">Puxando os valores da skill de cálculo: aviso prévio, 13º proporcional, férias + 1/3, FGTS + multa de 40%.</p>
+        <p class="t-resp">Validando citações em fonte oficial... Súmula 338 TST confirmada em tst.jus.br ✓</p>
+        <p class="t-ok">✓ Petição gerada com o seu papel timbrado: Reclamatoria_JoseSilva_v1.docx</p>
+        <p class="t-meta">Pronta pra sua revisão. Tempo total: 25 minutos.</p>
+      </div>
+    </div>
+
+    <h3 class="terminal-caption">Roda no SEU computador. E isso muda tudo.</h3>
+    <p class="lead">A MaestrIA não é um site que você acessa. É uma ferramenta instalada na sua máquina. Parece detalhe técnico, mas é o alicerce do sigilo profissional:</p>
+
+    <div class="dores-grid">
+      <div class="dor-card">
+        <div class="dor-icon">🔒</div>
+        <h3>Sigilo de verdade</h3>
+        <p>CPF, laudo médico e histórico do SEU cliente ficam no seu computador. Nada disso sobe pra servidor de terceiros. Ferramenta jurídica de site processa os dados do seu cliente na nuvem de outra empresa.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">📁</div>
+        <h3>Suas pastas, seu Word</h3>
+        <p>A peça nasce na pasta do cliente, organizada por caso, e abre direto no seu Word. Nada de baixar arquivo um por um de uma plataforma e reorganizar tudo na mão.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🪪</div>
+        <h3>Licença no seu CPF</h3>
+        <p>Sua licença é pessoal e ativa em até 3 computadores seus. Você não paga por assento de equipe nem depende de login em site que pode mudar as regras amanhã.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🔄</div>
+        <h3>Atualiza com um comando</h3>
+        <p>Digitou /atualizar-skill, recebeu as melhorias da semana. Correções e evoluções chegam direto na sua máquina, sem reinstalar nada e sem mensalidade escondida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTO VIVO -->
+<section class="produto-vivo" id="produto-vivo">
+  <div class="container">
+    <span class="kicker" data-num="02">Produto vivo (isso aqui não é promessa, é changelog)</span>
+    <h2>Tudo isso entrou <span class="vermelho">só esta semana</span>. Quem compra, recebe o que vier depois.</h2>
+    <p class="lead">Skill parada é prompt caro. A MaestrIA recebe melhoria toda semana, e o que sai depois da sua compra chega de graça com um comando. Abaixo, o que os compradores desta semana já encontram dentro:</p>
+
+    <div class="dores-grid">
+      <div class="dor-card">
+        <div class="dor-icon">🧭</div>
+        <h3>Jurimetria oficial do CNJ</h3>
+        <p>Em qual vara seu caso tem mais chance? Taxa real de procedência por vara, taxa de acordo, tempo até a sentença e comparação entre tribunais, direto da base pública do CNJ. No Previdenciário, no Trabalhista e nos combos.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🎯</div>
+        <h3>Triagem do primeiro contato</h3>
+        <p>O cliente novo mandou um textão ou um áudio de 4 minutos no WhatsApp? Joga na skill: sai a área do caso, ALERTA de prazo e prescrição, documentos a pedir e a resposta pronta pra colar. Em todos os pacotes.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">📡</div>
+        <h3>Radar processual (base oficial CNJ)</h3>
+        <p>"Como está o processo?" respondido em um comando, direto da base pública do CNJ. E autos em PDF viram ficha executiva: linha do tempo, estado atual e prazos em risco. Em todos os pacotes.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🧐</div>
+        <h3>Revisor treinado nos SEUS critérios</h3>
+        <p>Ele aprende com as suas melhores peças e revisa o trabalho do estagiário e do associado ANTES de chegar em você. Recurso passa por checagem de admissibilidade; contrato que seu cliente vai assinar ganha lente de cláusula abusiva. Nos pacotes com o gerador de documentos.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🩺</div>
+        <h3>Kit perícia previdenciária</h3>
+        <p>Guia de preparação do SEU cliente pra perícia médica e avaliação social do BPC, em linguagem que ele entende. E a RMI do auxílio-acidente calculada a partir da carta de concessão, em 2 minutos. No Previdenciário e nos combos.</p>
+      </div>
+    </div>
+    <p class="lead-mini">Nada disso custou um real a mais pra quem já tinha comprado: chegou pelo /maestria atualizar. É assim toda semana.</p>
+  </div>
+</section>
+
+<!-- ÁREAS: liga a home nas páginas de venda de cada vertical -->
+<section class="areas-home" id="areas">
+  <div class="container">
+    <span class="kicker" data-num="03">Cada área tem o seu arsenal</span>
+    <h2>Veja o que a MaestrIA faz <span class="vermelho">na sua área</span>.</h2>
+    <p class="lead">Cada pacote nasce da rotina real daquela matéria. Entre na página da sua área e veja ferramenta por ferramenta, com os cálculos e as peças que ela entrega.</p>
+    <div class="areas-grid">
+      <a class="area-card" href="/prev/">
+        <span class="ac-tag">Previdenciário</span>
+        <h3>Quem vive do INSS</h3>
+        <p>Cálculo e planejamento, auditor de CNIS, perícia de ponta a ponta, recurso administrativo e o kit do auxílio-acidente.</p>
+        <span class="ac-link">Ver o Previdenciário &rsaquo;</span>
+      </a>
+      <a class="area-card" href="/trab/">
+        <span class="ac-tag">Trabalhista</span>
+        <h3>Quem vive de rescisão</h3>
+        <p>Verbas rescisórias, hora extra com reflexos, insalubridade e periculosidade, contestação e acordo do 484-A.</p>
+        <span class="ac-link">Ver o Trabalhista &rsaquo;</span>
+      </a>
+      <a class="area-card" href="/marketing/">
+        <span class="ac-tag">Marketing Jurídico</span>
+        <h3>Quem precisa aparecer</h3>
+        <p>Site do escritório no ar, Google Meu Negócio, conteúdo na sua voz e todo CTA filtrado pelo Provimento 205.</p>
+        <span class="ac-link">Ver o Marketing &rsaquo;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRA QUEM É -->
+
+<section class="faixa-cta">
+  <div class="container">
+    <p class="cta-linha">Você acabou de ver o que ela faz. Agora escolhe o seu arsenal.</p>
+    <a href="#pacotes" class="btn-primary btn-grande">Escolher meu pacote</a>
+  </div>
+</section>
+<section class="pra-quem" id="pra-quem">
+  <div class="container">
+    <span class="kicker" data-num="03">Pra quem é</span>
+    <h2>Pra advogado que <span class="vermelho">parou de captar</span> pra não se quebrar.</h2>
+    <p class="lead">A MaestrIA substitui tarefa, nunca responsabilidade. Ela é pra quem já entendeu que o teto não é o mercado, é a capacidade de entrega. E quer destravar isso sem contratar time nem virar refém de sisteminha genérico.</p>
+
+    <div class="pra-quem-grid">
+      <div class="pq-col pq-sim">
+        <h3>É pra você se:</h3>
+        <ul>
+          <li>Já recusou cliente esse mês pra não sobrecarregar a agenda</li>
+          <li>Reescreve a mesma peça 3 vezes até assinar tranquilo</li>
+          <li>Cobra honorário sério e não quer torrar hora repetindo tarefa</li>
+          <li>Tem medo de IA inventar jurisprudência e você assinar embaixo</li>
+          <li>Não confia dado de cliente em servidor de terceiro</li>
+          <li>Quer parar de perder cliente indicado pro escritório do lado</li>
+        </ul>
+      </div>
+      <div class="pq-col pq-nao">
+        <h3>NÃO é pra você se:</h3>
+        <ul>
+          <li>Acredita que IA substitui advogado</li>
+          <li>Procura sisteminha de R$ 100 por mês e esquece</li>
+          <li>Não topa rodar nada local no seu computador</li>
+          <li>Espera receber peça pronta sem revisão</li>
+          <li>Não topa calibrar a skill com 2 modelos seus (15 minutos uma vez)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSELHEIROS -->
+<section class="conselheiros">
+  <div class="container">
+    <span class="kicker" data-num="04">Diferencial único</span>
+    <h2>O conselho que te dá confiança <span class="vermelho">pra protocolar sem reler 5 vezes</span>.</h2>
+    <p class="lead">Você escreve uma peça. O Doutrinador questiona o fundamento. O Litigante procura brechas pra exploração. O Conservador aponta o risco que ninguém viu. O Estrategista mostra o custo de cada decisão. Você deixa de conversar com uma IA. Passa a ter um conselho de guerra trabalhando junto. Em cada skill, 5 a 11 personas inspiradas em escolas doutrinárias do direito brasileiro. Sem inventar nome de pessoa real.</p>
+
+    <div class="cons-grid">
+      <div class="cons-card">
+        <h4>O Doutrinador</h4>
+        <p>Fundamentação teórica robusta. Princípios constitucionais, doutrina consagrada, raciocínio dogmático.</p>
+      </div>
+      <div class="cons-card">
+        <h4>O Litigante</h4>
+        <p>Pensa em vencer. Plano de batalha, prova a produzir, ponto de ataque, chance de êxito.</p>
+      </div>
+      <div class="cons-card">
+        <h4>O Estrategista</h4>
+        <p>Custo-benefício. Qual rito, qual caminho, qual ROI processual. Vê o caso de cima.</p>
+      </div>
+      <div class="cons-card">
+        <h4>O Conciliador</h4>
+        <p>Busca acordo. Preserva relação. Negocia valores razoáveis. Evita litígio que destrói vínculo.</p>
+      </div>
+      <div class="cons-card">
+        <h4>O Conservador</h4>
+        <p>Foco em risco zero. Defende caminho seguro. Cita jurisprudência consolidada. Foge de tese arrojada.</p>
+      </div>
+      <div class="cons-card cons-bonus">
+        <h4>+ Conselheiros específicos da área</h4>
+        <p>Sentinela do CNIS, Tático da Perícia, Defensor do Empregador, Mediador Familiar, Contratualista, e mais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JURIMETRIA -->
+<section class="conselheiros" id="jurimetria">
+  <div class="container">
+    <span class="kicker" data-num="05">Novidade: inteligência que plataforma de jurimetria cobra R$ 300/mês</span>
+    <h2>Em qual vara seu caso tem <span class="vermelho">mais chance</span>?</h2>
+    <p class="lead">A MaestrIA responde com o dado OFICIAL do CNJ, direto da base pública DataJud, sem custo extra. Um comando devolve a taxa real de procedência por vara, quanto cada juízo fecha de acordo, o tempo mediano até a sentença e a comparação entre tribunais. Antes de ajuizar, você decide o foro com estatística oficial na mão, não no feeling.</p>
+
+    <div class="terminal-mock">
+      <div class="terminal-bar">
+        <span class="t-dot"></span><span class="t-dot"></span><span class="t-dot"></span>
+        <span class="terminal-title">Claude Code: MaestrIA Previdenciário</span>
+      </div>
+      <div class="terminal-body">
+        <p class="t-cmd"><span class="t-prompt">&gt;</span> /jurimetria auxílio-acidente</p>
+        <p class="t-resp">Consultando a base oficial do CNJ (DataJud)... 112.277 processos de Auxílio-Acidente no TJSP desde 2022.</p>
+        <p class="t-resp">Taxa de procedência em 1ª instância no estado: 38,7%. Nas varas cíveis de Piracicaba: 70 a 80%.</p>
+        <p class="t-resp">Comparando com a Justiça Federal... TRF1: 44,5% | TRF4: 28,8%. Tempo mediano até a sentença: 4,8 meses.</p>
+        <p class="t-ok">✓ Relatório de Jurimetria gerado em Word, com metodologia e fonte: Jurimetria_AuxilioAcidente.docx</p>
+        <p class="t-meta">Exemplo real, apurado na base pública em julho/2026. Indicador estatístico de tendência, nunca garantia de resultado.</p>
+      </div>
+    </div>
+
+    <div class="dores-grid">
+      <div class="dor-card">
+        <div class="dor-icon">🧭</div>
+        <h3>Onde ajuizar</h3>
+        <p>Quando existe opção de competência, a comparação entre tribunais mostra onde a tese tem melhor histórico. Federal ou estadual, TRT2 ou TRT15: a resposta vira número.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🎯</div>
+        <h3>Qual vara</h3>
+        <p>Ranking de varas com base estatística mínima (nada de "100% de vitória" com uma sentença só). Vara com taxa duas vezes acima da média muda a estratégia.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">⏱️</div>
+        <h3>Expectativa honesta pro cliente</h3>
+        <p>"Neste tribunal, esse pedido tem X% de procedência e demora Y meses até a sentença." Dito na reunião de honorários, com fonte oficial. Cliente que entende o jogo confia mais.</p>
+      </div>
+      <div class="dor-card">
+        <div class="dor-icon">🤝</div>
+        <h3>Vale propor acordo?</h3>
+        <p>A taxa de acordo por vara mostra onde a mesa de negociação está aberta. Juízo que homologa metade dos casos por transação pede outra estratégia.</p>
+      </div>
+    </div>
+    <p class="lead-mini">Incluída no Previdenciário, no Trabalhista e em todos os combos. O relatório sai marcado como indicador estatístico oficial de tendência: bússola de estratégia, jamais promessa de resultado.</p>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="como-funciona" id="como-funciona">
+  <div class="container">
+    <span class="kicker" data-num="06">Do zero à primeira peça</span>
+    <h2>Da compra à primeira petição <span class="vermelho">no mesmo dia</span>.</h2>
+    <p class="lead">Sem reunião de implantação, sem consultor, sem TI. Você faz sozinho, no seu ritmo, com suporte de prontidão se travar.</p>
+
+    <div class="passos-grid">
+      <div class="passo-card">
+        <div class="passo-num">1</div>
+        <h3>Compra e recebe no email</h3>
+        <p>Em até 2 minutos chega o código de ativação e o link de download do seu pacote.</p>
+      </div>
+      <div class="passo-card">
+        <div class="passo-num">2</div>
+        <h3>Joga o arquivo na conversa</h3>
+        <p>Abre o Claude, arrasta o arquivo baixado pra conversa e escreve: instala pra mim. Ele faz o resto sozinho.</p>
+      </div>
+      <div class="passo-card">
+        <div class="passo-num">3</div>
+        <h3>Calibra em 30 minutos</h3>
+        <p>A skill pergunta seus dados, seu tom de escrita, lê 1 ou 2 modelos seus e configura onde os documentos ficam: numa pasta do computador ou no seu Google Drive, organizados por cliente e por caso.</p>
+      </div>
+      <div class="passo-card">
+        <div class="passo-num">4</div>
+        <h3>Gera a primeira peça</h3>
+        <p>Você pede a petição, ela lê os documentos do cliente e entrega a peça com o seu papel timbrado, em Word ou PDF, pronta pra sua revisão.</p>
+      </div>
+    </div>
+
+    <div class="prereq-box leigo-box">
+      <div class="prereq-icon">💬</div>
+      <div class="prereq-content">
+        <h3>Não precisa saber programar. Nada.</h3>
+        <p>Se você digita no WhatsApp, você opera a MaestrIA. Não tem código, não tem configuração complicada. Você conversa com a skill em português: ela pergunta, você responde, e o documento sai pronto em Word, em PDF ou até na tela, do jeito que você preferir revisar.</p>
+        <p class="prereq-meta">Travou em qualquer passo? Pede ajuda dentro da própria skill e a gente te destrava.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACOTES -->
+<section class="pacotes" id="pacotes">
+  <div class="container">
+    <span class="kicker" data-num="07">Pacotes</span>
+    <h2>Escolha seu arsenal.<br><span class="vermelho">Lote fundador: 20 licenças</span>, depois o preço sobe.</h2>
+    <p class="lead">Previdenciário, Trabalhista e Marketing disponíveis hoje, <strong>R$ 697 cada</strong> no lote fundador (primeiras 20 licenças ou até 31/07, o que vier primeiro; depois sobe pra R$ 997). Atende mais de uma área? Depois da compra você recebe a oferta pra somar as outras com desconto.</p>
+
+    <h3 class="pacote-section-title">Pacotes por área</h3>
+    <div class="pacotes-grid">
+
+      <div class="pack-card pack-disponivel pack-destaque">
+        <div class="pack-badge-top">Mais escolhido</div>
+        <div class="pack-status">LOTE FUNDADOR</div>
+        <div class="pack-header">
+          <span class="pack-tag">PREVIDENCIÁRIO</span>
+          <h3>MaestrIA Previdenciário</h3>
+        </div>
+        <div class="pack-price">
+          <span class="price-currency">R$</span><span class="price-value">697</span><span class="price-period">fundador (depois R$ 997)</span>
+        </div>
+        <p class="pack-saving">Pra escritório que vive do INSS: do primeiro áudio do cliente à audiência, com a sua voz, citando fonte oficial.</p>
+        <ul class="pack-features">
+          <li><strong>Cálculo previdenciário completo:</strong> RMI, atrasados, tempo especial e simulação de aposentadoria</li>
+          <li><strong>Planejamento previdenciário:</strong> quando cada regra destrava, aposentar agora vs esperar, relatório em Word pra vender como consultoria</li>
+          <li><strong>Auditor de CNIS:</strong> vínculo faltante, período com erro e contribuição não computada, apontados em minutos</li>
+          <li><strong>Qualificador de lead de auxílio-acidente (novo):</strong> seu time comercial cola a conversa do lead e recebe o veredito na hora: vale fechar, investigar ou dispensar, com o período de graça calculado na precisão do dia e o roteiro de fechamento pronto</li>
+          <li><strong>Recurso contra indeferimento:</strong> argumentado com os dados do caso, no mesmo dia</li>
+          <li><strong>Perícia de ponta a ponta:</strong> quesitos, impugnação de PPP e de laudo, e o cliente preparado em linguagem que ele entende</li>
+          <li><strong>Jurimetria oficial do CNJ:</strong> em qual vara seu benefício tem mais chance, antes de ajuizar</li>
+          <li><strong>Petições no seu timbrado:</strong> gerador completo de documentos + revisor treinado nos SEUS critérios</li>
+        </ul>
+        <details class="pack-mais">
+          <summary>Ver as outras 7 ferramentas do pacote</summary>
+          <ul class="pack-features">
+            <li><strong>Auxílio-acidente de ponta a ponta:</strong> RMI direto da carta de concessão e valor atual reajustado pelos índices oficiais</li>
+            <li><strong>Triagem do primeiro contato:</strong> o áudio de WhatsApp do cliente vira área, alerta de prazo e resposta pronta</li>
+            <li><strong>Radar processual (base CNJ):</strong> andamento em um comando; autos em PDF viram ficha executiva</li>
+            <li><strong>Mapa de provas:</strong> a força de cada prova, onde o adversário ataca e o que ainda dá pra produzir</li>
+            <li><strong>Teses vinculantes:</strong> repetitivos do STJ e repercussão geral do STF validados na fonte antes de entrar na peça</li>
+            <li><strong>Preparador de audiência:</strong> roteiro a partir dos autos + sustentação oral cronometrada</li>
+            <li><strong>Banco Vivo de Decisões:</strong> as skills aprendem o padrão decisório dos casos que você vence</li>
+          </ul>
+        </details>
+        <a href="https://pay.kiwify.com.br/q5QEizf" class="btn-pack" data-pacote="prev">Quero o Previdenciário por R$ 697</a>
+      </div>
+
+      <div class="pack-card pack-disponivel">
+        <div class="pack-status">LOTE FUNDADOR</div>
+        <div class="pack-header">
+          <span class="pack-tag">TRABALHISTA</span>
+          <h3>MaestrIA Trabalhista</h3>
+        </div>
+        <div class="pack-price">
+          <span class="price-currency">R$</span><span class="price-value">697</span><span class="price-period">fundador (depois R$ 997)</span>
+        </div>
+        <p class="pack-saving">Pra escritório que vive de rescisão e hora extra: do primeiro áudio do cliente à audiência, dos dois lados do balcão.</p>
+        <ul class="pack-features">
+          <li><strong>Verbas rescisórias completas:</strong> qualquer modalidade, FGTS + multa 40%, com memória apresentável ao juízo</li>
+          <li><strong>Hora extra com reflexos:</strong> HE e adicional noturno seguindo ADC 58 do STF e Lei 14.905</li>
+          <li><strong>Insalubridade, periculosidade e adicional noturno:</strong> o cálculo do adicional com os reflexos, pronto pra fundamentar o pedido</li>
+          <li><strong>Contestação trabalhista:</strong> defesa empresarial em reclamatória, tese a tese</li>
+          <li><strong>Acordo do art. 484-A:</strong> minuta padrão MTE com cálculo de homologação</li>
+          <li><strong>Jurimetria oficial do CNJ:</strong> taxa de procedência e de acordo por vara, comparação entre TRTs</li>
+          <li><strong>Petições no seu timbrado:</strong> gerador completo de documentos + revisor treinado nos SEUS critérios</li>
+        </ul>
+        <details class="pack-mais">
+          <summary>Ver as outras 6 ferramentas do pacote</summary>
+          <ul class="pack-features">
+            <li><strong>Triagem do primeiro contato:</strong> o áudio de WhatsApp do cliente vira área, alerta de prazo e resposta pronta</li>
+            <li><strong>Radar processual (base CNJ):</strong> andamento em um comando; autos em PDF viram ficha executiva</li>
+            <li><strong>Mapa de provas:</strong> a força de cada prova, onde o adversário ataca e o que ainda dá pra produzir</li>
+            <li><strong>Teses vinculantes:</strong> repetitivos do STJ e repercussão geral do STF validados na fonte antes de entrar na peça</li>
+            <li><strong>Preparador de audiência:</strong> roteiro a partir dos autos, preparação de testemunha e sustentação oral cronometrada</li>
+            <li><strong>Banco Vivo de Decisões:</strong> as skills aprendem o padrão decisório dos casos que você vence</li>
+          </ul>
+        </details>
+        <a href="https://pay.kiwify.com.br/zRpxcta" class="btn-pack" data-pacote="trab">Quero o Trabalhista por R$ 697</a>
+      </div>
+
+      <div class="pack-card pack-disponivel">
+        <div class="pack-status">LOTE FUNDADOR</div>
+        <div class="pack-header">
+          <span class="pack-tag">MARKETING JURÍDICO</span>
+          <h3>MaestrIA Marketing</h3>
+        </div>
+        <div class="pack-price">
+          <span class="price-currency">R$</span><span class="price-value">697</span><span class="price-period">fundador (depois R$ 997)</span>
+        </div>
+        <p class="pack-saving">Pra escritório que precisa se posicionar sem virar refém de social mídia nem de web designer.</p>
+        <ul class="pack-features">
+          <li><strong>Site do escritório no ar:</strong> construído pela skill, com SEO + GEO e blog plugado, no seu domínio, hospedado de graça</li>
+          <li><strong>Google Meu Negócio completo:</strong> da criação à rotina que rankeia no "advogado perto de mim"</li>
+          <li><strong>Landing pages de campanha:</strong> prontas pra anúncio, com Pixel e WhatsApp</li>
+          <li><strong>Conteúdo com a sua voz:</strong> reels, carrosséis, estáticos e artigos calibrados nas suas personas</li>
+          <li><strong>Arte direto no seu Canva:</strong> conecta com o Canva oficial e gera o design na sua conta</li>
+          <li><strong>Calendário editorial:</strong> mês inteiro de pauta da sua área em minutos</li>
+          <li><strong>Compliance OAB automático:</strong> todo CTA filtrado pelo Provimento 205</li>
+        </ul>
+        <details class="pack-mais">
+          <summary>Ver as outras 3 ferramentas do pacote</summary>
+          <ul class="pack-features">
+            <li><strong>Mapa de personas:</strong> quem é seu cliente, a dor nas palavras dele e o tom que funciona com cada perfil</li>
+            <li><strong>Estilo calibrado:</strong> aprende com seus textos e escreve como você, não como robô</li>
+            <li><strong>Pesquisa de campanha com dados públicos:</strong> bases oficiais viram praças, tamanho de público e ângulos de criativo</li>
+          </ul>
+        </details>
+        <a href="https://pay.kiwify.com.br/Ln4ErJJ" class="btn-pack" data-pacote="marketing">Quero o Marketing por R$ 697</a>
+      </div>
+
+    </div>
+
+    <p class="pack-rodape">Atende mais de uma área, ou quer captar mais clientes? Depois da compra você recebe a oferta pra somar as outras áreas com desconto. Todo pacote inclui <strong>12 meses de acesso com atualizações semanais</strong>, <strong>suporte pela própria skill</strong>, com a correção chegando pra todo mundo no <code>/atualizar-skill</code> (e as funcionalidades são ajustadas a partir do feedback de quem usa), licença no seu CPF válida em até 3 computadores e <strong>garantia incondicional de 7 dias</strong>.</p>
+
+    <div class="prereq-box">
+      <div class="prereq-icon">⚙️</div>
+      <div class="prereq-content">
+        <h3>Único pré-requisito: assinatura do Claude (plano Pro ou Max)</h3>
+        <p>O Claude é a inteligência artificial onde a MaestrIA trabalha. A assinatura é feita direto no <a href="https://claude.ai" target="_blank">claude.ai</a>, a partir de <strong>US$ 20/mês</strong>, e é o único custo fora da MaestrIA. Só isso. Não tem servidor, não tem TI, não tem mensalidade escondida.</p>
+        <p class="prereq-meta">Não tem ainda? Cria a conta em 5 minutos, com o mesmo email que vai usar na compra aqui.</p>
+      </div>
+    </div>
+
+    <h3 class="pacote-section-title">Como funcionam as atualizações</h3>
+    <p class="lead-mini">Comprou qualquer pacote? Toda melhoria, correção, nova skill da sua área e ajuste de jurisprudência chega com um único comando (/atualizar-skill), sem custo adicional durante o ano de acesso. Pacote novo de outra área (Família, Imobiliário, Criminal etc) é vendido em separado, no valor vigente na época do lançamento dele.</p>
+
+    <h3 class="pacote-section-title">Roadmap de liberação dos próximos pacotes</h3>
+
+    <div class="roadmap-timeline">
+      <div class="roadmap-item roadmap-done">
+        <div class="roadmap-mes">JUL/2026</div>
+        <div class="roadmap-pacote">Previdenciário + Trabalhista + Marketing</div>
+        <div class="roadmap-status">DISPONÍVEL HOJE</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-mes">AGO/2026</div>
+        <div class="roadmap-pacote">Família (pensão, divórcio consensual)</div>
+        <div class="roadmap-status">Em breve</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-mes">SET/2026</div>
+        <div class="roadmap-pacote">Imobiliário (distrato, locação)</div>
+        <div class="roadmap-status">Em breve</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-mes">OUT/2026</div>
+        <div class="roadmap-pacote">Criminal (flagrante, HC)</div>
+        <div class="roadmap-status">Em breve</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-mes">NOV/2026</div>
+        <div class="roadmap-pacote">Consumidor (CDC, dano moral, LGPD)</div>
+        <div class="roadmap-status">Em breve</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-mes">DEZ/2026</div>
+        <div class="roadmap-pacote">Empresarial (defesa trab + tributário)</div>
+        <div class="roadmap-status">Em breve</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-mes">JAN/2027</div>
+        <div class="roadmap-pacote">Saúde (medicamento, plano)</div>
+        <div class="roadmap-status">Em breve</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi">
+  <div class="container">
+    <span class="kicker" data-num="08">A conta</span>
+    <h2>Quanto te custa <span class="vermelho">fazer tudo na mão</span>?</h2>
+    <p class="lead">Sua hora vale R$ 250. Sua melhor hora vale R$ 500. Uma peça que toma três horas de trabalho repetitivo custa de R$ 750 a R$ 1.500, toda vez. Multiplique por 4 peças na semana, 48 semanas no ano, e chegue na conta abaixo. É o que o trabalho manual tira do seu escritório hoje.</p>
+    <div class="roi-grid">
+      <div class="roi-card destaque">
+        <strong>R$ 144 mil a R$ 288 mil</strong>
+        <span>desperdício anual em horas operacionais (4 peças por semana, R$ 250/h a R$ 500/h)</span>
+      </div>
+      <div class="roi-card">
+        <strong>576h+</strong>
+        <span>que somem do seu calendário todo ano nessa rotina</span>
+      </div>
+      <div class="roi-card">
+        <strong>2,6h</strong>
+        <span>economizadas por petição gerada com a skill</span>
+      </div>
+      <div class="roi-card">
+        <strong>1,85h</strong>
+        <span>economizadas por cálculo previdenciário que sai do braço pra skill</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANCO VIVO -->
+<section class="banco">
+  <div class="container">
+    <span class="kicker" data-num="09">O ativo que o seu escritório ainda não construiu</span>
+    <h2><span class="vermelho">Banco Vivo de Decisões</span>.<br>O conhecimento do escritório, virando patrimônio.</h2>
+
+    <p class="lead">O melhor conhecimento da advocacia brasileira ainda morre na cabeça das pessoas. Quando o associado sai, a inteligência sai junto. Quando o sócio para de operar, o jeito de vencer aquele tipo de caso se perde.</p>
+
+    <p class="lead">A MaestrIA muda esse jogo. Cada decisão favorável que você contribui, anonimizada dentro do seu computador antes de qualquer envio, entra no Banco Vivo. As skills passam a conhecer o padrão decisório agregado por vara, por tema, por tese. Quando outro advogado ataca um caso na mesma vara, a peça dele chega calibrada pelo que tem vencido ali.</p>
+
+    <p class="lead">E o efeito composto: cada contribuição treina a ferramenta no <strong>seu jeito de advogar</strong>. Quanto mais você usa, mais ela escreve como você, decide como você e conhece os casos que você vence. Depois de meses de uso, ela deixa de ser uma skill de prateleira. <strong>Vira um ativo do escritório, com a sua digital.</strong></p>
+    <div class="banco-pontos">
+      <div class="banco-ponto">
+        <strong>1.</strong>
+        <p>Você ganha um caso → contribui a decisão</p>
+      </div>
+      <div class="banco-ponto">
+        <strong>2.</strong>
+        <p>CPF, nomes e valores removidos no seu computador</p>
+      </div>
+      <div class="banco-ponto">
+        <strong>3.</strong>
+        <p>Banco agrupa por vara e por tema</p>
+      </div>
+      <div class="banco-ponto">
+        <strong>4.</strong>
+        <p>As próximas peças chegam no padrão do que vence ali</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="garantia">
+  <div class="container">
+    <div class="garantia-card">
+      <div class="selo-garantia"><strong>7</strong><span>dias</span></div>
+      <div class="garantia-texto">
+        <h2>Garantia incondicional de 7 dias</h2>
+        <p>Faça o teste: instale a skill, configure em menos de 30 minutos e rode uma petição completa num caso real. Se não economizar pelo menos 2 horas, devolvemos o valor integral. Sem perguntas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+
+<section class="faixa-cta">
+  <div class="container">
+    <p class="cta-linha">A conta fecha: a primeira peça já paga o investimento do ano inteiro.</p>
+    <a href="#pacotes" class="btn-primary btn-grande">Escolher meu pacote</a>
+  </div>
+</section>
+<section class="faq" id="faq">
+  <div class="container">
+    <span class="kicker">FAQ</span>
+    <h2>Perguntas que advogado sério faz.</h2>
+
+    <details>
+      <summary>Por que eu preciso de uma assinatura Claude Pro ou Max?</summary>
+      <p>O Claude é a inteligência artificial que faz o trabalho pesado, e a MaestrIA é a camada jurídica calibrada pra advocacia brasileira que trabalha em cima dele. O aplicativo é gratuito, mas o cérebro vem da assinatura: Claude Pro (US$ 20/mês) ou Claude Max, contratada direto no claude.ai. Sem ela, as skills não funcionam. Pense assim: o Claude é o motor, a MaestrIA é o carro.</p>
+    </details>
+
+    <details>
+      <summary>Preciso de internet pra usar?</summary>
+      <p>Sim, como qualquer ferramenta com inteligência artificial. O que importa: os documentos e dados dos seus clientes ficam gravados no seu computador, em pastas suas. Nada disso vai pra servidor nosso.</p>
+    </details>
+
+    <details>
+      <summary>Inventa acórdão como o ChatGPT?</summary>
+      <p>Não. As skills citam apenas leis, súmulas e temas verificados em fonte oficial (planalto.gov.br, stf.jus.br, stj.jus.br, tst.jus.br, gov.br/inss). Quando uma referência não pode ser confirmada na fonte, a skill avisa em vez de inventar. É a regra mais rígida do produto: nenhuma citação entra sem fonte.</p>
+    </details>
+
+    <details>
+      <summary>Funciona pra direito do consumidor / tributário / empresarial?</summary>
+      <p>Ainda não. O catálogo abre por área: Previdenciário, Trabalhista e Marketing hoje, Família em agosto, Imobiliário em setembro, Criminal em outubro, Consumidor em novembro, Empresarial em dezembro e Saúde em janeiro/2027. Cada área nova sai no valor de primeiro lote pra quem entra cedo.</p>
+    </details>
+
+    <details>
+      <summary>Quanto tempo leva o setup?</summary>
+      <p>30 minutos por skill, divididos em 4 blocos: dados do escritório (5 min), tom de voz e modelo (10 min), caso piloto (10 min), validação final (5 min). Você pode pular o caso piloto se quiser, mas recomendamos rodar.</p>
+    </details>
+
+    <details>
+      <summary>Os dados dos meus clientes ficam seguros?</summary>
+      <p>Sim. CPF, RG, prontuário, processo, valores: tudo fica em pastas suas, organizadas por cliente e por caso, no seu computador ou no seu Google Drive, você escolhe na configuração. Se um dia você quiser contribuir uma decisão pro Banco Vivo, os dados sensíveis são removidos no seu próprio computador e você revisa a versão limpa antes de enviar.</p>
+    </details>
+
+    <details>
+      <summary>Os Conselheiros são pessoas reais?</summary>
+      <p>Não. São personas de IA inspiradas em escolas doutrinárias brasileiras. As obras citadas como leituras recomendadas (Maurício Godinho Delgado, Maria Berenice Dias, Carlos Roberto Gonçalves, e outros) são públicas e de autoria dessas pessoas. Mas a fala do Conselheiro é IA, com disclaimer claro. Nunca atribuímos opinião a pessoa real.</p>
+    </details>
+
+    <details>
+      <summary>Como funciona a contribuição de decisões?</summary>
+      <p>É voluntária e simples: você ganhou um caso, decide contribuir, os dados sensíveis são removidos no seu computador, você revisa a versão limpa e envia. Cada contribuição deixa as skills mais afiadas no seu jeito de trabalhar e no padrão das varas onde você atua. Quem contribui, colhe primeiro.</p>
+    </details>
+
+    <details>
+      <summary>Funciona no meu computador?</summary>
+      <p>Windows e Mac, sim. Você arrasta o arquivo do pacote pra conversa do Claude e pede pra instalar. Ele prepara tudo sozinho; se faltar qualquer coisa no computador, ele mesmo resolve. Você não instala nada na mão. E tem <a href="instalacao.html" style="color:var(--vermelho);">guia passo a passo com tudo copiável</a>, feito pra quem nunca mexeu com isso.</p>
+    </details>
+
+    <details>
+      <summary>Como se compara com consultoria, curso de IA e sistema jurídico online?</summary>
+      <p>Consultoria monta uma plataforma sua e cobra R$ 30 a 55 mil por 6 meses de projeto. Curso te ensina a escrever prompt por R$ 2 a 4 mil, e o trabalho continua sendo seu. Sisteminha jurídico online hospeda os dados do seu cliente no servidor deles. A MaestrIA é produto pronto: instala em 30 minutos, roda no seu computador, sai por R$ 697 no lote fundador por área. Você não aprende a construir a ferramenta. Você usa.</p>
+    </details>
+
+    <details>
+      <summary>E se eu travar? Como funciona o suporte?</summary>
+      <p>Você pede ajuda de dentro da própria skill: ela abre um chamado direto e a gente resolve. Quando a correção sai, ela chega na sua skill com um único comando, sem custo adicional. Quem leva mais de uma área ganha canal prioritário via WhatsApp.</p>
+    </details>
+
+    <details>
+      <summary>Como funciona a garantia de 7 dias?</summary>
+      <p>Você compra, instala, configura e roda uma petição completa num caso real. Se dentro de 7 dias você achar que não é pra você, por qualquer motivo, devolvemos o valor integral. O pedido é feito direto na plataforma de pagamento, sem questionário e sem ligação tentando te segurar.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <h2>Pare de recusar cliente <span class="vermelho">por medo da entrega</span>.</h2>
+    <p>O próximo cliente indicado vai chegar. A pergunta é se você vai aceitar com a entrega blindada ou recusar de novo por causa da agenda. Escolhe o pacote da sua área, instala em meia hora e gera a próxima peça no padrão do seu escritório. Sete dias de garantia incondicional pra testar dentro da operação real.</p>
+    <a href="#pacotes" class="btn-primary btn-grande">Quero aceitar o próximo cliente</a>
+    <p class="cta-meta">Setup em 30 minutos. Sigilo local. Citação validada em fonte oficial. Garantia de 7 dias.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-col footer-brand">
+        <a href="/" class="logo-mia" aria-label="MaestrIA">
+      <img class="logo-mia-sym" src="/img/logo-sym.png" alt="">
+      <span class="logo-mia-lockup"><img class="logo-mia-word" src="/img/logo-word.png" alt="MaestrIA"></span>
+    </a>
+        <p>IA jurídica que roda no seu computador. Construída pra escritório crescer sem quebrar a entrega.</p>
+        <p class="footer-by">Um produto Samurai Lab</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produto</h4>
+        <a href="#pacotes">Pacotes</a>
+        <a href="#solucao">Como funciona</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Suporte</h4>
+        <a href="suporte.html">Central de suporte</a>
+        <a href="instalacao.html">Guia de instalação</a>
+        <a href="https://maestria.samurailab.com.br/membros/">Área de membros</a>
+        <a href="suporte.html#mensagem">Enviar mensagem</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="termos.html">Termos de uso</a>
+        <a href="privacidade.html">Política de privacidade</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Samurai Lab. Toda citação validada em fonte oficial. Dado de cliente fica no computador do advogado.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Checkout da Kiwify leva alguns segundos pra carregar: o botão reage na hora
+  // pro comprador saber que o clique funcionou (evita clique duplo e abandono)
+  document.querySelectorAll(".btn-pack").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (b.dataset.abrindo) return;
+      b.dataset.abrindo = "1";
+      b.dataset.textoOriginal = b.textContent;
+      b.textContent = "Abrindo checkout seguro...";
+      b.style.opacity = "0.85";
+      setTimeout(function () {
+        b.textContent = b.dataset.textoOriginal;
+        b.style.opacity = "";
+        delete b.dataset.abrindo;
+      }, 8000);
+    });
+  });
+</script>
+</body>
+</html>
