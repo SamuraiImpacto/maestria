@@ -562,15 +562,30 @@ function renderizarDownloads(dados) {
     const box = document.createElement("div");
     box.className = "card";
     let itens = "";
+    let qtdAntecipadas = 0;
     skills.forEach((s) => {
+      // Skill liberada antes do lancamento (piloto): marca na lista, senao a
+      // pessoa ve um nome que nao reconhece e nao sabe o que fazer com ele.
+      const selo = s.acesso_antecipado
+        ? " <span class='mini' style='color:#c9a227'>· acesso antecipado</span>"
+        : "";
+      if (s.acesso_antecipado) qtdAntecipadas++;
       itens +=
         "<li><strong>" + esc(s.nome) + "</strong>" +
-        " <span class='mini'>(versão " + esc(s.versao_atual) + ")</span></li>";
+        " <span class='mini'>(versão " + esc(s.versao_atual) + ")</span>" + selo + "</li>";
     });
+    const notaAntecipada = qtdAntecipadas
+      ? "<p class='mini' style='margin-top:10px; border-left:3px solid #c9a227; padding-left:10px'>" +
+        "<strong>" + qtdAntecipadas + " delas estão marcadas como acesso antecipado.</strong> " +
+        "São skills que ainda não foram lançadas para o público e estão liberadas na sua conta. " +
+        "Elas já vêm no instalador e funcionam igual às outras: a diferença é que ainda não " +
+        "passaram por uso real, então revise antes de protocolar e conte pra gente o que achar." +
+        "</p>"
+      : "";
     box.innerHTML =
       "<h3>O que vem no seu pacote</h3>" +
       "<p class='mini'>Tudo isso entra junto no instalador acima. Instalou, tá tudo dentro.</p>" +
-      "<ul style='margin:8px 0 0 18px; line-height:1.7;'>" + itens + "</ul>";
+      "<ul style='margin:8px 0 0 18px; line-height:1.7;'>" + itens + "</ul>" + notaAntecipada;
     grid.appendChild(box);
   }
 
