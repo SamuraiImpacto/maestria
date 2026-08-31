@@ -391,9 +391,13 @@ const LEIA_MAESTRIA = [
 // combinacao de areas e montada dinamicamente e, se faltar o arquivo, o full
 // (que contem tudo) segura: a licenca so e injetada nas skills do plano, entao
 // o cliente nunca fica travado por causa de uma combinacao nova de pacote.
-function bundlesCandidatos(plano) {
+function bundlesCandidatos(plano, temAntecipada) {
   const full = ["full", "vitalicio", "black", "cortesia"];
   const urlDe = (n) => STORAGE_PUB + "maestria-" + n + "-generico.zip";
+  // Cliente de piloto (skills liberadas antes do lancamento): usa o pacote que
+  // TEM essas skills dentro. Sem isso o instalador traria so as do plano e
+  // criaria pasta orfa, com licenca e sem skill. Cai pro full se faltar.
+  if (temAntecipada) return [urlDe("full-piloto"), urlDe("full")];
   if (full.includes(plano)) return [urlDe("full")];
   const areas = (plano || "").replace("pacote_", "");
   if (!areas) return [urlDe("full")];
@@ -453,7 +457,8 @@ async function baixarInstaladorPersonalizado(botao, dados) {
   const cred = credenciais();
   const plano = (dados && dados.cliente) ? dados.cliente.plano : "";
   const skills = (dados && dados.skills) || [];
-  const candidatos = bundlesCandidatos(plano);
+  const temAntecipada = skills.some((s) => s && s.acesso_antecipado);
+  const candidatos = bundlesCandidatos(plano, temAntecipada);
   const textoOriginal = botao.textContent;
   const ajuda = $("dl-perso-ajuda");
   if (ajuda) ajuda.innerHTML = "";
