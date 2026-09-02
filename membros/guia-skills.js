@@ -1,5 +1,6 @@
-// Gerado automaticamente a partir dos comandos reais das skills (nao editar a mao).
-// Regenerar: manutencao/pipeline-lote/gerar_guia.py
+// Gerado automaticamente a partir dos ZIPs PUBLICADOS no catalogo (nao editar a mao).
+// Regenerar: python manutencao/gerar_guia_do_catalogo.py
+// Depois de regenerar, BUMPAR o ?v= de guia-skills.js em membros/index.html.
 window.MAESTRIA_GUIA = {
  "peticao-builder": {
   "funcoes": [
@@ -30,6 +31,10 @@ window.MAESTRIA_GUIA = {
    {
     "c": "menos-perguntas",
     "d": "Liga o modo fluido, o Claude para de pedir permissão a cada passo da peticao-builder (escopado e seguro, sem liberar tudo)."
+   },
+   {
+    "c": "modo-teste",
+    "d": "Cria um CASO DEMO 100% fictício (cliente, CNIS, laudo, carta de concessão do INSS) pra você experimentar a MaestrIA de ponta a ponta sem usar dado de cliente real. Ideal pra testar, treinar a equipe ou gravar demonstração. Tudo marcado como FICTÍCIO."
    },
    {
     "c": "nova-peticao",
@@ -86,6 +91,10 @@ window.MAESTRIA_GUIA = {
    {
     "c": "auditar",
     "d": "Audita o CNIS do segurado vs documentos. Detecta gaps, indicadores e sugere ações de correção."
+   },
+   {
+    "c": "coisa-julgada",
+    "d": "O gate antes de protocolar. Descobre se o cliente já processou o INSS pelo mesmo pedido, aplica o teste da tríplice identidade e diz o caminho certo: protocolar, novo requerimento administrativo, ou rescisória. Evita a extinção do art. 485, V do CPC e a condenação em honorários."
    }
   ]
  },
@@ -138,6 +147,10 @@ window.MAESTRIA_GUIA = {
    {
     "c": "planejamento-previdenciario",
     "d": "Planejamento previdenciário completo pra vender como consultoria. Projeta ano a ano quando cada regra de aposentadoria destrava, compara aposentar agora vs esperar, simula estratégias de contribuição (teto, plano simplificado, parar de contribuir) com custo-benefício, e entrega relatório em Word ..."
+   },
+   {
+    "c": "qualificar-acidente",
+    "d": "Triagem comercial de lead de auxílio-acidente pro time do escritório. Conduz o roteiro de perguntas (lesão, data, qualidade de segurado, função), roda o motor do período de graça e devolve o veredito PERFIL FORTE / INVESTIGAR / NÃO SERVE com o próximo passo pronto (script de fechamento ou desqual..."
    },
    {
     "c": "simular-beneficio",
