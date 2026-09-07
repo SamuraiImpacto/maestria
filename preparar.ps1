@@ -19,6 +19,43 @@ function Tem-PythonReal {
     } catch { return $false }
 }
 
+function Recarregar-Caminhos {
+    # Programa recém-instalado só aparece pra quem abre um terminal novo. Sem
+    # recarregar aqui, a conferência logo abaixo diria "não instalou" mesmo
+    # tendo instalado, e mandaria a pessoa pro caminho manual à toa.
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
+                [System.Environment]::GetEnvironmentVariable("Path", "User")
+}
+
+function Destravar-LojaDaMicrosoft {
+    # ⛔ O winget confere o certificado da loja da Microsoft antes de instalar
+    # QUALQUER coisa, mesmo o que não vem da loja. Quando um antivírus ou a rede
+    # da empresa inspeciona o tráfego, essa conferência falha com o código
+    # 0x8a15005e e derruba a instalação inteira. Aconteceu com uma cliente em
+    # 07/09/2026: o preparador dizia "OK, instalado" e nada tinha sido instalado.
+    #
+    # A MaestrIA não usa a loja em nada: Git e Python vêm da fonte "winget".
+    # Então desligamos só essa conferência, e só depois dela já ter atrapalhado.
+    Write-Host "   O Windows travou a conferência da loja da Microsoft. Destravando..." -ForegroundColor Yellow
+    winget settings --enable BypassCertificatePinningForMicrosoftStore 2>&1 | Out-Null
+}
+
+function Instalar-ComWinget($id, $comandoParaConferir, $minutos) {
+    # Devolve $true só quando o programa REALMENTE responde depois da instalação.
+    # ⛔ Nunca confiar no código de saída do winget: ele volta 0 em situações em
+    # que não instalou nada. Quem diz a verdade é o comando existir ou não.
+    Write-Host "   Instalando ($minutos)..."
+    winget install --id $id -e --source winget --accept-package-agreements --accept-source-agreements
+    Recarregar-Caminhos
+    if (& $comandoParaConferir) { return $true }
+
+    # Segunda e última tentativa, agora sem a trava da loja no caminho.
+    Destravar-LojaDaMicrosoft
+    winget install --id $id -e --source winget --accept-package-agreements --accept-source-agreements
+    Recarregar-Caminhos
+    return (& $comandoParaConferir)
+}
+
 Write-Host ""
 Write-Host "==============================================" -ForegroundColor Red
 Write-Host "  MaestrIA | Preparando o seu computador" -ForegroundColor White
@@ -40,11 +77,13 @@ if (-not $temWinget) {
 Write-Host "[1 de 3] Git (programa de apoio do Claude Code)..." -ForegroundColor Cyan
 if (Tem-Comando "git") {
     Write-Host "   OK: já está instalado, nada a fazer." -ForegroundColor Green
-} elseif ($temWinget) {
-    Write-Host "   Instalando (1 a 3 minutos)..."
-    winget install --id Git.Git -e --source winget --accept-package-agreements --accept-source-agreements
+} elseif ($temWinget -and (Instalar-ComWinget "Git.Git" { Tem-Comando "git" } "1 a 3 minutos")) {
     Write-Host "   OK: Git instalado." -ForegroundColor Green
 } else {
+    if ($temWinget) {
+        Write-Host "   O instalador automático não conseguiu. Sem problema: dá pra" -ForegroundColor Yellow
+        Write-Host "   instalar na mão, e é rápido." -ForegroundColor Yellow
+    }
     Write-Host "   Abrindo a página oficial do Git no seu navegador." -ForegroundColor Yellow
     Write-Host "   Lá: clique no botão 'Click here to download', rode o arquivo"
     Write-Host "   baixado e vá clicando Next em tudo até o final. Pode confiar:"
@@ -74,11 +113,13 @@ Write-Host ""
 Write-Host "[3 de 3] Python (motor de cálculo das skills)..." -ForegroundColor Cyan
 if (Tem-PythonReal) {
     Write-Host "   OK: já está instalado, nada a fazer." -ForegroundColor Green
-} elseif ($temWinget) {
-    Write-Host "   Instalando (2 a 4 minutos)..."
-    winget install --id Python.Python.3.12 -e --source winget --accept-package-agreements --accept-source-agreements
+} elseif ($temWinget -and (Instalar-ComWinget "Python.Python.3.12" { Tem-PythonReal } "2 a 4 minutos")) {
     Write-Host "   OK: Python instalado." -ForegroundColor Green
 } else {
+    if ($temWinget) {
+        Write-Host "   O instalador automático não conseguiu. Sem problema: dá pra" -ForegroundColor Yellow
+        Write-Host "   instalar na mão, e é rápido." -ForegroundColor Yellow
+    }
     Write-Host "   Abrindo a página oficial do Python." -ForegroundColor Yellow
     Write-Host "   Clique no botão amarelo 'Download Python', rode o arquivo e,"
     Write-Host "   IMPORTANTE: marque a caixinha 'Add python.exe to PATH' antes"
