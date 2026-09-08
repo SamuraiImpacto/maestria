@@ -803,12 +803,13 @@ h2 {
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
   var TOTAL_PASSOS = 6;
 
-  // Lote fundador: 697 até 31/08/2026 (inclusive), 997 a partir de 01/09.
+  // Lote fundador: 697 até 26/09/2026 (inclusive), 997 a partir de 27/09.
+  // Esticado em 08/09/2026 por ordem do Samurai, alunos da FAAP incluídos.
   // A página vira o preço SOZINHA na virada. Sem isso, na virada o funil estaria
   // anunciando 697 e o checkout cobrando 997: o pior jeito possível de receber
   // um cliente novo. Se o Samurai esticar o lote, muda só a data aqui
   // (e garante no Kiwify que o checkout continua 697 ate a mesma data).
-  var FIM_LOTE = new Date(2026, 7, 31); // mes 7 = agosto
+  var FIM_LOTE = new Date(2026, 8, 26); // mes 8 = setembro
   var PRECO_FUNDADOR = 697;
   var PRECO_CHEIO = 997;
 
