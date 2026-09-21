@@ -615,10 +615,23 @@ function renderizarGuia(dados) {
   box.innerHTML = "";
   const guia = window.MAESTRIA_GUIA || {};
   const skills = dados.skills || [];
+  const emBreve = dados.skills_em_breve || [];
   if (!skills.length) {
     box.innerHTML = "<p class='vazio'>Nenhuma skill liberada ainda.</p>";
     return;
   }
+
+  // Nome de gente para o código da área. Sem isto a página mostrava "prev" e
+  // "trab" ou, pior, não mostrava área nenhuma.
+  const NOME_AREA = {
+    prev: "Previdenciário", trab: "Trabalhista", marketing: "Marketing jurídico",
+    familia: "Família", consumidor: "Consumidor", criminal: "Criminal",
+    saude: "Saúde", tributario: "Tributário", imob: "Imobiliário",
+    empresarial: "Empresarial", universal: "Serve para qualquer área",
+  };
+  const rotulo = (a) => NOME_AREA[a] || (a ? a.charAt(0).toUpperCase() + a.slice(1) : "Outras");
+  // "Serve para qualquer área" por último: é apoio, não é a área de ninguém.
+  const pesoArea = (a) => (a === "universal" ? 2 : 1);
 
   // como usar (sempre no topo)
   const intro = document.createElement("div");
@@ -638,63 +651,92 @@ function renderizarGuia(dados) {
     "<li style='margin-bottom:10px;'><code>" + esc(comando) + "</code>" +
     "<div class='mini' style='margin:2px 0 0 2px; line-height:1.55;'>" + esc(texto) + "</div></li>";
 
-  skills.forEach((s, i) => {
-    const info = guia[s.skill_id];
-    const det = document.createElement("details");
-    det.className = "card";
-    if (i === 0) det.open = true;
-    let corpo = "";
-    if (info && info.funcoes && info.funcoes.length) {
-      corpo = "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>";
-      info.funcoes.forEach((f) => {
-        corpo += liFunc("/maestria:" + f.c, f.d);
-      });
-      corpo += "</ul>";
-    } else {
-      corpo = "<p class='mini' style='margin-top:8px;'>" + esc(s.descricao || "") + "</p>";
-    }
-    det.innerHTML =
-      "<summary style='cursor:pointer; font-weight:700; font-size:1.05em;'>" +
-      esc(s.nome) +
-      " <span class='mini'>(" + ((info && info.funcoes) ? info.funcoes.length + (info.funcoes.length === 1 ? " função própria" : " funções próprias") : "resumo") + ")</span></summary>" +
-      "<p class='mini' style='margin-top:6px;'>" + esc((s.descricao || "").split(".")[0]) + ". Além das funções abaixo, esta skill tem todas as ferramentas dos blocos no fim da página.</p>" +
-      corpo;
-    box.appendChild(det);
+  // Agrupa por área, mantendo a ordem alfabética que veio da edge dentro de cada uma.
+  const porArea = new Map();
+  skills.forEach((s) => {
+    const a = s.area || "outras";
+    if (!porArea.has(a)) porArea.set(a, []);
+    porArea.get(a).push(s);
+  });
+  const areas = Array.from(porArea.keys()).sort((x, y) =>
+    pesoArea(x) - pesoArea(y) || rotulo(x).localeCompare(rotulo(y), "pt-BR"));
+
+  // Cabeçalho: diz de cara quantas áreas a pessoa tem na mão.
+  const quantas = areas.filter((a) => a !== "universal").length;
+  const resumo = document.createElement("p");
+  resumo.className = "mini";
+  resumo.style.margin = "18px 2px 6px";
+  resumo.innerHTML = "Você tem <strong>" + skills.length + " skills</strong> em <strong>" +
+    quantas + (quantas === 1 ? " área" : " áreas") + "</strong> do direito. Cada uma abaixo vem com os comandos prontos.";
+  box.appendChild(resumo);
+
+  areas.forEach((a) => {
+    const titulo = document.createElement("h3");
+    titulo.style.cssText = "margin:26px 0 10px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,.12);";
+    titulo.innerHTML = esc(rotulo(a)) +
+      " <span class='mini' style='font-weight:400'>(" + porArea.get(a).length +
+      (porArea.get(a).length === 1 ? " skill" : " skills") + ")</span>";
+    box.appendChild(titulo);
+
+    porArea.get(a).forEach((s) => {
+      const info = guia[s.skill_id];
+      const det = document.createElement("details");
+      det.className = "card";
+      // ⛔ ABERTO por padrão. Fechado, a pessoa via só o título e concluía que a
+      // skill não tinha comando nenhum. O conteúdo é o que ela veio buscar aqui.
+      det.open = true;
+      let corpo = "";
+      if (info && info.funcoes && info.funcoes.length) {
+        corpo = "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>";
+        info.funcoes.forEach((f) => {
+          corpo += liFunc("/maestria:" + f.c, f.d);
+        });
+        corpo += "</ul>";
+      } else {
+        corpo = "<p class='mini' style='margin-top:8px;'>" + esc(s.descricao || "") + "</p>";
+      }
+      const qtd = (info && info.funcoes) ? info.funcoes.length : 0;
+      det.innerHTML =
+        "<summary style='cursor:pointer; font-weight:700; font-size:1.05em;'>" +
+        esc(s.nome) +
+        " <span class='mini'>(" + (qtd ? qtd + (qtd === 1 ? " função própria" : " funções próprias") : "resumo") + ")</span></summary>" +
+        "<p class='mini' style='margin-top:6px;'>" + esc((s.descricao || "").split(".")[0]) +
+        ". Além das funções abaixo, esta skill tem todas as ferramentas dos blocos no fim da página.</p>" +
+        corpo;
+      box.appendChild(det);
+    });
   });
 
-  // bloco fixo 1: ferramentas presentes em TODA skill
-  const fixo = document.createElement("div");
-  fixo.className = "card";
-  fixo.innerHTML =
-    "<h3>Em toda skill (peça pela central /maestria)</h3>" +
-    "<p class='mini' style='margin-top:4px;'>Estas ferramentas existem em todas as skills. Digite <code>/maestria</code> e peça em português (ex: \"quero abrir um chamado\", \"onde ficam meus arquivos?\").</p>" +
-    "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>" +
-    liFunc("menu", "Cardápio da skill em cards clicáveis, pra escolher o que fazer sem decorar comando.") +
-    liFunc("setup rápido", "Configuração inicial guiada (uns 30 minutos): dados do escritório, tom de voz e preferências. Roda uma vez só.") +
-    liFunc("configurar pastas", "Escolhe onde os documentos gerados ficam salvos: pasta do computador ou pasta do Google Drive sincronizado.") +
-    liFunc("editar estilo", "Define palavras e construções que a MaestrIA nunca deve usar nos seus textos. Ela escreve do SEU jeito.") +
-    liFunc("listar casos", "Mostra tudo o que você já gerou com a skill, organizado por caso.") +
-    liFunc("abrir", "Abre o arquivo ou a pasta gerada direto no Explorer, sem caçar caminho.") +
-    liFunc("economia", "Calcula quanto tempo e dinheiro a skill já te economizou, com base no seu valor por hora.") +
-    liFunc("atualizar skill", "Puxa as correções e melhorias mais novas. A skill também avisa sozinha quando tem novidade.") +
-    liFunc("suporte", "Abre um chamado direto pra gente. A resposta aparece aqui na sua área de membros.") +
-    liFunc("ativar licença / minha licença", "Ativação da skill com o código da compra e consulta de validade.") +
-    "</ul>";
-  box.appendChild(fixo);
+  // O que ainda não saiu. Só aparece para quem tem alguma, e o texto muda
+  // conforme a pessoa já ter direito a elas ou não.
+  if (emBreve.length) {
+    const inclusas = emBreve.some((s) => s.inclusa_no_seu_plano);
+    const porAreaBreve = new Map();
+    emBreve.forEach((s) => {
+      const a = s.area || "outras";
+      if (!porAreaBreve.has(a)) porAreaBreve.set(a, []);
+      porAreaBreve.get(a).push(s.nome);
+    });
+    const linhas = Array.from(porAreaBreve.entries())
+      .sort((x, y) => rotulo(x[0]).localeCompare(rotulo(y[0]), "pt-BR"))
+      .map(([a, nomes]) =>
+        "<li style='margin-bottom:8px;'><strong>" + esc(rotulo(a)) + ":</strong> " +
+        esc(nomes.join(", ")) + "</li>")
+      .join("");
 
-  // bloco fixo 2: inteligencia juridica compartilhada
-  const intel = document.createElement("div");
-  intel.className = "card";
-  intel.innerHTML =
-    "<h3>Inteligência jurídica (também em toda skill)</h3>" +
-    "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>" +
-    liFunc("mesa", "Convoca TODOS os Conselheiros de uma vez pra debater seu caso ou sua peça. Cada um dá a opinião pela sua escola de pensamento e você vê o debate.") +
-    liFunc("conselheiro", "Consulta UM Conselheiro por vez, pra uma análise profunda de um ângulo específico do caso.") +
-    liFunc("consultar juízo", "Mostra a tendência decisória de um juízo específico num tema, com base no Banco Vivo de Decisões da MaestrIA.") +
-    liFunc("contribuir decisão", "Doa uma decisão favorável sua (com os nomes das partes removidos automaticamente) pro Banco Vivo. Quanto mais advogados contribuem, mais forte o radar de todos.") +
-    liFunc("ver insights", "Teses vencedoras, jurisprudência confirmada em fonte oficial e armadilhas conhecidas da sua área.") +
-    "</ul>";
-  box.appendChild(intel);
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.marginTop = "28px";
+    card.innerHTML =
+      "<h3>As áreas que ainda estão por vir</h3>" +
+      "<p class='mini' style='margin-top:6px;'>" +
+      (inclusas
+        ? "Estas estão em construção, sem data prometida. Quando ficarem prontas, <strong>entram no seu acesso sem você pagar de novo</strong>."
+        : "Estas estão em construção e não fazem parte do seu pacote atual.") +
+      "</p>" +
+      "<ul style='margin:12px 0 0 18px; line-height:1.7;'>" + linhas + "</ul>";
+    box.appendChild(card);
+  }
 }
 
 // ---------- Licença ----------
