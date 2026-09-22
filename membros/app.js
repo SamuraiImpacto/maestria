@@ -232,6 +232,31 @@ function renderizarInicio(dados) {
   }
 }
 
+// ---------- Áreas do direito: nome de gente para o código ----------
+// Usado pela aba Downloads e pela aba Guia. Uma cópia só, de propósito: duas
+// listas iguais em lugares diferentes é uma delas ficando velha sem ninguém ver.
+const NOME_AREA = {
+  prev: "Previdenciário", trab: "Trabalhista", marketing: "Marketing jurídico",
+  familia: "Família", consumidor: "Consumidor", criminal: "Criminal",
+  saude: "Saúde", tributario: "Tributário", imob: "Imobiliário",
+  empresarial: "Empresarial", universal: "Serve para qualquer área",
+};
+function rotuloArea(a) {
+  return NOME_AREA[a] || (a ? a.charAt(0).toUpperCase() + a.slice(1) : "Outras");
+}
+// "Serve para qualquer área" vai por último: é apoio, não é área de ninguém.
+function pesoArea(a) { return a === "universal" ? 2 : 1; }
+function agruparPorArea(lista) {
+  const mapa = new Map();
+  (lista || []).forEach((s) => {
+    const a = s.area || "outras";
+    if (!mapa.has(a)) mapa.set(a, []);
+    mapa.get(a).push(s);
+  });
+  return new Map(Array.from(mapa.entries()).sort(
+    (x, y) => pesoArea(x[0]) - pesoArea(y[0]) || rotuloArea(x[0]).localeCompare(rotuloArea(y[0]), "pt-BR")));
+}
+
 // ---------- Downloads (UM arquivo só: o instalador do pacote) ----------
 const URL_INSTALADOR =
   "https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-instalador.zip";
@@ -561,18 +586,24 @@ function renderizarDownloads(dados) {
   if (skills.length) {
     const box = document.createElement("div");
     box.className = "card";
-    let itens = "";
     let qtdAntecipadas = 0;
-    skills.forEach((s) => {
-      // Skill liberada antes do lancamento (piloto): marca na lista, senao a
-      // pessoa ve um nome que nao reconhece e nao sabe o que fazer com ele.
-      const selo = s.acesso_antecipado
-        ? " <span class='mini' style='color:#c9a227'>· acesso antecipado</span>"
-        : "";
-      if (s.acesso_antecipado) qtdAntecipadas++;
-      itens +=
-        "<li><strong>" + esc(s.nome) + "</strong>" +
-        " <span class='mini'>(versão " + esc(s.versao_atual) + ")</span>" + selo + "</li>";
+    const porArea = agruparPorArea(skills);
+    let itens = "";
+    porArea.forEach((lista, area) => {
+      itens += "<li style='list-style:none; margin:14px 0 6px -18px; font-weight:700;'>" +
+        esc(rotuloArea(area)) + " <span class='mini' style='font-weight:400'>(" + lista.length +
+        (lista.length === 1 ? " skill" : " skills") + ")</span></li>";
+      lista.forEach((s) => {
+        // Skill liberada antes do lancamento (piloto): marca na lista, senao a
+        // pessoa ve um nome que nao reconhece e nao sabe o que fazer com ele.
+        const selo = s.acesso_antecipado
+          ? " <span class='mini' style='color:#c9a227'>· acesso antecipado</span>"
+          : "";
+        if (s.acesso_antecipado) qtdAntecipadas++;
+        itens +=
+          "<li><strong>" + esc(s.nome) + "</strong>" +
+          " <span class='mini'>(versão " + esc(s.versao_atual) + ")</span>" + selo + "</li>";
+      });
     });
     const notaAntecipada = qtdAntecipadas
       ? "<p class='mini' style='margin-top:10px; border-left:3px solid #c9a227; padding-left:10px'>" +
@@ -582,10 +613,36 @@ function renderizarDownloads(dados) {
         "passaram por uso real, então revise antes de protocolar e conte pra gente o que achar." +
         "</p>"
       : "";
+
+    // Quem tem o catálogo completo precisa VER que é completo. Antes a aba
+    // mostrava só uma lista de nomes, e a pessoa não tinha como saber se aquilo
+    // era tudo o que existe ou um pedaço.
+    const emBreve = dados.skills_em_breve || [];
+    const temTudo = !(dados.skills_bloqueadas || []).length;
+    const nomesDeArea = Array.from(porArea.keys())
+      .filter((a) => a !== "universal").map(rotuloArea);
+    const listaDeAreas = nomesDeArea.length > 1
+      ? nomesDeArea.slice(0, -1).join(", ") + " e " + nomesDeArea[nomesDeArea.length - 1]
+      : (nomesDeArea[0] || "");
+    const cabecalho = temTudo
+      ? "<h3>Você tem o catálogo completo</h3>" +
+        "<p class='mini'>Todas as " + skills.length + " skills publicadas hoje" +
+        (listaDeAreas ? ": " + esc(listaDeAreas) + ", mais as que servem para qualquer área" : "") +
+        ". Tudo isso entra junto no instalador acima: instalou, tá tudo dentro.</p>"
+      : "<h3>O que vem no seu pacote</h3>" +
+        "<p class='mini'>Tudo isso entra junto no instalador acima. Instalou, tá tudo dentro.</p>";
+
+    const rodapeEmBreve = (emBreve.length && emBreve.some((s) => s.inclusa_no_seu_plano))
+      ? "<p class='mini' style='margin-top:14px; border-left:3px solid rgba(255,255,255,.2); padding-left:10px'>" +
+        "Outras <strong>" + emBreve.length + " skills</strong> estão em construção, sem data prometida. " +
+        "Quando ficarem prontas, entram no seu instalador sem você pagar de novo. " +
+        "A lista completa está na aba <strong>Guia das skills</strong>.</p>"
+      : "";
+
     box.innerHTML =
-      "<h3>O que vem no seu pacote</h3>" +
-      "<p class='mini'>Tudo isso entra junto no instalador acima. Instalou, tá tudo dentro.</p>" +
-      "<ul style='margin:8px 0 0 18px; line-height:1.7;'>" + itens + "</ul>" + notaAntecipada;
+      cabecalho +
+      "<ul style='margin:8px 0 0 18px; line-height:1.7;'>" + itens + "</ul>" +
+      notaAntecipada + rodapeEmBreve;
     grid.appendChild(box);
   }
 
@@ -621,17 +678,7 @@ function renderizarGuia(dados) {
     return;
   }
 
-  // Nome de gente para o código da área. Sem isto a página mostrava "prev" e
-  // "trab" ou, pior, não mostrava área nenhuma.
-  const NOME_AREA = {
-    prev: "Previdenciário", trab: "Trabalhista", marketing: "Marketing jurídico",
-    familia: "Família", consumidor: "Consumidor", criminal: "Criminal",
-    saude: "Saúde", tributario: "Tributário", imob: "Imobiliário",
-    empresarial: "Empresarial", universal: "Serve para qualquer área",
-  };
-  const rotulo = (a) => NOME_AREA[a] || (a ? a.charAt(0).toUpperCase() + a.slice(1) : "Outras");
-  // "Serve para qualquer área" por último: é apoio, não é a área de ninguém.
-  const pesoArea = (a) => (a === "universal" ? 2 : 1);
+  const rotulo = rotuloArea;
 
   // como usar (sempre no topo)
   const intro = document.createElement("div");
@@ -651,15 +698,9 @@ function renderizarGuia(dados) {
     "<li style='margin-bottom:10px;'><code>" + esc(comando) + "</code>" +
     "<div class='mini' style='margin:2px 0 0 2px; line-height:1.55;'>" + esc(texto) + "</div></li>";
 
-  // Agrupa por área, mantendo a ordem alfabética que veio da edge dentro de cada uma.
-  const porArea = new Map();
-  skills.forEach((s) => {
-    const a = s.area || "outras";
-    if (!porArea.has(a)) porArea.set(a, []);
-    porArea.get(a).push(s);
-  });
-  const areas = Array.from(porArea.keys()).sort((x, y) =>
-    pesoArea(x) - pesoArea(y) || rotulo(x).localeCompare(rotulo(y), "pt-BR"));
+  // Mesma regra de agrupamento da aba Downloads.
+  const porArea = agruparPorArea(skills);
+  const areas = Array.from(porArea.keys());
 
   // Cabeçalho: diz de cara quantas áreas a pessoa tem na mão.
   const quantas = areas.filter((a) => a !== "universal").length;
@@ -709,8 +750,8 @@ function renderizarGuia(dados) {
 
   // O que ainda não saiu. Só aparece para quem tem alguma, e o texto muda
   // conforme a pessoa já ter direito a elas ou não.
-  if (emBreve.length) {
-    const inclusas = emBreve.some((s) => s.inclusa_no_seu_plano);
+  const inclusas = emBreve.some((s) => s.inclusa_no_seu_plano);
+  if (emBreve.length && inclusas) {
     const porAreaBreve = new Map();
     emBreve.forEach((s) => {
       const a = s.area || "outras";
@@ -730,9 +771,7 @@ function renderizarGuia(dados) {
     card.innerHTML =
       "<h3>As áreas que ainda estão por vir</h3>" +
       "<p class='mini' style='margin-top:6px;'>" +
-      (inclusas
-        ? "Estas estão em construção, sem data prometida. Quando ficarem prontas, <strong>entram no seu acesso sem você pagar de novo</strong>."
-        : "Estas estão em construção e não fazem parte do seu pacote atual.") +
+      "Estas estão em construção, sem data prometida. Quando ficarem prontas, <strong>entram no seu acesso sem você pagar de novo</strong>." +
       "</p>" +
       "<ul style='margin:12px 0 0 18px; line-height:1.7;'>" + linhas + "</ul>";
     box.appendChild(card);
