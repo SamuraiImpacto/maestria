@@ -113,6 +113,10 @@ window.MAESTRIA_GUIA = {
     "d": "Consulta o andamento de qualquer processo pelo número unificado, direto na base oficial do CNJ (DataJud): classe, órgão julgador, assuntos e a linha do tempo de movimentações, sem abrir o site do tribunal."
    },
    {
+    "c": "pode-fazer",
+    "d": "Responde se a MaestrIA faz alguma coisa, com o comando exato pra fazer. Quando NÃO faz, diz que não faz e oferece registrar o pedido. Nunca inventa comando."
+   },
+   {
     "c": "resumir-processo",
     "d": "Recebe os autos de um processo em andamento (PDF, mesmo grandão) e devolve a ficha executiva: partes, linha do tempo das decisões, estado atual, prazos em risco e próximos passos. O comando de quem pegou o caso pela metade."
    },
