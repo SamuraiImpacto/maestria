@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O que a Erika ve na aba Guia</title>
+<link rel="stylesheet" href="../membros/style.css">
+<style>body{padding:24px;max-width:900px;margin:0 auto}</style>
+</head><body>
+<h2 class="view-titulo">Guia das skills</h2>
+<div id="guia-skills-lista"></div>
+<script src="../membros/guia-skills.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+function esc(texto) {
+  const div = document.createElement("div");
+  div.textContent = String(texto ?? "");
+  return div.innerHTML;
+}
+function renderizarGuia(dados) {
+  const box = $("guia-skills-lista");
+  if (!box) return;
+  box.innerHTML = "";
+  const guia = window.MAESTRIA_GUIA || {};
+  const skills = dados.skills || [];
+  if (!skills.length) {
+    box.innerHTML = "<p class='vazio'>Nenhuma skill liberada ainda.</p>";
+    return;
+  }
+
+  // como usar (sempre no topo)
+  const intro = document.createElement("div");
+  intro.className = "card";
+  intro.innerHTML =
+    "<h3>Como usar qualquer função</h3>" +
+    "<ol style='margin:10px 0 0 18px; line-height:1.8;'>" +
+    "<li>Abra o <strong>Claude Code</strong> no seu computador.</li>" +
+    "<li>Digite o comando da função (ex: <code>/maestria:nova-peticao</code>) e aperte Enter. Ou digite só <code>/maestria</code> pra ver o menu geral e escolher por lá.</li>" +
+    "<li>A skill conduz o resto com perguntas, uma de cada vez. Pode responder em português normal e mandar documentos, prints e até áudio do cliente.</li>" +
+    "<li>O resultado sai em <strong>Word</strong>, salvo na pasta que você escolheu, pronto pra abrir com dois cliques.</li>" +
+    "</ol>" +
+    "<p class='mini' style='margin-top:8px;'>Não precisa decorar nada: escrever o que você quer em português na central <code>/maestria</code> também funciona. Os comandos existem pra quem gosta de atalho.</p>";
+  box.appendChild(intro);
+
+  const liFunc = (comando, texto) =>
+    "<li style='margin-bottom:10px;'><code>" + esc(comando) + "</code>" +
+    "<div class='mini' style='margin:2px 0 0 2px; line-height:1.55;'>" + esc(texto) + "</div></li>";
+
+  skills.forEach((s, i) => {
+    const info = guia[s.skill_id];
+    const det = document.createElement("details");
+    det.className = "card";
+    if (i === 0) det.open = true;
+    let corpo = "";
+    if (info && info.funcoes && info.funcoes.length) {
+      corpo = "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>";
+      info.funcoes.forEach((f) => {
+        corpo += liFunc("/maestria:" + f.c, f.d);
+      });
+      corpo += "</ul>";
+    } else {
+      corpo = "<p class='mini' style='margin-top:8px;'>" + esc(s.descricao || "") + "</p>";
+    }
+    det.innerHTML =
+      "<summary style='cursor:pointer; font-weight:700; font-size:1.05em;'>" +
+      esc(s.nome) +
+      " <span class='mini'>(" + ((info && info.funcoes) ? info.funcoes.length + (info.funcoes.length === 1 ? " função própria" : " funções próprias") : "resumo") + ")</span></summary>" +
+      "<p class='mini' style='margin-top:6px;'>" + esc((s.descricao || "").split(".")[0]) + ". Além das funções abaixo, esta skill tem todas as ferramentas dos blocos no fim da página.</p>" +
+      corpo;
+    box.appendChild(det);
+  });
+
+  // bloco fixo 1: ferramentas presentes em TODA skill
+  const fixo = document.createElement("div");
+  fixo.className = "card";
+  fixo.innerHTML =
+    "<h3>Em toda skill (peça pela central /maestria)</h3>" +
+    "<p class='mini' style='margin-top:4px;'>Estas ferramentas existem em todas as skills. Digite <code>/maestria</code> e peça em português (ex: \"quero abrir um chamado\", \"onde ficam meus arquivos?\").</p>" +
+    "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>" +
+    liFunc("menu", "Cardápio da skill em cards clicáveis, pra escolher o que fazer sem decorar comando.") +
+    liFunc("setup rápido", "Configuração inicial guiada (uns 30 minutos): dados do escritório, tom de voz e preferências. Roda uma vez só.") +
+    liFunc("configurar pastas", "Escolhe onde os documentos gerados ficam salvos: pasta do computador ou pasta do Google Drive sincronizado.") +
+    liFunc("editar estilo", "Define palavras e construções que a MaestrIA nunca deve usar nos seus textos. Ela escreve do SEU jeito.") +
+    liFunc("listar casos", "Mostra tudo o que você já gerou com a skill, organizado por caso.") +
+    liFunc("abrir", "Abre o arquivo ou a pasta gerada direto no Explorer, sem caçar caminho.") +
+    liFunc("economia", "Calcula quanto tempo e dinheiro a skill já te economizou, com base no seu valor por hora.") +
+    liFunc("atualizar skill", "Puxa as correções e melhorias mais novas. A skill também avisa sozinha quando tem novidade.") +
+    liFunc("suporte", "Abre um chamado direto pra gente. A resposta aparece aqui na sua área de membros.") +
+    liFunc("ativar licença / minha licença", "Ativação da skill com o código da compra e consulta de validade.") +
+    "</ul>";
+  box.appendChild(fixo);
+
+  // bloco fixo 2: inteligencia juridica compartilhada
+  const intel = document.createElement("div");
+  intel.className = "card";
+  intel.innerHTML =
+    "<h3>Inteligência jurídica (também em toda skill)</h3>" +
+    "<ul style='margin:12px 0 0 18px; list-style:none; padding-left:0;'>" +
+    liFunc("mesa", "Convoca TODOS os Conselheiros de uma vez pra debater seu caso ou sua peça. Cada um dá a opinião pela sua escola de pensamento e você vê o debate.") +
+    liFunc("conselheiro", "Consulta UM Conselheiro por vez, pra uma análise profunda de um ângulo específico do caso.") +
+    liFunc("consultar juízo", "Mostra a tendência decisória de um juízo específico num tema, com base no Banco Vivo de Decisões da MaestrIA.") +
+    liFunc("contribuir decisão", "Doa uma decisão favorável sua (com os nomes das partes removidos automaticamente) pro Banco Vivo. Quanto mais advogados contribuem, mais forte o radar de todos.") +
+    liFunc("ver insights", "Teses vencedoras, jurisprudência confirmada em fonte oficial e armadilhas conhecidas da sua área.") +
+    "</ul>";
+  box.appendChild(intel);
+}
+renderizarGuia({"ok":true,"cliente":{"nome":"Erika","email":"erikacgp@hotmail.com","plano":"cortesia","plano_legivel":"MaestrIA Full (catálogo completo)","vitalicio":true,"vence_em":null,"expirou":false,"cpf_registrado":true},"skills":[{"skill_id":"acordo-trabalhista","nome":"Acordo Trabalhista","descricao":"Skill da MaestrIA pra advogado trabalhista negociar e formalizar acordo extrajudicial (art. 484-A CLT) ou acordo em audiência.","area":"trab","versao_atual":"1.5.4","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-acordo-trabalhista-v1.5.4.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."},{"skill_id":"auditor-previdenciario","nome":"Auditor Previdenciário","descricao":"Skill pra auditoria de CNIS e identificação de inconsistências previdenciárias.","area":"prev","versao_atual":"1.7.1","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-auditor-previdenciario-v1.7.1.zip","changelog":"1.7.1: o /coisa-julgada ganhou a escada de busca, que era o buraco da versão anterior: ele mandava procurar a ação anterior, mas não dizia COMO achar quando ninguém tem o número do processo. Agora são seis degraus, do mais barato ao mais completo, com o caminho que resolve de fato: a certidão de distribuição pedida por CPF no Tribunal Regional Federal, pela internet, mais a certidão da Justiça Estadual quando o caso é acidentário, que é a falha de busca mais comum em auxílio-acidente. Entrou também o aviso que economiza tempo: a base do DataJud não permite procurar por CPF nem por nome, porque não expõe as partes, então ela confirma um processo que você já achou e não descobre nenhum."},{"skill_id":"briefing-do-caso","nome":"Briefing do Caso","descricao":"Skill universal pra intake estruturado de caso (qualquer área), preparando o caminho pra petição.","area":"universal","versao_atual":"1.8.2","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-briefing-do-caso-v1.8.2.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."},{"skill_id":"calculo-previdenciario","nome":"Cálculo Previdenciário","descricao":"Skill pra cálculo de RMI, conversão de tempo especial, simulações de aposentadoria.","area":"prev","versao_atual":"1.8.6","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-calculo-previdenciario-v1.8.6.zip","changelog":"Varredura de casos-limite no cálculo de atrasados e na RMI. 1) Benefício assistencial (BPC/LOAS) agora sai SEMPRE em um salário mínimo, como manda o art. 20 da Lei 8.742/93, mesmo que a RMI tenha sido digitada errada. 2) Salário-família deixou de receber o piso do salário mínimo: uma cota de R$ 65 chegava a virar um salário mínimo no cálculo. 3) O cálculo agora confere o TETO DO JUIZADO ESPECIAL FEDERAL (60 salários mínimos, art. 3º da Lei 10.259/01) e avisa quando o valor da causa passa dele: isso decide se a ação vai pro Juizado ou pra Vara Federal. 4) Data digitada errada não vira mais número plausível: data final antes da DIB, data-base anterior ao benefício, sentença fora do período, RMI zerada, tipo de benefício desconhecido e período todo prescrito agora saem com aviso em destaque. 5) Na RMI, a regra dos 80% maiores salários deixou de ter padrão fixo: sem informação, o motor decide pela data do requerimento (antes ou depois da EC 103) e diz o que decidiu. Falta de teto ou de salário mínimo do ano também vira aviso. 6) Planilha da RMI em português, com o segurado, o benefício e as premissas. É só rodar /calcular-atrasados ou /calcular-rmi."},{"skill_id":"calculo-trabalhista","nome":"Cálculo Trabalhista","descricao":"Skill pra cálculo de horas extras, verbas rescisórias e atualização (ADC 58 STF).","area":"trab","versao_atual":"1.5.10","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-calculo-trabalhista-v1.5.10.zip","changelog":"Quatro melhorias validadas contra cálculos reais do PJe-Calc, a ferramenta oficial da Justiça do Trabalho. (1) Adicional de insalubridade, periculosidade e noturno agora sai proporcional aos dias no mês de admissão e de demissão: antes o mês parcial saía cheio, inflando o valor em até um terço. (2) Horas extras aceitam o percentual da SUA convenção coletiva (60%, 70%, 80%, o que for), e percentual inválido dá erro claro em vez de cair pra 50% em silêncio. (3) O FGTS sobre o 13º passou a usar os avos realmente devidos, o que corrige também a multa de 40% em contratos curtos e nas demissões de fim de ano. (4) Entrou a multa do art. 477 da CLT como pedido opcional, com a premissa jurídica explicada na planilha. Na validação, as verbas centrais e os fatores de correção monetária bateram com o PJe-Calc centavo a centavo nos casos comparados."},{"skill_id":"contestacao-trabalhista","nome":"Contestação Trabalhista","descricao":"Skill pra elaboração de contestação em reclamatória trabalhista.","area":"trab","versao_atual":"1.5.4","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-contestacao-trabalhista-v1.5.4.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."},{"skill_id":"peticao-builder","nome":"Gerador de Documentos Jurídicos","descricao":"Skill mestre de documentos jurídicos: petições, contratos e peças em Word com a formatação do seu escritório. [INCLUIDA EM TODOS OS PACOTES EXCETO MARKETING]","area":"universal","versao_atual":"1.15.6","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-peticao-builder-v1.15.6.zip","changelog":"Licenca vencida nao trava mais a skill. Voce continua usando tudo o que ja instalou, sem limite e sem prazo: o que vence e o direito as atualizacoes e as skills novas. Reembolso e cancelamento continuam retirando o acesso."},{"skill_id":"impugnacao-laudo-pericial","nome":"Impugnação de Laudo Pericial","descricao":"Skill pra impugnar laudo pericial em ações previdenciárias ou trabalhistas.","area":"prev","versao_atual":"1.7.0","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-impugnacao-laudo-pericial-v1.7.0.zip","changelog":"1.7.0: bloco de auxílio-acidente, com fonte oficial conferida em 02/09/2026. A base normativa passou a trazer o Tema 416 do STJ (lesão mínima não afasta o direito), o Tema 862 do STJ (termo inicial no dia seguinte ao da cessação do auxílio-doença), o Tema 1225 do STF (não há repercussão geral, o STJ é a palavra final), o Tema 315 da TNU (dispensa pedido de prorrogação e requerimento específico), os dois itens do Tema 246 da TNU sobre alta programada e DCB, e os parágrafos 11-A, 11-F e 11-G do art. 60 na redação da Lei 15.265/2025. O comando de impugnação ganhou dois grupos de perguntas novos: auxílio-acidente (perito que responde sobre incapacidade quando o quesito era sobre redução, profissão de referência errada, rotina não detalhada, consolidação na DCB, percentual de redução e proposta de acordo aquém da tese) e divergência com a perícia administrativa do próprio INSS. Os pedidos agora saem em escada: esclarecimentos do art. 477, depois complementação ou nova perícia do art. 480, e por último o pedido subsidiário. Entrou o art. 479 do CPC, que obriga o juiz a justificar por que considerou ou não as conclusões do laudo. Acervo de insights ampliado e acentuação dos itens herdados corrigida."},{"skill_id":"impugnacao-ppp","nome":"Impugnação de PPP","descricao":"Skill pra impugnar PPP (Perfil Profissiográfico Previdenciário) inconsistente.","area":"prev","versao_atual":"1.5.4","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-impugnacao-ppp-v1.5.4.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."},{"skill_id":"marketing-juridico","nome":"Marketing Jurídico","descricao":"Skill universal pra criação de conteúdo jurídico ético (Provimento 205 OAB).","area":"universal","versao_atual":"1.8.5","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-marketing-juridico-v1.8.5.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."},{"skill_id":"preparador-audiencia","nome":"Preparador de Audiência","descricao":"Skill universal pra preparação de cliente e testemunhas para audiência.","area":"universal","versao_atual":"1.6.2","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-preparador-audiencia-v1.6.2.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."},{"skill_id":"quesitos-pericia","nome":"Quesitos de Perícia","descricao":"Skill pra montar quesitos de perícia médica e social em ações previdenciárias.","area":"prev","versao_atual":"1.8.0","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-quesitos-pericia-v1.8.0.zip","changelog":"1.8.0: artilharia de auxílio-acidente, com fonte oficial conferida em 02/09/2026. Entraram no manual o Tema 416 do STJ (lesão mínima não afasta o direito), o Tema 862 do STJ (termo inicial no dia seguinte ao da cessação do auxílio-doença), o Tema 1225 do STF (não há repercussão geral, o STJ é a palavra final), o Tema 315 da TNU (dispensa pedido de prorrogação e requerimento específico), os dois itens do Tema 246 da TNU sobre alta programada e DCB, e os parágrafos 11-A, 11-F e 11-G do art. 60 na redação da Lei 15.265/2025, que limitam a 30 dias o benefício concedido por análise documental. No intake entraram as três perguntas que decidem o caso, com destaque pra profissão da época do acidente. Os quesitos de auxílio-acidente foram de quatro pra sete, incluindo a rotina respondida ato por ato, a consolidação da sequela na DCB e o percentual de redução. Novo sub-bloco de divergência entre perícia administrativa e judicial. O comando de preparação da perícia ganhou a linha do tempo do que o escritório faz nas semanas anteriores ao exame, incluindo o retorno do cliente no mesmo dia."},{"skill_id":"recurso-administrativo-inss","nome":"Recurso Administrativo INSS","descricao":"Skill pra recurso administrativo ao INSS contra indeferimento de benefício.","area":"prev","versao_atual":"1.5.4","zip_url":"https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/skills-public/maestria-recurso-administrativo-inss-v1.5.4.zip","changelog":"Central /maestria: ativacao automatica (a licenca ja vem no pacote, sem digitar codigo nem CPF), sem terminal, com gerenciamento de dispositivos. Corrige a regressao que fazia o /maestria voltar ao fluxo antigo ao atualizar uma skill."}],"skills_bloqueadas":[],"instalacoes":[{"hostname":"ERIKAADV-04","os_info":"Windows 11 Home Single Language 10.0.26200","ativada_em":"2026-09-21T20:36:15.765194+00:00"},{"hostname":"ERIKAADV-06","os_info":"Microsoft Windows 11 Home Single Language","ativada_em":"2026-09-21T20:16:09.195778+00:00"},{"hostname":"ERIKAADV-01","os_info":"Windows 11 Home Single Language 10.0.26200","ativada_em":"2026-09-21T18:50:07.248669+00:00"}],"limite_dispositivos":4,"tickets":[]});
+</script>
+</body></html>
