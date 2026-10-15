@@ -753,7 +753,7 @@ h2 {
 
   <!-- OFERTA -->
   <section class="tela" data-tela="oferta">
-    <div class="prazo" id="prazoBox">⏳ Lote fundador</div>
+    <div class="prazo" id="prazoBox">De R$ 1.497 por R$ 997</div>
     <h1>MaestrIA <span class="vermelho">Previdenciário</span></h1>
     <p class="sub">As 9 skills, instaladas no seu computador em uns 30 minutos. Uma vez só, sem mensalidade.</p>
 
@@ -768,11 +768,11 @@ h2 {
       </ul>
       <div class="sep" style="margin:22px 0;"></div>
       <div class="preco-linha">
-        <span class="preco-cifra">R$</span><span class="preco-valor">697</span>
+        <span class="preco-cifra">R$</span><span class="preco-valor">997</span>
       </div>
-      <p class="preco-depois" id="precoDepois">no lote fundador. Depois, R$ 997.</p>
+      <p class="preco-depois" id="precoDepois">em vez de R$ 1.497, com 12 meses de acesso</p>
       <p class="preco-parcela">ou em até 12x no cartão</p>
-      <a href="https://pay.kiwify.com.br/q5QEizf?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO POR R$ 697</a>
+      <a href="https://pay.kiwify.com.br/q5QEizf?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO POR R$ 997</a>
       <div class="garantia">
         <span style="font-size:20px;">🛡️</span>
         <p><strong>7 dias de garantia.</strong> Instala, roda numa peça de verdade e vê. Se não fizer sentido pro seu escritório, você pede o reembolso e pronto. Sem justificativa, sem estresse.</p>
@@ -803,38 +803,18 @@ h2 {
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
   var TOTAL_PASSOS = 6;
 
-  // Lote fundador: 697 até 26/09/2026 (inclusive), 997 a partir de 27/09.
-  // Esticado em 08/09/2026 por ordem do Samurai, alunos da FAAP incluídos.
-  // A página vira o preço SOZINHA na virada. Sem isso, na virada o funil estaria
-  // anunciando 697 e o checkout cobrando 997: o pior jeito possível de receber
-  // um cliente novo. Se o Samurai esticar o lote, muda só a data aqui
-  // (e garante no Kiwify que o checkout continua 697 ate a mesma data).
-  var FIM_LOTE = new Date(2026, 8, 26); // mes 8 = setembro
-  var PRECO_FUNDADOR = 697;
-  var PRECO_CHEIO = 997;
-
-  function diasAteFimDoLote() {
-    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-    var fim = new Date(FIM_LOTE.getTime()); fim.setHours(0, 0, 0, 0);
-    return Math.round((fim - hoje) / 86400000);
-  }
+  // Preco do Previdenciario desde 14/10/2026: R$ 997, ancorado em R$ 1.497.
+  // O lote fundador de R$ 697 acabou e a Kiwify esta no preco novo.
+  // ⛔ Nao ha data de virada nova. Enquanto nao houver, a pagina nao anuncia
+  // prazo nenhum: prazo vencido no ar e pior do que nao ter prazo, e preco
+  // anunciado diferente do que o checkout cobra e o pior jeito de receber um
+  // cliente novo. Se voltar a ter lote com data, a virada volta aqui.
+  var PRECO = 997;
 
   function aplicaLote() {
-    var dias = diasAteFimDoLote();
-    var box = $("#prazoBox");
-    var dataTxt = ("0" + FIM_LOTE.getDate()).slice(-2) + "/" + ("0" + (FIM_LOTE.getMonth() + 1)).slice(-2);
-
-    if (dias < 0) {
-      // Lote virou: o preço cheio passa a valer em TODA a página, sozinho.
-      box.style.display = "none";
-      $(".preco-valor").textContent = PRECO_CHEIO;
-      $("#precoDepois").textContent = "à vista, ou parcelado";
-      $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + PRECO_CHEIO;
-      return;
-    }
-    if (dias === 0) box.textContent = "⏳ Lote fundador: hoje é o último dia (" + dataTxt + ")";
-    else if (dias === 1) box.textContent = "⏳ Lote fundador: termina amanhã (" + dataTxt + ")";
-    else box.textContent = "⏳ Lote fundador: faltam " + dias + " dias (até " + dataTxt + ")";
+    $("#prazoBox").textContent = "De R$ 1.497 por R$ " + PRECO;
+    $(".preco-valor").textContent = PRECO;
+    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + PRECO;
   }
 
   var respostas = {};

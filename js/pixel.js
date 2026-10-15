@@ -26,10 +26,10 @@
      A chave é o código final da URL da Kiwify. */
   var CHECKOUTS = {
     mS2gAMm: { valor: 1997, nome: "Full Embaixador" },
-    q5QEizf: { valor: 697, nome: "Pacote Previdenciario" },
-    zRpxcta: { valor: 697, nome: "Pacote Trabalhista" },
-    Ln4ErJJ: { valor: 697, nome: "Pacote Marketing Juridico" },
-    Lvo0094: { valor: 997, nome: "Combo Previdenciario + Trabalhista" },
+    q5QEizf: { valor: 997, nome: "Pacote Previdenciario" },
+    zRpxcta: { valor: 997, nome: "Pacote Trabalhista" },
+    Ln4ErJJ: { valor: 997, nome: "Pacote Marketing Juridico" },
+    Lvo0094: { valor: 1497, nome: "Combo Previdenciario + Trabalhista" },
   };
 
   /* Delegação no document: pega o clique mesmo em botão criado depois,
