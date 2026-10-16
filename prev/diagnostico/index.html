@@ -810,11 +810,27 @@ h2 {
   // anunciado diferente do que o checkout cobra e o pior jeito de receber um
   // cliente novo. Se voltar a ter lote com data, a virada volta aqui.
   var PRECO = 997;
+  /* Oferta de 16/10/2026: R$ 697 ate as 23h59 de Brasilia (= 02:59:59 UTC do
+     dia 17). A pagina volta SOZINHA para 997 na virada, sem deploy nenhum.
+     ⛔ Hora absoluta em UTC, nunca o relogio local do visitante. */
+  var PROMO_FIM = Date.UTC(2026, 9, 17, 2, 59, 59);
+  var PROMO = 697;
+
+  function promoValendo() { return Date.now() <= PROMO_FIM; }
 
   function aplicaLote() {
-    $("#prazoBox").textContent = "De R$ 1.497 por R$ " + PRECO;
-    $(".preco-valor").textContent = PRECO;
-    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + PRECO;
+    var preco = promoValendo() ? PROMO : PRECO;
+    $(".preco-valor").textContent = preco;
+    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + preco;
+    $("#prazoBox").textContent = promoValendo()
+      ? "Só hoje, até as 23h59: R$ 697"
+      : "De R$ 1.497 por R$ 997";
+    $("#precoDepois").textContent = promoValendo()
+      ? "só hoje, até as 23h59. À meia-noite volta para R$ 997"
+      : "em vez de R$ 1.497, com 12 meses de acesso";
+    if (promoValendo()) {
+      setTimeout(aplicaLote, Math.min(PROMO_FIM - Date.now() + 1000, 1800000));
+    }
   }
 
   var respostas = {};
@@ -1230,6 +1246,10 @@ h2 {
     mostra("resultado");
   }
 
+  // ⛔ o preco precisa estar certo em QUALQUER caminho, nao so em quem
+  // termina o diagnostico: quem pula direto para a oferta via data-vai
+  // chegava na tela com o preco do HTML, sem a condicao do dia.
+  aplicaLote();
   atualizaProgresso(tela("abertura"));
 })();
 </script>

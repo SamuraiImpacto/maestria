@@ -24,6 +24,12 @@
 
   /* Valor de cada checkout, pro Meta otimizar por receita e não por clique.
      A chave é o código final da URL da Kiwify. */
+  /* 16/10/2026: o Previdenciario sai por 697 ate as 23h59 de Brasilia
+     (= 02:59:59 UTC do dia 17). Depois volta a 997 sozinho.
+     ⛔ A conta e feita NO CLIQUE, nao na carga da pagina: quem deixou a
+     aba aberta durante a virada manda para o Meta o valor que vai pagar. */
+  var PROMO_PREV_FIM = Date.UTC(2026, 9, 17, 2, 59, 59);
+
   var CHECKOUTS = {
     mS2gAMm: { valor: 1997, nome: "Full Embaixador" },
     q5QEizf: { valor: 997, nome: "Pacote Previdenciario" },
@@ -41,9 +47,11 @@
     if (a.href.indexOf("pay.kiwify.com.br") > -1) {
       var codigo = a.href.split("?")[0].split("/").pop();
       var item = CHECKOUTS[codigo] || { valor: 0, nome: codigo };
+      var valor = (codigo === "q5QEizf" && Date.now() <= PROMO_PREV_FIM)
+        ? 697 : item.valor;
       fbq("track", "InitiateCheckout", {
         content_name: item.nome,
-        value: item.valor,
+        value: valor,
         currency: "BRL",
       });
     }

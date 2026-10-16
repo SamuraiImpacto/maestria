@@ -676,7 +676,42 @@
   .pack-mais li{display:flex;gap:11px;font-size:13.5px;color:var(--muted);line-height:1.5}
   .pack-mais .ck{flex:0 0 auto;color:var(--red-ink);font-weight:900}
   .pack-mais li b{color:#dcdce1}
+
+  /* oferta de hoje: 697 ate as 23h59 de 16/10/2026 */
+  .so-promo{display:none}
+  html.promo .so-promo{display:inline}
+  html.promo .so-normal{display:none}
+  #promoBar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:linear-gradient(90deg,#7a0d12,#c1121f);color:#fff;
+    border-top:1px solid rgba(255,255,255,.2);box-shadow:0 -12px 34px rgba(0,0,0,.5)}
+  html.promo #promoBar{display:block}
+  html.promo body{padding-bottom:76px}
+  .pb-in{max-width:1120px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;
+    justify-content:center;gap:8px 16px;flex-wrap:wrap;text-align:center;font-size:14.5px}
+  .pb-in b{font-weight:900}
+  .pb-rel{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.3);padding:4px 10px;
+    border-radius:7px;font-weight:800;letter-spacing:.02em}
+  .pb-btn{background:#fff;color:#7a0d12;font-weight:800;padding:9px 17px;border-radius:9px;
+    text-decoration:none;white-space:nowrap}
+  .pb-btn:hover{background:#ffe9ea}
+  @media(max-width:620px){.pb-in{padding:9px 12px;font-size:13px;gap:6px 10px}
+    html.promo body{padding-bottom:92px}}
 </style>
+
+<script>
+(function(){
+  /* Oferta de 16/10/2026: R$ 697 ate as 23h59 de Brasilia.
+     ⛔ A hora e ABSOLUTA (UTC), nao o relogio do visitante: 23h59:59 em
+     Brasilia e 02:59:59 UTC do dia seguinte.
+     ⛔ O preco normal e o que esta escrito no HTML. Este script so ACRESCENTA
+     a promocao. Se ele nao rodar, aparece R$ 997, nunca menos do que o
+     checkout cobra. */
+  window.PROMO_FIM = Date.UTC(2026, 9, 17, 2, 59, 59);
+  if (Date.now() <= window.PROMO_FIM) {
+    document.documentElement.className += " promo";
+  }
+})();
+</script>
 
 <nav>
   <div class="wrap nav-in">
@@ -699,10 +734,10 @@
     <h1 class="big">No previdenciário, o gargalo não é achar caso. É o que cada caso <span class="red">consome antes de virar petição</span>.</h1>
     <p class="hero-sub">São 9 skills previdenciárias instaladas no Claude, a IA mais avançada do mundo, direto no seu computador. Você digita <span class="cmd">/maestria</span> e pede: ela lê a carta de concessão, o CNIS e o laudo, calcula, escreve <b>no seu estilo</b> e entrega em Word, com cada citação conferida em fonte oficial. <b>Nunca inventa jurisprudência.</b></p>
     <div class="hero-cta">
-      <a href="#pacotes" class="btn btn-red">Quero o Previdenciário por R$ 997</a>
+      <a href="#pacotes" class="btn btn-red"><span class="so-normal">Quero o Previdenciário por R$ 997</span><span class="so-promo">Quero o Previdenciário por R$ 697</span></a>
       <a href="#acoes" class="btn btn-ghost">Ver como funciona</a>
     </div>
-    <p class="hero-tiny">De R$ 1.497 por R$ 997, com 12 meses de acesso. Único pré-requisito: uma assinatura do Claude.</p>
+    <p class="hero-tiny"><span class="so-normal">De R$ 1.497 por R$ 997, com 12 meses de acesso.</span><span class="so-promo"><b>Só hoje, até as 23h59: R$ 697.</b> Depois volta para R$ 997.</span> Único pré-requisito: uma assinatura do Claude.</p>
 
     <div class="term" id="term">
       <div class="term-bar">
@@ -1034,7 +1069,7 @@
       <div class="gf-saldo">
         <div><b>355 horas</b><span>voltam pro seu calendário todo ano</span></div>
         <div class="gf-sep"></div>
-        <div><b>R$ 997</b><span>o pacote inteiro: menos que UMA peça feita na mão</span></div>
+        <div><b><span class="so-normal">R$ 997</span><span class="so-promo">R$ 697</span></b><span>o pacote inteiro: menos que UMA peça feita na mão</span></div>
       </div>
     </div>
   </div>
@@ -1112,21 +1147,21 @@
 <section id="pacotes" style="padding-top:20px">
   <div class="wrap">
     <div class="price-head reveal">
-      <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg><span>Preço e o que entra</span></span>
-      <h2 class="sec">De R$ 1.497 por <span class="red">R$ 997</span>, com 12 meses de acesso.</h2>
-      <p class="lead">O pacote inteiro do Previdenciário, com todas as atualizações do período e licença no seu CPF em até 3 computadores.</p>
+      <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg><span><span class="so-normal">Preço e o que entra</span><span class="so-promo">Só hoje, até as 23h59</span></span></span>
+      <h2 class="sec"><span class="so-normal">De R$ 1.497 por <span class="red">R$ 997</span>, com 12 meses de acesso.</span><span class="so-promo">Hoje o Previdenciário sai por <span class="red">R$ 697</span>, até as 23h59.</span></h2>
+      <p class="lead"><span class="so-normal">O pacote inteiro do Previdenciário, com todas as atualizações do período e licença no seu CPF em até 3 computadores.</span><span class="so-promo">A condição vale até as <b>23h59 de hoje, 16 de outubro</b>. À meia-noite a página volta sozinha para R$ 997, e não tem prorrogação. É o pacote inteiro, com todas as atualizações do período e licença no seu CPF em até 3 computadores.</span></p>
     </div>
 
     <div class="emb reveal">
-      <span class="emb-tag">De R$ 1.497 por R$ 997</span>
+      <span class="emb-tag"><span class="so-normal">De R$ 1.497 por R$ 997</span><span class="so-promo">Só hoje, até as 23h59</span></span>
       <div class="emb-name">MaestrIA Previdenciário</div>
       <p class="emb-sub">Do primeiro áudio do cliente à audiência, com a sua voz, citando fonte oficial.</p>
       <div class="emb-price">
-        <span class="from">R$ 1.497</span>
-        <span class="now"><span class="cur">R$</span><span class="val">997</span><span class="per">12 meses de acesso</span></span>
+        <span class="from"><span class="so-normal">R$ 1.497</span><span class="so-promo">R$ 997</span></span>
+        <span class="now"><span class="cur">R$</span><span class="val"><span class="so-normal">997</span><span class="so-promo">697</span></span><span class="per">12 meses de acesso</span></span>
       </div>
-      <p class="emb-parcel">12 meses, com todas as atualizações do período</p>
-      <a href="https://pay.kiwify.com.br/q5QEizf?src=lp-prev" class="btn btn-red" data-pacote="prev">Quero o Previdenciário por R$ 997</a>
+      <p class="emb-parcel"><span class="so-normal">12 meses, com todas as atualizações do período</span><span class="so-promo">12 meses de acesso. Hoje até as 23h59; depois, R$ 997</span></p>
+      <a href="https://pay.kiwify.com.br/q5QEizf?src=lp-prev" class="btn btn-red" data-pacote="prev"><span class="so-normal">Quero o Previdenciário por R$ 997</span><span class="so-promo">Quero o Previdenciário por R$ 697</span></a>
       <div class="seals">
         <span><span class="s-ck">✓</span> Compra segura</span>
         <span><span class="s-ck">✓</span> 7 dias de garantia</span>
@@ -1159,7 +1194,7 @@
       </div>
     </div>
 
-    <p class="pacotes-pe">Todo pacote inclui <b>12 meses de acesso</b> com todas as atualizações do período (depois, a renovação sai por <b>metade do que você pagou</b>: R$ 498,50 pra quem entra por R$ 997), <b>suporte pela própria skill</b>, com a correção chegando pra todo mundo no <span class="cmd">/atualizar-skill</span>, licença no seu CPF válida em até 3 computadores e <b>garantia incondicional de 7 dias</b>. Atende trabalhista também, ou quer captar mais clientes? Depois da compra você recebe a oferta pra somar as outras áreas com desconto.</p>
+    <p class="pacotes-pe">Todo pacote inclui <b>12 meses de acesso</b> com todas as atualizações do período (depois, a renovação sai por <b>metade do que você pagou</b>: <span class="so-normal">R$ 498,50 pra quem entra por R$ 997</span><span class="so-promo">R$ 348,50 pra quem entra hoje por R$ 697</span>), <b>suporte pela própria skill</b>, com a correção chegando pra todo mundo no <span class="cmd">/atualizar-skill</span>, licença no seu CPF válida em até 3 computadores e <b>garantia incondicional de 7 dias</b>. Atende trabalhista também, ou quer captar mais clientes? Depois da compra você recebe a oferta pra somar as outras áreas com desconto.</p>
 
 
 
@@ -1202,6 +1237,35 @@
     <p class="cta-meta reveal"><span>Setup em 30 minutos</span><span>Sigilo local</span><span>Citação validada em fonte oficial</span><span>Garantia de 7 dias</span></p>
   </div>
 </section>
+
+<div id="promoBar">
+  <div class="pb-in">
+    <span><b>Só hoje:</b> Previdenciário por <b>R$ 697</b>. Às 23h59 volta para R$ 997.</span>
+    <span class="pb-rel">carregando</span>
+    <a href="#pacotes" class="pb-btn">Quero agora</a>
+  </div>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById("promoBar");
+  if (!bar || !window.PROMO_FIM) return;
+  var rel = bar.querySelector(".pb-rel");
+  var dd = function(n){ return (n < 10 ? "0" : "") + n; };
+  (function tic(){
+    var falta = window.PROMO_FIM - Date.now();
+    if (falta <= 0) {
+      /* passou das 23h59: a pagina inteira volta ao preco normal, sozinha */
+      document.documentElement.className =
+        document.documentElement.className.split(" promo").join("");
+      return;
+    }
+    rel.textContent = "faltam " + dd(Math.floor(falta / 3600000)) + "h "
+      + dd(Math.floor(falta % 3600000 / 60000)) + "m "
+      + dd(Math.floor(falta % 60000 / 1000)) + "s";
+    setTimeout(tic, 1000);
+  })();
+})();
+</script>
 
 <footer>
   <div class="wrap">
@@ -1378,9 +1442,9 @@
       a.addEventListener('click', function(){
         if(a.dataset.abrindo) return;
         a.dataset.abrindo = '1';
-        var original = a.textContent;
+        var original = a.innerHTML;
         a.textContent = 'Abrindo checkout seguro...';
-        setTimeout(function(){ a.textContent = original; delete a.dataset.abrindo; }, 8000);
+        setTimeout(function(){ a.innerHTML = original; delete a.dataset.abrindo; }, 8000);
       });
     });
   })();

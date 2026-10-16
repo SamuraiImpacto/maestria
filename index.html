@@ -654,7 +654,42 @@
   .cic-ic,.bonus-ic{display:inline-flex;align-items:center;justify-content:center;color:var(--red-ink)}
   .cic-ic svg{width:26px;height:26px}
   .bonus-ic svg{width:22px;height:22px}
+
+  /* oferta de hoje: 697 ate as 23h59 de 16/10/2026 */
+  .so-promo{display:none}
+  html.promo .so-promo{display:inline}
+  html.promo .so-normal{display:none}
+  #promoBar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:linear-gradient(90deg,#7a0d12,#c1121f);color:#fff;
+    border-top:1px solid rgba(255,255,255,.2);box-shadow:0 -12px 34px rgba(0,0,0,.5)}
+  html.promo #promoBar{display:block}
+  html.promo body{padding-bottom:76px}
+  .pb-in{max-width:1120px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;
+    justify-content:center;gap:8px 16px;flex-wrap:wrap;text-align:center;font-size:14.5px}
+  .pb-in b{font-weight:900}
+  .pb-rel{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.3);padding:4px 10px;
+    border-radius:7px;font-weight:800;letter-spacing:.02em}
+  .pb-btn{background:#fff;color:#7a0d12;font-weight:800;padding:9px 17px;border-radius:9px;
+    text-decoration:none;white-space:nowrap}
+  .pb-btn:hover{background:#ffe9ea}
+  @media(max-width:620px){.pb-in{padding:9px 12px;font-size:13px;gap:6px 10px}
+    html.promo body{padding-bottom:92px}}
 </style>
+
+<script>
+(function(){
+  /* Oferta de 16/10/2026: R$ 697 ate as 23h59 de Brasilia.
+     ⛔ A hora e ABSOLUTA (UTC), nao o relogio do visitante: 23h59:59 em
+     Brasilia e 02:59:59 UTC do dia seguinte.
+     ⛔ O preco normal e o que esta escrito no HTML. Este script so ACRESCENTA
+     a promocao. Se ele nao rodar, aparece R$ 997, nunca menos do que o
+     checkout cobra. */
+  window.PROMO_FIM = Date.UTC(2026, 9, 17, 2, 59, 59);
+  if (Date.now() <= window.PROMO_FIM) {
+    document.documentElement.className += " promo";
+  }
+})();
+</script>
 
 <nav>
   <div class="wrap nav-in">
@@ -1434,8 +1469,8 @@
     <div class="pacotes-3">
       <a class="pk" href="https://pay.kiwify.com.br/q5QEizf" data-pacote="prev">
         <span class="pk-tag">Previdenciário</span>
-        <span class="pk-preco"><small>R$</small>997</span>
-        <span class="pk-nota">de R$ 1.497, com 12 meses de acesso</span>
+        <span class="pk-preco"><small>R$</small><span class="so-normal">997</span><span class="so-promo">697</span></span>
+        <span class="pk-nota"><span class="so-normal">de R$ 1.497, com 12 meses de acesso</span><span class="so-promo"><b>só hoje, até as 23h59.</b> Depois, R$ 997</span></span>
         <span class="pk-desc">RMI e atrasados, planejamento, auditor de CNIS, perícia completa e recurso administrativo. Mais jurimetria e as 3 universais.</span>
         <span class="pk-btn">Quero o Previdenciário</span>
       </a>
@@ -1522,6 +1557,35 @@
     <p class="cta-meta reveal"><span>Setup em 30 minutos</span><span>Sigilo local</span><span>Citação validada na fonte</span><span>Garantia de 7 dias</span></p>
   </div>
 </section>
+
+<div id="promoBar">
+  <div class="pb-in">
+    <span><b>Só hoje:</b> Previdenciário por <b>R$ 697</b>. Às 23h59 volta para R$ 997.</span>
+    <span class="pb-rel">carregando</span>
+    <a href="/prev/" class="pb-btn">Quero agora</a>
+  </div>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById("promoBar");
+  if (!bar || !window.PROMO_FIM) return;
+  var rel = bar.querySelector(".pb-rel");
+  var dd = function(n){ return (n < 10 ? "0" : "") + n; };
+  (function tic(){
+    var falta = window.PROMO_FIM - Date.now();
+    if (falta <= 0) {
+      /* passou das 23h59: a pagina inteira volta ao preco normal, sozinha */
+      document.documentElement.className =
+        document.documentElement.className.split(" promo").join("");
+      return;
+    }
+    rel.textContent = "faltam " + dd(Math.floor(falta / 3600000)) + "h "
+      + dd(Math.floor(falta % 3600000 / 60000)) + "m "
+      + dd(Math.floor(falta % 60000 / 1000)) + "s";
+    setTimeout(tic, 1000);
+  })();
+})();
+</script>
 
 <footer>
   <div class="wrap">
