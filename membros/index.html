@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260715a">
+  <link rel="stylesheet" href="style.css?v=20261020a">
 </head>
 <body>
 
@@ -90,6 +90,58 @@
             <div class="progresso-trilho"><div id="ini-progresso-barra" class="progresso-barra"></div></div>
           </div>
           <button type="button" id="ini-continuar" class="btn-principal btn-inline">Continuar de onde parei →</button>
+        </div>
+
+        <!-- ⛔ Primeiros passos: aparece SO para quem ainda nao instalou.
+             Quem precisa de uma coisa nao pode receber seis. -->
+        <div id="ini-primeiros-passos" class="hidden">
+          <div class="pp-caixa">
+            <h3 class="pp-titulo">Vamos colocar a sua MaestrIA para funcionar</h3>
+            <p class="pp-sub">São 3 passos e leva uns 10 minutos. Faça pelo computador,
+              não pelo celular.</p>
+
+            <div class="pp-passo">
+              <span class="pp-num">1</span>
+              <div class="pp-corpo">
+                <strong>Entre no grupo</strong>
+                <p>É lá que a gente te ajuda na hora. Se travar em qualquer ponto,
+                  manda um print no grupo.</p>
+                <a class="pp-btn pp-btn--verde" href="https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7" target="_blank" rel="noopener">
+                  ENTRAR NO GRUPO</a>
+              </div>
+            </div>
+
+            <div class="pp-passo">
+              <span class="pp-num">2</span>
+              <div class="pp-corpo">
+                <strong>Você já usa o Claude no computador?</strong>
+                <p>É dentro dele que a MaestrIA funciona. Se ainda não tem, a aula te
+                  leva pela mão, sem terminal e sem código.</p>
+                <button type="button" class="pp-btn pp-btn--claro" data-abrir-aula="01-instalacao">
+                  AINDA NÃO TENHO, QUERO A AULA</button>
+                <button type="button" class="pp-btn pp-btn--vazado" id="pp-ja-tenho">
+                  JÁ TENHO O CLAUDE</button>
+              </div>
+            </div>
+
+            <div class="pp-passo pp-passo--travado" id="pp-passo3">
+              <span class="pp-num">3</span>
+              <div class="pp-corpo">
+                <strong>Baixe e instale a sua MaestrIA</strong>
+                <p>Baixe o arquivo, <b>arraste ele para dentro da conversa do Claude</b>
+                  e escreva: <b>instala pra mim</b>. O Claude faz o resto. Você não digita
+                  código nem CPF: já está tudo dentro do arquivo.</p>
+                <button type="button" class="pp-btn pp-btn--azul" data-view-destino="downloads">
+                  BAIXAR A MINHA MAESTRIA</button>
+                <p class="pp-fim">No fim, <b>feche o Claude por completo</b>, abra de novo
+                  e digite <b>/maestria</b>.</p>
+              </div>
+            </div>
+
+            <p class="pp-rodape">Já instalou e quer ver o resto?
+              <button type="button" class="pp-link" id="pp-ja-instalei">Mostrar tudo</button>
+            </p>
+          </div>
         </div>
 
         <div class="grid-acoes">

@@ -215,6 +215,43 @@ function renderizarInicio(dados) {
   $("ini-plano").textContent = (c.plano_legivel || "") +
     (c.vitalicio ? " · licença vitalícia" : c.vence_em ? " · ativa até " + dataBr(c.vence_em) : "");
 
+  // ⛔ Quem ainda NAO instalou ve um caminho so. O mural de seis cards e o que
+  // trava a pessoa que acabou de comprar: ela precisa de uma coisa de cada vez.
+  // A prova de instalacao e a maquina registrada, a mesma que a aba de licenca
+  // mostra. Se a deteccao falhar, o pior caso e ver a tela antiga.
+  const jaInstalou = ((dados && dados.instalacoes) || []).length > 0;
+  const pp = $("ini-primeiros-passos");
+  const grade = document.querySelector(".grid-acoes");
+  const progresso = document.querySelector(".progresso-wrap");
+  if (pp) {
+    const mostrarPasso = !jaInstalou && !localStorage.getItem("maestria_pulou_passos");
+    pp.classList.toggle("hidden", !mostrarPasso);
+    if (grade) grade.classList.toggle("hidden", mostrarPasso);
+    if (progresso) progresso.classList.toggle("hidden", mostrarPasso);
+    // ⛔ o botao do curso vive FORA da .progresso-wrap: esconder so a barra
+    // deixava um "Comecar: ..." solto por cima do passo 1.
+    const btnCurso = $("ini-continuar");
+    if (btnCurso) btnCurso.classList.toggle("hidden", mostrarPasso);
+    const liberar = () => {
+      const p3 = $("pp-passo3");
+      if (p3) p3.classList.add("pp-liberado");
+    };
+    const jaTenho = $("pp-ja-tenho");
+    if (jaTenho) jaTenho.onclick = liberar;
+    // quem vai ver a aula tambem destrava o passo 3 para quando voltar
+    pp.querySelectorAll("[data-abrir-aula]").forEach((b) => b.addEventListener("click", liberar));
+    const pular = $("pp-ja-instalei");
+    if (pular) {
+      pular.onclick = () => {
+        localStorage.setItem("maestria_pulou_passos", "1");
+        pp.classList.add("hidden");
+        if (grade) grade.classList.remove("hidden");
+        if (progresso) progresso.classList.remove("hidden");
+        if (btnCurso) btnCurso.classList.remove("hidden");
+      };
+    }
+  }
+
   const est = window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.estado ? window.MAESTRIA_CURSO.estado() : null;
   const btn = $("ini-continuar");
   if (est && est.total) {

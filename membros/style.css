@@ -386,3 +386,30 @@ textarea { resize: vertical; }
   .menu-toggle { display: block; }
   .tela-app { padding: 18px 16px 60px; }
 }
+
+  /* Primeiros passos (quem ainda nao instalou) */
+  /* ⛔ A area de membros e TEMA ESCURO. Caixa branca aqui some o texto e some
+     o titulo: usar as variaveis do tema, nunca cor chapada. */
+  .pp-caixa{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:28px 26px;margin:4px 0 22px;color:var(--text)}
+  .pp-titulo{font-size:23px;margin:0 0 6px;color:var(--text)}
+  .pp-sub{color:var(--text-muted);margin:0 0 22px}
+  .pp-passo{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--border)}
+  .pp-passo:first-of-type{border-top:none;padding-top:4px}
+  .pp-num{flex:0 0 34px;height:34px;border-radius:50%;background:var(--vermelho);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800}
+  .pp-corpo strong{display:block;font-size:17px;margin-bottom:4px;color:var(--text)}
+  .pp-corpo p{color:var(--text-muted);margin:0 0 12px;line-height:1.55}
+  .pp-corpo b{color:var(--text)}
+  .pp-btn{display:inline-block;border:none;border-radius:10px;padding:14px 24px;font-size:15px;
+    font-weight:700;cursor:pointer;text-decoration:none;margin:0 8px 8px 0;font-family:inherit}
+  .pp-btn--verde{background:#25d366;color:#07240f}
+  .pp-btn--azul{background:var(--vermelho);color:#fff}
+  .pp-btn--claro{background:var(--text);color:#111}
+  .pp-btn--vazado{background:transparent;color:var(--text);border:1px solid var(--border-strong)}
+  .pp-passo--travado{opacity:.4;pointer-events:none}
+  .pp-passo--travado.pp-liberado{opacity:1;pointer-events:auto}
+  .pp-fim{font-size:14px;color:var(--text-dim);margin:6px 0 0}
+  .pp-rodape{margin:18px 0 0;font-size:14px;color:var(--text-dim)}
+  .pp-link{background:none;border:none;color:var(--vermelho-soft);cursor:pointer;font-size:14px;
+    text-decoration:underline;padding:0;font-family:inherit}
