@@ -228,6 +228,11 @@ function renderizarInicio(dados) {
     pp.classList.toggle("hidden", !mostrarPasso);
     if (grade) grade.classList.toggle("hidden", mostrarPasso);
     if (progresso) progresso.classList.toggle("hidden", mostrarPasso);
+    // ⛔ o banner "Bem-vindo" come 144px antes do bloco e nao diz nada a quem
+    // acabou de chegar. Com ele na tela, o passo 3 (baixar e instalar) cai para
+    // fora do campo de visao, e quem esta travado nao rola: faz o que esta la.
+    const hero = document.querySelector("#view-inicio .inicio-hero");
+    if (hero) hero.classList.toggle("hidden", mostrarPasso);
     // ⛔ o botao do curso vive FORA da .progresso-wrap: esconder so a barra
     // deixava um "Comecar: ..." solto por cima do passo 1.
     const btnCurso = $("ini-continuar");
@@ -247,6 +252,7 @@ function renderizarInicio(dados) {
         pp.classList.add("hidden");
         if (grade) grade.classList.remove("hidden");
         if (progresso) progresso.classList.remove("hidden");
+        if (hero) hero.classList.remove("hidden");
         if (btnCurso) btnCurso.classList.remove("hidden");
       };
     }
