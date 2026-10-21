@@ -197,8 +197,6 @@ function renderizarPainel(dados) {
 
   renderizarDownloads(dados);
   renderizarLicenca(dados);
-  renderizarTickets(dados.tickets || []);
-  montarSelectChamado(dados);
   renderizarGuia(dados);
 
   // Aulas na barra lateral + entrada pelo Início (dashboard)
@@ -1096,94 +1094,12 @@ async function removerDispositivo(hostname, botao) {
   }
 }
 
-// ---------- Chamados ----------
-function renderizarTickets(tickets) {
-  const box = $("pl-tickets");
-  box.innerHTML = "";
-  if (!tickets.length) {
-    box.innerHTML = "<p class='vazio'>Você ainda não abriu nenhum chamado.</p>";
-    return;
-  }
-  tickets.forEach((t) => {
-    const respondido = Boolean(t.resposta);
-    const el = document.createElement("div");
-    el.className = "ticket";
-    el.innerHTML =
-      "<div class='ticket-head'>" +
-      "<strong>#" + esc(t.numero) + " · " + esc(t.resumo) + "</strong>" +
-      "<span class='ticket-status " + (respondido ? "respondido" : "aberto") + "'>" +
-      (respondido ? "Respondido" : "Em análise") + "</span></div>" +
-      "<p class='meta'>" + esc(t.skill_id) + " · aberto em " + dataBr(t.created_at) + "</p>" +
-      (respondido
-        ? "<div class='resposta'><strong>Resposta" +
-          (t.respondido_em ? " em " + dataBr(t.respondido_em) : "") +
-          "</strong><br>" + esc(t.resposta) + "</div>"
-        : "");
-    box.appendChild(el);
-  });
-}
-
-function montarSelectChamado(dados) {
-  const sel = $("tk-skill");
-  sel.innerHTML = "";
-  (dados.skills || []).forEach((s) => {
-    const opt = document.createElement("option");
-    opt.value = s.skill_id;
-    opt.textContent = s.nome;
-    sel.appendChild(opt);
-  });
-  const optOutra = document.createElement("option");
-  optOutra.value = "outra";
-  optOutra.textContent = "Outra / assunto geral";
-  sel.appendChild(optOutra);
-}
-
-// ---------- novo chamado ----------
-$("form-ticket").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const cred = credenciais();
-  if (!cred) return;
-
-  const msg = $("ticket-msg");
-  msg.className = "hidden";
-  const btn = e.target.querySelector("button[type=submit]");
-  btn.disabled = true;
-  btn.textContent = "Enviando...";
-
-  try {
-    const resp = await fetch(CORE + "/skill-support-ticket", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        skill_id: $("tk-skill").value,
-        cliente_token: cred.token,
-        email_contato: dadosAtuais && dadosAtuais.cliente ? dadosAtuais.cliente.email : "",
-        categoria: $("tk-categoria").value,
-        severidade: "medio",
-        resumo: $("tk-resumo").value.trim(),
-        descricao: $("tk-descricao").value.trim(),
-        versao_skill: null,
-        os: navigator.userAgent.includes("Mac") ? "mac" : "windows",
-      }),
-    });
-    const dados = await resp.json();
-    if (!resp.ok || !dados.ok) throw new Error("Não deu pra enviar. Tente de novo em instantes.");
-
-    msg.textContent = "Chamado #" + dados.numero + " aberto! A resposta aparece aqui e chega no seu email em até 48h úteis.";
-    msg.className = "ok";
-    e.target.reset();
-
-    // Recarrega os chamados
-    await entrar(cred.token, cred.cpf, false);
-    mostrarView("chamados");
-  } catch (err) {
-    msg.textContent = err.message || "Falha de conexão. Tente de novo.";
-    msg.className = "falha";
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Enviar chamado";
-  }
-});
+// ---------- Suporte ----------
+// ⛔ O suporte e o GRUPO, e so. O formulario de chamado saiu da tela em
+// 20/10/2026 ("isso nao existe, e tudo no grupo"): prometia resposta por
+// e-mail em 48h que ninguem atendia. O codigo que o alimentava sai junto,
+// porque $("form-ticket") sem o formulario no HTML derrubaria o resto do JS.
+// Os chamados antigos continuam no banco e sao respondidos pelo admin.
 
 // ---------- sessão persistida ----------
 (async function init() {
