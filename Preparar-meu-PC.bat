@@ -167,7 +167,8 @@ echo   Estou salvando um relatorio na sua Area de Trabalho.
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$l=@(); $l+='RELATORIO DO PREPARADOR DA MAESTRIA'; $l+=('Data: '+(Get-Date -Format 'dd/MM/yyyy HH:mm')); $l+=('Computador: '+$env:COMPUTERNAME+'   Usuario: '+$env:USERNAME); $l+=('Windows: '+(Get-CimInstance Win32_OperatingSystem).Caption); $l+=('E administrador: '+([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)); $l+=('Politica do PowerShell: '+(Get-ExecutionPolicy)); $l+=('winget: '+$(if(Get-Command winget -EA SilentlyContinue){'existe'}else{'NAO existe'})); $l+=('git: '+$(if(Get-Command git -EA SilentlyContinue){'ok'}else{'FALTANDO'})); $l+=('python: '+$(if(Get-Command python -EA SilentlyContinue){'ok'}else{'FALTANDO'})); try{ $null=Invoke-WebRequest 'https://github.com' -UseBasicParsing -TimeoutSec 15; $l+='Chega no github: ok' }catch{ $l+=('Chega no github: BLOQUEADO - '+$_.Exception.Message) }; try{ $a=Join-Path $env:LOCALAPPDATA 'maestria-teste.txt'; Set-Content $a 'x'; Remove-Item $a; $l+='Escrever na pasta do usuario: ok' }catch{ $l+='Escrever na pasta do usuario: BLOQUEADO' }; $p=Join-Path ([Environment]::GetFolderPath('Desktop')) 'MaestrIA-relatorio.txt'; Set-Content -Path $p -Value $l -Encoding UTF8; Write-Host ('   Relatorio salvo em: '+$p)"
 echo.
-echo   Mande esse arquivo pelo suporte: maestria.samurailab.com.br/suporte.html
+echo   Mande esse arquivo no grupo da comunidade:
+echo   https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7
 echo.
 pause
 exit /b 0

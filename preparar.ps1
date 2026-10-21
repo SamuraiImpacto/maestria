@@ -104,7 +104,8 @@ if (Tem-Comando "claude") {
         Write-Host "   OK: Claude Code instalado." -ForegroundColor Green
     } catch {
         Write-Host "   [ERRO] A instalação do Claude Code falhou: $($_.Exception.Message)" -ForegroundColor Red
-        Write-Host "   Tire uma foto desta tela e mande pro suporte: maestria.samurailab.com.br/suporte.html"
+        Write-Host "   Tire um print desta tela e mande no grupo da comunidade: "
+        Write-Host "   https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7"
     }
 }
 
@@ -131,7 +132,22 @@ if (Tem-PythonReal) {
 # ---------- RESUMO ----------
 Write-Host ""
 Write-Host "==============================================" -ForegroundColor Red
-Write-Host "  PRONTO! Próximos passos (2 minutos):" -ForegroundColor White
+# ⛔ Nao escreva PRONTO sem olhar: dizer que deu certo quando nao deu faz o
+# advogado seguir para o passo seguinte e travar sem entender por que.
+$gitOk = [bool](Get-Command git -ErrorAction SilentlyContinue)
+$pyOk = [bool](Get-Command python -ErrorAction SilentlyContinue) -or [bool](Get-Command py -ErrorAction SilentlyContinue)
+if ($gitOk -and $pyOk) {
+    Write-Host "  PRONTO! Próximos passos (2 minutos):" -ForegroundColor White
+} else {
+    $faltou = @()
+    if (-not $gitOk) { $faltou += "Git" }
+    if (-not $pyOk) { $faltou += "Python" }
+    Write-Host ("  QUASE LA: faltou instalar " + ($faltou -join " e ") + ".") -ForegroundColor Yellow
+    Write-Host "  Tira um print desta tela e manda no grupo da comunidade," -ForegroundColor Yellow
+    Write-Host "  que a gente resolve por la. Nao precisa saber explicar." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  Se quiser tentar mesmo assim, os proximos passos sao:" -ForegroundColor White
+}
 Write-Host "==============================================" -ForegroundColor Red
 Write-Host ""
 Write-Host "  1. FECHE esta janela e abra o PowerShell DE NOVO" -ForegroundColor White

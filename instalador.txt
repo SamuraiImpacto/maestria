@@ -54,7 +54,7 @@ Envie `ticket` OU `cpf`, nunca precisa dos dois.
 Respostas e o que dizer (uma frase):
 - **200 `ativo:true`** → "Licença ativada. Instalando suas skills:" e vá pro passo 3.
 - **403 documento não confere** → "O CPF/CNPJ não bate com o da compra. Confere os números? Se comprou pela empresa, é o CNPJ."
-- **403 limite de máquinas** → "Sua licença já está em 3 computadores. O suporte libera a troca: maestria.samurailab.com.br/suporte.html"
+- **403 limite de máquinas** → "Sua licença já está em 3 computadores. Você mesmo libera uma vaga na área de membros (maestria.samurailab.com.br/membros, aba Licença). Se travar, manda um print no grupo: https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7"
 - **404 / `ativo:false`** → "Código não encontrado ou licença vencida. Confere se copiou o código inteiro do email?"
 - **Erro de rede** → avise com honestidade e sugira tentar de novo em instantes.
 
@@ -71,7 +71,7 @@ Dentro de cada pacote há um `INSTRUCOES-PARA-O-CLAUDE.md` próprio. **Ele só p
 **Git não é usado em nenhuma etapa desta instalação.** Se o próprio Claude Code reclamar que falta git no sistema (é uma dependência dele, não das skills), pergunte antes de agir:
 > "Seu computador não tem o Git, que o Claude Code usa pra funcionar bem. Posso instalar pra você pelo instalador oficial? Isso aceita a licença do Git (software livre) em seu nome."
 
-Só depois do sim: no Windows, `winget install --id Git.Git -e --silent --accept-package-agreements --accept-source-agreements` (o modo silencioso evita o assistente de várias telas, confuso pra quem é leigo); no Mac, as ferramentas de linha de comando da Apple via `softwareupdate` (evite `xcode-select --install`, que abre um diálogo confuso). Se o usuário disser não, siga a instalação normalmente: as skills instalam sem git.
+Só depois do sim: no Windows, `winget install --id Git.Git -e --source winget --silent --accept-package-agreements --accept-source-agreements` (o `--source winget` importa: sem ele o comando pode cair na loja da Microsoft, que pede login e trava o advogado) (o modo silencioso evita o assistente de várias telas, confuso pra quem é leigo); no Mac, as ferramentas de linha de comando da Apple via `softwareupdate` (evite `xcode-select --install`, que abre um diálogo confuso). Se o usuário disser não, siga a instalação normalmente: as skills instalam sem git.
 
 Python também não é necessário pra instalar (só pra gerar documentos depois). Se faltar, resolva quando o usuário for gerar o primeiro documento, perguntando antes da mesma forma.
 
