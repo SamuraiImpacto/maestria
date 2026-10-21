@@ -256,6 +256,8 @@ function renderizarInicio(dados) {
     }
   }
 
+  montarUpgrade(dados, jaInstalou);
+
   const est = window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.estado ? window.MAESTRIA_CURSO.estado() : null;
   const btn = $("ini-continuar");
   if (est && est.total) {
@@ -1115,6 +1117,93 @@ async function removerDispositivo(hostname, botao) {
     botao.textContent = "remover";
     window.alert("Não deu pra remover agora. Tente de novo em instantes.");
   }
+}
+
+// ---------- Upgrade do pacote ----------
+// ⛔ O caminho de comprar outra área não existia em lugar nenhum do produto: quem
+// usa todo dia e quer mais só conseguia comprar se alguém falasse com ele por
+// fora. São as pessoas mais fáceis de vender, e elas não tinham para onde clicar.
+//
+// ⛔ Sem preço escrito aqui: preço muda, e número velho na área de membros faz o
+// cliente chegar no checkout com outro valor e desistir. Quem mostra preço é a
+// página da área, que é a fonte.
+const AREAS_MAESTRIA = [
+  {
+    id: "prev",
+    nome: "Previdenciário",
+    texto: "Cálculo de atrasados e RMI, petição, impugnação de laudo, quesitos de perícia e recurso ao INSS.",
+    pagina: "https://maestria.samurailab.com.br/prev/",
+  },
+  {
+    id: "trab",
+    nome: "Trabalhista",
+    texto: "Cálculo trabalhista, petição inicial, contestação e acordo, com a conta e a peça no mesmo lugar.",
+    pagina: "https://maestria.samurailab.com.br/trab/",
+  },
+  {
+    id: "marketing",
+    nome: "Marketing Jurídico",
+    texto: "Reel, carrossel, estático, artigo e landing na sua voz, com a blindagem do Provimento 205 da OAB.",
+    pagina: "https://maestria.samurailab.com.br/marketing/",
+  },
+];
+
+function areasDoPlano(plano) {
+  const p = String(plano || "").toLowerCase();
+  // Quem é full, vitalício, black ou cortesia já tem tudo: nada a oferecer.
+  if (["full", "vitalicio", "black", "cortesia"].some((x) => p.includes(x))) return "TUDO";
+  if (!p.startsWith("pacote_")) return [];
+  return p.replace("pacote_", "").split("_").filter(Boolean);
+}
+
+function montarUpgrade(dados, jaInstalou) {
+  const caixa = $("ini-upgrade");
+  if (!caixa) return;
+  const plano = dados && dados.cliente ? dados.cliente.plano : "";
+  const tem = areasDoPlano(plano);
+
+  // ⛔ Não aparece para quem ainda está instalando, nem para quem já tem tudo.
+  if (!jaInstalou || tem === "TUDO") {
+    caixa.classList.add("hidden");
+    return;
+  }
+  const faltam = AREAS_MAESTRIA.filter((a) => tem.indexOf(a.id) === -1);
+  if (!faltam.length) {
+    caixa.classList.add("hidden");
+    return;
+  }
+  caixa.classList.remove("hidden");
+
+  const nomesTem = AREAS_MAESTRIA.filter((a) => tem.indexOf(a.id) !== -1).map((a) => a.nome);
+  const resumo = $("up-resumo");
+  if (resumo) {
+    resumo.textContent = nomesTem.length
+      ? "Você tem " + listaBonita(nomesTem) + ". Dá para somar:"
+      : "Dá para somar ao seu pacote:";
+  }
+
+  const grade = $("up-grade");
+  if (!grade) return;
+  grade.innerHTML =
+    AREAS_MAESTRIA.map((a) => {
+      const possui = tem.indexOf(a.id) !== -1;
+      return (
+        '<div class="up-item' + (possui ? " up-item--tem" : "") + '">' +
+        (possui ? '<span class="up-tag">JÁ É SEU</span>' : "") +
+        "<strong>" + esc(a.nome) + "</strong>" +
+        "<p>" + esc(a.texto) + "</p>" +
+        (possui
+          ? ""
+          : '<a class="up-btn" href="' + a.pagina + '?src=membros-upgrade" target="_blank" rel="noopener">Ver o ' +
+            esc(a.nome) + "</a>") +
+        "</div>"
+      );
+    }).join("");
+}
+
+function listaBonita(nomes) {
+  if (nomes.length === 1) return nomes[0];
+  return nomes.slice(0, -1).join(", ") + " e " + nomes[nomes.length - 1];
 }
 
 // ---------- Suporte ----------

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261021a">
+  <link rel="stylesheet" href="style.css?v=20261021c">
 </head>
 <body>
 
@@ -136,6 +136,21 @@
             <p class="pp-rodape">Já instalou e quer ver o resto?
               <button type="button" class="pp-link" id="pp-ja-instalei">Mostrar tudo</button>
             </p>
+          </div>
+        </div>
+
+        <!-- Upgrade: só para quem já instalou. Quem está nos primeiros passos
+             não vê, porque oferta durante a instalação é o barulho que trava. -->
+        <div id="ini-upgrade" class="hidden">
+          <div class="up-caixa">
+            <div class="up-topo">
+              <h3 class="up-titulo">O seu pacote</h3>
+              <p class="up-sub" id="up-resumo"></p>
+            </div>
+            <div class="up-grade" id="up-grade"></div>
+            <p class="up-rodape">Comprar outra área <b>soma</b> ao que você já tem: mesma
+              licença, mesmos computadores, mesma pasta. As skills novas aparecem sozinhas
+              no seu <b>/maestria</b> depois da compra.</p>
           </div>
         </div>
 
@@ -276,8 +291,8 @@
 </main>
 
 <script src="guia-skills.js?v=20260926a"></script>
-<script src="app.js?v=20261021b"></script>
-<script src="conteudo.js?v=20261021a"></script>
-<script src="curso.js?v=20261021a"></script>
+<script src="app.js?v=20261021c"></script>
+<script src="conteudo.js?v=20261021c"></script>
+<script src="curso.js?v=20261021c"></script>
 </body>
 </html>
