@@ -256,6 +256,12 @@ function renderizarInicio(dados) {
     }
   }
 
+  // ⛔ Antes de montar qualquer coisa do curso: o curso precisa saber o pacote
+  // dele para esconder as aulas e os trechos de area que ele nao comprou.
+  if (window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.definirAreas) {
+    window.MAESTRIA_CURSO.definirAreas(dados && dados.cliente ? dados.cliente.plano : "");
+  }
+
   montarUpgrade(dados, jaInstalou);
 
   const est = window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.estado ? window.MAESTRIA_CURSO.estado() : null;

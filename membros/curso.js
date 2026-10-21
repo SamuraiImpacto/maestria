@@ -43,7 +43,60 @@
   }
 
   // Renderiza o markdown do módulo pros componentes do curso
+// ---------- Filtro por pacote ----------
+  // ⛔ Quem compra so o Marketing nao pode abrir o curso e ler sobre calculo de
+  // atrasados do INSS: o produto parece de outro, e o que e dele se perde no
+  // meio. Os blocos <!-- area:X --> ... <!-- /area --> do markdown somem quando
+  // X nao esta no pacote dele.
+  //
+  // ⛔ SO EXIBICAO: nada e apagado, e sem plano conhecido o padrao e MOSTRAR
+  // TUDO. Esconder conteudo de quem pagou por ele e pior que mostrar demais.
+  var AREAS_DO_CLIENTE = null; // null = mostra tudo
+
+  function definirAreas(plano) {
+    var p = String(plano || "").toLowerCase();
+    if (!p) { AREAS_DO_CLIENTE = null; return; }
+    var FULL = ["full", "vitalicio", "black", "cortesia"];
+    for (var i = 0; i < FULL.length; i++) {
+      if (p.indexOf(FULL[i]) !== -1) { AREAS_DO_CLIENTE = null; return; }
+    }
+    if (p.indexOf("pacote_") !== 0) { AREAS_DO_CLIENTE = null; return; }
+    AREAS_DO_CLIENTE = p.replace("pacote_", "").split("_").filter(Boolean);
+  }
+
+  function temArea(area) {
+    if (!AREAS_DO_CLIENTE) return true;
+    if (area === "universal") return true;
+    return AREAS_DO_CLIENTE.indexOf(area) !== -1;
+  }
+
+  function filtrarPorArea(md) {
+    // ⛔ A limpeza dos marcadores acontece SEMPRE, inclusive para quem ve tudo.
+    // O renderizador daqui nao entende comentario de HTML: sem esta linha, quem
+    // e vitalicio leria "<!-- area:prev -->" no meio da aula.
+    var t = md;
+    if (AREAS_DO_CLIENTE) {
+      t = t.replace(/<!--\s*area:([a-z_]+)\s*-->[\s\S]*?<!--\s*\/area\s*-->/g,
+        function (bloco, area) { return temArea(area) ? bloco : ""; });
+    }
+    return t.replace(/<!--\s*area:[a-z_]+\s*-->\r?\n?|<!--\s*\/area\s*-->\r?\n?/g, "");
+  }
+
+  // Aula inteira de uma area so: o frontmatter pode trazer "areas".
+  function aulaVisivel(mod) {
+    if (!mod || !mod.areas) return true;
+    var lista = String(mod.areas).split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+    if (!lista.length) return true;
+    for (var i = 0; i < lista.length; i++) if (temArea(lista[i])) return true;
+    return false;
+  }
+
+  function aulas() {
+    return CURSO.filter(aulaVisivel);
+  }
+
   function render(md, slug) {
+    md = filtrarPorArea(md);
     var linhas = md.split("\n");
     var html = [];
     var i = 0;
@@ -188,8 +241,8 @@
   // Resumo do progresso pro dashboard: total, feitas e a próxima aula pendente
   function estado() {
     var prog = progresso();
-    var feitas = CURSO.filter(function (m) { return prog[m.slug]; }).length;
-    var proxima = CURSO.filter(function (m) { return !prog[m.slug]; })[0] || null;
+    var feitas = aulas().filter(function (m) { return prog[m.slug]; }).length;
+    var proxima = aulas().filter(function (m) { return !prog[m.slug]; })[0] || null;
     return { total: CURSO.length, feitas: feitas, proxima: proxima };
   }
 
@@ -203,7 +256,7 @@
       grupo.textContent = "Aulas · " + est.feitas + " de " + est.total;
     }
     var prog = progresso();
-    alvo.innerHTML = CURSO.map(function (mod) {
+    alvo.innerHTML = aulas().map(function (mod) {
       var cls = "menu-item menu-aula" + (mod.slug === ativo ? " ativo" : "") + (prog[mod.slug] ? " feito" : "");
       return '<button type="button" class="' + cls + '" data-modulo="' + mod.slug + '">' +
         '<span class="menu-icone">' + mod.icone + "</span><span>" + esc(mod.titulo.split(":")[0]) + "</span>" +
@@ -215,15 +268,16 @@
   }
 
   function abrirModulo(slug) {
-    var mod = CURSO.filter(function (m) { return m.slug === slug; })[0] || CURSO[0];
+    var lista = aulas();
+    var mod = lista.filter(function (m) { return m.slug === slug; })[0] || lista[0];
     if (!mod) return;
-    var idx = CURSO.indexOf(mod);
+    var idx = lista.indexOf(mod);
     var tela = document.getElementById("view-aula");
-    var anterior = CURSO[idx - 1];
-    var proximo = CURSO[idx + 1];
+    var anterior = lista[idx - 1];
+    var proximo = lista[idx + 1];
 
     tela.innerHTML =
-      '<article class="c-aula"><p class="c-aula-modulo">Aula ' + (idx + 1) + " de " + CURSO.length + "</p>" +
+      '<article class="c-aula"><p class="c-aula-modulo">Aula ' + (idx + 1) + " de " + lista.length + "</p>" +
       "<h2>" + esc(mod.titulo) + "</h2><p class=\"c-aula-sub\">" + esc(mod.subtitulo) + "</p>" +
       render(mod.corpo, mod.slug) +
       '<div class="c-nav">' +
@@ -276,9 +330,11 @@
   // Primeira entrada: abre a primeira aula ainda não concluída
   function abrirInicial() {
     var prog = progresso();
-    var pendente = CURSO.filter(function (m) { return !prog[m.slug]; })[0];
-    abrirModulo((pendente || CURSO[0] || {}).slug);
+    var lista = aulas();
+    var pendente = lista.filter(function (m) { return !prog[m.slug]; })[0];
+    abrirModulo((pendente || lista[0] || {}).slug);
   }
 
-  window.MAESTRIA_CURSO = { abrir: abrirModulo, montarMenu: montarMenu, abrirInicial: abrirInicial, estado: estado };
+  window.MAESTRIA_CURSO = { abrir: abrirModulo, montarMenu: montarMenu, abrirInicial: abrirInicial,
+    estado: estado, definirAreas: definirAreas };
 })();
