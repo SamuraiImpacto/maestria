@@ -125,6 +125,27 @@
   .passo p{margin:0;font-size:15.4px;color:var(--muted);line-height:1.56}
   .passo p strong{color:var(--txt)}
 
+  /* ---------- lista de comandos ---------- */
+  .cmds{display:grid;gap:12px;margin-top:26px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .cmdbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px 14px}
+  .cmdbox h4{margin:0 0 14px;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;
+    font-family:var(--mono);color:var(--red-ink);font-weight:700}
+  .cmdbox dl{margin:0;display:grid;gap:11px}
+  .cmdbox dt{font-family:var(--mono);font-size:13.5px;color:var(--txt);font-weight:600}
+  .cmdbox dd{margin:2px 0 0;color:var(--muted);font-size:14.6px;line-height:1.5}
+
+  /* ---------- saidas e requisitos ---------- */
+  .saidas{display:grid;gap:12px;margin-top:26px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .saida{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel-2)}
+  .saida b{display:block;font-size:15.5px;margin-bottom:5px}
+  .saida span{color:var(--muted);font-size:14.4px;line-height:1.5}
+
+  /* ---------- o que nao e ---------- */
+  .naoe{display:grid;gap:13px;margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .naoe div{border-left:3px solid var(--red);padding:3px 0 3px 16px}
+  .naoe b{display:block;font-size:15.6px;margin-bottom:3px}
+  .naoe span{color:var(--muted);font-size:14.8px;line-height:1.52}
+
   /* ---------- preco ---------- */
   .planos{display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));align-items:start}
   .plano{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;
@@ -337,6 +358,131 @@
         <p>O vídeo do seu cliente <strong>não vai para servidor nenhum</strong>. A edição acontece
           dentro do seu computador.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <p class="rotulo">Os comandos, um por um</p>
+    <h2>Você escreve em português. Estes são os atalhos.</h2>
+    <p class="lead">Não precisa decorar nenhum: digitar <code>/maestria</code> abre o menu e você
+      escolhe pelo nome. Eles existem para quem gosta de ir direto.</p>
+
+    <div class="cmds">
+      <div class="cmdbox">
+        <h4>Vídeo</h4>
+        <dl>
+          <dt>/editar-video</dt>
+          <dd>O vídeo do celular volta editado, com um dos 39 modelos do cardápio.</dd>
+          <dt>/cortes-video</dt>
+          <dd>Live, aula ou palestra vira vários cortes curtos que fecham uma ideia.</dd>
+          <dt>/video-pje</dt>
+          <dd>Vídeo de testemunha dividido abaixo do limite do tribunal, com conferência de cada parte.</dd>
+          <dt>/anuncio-sem-gravar</dt>
+          <dd>Anúncio em motion de 15 a 30 segundos, nos três tamanhos do Instagram.</dd>
+          <dt>/cardapio-video</dt>
+          <dd>Os 39 modelos com vídeo de amostra, para escolher em segundos.</dd>
+          <dt>/minha-marca</dt>
+          <dd>Seu nome, cargo, cores e arroba nas telas de todo vídeo.</dd>
+        </dl>
+      </div>
+
+      <div class="cmdbox">
+        <h4>Conteúdo</h4>
+        <dl>
+          <dt>/novo-reel</dt>
+          <dd>Roteiro com gancho de 3 segundos, desenvolvimento, fechamento e legenda.</dd>
+          <dt>/novo-carrossel</dt>
+          <dd>Texto lâmina a lâmina, legenda e direção de arte.</dd>
+          <dt>/carrossel-imagens</dt>
+          <dd>Esse mesmo texto virando as imagens prontas, na sua marca.</dd>
+          <dt>/novo-estatico</dt>
+          <dd>A frase de impacto, o apoio e a arte para o feed.</dd>
+          <dt>/novo-artigo</dt>
+          <dd>Artigo com SEO por dentro, pronto para publicar no seu site.</dd>
+          <dt>/calendario-editorial</dt>
+          <dd>O mês inteiro, dia a dia, com formato e tema de cada post.</dd>
+        </dl>
+      </div>
+
+      <div class="cmdbox">
+        <h4>Presença na internet</h4>
+        <dl>
+          <dt>/criar-site e /publicar-site</dt>
+          <dd>O site do escritório construído e colocado no ar.</dd>
+          <dt>/nova-landing</dt>
+          <dd>Página de captação para a sua tese.</dd>
+          <dt>/publicar-artigo</dt>
+          <dd>Manda o artigo para o site sem você abrir painel nenhum.</dd>
+          <dt>/google-meu-negocio</dt>
+          <dd>Seu perfil arrumado para quem procura advogado na sua cidade.</dd>
+          <dt>/pesquisa-de-campanha</dt>
+          <dd>Dados públicos oficiais para saber onde está o seu público.</dd>
+        </dl>
+      </div>
+
+      <div class="cmdbox">
+        <h4>A sua cara</h4>
+        <dl>
+          <dt>/tom-de-voz</dt>
+          <dd>Manual da sua voz, tirado dos seus textos de verdade.</dd>
+          <dt>/mapear-personas</dt>
+          <dd>Quem é o seu público, a dor e a objeção de cada um.</dd>
+          <dt>/meu-flg</dt>
+          <dd>Pilares, matriz da semana e os próximos 90 dias do seu perfil.</dd>
+          <dt>/editar-estilo</dt>
+          <dd>Calibra o jeito de escrever até sair do jeito que você fala.</dd>
+          <dt>/conselheiro</dt>
+          <dd>Gente de conteúdo opinando sobre o seu conteúdo antes de postar.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <p class="rotulo">O que chega na sua mão</p>
+    <h2>Arquivo pronto, não sugestão.</h2>
+    <p class="lead">Ele não devolve ideia para você executar depois. Devolve o arquivo salvo na sua
+      pasta, pronto para abrir, postar ou juntar no processo.</p>
+
+    <div class="saidas">
+      <div class="saida"><b>MP4</b><span>Vídeo editado, cortes e anúncio, nos tamanhos de Reels, feed e quadrado.</span></div>
+      <div class="saida"><b>PNG 1080x1350</b><span>As lâminas do carrossel, na sua marca, prontas para subir.</span></div>
+      <div class="saida"><b>Word</b><span>Artigo, roteiro, calendário, personas e tom de voz, com o seu timbrado.</span></div>
+      <div class="saida"><b>Site no ar</b><span>Endereço funcionando, não um arquivo para alguém publicar depois.</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <p class="rotulo">Falando na lata</p>
+    <h2>O que ele não é.</h2>
+    <p class="lead">Melhor você saber agora do que descobrir depois de pagar.</p>
+
+    <div class="naoe">
+      <div><b>Não é site que você acessa</b><span>É instalado no seu computador. O seu material fica com você, não na nuvem de ninguém.</span></div>
+      <div><b>Não é curso</b><span>Não tem aula para assistir e depois fazer sozinho. Quem faz é ele.</span></div>
+      <div><b>Não é mensalidade</b><span>Pagamento único. O único custo que se repete é a assinatura do Claude, contratada direto com eles.</span></div>
+      <div><b>Não posta por você</b><span>Entrega o arquivo pronto. Quem aperta publicar é você, porque a conta é sua e a responsabilidade também.</span></div>
+      <div><b>Não inventa jurisprudência</b><span>Todo julgado é conferido em fonte oficial antes de entrar. Se não achar, ele diz que não achou.</span></div>
+      <div><b>Não promete resultado</b><span>Marketing jurídico tem regra, e ela é levada a sério aqui: nada de êxito, valor ganho ou depoimento de cliente.</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <p class="rotulo">Para rodar</p>
+    <h2>O que você precisa ter.</h2>
+    <div class="saidas">
+      <div class="saida"><b>Windows ou Mac</b><span>Funciona nos dois. A instalação é a mesma e leva uns 10 minutos.</span></div>
+      <div class="saida"><b>Assinatura do Claude</b><span>Plano Pro ou Max, contratado em claude.ai. É o único custo fora daqui.</span></div>
+      <div class="saida"><b>Até 3 computadores</b><span>A mesma licença vale no escritório, em casa e no notebook.</span></div>
+      <div class="saida"><b>Nenhum conhecimento técnico</b><span>Você arrasta um arquivo e escreve em português. Sem terminal, sem código.</span></div>
     </div>
   </div>
 </section>
