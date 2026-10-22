@@ -23,6 +23,14 @@ COPY prev/ ./prev/
 COPY trab/ ./trab/
 COPY marketing/ ./marketing/
 
+# Black do MaestrIA Marketing (pagina de oferta).
+# ⛔ ESTE ARQUIVO E A LISTA DE QUEM SOBE. Pasta nova no repositorio NAO vai
+#    para o ar sozinha: ela precisa de um COPY aqui. Sem isso o deploy passa
+#    verde, o commit certo aparece no historico do EasyPanel, e a pasta
+#    simplesmente nao existe no servidor. Foi o que aconteceu com a /black/
+#    em 22/10/2026: uma tarde de caca a um 404 que era uma linha faltando.
+COPY black/ ./black/
+
 # Redirect do endereço antigo do diagnóstico (/diagnostico -> /prev/diagnostico).
 # O funil em si mora dentro de prev/, então já sobe no COPY prev/ lá em cima.
 COPY diagnostico/ ./diagnostico/
