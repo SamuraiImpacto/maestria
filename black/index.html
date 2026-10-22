@@ -95,6 +95,13 @@
   .semvideo strong{font-family:var(--serif);font-size:clamp(20px,3.4vw,30px);font-weight:800;max-width:22ch;line-height:1.2}
   .semvideo p{margin:0;color:var(--muted);font-size:15px;max-width:46ch}
 
+  .hidden{display:none}
+  .acao-topo{margin:34px 0 0;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+  .btn--grande{font-size:18px;padding:19px 38px;align-self:flex-start}
+  .provas{display:flex;flex-wrap:wrap;gap:12px 30px;color:var(--muted);font-size:15.5px}
+  .provas span{display:flex;align-items:baseline;gap:8px}
+  .provas b{font-family:var(--serif);font-size:27px;color:var(--txt);font-weight:800;line-height:1}
+
   /* ---------- blocos ---------- */
   section{padding:58px 0}
   .rotulo{font-family:var(--mono);font-size:12px;letter-spacing:2.2px;text-transform:uppercase;
@@ -182,13 +189,17 @@
     O artigo, o reel, o carrossel e o calendário do mês saem na sua voz. Tudo com a blindagem do
     Provimento 205 por baixo, e sem o vídeo do seu cliente subir para servidor nenhum.</p>
 
-  <div class="palco">
-    <div class="moldura" id="palco-video">
-      <div class="semvideo">
-        <strong>Veja o MaestrIA Marketing trabalhando</strong>
-        <p>O vídeo entra aqui. Enquanto isso, role a página: está tudo escrito, item por item.</p>
-      </div>
+  <div class="acao-topo">
+    <a class="btn btn--grande" href="#precos">Ver os planos da Black</a>
+    <div class="provas">
+      <span><b>39</b> modelos de edição de vídeo</span>
+      <span><b>3</b> computadores na mesma licença</span>
+      <span><b>0</b> mensalidade</span>
     </div>
+  </div>
+
+  <div class="palco hidden" id="palco-wrap">
+    <div class="moldura" id="palco-video"></div>
   </div>
 </div>
 
@@ -471,7 +482,9 @@
     // ⛔ O video so aparece quando existir. Player quebrado no topo de pagina
     // de venda derruba a pagina inteira.
     var palco = document.getElementById("palco-video");
+    var palcoWrap = document.getElementById("palco-wrap");
     if (cfg.vsl && palco) {
+      if (palcoWrap) palcoWrap.classList.remove("hidden");
       var ehArquivo = /\.(mp4|webm|mov)(\?|$)/i.test(cfg.vsl);
       palco.innerHTML = ehArquivo
         ? '<video controls playsinline preload="metadata" poster="' + (cfg.vslCapa || "") + '"><source src="' + cfg.vsl + '"></video>'
