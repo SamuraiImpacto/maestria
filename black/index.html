@@ -125,6 +125,46 @@
   .passo p{margin:0;font-size:15.4px;color:var(--muted);line-height:1.56}
   .passo p strong{color:var(--txt)}
 
+  /* ---------- a conversa ---------- */
+  .conversa{margin-top:30px;border:1px solid var(--line-strong);border-radius:16px;overflow:hidden;
+    background:#0e0e11;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+  .conversa .barra{display:flex;align-items:center;gap:7px;padding:12px 16px;background:#17171c;
+    border-bottom:1px solid var(--line)}
+  .conversa .bola{width:11px;height:11px;border-radius:50%}
+  .conversa .barra span{margin-left:10px;font-family:var(--mono);font-size:12.5px;color:var(--muted-2)}
+  .conversa .corpo{padding:22px 20px;display:grid;gap:16px}
+  .fala{display:grid;gap:6px}
+  .fala .quem{font-family:var(--mono);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--muted-2)}
+  .fala.eu .bolha{background:var(--red-soft);border:1px solid rgba(239,39,39,.35);color:var(--txt)}
+  .bolha{padding:13px 16px;border-radius:12px;background:#17171c;border:1px solid var(--line);
+    font-size:15.6px;line-height:1.55;color:var(--txt)}
+  .bolha .mudo{color:var(--muted);display:block;margin-top:7px;font-size:14.6px}
+  .bolha ul{margin:9px 0 0;padding-left:19px;color:var(--muted);font-size:14.8px;line-height:1.6}
+  .bolha .arquivo{display:inline-flex;align-items:center;gap:9px;margin-top:11px;padding:9px 13px;
+    border:1px dashed var(--line-strong);border-radius:9px;font-family:var(--mono);font-size:13px;
+    color:var(--green)}
+  .digitando{display:inline-flex;gap:4px;align-items:center;color:var(--muted-2);font-size:14px}
+  .digitando i{width:5px;height:5px;border-radius:50%;background:var(--muted-2);display:inline-block;
+    animation:pisca 1.3s infinite}
+  .digitando i:nth-child(2){animation-delay:.2s}
+  .digitando i:nth-child(3){animation-delay:.4s}
+  @keyframes pisca{0%,60%,100%{opacity:.25}30%{opacity:1}}
+
+  /* ---------- antes e depois ---------- */
+  .ad{display:grid;gap:14px;margin-top:28px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .ad > div{border-radius:16px;padding:24px 22px;border:1px solid var(--line)}
+  .ad .antes{background:var(--panel-2)}
+  .ad .depois{background:linear-gradient(180deg,var(--red-soft),transparent 70%);border-color:var(--red)}
+  .ad h4{margin:0 0 4px;font-family:var(--mono);font-size:12px;letter-spacing:1.8px;text-transform:uppercase}
+  .ad .antes h4{color:var(--muted-2)}
+  .ad .depois h4{color:var(--red-ink)}
+  .ad .tempo{font-family:var(--serif);font-size:34px;font-weight:800;letter-spacing:-1px;margin:0 0 14px;line-height:1}
+  .ad .antes .tempo{color:var(--muted)}
+  .ad ol{margin:0;padding-left:20px;display:grid;gap:9px}
+  .ad li{color:var(--muted);font-size:15.2px;line-height:1.5}
+  .ad .depois li{color:var(--txt)}
+
   /* ---------- lista de comandos ---------- */
   .cmds{display:grid;gap:12px;margin-top:26px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
   .cmdbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px 14px}
@@ -223,6 +263,96 @@
     <div class="moldura" id="palco-video"></div>
   </div>
 </div>
+
+<section style="padding-bottom:20px">
+  <div class="wrap">
+    <p class="rotulo">Como é usar, de verdade</p>
+    <h2>Você conversa. Ele trabalha.</h2>
+    <p class="lead">Não tem painel, não tem campo para preencher, não tem menu escondido. É uma
+      conversa, do jeito que você falaria com alguém do escritório.</p>
+
+    <div class="conversa">
+      <div class="barra">
+        <i class="bola" style="background:#ff5f57"></i>
+        <i class="bola" style="background:#febc2e"></i>
+        <i class="bola" style="background:#28c840"></i>
+        <span>Claude · no seu computador</span>
+      </div>
+      <div class="corpo">
+        <div class="fala eu">
+          <span class="quem">Você</span>
+          <div class="bolha">gravei um vídeo falando sobre auxílio-acidente, edita pra mim
+            <span class="arquivo">📎 IMG_4821.MOV · 2 min 14 s</span>
+          </div>
+        </div>
+
+        <div class="fala">
+          <span class="quem">MaestrIA</span>
+          <div class="bolha">Achei 2 minutos e 14 de fala. Qual estilo de edição?
+            <span class="mudo">Te mostro 4 que combinam com o assunto, com amostra de cada um.</span>
+          </div>
+        </div>
+
+        <div class="fala eu">
+          <span class="quem">Você</span>
+          <div class="bolha">o segundo</div>
+        </div>
+
+        <div class="fala">
+          <span class="quem">MaestrIA</span>
+          <div class="bolha">Pronto. Tirei 11 pausas e 3 gaguejadas, ficou 1 min 48.
+            <ul>
+              <li>Legenda queimada, palavra por palavra</li>
+              <li>4 telas desenhadas ilustrando o que você falou</li>
+              <li>Seu nome e suas cores na abertura e no fim</li>
+            </ul>
+            <span class="arquivo">✓ auxilio-acidente-reels.mp4 · 1080x1920</span>
+          </div>
+        </div>
+
+        <div class="fala">
+          <span class="quem">MaestrIA</span>
+          <div class="bolha"><span class="digitando"><i></i><i></i><i></i> quer a legenda do post
+            e 3 cortes pros stories também?</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="rotulo">A mesma tarefa</p>
+    <h2>Um vídeo para o Instagram, hoje e com ele.</h2>
+
+    <div class="ad">
+      <div class="antes">
+        <h4>Como é hoje</h4>
+        <p class="tempo">2 a 5 dias</p>
+        <ol>
+          <li>Você grava e manda para o editor, ou tenta você mesmo</li>
+          <li>Espera a primeira versão</li>
+          <li>Pede ajuste na legenda, no corte, no nome escrito errado</li>
+          <li>Espera de novo</li>
+          <li>Posta quando o assunto já esfriou</li>
+        </ol>
+      </div>
+      <div class="depois">
+        <h4>Com o MaestrIA</h4>
+        <p class="tempo">Enquanto o café esfria</p>
+        <ol>
+          <li>Você grava no celular e arrasta para a conversa</li>
+          <li>Escolhe o estilo entre os que ele sugere</li>
+          <li>Recebe o vídeo pronto, com legenda e telas</li>
+          <li>Não gostou de algo, fala e ele refaz na hora</li>
+          <li>Posta no mesmo dia, com o assunto ainda quente</li>
+        </ol>
+      </div>
+    </div>
+    <p class="nota" style="margin-top:16px">O tempo de edição depende do tamanho do vídeo e do seu
+      computador. O que não depende de nada é não ter que esperar outra pessoa.</p>
+  </div>
+</section>
 
 <section>
   <div class="wrap">
