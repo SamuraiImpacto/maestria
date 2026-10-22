@@ -920,26 +920,37 @@
     }
 
     // ---------- entrada ao rolar ----------
-    // ⛔ A classe .rv e posta AQUI, pelo JS, e nao no HTML: assim o conteudo
-    // so fica invisivel se houver JS para traze-lo de volta.
-    var alvos = document.querySelectorAll("section > .wrap > *, .hero > *");
-    if (window.IntersectionObserver && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
-      var obs = new IntersectionObserver(function (ent) {
-        ent.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add("on"); obs.unobserve(e.target); }
+    // ⛔ ISTO JA DEIXOU A PAGINA EM BRANCO UMA VEZ: o IntersectionObserver nao
+    // disparou (aba em segundo plano, pagina nao desenhada) e os 52 blocos
+    // ficaram invisiveis, hero incluido. Numa pagina de venda isso e perder
+    // tudo. As tres travas abaixo existem por causa disso:
+    //   1. o que ja esta na primeira tela NUNCA e escondido;
+    //   2. cada bloco tem um despertador proprio: se em 1,2 s ninguem o
+    //      revelou, ele se revela sozinho;
+    //   3. qualquer erro aqui dentro faz tudo aparecer e segue a vida.
+    try {
+      var reduz = window.matchMedia && matchMedia("(prefers-reduced-motion:reduce)").matches;
+      if (window.IntersectionObserver && !reduz) {
+        var obs = new IntersectionObserver(function (ent) {
+          ent.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("on"); obs.unobserve(e.target); }
+          });
+        }, { rootMargin: "0px 0px -6% 0px", threshold: 0.02 });
+
+        var alvos = document.querySelectorAll("section > .wrap > *");
+        alvos.forEach(function (el, i) {
+          // trava 1: nada da primeira tela entra na brincadeira
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.95) return;
+          el.classList.add("rv");
+          el.style.transitionDelay = (Math.min(i % 5, 4) * 50) + "ms";
+          obs.observe(el);
+          // trava 2: o despertador de cada um
+          setTimeout(function () { el.classList.add("on"); }, 1200);
         });
-      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.04 });
-      alvos.forEach(function (el, i) {
-        el.classList.add("rv");
-        el.style.transitionDelay = (Math.min(i % 6, 4) * 45) + "ms";
-        obs.observe(el);
-      });
-      // rede de seguranca: o que nao disparar em 2,5 s aparece assim mesmo
-      setTimeout(function () {
-        document.querySelectorAll(".rv:not(.on)").forEach(function (el) {
-          if (el.getBoundingClientRect().top < innerHeight * 1.2) el.classList.add("on");
-        });
-      }, 2500);
+      }
+    } catch (e) {
+      // trava 3
+      document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("on"); });
     }
 
     // ---------- o relogio do prazo ----------
