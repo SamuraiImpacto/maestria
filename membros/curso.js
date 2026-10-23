@@ -281,8 +281,8 @@
       "<h2>" + esc(mod.titulo) + "</h2><p class=\"c-aula-sub\">" + esc(mod.subtitulo) + "</p>" +
       ((mod.slug === "01-instalacao" || mod.slug === "01b-claude-code-basico") ?
         '<section class="c-video-guia" aria-label="Tutorial em vídeo">' +
-        '<video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#101b26" poster="/img/guia/20261023/capa-samurai.jpg">' +
-        '<source src="/img/guia/20261023/guia-maestria-samurai.mp4" type="video/mp4">' +
+        '<video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#101b26" poster="/img/guia/20261023/capa-samurai.jpg?v=2">' +
+        '<source src="/img/guia/20261023/guia-maestria-samurai.mp4?v=2" type="video/mp4">' +
         '<track default kind="captions" src="/img/guia/20261023/guia-maestria-samurai.vtt" srclang="pt-BR" label="Português">' +
         'Seu navegador não abriu o vídeo. Use o guia ilustrado abaixo.</video>' +
         '<p><a href="/instalacao.html" target="_blank" rel="noopener">Abrir o guia com telas, capítulos e soluções para erros</a></p></section>' : "") +
