@@ -1,465 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia de instalação | MaestrIA</title>
-  <meta name="description" content="Guia de instalação da MaestrIA passo a passo, feito pra quem nunca mexeu com programação. Sem terminal: você baixa um arquivo, arrasta no Claude e pede pra instalar.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260715a">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instalação e primeiro uso, tela a tela | MaestrIA</title>
+  <meta name="description" content="Telas reais para escolher a pasta, instalar a MaestrIA e entender modelos, esforço e Remote Control.">
   <style>
-    .caixa-comando {
-      background: var(--bg-card-2); border: 1px solid var(--border-strong);
-      border-radius: 8px; padding: 18px 20px; margin: 14px 0;
-      text-align: left; position: relative;
-    }
-    .caixa-comando code {
-      color: var(--gold); font-size: 15px; word-break: break-all;
-      background: none; border: none; padding: 0;
-    }
-    .caixa-comando .rotulo {
-      display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;
-    }
-    .btn-copiar {
-      position: absolute; top: 12px; right: 12px;
-      background: transparent; color: var(--text-dim);
-      border: 1px solid var(--border-strong); border-radius: 6px;
-      padding: 4px 12px; font-size: 12px; cursor: pointer; font-family: inherit;
-    }
-    .btn-copiar:hover { color: var(--text); }
-
-    .passo-bloco {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 28px; margin: 26px auto; max-width: 800px;
-      text-align: left;
-    }
-    .passo-bloco h3 { font-size: 21px; margin-bottom: 4px; }
-    .passo-topo { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-    .passo-bola {
-      min-width: 44px; height: 44px; border-radius: 50%;
-      background: var(--vermelho); color: #fff; font-weight: 900; font-size: 20px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .passo-tempo { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
-    .passo-bloco p, .passo-bloco li { color: var(--text-muted); font-size: 15px; line-height: 1.65; }
-    .passo-bloco ol { padding-left: 22px; margin: 10px 0; }
-    .passo-bloco ol li { margin-bottom: 10px; }
-    .passo-bloco strong { color: var(--text); }
-
-    .caixa-sucesso {
-      background: rgba(46, 160, 67, 0.08); border: 1px solid rgba(46, 160, 67, 0.4);
-      border-radius: 8px; padding: 14px 18px; margin-top: 16px; font-size: 14px;
-      color: var(--text-muted);
-    }
-    .caixa-sucesso strong { color: #4ade80; }
-    .caixa-socorro {
-      background: var(--vermelho-bg); border: 1px solid var(--vermelho-border);
-      border-radius: 8px; padding: 14px 18px; margin-top: 10px; font-size: 14px;
-      color: var(--text-muted);
-    }
-    .caixa-socorro strong { color: var(--vermelho); }
-
-    .tela-mock {
-      background: #0d0d0d; border: 1px solid var(--border-strong); border-radius: 10px;
-      margin: 16px 0 4px; overflow: hidden;
-    }
-    .tela-mock .tm-barra {
-      background: #1a1a1a; padding: 8px 14px; font-size: 11px; color: var(--text-dim);
-      border-bottom: 1px solid var(--border-strong);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .tela-mock .tm-corpo { padding: 16px 18px; font-size: 13.5px; line-height: 1.7; }
-    .tm-voce { color: #e8e8e8; }
-    .tm-voce b { color: var(--gold); }
-    .tm-claude { color: #9fb3c8; }
-    .tm-ok { color: #4ade80; font-weight: 700; }
-    .tm-legenda { font-size: 12px; color: var(--text-dim); margin: 4px 0 0; text-align: center; }
-
-    .print-real { margin: 16px 0 4px; }
-    .print-real img {
-      width: 100%; display: block; border: 1px solid var(--border-strong);
-      border-radius: 10px;
-    }
-    .print-real figcaption {
-      font-size: 12px; color: var(--text-dim); margin-top: 6px; text-align: center;
-    }
-
-    .nomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 28px; }
-    .indice-passos {
-      max-width: 800px; margin: 24px auto 0; text-align: left;
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 28px;
-    }
-    .indice-passos li { margin-bottom: 6px; color: var(--text-muted); font-size: 15px; }
-    .indice-passos a { color: var(--text); text-decoration: none; }
-    .indice-passos a:hover { color: var(--vermelho); }
-    .faq-inst details {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 16px 20px; margin-bottom: 10px; text-align: left;
-    }
-    .faq-inst summary { cursor: pointer; font-weight: 700; font-size: 15px; }
-    .faq-inst p { margin-top: 10px; color: var(--text-muted); font-size: 14px; }
-    .rota-b { max-width: 800px; margin: 0 auto; text-align: left; }
-
-    /* placeholder pros prints que só uma instalação real gera (a preencher) */
-    .print-pendente {
-      margin: 16px 0 4px; border: 1px dashed var(--border-strong); border-radius: 10px;
-      padding: 26px 20px; text-align: center; color: var(--text-dim); font-size: 13px;
-      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px);
-    }
-    .print-pendente b { color: var(--text-muted); display: block; margin-bottom: 4px; }
-
-    /* avisos do Windows ilustrados (SmartScreen e administrador), que o Windows não deixa printar */
-    .aviso-win { border-radius: 10px; margin: 16px 0 4px; overflow: hidden; border: 1px solid var(--border-strong); text-align: left; }
-    .aviso-win .aw-topo { padding: 10px 16px; font-size: 13px; font-weight: 700; color: #fff; }
-    .aviso-win.smartscreen .aw-topo { background: #0b60b0; }
-    .aviso-win.uac .aw-topo { background: #1f1f24; }
-    .aviso-win .aw-corpo { background: #f3f3f3; color: #1a1a1a; padding: 16px; font-size: 13.5px; line-height: 1.6; }
-    .aviso-win .aw-corpo .aw-btns { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .aviso-win .aw-btn { padding: 6px 16px; border-radius: 4px; font-size: 13px; border: 1px solid #adadad; background: #e1e1e1; color: #1a1a1a; }
-    .aviso-win .aw-btn.destaque { background: var(--vermelho); border-color: var(--vermelho); color: #fff; font-weight: 700; }
-    .aviso-win .aw-legenda { font-size: 12px; color: var(--text-dim); padding: 8px 16px; background: #0d0d0d; }
+    :root{color-scheme:dark;--fundo:#101b26;--cartao:#182735;--texto:#f6f3ed;--suave:#c0cbd3;--ouro:#e1bd7a;--borda:#354757}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--fundo);color:var(--texto);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--ouro)}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ouro);outline-offset:5px}header,main,footer{max-width:1120px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--borda)}header b{letter-spacing:.12em}h1{font-size:clamp(36px,5vw,62px);line-height:1.1;letter-spacing:-.04em;max-width:880px;margin:18px 0}h2{font-size:clamp(27px,3vw,38px);line-height:1.2;letter-spacing:-.025em}h3{font-size:21px;line-height:1.35}p{max-width:850px}.linha-fina,.nota{color:var(--suave)}.selo{color:var(--ouro);font-size:13px;letter-spacing:.1em;text-transform:uppercase}.hero{padding:40px 0 25px}.hero>p{font-size:21px}.atalhos{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.atalhos a,.botao{display:inline-block;border:1px solid var(--borda);border-radius:10px;padding:11px 18px;text-decoration:none;color:var(--texto);background:var(--cartao);font:inherit;cursor:pointer}.botao.principal{background:var(--ouro);color:#142330;font-weight:700}.painel{background:var(--cartao);border:1px solid var(--borda);border-radius:18px;padding:28px;margin:24px 0}.aviso{border-left:4px solid var(--ouro);padding:12px 20px;background:#203242;margin:22px 0}.etapa{padding:30px 0;border-top:1px solid var(--borda);scroll-margin-top:20px}.numero{font-size:13px;letter-spacing:.1em;color:var(--ouro);text-transform:uppercase}.duas{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}figure{margin:18px 0;background:#f6f4ef;color:#1b2b39;border-radius:14px;padding:24px;text-align:center}figure img{max-width:100%;height:auto;display:block;margin:0 auto}figure.compacta img{max-height:390px}figcaption{font-size:14px;margin-top:16px}video{display:block;width:100%;background:#080e14;border-radius:12px;max-height:620px}.capitulos{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.capitulos button{border:1px solid var(--borda);border-radius:8px;background:var(--fundo);color:var(--texto);padding:9px 13px;font:inherit;cursor:pointer}code{font-family:Consolas,monospace;color:var(--ouro);overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:18px;background:#0b141d;border-radius:10px;overflow-wrap:anywhere}.comando{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#0b141d;border-radius:10px;padding:16px}.comando button{font:inherit;color:var(--texto);border:1px solid var(--borda);border-radius:8px;background:var(--cartao);padding:8px 12px;cursor:pointer}.tabela{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{padding:14px 12px;text-align:left;border-bottom:1px solid var(--borda);vertical-align:top}th{color:var(--ouro)}details{border-bottom:1px solid var(--borda);padding:18px 0}summary{cursor:pointer;font-weight:650}.checagem{display:block;padding:9px 0}.checagem input{width:20px;height:20px;vertical-align:middle;margin-right:10px;accent-color:var(--ouro)}.fontes{font-size:14px;color:var(--suave)}footer{font-size:14px;color:var(--suave);border-top:1px solid var(--borda)}@media(max-width:700px){header,main,footer{padding:18px}.hero{padding-top:24px}.duas{grid-template-columns:1fr;gap:0}.painel{padding:18px}figure{padding:14px}.comando{flex-wrap:wrap}.capitulos button{font-size:14px}th,td{min-width:150px;padding:12px 8px}}
   </style>
-  <link rel="icon" href="/img/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-  <meta name="theme-color" content="#0a0a0c">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://maestria.samurailab.com.br/img/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://maestria.samurailab.com.br/img/og-image.png">
-  <script src="/js/pixel.js"></script>
 </head>
 <body>
-
-<nav class="nav">
-  <div class="container nav-inner">
-    <a href="/" class="logo-mia" aria-label="MaestrIA"><img class="logo-mia-sym" src="/img/logo-sym.png" alt=""><span class="logo-mia-lockup"><img class="logo-mia-word" src="/img/logo-word.png" alt="MaestrIA"></span></a>
-    <div class="nav-links">
-      <a href="https://maestria.samurailab.com.br/membros/">Área de membros</a>
-      <a href="suporte.html" class="btn-nav">Suporte</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="container">
-    <div class="badges">
-      <span class="badge">GUIA DE INSTALAÇÃO</span>
-      <span class="badge">SEM TERMINAL, FEITO PRA LEIGO</span>
-    </div>
-    <h1>Do zero ao primeiro documento,<br><span class="vermelho">um passo de cada vez.</span></h1>
-    <p class="hero-sub">Siga na ordem, sem pular. Você não vai abrir terminal, não vai digitar comando e não tem como estragar nada. É só instalar um aplicativo, baixar um arquivo na sua área de membros e pedir pro Claude instalar. Cada passo diz <strong>o que fazer</strong>, mostra <strong>o que deve aparecer na sua tela</strong> e o que fazer <strong>se não aparecer</strong>.</p>
-  </div>
-</header>
-
-<!-- OS 3 NOMES -->
-<section class="o-que-e">
-  <div class="container">
-    <span class="kicker">Antes de tudo: os 3 nomes que você vai ver</span>
-    <h2>Claude, Claude Code e MaestrIA. <span class="vermelho">Quem é quem?</span></h2>
-    <div class="nomes-grid">
-      <div class="dor-card">
-        <div class="dor-icon">🧠</div>
-        <h3>Claude</h3>
-        <p>A inteligência artificial (tipo o ChatGPT, só que da Anthropic). É a assinatura que você paga no site claude.ai. Pense nele como <strong>um estagiário genial</strong>.</p>
-      </div>
-      <div class="dor-card">
-        <div class="dor-icon">💻</div>
-        <h3>Claude Code</h3>
-        <p>O programa que coloca esse estagiário <strong>dentro do seu computador</strong>, com acesso às suas pastas (é assim que ele lê os documentos do cliente e salva o Word pronto).</p>
-      </div>
-      <div class="dor-card">
-        <div class="dor-icon">⚖️</div>
-        <h3>MaestrIA</h3>
-        <p>O <strong>treinamento jurídico</strong> desse estagiário: o que você comprou. Um arquivo que ensina o Claude a calcular, escrever e citar como o SEU escritório.</p>
-      </div>
-    </div>
-    <p class="lead" style="margin-top:26px;">Ou seja: você vai <strong>1)</strong> ter a assinatura do Claude, <strong>2)</strong> instalar o Claude Code e <strong>3)</strong> entregar a MaestrIA pra ele. É exatamente isso que os passos abaixo fazem.</p>
-
-    <div class="indice-passos">
-      <strong style="color:var(--text);">O caminho completo (uns 30 minutos, uma única vez):</strong>
-      <ol style="margin-top:12px; padding-left:22px;">
-        <li><a href="#passo1">Ter a assinatura do Claude</a> (5 min, pula se já tem)</li>
-        <li><a href="#passo2">Preparar o computador num clique</a> (3 min, Git e Python, o passo que trava todo mundo)</li>
-        <li><a href="#passo3-claude">Instalar o Claude Code no computador</a> (5 min)</li>
-        <li><a href="#passo3">Baixar o seu instalador na área de membros</a> (2 min)</li>
-        <li><a href="#passo4">Arrastar no Claude e pedir pra instalar</a> (2 min, sem código nem CPF)</li>
-        <li><a href="#passo5">Fechar o Claude por completo e abrir o /maestria</a> (30 segundos, e é aqui que muita gente trava)</li>
-        <li><a href="#passo6">Calibrar com o seu escritório</a> (30 min, e nunca mais)</li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- PASSOS -->
-<section class="solucao">
-  <div class="container">
-
-    <div class="passo-bloco" id="passo1">
-      <div class="passo-topo">
-        <div class="passo-bola">1</div>
-        <div>
-          <h3>Ter a assinatura do Claude</h3>
-          <span class="passo-tempo">5 minutos · pule se já tem Claude Pro ou Max</span>
-        </div>
-      </div>
-      <ol>
-        <li>Abra o site <strong>claude.ai</strong> no seu navegador.</li>
-        <li>Crie a conta com o seu email de trabalho (pode usar a conta do Google pra facilitar).</li>
-        <li>Assine o plano <strong>Pro</strong> (US$ 20/mês, ou US$ 17/mês pagando o ano) ou <strong>Max</strong>. É o único custo além da MaestrIA.</li>
-      </ol>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> você consegue entrar em claude.ai e conversar com o Claude por lá.</div>
-      <div class="caixa-socorro"><strong>Importante:</strong> anote qual email você usou. Vai precisar dele no passo 2, e tem que ser O MESMO. Assinou pelo iPhone? No computador você entra com a MESMA conta, mesmo email, sem pagar de novo.</div>
-    </div>
-
-    <div class="passo-bloco" id="passo2">
-      <div class="passo-topo">
-        <div class="passo-bola">2</div>
-        <div>
-          <h3>Preparar o computador (num clique)</h3>
-          <span class="passo-tempo">3 minutos · o passo que quase todo mundo esquece, e é o que trava a instalação</span>
-        </div>
-      </div>
-      <p>No Windows, o Claude Code precisa de um programa chamado <strong>Git</strong> pra trabalhar nas suas pastas, e as skills usam o <strong>Python</strong> pra gerar os documentos. Você <strong>não precisa entender o que são</strong>: baixa um arquivo, dá dois cliques, e ele instala os dois sozinho.</p>
-      <ol>
-        <li>Baixe o <strong><a href="/Preparar-meu-PC.bat" download style="color:var(--gold);">Preparar-meu-PC.bat</a></strong> (também está na sua área de membros, aba Downloads).</li>
-        <li>Dê <strong>dois cliques</strong> no arquivo baixado. Vai abrir uma telinha preta explicando o que vai fazer. Aperte uma tecla e espere.</li>
-      </ol>
-      <div class="tela-mock">
-        <div class="tm-barra">⬛ Preparar-meu-PC</div>
-        <div class="tm-corpo">
-          <p class="tm-claude">==================================================<br>&nbsp;&nbsp;&nbsp;MaestrIA - Preparando seu computador<br>==================================================<br><br>&nbsp;Este assistente instala o que o Claude Code precisa:<br>&nbsp;&nbsp;&nbsp;- Git&nbsp;&nbsp;&nbsp;&nbsp;(pra abrir suas pastas)<br>&nbsp;&nbsp;&nbsp;- Python (pra gerar seus documentos)<br><br>&nbsp;<span style="color:#e8e8e8;">Aperte uma tecla pra começar</span></p>
-          <p class="tm-ok">✓ Pronto! Seu computador está preparado.</p>
-        </div>
-      </div>
-      <p class="tm-legenda">É essa telinha que aparece. Aperta uma tecla, espera 2 a 3 minutos, e fecha.</p>
-
-      <p style="margin-top:22px;"><strong>Vão aparecer duas janelas do Windows. As duas são normais</strong>, e é aqui que a maioria trava por medo. Não tem perigo nenhum:</p>
-      <div class="aviso-win smartscreen">
-        <div class="aw-topo">🛡️ O Windows protegeu o seu PC</div>
-        <div class="aw-corpo">
-          O Microsoft Defender SmartScreen impediu a inicialização de um aplicativo não reconhecido.
-          <div class="aw-btns"><span class="aw-btn destaque">Mais informações</span><span class="aw-btn">Não executar</span></div>
-        </div>
-        <div class="aw-legenda">Clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b>. O arquivo é nosso, só não é "famoso" pro Windows ainda.</div>
-      </div>
-      <div class="aviso-win uac">
-        <div class="aw-topo">Controle de Conta de Usuário</div>
-        <div class="aw-corpo">
-          Deseja permitir que este aplicativo faça alterações no seu dispositivo? <strong>Git for Windows</strong>
-          <div class="aw-btns"><span class="aw-btn destaque">Sim</span><span class="aw-btn">Não</span></div>
-        </div>
-        <div class="aw-legenda">Clique em <b>Sim</b>. É a permissão pra instalar o Git. Só isso.</div>
-      </div>
-
-      <div class="print-real">
-        <figure>
-          <img src="img/guia/passo-git-download.png" alt="Página oficial de download do Git" loading="lazy" onerror="this.closest('figure').style.display='none'">
-          <figcaption>Se um dia precisar instalar o Git na mão, é aqui: git-scm.com/download/win (o download começa sozinho).</figcaption>
-        </figure>
-      </div>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> a telinha preta escreveu "Seu computador está preparado" e fechou. Se algum item já estava instalado, ela só confirmou e seguiu. Isso é normal.</div>
-      <div class="caixa-socorro"><strong>No Mac você pula este passo:</strong> o Git já vem com o sistema, e o Python o Claude instala sozinho quando precisar. É só ir pro passo 3.</div>
-    </div>
-
-    <div class="passo-bloco" id="passo3-claude">
-      <div class="passo-topo">
-        <div class="passo-bola">3</div>
-        <div>
-          <h3>Instalar o Claude Code no computador</h3>
-          <span class="passo-tempo">5 minutos · instala como qualquer programa, sem terminal</span>
-        </div>
-      </div>
-      <ol>
-        <li>Abra <strong>claude.com/claude-code</strong> e baixe o instalador pro seu sistema (Windows ou Mac).</li>
-        <li>O arquivo baixado fica na pasta <strong>Downloads</strong>. Dê dois cliques nele e siga o instalador (avançar, avançar, concluir). É um programa comum, da Anthropic, a empresa do Claude.</li>
-        <li>Abra o aplicativo <strong>Claude Code</strong> que apareceu no computador (menu Iniciar no Windows; busca do Mac) e <strong>entre com o MESMO email do passo 1</strong>. O login acontece uma vez só.</li>
-      </ol>
-      <figure class="print-real">
-        <img src="img/guia/passo2-download.png" alt="Página de download do Claude Code" loading="lazy" onerror="this.closest('figure').style.display='none'">
-        <figcaption>Tela real: a página claude.com/claude-code com o botão de download.</figcaption>
-      </figure>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o aplicativo abriu, você fez o login e apareceu uma tela de conversa esperando você digitar.</div>
-      <div class="caixa-socorro"><strong>O antivírus reclamou?</strong> O instalador é oficial da Anthropic, baixado do site deles. Clique em "permitir" ou "executar assim mesmo". <strong>Dica extra:</strong> fixe o Claude Code na barra de tarefas (botão direito no ícone → Fixar) pra ele virar um clique só, pra sempre.</div>
-    </div>
-
-    <div class="passo-bloco" id="passo3">
-      <div class="passo-topo">
-        <div class="passo-bola">4</div>
-        <div>
-          <h3>Baixar o seu instalador (na área de membros)</h3>
-          <span class="passo-tempo">2 minutos · um arquivo só, com tudo dentro</span>
-        </div>
-      </div>
-      <p>Depois de comprar, você recebe um email com o seu <strong>código de ativação</strong>. É com ele que você entra na sua área de membros e baixa o instalador:</p>
-      <ol>
-        <li>Abra <strong><a href="https://maestria.samurailab.com.br/membros/" style="color:var(--gold);">maestria.samurailab.com.br/membros</a></strong>.</li>
-        <li>Faça login com o <strong>código do email</strong> e o <strong>CPF ou CNPJ da compra</strong>. O CPF você digita <strong>só aqui, no site</strong> (é o que confirma que a licença é sua).</li>
-        <li>Vá em <strong>Downloads</strong> e clique em <strong>Baixar meu instalador</strong>. É UM arquivo só, e ele já vem com <strong>todas as suas skills e a sua licença dentro</strong>.</li>
-      </ol>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> o arquivo do instalador está na sua pasta Downloads.</div>
-      <div class="caixa-socorro"><strong>NÃO dê dois cliques no arquivo e não descompacte.</strong> Ele vai ser usado inteiro, do jeito que está, no próximo passo. <strong>Baixe sempre por aqui</strong> (área de membros ou link do seu email de compra): arquivo vindo de outro lugar pode ter sido alterado.</div>
-    </div>
-
-    <div class="passo-bloco" id="passo4">
-      <div class="passo-topo">
-        <div class="passo-bola">5</div>
-        <div>
-          <h3>Arrastar no Claude e pedir pra instalar</h3>
-          <span class="passo-tempo">2 minutos · sem digitar código nem CPF</span>
-        </div>
-      </div>
-      <ol>
-        <li>Abra a pasta <strong>Downloads</strong> numa janela, e o <strong>Claude Code</strong> (passo 2) na outra.</li>
-        <li><strong>Arraste o arquivo do instalador</strong> pra dentro da conversa do Claude e solte.</li>
-        <li>Escreva a frase abaixo e aperte Enter:</li>
-      </ol>
-      <div class="caixa-comando">
-        <span class="rotulo">Escreva na conversa</span>
-        <code>instala pra mim</code>
-        <button class="btn-copiar" type="button">copiar</button>
-      </div>
-      <p>Pronto. O Claude copia <strong>todas as suas skills sozinho</strong>, mostrando o progresso. Você <strong>não digita código nem CPF</strong>: a sua licença já vem dentro do arquivo. Se ele pedir permissão pra criar ou copiar arquivos, é só <strong>aceitar</strong>. Vá tomar um café.</p>
-      <div class="tela-mock">
-        <div class="tm-barra">Claude Code</div>
-        <div class="tm-corpo">
-          <p class="tm-voce">📎 MaestrIA-Instalar.zip<br><b>instala pra mim</b></p>
-          <p class="tm-claude">Deixa comigo: vou copiar todas as skills do seu pacote. Instalando 1 de 9: Cálculo Previdenciário...</p>
-          <p class="tm-claude">Instalando 9 de 9: Marketing Jurídico...</p>
-          <p class="tm-ok">✓ Tudo instalado! Agora feche o Claude Code por completo, abra de novo e digite /maestria.</p>
-        </div>
-      </div>
-      <p class="tm-legenda">O texto exato varia, mas o fluxo é esse: você arrasta, escreve "instala pra mim", e ele copia tudo sozinho.</p>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> ele foi copiando skill por skill até avisar que terminou. Só espere, ele vai "falando" o que está fazendo.</div>
-      <div class="caixa-socorro"><strong>Ele fez uma pergunta no meio?</strong> Normal, é a trava de segurança do Claude. Leia com calma e confirme (geralmente é só "sim" ou apertar Enter). Ele nunca faz nada destrutivo sem avisar de forma explícita.</div>
-    </div>
-
-    <div class="passo-bloco" id="passo5">
-      <div class="passo-topo">
-        <div class="passo-bola">6</div>
-        <div>
-          <h3>Feche o Claude por completo e abra o /maestria</h3>
-          <span class="passo-tempo">30 segundos · o passo que MAIS gente pula</span>
-        </div>
-      </div>
-      <p>O comando <strong>/maestria</strong> só passa a existir depois que o Claude Code <strong>reinicia por completo</strong>. Então:</p>
-      <ol>
-        <li><strong>Feche o Claude Code inteiro</strong> (o aplicativo todo, não só a conversa).</li>
-        <li>Abra de novo e comece uma <strong>conversa nova</strong>.</li>
-        <li>Digite <strong>/maestria</strong> e aperte Enter.</li>
-      </ol>
-      <div class="tela-mock">
-        <div class="tm-barra">Claude Code · conversa nova</div>
-        <div class="tm-corpo">
-          <p class="tm-voce"><b>/maestria</b></p>
-          <p class="tm-claude">🥋 MaestrIA · o que vamos fazer?<br>⭐ Destaques: Petição · Calcular RMI · Jurimetria · Auditar CNIS · Buscar jurisprudência ...</p>
-        </div>
-      </div>
-      <div class="caixa-sucesso"><strong>✓ Deu certo se:</strong> apareceu a central da MaestrIA, com os destaques e as skills da sua área.</div>
-      <div class="caixa-socorro"><strong>Digitou /maestria e nada?</strong> 9 em cada 10 vezes é porque o Claude não foi reiniciado. Feche o aplicativo TODO, abra de novo, conversa nova, /maestria. Se ainda assim nada: volte ao passo 4 e arraste o arquivo de novo (não tem problema instalar duas vezes).</div>
-    </div>
-
-    <div class="passo-bloco" id="passo6">
-      <div class="passo-topo">
-        <div class="passo-bola">7</div>
-        <div>
-          <h3>Calibrar com o seu escritório (última etapa!)</h3>
-          <span class="passo-tempo">30 minutos · uma única vez na vida</span>
-        </div>
-      </div>
-      <p>Digite <strong>/maestria</strong> e escolha <strong>Configurar ou calibrar</strong>. A skill conversa com você em português:</p>
-      <ol>
-        <li>Pergunta os dados do escritório (nome, OAB, endereço).</li>
-        <li>Pede <strong>1 ou 2 peças suas em Word</strong> pra aprender o seu papel timbrado e o seu jeito de escrever (é só arrastar os arquivos pra conversa, igual você fez com o instalador).</li>
-        <li>Pergunta onde salvar os documentos: numa pasta do computador ou no seu Google Drive.</li>
-      </ol>
-      <div class="caixa-sucesso"><strong>✓ Terminou!</strong> Daqui em diante é rotina: <strong>/maestria</strong>, pede o que precisa, revisa o Word que sai pronto no seu timbrado. A primeira peça num caso real é o melhor teste.</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- USAR EM OUTRO COMPUTADOR -->
-<section class="pra-quem">
-  <div class="container">
-    <span class="kicker">Trocar de máquina ou usar em mais de uma</span>
-    <h2>Sua licença vale em <span class="vermelho">até 3 computadores</span></h2>
-    <div class="rota-b">
-      <div class="passo-bloco">
-        <p>Pra instalar em outro computador seu, é o mesmo caminho: nele, entre na <a href="https://maestria.samurailab.com.br/membros/" style="color:var(--gold);">área de membros</a>, baixe o seu instalador na aba Downloads e repita os passos 4 e 5.</p>
-        <p style="margin-top:12px;">Vai trocar de máquina e liberar uma vaga? Na área de membros, em <strong>Minha licença</strong>, cada computador aparece com um botão <strong>remover</strong>: removeu o antigo, libera a vaga na hora. Precisa de mais de 3 máquinas? <a href="suporte.html" style="color:var(--gold);">Fale com o suporte</a> que a gente libera.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOCORRO -->
-<section class="cta-final">
-  <div class="container">
-    <span class="kicker">Deu algo errado?</span>
-    <h2>Os travamentos mais comuns (e a saída de cada um)</h2>
-    <div class="faq-inst" style="max-width:760px;margin:28px auto 0;">
-      <details>
-        <summary>Não sei se tenho "conta do Claude". Como confirmo?</summary>
-        <p>Entre em claude.ai no navegador. Se abrir uma conversa com o seu nome no canto, você tem conta. Pra saber se a assinatura está ativa: clique no seu nome ou foto → Configurações → Plano. Tem que aparecer Pro ou Max. Aparecendo "Free", assine antes de continuar (passo 1).</p>
-      </details>
-      <details>
-        <summary>Baixei o arquivo e não sei onde ele foi parar</summary>
-        <p>Quase sempre está na pasta <strong>Downloads</strong>. No Windows: abra qualquer pasta e clique em "Downloads" na lateral esquerda. Outro jeito: no navegador, aperte Ctrl+J (ou Cmd+J no Mac) que ele mostra os últimos downloads, e clique em "mostrar na pasta".</p>
-      </details>
-      <details>
-        <summary>Digitei /maestria e não apareceu nada</summary>
-        <p>É o travamento número 1, e a causa é quase sempre a mesma: o Claude não foi reiniciado. <strong>Feche o aplicativo inteiro, abra de novo, conversa nova</strong>, digite /maestria. Se ainda assim nada, volte ao passo 4, arraste o arquivo de novo e peça "instala pra mim" (não tem problema instalar duas vezes).</p>
-      </details>
-      <details>
-        <summary>O aplicativo diz "Git é necessário para sessões locais" (ou continua pedindo Git)</summary>
-        <p>O Git é um programa de apoio gratuito que o Claude Code usa no Windows. Na maioria das vezes ele já instalou, mas o aplicativo só percebe programas novos quando abre de novo. Faça assim: <strong>feche o Claude completamente</strong> (feche a janela e, se houver um ícone dele perto do relógio, clique com o botão direito e saia) <strong>e abra de novo</strong>. Persistiu? <strong>Reinicie o computador uma vez</strong> e abra o Claude: resolve quase sempre. Se ainda pedir, baixe o Git no site oficial <strong>git-scm.com</strong> (clique em "Click here to download", rode o arquivo e vá clicando <strong>Next</strong> em tudo), feche e abra o Claude.</p>
-      </details>
-      <details>
-        <summary>O Claude fica me fazendo perguntas durante a instalação. Respondo o quê?</summary>
-        <p>Pode confiar e confirmar. Ele pede permissão antes de mexer em qualquer coisa (é uma trava de segurança do Claude Code). Pra instalação da MaestrIA, a resposta é "sim" / "yes" / Enter. Ele nunca apaga nada seu sem perguntar de forma explícita, e nunca pede o seu CPF pra instalar (o CPF você só usa no login da área de membros).</p>
-      </details>
-      <details>
-        <summary>O antivírus bloqueou alguma coisa</summary>
-        <p>Tanto o aplicativo quanto o seu instalador vêm de fonte oficial (o app é da Anthropic, em claude.com; o instalador é o seu, baixado da área de membros). Clique em "permitir" / "executar assim mesmo".</p>
-      </details>
-      <details>
-        <summary>Apareceu "limite de computadores" ou preciso trocar de máquina</summary>
-        <p>Sua licença vale pra 3 computadores. Trocou de máquina? Entre na <a href="https://maestria.samurailab.com.br/membros/">área de membros</a>, em <strong>Minha licença</strong>, e clique em <strong>remover</strong> no computador antigo: libera a vaga na hora. Precisa de mais de 3? Abra um chamado que a gente libera.</p>
-      </details>
-      <details>
-        <summary>Nada disso resolveu</summary>
-        <p>Tire uma <strong>foto da tela</strong> exatamente como ela está (pode ser com o celular mesmo) e abra um chamado na <a href="suporte.html">central de suporte</a> ou pela área de membros. Com a foto, a gente devolve o passo exato pra destravar. E se a skill já estiver instalada, o caminho mais rápido é escrever <strong>/maestria suporte</strong> na própria conversa.</p>
-      </details>
-    </div>
-    <a href="suporte.html" class="btn-primary btn-grande" style="margin-top:36px;">Ainda travado? Fala com o suporte</a>
-    <p class="cta-meta">Manda uma foto da tela junto: resolve na primeira resposta em vez de na quinta.</p>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-bottom">
-      <p>© 2026 Samurai Lab. MaestrIA é skills de IA jurídica para advogados sérios.</p>
-    </div>
-  </div>
-</footer>
-
-<script>
-  document.querySelectorAll(".btn-copiar").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var codigo = btn.parentElement.querySelector("code").textContent;
-      navigator.clipboard.writeText(codigo).then(function () {
-        btn.textContent = "copiado!";
-        setTimeout(function () { btn.textContent = "copiar"; }, 2000);
-      });
-    });
-  });
-</script>
-
+<header><b>MaestrIA</b><a href="/membros/">Área de membros</a></header>
+<main>
+  <section class="hero">
+    <span class="selo">Instalação e primeiro uso</span>
+    <h1>Do primeiro clique à sua pasta de trabalho.</h1>
+    <p>Veja onde clicar no Claude, escolha uma pasta que você reconheça e aprenda a continuar sozinho. Pause o vídeo e faça uma etapa por vez.</p>
+    <nav class="atalhos" aria-label="Atalhos do guia"><a href="#video">Ver o vídeo</a><a href="#pasta">Escolher a pasta</a><a href="#socorro">Resolver um erro</a><a href="#modelos">Modelos e esforço</a><a href="#remote">Usar pelo celular</a></nav>
+  </section>
+  <section id="video" class="painel">
+    <h2>Acompanhe as telas reais</h2>
+    <video id="tutorial" controls playsinline preload="metadata" poster="/img/guia/20261023/capa.jpg">
+      <source src="/img/guia/20261023/guia-maestria.mp4" type="video/mp4">
+      <track default kind="captions" src="/img/guia/20261023/guia-maestria.vtt" srclang="pt-BR" label="Português">
+      Seu navegador não conseguiu abrir o vídeo. Use as etapas ilustradas abaixo.
+    </video>
+    <div class="capitulos" aria-label="Capítulos do vídeo"><button type="button" data-tempo="0">Tela certa</button><button type="button" data-cena="03">Pasta</button><button type="button" data-cena="06">Instalador</button><button type="button" data-cena="08">Modelos e esforço</button><button type="button" data-cena="10">Remote Control</button></div>
+    <p class="nota">Tutorial editado com capturas reais do Windows, aproximações e narração sintética em português. O vídeo mostra a cópia e uma confirmação real da instalação. A abertura da central e a conexão pelo celular são orientadas, sem demonstração completa dessas duas etapas. Telas de 23/10/2026, os nomes podem variar conforme a versão.</p>
+  </section>
+  <section id="preparar" class="etapa">
+    <span class="numero">Passo 1</span><h2>Abra o aplicativo Claude</h2>
+    <p>Baixe o aplicativo no site oficial da Anthropic e entre com a conta da sua assinatura. O acesso ao Code depende de um plano compatível. A conta da área de membros MaestrIA é usada para baixar seu pacote.</p>
+    <a class="botao principal" href="https://claude.ai/download">Baixar o Claude oficial</a>
+    <div class="duas"><div><h3>No Windows</h3><p>O preparador da MaestrIA instala os programas de apoio Git e Python. Depois, abra novamente o Claude para que ele reconheça os programas.</p><a class="botao" href="/Preparar-meu-PC.bat" download>Baixar o preparador do Windows</a><p class="nota">Leia o resultado da preparação. Se algo faltar, resolva antes de seguir. Se o computador bloquear a instalação, use o grupo ou o responsável pela máquina.</p></div><div><h3>No Mac</h3><p>Instale o aplicativo oficial e abra a aba Code. O preparador do Windows não é usado no Mac. Se faltar um programa de apoio, siga a orientação específica apresentada pelo instalador.</p><p class="nota">As capturas deste guia são do Windows. Não foram validadas como telas do Mac.</p></div></div>
+  </section>
+  <section id="code" class="etapa"><span class="numero">Passo 2</span><h2>Entre em Code e escolha Este computador</h2>
+    <div class="duas"><div><p>No alto da lateral do aplicativo, procure <strong>Code</strong> ou o ícone <strong>&lt;/&gt;</strong>. Comece uma nova sessão.</p><figure><img src="/img/guia/20261023/code.png" width="330" height="90" alt="Parte superior do Claude, com o ícone Code à direita"><figcaption>O ícone &lt;/&gt; abre Code.</figcaption></figure></div><div><p>Abaixo da caixa de mensagem, clique no seletor de ambiente e escolha <strong>Este computador</strong>.</p><figure class="compacta"><img src="/img/guia/20261023/local.png" width="340" height="288" alt="Seletor de ambiente com Este computador marcado"><figcaption>A instalação precisa de uma sessão com acesso ao computador.</figcaption></figure></div></div>
+    <div class="aviso"><strong>“Não consigo instalar daqui”?</strong> Confira estes dois pontos antes de tentar novamente: aba Code e ambiente Este computador. Anexar o ZIP em um chat comum não dá a ele acesso à pasta de instalação.</div>
+  </section>
+  <section id="pasta" class="etapa"><span class="numero">Passo 3</span><h2>Uma pasta sua, fácil de encontrar</h2>
+    <p>Crie uma pasta chamada <strong>MaestrIA-Arquivos</strong> dentro da sua pasta pessoal, fora do OneDrive. Ela será o lugar inicial dos seus documentos. Se já trabalha em outra pasta local organizada, pode escolhê-la.</p>
+    <details><summary>Como criar a pasta no Windows, sem digitar um caminho</summary><ol><li>Abra o Explorador de Arquivos, o ícone de pasta do Windows.</li><li>Abra <strong>Este computador → Disco Local (C:) → Usuários</strong>. A pasta pode aparecer como <strong>Users</strong>.</li><li>Abra a pasta do seu usuário, a mesma que contém Downloads. Não entre em OneDrive.</li><li>Use <strong>Novo → Pasta</strong>, digite <strong>MaestrIA-Arquivos</strong> e confirme.</li></ol><p>Seu nome de usuário pode ser diferente do mostrado no vídeo. Não renomeie pastas que já existem.</p></details>
+    <ol><li>Volte ao Claude. Ao lado de Este computador, clique no controle da pasta.</li><li>Escolha <strong>Abrir pasta…</strong>.</li><li>Localize <strong>MaestrIA-Arquivos</strong> e clique em <strong>Selecionar pasta</strong>.</li></ol>
+    <figure><img src="/img/guia/20261023/abrir-pasta.png" width="353" height="45" alt="Opção Abrir pasta no seletor do Claude"><figcaption>É este botão que abre o seletor de pastas do Windows.</figcaption></figure>
+    <figure><img src="/img/guia/20261023/caminho.png" width="490" height="33" alt="Campo Pasta preenchido com o caminho local no Windows"><figcaption>Escolha a sua pasta. O nome do usuário muda em cada computador.</figcaption></figure>
+    <figure><img src="/img/guia/20261023/confirmar-pasta.png" width="140" height="37" alt="Botão Selecionar pasta do Windows"><figcaption>Confirme neste botão.</figcaption></figure>
+    <figure><img src="/img/guia/20261023/pasta-confirmada.png" width="307" height="38" alt="Este computador e MaestrIA-Arquivos na barra inferior do Claude"><figcaption>Antes de continuar, confira o ambiente e a pasta selecionada.</figcaption></figure>
+    <p>A pasta dos seus documentos não é a pasta interna em que a MaestrIA é instalada. Você não precisa escolher <code>.claude</code> como pasta de trabalho.</p>
+  </section>
+  <section id="instalar" class="etapa"><span class="numero">Passo 4</span><h2>Baixe seu pacote e peça a instalação</h2>
+    <ol><li>Na <a href="/membros/">área de membros</a>, entre em <strong>Downloads → Baixar meu instalador</strong>.</li><li>Encontre <strong>MaestrIA-Instalar.zip</strong> em Downloads.</li><li>Anexe o ZIP na sessão local do Claude pelo botão <strong>+</strong> ou arrastando o arquivo para a conversa.</li><li>Envie a mensagem abaixo e acompanhe as ações solicitadas.</li></ol>
+    <div class="comando"><code>instala pra mim</code><button type="button" data-copiar="instala pra mim">Copiar mensagem</button></div>
+    <figure><img src="/img/guia/20261023/anexar.png" width="357" height="77" alt="Menu do botão mais com Adicionar arquivos ou fotos"><figcaption>Use Adicionar arquivos ou fotos para escolher o ZIP que você baixou.</figcaption></figure>
+    <p>O arquivo já contém sua licença. Não compartilhe o ZIP em grupo. Durante a instalação, confira as permissões que o Claude pede.</p>
+    <details><summary>Prefiro deixar o ZIP na pasta em vez de anexar</summary><p>Copie <strong>MaestrIA-Instalar.zip</strong> para a pasta <strong>MaestrIA-Arquivos</strong> que você selecionou no Claude. Depois envie: “Instala pra mim a MaestrIA. O arquivo MaestrIA-Instalar.zip está nesta pasta.” O Claude precisa conseguir ler essa pasta local.</p></details>
+    <figure><img src="/img/guia/20261023/confirmacao.png" width="520" height="217" alt="Claude apresenta as opções Pode registrar e Não registrar agora"><figcaption>Leia a pergunta e responda. O registro usa sua licença e o nome do computador. Uma confirmação pendente significa que essa etapa ainda não terminou.</figcaption></figure>
+    <details><summary>O que a instalação acrescenta</summary><p>Ela copia os comandos e arquivos do pacote para a configuração do Claude. Também registra a instalação com sua licença e o nome do computador, e acrescenta regras de conferência de fontes que são lidas nas conversas. Seus textos de configuração existentes devem ser preservados. Arquivos enviados ao Claude são tratados conforme a conta e as políticas da Anthropic; trabalhar numa pasta local não significa que a IA funcione sem conexão.</p></details>
+  </section>
+  <section id="conferir" class="etapa"><span class="numero">Passo 5</span><h2>Confira a central antes de começar</h2><p>Depois que a instalação confirmar a cópia, abra uma conversa nova em Code, na mesma pasta, e envie:</p>
+    <div class="comando"><code>/maestria</code><button type="button" data-copiar="/maestria">Copiar comando</button></div>
+    <p>Se os comandos não aparecerem, feche o aplicativo por completo e abra novamente. Confira a central e as ferramentas do seu pacote. Faça um primeiro pedido com dados de demonstração e abra o resultado salvo na pasta.</p>
+    <label class="checagem"><input type="checkbox">Escolhi Code e Este computador.</label><label class="checagem"><input type="checkbox">O nome da minha pasta aparece na conversa.</label><label class="checagem"><input type="checkbox">A instalação conferiu a cópia dos arquivos.</label><label class="checagem"><input type="checkbox">Abri /maestria e conferi um resultado.</label>
+    <p>Já usa a MaestrIA e quer a versão nova? Use <code>/maestria:atualizar-skill</code>. O aviso de atualização não instala a versão sozinho.</p>
+  </section>
+  <section id="modelos" class="etapa"><span class="numero">No dia a dia</span><h2>Modelo e esforço, sem adivinhação</h2><p>Clique no nome do modelo perto da caixa de mensagem. No mesmo menu, abra Esforço. Esta é uma orientação inicial de uso; compare o resultado e mantenha sua revisão profissional.</p>
+    <div class="duas"><figure class="compacta"><img src="/img/guia/20261023/modelos.png" width="246" height="313" alt="Menu real com Opus, Fable, Sonnet e Haiku"><figcaption>Os modelos disponíveis dependem da sua conta.</figcaption></figure><figure class="compacta"><img src="/img/guia/20261023/esforco.png" width="600" height="375" alt="Menu Esforço com Baixo, Médio, Alto, Extra, Máx e Ultracode"><figcaption>O esforço controla quanto aprofundar o trabalho.</figcaption></figure></div>
+    <div class="tabela"><table><thead><tr><th>O que você vai fazer</th><th>Comece por</th></tr></thead><tbody><tr><td>Organizar material, resumir e ajustar conteúdo</td><td>Sonnet + Médio</td></tr><tr><td>Comparar argumentos e versões de uma peça difícil</td><td>Opus + Alto</td></tr><tr><td>Ajustar um título ou a formatação</td><td>Sonnet + Baixo ou Médio</td></tr><tr><td>Aprofundar um problema que continuou mal resolvido</td><td>Confira os documentos e a instrução; avalie Extra numa tentativa específica</td></tr></tbody></table></div>
+    <p><strong>Extra e Máx</strong> podem gastar mais limite. Mais esforço não garante acerto. <strong>Ultracode</strong> coordena trabalho com vários agentes e não é necessário para começar. <strong>Modo rápido</strong> é outra escolha: confira o aviso de uso e cobrança antes de ativar.</p>
+    <p>O controle de <strong>permissões</strong> é separado. Leia as ações pedidas; não é necessário escolher Ignorar permissões. Se estiver em Planejar, o Claude está preparando uma proposta, não executando a instalação.</p>
+  </section>
+  <section id="remote" class="etapa"><span class="numero">Continue de outro lugar</span><h2>Remote Control: a mesma sessão no celular</h2><p>O trabalho continua no computador. O celular permite acompanhar a sessão e enviar orientações. Deixe a máquina ligada, conectada e com o Claude aberto.</p>
+    <ol><li>Na sessão local que já funciona, envie <code>/remote-control</code> ou use o controle Remote Control nos detalhes da sessão.</li><li>No celular, entre no Claude com a <strong>mesma conta e organização</strong> e abra a sessão em Code. Pelo navegador, use <a href="https://claude.ai/code">claude.ai/code</a>.</li><li>Confira o título e o histórico. Continue o trabalho naquela conversa.</li><li>Ao terminar, desligue o Remote Control daquela sessão se não quiser mais acompanhá-la de outro dispositivo.</li></ol>
+    <figure><img src="/img/guia/20261023/remote.png" width="255" height="195" alt="Menu real informa que Remote Control está desativado neste computador"><figcaption>Se estiver desativado, a conexão ainda precisa ser habilitada e conferida. Esta captura não demonstra uma conexão ativa.</figcaption></figure>
+    <div class="comando"><code>/remote-control</code><button type="button" data-copiar="/remote-control">Copiar comando</button></div>
+    <p class="nota">Se a máquina dormir, o acesso fica indisponível enquanto isso. Não compartilhe link ou QR de conexão. A disponibilidade depende da conta e pode ser controlada pelo administrador de uma equipe. Uma conversa comum nova no celular não ganha acesso à pasta local.</p>
+  </section>
+  <section id="socorro" class="etapa"><span class="numero">Retome deste ponto</span><h2>O que apareceu na sua tela?</h2>
+    <details><summary>“A pasta não existe mais”</summary><p>Abra uma nova sessão, escolha Este computador e selecione uma pasta que você consegue abrir no Explorador. Outra opção é editar o ambiente salvo e corrigir o endereço. Não apague documentos ou conversas para resolver. Evite uma pasta que só esteja disponível no OneDrive.</p><a href="#pasta">Voltar à escolha da pasta</a></details>
+    <details><summary>“Não é um repositório Git”</summary><p>Esse aviso sozinho não é o mesmo que uma pasta inexistente nem que a falta do programa Git. Uma pasta de documentos pode ser usada localmente. Leia a mensagem de erro que impede o início e compare com as opções deste guia.</p></details>
+    <details><summary>“Git é necessário para sessões locais”</summary><p>Use o preparador do Windows, confira se ele terminou sem pendência e feche e abra o Claude. Se continuar, mande a mensagem e o resultado do preparador no grupo. O download oficial do programa é <a href="https://git-scm.com/download/win">Git para Windows</a>.</p></details>
+    <details><summary>“Não consigo instalar daqui” ou “não tenho acesso à pasta”</summary><p>Confira se você está na aba Code, em Este computador, com uma pasta escolhida. Reanexe o ZIP naquela sessão. Se a restrição continuar, não peça para ignorar as proteções: mande o print no grupo.</p></details>
+    <details><summary>O /maestria não aparece</summary><p>Abra uma conversa nova. Se continuar, feche o Claude inteiro e abra de novo. Confira a resposta final da instalação: ela verificou os arquivos ou apenas explicou como instalar? Mande esse trecho no grupo, sem mostrar sua licença.</p></details>
+    <details><summary>A sessão não aparece no celular</summary><p>Confira a mesma conta e organização nos dois dispositivos, computador acordado e conectado, sessão aberta e Remote Control ligado. Confira também se o aplicativo está atualizado e se sua conta oferece o recurso.</p></details>
+    <details><summary>O Windows ou o antivírus bloqueou um arquivo</summary><p>Não desative as proteções para continuar. Confira a origem do download e mande o print no grupo. Em computador administrado pelo escritório, peça ajuda ao responsável pela máquina.</p></details>
+    <p><a class="botao principal" href="https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7">Pedir ajuda no grupo da comunidade</a></p><p class="nota">Diga a etapa em que parou e o texto do erro. Oculte documentos de clientes, CPF e licença antes de mandar o print.</p>
+  </section>
+  <section class="fontes"><p>Fontes oficiais consultadas em 23/10/2026: <a href="https://code.claude.com/docs/en/desktop-quickstart">primeira sessão</a>, <a href="https://code.claude.com/docs/en/model-config">modelos e esforço</a> e <a href="https://code.claude.com/docs/en/remote-control">Remote Control</a>. Os exemplos de escolha por tarefa são orientações da MaestrIA.</p></section>
+</main>
+<footer>MaestrIA · Samurai Lab · Guia visual de instalação e uso</footer>
+<script src="/js/guia-instalacao.js?v=20261023a"></script>
 </body>
 </html>

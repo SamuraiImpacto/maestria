@@ -279,6 +279,13 @@
     tela.innerHTML =
       '<article class="c-aula"><p class="c-aula-modulo">Aula ' + (idx + 1) + " de " + lista.length + "</p>" +
       "<h2>" + esc(mod.titulo) + "</h2><p class=\"c-aula-sub\">" + esc(mod.subtitulo) + "</p>" +
+      ((mod.slug === "01-instalacao" || mod.slug === "01b-claude-code-basico") ?
+        '<section class="c-video-guia" aria-label="Tutorial em vídeo">' +
+        '<video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#101b26" poster="/img/guia/20261023/capa.jpg">' +
+        '<source src="/img/guia/20261023/guia-maestria.mp4" type="video/mp4">' +
+        '<track default kind="captions" src="/img/guia/20261023/guia-maestria.vtt" srclang="pt-BR" label="Português">' +
+        'Seu navegador não abriu o vídeo. Use o guia ilustrado abaixo.</video>' +
+        '<p><a href="/instalacao.html" target="_blank" rel="noopener">Abrir o guia com telas, capítulos e soluções para erros</a></p></section>' : "") +
       render(mod.corpo, mod.slug) +
       '<div class="c-nav">' +
       (anterior ? '<button type="button" class="c-nav-ant" data-modulo="' + anterior.slug + '">← ' + esc(anterior.titulo.split(":")[0]) + "</button>" : "<span></span>") +

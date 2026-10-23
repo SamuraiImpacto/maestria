@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.420 line:90% size:85%
+Abra o aplicativo Claude.
+
+00:00:02.420 --> 00:00:08.421 line:90% size:85%
+No alto da lateral, escolha Code, representado por este ícone.
+
+00:00:08.421 --> 00:00:14.519 line:90% size:85%
+É nesse modo que vamos trabalhar com os arquivos do computador.
+
+00:00:15.719 --> 00:00:23.297 line:90% size:85%
+Abaixo da caixa de mensagem, abra o seletor de ambiente e escolha Este computador.
+
+00:00:23.297 --> 00:00:28.658 line:90% size:85%
+Essa escolha vem antes de anexar o instalador da MaestrIA.
+
+00:00:29.858 --> 00:00:34.340 line:90% size:85%
+Ao lado do ambiente, clique no nome da pasta.
+
+00:00:34.340 --> 00:00:36.331 line:90% size:85%
+Escolha Abrir pasta.
+
+00:00:36.331 --> 00:00:44.896 line:90% size:85%
+Use uma pasta chamada MaestrIA Arquivos dentro da sua pasta pessoal, fora do OneDrive.
+
+00:00:44.896 --> 00:00:48.382 line:90% size:85%
+Crie a pasta antes de selecioná-la.
+
+00:00:49.582 --> 00:00:55.120 line:90% size:85%
+Na janela do Windows, selecione a pasta que você criou.
+
+00:00:55.120 --> 00:01:01.362 line:90% size:85%
+O nome do usuário mostrado aqui é apenas o desta demonstração.
+
+00:01:01.362 --> 00:01:04.684 line:90% size:85%
+No seu computador, escolha o seu.
+
+00:01:04.684 --> 00:01:07.604 line:90% size:85%
+Confirme em Selecionar pasta.
+
+00:01:08.804 --> 00:01:16.644 line:90% size:85%
+De volta ao Claude, confira os dois controles: Este computador e MaestrIA Arquivos.
+
+00:01:16.644 --> 00:01:24.106 line:90% size:85%
+Se aparecer que a pasta não existe mais, escolha novamente uma pasta existente.
+
+00:01:24.106 --> 00:01:28.356 line:90% size:85%
+Não apague suas conversas para resolver isso.
+
+00:01:29.556 --> 00:01:35.450 line:90% size:85%
+Na área de membros, abra Downloads e baixe o seu instalador.
+
+00:01:35.450 --> 00:01:38.005 line:90% size:85%
+Ele já contém sua licença.
+
+00:01:38.005 --> 00:01:44.095 line:90% size:85%
+Anexe o arquivo ZIP à sessão local e escreva: instala pra mim.
+
+00:01:44.095 --> 00:01:46.747 line:90% size:85%
+Leia as permissões pedidas.
+
+00:01:46.747 --> 00:01:55.490 line:90% size:85%
+Se a conversa disser que não tem acesso ao computador, volte para Code e Este computador.
+
+00:01:56.690 --> 00:02:05.324 line:90% size:85%
+Nesta instalação real, o Claude leu o pacote, fez uma cópia de segurança e copiou os arquivos.
+
+00:02:05.324 --> 00:02:08.722 line:90% size:85%
+O teste final ainda aparece pendente.
+
+00:02:08.722 --> 00:02:20.753 line:90% size:85%
+Se preferir, você pode deixar o ZIP dentro da pasta escolhida e dizer o nome do arquivo ao Claude, como fizemos nesta demonstração.
+
+00:02:21.953 --> 00:02:32.207 line:90% size:85%
+O Claude pode pedir sua confirmação para registrar a licença neste computador ou instalar um programa de apoio.
+
+00:02:32.207 --> 00:02:36.733 line:90% size:85%
+Leia a pergunta e escolha a opção correspondente.
+
+00:02:36.733 --> 00:02:41.629 line:90% size:85%
+Nesta tela real, o registro ainda aguarda a resposta.
+
+00:02:41.629 --> 00:02:46.894 line:90% size:85%
+Enquanto houver uma pendência, a instalação não terminou.
+
+00:02:46.894 --> 00:02:49.943 line:90% size:85%
+Não envie sua licença pelo grupo.
+
+00:02:51.143 --> 00:02:59.342 line:90% size:85%
+Depois da cópia e da conferência, abra uma conversa nova em Code e digite barra maestria.
+
+00:02:59.342 --> 00:03:06.712 line:90% size:85%
+Se os comandos não aparecerem, feche o aplicativo por completo e abra novamente.
+
+00:03:06.712 --> 00:03:12.700 line:90% size:85%
+Confira se a central abriu e revise um resultado antes de usá-lo.
+
+00:03:12.700 --> 00:03:19.149 line:90% size:85%
+Este trecho explica a verificação; não mostra uma ativação de cliente.
+
+00:03:20.349 --> 00:03:24.558 line:90% size:85%
+O modelo fica perto da caixa de mensagem.
+
+00:03:24.558 --> 00:03:33.900 line:90% size:85%
+Como orientação inicial da MaestrIA, comece com Sonnet para organização, resumos e ajustes.
+
+00:03:33.900 --> 00:03:37.801 line:90% size:85%
+Para uma análise difícil, avalie Opus.
+
+00:03:37.801 --> 00:03:41.908 line:90% size:85%
+A lista disponível depende da sua conta.
+
+00:03:41.908 --> 00:03:46.322 line:90% size:85%
+Você não precisa testar todos para começar.
+
+00:03:47.522 --> 00:03:50.489 line:90% size:85%
+No mesmo menu, abra Esforço.
+
+00:03:50.489 --> 00:03:52.184 line:90% size:85%
+Comece em Médio.
+
+00:03:52.184 --> 00:03:57.269 line:90% size:85%
+Use Alto quando precisar aprofundar comparações.
+
+00:03:57.269 --> 00:04:03.519 line:90% size:85%
+Extra e Máximo podem gastar mais limite e levar mais tempo.
+
+00:04:03.519 --> 00:04:06.909 line:90% size:85%
+Mais esforço não garante acerto.
+
+00:04:06.909 --> 00:04:12.524 line:90% size:85%
+Ultracode é uma opção de trabalho com vários agentes.
+
+00:04:12.524 --> 00:04:15.702 line:90% size:85%
+Não é necessário para começar.
+
+00:04:16.902 --> 00:04:23.044 line:90% size:85%
+Esta tela real mostra o Remote Control desativado neste computador.
+
+00:04:23.044 --> 00:04:35.419 line:90% size:85%
+Para acompanhar uma sessão local, abra a sessão que já funciona e use barra remote hífen control, ou o controle nos detalhes da sessão.
+
+00:04:35.419 --> 00:04:38.261 line:90% size:85%
+Confira se ela ficou conectada.
+
+00:04:38.261 --> 00:04:44.586 line:90% size:85%
+Depois, entre no celular com a mesma conta e abra a conversa em Code.
+
+00:04:44.586 --> 00:04:50.178 line:90% size:85%
+A conexão pelo celular ainda não foi demonstrada neste vídeo.
+
+00:04:51.378 --> 00:04:57.012 line:90% size:85%
+O Remote Control acompanha o trabalho que roda no computador.
+
+00:04:57.012 --> 00:05:02.739 line:90% size:85%
+Mantenha o computador ligado, conectado e com o Claude aberto.
+
+00:05:02.739 --> 00:05:07.911 line:90% size:85%
+Se ele dormir, o acesso fica indisponível enquanto isso.
+
+00:05:07.911 --> 00:05:14.654 line:90% size:85%
+Uma conversa comum nova no celular não dá acesso aos arquivos da máquina.
+
+00:05:15.854 --> 00:05:21.141 line:90% size:85%
+Na próxima vez, confira a pasta, o modelo e o esforço.
+
+00:05:21.141 --> 00:05:25.058 line:90% size:85%
+Envie a tarefa e revise o arquivo final.
+
+00:05:25.058 --> 00:05:30.737 line:90% size:85%
+Para atualizar, use o comando da MaestrIA atualizar skill.
+
+00:05:30.737 --> 00:05:40.137 line:90% size:85%
+Se travar, mande um print no grupo da comunidade, ocultando informações de clientes e a licença.
