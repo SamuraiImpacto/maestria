@@ -2,7 +2,7 @@
 (function () {
   "use strict";
   const video = document.getElementById("tutorial");
-  const capitulos = {"03": 29.86, "06": 89.56, "08": 200.35, "10": 256.9};
+  const capitulos = {"03": 77.4, "06": 173.6, "08": 267.8, "10": 331.8};
   document.querySelectorAll("[data-tempo], [data-cena]").forEach(function (botao) {
     botao.addEventListener("click", function () {
       if (!video) return;

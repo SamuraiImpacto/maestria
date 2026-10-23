@@ -1,0 +1,391 @@
+WEBVTT
+
+00:00:00.280 --> 00:00:04.720
+meu amigo advogado vamos colocar a MaestrIA
+para funcionar no seu computador
+
+00:00:04.720 --> 00:00:09.560
+eu vou te mostrar onde clicar qual pasta
+escolher e como começar
+
+00:00:09.560 --> 00:00:14.220
+a trabalhar depois vamos ver os modelos
+o esforço e como acompanhar
+
+00:00:14.220 --> 00:00:18.721
+uma tarefa pelo celular pode fazer junto comigo
+quando precisar pausa o vídeo
+
+00:00:18.721 --> 00:00:23.680
+termina aquela etapa e continua a primeira coisa
+é
+
+00:00:23.680 --> 00:00:28.280
+abrir o aplicativo do Claude no seu computador
+Se você ainda não instalou,
+
+00:00:28.280 --> 00:00:30.920
+o link oficial está aqui nessa aula.
+
+00:00:31.040 --> 00:00:33.380
+Entre com a conta da sua assinatura no Claude.
+
+00:00:33.920 --> 00:00:38.180
+Essa conta é diferente do acesso à área
+de membros do MaestrIA, onde você
+
+00:00:38.180 --> 00:00:39.980
+baixa o seu pacote.
+
+00:00:40.040 --> 00:00:43.260
+Dentro do aplicativo, procure a opção Code.
+
+00:00:43.360 --> 00:00:47.740
+Dependendo da versão, ela aparece como esse
+símbolo que está destacado na
+
+00:00:47.740 --> 00:00:48.640
+tela.
+
+00:00:48.640 --> 00:00:52.880
+É ali que você vai trabalhar com os arquivos
+do seu computador.
+
+00:00:52.920 --> 00:00:57.840
+Agora, abaixo da caixa onde você escreve
+a mensagem, confira
+
+00:00:57.840 --> 00:00:59.240
+o ambiente.
+
+00:00:59.340 --> 00:01:01.100
+Escolha este computador.
+
+00:01:01.620 --> 00:01:05.240
+Guarda essa combinação, Code e este computador.
+
+00:01:05.240 --> 00:01:10.220
+Se você mandar o instalador em uma conversa
+comum, pode receber aquela resposta
+
+00:01:10.220 --> 00:01:13.060
+dizendo que o Claude não consegue instalar dali.
+
+00:01:13.120 --> 00:01:17.060
+Se isso acontecer, volte aqui e confira essas
+duas escolhas.
+
+00:01:17.520 --> 00:01:20.880
+O próximo passo é selecionar a pasta.
+
+00:01:20.900 --> 00:01:26.300
+Para começar, use a pasta chamada
+MaestrIA-Arquivos dentro
+
+00:01:26.300 --> 00:01:29.420
+da sua pasta de usuário fora do OneDrive.
+
+00:01:30.040 --> 00:01:33.200
+O preparador do Windows tenta criar essa pasta
+para você.
+
+00:01:33.960 --> 00:01:38.240
+Se ela ainda não existir, o passo a passo
+para criar essa pasta está logo
+
+00:01:38.240 --> 00:01:39.500
+abaixo do vídeo.
+
+00:01:39.500 --> 00:01:44.520
+No Claude, clique no nome da pasta, escolha
+Abrir Pasta e localize
+
+00:01:44.520 --> 00:01:46.740
+a MaestrIA-Arquivos.
+
+00:01:46.740 --> 00:01:51.484
+depois confirme em selecionar pasta o nome
+do usuário
+
+00:01:51.484 --> 00:01:54.864
+que aparece no meu computador pode ser diferente
+do seu.
+
+00:01:54.864 --> 00:01:58.364
+Você precisa escolher a pasta que existe na sua
+máquina.
+
+00:01:58.364 --> 00:02:02.184
+E atenção, essa é a pasta dos seus documentos.
+
+00:02:02.184 --> 00:02:07.864
+Você não precisa procurar nem selecionar aquela
+pasta interna chamada .claude.
+
+00:02:07.864 --> 00:02:12.444
+Se aparecer a mensagem A pasta não existe mais,
+o Claude está tentando abrir
+
+00:02:12.444 --> 00:02:14.744
+um endereço que ficou indisponível.
+
+00:02:14.764 --> 00:02:18.484
+escolha novamente uma pasta que você consegue
+abrir no explorador de arquivos
+
+00:02:18.484 --> 00:02:23.244
+não precisa apagar suas conversas para resolver
+isso agora
+
+00:02:23.244 --> 00:02:28.224
+vamos ao instalador no Windows, confira primeiro
+os programas
+
+00:02:28.224 --> 00:02:33.104
+de apoio aqui na aula tem um preparador que
+verifica o Git e o Python
+
+00:02:33.104 --> 00:02:37.844
+e tenta instalar o que estiver faltando leia
+a mensagem final
+
+00:02:37.844 --> 00:02:43.044
+se ele apontar alguma pendência, resolva antes
+de continuar
+
+00:02:43.484 --> 00:02:47.804
+Depois feche e abra novamente o Claude para ele
+reconhecer os programas
+
+00:02:48.204 --> 00:02:53.004
+Se você usa Mac, siga a orientação específica
+da aula Esse preparador
+
+00:02:53.004 --> 00:02:57.804
+é para Windows Com o ambiente preparado, entre
+na área de membros da MaestrIA
+
+00:02:57.804 --> 00:03:02.524
+Abra Downloads e clique em Baixar meu instalador
+Esse arquivo
+
+00:03:02.524 --> 00:03:07.984
+já vem com as ferramentas do seu pacote e sua
+licença Por isso, não compartilhe
+
+00:03:07.984 --> 00:03:12.704
+o arquivo ZIP no grupo Volte para aquela sessão
+em Code no
+
+00:03:12.704 --> 00:03:18.064
+seu computador com a pasta escolhida Clique no
+botão de mais e anexe
+
+00:03:18.064 --> 00:03:22.924
+o arquivo que você baixou Depois escreva Instala
+para mim Você também pode
+
+00:03:22.924 --> 00:03:26.684
+colocar o ZIP dentro da pasta MaestrIA-Arquivos
+E dizer ao Claude
+
+00:03:26.684 --> 00:03:31.644
+que o instalador está naquela pasta Acompanhe
+o que ele responder Durante
+
+00:03:31.644 --> 00:03:35.804
+a instalação, o Claude pode pedir
+uma confirmação para registrar sua licença
+
+00:03:35.804 --> 00:03:40.784
+naquele computador Ou instalar um programa
+de apoio Leia a pergunta
+
+00:03:40.784 --> 00:03:46.068
+e responda se ele estiver esperando
+uma confirmação aquela etapa ainda não terminou
+
+00:03:46.068 --> 00:03:50.548
+a instalação também deve preservar suas
+configurações e conferir os arquivos
+
+00:03:50.548 --> 00:03:55.328
+copiados se aparecer um erro não considere
+concluído só
+
+00:03:55.328 --> 00:04:00.028
+porque parte dos arquivos foi instalada depois
+dessas conferências abre
+
+00:04:00.028 --> 00:04:04.988
+uma conversa nova em Code e digite o comando que está
+na tela,
+
+00:04:04.988 --> 00:04:06.508
+barra MaestrIA.
+
+00:04:06.768 --> 00:04:11.408
+Confira se a central abriu e se aparecem as
+ferramentas do seu pacote.
+
+00:04:11.888 --> 00:04:16.508
+Se o comando não aparecer, feche o aplicativo
+inteiro e abra novamente.
+
+00:04:17.228 --> 00:04:21.848
+Para o primeiro teste, use dados fictícios, faça
+um pedido simples, abra
+
+00:04:21.848 --> 00:04:24.588
+o arquivo gerado e confira o resultado.
+
+00:04:25.228 --> 00:04:28.768
+É assim que você verifica o caminho completo.
+
+00:04:28.768 --> 00:04:34.068
+Agora vamos a duas escolhas que aparecem no dia
+a dia, modelo e esforço.
+
+00:04:34.368 --> 00:04:37.168
+O modelo fica perto da sua caixa de mensagem.
+
+00:04:37.168 --> 00:04:42.208
+Para começar, minha orientação é usar o Sonnet
+com esforço médio nas tarefas
+
+00:04:42.208 --> 00:04:48.328
+de rotina, como organizar documentos, resumir
+material e ajustar um conteúdo.
+
+00:04:48.448 --> 00:04:53.828
+Para uma análise mais difícil, com comparação
+de argumentos ou versões de uma peça,
+
+00:04:53.848 --> 00:04:57.228
+você pode avaliar o Opus com esforço alto.
+
+00:04:57.228 --> 00:05:01.808
+Os nomes e as opções disponíveis podem mudar
+conforme sua conta.
+
+00:05:03.528 --> 00:05:06.708
+Você não precisa escolher o maior esforço
+para tudo.
+
+00:05:06.808 --> 00:05:11.968
+Mais esforço pode gastar mais limite e levar
+mais tempo, e não elimina a necessidade
+
+00:05:11.968 --> 00:05:13.880
+de conferir a resposta.
+
+00:05:13.908 --> 00:05:18.768
+Uma instrução clara ajuda muito Diga o que você
+quer receber, quais documentos
+
+00:05:18.768 --> 00:05:21.992
+devem ser usados e o que precisa ser preservado.
+
+00:05:21.992 --> 00:05:25.072
+O controle de permissões é uma outra escolha.
+
+00:05:25.092 --> 00:05:27.212
+Leia as ações que o Claude pede.
+
+00:05:27.212 --> 00:05:31.792
+Você não precisa selecionar e ignorar permissões
+para usar a MaestrIA.
+
+00:05:31.812 --> 00:05:34.340
+Por último, vamos ao Remote Control.
+
+00:05:34.412 --> 00:05:38.912
+Esse recurso permite acompanhar pelo celular
+uma sessão que está rodando
+
+00:05:38.912 --> 00:05:40.192
+no seu computador.
+
+00:05:40.312 --> 00:05:43.772
+Primeiro, deixe a MaestrIA funcionando na sessão
+local.
+
+00:05:43.872 --> 00:05:48.132
+Depois, use o comando de Remote Control que
+aparece na sua tela ou abra
+
+00:05:48.132 --> 00:05:51.072
+o controle correspondente nos detalhes
+da sessão.
+
+00:05:51.592 --> 00:05:54.192
+Confira se a sessão ficou ativa.
+
+00:05:54.192 --> 00:05:59.212
+No celular, entre no Claude com a mesma conta
+e se você usa uma conta de equipe,
+
+00:05:59.212 --> 00:06:00.852
+a mesma organização.
+
+00:06:00.912 --> 00:06:03.632
+Procure aquela sessão na área de Code.
+
+00:06:03.732 --> 00:06:08.132
+Confira o título e o histórico para ter certeza
+que você abriu a conversa
+
+00:06:08.132 --> 00:06:08.912
+certa.
+
+00:06:08.912 --> 00:06:13.572
+Dali você pode acompanhar o trabalho e enviar
+novas solicitações.
+
+00:06:14.032 --> 00:06:18.612
+O computador precisa continuar ligado, conectado
+e com a sessão disponível.
+
+00:06:19.152 --> 00:06:24.272
+Se ele dormir ou perder a conexão, o acesso
+remoto pode ficar indisponível.
+
+00:06:24.332 --> 00:06:28.672
+Abrir uma conversa comum nova no celular não dá
+acesso automático aos arquivos
+
+00:06:28.672 --> 00:06:29.992
+do computador.
+
+00:06:30.132 --> 00:06:36.192
+Para retomar sua rotina, confira sempre a pasta,
+escolha o modelo e o esforço,
+
+00:06:36.232 --> 00:06:38.592
+explique a tarefa e revise o resultado.
+
+00:06:38.832 --> 00:06:43.192
+Quando houver uma atualização da MaestrIA, use
+o comando de atualizar a skill
+
+00:06:43.192 --> 00:06:44.552
+que está na tela.
+
+00:06:44.552 --> 00:06:48.692
+O aviso de uma nova versão não instala
+a atualização sozinho.
+
+00:06:48.692 --> 00:06:54.132
+E se travar, manda um print no nosso grupo
+da comunidade com a etapa e a mensagem
+
+00:06:54.132 --> 00:06:55.312
+que apareceu.
+
+00:06:55.312 --> 00:06:58.872
+Antes de enviar, esconda sua licença e qualquer
+informação de cliente.
+
+00:06:59.192 --> 00:07:03.732
+Essa aula fica aqui para você voltar direto ao
+ponto em que você parou.
