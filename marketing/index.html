@@ -681,6 +681,18 @@
   /* ajustes locais da pagina do Marketing */
   .xls-cal th:last-child,.xls-cal td:last-child{text-align:left;font-variant-numeric:normal}
   .xls-cal tr td:first-child{font-family:var(--mono);font-size:12px;font-weight:600}
+
+  /* Vitrines de modelos: dois cartoes, um por tipo de peca */
+  .vitrines{margin:36px auto 0;max-width:980px;text-align:center}
+  .vitrines-cards{display:grid;gap:16px;grid-template-columns:repeat(2,1fr);margin-top:18px}
+  @media (max-width:760px){.vitrines-cards{grid-template-columns:1fr}}
+  .vitrine-card{display:flex;flex-direction:column;gap:8px;text-align:left;text-decoration:none;
+    padding:22px 24px;border:1px solid rgba(255,255,255,.14);border-radius:16px;
+    background:rgba(255,255,255,.03);color:inherit;transition:border-color .18s ease,transform .18s ease}
+  .vitrine-card:hover{border-color:var(--red,#e33);transform:translateY(-2px)}
+  .vitrine-card strong{font-size:21px;line-height:1.2}
+  .vitrine-card span{font-size:15px;opacity:.72;line-height:1.45}
+  .vitrine-card em{font-style:normal;font-weight:600;color:var(--red,#e33);font-size:15px;margin-top:4px}
 </style>
 
 <nav>
@@ -1100,27 +1112,22 @@
     </div>
 
     <p class="pacotes-pe">Todo pacote inclui <b>12 meses de acesso</b> com todas as atualizações do período (depois, a renovação sai por <b>metade do que você pagou</b>), <b>suporte pela própria skill</b>, licença no seu CPF válida em até 3 computadores e <b>garantia incondicional de 7 dias</b>. Atende uma área do Direito e quer somar a entrega jurídica? Depois da compra você recebe a oferta pra juntar Previdenciário ou Trabalhista com desconto.</p>
-
-    <div class="vem reveal">
-      <span class="vem-h">Atende mais de uma área? Existe um caminho melhor.</span>
-      <p class="vem-p">O <strong>Full Embaixador</strong> leva todas as áreas da MaestrIA por <strong>R$ 1.997</strong>, com 12 meses de acesso e renovação por metade do valor pago. E não só as três de hoje: Família, Consumidor, Criminal e as próximas entram sem você pagar de novo. Só as 3 áreas atuais, compradas soltas, já somam R$ 2.991.</p>
-      <div class="vem-grid">
-        <span class="vem-item">
-          <b>Café com MaestrIA</b>
-          Encontro semanal ao vivo com o Samurai e os outros Embaixadores.
-        </span>
-        <span class="vem-item">
-          <b>Call de implementação</b>
-          Até 1 hora, só sua, pra deixar tudo rodando no jeito do seu escritório.
-        </span>
-        <span class="vem-item">
-          <b>As três que não são de área nenhuma</b>
-          Captação, gestão do escritório e sistema sob medida, em construção e sem data prometida: quando passarem no teste, o Embaixador recebe sem pagar de novo.
-        </span>
+    <div class="vitrines reveal">
+      <span class="vem-h">Antes de decidir, veja o que sai da máquina.</span>
+      <div class="vitrines-cards">
+        <a class="vitrine-card" href="/modelos-video/">
+          <strong>Modelos de vídeo</strong>
+          <span>30 modelos de edição, cada um com a amostra do jeito que o vídeo sai.</span>
+          <em>Ver os modelos de vídeo</em>
+        </a>
+        <a class="vitrine-card" href="/modelos/">
+          <strong>Modelos de post e carrossel</strong>
+          <span>18 modelos, em post único, carrossel e story, nos três formatos.</span>
+          <em>Ver os modelos de post</em>
+        </a>
       </div>
-      <p class="vem-fecho" style="margin-top:22px"><b>Já comprou uma área? Você paga só a diferença.</b> <a href="/suporte.html#mensagem" style="color:var(--red-ink);font-weight:600">Fale com a gente</a>.</p>
-      <a href="/#planos" class="btn btn-red">Ver o Full Embaixador</a>
     </div>
+
 
     <div class="cardy reveal" style="max-width:760px;margin:24px auto 0;text-align:center">
       <h4 style="margin-bottom:8px">Único pré-requisito: assinatura do Claude (plano Pro ou Max)</h4>

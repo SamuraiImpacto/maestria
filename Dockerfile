@@ -46,6 +46,12 @@ COPY img/ ./img/
 # mesmo com a tag presente no HTML.
 COPY js/ ./js/
 
+# As duas vitrines de modelos, linkadas pelo card das LPs.
+# ⛔ ESTE ARQUIVO E A LISTA DE QUEM SOBE: pasta nova no repositorio NAO vai para o
+#    ar sozinha, precisa de um COPY aqui. Foi o que segurou a /black/ em 22/10.
+COPY modelos/ ./modelos/
+COPY modelos-video/ ./modelos-video/
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

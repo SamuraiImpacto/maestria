@@ -5,3 +5,6 @@ node_modules/
 .env
 .env.local
 manutencao/_cache_zips/
+
+# backups locais das LPs antes de tirar o bloco do Embaixador (24/10/2026)
+*.antes-embaixador

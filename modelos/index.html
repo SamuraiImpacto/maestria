@@ -1,0 +1,132 @@
+<title>Modelos de post e carrossel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<style>
+/* layout: mesa de prancheta. Cada modelo e uma folha com a peca impressa em cima e a ficha embaixo.
+   Irmao do mostruario de video: mesma paleta e mesmas fontes, para o advogado reconhecer os dois. */
+:root {
+  --fundo: #ECEEF1; --cartao: #FFFFFF; --tinta: #14161A; --suave: #586271; --linha: #D3D8DE;
+  --corte: #D62B25; --corte-tinta: #FFFFFF; --sinal: #FFD60A; --sinal-tinta: #1A1600;
+  --pronto: #1F8A4C; --andamento: #2D5BD7;
+  --display: "Big Shoulders Display", "Arial Narrow", "Segoe UI", sans-serif;
+  --texto: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --fundo: #0C0D0F; --cartao: #16181C; --tinta: #EFF1F4; --suave: #9AA3AE; --linha: #2A2E34;
+  --corte: #FF453A; --corte-tinta: #FFFFFF; --sinal: #FFD60A; --sinal-tinta: #1A1600;
+  --pronto: #3CCB7F; --andamento: #6E95FF; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --fundo: #0C0D0F; --cartao: #16181C; --tinta: #EFF1F4; --suave: #9AA3AE; --linha: #2A2E34;
+  --corte: #FF453A; --corte-tinta: #FFFFFF; --sinal: #FFD60A; --sinal-tinta: #1A1600;
+  --pronto: #3CCB7F; --andamento: #6E95FF; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--fundo); color: var(--tinta); font-family: var(--texto); font-size: 16px; line-height: 1.5; }
+.pagina { max-width: 1260px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: 10px; margin-bottom: 24px; }
+.olho { margin: 0; font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--corte); }
+h1 { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(40px, 7vw, 76px); line-height: 0.92;
+  letter-spacing: 0.005em; text-transform: uppercase; text-wrap: balance; }
+.lead { margin: 0; max-width: 62ch; color: var(--suave); font-size: 17px; }
+.como { background: var(--cartao); border: 1px solid var(--linha); border-radius: 18px; padding: 18px 20px; margin-bottom: 26px;
+  display: grid; gap: 10px; }
+.como h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; letter-spacing: 0.01em; }
+.como p { margin: 0; }
+.como code { font-family: var(--mono); font-size: 15px; background: var(--fundo); border: 1px solid var(--linha);
+  border-radius: 8px; padding: 2px 8px; }
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filtros button { font: 600 14px var(--texto); border-radius: 999px; padding: 9px 16px; cursor: pointer;
+  border: 1px solid var(--linha); background: var(--cartao); color: var(--tinta); }
+.filtros button[aria-pressed="true"] { background: var(--corte); color: var(--corte-tinta); border-color: var(--corte); }
+.filtros button:focus-visible { outline: 3px solid var(--andamento); outline-offset: 2px; }
+.grade { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.modelo { background: var(--cartao); border: 1px solid var(--linha); border-radius: 20px; overflow: hidden;
+  display: flex; flex-direction: column; min-width: 0; }
+.modelo[hidden] { display: none; }
+.tela { background: var(--fundo); border-bottom: 1px solid var(--linha); }
+.tela img { display: block; width: 100%; height: auto; }
+.ficha { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0; }
+.claquete { margin: 0; display: flex; justify-content: space-between; gap: 10px; font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--suave); border-bottom: 2px dashed var(--linha); padding-bottom: 8px; }
+.claquete span:first-child { color: var(--corte); white-space: nowrap; flex: none; }
+.claquete span:last-child { text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.versao { margin: 0; font-size: 13px; padding: 6px 10px; border-radius: 10px;
+  background: color-mix(in srgb, var(--sinal) 30%, transparent); color: var(--tinta); }
+.modelo h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 0.95;
+  text-transform: uppercase; text-wrap: balance; }
+.desc { margin: 0; font-size: 15px; }
+.bom { margin: 0; font-size: 14px; color: var(--suave); font-variant-numeric: tabular-nums; }
+.bom b { color: var(--tinta); margin-right: 4px; }
+.tec { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tec li { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--linha); color: var(--suave); }
+footer { margin-top: 36px; color: var(--suave); font-size: 14px; max-width: 70ch; display: grid; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; animation: none !important; transition: none !important; } }
+</style>
+<div class="pagina">
+  <header>
+    <p class="olho">MaestrIA Marketing · 18 modelos · post único, carrossel e story</p>
+    <h1>Modelos de post e carrossel</h1>
+    <p class="lead">Cada modelo aparece aqui como a peça sai de verdade: à esquerda o post único, à direita
+      o carrossel. As peças desta página foram feitas com um escritório de demonstração; no seu computador
+      elas saem com o seu nome, as suas cores e as suas fotos.</p>
+  </header>
+
+  <section class="como">
+    <h2>Como pedir</h2>
+    <p>Abra o Claude e escreva <code>/maestria:novo-carrossel</code> ou <code>/maestria:novo-estatico</code>,
+      e diga o nome do modelo que você viu aqui. Para ver as prévias já na sua marca, use
+      <code>/maestria:cardapio-carrossel</code>.</p>
+    <p>Você escreve o texto em português, do seu jeito. A máquina desenha e nunca muda as suas palavras.</p>
+  </section>
+
+  <div class="filtros" role="group" aria-label="Filtrar modelos">
+    <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+    <button type="button" data-filtro="sem-foto" aria-pressed="false">Sem precisar de foto</button>
+    <button type="button" data-filtro="uma-foto" aria-pressed="false">Com uma foto sua</button>
+  </div>
+
+  <main class="grade" id="grade">
+    <article class="modelo uma-foto" id="bilhete-sobre-foto"><div class="tela"><img src="previas/bilhete-sobre-foto.png" alt="Prévia do modelo Bilhete sobre foto, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 01</span><span>1 foto sua</span></p><h2>Bilhete sobre foto</h2><p class="desc">Dica ou alerta com uma foto de contexto.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo sem-foto" id="explicacao-na-lupa"><div class="tela"><img src="previas/explicacao-na-lupa.png" alt="Prévia do modelo Explicação na lupa, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 02</span><span>Não precisa de foto</span></p><h2>Explicação na lupa</h2><p class="desc">Explicar um detalhe ou critério com um ponto visual de atenção.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+    <article class="modelo uma-foto" id="foto-acima-do-texto"><div class="tela"><img src="previas/foto-acima-do-texto.png" alt="Prévia do modelo Foto acima do texto, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 03</span><span>1 foto sua</span></p><h2>Foto acima do texto</h2><p class="desc">Apresentar o advogado ou um assunto com contexto visual.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo uma-foto" id="foto-com-manchete"><div class="tela"><img src="previas/foto-com-manchete.png" alt="Prévia do modelo Foto com manchete, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 04</span><span>1 foto sua</span></p><h2>Foto com manchete</h2><p class="desc">Abrir uma história ou apresentar uma dúvida.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo uma-foto" id="foto-e-lista"><div class="tela"><img src="previas/foto-e-lista.png" alt="Prévia do modelo Foto e lista, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 05</span><span>1 foto sua</span></p><h2>Foto e lista</h2><p class="desc">Apresentar sinais, critérios ou perguntas relacionados a uma situação.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+    <article class="modelo uma-foto" id="foto-para-o-claro"><div class="tela"><img src="previas/foto-para-o-claro.png" alt="Prévia do modelo Foto para o claro, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 06</span><span>1 foto sua</span></p><h2>Foto para o claro</h2><p class="desc">Assunto de contexto visual com título e explicação na parte inferior.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+    <article class="modelo sem-foto" id="frase-em-destaque"><div class="tela"><img src="previas/frase-em-destaque.png" alt="Prévia do modelo Frase em destaque, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 07</span><span>Não precisa de foto</span></p><h2>Frase em destaque</h2><p class="desc">Valorizar uma ideia com composição sóbria.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo uma-foto" id="frase-grifada-sobre-foto"><div class="tela"><img src="previas/frase-grifada-sobre-foto.png" alt="Prévia do modelo Frase grifada na foto, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 08</span><span>1 foto sua</span></p><h2>Frase grifada na foto</h2><p class="desc">Destacar uma frase curta sobre uma foto.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo sem-foto" id="lista-de-orientacao"><div class="tela"><img src="previas/lista-de-orientacao.png" alt="Prévia do modelo Lista de orientação, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 09</span><span>Não precisa de foto</span></p><h2>Lista de orientação</h2><p class="desc">Critérios, documentos e passos que precisam ser escaneados rapidamente.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+    <article class="modelo uma-foto" id="manchete-e-faixa-fotografica"><div class="tela"><img src="previas/manchete-e-faixa-fotografica.png" alt="Prévia do modelo Manchete com faixa de foto, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 10</span><span>1 foto sua</span></p><h2>Manchete com faixa de foto</h2><p class="desc">Apresentar um tema com uma faixa de imagem.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo sem-foto" id="mito-e-verdade"><div class="tela"><img src="previas/mito-e-verdade.png" alt="Prévia do modelo Mito e verdade, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 11</span><span>Não precisa de foto</span></p><h2>Mito e verdade</h2><p class="desc">Comparar afirmações e esclarecer dúvidas.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo uma-foto" id="noticia-em-cartao"><div class="tela"><img src="previas/noticia-em-cartao.png" alt="Prévia do modelo Notícia em cartão, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 12</span><span>1 foto sua</span></p><h2>Notícia em cartão</h2><p class="desc">Destacar uma novidade ou alerta informativo.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo sem-foto" id="objeto-em-destaque"><div class="tela"><img src="previas/objeto-em-destaque.png" alt="Prévia do modelo Objeto em destaque, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 13</span><span>Não precisa de foto</span></p><h2>Objeto em destaque</h2><p class="desc">Dar concretude a um prazo, documento, situação ou requisito.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+    <article class="modelo sem-foto" id="papel-com-objeto"><div class="tela"><img src="previas/papel-com-objeto.png" alt="Prévia do modelo Papel com objeto lateral, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 14</span><span>Não precisa de foto</span></p><h2>Papel com objeto lateral</h2><p class="desc">Explicação objetiva, etapa ou critério documental.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+    <article class="modelo sem-foto" id="passo-com-icone"><div class="tela"><img src="previas/passo-com-icone.png" alt="Prévia do modelo Passo com ícone, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 15</span><span>Não precisa de foto</span></p><h2>Passo com ícone</h2><p class="desc">Explicar uma etapa, critério ou orientação.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo sem-foto" id="quadro-de-orientacao"><div class="tela"><img src="previas/quadro-de-orientacao.png" alt="Prévia do modelo Quadro de orientação, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 16</span><span>Não precisa de foto</span></p><h2>Quadro de orientação</h2><p class="desc">Organizar uma regra, um prazo ou uma sequência.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo sem-foto" id="recado-de-perfil"><div class="tela"><img src="previas/recado-de-perfil.png" alt="Prévia do modelo Recado de perfil, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 17</span><span>Não precisa de foto</span></p><h2>Recado de perfil</h2><p class="desc">Dar uma resposta curta com a identidade do escritório.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>capa com foto</li><li>foto e texto</li><li>tela dividida</li><li>moldura</li><li>citação</li><li>antes e depois</li></ul></div></article>
+    <article class="modelo uma-foto" id="texto-e-foto-lateral"><div class="tela"><img src="previas/texto-e-foto-lateral.png" alt="Prévia do modelo Texto e foto lateral, em post único e em carrossel" loading="lazy" width="1020" height="400"></div><div class="ficha"><p class="claquete"><span>Modelo 18</span><span>1 foto sua</span></p><h2>Texto e foto lateral</h2><p class="desc">Capa com pergunta ou situação humana e uma mensagem curta.</p><p class="bom"><b>Formatos</b> 4:5 · 1:1 · 9:16</p><ul class="tec"><li>frase</li><li>lista</li><li>passo a passo</li><li>contraste</li></ul></div></article>
+  </main>
+
+  <footer>
+    <p>Todos os modelos saem nos três formatos: feed 4:5, quadrado 1:1 e story 9:16. O arquivo chega em PNG,
+      pronto para subir, com o seu nome e o seu @ na peça.</p>
+    <p>Não gostou de uma lâmina? Diga o que mudar e a máquina refaz só aquela.</p>
+  </footer>
+</div>
+<script>
+(function () {
+  var botoes = document.querySelectorAll(".filtros button");
+  var modelos = document.querySelectorAll(".modelo");
+  botoes.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var alvo = b.dataset.filtro;
+      botoes.forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
+      modelos.forEach(function (m) {
+        m.hidden = !(alvo === "todos" || m.classList.contains(alvo));
+      });
+    });
+  });
+})();
+</script>
