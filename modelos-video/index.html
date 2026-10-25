@@ -1,4 +1,20 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+.tela.desenho { aspect-ratio: 9 / 16; display: flex; flex-direction: column; justify-content: center; gap: 14px;
+  padding: 26px 18px; background: linear-gradient(180deg, #143D47, #0E2A31); }
+.balao { align-self: flex-start; max-width: 88%; display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border-radius: 18px 18px 18px 4px; background: #F4F7F6; color: #14161A; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.balao .play { width: 0; height: 0; border-left: 12px solid #1F8A4C; border-top: 8px solid transparent; border-bottom: 8px solid transparent; flex: none; }
+.balao .onda { display: flex; align-items: center; gap: 3px; height: 26px; }
+.balao .onda i { display: block; width: 3px; border-radius: 2px; background: #1F8A4C; }
+.balao .tempo { font-family: var(--mono); font-size: 11px; color: #586271; }
+.rotulo-neutro { align-self: flex-start; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #FFD60A; }
+.legenda-desenho { color: #FFFFFF; font-weight: 700; font-size: 17px; line-height: 1.25; text-align: center; text-wrap: balance; }
+.legenda-desenho b { color: #FFD60A; }
+.blocos { display: grid; gap: 8px; }
+.bloco-seq { border-radius: 12px; padding: 10px 12px; font-family: var(--mono); font-size: 11px; letter-spacing: .05em;
+  text-transform: uppercase; color: #FFFFFF; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
+.bloco-seq span { display: block; font-family: var(--texto); text-transform: none; letter-spacing: 0; font-size: 13px; opacity: .8; margin-top: 2px; }
+</style></head><body>
 <title>Cardápio de Edição</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,11 +103,24 @@ footer { margin-top: 36px; color: var(--suave); font-size: 14px; max-width: 70ch
 </style>
 <div class="pagina" id="pagina">
   <header>
-    <p class="olho">Mostruário de edição · 30 modelos, do 01 ao 31 · o 04 saiu</p>
+    <p class="olho">Mostruário de edição · 30 modelos, do 01 ao 31 · e dois novos com mensagem de áudio</p>
     <h1>Modelos de edição</h1>
     <p class="lead">Cada modelo tem um vídeo de amostra feito com o mesmo editor. Assista e diga o número do modelo que combina com o próximo vídeo.</p>
   </header>
   <main class="grade">
+    <article class="modelo" id="ma1"><div class="tela desenho" role="img" aria-label="Desenho do modelo Mensagem de áudio: balão com onda e legenda">
+      <span class="rotulo-neutro">Mensagem de áudio</span>
+      <div class="balao"><span class="play"></span><span class="onda"><i style="height:8px"></i><i style="height:14px"></i><i style="height:22px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:26px"></i><i style="height:16px"></i><i style="height:10px"></i><i style="height:20px"></i><i style="height:24px"></i><i style="height:12px"></i><i style="height:8px"></i><i style="height:16px"></i><i style="height:22px"></i><i style="height:14px"></i><i style="height:9px"></i><i style="height:18px"></i><i style="height:12px"></i></span><span class="tempo">0:24</span></div>
+      <p class="legenda-desenho">O INSS negou e você <b>não sabe por quê</b>?</p>
+    </div><div class="ficha"><p class="claquete"><span>Novo</span><span>amostra em vídeo em breve</span></p><h2>Mensagem de áudio</h2><p class="desc">O áudio vira vídeo no formato de uma mensagem de áudio: o balão com o botão de tocar, a onda que acompanha a voz de verdade e a legenda sincronizada com o que foi falado, nas cores do escritório. A voz fica inteira, sem cortes.</p><p class="bom"><b>Bom para</b> Transformar um áudio seu em vídeo, responder uma dúvida em formato de conversa, ou usar o áudio de um cliente com a autorização dele.</p><ul class="tec"><li>Balão de áudio</li><li>Onda calculada da voz</li><li>Legenda sincronizada</li><li>Voz preservada</li><li>9:16, 4:5 e 1:1</li></ul></div></article>
+    <article class="modelo" id="ma2"><div class="tela desenho" role="img" aria-label="Desenho da sequência: mensagem de áudio, seu comentário e explicação animada">
+      <span class="rotulo-neutro">Sequência</span>
+      <div class="blocos">
+        <div class="bloco-seq">1 · Mensagem de áudio<span>a dúvida chega como áudio, com legenda</span></div>
+        <div class="bloco-seq">2 · Você comentando<span>o seu vídeo, editado com legenda e animação</span></div>
+        <div class="bloco-seq">3 · Explicação animada<span>a resposta em tela, nas suas cores</span></div>
+      </div>
+    </div><div class="ficha"><p class="claquete"><span>Novo</span><span>amostra em vídeo em breve</span></p><h2>Áudio, comentário e animação</h2><p class="desc">O vídeo junta a mensagem de áudio, você comentando em vídeo e uma explicação animada, na ordem que fizer sentido. Você vê a prévia, aprova, e recebe o vídeo final pronto para postar. Cada parte entra inteira, sem acelerar nem cortar a fala.</p><p class="bom"><b>Bom para</b> Responder a pergunta que chegou por áudio com a sua cara e uma explicação clara, no mesmo vídeo.</p><ul class="tec"><li>Mensagem de áudio</li><li>Seu vídeo com legenda</li><li>Cena animada</li><li>Prévia antes do final</li><li>9:16, 4:5 e 1:1</li></ul></div></article>
     <article class="modelo" id="m01" data-chave="classico"><div class="tela"><video src="https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/editor-publico/cardapio/v1/m01.mp4" poster="https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/editor-publico/cardapio/v1/m01.jpg" controls playsinline preload="none"></video></div><div class="ficha"><p class="claquete"><span>Modelo 01</span><span>amostra: Subir campanha até IA faz</span></p><h2>Motion clássico</h2><p class="desc">A frase entra palavra por palavra, o vídeo muda de moldura e telas desenhadas ilustram a fala. É o estilo do corte 07, o preferido do Samurai.</p><p class="bom"><b>Bom para</b> Conteúdo de tráfego e atendimento com números e exemplos do dia a dia do escritório.</p><ul class="tec"><li>Kinetic typography</li><li>Legenda sincronizada</li><li>Cursor e cliques</li><li>Conversa em bolhas</li><li>Pilha de notificações</li><li>Gráfico de linha</li></ul></div></article>
     <article class="modelo" id="m02" data-chave="documentario"><div class="tela"><video src="https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/editor-publico/cardapio/v1/m02.mp4" poster="https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/editor-publico/cardapio/v1/m02.jpg" controls playsinline preload="none"></video></div><div class="ficha"><p class="claquete"><span>Modelo 02</span><span>amostra: Mentalidade samurai</span></p><h2>Documentário</h2><p class="desc">Preto e branco contrastado, barras de cinema, grão de filme, aproximação lenta e legenda em itálico de livro. Quase nenhum texto além da fala.</p><p class="bom"><b>Bom para</b> Falas sérias e de autoridade: história, propósito, posicionamento, depoimento.</p><ul class="tec"><li>Documentário realista</li><li>Preto e branco</li><li>Barras cinematográficas</li><li>Grão de filme</li><li>Vinheta</li><li>Zoom contínuo</li></ul></div></article>
     <article class="modelo" id="m03" data-chave="alta_retencao"><div class="tela"><video src="https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/editor-publico/cardapio/v1/m03.mp4" poster="https://xiwjtgyidguhvwpveokz.supabase.co/storage/v1/object/public/editor-publico/cardapio/v1/m03.jpg" controls playsinline preload="none"></video></div><div class="ficha"><p class="claquete"><span>Modelo 03</span><span>amostra: Cem mil visualizações</span></p><h2>Alta retenção</h2><p class="desc">Uma palavra gigante por vez, corte seco para mais perto a cada frase, tremor e clarão nos momentos fortes, transições rápidas e efeito sonoro em tudo.</p><p class="bom"><b>Bom para</b> Ganchos fortes, conteúdo rápido, números de impacto, vídeo para viralizar.</p><ul class="tec"><li>Alta retenção</li><li>Uma palavra por vez</li><li>Punch-in</li><li>Camera shake</li><li>Flash de impacto</li><li>Whip pan</li></ul></div></article>
