@@ -32,9 +32,9 @@
 
   var CHECKOUTS = {
     mS2gAMm: { valor: 1997, nome: "Full Embaixador" },
-    q5QEizf: { valor: 997, nome: "Pacote Previdenciario" },
-    zRpxcta: { valor: 997, nome: "Pacote Trabalhista" },
-    Ln4ErJJ: { valor: 997, nome: "Pacote Marketing Juridico" },
+    q5QEizf: { valor: 697, nome: "Pacote Previdenciario" },
+    zRpxcta: { valor: 697, nome: "Pacote Trabalhista" },
+    Ln4ErJJ: { valor: 297, nome: "Pacote Marketing Juridico" },
     Lvo0094: { valor: 1497, nome: "Combo Previdenciario + Trabalhista" },
     gQZKu4v: { valor: 47, nome: "Kit de Prompts do Escritorio com IA" },
   };

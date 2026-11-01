@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <script src="/js/pixel.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Skills de IA jurídica que rodam no computador do advogado. Peça no padrão do escritório, citação validada em fonte oficial, jurimetria oficial do CNJ e dado de cliente 100% local. Previdenciário, Trabalhista e Marketing a partir de R$ 997.">
+<meta name="description" content="Skills de IA jurídica que rodam no computador do advogado. Peça no padrão do escritório, citação validada em fonte oficial, jurimetria oficial do CNJ e dado de cliente 100% local. Previdenciário e Trabalhista por R$ 697, Marketing por R$ 297.">
 <title>MaestrIA: IA jurídica que roda no seu computador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -655,25 +655,6 @@
   .cic-ic svg{width:26px;height:26px}
   .bonus-ic svg{width:22px;height:22px}
 
-  /* oferta de hoje: 697 ate as 23h59 de 16/10/2026 */
-  .so-promo{display:none}
-  html.promo .so-promo{display:inline}
-  html.promo .so-normal{display:none}
-  #promoBar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;
-    background:linear-gradient(90deg,#7a0d12,#c1121f);color:#fff;
-    border-top:1px solid rgba(255,255,255,.2);box-shadow:0 -12px 34px rgba(0,0,0,.5)}
-  html.promo #promoBar{display:block}
-  html.promo body{padding-bottom:76px}
-  .pb-in{max-width:1120px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;
-    justify-content:center;gap:8px 16px;flex-wrap:wrap;text-align:center;font-size:14.5px}
-  .pb-in b{font-weight:900}
-  .pb-rel{font-variant-numeric:tabular-nums;background:rgba(0,0,0,.3);padding:4px 10px;
-    border-radius:7px;font-weight:800;letter-spacing:.02em}
-  .pb-btn{background:#fff;color:#7a0d12;font-weight:800;padding:9px 17px;border-radius:9px;
-    text-decoration:none;white-space:nowrap}
-  .pb-btn:hover{background:#ffe9ea}
-  @media(max-width:620px){.pb-in{padding:9px 12px;font-size:13px;gap:6px 10px}
-    html.promo body{padding-bottom:92px}}
 
   /* Vitrines de modelos: dois cartoes, um por tipo de peca */
   .vitrines{margin:36px auto 0;max-width:980px;text-align:center}
@@ -688,20 +669,6 @@
   .vitrine-card em{font-style:normal;font-weight:600;color:var(--red,#e33);font-size:15px;margin-top:4px}
 </style>
 
-<script>
-(function(){
-  /* Oferta de 16/10/2026: R$ 697 ate as 23h59 de Brasilia.
-     ⛔ A hora e ABSOLUTA (UTC), nao o relogio do visitante: 23h59:59 em
-     Brasilia e 02:59:59 UTC do dia seguinte.
-     ⛔ O preco normal e o que esta escrito no HTML. Este script so ACRESCENTA
-     a promocao. Se ele nao rodar, aparece R$ 997, nunca menos do que o
-     checkout cobra. */
-  window.PROMO_FIM = Date.UTC(2026, 9, 17, 2, 59, 59);
-  if (Date.now() <= window.PROMO_FIM) {
-    document.documentElement.className += " promo";
-  }
-})();
-</script>
 
 <nav>
   <div class="wrap nav-in">
@@ -1329,7 +1296,7 @@
       <div class="emb-name">Full Embaixador</div>
       <p class="emb-sub">Todas as áreas do MaestrIA, hoje e no futuro.</p>
       <div class="emb-price">
-        <span class="from">R$ 2.991 comprando 3 áreas soltas</span>
+        <span class="from">todas as áreas de hoje e as que vierem</span>
         <span class="now"><span class="cur">R$</span><span class="val">1.997</span><span class="per">à vista</span></span>
       </div>
       <p class="emb-parcel">ou 12x de R$ 206,54 no cartão</p>
@@ -1429,27 +1396,27 @@
     <div class="pacotes-3">
       <a class="pk" href="https://pay.kiwify.com.br/q5QEizf" data-pacote="prev">
         <span class="pk-tag">Previdenciário</span>
-        <span class="pk-preco"><small>R$</small><span class="so-normal">997</span><span class="so-promo">697</span></span>
-        <span class="pk-nota"><span class="so-normal">de R$ 1.497, com 12 meses de acesso</span><span class="so-promo"><b>só hoje, até as 23h59.</b> Depois, R$ 997</span></span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
         <span class="pk-desc">RMI e atrasados, planejamento, auditor de CNIS, perícia completa e recurso administrativo. Mais jurimetria e as 3 universais.</span>
         <span class="pk-btn">Quero o Previdenciário</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/zRpxcta" data-pacote="trab">
         <span class="pk-tag">Trabalhista</span>
-        <span class="pk-preco"><small>R$</small>997</span>
-        <span class="pk-nota">de R$ 1.497, com 12 meses de acesso</span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
         <span class="pk-desc">Rescisão, hora extra pela ADC 58, insalubridade, FGTS, contestação e acordo do 484-A. Mais jurimetria e as 3 universais.</span>
         <span class="pk-btn">Quero o Trabalhista</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/Ln4ErJJ" data-pacote="marketing">
         <span class="pk-tag">Marketing Jurídico</span>
-        <span class="pk-preco"><small>R$</small>997</span>
-        <span class="pk-nota">de R$ 1.497, com 12 meses de acesso</span>
+        <span class="pk-preco"><small>R$</small>297</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
         <span class="pk-desc">Site com SEO e blog, Google Meu Negócio, landing com Pixel, conteúdo na sua voz e arte no seu Canva. Todo CTA no Provimento 205.</span>
         <span class="pk-btn">Quero o Marketing</span>
       </a>
     </div>
-    <p class="pacotes-pe">Todo pacote dá <b>12 meses de acesso</b> com todas as atualizações do período, as 3 skills universais, licença em 3 computadores e garantia de 7 dias. Depois do primeiro ano, a <b>renovação custa metade do que você pagou</b>: R$ 498,50 para quem entrou por R$ 997. Já comprou uma área? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
+    <p class="pacotes-pe">Todo pacote dá <b>12 meses de acesso</b> com todas as atualizações do período, as 3 skills universais, licença em 3 computadores e garantia de 7 dias. Depois do primeiro ano, a <b>renovação custa metade do que você pagou</b>: R$ 348,50 para quem entrou numa área por R$ 697 e R$ 148,50 para quem entrou no Marketing por R$ 297. Já comprou uma área? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
     <div class="vitrines reveal">
       <span class="vem-h">Antes de decidir, veja o que sai da máquina.</span>
       <div class="vitrines-cards">
@@ -1519,7 +1486,7 @@
 
     <details class="faq reveal"><summary>Com que frequência a MaestrIA é atualizada?</summary><div class="ans">Sempre que fica pronta e testada, não em data fixa. Durante os 12 meses, tudo o que sair chega sem custo com o /atualizar-skill. Correção de bug fura a fila.</div></details>
 
-    <details class="faq reveal"><summary>O acesso é pra sempre? E depois de 1 ano?</summary><div class="ans">A licença vale por <b>12 meses</b>, e nesse período tudo o que a gente lançar chega pra você sem custo. Passado o ano, você decide se renova, e a renovação sai por <b>metade do valor que você pagou</b>: quem entrou no Embaixador por R$ 1.997 renova por R$ 998,50; quem entrou numa área por R$ 997 renova por R$ 498,50. Não é cobrança automática nem pegadinha: se não renovar, você simplesmente para de receber as atualizações novas. E o preço da sua renovação é sempre calculado sobre o que você pagou, então entrar no lote fundador barateia todos os anos seguintes.</div></details>
+    <details class="faq reveal"><summary>O acesso é pra sempre? E depois de 1 ano?</summary><div class="ans">A licença vale por <b>12 meses</b>, e nesse período tudo o que a gente lançar chega pra você sem custo. Passado o ano, você decide se renova, e a renovação sai por <b>metade do valor que você pagou</b>: quem entrou no Embaixador por R$ 1.997 renova por R$ 998,50; quem entrou numa área por R$ 697 renova por R$ 348,50; quem entrou no Marketing por R$ 297 renova por R$ 148,50. Não é cobrança automática nem pegadinha: se não renovar, você simplesmente para de receber as atualizações novas. E o preço da sua renovação é sempre calculado sobre o que você pagou, então entrar no lote fundador barateia todos os anos seguintes.</div></details>
 
     <details class="faq reveal"><summary>Como se compara com consultoria e curso de IA?</summary><div class="ans">Consultoria cobra R$ 30 a 55 mil por 6 meses. Curso ensina prompt e o trabalho continua seu. A MaestrIA é produto pronto: você não aprende a construir a ferramenta, você usa.</div></details>
   </div>
@@ -1534,34 +1501,6 @@
   </div>
 </section>
 
-<div id="promoBar">
-  <div class="pb-in">
-    <span><b>Só hoje:</b> Previdenciário por <b>R$ 697</b>. Às 23h59 volta para R$ 997.</span>
-    <span class="pb-rel">carregando</span>
-    <a href="/prev/" class="pb-btn">Quero agora</a>
-  </div>
-</div>
-<script>
-(function(){
-  var bar = document.getElementById("promoBar");
-  if (!bar || !window.PROMO_FIM) return;
-  var rel = bar.querySelector(".pb-rel");
-  var dd = function(n){ return (n < 10 ? "0" : "") + n; };
-  (function tic(){
-    var falta = window.PROMO_FIM - Date.now();
-    if (falta <= 0) {
-      /* passou das 23h59: a pagina inteira volta ao preco normal, sozinha */
-      document.documentElement.className =
-        document.documentElement.className.split(" promo").join("");
-      return;
-    }
-    rel.textContent = "faltam " + dd(Math.floor(falta / 3600000)) + "h "
-      + dd(Math.floor(falta % 3600000 / 60000)) + "m "
-      + dd(Math.floor(falta % 60000 / 1000)) + "s";
-    setTimeout(tic, 1000);
-  })();
-})();
-</script>
 
 <footer>
   <div class="wrap">
