@@ -36,6 +36,7 @@
     zRpxcta: { valor: 997, nome: "Pacote Trabalhista" },
     Ln4ErJJ: { valor: 997, nome: "Pacote Marketing Juridico" },
     Lvo0094: { valor: 1497, nome: "Combo Previdenciario + Trabalhista" },
+    gQZKu4v: { valor: 47, nome: "Kit de Prompts do Escritorio com IA" },
   };
 
   /* Delegação no document: pega o clique mesmo em botão criado depois,
