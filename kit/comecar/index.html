@@ -113,6 +113,12 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 }
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
 
+@media print {
+  :root { --bg:#fff; --card:#fff; --card2:#f4f4f4; --txt:#111; --dim:#444; --bd:#ccc; --bd2:#ccc; }
+  body { background:#fff !important; color:#111 !important; }
+  #nav, .fixo, button, .botao { display:none !important; }
+  section, .cartao, details { break-inside:avoid-page; }
+}
 .form { display:flex; flex-direction:column; gap:14px; width:100%; max-width:520px; background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:24px 20px; text-align:left; }
 .form label { display:flex; flex-direction:column; gap:6px; color:var(--txt); font-weight:700; font-size:15px; }
 .form label span { font-weight:500; color:var(--dim); font-size:13.5px; }

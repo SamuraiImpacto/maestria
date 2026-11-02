@@ -113,6 +113,12 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 }
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
 
+@media print {
+  :root { --bg:#fff; --card:#fff; --card2:#f4f4f4; --txt:#111; --dim:#444; --bd:#ccc; --bd2:#ccc; }
+  body { background:#fff !important; color:#111 !important; }
+  #nav, .fixo, button, .botao { display:none !important; }
+  section, .cartao, details { break-inside:avoid-page; }
+}
 .form { display:flex; flex-direction:column; gap:14px; width:100%; max-width:520px; background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:24px 20px; text-align:left; }
 .form label { display:flex; flex-direction:column; gap:6px; color:var(--txt); font-weight:700; font-size:15px; }
 .form label span { font-weight:500; color:var(--dim); font-size:13.5px; }
@@ -170,12 +176,31 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <p class="olho">O que chega na sua tela</p>
     <h2>Não é curso. Não é prompt. <em>É o material do seu escritório.</em></h2>
     <div class="grade">
-      <div class="cartao"><span class="num">46<small style="font-size:18px;color:var(--dim)">/100</small></span><h3>Raio-x do Instagram</h3><p>A nota do perfil em posicionamento, bio, feed e engajamento, o que corrigir primeiro e a bio nova pronta para colar.</p></div>
+      <div class="cartao"><span class="num">34<small style="font-size:18px;color:var(--dim)">/100</small></span><h3>Raio-x do Instagram</h3><p>A nota do perfil em posicionamento, bio, feed e engajamento, o que corrigir primeiro e a bio nova pronta para colar.</p></div>
       <div class="cartao"><span class="num">30</span><h3>Roteiros de vídeo</h3><p>Da sua área, com gancho, miolo e fechamento. Você grava no celular, três de uma vez, e posta um por dia.</p></div>
       <div class="cartao"><span class="num">10</span><h3>Mensagens de venda</h3><p>O que mandar no WhatsApp em cada momento: o primeiro contato, o "quanto custa?", o "tá caro", o "vou pensar", quem sumiu.</p></div>
       <div class="cartao"><span class="num">3</span><h3>Anúncios da primeira campanha</h3><p>Objetivo, público, roteiro de cada vídeo e a legenda, dentro da regra da OAB. E o que olhar na primeira semana.</p></div>
     </div>
-    <p class="nota">Exemplo de nota de um perfil real lido pela IA. A sua nota é a do seu perfil.</p>
+    <p class="nota">Nota de um perfil real lido pela IA, mostrado abaixo. A sua nota é a do seu perfil.</p>
+  </section>
+
+  <section>
+    <p class="olho">Um caso real</p>
+    <h2>Direito imobiliário, 1,1 mil seguidores. <em>Lido em 90 segundos.</em></h2>
+    <p class="sub">Perfil público, nome escondido. Trechos copiados do que a IA entregou, sem edição.</p>
+    <div class="duo">
+      <div class="lado ruim"><span class="tag">A bio hoje</span>
+        <p class="volta">Advogado especialista em Direito imobiliário</p></div>
+      <div class="lado bom"><span class="tag">A bio nova, pronta para colar</span>
+        <p class="volta">Te ajudo a comprar imóvel com segurança<br>Leilão de imóveis, análise de edital e restituição de ITBI<br>Fale comigo no WhatsApp</p></div>
+    </div>
+    <div class="cartao"><h3>O que o raio-x apontou</h3>
+      <p>"Quem cai no seu perfil hoje lê especialista em Direito imobiliário e fica nisso. Não dá para saber se você cuida de compra, aluguel, condomínio, leilão ou usucapião. E a categoria do perfil é de planejamento sucessório: a bio diz uma coisa, a categoria diz outra e o feed fala de uma terceira."</p>
+      <p>"O feed conta a história real: você é o cara do leilão de imóveis. Isso é bom, é nicho com dor clara."</p></div>
+    <div class="cartao"><h3>Três dos 30 roteiros</h3>
+      <ul class="lista"><li>Paguei ITBI a mais?</li><li>Arrematei, o ocupante não sai</li><li>Prazo para reclamar de defeito</li></ul></div>
+    <div class="zap"><div class="topo"><i></i><div>Mensagem pronta<small>quando o cliente diz "tá caro"</small></div></div>
+      <div class="bolha out">Entendo, NOME, é dinheiro e tem que fazer sentido para você. Me ajuda a entender: o valor ficou acima do que você esperava ou o problema é pagar tudo de uma vez agora? Dependendo do que for, a gente conversa sobre o que dá para ajustar no trabalho.</div></div>
   </section>
 
   <section>
@@ -185,9 +210,9 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
       <div class="lado ruim"><span class="tag">O que a IA grátis devolve</span>
         <p class="volta">"Crie conteúdo de valor para o seu público. Poste com frequência. Use uma bio clara."</p></div>
       <div class="lado bom"><span class="tag">O que chega para você</span>
-        <p class="volta">"A sua bio começa por você e não pelo cliente. Oito posts em três dias, três interações em média: o problema não é frequência. A bio nova está abaixo, pronta para colar."</p></div>
+        <p class="volta">"A bio diz uma coisa, a categoria diz outra e o feed fala de uma terceira. O feed conta a história real: você é o cara do leilão de imóveis."</p></div>
     </div>
-    <p class="nota">Trechos de exemplo. O seu material fala do seu perfil e da sua área.</p>
+    <p class="nota">Trecho do caso real acima. O seu material fala do seu perfil e da sua área.</p>
     <p class="faca">Ninguém fecha com o advogado que não aparece.</p>
   </section>
 
@@ -197,7 +222,7 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <ol class="lista">
       <li>Você paga. Leva um minuto.</li>
       <li>Na tela seguinte, informa o seu @ do Instagram e a sua área.</li>
-      <li>Em uns 3 minutos o material está pronto na tela, e o link chega no seu e-mail e no seu WhatsApp. Você lê, ajusta ao seu jeito e usa.</li>
+      <li>Em uns 2 minutos o material está pronto na tela, e o link chega no seu e-mail e no seu WhatsApp. Você lê, ajusta ao seu jeito e usa.</li>
     </ol>
   </section>
 
