@@ -52,6 +52,11 @@ COPY js/ ./js/
 COPY modelos/ ./modelos/
 COPY modelos-video/ ./modelos-video/
 
+# Funil do perfil Samurai do Jurídico: pack grátis (/prompts/) e venda do kit de R$ 47 (/kit/).
+# Geradas por C:/Acervo/Iscas/MaestrIA-2026-11/paginas_funil.py a partir dos .md testados.
+COPY prompts/ ./prompts/
+COPY kit/ ./kit/
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

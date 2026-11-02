@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>10 prompts para o escritório | Samurai do Jurídico</title>
+<meta name="description" content="Dez prompts grátis para advogado: revisar a peça, mapear a contestação, desmontar o laudo, preparar a audiência e mais. Sem cadastro.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#000; --card:#0b0b0b; --card2:#141414; --txt:#fff; --muted:#bdbdbd; --dim:#7f7f7f;
+  --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.08); --redbd:rgba(239,39,39,.32);
+  --cta:#14a44d; --cta2:#1cc25c; --ok:#4ade80; --bd:#1f1f1f; --bd2:#2c2c2c; --r:16px; --rs:10px;
+  --zap:#0b141a; --zapin:#202c33; --zapout:#005c4b; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+main { max-width:820px; margin:0 auto; padding:40px 16px 120px; display:flex; flex-direction:column; gap:72px; }
+section { display:flex; flex-direction:column; gap:18px; }
+.selo { align-self:flex-start; font-size:12.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--red2); background:var(--redbg); border:1px solid var(--redbd); border-radius:999px; padding:6px 14px; }
+h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(34px,6.4vw,58px); line-height:1.08; text-wrap:balance; letter-spacing:-.01em; }
+h1 em, h2 em { font-style:italic; color:var(--red2); }
+h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(26px,4.4vw,38px); line-height:1.15; text-wrap:balance; }
+h3 { color:var(--txt); font-size:18px; font-weight:800; line-height:1.3; }
+.sub { font-size:19px; max-width:60ch; }
+.sub b, p b { color:var(--txt); }
+.olho { font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); }
+.faca { font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(22px,3.6vw,30px); line-height:1.25; border-left:3px solid var(--red); padding:4px 0 4px 18px; text-wrap:balance; }
+.cascata { display:flex; flex-direction:column; gap:4px; color:var(--txt); font-size:20px; font-weight:600; }
+.botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:inherit; font-weight:800; font-size:16px; color:#fff; background:var(--cta); border:0; border-radius:var(--rs); padding:14px 22px; cursor:pointer; text-decoration:none; transition:background .15s, transform .15s; }
+.botao:hover { background:var(--cta2); transform:translateY(-1px); }
+.botao:focus-visible, a:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
+.botao.grande { font-size:18px; padding:18px 28px; width:100%; }
+.botao.copiado { background:var(--card2); color:var(--ok); }
+.nota { font-size:14px; color:var(--dim); }
+.hero { gap:22px; padding-top:8px; }
+.hero .acoes { display:flex; flex-wrap:wrap; gap:12px 18px; align-items:center; }
+.zap { background:var(--zap); border:1px solid var(--bd2); border-radius:22px; padding:16px; display:flex; flex-direction:column; gap:10px; max-width:440px; width:100%; }
+.zap .topo { display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid #1e2a30; color:var(--txt); font-weight:700; font-size:15px; }
+.zap .topo i { width:34px; height:34px; border-radius:50%; background:#2a3942; display:inline-block; }
+.zap .topo small { display:block; color:#8696a0; font-weight:500; font-size:12.5px; }
+.bolha { max-width:86%; padding:9px 12px 7px; border-radius:12px; font-size:15px; line-height:1.45; color:#e9edef; }
+.bolha.in { background:var(--zapin); align-self:flex-start; border-top-left-radius:4px; }
+.bolha.out { background:var(--zapout); align-self:flex-end; border-top-right-radius:4px; }
+.bolha .h { display:block; text-align:right; font-size:11.5px; color:#8696a0; margin-top:2px; }
+.duo { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+.lado { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:12px; }
+.lado.ruim { border-color:var(--redbd); }
+.lado.bom { border-color:rgba(74,222,128,.35); }
+.lado .tag { font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
+.lado.ruim .tag { color:var(--red2); }
+.lado.bom .tag { color:var(--ok); }
+.digitado { font-family:ui-monospace,'SFMono-Regular',Consolas,monospace; font-size:14px; color:var(--txt); background:var(--card2); border-radius:var(--rs); padding:12px; white-space:pre-wrap; }
+.volta { font-size:15px; color:var(--muted); white-space:pre-line; }
+.grade { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.cartao { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:8px; }
+.cartao .num { font-family:'Playfair Display',serif; font-weight:900; font-size:44px; line-height:1; color:var(--red2); font-variant-numeric:tabular-nums; }
+.indice { list-style:none; display:grid; gap:8px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+.indice a { display:flex; gap:12px; align-items:baseline; color:var(--txt); text-decoration:none; background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:12px 14px; font-size:15.5px; transition:border-color .15s; }
+.indice a:hover { border-color:var(--bd2); background:var(--card2); }
+.indice a b { color:var(--red2); font-variant-numeric:tabular-nums; min-width:22px; }
+.indice a span { display:block; color:var(--dim); font-size:13.5px; }
+.item { gap:14px; scroll-margin-top:16px; }
+.quando { color:var(--txt); }
+.quando b { color:var(--ok); }
+.caixa { background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); overflow:hidden; }
+.barra { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--bd); flex-wrap:wrap; }
+.barra span { font-size:12.5px; font-weight:700; color:var(--dim); letter-spacing:.08em; text-transform:uppercase; }
+.prompt { max-height:300px; overflow:auto; padding:18px 16px; font-family:ui-monospace,'SFMono-Regular',Consolas,monospace; font-size:13.5px; line-height:1.6; color:var(--muted); white-space:pre-wrap; word-break:break-word; }
+.lista { list-style:none; display:grid; gap:10px; }
+.lista li { position:relative; padding-left:28px; color:var(--txt); }
+.lista li::before { content:''; position:absolute; left:4px; top:.58em; width:9px; height:9px; border-radius:50%; background:var(--ok); }
+.lista.nao li::before { background:var(--red); border-radius:2px; }
+.cuidado { background:var(--redbg); border:1px solid var(--redbd); border-radius:var(--r); padding:20px; color:var(--txt); gap:6px; }
+.cuidado strong { color:var(--red2); font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; }
+.oferta { background:var(--card2); border:1px solid var(--bd2); border-radius:22px; padding:30px 22px; gap:16px; }
+.oferta .preco { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:64px; line-height:1; font-variant-numeric:tabular-nums; }
+.oferta .preco small { display:block; font-family:'Inter',sans-serif; font-size:15px; font-weight:600; color:var(--dim); margin-top:10px; letter-spacing:.02em; }
+.tira { display:flex; flex-wrap:wrap; gap:8px; }
+.tira span { font-size:13.5px; color:var(--txt); background:var(--card); border:1px solid var(--bd2); border-radius:999px; padding:6px 12px; }
+details { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:14px 16px; }
+details summary { cursor:pointer; color:var(--txt); font-weight:700; list-style:none; display:flex; justify-content:space-between; gap:12px; }
+details summary::after { content:'+'; color:var(--red2); font-weight:800; }
+details[open] summary::after { content:'\2212'; }
+details p { margin-top:10px; }
+.fixo { position:fixed; left:0; right:0; bottom:0; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(0,0,0,.92); border-top:1px solid var(--bd2); display:none; z-index:5; }
+.fixo .botao { width:100%; }
+footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; color:var(--dim); }
+@media (max-width:700px) { .fixo { display:block; } body { font-size:16.5px; } .sub { font-size:17.5px; } }
+@media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <span class="selo">Grátis · sem cadastro · sem e-mail</span>
+    <h1>Você ainda pede para a IA <em>"dar uma olhada"</em> na sua peça?</h1>
+    <p class="sub">Ela olha. Elogia. Devolve um texto bonito e genérico. E se você deixar, cita uma decisão que ninguém sabe de onde saiu. <b>O problema não é a IA. É o pedido.</b> Aqui estão 10 pedidos prontos, do jeito que eu uso no escritório.</p>
+    <div class="acoes"><a class="botao" href="#os-10">Ver os 10 prompts</a><span class="nota">ChatGPT, Claude, Gemini: funciona em qualquer uma.</span></div>
+  </section>
+
+  <section>
+    <p class="olho">A diferença</p>
+    <h2>Mesma IA. Mesma peça. <em>Pedido diferente.</em></h2>
+    <div class="duo">
+      <div class="lado ruim"><span class="tag">O que quase todo mundo digita</span>
+        <div class="digitado">revisa essa petição pra mim</div>
+        <p class="volta">"Sua petição está bem estruturada e clara. Sugiro apenas pequenos ajustes de redação no segundo parágrafo..."</p></div>
+      <div class="lado bom"><span class="tag">O que está aqui</span>
+        <div class="digitado">Atue como revisor que nunca elogia e começa pelo problema mais grave...</div>
+        <p class="volta">"1. Argumento mais fraco: o nexo depende só do relato do autor, sem documento.
+2. Pedido com mais risco: danos morais, sem fato que sustente.
+3. Fato sem prova: a data da demissão não bate com o termo de rescisão."</p></div>
+    </div>
+    <p class="nota">Exemplo fictício, criado para demonstração.</p>
+    <p class="faca">IA que elogia a sua peça não te protege de nada. O juiz não vai elogiar.</p>
+  </section>
+
+  <section id="os-10">
+    <p class="olho">O pack</p>
+    <h2>10 momentos em que o escritório <em>trava</em></h2>
+    <p>Cada prompt nasceu de uma cena que se repete toda semana. Escolha a sua e pule direto.</p>
+    <ul class="indice"><li><a href="#p1"><b>01</b><div>O revisor que não elogia<span>Antes de protocolar</span></div></a></li><li><a href="#p2"><b>02</b><div>O mapa da contestação antes da réplica<span>Antes da réplica</span></div></a></li><li><a href="#p3"><b>03</b><div>A pilha de documentos do cliente<span>Quando o cliente despeja tudo no WhatsApp</span></div></a></li><li><a href="#p4"><b>04</b><div>Sentença ruim: o que vale recorrer<span>Depois da sentença ruim</span></div></a></li><li><a href="#p5"><b>05</b><div>O laudo que se contradiz<span>Quando o laudo veio contra</span></div></a></li><li><a href="#p6"><b>06</b><div>A audiência antes da audiência<span>Três dias antes da audiência</span></div></a></li><li><a href="#p7"><b>07</b><div>A conferência de citações<span>Antes de assinar o que a IA escreveu</span></div></a></li><li><a href="#p8"><b>08</b><div>Uma página para o juiz<span>Na hora de despachar</span></div></a></li><li><a href="#p9"><b>09</b><div>A decisão explicada ao cliente<span>Quando o cliente pergunta &quot;e aí?&quot;</span></div></a></li><li><a href="#p10"><b>10</b><div>A pergunta do cliente que vira vídeo<span>Quando você não sabe o que gravar</span></div></a></li></ul>
+  </section>
+
+  <section>
+    <h2>Como usar</h2>
+    <ol class="lista">
+      <li>Abra uma conversa nova na IA que você já usa. Um prompt por conversa.</li>
+      <li>Copie o prompt inteiro e cole.</li>
+      <li>Mande o material que ela pedir. Antes, tire nome, CPF e tudo que identifique o cliente.</li>
+    </ol>
+  </section>
+
+  <section class="item" id="p1"><p class="olho">01 · Antes de protocolar</p><h3>O revisor que não elogia</h3><p class="quando"><b>Quando usar:</b> a peça está pronta e você vai protocolar.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t1">Copiar o prompt</button></div><pre class="prompt" id="t1">Você vai revisar uma peça que eu vou protocolar. Atue como advogado revisor experiente em [sua área], do tipo que nunca elogia e começa sempre pelo problema mais grave. Seu trabalho é me impedir de errar, não me deixar confortável.
+
+Eu vou colar a peça e, se tiver, os documentos que ela usa.
+
+Me entregue, nesta ordem:
+1. O argumento mais fraco: o primeiro que a outra parte vai atacar, e por quê.
+2. O pedido com mais risco de ser negado, e o motivo provável.
+3. Fato afirmado na peça que não tem prova nos documentos que mandei.
+4. Contradição interna: um trecho que enfraquece o que foi dito antes.
+5. O que está faltando: prova, fundamento ou pedido que ainda dá tempo de incluir.
+6. Toda citação de lei, súmula ou decisão, marcada como [conferir na fonte oficial]. Não confirme nenhuma de memória.
+
+Para cada ponto, mostre o trecho, explique o risco em uma linha e sugira a correção. Não reescreva a peça inteira. Não invente fato nem jurisprudência.
+
+Comece me pedindo a peça.</pre></div></section>
+<section class="item" id="p2"><p class="olho">02 · Antes da réplica</p><h3>O mapa da contestação antes da réplica</h3><p class="quando"><b>Quando usar:</b> chegou uma contestação longa e você ainda não escreveu nada.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t2">Copiar o prompt</button></div><pre class="prompt" id="t2">Chegou a contestação e eu preciso saber o que realmente ameaça a minha tese antes de escrever a réplica. Atue como advogado de [sua área] fazendo uma leitura adversarial.
+
+Eu vou colar a petição inicial (ou um resumo dela) e a contestação.
+
+Me entregue:
+1. A tese de defesa em três linhas, do jeito que o juiz vai entender.
+2. Uma tabela: argumento da defesa | perigo para nós (alto, médio, baixo) | por quê | onde está na contestação.
+3. Fatos que a defesa admitiu, mesmo sem querer, e que nos ajudam.
+4. Documentos que a defesa juntou e o que cada um tenta provar.
+5. Preliminares e questões processuais que precisam de resposta própria.
+6. O que eu não preciso rebater: argumento secundário que só gasta espaço.
+7. A ordem sugerida para a réplica, do ponto mais perigoso para o menos.
+
+Use só o que está nas peças. Se citar lei ou decisão, marque [conferir na fonte oficial]. Não escreva a réplica ainda: quero o mapa primeiro.
+
+Resposta enxuta: no máximo 800 palavras, em tópicos curtos. Entregue todos os itens; se faltar espaço, encurte os primeiros, nunca corte o último.
+O que o material não diz, escreva &quot;não consta&quot; em vez de supor.</pre></div></section>
+<section class="item" id="p3"><p class="olho">03 · Quando o cliente despeja tudo no WhatsApp</p><h3>A pilha de documentos do cliente</h3><p class="quando"><b>Quando usar:</b> o cliente mandou dezenas de arquivos, fotos e prints pelo WhatsApp.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t3">Copiar o prompt</button></div><pre class="prompt" id="t3">Meu cliente mandou uma pilha de documentos, fotos e prints, tudo fora de ordem. Você vai organizar esse material para mim, advogado de [sua área]. O objetivo do caso é: [descreva em uma linha].
+
+Eu vou colar ou anexar os arquivos.
+
+Me entregue:
+1. Uma linha do tempo: data | o que aconteceu | qual documento mostra isso.
+2. Uma lista de documentos por assunto, com o nome do arquivo e uma linha do que ele contém.
+3. O que cada documento ajuda a provar, e o que ele pode atrapalhar.
+4. As contradições entre documentos, ou entre os documentos e o que o cliente contou.
+5. O que falta: documento que eu devo pedir ao cliente, escrito em linguagem simples para eu mandar no WhatsApp.
+6. Prazos que aparecem nos papéis (vencimento, notificação, data de ciência), marcados como [conferir].
+
+Não tire conclusão jurídica sobre o caso. Organize, aponte e deixe a decisão comigo. Se um arquivo estiver ilegível, diga qual.</pre></div></section>
+<section class="item" id="p4"><p class="olho">04 · Depois da sentença ruim</p><h3>Sentença ruim: o que vale recorrer</h3><p class="quando"><b>Quando usar:</b> saiu a sentença desfavorável e você quer separar o que tem chance do que é impulso.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t4">Copiar o prompt</button></div><pre class="prompt" id="t4">Saiu uma sentença desfavorável e eu não quero recorrer de tudo no impulso. Atue como advogado de [sua área] experiente em recursos.
+
+Eu vou colar a sentença e a minha petição principal (inicial ou contestação).
+
+Me entregue:
+1. O que a sentença decidiu, ponto a ponto, em linguagem direta.
+2. Para cada ponto: o fundamento que o juiz usou e se ele enfrentou o meu argumento ou passou por cima.
+3. Omissões, contradições ou obscuridades que justificariam embargos de declaração.
+4. Os pontos que valem o recurso, os que são fracos e os que eu deveria deixar de lado, com o motivo.
+5. Prova ou argumento que estava nos autos e o juiz ignorou.
+6. Qual recurso parece cabível e o prazo, os dois marcados como [conferir na fonte oficial]. Não calcule a data final de cabeça.
+
+Não escreva o recurso. Quero a triagem primeiro, para eu decidir.
+
+Resposta enxuta: no máximo 700 palavras, em tópicos curtos. Entregue todos os itens; se faltar espaço, encurte os primeiros, nunca corte o último.
+Todo artigo, lei, súmula, tema ou julgado que você mencionar vem com [conferir na fonte oficial] na mesma linha, inclusive em observações. Se o número não for necessário, cite só a regra.</pre></div></section>
+<section class="item" id="p5"><p class="olho">05 · Quando o laudo veio contra</p><h3>O laudo que se contradiz</h3><p class="quando"><b>Quando usar:</b> o laudo pericial veio contra o seu cliente.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t5">Copiar o prompt</button></div><pre class="prompt" id="t5">O laudo pericial veio desfavorável ao meu cliente. Você vai me ajudar a achar onde a conclusão do perito não se sustenta nos próprios dados dele. Sou advogado de [sua área]; não sou da área técnica do perito.
+
+Eu vou colar o laudo, os quesitos e, se tiver, os documentos técnicos do cliente (exames, relatórios, laudos particulares).
+
+Me entregue:
+1. A conclusão do perito em três linhas.
+2. Uma tabela: o que o perito afirmou | o dado que ele mesmo registrou | se combina ou não.
+3. Quesitos que ficaram sem resposta, com resposta evasiva ou que responderam outra pergunta.
+4. Documento do cliente que o perito não analisou ou descartou sem explicar.
+5. Termo técnico que eu preciso entender, explicado em uma linha.
+6. Perguntas complementares que eu posso pedir ao perito.
+
+Não faça diagnóstico técnico no lugar do perito e não invente norma técnica. Se for citar norma, lei ou decisão, marque [conferir na fonte oficial].</pre></div></section>
+<section class="item" id="p6"><p class="olho">06 · Três dias antes da audiência</p><h3>A audiência antes da audiência</h3><p class="quando"><b>Quando usar:</b> dois ou três dias antes de uma audiência de instrução.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t6">Copiar o prompt</button></div><pre class="prompt" id="t6">Tenho uma audiência de instrução e quero chegar sabendo o que vai acontecer na sala, não só o que aconteceu no processo. Atue como advogado de [sua área] que prepara audiência com método.
+
+Eu vou colar a inicial, a contestação e o que mais for importante (documentos, decisões, rol de testemunhas).
+
+Me entregue:
+1. Os pontos que ainda estão em disputa: só o que a audiência pode resolver.
+2. As perguntas que o juiz provavelmente vai fazer ao meu cliente, e onde a resposta dele pode se complicar.
+3. As perguntas que o advogado da outra parte vai usar para enfraquecer a minha tese.
+4. Minhas perguntas para cada testemunha, na ordem, com o objetivo de cada uma.
+5. Uma folha de mesa: os 5 fatos que eu preciso provar e qual pergunta prova cada um.
+6. Um roteiro para eu explicar ao meu cliente como funciona a audiência, sem combinar resposta: só para ele não travar.
+
+Use apenas o que está nos documentos.
+
+Eu represento: [autor ou réu].
+Resposta enxuta: no máximo 900 palavras, em tópicos curtos. Entregue todos os itens; se faltar espaço, encurte os primeiros, nunca corte o último.
+Todo artigo, lei, súmula, tema ou julgado que você mencionar vem com [conferir na fonte oficial] na mesma linha, inclusive em observações. Se o número não for necessário, cite só a regra.</pre></div></section>
+<section class="item" id="p7"><p class="olho">07 · Antes de assinar o que a IA escreveu</p><h3>A conferência de citações</h3><p class="quando"><b>Quando usar:</b> a peça foi escrita com ajuda de IA, ou por outra pessoa, e tem jurisprudência.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t7">Copiar o prompt</button></div><pre class="prompt" id="t7">A IA escreve bem e também inventa julgado com a mesma segurança. Antes de protocolar, você vai separar cada citação desta peça para eu conferir.
+
+Eu vou colar a peça e, se tiver, os acórdãos e as leis que eu usei.
+
+Para cada citação (lei, artigo, súmula, tema, acórdão, doutrina), coloque em um destes grupos:
+A. Confere com o material que eu mandei: mostre o trecho do material.
+B. Precisa ser aberta na fonte oficial: diga onde procurar (site do tribunal, Planalto, base do CNJ) e o que conferir (número, data, relator, se diz o que a peça afirma).
+C. Tem cara de invenção: número fora do padrão do tribunal, ementa genérica demais, súmula que não trata do tema. Diga o motivo.
+
+Cada citação vai para um grupo só. Se eu não colar o texto do material, o grupo A fica vazio.
+
+No fim, liste o que eu preciso abrir antes de assinar, do mais arriscado para o menos.
+
+Você não confirma nenhuma citação de memória e não acrescenta lei, resolução ou julgado que não esteja na peça: para dizer onde procurar, descreva o tipo de fonte, sem número. O seu papel é me mostrar por onde começar a conferir.</pre></div></section>
+<section class="item" id="p8"><p class="olho">08 · Na hora de despachar</p><h3>Uma página para o juiz</h3><p class="quando"><b>Quando usar:</b> a peça é longa e você vai despachar ou quer um memorial curto.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t8">Copiar o prompt</button></div><pre class="prompt" id="t8">Minha peça é longa e o juiz não vai ler tudo com calma. Você vai transformar o caso em UMA página, para despacho ou memorial. Sou advogado de [sua área].
+
+Eu vou colar a peça e o que mais for importante.
+
+A página tem:
+1. O pedido, em uma frase.
+2. O problema, em até cinco linhas, sem adjetivo.
+3. Os três fatos que decidem o caso, cada um com o documento que prova (folha ou número do anexo).
+4. O fundamento central, em poucas linhas. Lei ou decisão aparece como [conferir na fonte oficial].
+5. O que eu peço que o juiz faça agora.
+
+Linguagem direta, sem juridiquês desnecessário, frases curtas. Se faltar informação para alguma parte, me pergunte em vez de inventar.</pre></div></section>
+<section class="item" id="p9"><p class="olho">09 · Quando o cliente pergunta &quot;e aí?&quot;</p><h3>A decisão explicada ao cliente</h3><p class="quando"><b>Quando usar:</b> saiu uma decisão e o cliente vai perguntar &quot;e aí, doutor?&quot;.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t9">Copiar o prompt</button></div><pre class="prompt" id="t9">Saiu uma decisão no processo do meu cliente e eu preciso explicar para ele por WhatsApp, em linguagem de gente. Sou advogado de [sua área].
+
+Eu vou colar a decisão e, se precisar, uma linha de contexto do caso.
+
+Escreva uma mensagem para eu revisar e mandar:
+1. O que aconteceu, em duas ou três frases simples, sem termo jurídico. Se um termo for inevitável, explique entre parênteses.
+2. O que muda para ele agora, na prática.
+3. O próximo passo e quem faz: o escritório, o cliente ou o juiz.
+4. O que ele precisa fazer ou mandar, se for o caso.
+
+Tom calmo e respeitoso, sem promessa de resultado, sem previsão de prazo que eu não confirmei, sem minimizar uma notícia ruim. Até 10 linhas. Se a decisão for desfavorável, escreva também uma versão para eu falar por áudio.</pre></div></section>
+<section class="item" id="p10"><p class="olho">10 · Quando você não sabe o que gravar</p><h3>A pergunta do cliente que vira vídeo</h3><p class="quando"><b>Quando usar:</b> você quer aparecer e não sabe sobre o que falar.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t10">Copiar o prompt</button></div><pre class="prompt" id="t10">Você vai transformar as perguntas que os clientes mandam no WhatsApp do meu escritório em roteiros de vídeo curto para EU gravar no celular. Sou advogado de [sua área].
+
+1. Eu colo as perguntas do jeito que chegaram. Antes de tudo, tire nome, número, cidade pequena, empresa e qualquer detalhe que identifique a pessoa. A dúvida fica, a pessoa some.
+2. Agrupe as parecidas e me mostre as 5 que mais aparecem. Eu escolho quais viram roteiro.
+
+Para cada roteiro (30 a 60 segundos):
+GANCHO (0 a 3 s): a dúvida com as palavras que o cliente usou.
+BLOCO 1, BLOCO 2, BLOCO 3: o que aparece na tela e o que eu falo, uma ideia por bloco, até 10 segundos cada.
+FECHAMENTO: &quot;Comenta a sua dúvida&quot;, &quot;Salva para mostrar a quem precisa&quot; ou &quot;Me segue para mais&quot;. Nada de &quot;me chama que eu resolvo&quot; nem &quot;consulta grátis&quot;.
+TEXTO EM TELA e LEGENDA do post.
+
+Regras: fala de gente, sem juridiquês; informa, não promete resultado nem cita valor de indenização; se eu pedir lei ou decisão, escreva [conferir na fonte oficial antes de gravar]. Comece me pedindo as perguntas.</pre></div></section>
+
+  <section class="cuidado"><strong>Leia antes de usar o que voltou</strong>A IA erra, e erra com confiança. Por isso todo prompt aqui manda ela marcar lei, súmula e decisão como "conferir na fonte oficial". Confira cada uma. Quem assina é você.</section>
+
+  <section class="oferta" id="kit">
+    <p class="olho">Próximo passo</p>
+    <h2>Esses 10 cuidam do processo. <em>E quem cuida do WhatsApp?</em></h2>
+    <p>O cliente que chamou às 21h47. O "quanto custa?" sem bom-dia. O "vou pensar" que nunca volta. O <b>Kit de Prompts do Escritório com IA</b> tem 38 prompts para o atendimento: triagem do primeiro contato, resposta, proposta, objeção, follow-up e o conteúdo do mês.</p>
+    <div class="tira"><span>5 triagens</span><span>30 de atendimento</span><span>3 de conteúdo</span><span>Qualquer área</span></div>
+    <div class="preco">R$ 47<small>pagamento único</small></div>
+    <a class="botao grande" href="/kit/">Quero ver o kit</a>
+  </section>
+
+  <footer>Samurai do Jurídico. Prompt é ponto de partida: o MaestrIA faz isso dentro do seu computador, com o modelo do seu escritório e a jurisprudência conferida na fonte oficial.</footer>
+</main>
+<div class="fixo"><a class="botao" href="#os-10">Pegar os 10 prompts</a></div>
+<script>
+(function () {
+  function copiar(botao) {
+    var texto = document.getElementById(botao.getAttribute('data-alvo')).innerText;
+    function avisar() {
+      botao.textContent = 'Copiado. Agora cole na sua IA.';
+      botao.classList.add('copiado');
+      setTimeout(function () { botao.textContent = 'Copiar o prompt'; botao.classList.remove('copiado'); }, 4000);
+    }
+    function reserva() {
+      var area = document.createElement('textarea');
+      area.value = texto; area.setAttribute('readonly', ''); area.style.position = 'fixed'; area.style.opacity = '0';
+      document.body.appendChild(area); area.select();
+      try { document.execCommand('copy'); avisar(); } catch (err) { botao.textContent = 'Selecione o texto e copie'; }
+      document.body.removeChild(area);
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(texto).then(avisar, reserva); }
+    else { reserva(); }
+  }
+  document.querySelectorAll('.copiar').forEach(function (b) { b.addEventListener('click', function () { copiar(b); }); });
+})();
+</script>
+</body>
+</html>
