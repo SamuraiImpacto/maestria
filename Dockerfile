@@ -22,6 +22,8 @@ COPY membros/ ./membros/
 COPY prev/ ./prev/
 COPY trab/ ./trab/
 COPY marketing/ ./marketing/
+# Combo Previdenciário + Marketing (checkout urkdMlQ), para mandar a quem já usa o Claude.
+COPY prev-marketing/ ./prev-marketing/
 
 # Black do MaestrIA Marketing (pagina de oferta).
 # ⛔ ESTE ARQUIVO E A LISTA DE QUEM SOBE. Pasta nova no repositorio NAO vai
