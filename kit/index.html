@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Kit de Prompts do Escritório com IA | Samurai do Jurídico</title>
-<meta name="description" content="38 prompts para o advogado acertar a resposta em cada momento da venda: primeiro contato, preço, proposta, objeção e follow-up. R$ 47.">
+<title>Escritório Pronto com IA | Samurai do Jurídico</title>
+<meta name="description" content="Informe o seu @ e a sua área: em 3 minutos a IA entrega o raio-x do Instagram, 30 roteiros, as mensagens de venda e a primeira campanha. R$ 47.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,99 +112,130 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   .cuidado { max-width:720px; }
 }
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
+
+.form { display:flex; flex-direction:column; gap:14px; width:100%; max-width:520px; background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:24px 20px; text-align:left; }
+.form label { display:flex; flex-direction:column; gap:6px; color:var(--txt); font-weight:700; font-size:15px; }
+.form label span { font-weight:500; color:var(--dim); font-size:13.5px; }
+.form input, .form select { font:inherit; font-size:16px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:12px 14px; width:100%; }
+.form input:focus, .form select:focus { outline:2px solid var(--ok); outline-offset:1px; }
+.erro { color:var(--red2); font-weight:700; font-size:15px; min-height:1px; }
+.etapas { list-style:none; display:flex; flex-direction:column; gap:12px; width:100%; max-width:520px; text-align:left; }
+.etapas li { display:flex; gap:12px; align-items:center; color:var(--dim); font-size:16px; transition:color .3s; }
+.etapas li i { width:22px; height:22px; border-radius:50%; border:2px solid var(--bd2); flex:none; display:flex; align-items:center; justify-content:center; font-style:normal; font-size:13px; }
+.etapas li.ativa { color:var(--txt); font-weight:700; }
+.etapas li.ativa i { border-color:var(--ok); border-top-color:transparent; animation:gira .9s linear infinite; }
+.etapas li.feita { color:var(--txt); }
+.etapas li.feita i { background:var(--ok); border-color:var(--ok); color:#000; }
+.etapas li.feita i::after { content:'✓'; }
+@keyframes gira { to { transform:rotate(360deg); } }
+.barra-prog { width:100%; max-width:520px; height:8px; background:var(--card2); border-radius:99px; overflow:hidden; }
+.barra-prog div { height:100%; width:0; background:var(--ok); transition:width .8s ease; }
+.nav { position:sticky; top:0; z-index:4; display:flex; gap:6px; flex-wrap:wrap; justify-content:center; padding:10px 0; background:rgba(0,0,0,.92); border-bottom:1px solid var(--bd); }
+.nav a { color:var(--txt); text-decoration:none; font-weight:700; font-size:14px; padding:7px 14px; border:1px solid var(--bd2); border-radius:99px; }
+.nav a:hover { border-color:var(--ok); }
+.placar { display:flex; gap:24px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.nota-grande { font-family:'Playfair Display',serif; font-weight:900; font-size:96px; line-height:1; color:var(--txt); font-variant-numeric:tabular-nums; }
+.nota-grande small { font-size:28px; color:var(--dim); }
+.barras { display:flex; flex-direction:column; gap:10px; min-width:240px; text-align:left; }
+.barras div { display:grid; grid-template-columns:130px 1fr 34px; gap:10px; align-items:center; font-size:14px; color:var(--txt); }
+.barras b { display:block; height:8px; border-radius:99px; background:var(--card2); overflow:hidden; }
+.barras b span { display:block; height:100%; background:var(--red2); }
+.barras em { font-style:normal; color:var(--dim); font-variant-numeric:tabular-nums; text-align:right; }
+.leitura { display:flex; flex-direction:column; gap:12px; max-width:680px; text-align:left; }
+.chip { display:inline-block; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border-radius:99px; padding:3px 10px; }
+.chip.Urgente { background:var(--redbg); color:var(--red2); border:1px solid var(--redbd); }
+.chip.Importante { background:rgba(250,204,21,.08); color:#facc15; border:1px solid rgba(250,204,21,.3); }
+.chip.Melhoria { background:rgba(74,222,128,.08); color:var(--ok); border:1px solid rgba(74,222,128,.3); }
+.texto-pre { white-space:pre-line; color:var(--txt); }
+.roteiro b, .msg b { color:var(--txt); }
+.filtros { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.filtros button { font:inherit; font-weight:700; font-size:14px; color:var(--txt); background:var(--card); border:1px solid var(--bd2); border-radius:99px; padding:7px 14px; cursor:pointer; }
+.filtros button[aria-pressed="true"] { background:var(--txt); color:#000; }
+.copiar-s { font:inherit; font-weight:700; font-size:13px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:8px; padding:6px 12px; cursor:pointer; align-self:flex-start; }
+.copiar-s:hover { border-color:var(--ok); }
+.aviso-ia { font-size:14px; color:var(--dim); max-width:680px; }
 </style>
 <script src="/js/pixel.js" defer></script>
 </head>
 <body>
 <main>
   <section class="hero">
-    <span class="selo">Kit de Prompts do Escritório com IA</span>
-    <h1>Você não perde o cliente no processo. <em>Perde na resposta.</em></h1>
-    <p class="sub">O contato chega querendo contratar. Aí vem a sua mensagem: o preço de cara, o áudio explicando a lei, o "depende", o "fico no aguardo". <b>Nos escritórios que eu acompanho, a venda morre aí.</b> Este kit tem 38 prompts para você escrever a resposta certa em cada momento da venda. Quem conversa com o cliente continua sendo você.</p>
-    <div class="duo">
-      <div class="lado ruim"><span class="tag">A resposta que mata a venda</span>
-        <div class="digitado">"quanto o sr cobra?"</div>
-        <p class="volta">"Boa noite! Meus honorários são 30% do que o senhor receber no final."</p></div>
-      <div class="lado bom"><span class="tag">A resposta que conduz</span>
-        <div class="digitado">"quanto o sr cobra?"</div>
-        <p class="volta">"Boa noite! Consigo te passar o valor certinho, mas depende do seu caso. Me conta duas coisas: quando você saiu da empresa e se assinou algum papel na saída?"</p></div>
-    </div>
-    <p class="nota">Exemplo fictício, no caminho que o prompt 4 do kit ensina.</p>
-    <div class="acoes"><a class="botao" href="#comprar">Quero o kit por R$ 47</a><span class="nota">Acesso na hora. Funciona no ChatGPT, no Claude e no Gemini.</span></div>
+    <span class="selo">Escritório Pronto com IA</span>
+    <h1>O marketing do seu escritório, <em>pronto em 3 minutos.</em></h1>
+    <p class="sub">Você informa o seu @ do Instagram e a sua área. A IA lê o seu perfil e entrega, feito para você: <b>o raio-x do Instagram com a bio nova, 30 roteiros de vídeo da sua área, as mensagens de venda do WhatsApp e a sua primeira campanha de tráfego.</b> Sem prompt. Sem copiar e colar nada em IA nenhuma.</p>
+    <div class="acoes"><a class="botao" href="#comprar">Quero o meu por R$ 47</a><span class="nota">Pagou, informou o @, recebeu. Fica no link e chega no seu e-mail e WhatsApp.</span></div>
   </section>
 
   <section>
-    <p class="olho">Onde a venda morre</p>
-    <h2>Os 5 erros que mais <em>derrubam contrato</em> no WhatsApp</h2>
-    <p>Calma. Não é falta de competência. Ninguém ensinou advogado a vender por mensagem. Cada erro abaixo tem um prompt no kit para você acertar a resposta.</p>
-    <div class="grade"><div class="cartao"><span class="num">1</span><h3>Responder o preço antes de entender o caso</h3><p>O contato pergunta &quot;quanto custa?&quot; e recebe um número seco. Sem contexto, todo preço é caro.</p><p class="nota">Prompt 4: responder a mensagem vaga</p></div><div class="cartao"><span class="num">2</span><h3>Dar a aula inteira no WhatsApp</h3><p>Você explica a lei, o prazo e o caminho. Ele agradece, entende tudo e vai contratar quem cobrou menos.</p><p class="nota">Prompt 2: qualificar sem interrogatório</p></div><div class="cartao"><span class="num">3</span><h3>Mandar a proposta e esperar</h3><p>O PDF vai, o &quot;visualizou&quot; aparece, e a conversa morre ali.</p><p class="nota">Prompts 11 e 19: enviar e retomar a proposta</p></div><div class="cartao"><span class="num">4</span><h3>Ficar na defensiva no &quot;tá caro&quot;</h3><p>Você justifica, dá desconto, ou some. Nas três, quem conduz a conversa passa a ser ele.</p><p class="nota">Prompt 13: o &quot;tá caro&quot; na hora da proposta</p></div><div class="cartao"><span class="num">5</span><h3>Aceitar o &quot;vou pensar&quot;</h3><p>Você responde &quot;fico no aguardo&quot;. Ele nunca mais volta.</p><p class="nota">Prompt 14: o &quot;vou pensar&quot;</p></div></div>
-    <p class="faca">O contato não compara advogado. Compara resposta.</p>
+    <p class="olho">O que chega na sua tela</p>
+    <h2>Não é curso. Não é prompt. <em>É o material do seu escritório.</em></h2>
+    <div class="grade">
+      <div class="cartao"><span class="num">46<small style="font-size:18px;color:var(--dim)">/100</small></span><h3>Raio-x do Instagram</h3><p>A nota do perfil em posicionamento, bio, feed e engajamento, o que corrigir primeiro e a bio nova pronta para colar.</p></div>
+      <div class="cartao"><span class="num">30</span><h3>Roteiros de vídeo</h3><p>Da sua área, com gancho, miolo e fechamento. Você grava no celular, três de uma vez, e posta um por dia.</p></div>
+      <div class="cartao"><span class="num">10</span><h3>Mensagens de venda</h3><p>O que mandar no WhatsApp em cada momento: o primeiro contato, o "quanto custa?", o "tá caro", o "vou pensar", quem sumiu.</p></div>
+      <div class="cartao"><span class="num">3</span><h3>Anúncios da primeira campanha</h3><p>Objetivo, público, roteiro de cada vídeo e a legenda, dentro da regra da OAB. E o que olhar na primeira semana.</p></div>
+    </div>
+    <p class="nota">Exemplo de nota de um perfil real lido pela IA. A sua nota é a do seu perfil.</p>
+  </section>
+
+  <section>
+    <p class="olho">A diferença</p>
+    <h2>A IA grátis te dá o genérico. <em>Esta leu o seu perfil.</em></h2>
+    <div class="duo">
+      <div class="lado ruim"><span class="tag">O que a IA grátis devolve</span>
+        <p class="volta">"Crie conteúdo de valor para o seu público. Poste com frequência. Use uma bio clara."</p></div>
+      <div class="lado bom"><span class="tag">O que chega para você</span>
+        <p class="volta">"A sua bio começa por você e não pelo cliente. Oito posts em três dias, três interações em média: o problema não é frequência. A bio nova está abaixo, pronta para colar."</p></div>
+    </div>
+    <p class="nota">Trechos de exemplo. O seu material fala do seu perfil e da sua área.</p>
+    <p class="faca">Ninguém fecha com o advogado que não aparece.</p>
   </section>
 
   <section>
     <p class="olho">Como funciona</p>
-    <h2>A IA não fala com o seu cliente. <em>Ela te ajuda a escrever.</em></h2>
+    <h2>Três passos. <em>O último é seu.</em></h2>
     <ol class="lista">
-      <li>Chegou a mensagem difícil: o "quanto custa?", o "tá caro", o silêncio depois da proposta.</li>
-      <li>Você abre o prompt daquele momento, cola na IA que já usa e conta a situação.</li>
-      <li>A IA devolve a resposta. Você lê, ajusta para o seu jeito e manda do seu WhatsApp.</li>
+      <li>Você paga. Leva um minuto.</li>
+      <li>Na tela seguinte, informa o seu @ do Instagram e a sua área.</li>
+      <li>Em uns 3 minutos o material está pronto na tela, e o link chega no seu e-mail e no seu WhatsApp. Você lê, ajusta ao seu jeito e usa.</li>
     </ol>
-  </section>
-
-  <section>
-    <p class="olho">O que tem dentro</p>
-    <h2>38 prompts. <em>Do primeiro "oi" ao pedido de indicação.</em></h2>
-    <div class="grade">
-      <div class="cartao"><span class="num">5</span><h3>Triagens</h3><p>O primeiro contato vira veredito, a conversa vira ficha, a pilha de prints vira linha do tempo e o contato que sumiu ganha retomada.</p></div>
-      <div class="cartao"><span class="num">30</span><h3>Conversa de venda</h3><p>Primeira resposta, proposta, "tá caro", "vou pensar", "o outro cobra menos", follow-up, indicação e avaliação no Google.</p></div>
-      <div class="cartao"><span class="num">3</span><h3>Conteúdo</h3><p>A pergunta do cliente vira roteiro, o mês vira calendário e o vídeo gravado ganha texto em tela e legenda.</p></div>
-    </div>
-    <p>Abra e veja um por um:</p>
-    <details><summary>Triagens (5)</summary><ul class="lista" style="margin-top:12px"><li>Primeiro contato pelo WhatsApp ou direct</li><li>Ficha do atendimento</li><li>Cliente que chegou com uma pilha de documentos e prints</li><li>Caso que já tem processo ou outro advogado</li><li>Contato que sumiu depois da conversa ou da proposta</li></ul></details>
-    <details><summary>Conversa de venda (30)</summary><ul class="lista" style="margin-top:12px"><li>A primeira resposta a quem acabou de chamar</li><li>Qualificar o caso sem parecer interrogatório</li><li>Separar o caso que serve do que não serve</li><li>Responder a mensagem vaga (&quot;quanto custa?&quot;, &quot;preciso de um advogado&quot;)</li><li>Transformar a conversa em reunião marcada</li><li>A mensagem automática de fora do horário que não parece robô</li><li>Reengajar quem mandou &quot;oi&quot; e sumiu</li><li>Estruturar uma proposta de honorários clara</li><li>Apresentar o valor sem soar defensivo</li><li>Montar proposta com opções (escada de contratação)</li><li>A mensagem que envia a proposta pelo WhatsApp</li><li>Explicar os modelos de cobrança (fixo, êxito, misto)</li><li>Responder ao &quot;tá caro&quot; na hora da proposta</li><li>&quot;Vou pensar&quot;</li><li>&quot;Preciso falar com [cônjuge, sócio, família]&quot;</li><li>&quot;O outro advogado cobra menos&quot;</li><li>&quot;E se eu perder? E se não der certo?&quot;</li><li>&quot;Depois eu te chamo&quot; (o sumiço educado)</li><li>Follow-up de quem recebeu a proposta e sumiu</li><li>Sequência de 3 follow-ups (cadência sem ser chato)</li><li>Reativar cliente antigo</li><li>Reativar contato antigo que nunca fechou</li><li>Cobrar documento pendente sem irritar o cliente</li><li>A mensagem de encerramento antes de arquivar o contato</li><li>Pedir indicação depois de uma etapa concluída</li><li>Pedir avaliação no Google</li><li>Responder avaliação (positiva e negativa)</li><li>Manter o cliente informado durante o processo</li><li>Mensagem de data especial (relacionamento)</li><li>Ativar a rede de parceiros indicadores</li></ul></details>
-    <details><summary>Conteúdo para 30 dias (3)</summary><ul class="lista" style="margin-top:12px"><li>Roteiro do WhatsApp</li><li>Calendário de 30 dias por área</li><li>Texto em tela e legenda do vídeo que você já gravou</li></ul></details>
-  </section>
-
-  <section>
-    <p class="olho">Por que não tem petição</p>
-    <h2>Prompt de petição no ChatGPT <em>inventa decisão.</em></h2>
-    <p>Por isso ele não está aqui. Este kit fica onde a IA comum é forte: escrever, organizar e responder. Peça, cálculo e jurisprudência conferida na fonte oficial moram no MaestrIA, que roda no seu computador.</p>
   </section>
 
   <section>
     <div class="duo">
       <div class="lado bom"><span class="tag">É para você se</span><ul class="lista">
-        <li>Você mesmo responde o WhatsApp do escritório, ou sabe que ninguém responde direito.</li>
-        <li>Já usa ChatGPT, Claude ou Gemini, mesmo que pouco.</li>
-        <li>Quer o atendimento no seu jeito, não no de um robô.</li></ul></div>
+        <li>Você sabe que precisa aparecer e nunca sabe o que gravar.</li>
+        <li>O WhatsApp do escritório recebe contato e a conversa morre na resposta.</li>
+        <li>Quer começar no tráfego pago sem queimar dinheiro no escuro.</li></ul></div>
       <div class="lado ruim"><span class="tag">Não é para você se</span><ul class="lista nao">
-        <li>Quer que a IA mande mensagem sozinha, sem você ler.</li>
+        <li>Quer que a IA publique sozinha, sem você ler.</li>
         <li>Procura modelo de petição.</li>
-        <li>Vai colar dado de cliente sem anonimizar.</li></ul></div>
+        <li>Não vai gravar nenhum vídeo.</li></ul></div>
     </div>
   </section>
 
   <section class="oferta" id="comprar">
-    <p class="olho">Kit de Prompts do Escritório com IA</p>
-    <h2>Copie, cole, revise, mande.</h2>
-    <div class="tira"><span>38 prompts testados</span><span>Página com botão de copiar</span><span>Qualquer área do Direito</span><span>Acesso na hora</span></div>
+    <p class="olho">Escritório Pronto com IA</p>
+    <h2>Pague, informe o @, <em>receba pronto.</em></h2>
+    <div class="tira"><span>Raio-x e bio nova</span><span>30 roteiros</span><span>10 mensagens de venda</span><span>Primeira campanha</span><span>Bônus: 38 prompts</span></div>
     <div class="preco">R$ 47<small>pagamento único</small></div>
-    <a class="botao grande" href="https://pay.kiwify.com.br/gQZKu4v">Quero o kit</a>
-    <p class="nota">Você recebe o acesso no e-mail da compra. Funciona no ChatGPT, no Claude, no Gemini e em qualquer IA de conversa.</p>
+    <a class="botao grande" href="https://pay.kiwify.com.br/gQZKu4v">Quero o meu escritório pronto</a>
+    <p class="nota">Feito pela IA a partir do seu perfil público. Qualquer área do Direito.</p>
   </section>
 
   <section>
     <h2>Perguntas</h2>
-    <details><summary>Preciso pagar alguma IA?</summary><p>Não. Os prompts funcionam na versão grátis do ChatGPT, do Claude e do Gemini. Nas pagas, a resposta costuma vir mais completa.</p></details>
-    <details><summary>Serve para a minha área?</summary><p>Serve para qualquer área. Onde a área muda a conversa, o prompt pergunta qual é a sua.</p></details>
-    <details><summary>A IA vai responder o cliente sozinha?</summary><p>Não. Ela escreve, você lê, ajusta e envia. Cada prompt já vem com a trava: a mensagem acolhe e pede documentos, e não opina sobre o caso antes de você ver o material.</p></details>
-    <details><summary>Posso colar a conversa do cliente?</summary><p>Pode, depois de tirar nome, CPF e o que identifique a pessoa. O kit mostra como fazer isso em segundos.</p></details>
-    <details><summary>E depois do kit?</summary><p>Quando você quiser a IA escrevendo peça, calculando e conferindo jurisprudência na fonte oficial, o caminho é o MaestrIA. O kit é o primeiro degrau.</p></details>
+    <details><summary>Preciso saber usar IA?</summary><p>Não. Você não escreve prompt nenhum. Informa o @ e a área, e recebe pronto.</p></details>
+    <details><summary>Meu perfil é pequeno, novo ou quase parado. Serve?</summary><p>Serve. O raio-x mostra exatamente isso e o que fazer primeiro. Se o perfil for privado, a IA monta o material pela sua área e avisa que não conseguiu ler o perfil.</p></details>
+    <details><summary>Serve para a minha área?</summary><p>Serve para qualquer área: previdenciário, trabalhista, família, cível, bancário, criminal, tributário, empresarial e outras. Os roteiros, as mensagens e a campanha são da área que você informar.</p></details>
+    <details><summary>A IA publica ou responde por mim?</summary><p>Não. Ela escreve, você lê, ajusta e usa. A publicidade continua sua, dentro do Provimento 205/2021 da OAB, e o material já vem escrito dentro dessa regra.</p></details>
+    <details><summary>O material fica comigo?</summary><p>Fica. É um link só seu, que chega no e-mail e no WhatsApp. Abra quando quiser.</p></details>
+    <details><summary>E depois?</summary><p>Isso é feito uma vez. Se quiser o conteúdo do escritório todo mês, com a sua marca, o caminho é o MaestrIA Marketing.</p></details>
   </section>
 
   <footer>Samurai do Jurídico.</footer>
 </main>
-<div class="fixo"><a class="botao" href="#comprar">Quero o kit por R$ 47</a></div>
+<div class="fixo"><a class="botao" href="#comprar">Quero o meu por R$ 47</a></div>
 
 </body>
 </html>

@@ -112,6 +112,48 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   .cuidado { max-width:720px; }
 }
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
+
+.form { display:flex; flex-direction:column; gap:14px; width:100%; max-width:520px; background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:24px 20px; text-align:left; }
+.form label { display:flex; flex-direction:column; gap:6px; color:var(--txt); font-weight:700; font-size:15px; }
+.form label span { font-weight:500; color:var(--dim); font-size:13.5px; }
+.form input, .form select { font:inherit; font-size:16px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:12px 14px; width:100%; }
+.form input:focus, .form select:focus { outline:2px solid var(--ok); outline-offset:1px; }
+.erro { color:var(--red2); font-weight:700; font-size:15px; min-height:1px; }
+.etapas { list-style:none; display:flex; flex-direction:column; gap:12px; width:100%; max-width:520px; text-align:left; }
+.etapas li { display:flex; gap:12px; align-items:center; color:var(--dim); font-size:16px; transition:color .3s; }
+.etapas li i { width:22px; height:22px; border-radius:50%; border:2px solid var(--bd2); flex:none; display:flex; align-items:center; justify-content:center; font-style:normal; font-size:13px; }
+.etapas li.ativa { color:var(--txt); font-weight:700; }
+.etapas li.ativa i { border-color:var(--ok); border-top-color:transparent; animation:gira .9s linear infinite; }
+.etapas li.feita { color:var(--txt); }
+.etapas li.feita i { background:var(--ok); border-color:var(--ok); color:#000; }
+.etapas li.feita i::after { content:'✓'; }
+@keyframes gira { to { transform:rotate(360deg); } }
+.barra-prog { width:100%; max-width:520px; height:8px; background:var(--card2); border-radius:99px; overflow:hidden; }
+.barra-prog div { height:100%; width:0; background:var(--ok); transition:width .8s ease; }
+.nav { position:sticky; top:0; z-index:4; display:flex; gap:6px; flex-wrap:wrap; justify-content:center; padding:10px 0; background:rgba(0,0,0,.92); border-bottom:1px solid var(--bd); }
+.nav a { color:var(--txt); text-decoration:none; font-weight:700; font-size:14px; padding:7px 14px; border:1px solid var(--bd2); border-radius:99px; }
+.nav a:hover { border-color:var(--ok); }
+.placar { display:flex; gap:24px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.nota-grande { font-family:'Playfair Display',serif; font-weight:900; font-size:96px; line-height:1; color:var(--txt); font-variant-numeric:tabular-nums; }
+.nota-grande small { font-size:28px; color:var(--dim); }
+.barras { display:flex; flex-direction:column; gap:10px; min-width:240px; text-align:left; }
+.barras div { display:grid; grid-template-columns:130px 1fr 34px; gap:10px; align-items:center; font-size:14px; color:var(--txt); }
+.barras b { display:block; height:8px; border-radius:99px; background:var(--card2); overflow:hidden; }
+.barras b span { display:block; height:100%; background:var(--red2); }
+.barras em { font-style:normal; color:var(--dim); font-variant-numeric:tabular-nums; text-align:right; }
+.leitura { display:flex; flex-direction:column; gap:12px; max-width:680px; text-align:left; }
+.chip { display:inline-block; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border-radius:99px; padding:3px 10px; }
+.chip.Urgente { background:var(--redbg); color:var(--red2); border:1px solid var(--redbd); }
+.chip.Importante { background:rgba(250,204,21,.08); color:#facc15; border:1px solid rgba(250,204,21,.3); }
+.chip.Melhoria { background:rgba(74,222,128,.08); color:var(--ok); border:1px solid rgba(74,222,128,.3); }
+.texto-pre { white-space:pre-line; color:var(--txt); }
+.roteiro b, .msg b { color:var(--txt); }
+.filtros { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.filtros button { font:inherit; font-weight:700; font-size:14px; color:var(--txt); background:var(--card); border:1px solid var(--bd2); border-radius:99px; padding:7px 14px; cursor:pointer; }
+.filtros button[aria-pressed="true"] { background:var(--txt); color:#000; }
+.copiar-s { font:inherit; font-weight:700; font-size:13px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:8px; padding:6px 12px; cursor:pointer; align-self:flex-start; }
+.copiar-s:hover { border-color:var(--ok); }
+.aviso-ia { font-size:14px; color:var(--dim); max-width:680px; }
 </style>
 <script src="/js/pixel.js" defer></script>
 </head>
@@ -302,11 +344,11 @@ Regras: fala de gente, sem juridiquês; informa, não promete resultado nem cita
 
   <section class="oferta" id="kit">
     <p class="olho">Próximo passo</p>
-    <h2>Esses 10 cuidam do processo. <em>E a venda?</em></h2>
-    <p>O preço respondido de cara. A aula de direito dada de graça no WhatsApp. O "vou pensar" que você aceitou. O contrato morre na resposta, não no processo. O <b>Kit de Prompts do Escritório com IA</b> tem 38 prompts para você acertar a resposta em cada momento da venda, do primeiro "oi" ao follow-up. Quem manda a mensagem é você.</p>
-    <div class="tira"><span>5 triagens</span><span>30 de conversa de venda</span><span>3 de conteúdo</span><span>Qualquer área</span></div>
+    <h2>Esses 10 cuidam do processo. <em>E o marketing do escritório?</em></h2>
+    <p>Você informa o seu @ do Instagram e a sua área. Em uns 3 minutos a IA entrega, feito para você: o raio-x do perfil com a bio nova, 30 roteiros de vídeo da sua área, as mensagens de venda do WhatsApp e a sua primeira campanha de tráfego. Sem prompt nenhum.</p>
+    <div class="tira"><span>Raio-x e bio nova</span><span>30 roteiros</span><span>10 mensagens de venda</span><span>Primeira campanha</span></div>
     <div class="preco">R$ 47<small>pagamento único</small></div>
-    <a class="botao grande" href="/kit/">Quero ver o kit</a>
+    <a class="botao grande" href="/kit/">Quero ver o meu escritório pronto</a>
   </section>
 
   <footer>Samurai do Jurídico. Prompt é ponto de partida: o MaestrIA faz isso dentro do seu computador, com o modelo do seu escritório e a jurisprudência conferida na fonte oficial.</footer>
