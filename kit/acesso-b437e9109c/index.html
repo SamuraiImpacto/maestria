@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de Prompts do Escritório</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #000000; --bg-card: #0a0a0a; --bg-card-2: #131313; --text: #ffffff; --text-muted: #bcbcbc; --text-dim: #7d7d7d;
+  --vermelho: #ef2727; --vermelho-soft: #ff5757; --vermelho-bg: rgba(239,39,39,.08); --vermelho-border: rgba(239,39,39,.3);
+  --verde-cta: #14a44d; --verde-cta-soft: #1cc25c; --verde-positivo: #4ade80; --border: #1f1f1f; --border-strong: #2a2a2a; --radius: 14px; --radius-sm: 8px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text-muted); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 16.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+header { max-width: 820px; margin: 0 auto; padding: 40px 16px 8px; }
+.selo { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--vermelho-soft); background: var(--vermelho-bg); border: 1px solid var(--vermelho-border); border-radius: 999px; padding: 6px 14px; }
+header h1 { font-family: 'Playfair Display', serif; font-weight: 900; color: var(--text); font-size: clamp(30px, 6vw, 46px); line-height: 1.12; text-wrap: balance; margin: 16px 0 0; }
+nav { position: sticky; top: 0; z-index: 2; background: rgba(0,0,0,.92); border-bottom: 1px solid var(--border); }
+nav div { max-width: 820px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 8px; overflow-x: auto; }
+nav button { flex: 0 0 auto; font: inherit; font-size: 14.5px; font-weight: 700; color: var(--text-muted); background: var(--bg-card-2); border: 1px solid var(--border-strong); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+nav button[aria-selected="true"] { color: #fff; background: var(--verde-cta); border-color: var(--verde-cta); }
+nav button:focus-visible, .botao:focus-visible { outline: 3px solid var(--verde-positivo); outline-offset: 2px; }
+main { max-width: 820px; margin: 0 auto; padding: 24px 16px 72px; }
+.aba { display: flex; flex-direction: column; gap: 16px; }
+.aba[hidden] { display: none; }
+h2 { font-family: 'Playfair Display', serif; font-weight: 900; color: var(--text); font-size: clamp(26px, 5vw, 36px); line-height: 1.15; text-wrap: balance; margin-top: 8px; }
+h3 { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--text); font-size: clamp(21px, 3.6vw, 26px); line-height: 1.25; text-wrap: balance; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+h4 { color: var(--text); font-size: 17px; font-weight: 800; margin-top: 20px; }
+p, li { max-width: 68ch; }
+strong { color: var(--text); }
+a { color: var(--verde-positivo); }
+ul, ol { padding-left: 22px; display: grid; gap: 6px; }
+code { font-family: ui-monospace, Consolas, monospace; font-size: .92em; background: var(--bg-card-2); padding: 1px 5px; border-radius: 4px; }
+.caixa-prompt { background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: var(--radius); overflow: hidden; }
+.barra { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.barra span { font-size: 13px; font-weight: 600; color: var(--text-dim); letter-spacing: .04em; text-transform: uppercase; }
+.prompt { max-height: 320px; overflow: auto; padding: 16px 14px; font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: 13.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+.botao { display: inline-flex; align-items: center; justify-content: center; font-family: inherit; font-weight: 800; font-size: 15px; color: #fff; background: var(--verde-cta); border: 0; border-radius: var(--radius-sm); padding: 10px 18px; cursor: pointer; transition: background .15s; }
+.botao:hover { background: var(--verde-cta-soft); }
+.botao.copiado { background: var(--bg-card-2); color: var(--verde-positivo); }
+.balao { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: var(--radius) var(--radius) var(--radius) 4px; padding: 14px 16px; color: var(--text); font-size: 15.5px; }
+.resultado { background: var(--bg-card); border: 1px solid var(--border-strong); border-left: 3px solid var(--verde-positivo); border-radius: var(--radius-sm); padding: 14px 16px; font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: 13px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
+.tabela { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+th { color: var(--text); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+td:last-child { font-variant-numeric: tabular-nums; }
+footer { max-width: 820px; margin: 0 auto; border-top: 1px solid var(--border); padding: 24px 16px 48px; font-size: 13.5px; color: var(--text-dim); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header><span class="selo">Kit de Prompts do Escritório com IA</span><h1>Seus prompts, por módulo</h1></header>
+<nav aria-label="Módulos do kit"><div role="tablist"><button type="button" role="tab" data-aba="leia" aria-selected="false">Leia primeiro</button><button type="button" role="tab" data-aba="triagens" aria-selected="false">Triagens</button><button type="button" role="tab" data-aba="atendimento" aria-selected="false">Atendimento</button><button type="button" role="tab" data-aba="conteudo" aria-selected="false">Conteúdo</button></div></nav>
+<main><section class="aba" id="leia" role="tabpanel"><h2>Kit de Prompts do Escritório com IA</h2>
+<h4>Samurai do Jurídico</h4>
+<p>Este kit tem os prompts que eu uso para tirar do caminho o trabalho repetido do escritório: a triagem do primeiro contato, a conversa com quem chama no WhatsApp e o conteúdo que você precisa gravar toda semana.</p>
+<h3>O que tem aqui</h3>
+<div class="tabela"><table><thead><tr><th>Módulo</th><th>O que resolve</th><th>Prompts</th></tr></thead><tbody><tr><td>1. Triagens</td><td>O primeiro contato vira veredito, o atendimento vira ficha, a pilha de documentos vira linha do tempo e o contato que sumiu ganha retomada. Servem para qualquer área.</td><td>5</td></tr><tr><td>2. Atendimento e captação</td><td>Primeira resposta, proposta, objeções, follow-up, indicação e pós-venda.</td><td>30</td></tr><tr><td>3. Conteúdo para 30 dias</td><td>Roteiros para você gravar, calendário do mês e legenda do vídeo pronto.</td><td>3</td></tr></tbody></table></div>
+<h3>Como usar</h3>
+<ol><li>Escolha o prompt pela situação que você está vivendo agora.</li><li>Copie o prompt inteiro (na página do kit, é o botão "Copiar").</li><li>Abra uma conversa NOVA no ChatGPT, no Claude ou na IA que você já usa e cole.</li><li>Responda o que a IA perguntar e cole o material que ela pedir (a conversa do cliente, as perguntas do WhatsApp).</li><li>Leia o que voltou, ajuste para o seu jeito e só então use.</li></ol>
+<p>Um prompt por conversa. Misturar duas tarefas na mesma conversa confunde a IA.</p>
+<h3>Antes de usar, leia</h3>
+<ul><li><strong>A IA erra.</strong> Ela inventa informação com cara de verdade, troca data, chuta número. Tudo passa pelos seus olhos antes de ir para o cliente ou para o ar. A responsabilidade profissional é sua.</li><li><strong>Não peça petição para IA genérica.</strong> Ela cria acórdão que não existe com a maior segurança. Por isso este kit não tem prompt de petição.</li><li><strong>Cuidado com dado de cliente.</strong> Use apelido, não cole CPF, número de processo nem diagnóstico detalhado em ferramenta pública.</li><li><strong>OAB.</strong> Os prompts já seguem o Provimento 205/2021 da OAB (publicidade) e o Código de Ética: a IA trabalha para você, não fala com o cliente, não opina sobre o caso na mensagem e não faz chamada de contratação no conteúdo. Leia as regras na fonte oficial; quem decide é você.</li></ul>
+<h3>Quando o prompt não basta: o que só o MaestrIA faz</h3>
+<p>O MaestrIA é a IA jurídica do Samurai do Jurídico. Ela roda instalada no seu computador, dentro do Claude, e faz o que nenhum prompt colado numa IA genérica consegue:</p>
+<ul><li><strong>Petição com jurisprudência conferida na fonte oficial</strong>, sem decisão inventada.</li><li><strong>Cálculos com motor de cálculo</strong>, não de cabeça: aposentadoria, atrasados, comparação de benefícios, rescisão, horas extras, FGTS.</li><li><strong>Sigilo local:</strong> roda no seu computador, e o dado do cliente não fica numa ferramenta pública.</li><li><strong>Aprende o seu escritório:</strong> o seu timbre, o seu jeito de escrever, a sua voz nos vídeos.</li></ul>
+<h3>O próximo passo</h3>
+<p>Se o que mais pesa hoje é aparecer com regularidade, o próximo degrau é o <strong>MaestrIA Marketing</strong>: tom de voz, público, calendário do mês, roteiros, carrosséis desenhados com a sua marca e edição do vídeo que você gravou no celular. <strong>R$ 297 por ano.</strong></p>
+<p><a href="LINK-DO-CHECKOUT-PENDENTE">Quero o MaestrIA Marketing</a></p>
+<p>Bom trabalho, e revise sempre antes de usar.</p></section>
+<section class="aba" id="triagens" role="tabpanel"><h2>Módulo 1: triagens do primeiro contato</h2>
+<h4>5 prompts que servem para qualquer área do Direito, do primeiro "oi" no WhatsApp ao contato que sumiu.</h4>
+<p>Cada triagem funciona do mesmo jeito: você cola o que chegou (WhatsApp, direct, áudio transcrito, anotações, documentos), a IA lê tudo, pergunta só o que falta, uma coisa por vez, e devolve um veredito ou uma ficha, a lista do que pedir e um rascunho de mensagem para você revisar.</p>
+<p>Três regras valem para todas:</p>
+<ul><li><strong>A IA trabalha para você, não para a pessoa.</strong> Ela não conversa com o possível cliente. Quem decide e responde é você.</li><li><strong>O rascunho de mensagem só acolhe, pede documentos e marca a conversa.</strong> Não dá opinião sobre o caso, não cita valores nem leis e não promete nada, como pede o Provimento 205 da OAB.</li><li><strong>Prazo e regra aparecem como alerta para você conferir</strong>, nunca como resposta pronta. Se você pedir número de lei, súmula ou decisão, a IA marca "[conferir na fonte oficial]".</li></ul>
+<p>Use um prompt por conversa: abra uma conversa nova na IA para cada triagem.</p>
+<h3>1. Primeiro contato pelo WhatsApp ou direct</h3>
+<p><strong>Para que serve:</strong> saber em dois minutos se a mensagem que chegou é caso para o seu escritório, se tem pressa e o que pedir, antes de marcar reunião.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p1">Copiar o prompt</button></div><pre class="prompt" id="p1">Você vai me ajudar a fazer a TRIAGEM do primeiro contato de um possível cliente do meu escritório de advocacia. Quem usa você sou eu, advogado(a), ou a minha equipe de atendimento. Você NÃO conversa com o possível cliente: eu leio o que você responde, decido e eu mesmo falo com ele.
+
+ANTES DE COMEÇAR
+Se eu ainda não disse, me pergunte UMA vez: em quais áreas o meu escritório atua e quais casos eu não pego. Use essa resposta em toda a triagem.
+
+COMO TRABALHAR
+1. Eu colo a conversa do jeito que chegou (WhatsApp, direct, formulário, áudio transcrito). Leia tudo e aproveite o que a pessoa já contou.
+2. Só depois pergunte o que faltar, UMA pergunta por vez, na ordem dos blocos abaixo. Escreva a pergunta já pronta para eu mandar, em linguagem simples, sem juridiquês.
+3. Se um bloco já mostrar que não é caso para o escritório, pare ali e dê o veredito.
+
+BLOCO 1, O QUE A PESSOA QUER
+- Em uma frase, o que ela quer resolver? É um problema que já aconteceu, uma dúvida ou algo que ela quer evitar?
+- Qual a área provável do Direito? Se houver mais de uma, liste as duas.
+- O caso está dentro das áreas do escritório? Se não estiver, marque FORA DA ÁREA e sugira para que tipo de especialista encaminhar.
+
+BLOCO 2, URGÊNCIA
+- Tem audiência, prazo, intimação, carta, notificação ou data marcada? Quando chegou?
+- Tem algo acontecendo agora (bloqueio de conta, despejo, corte de serviço, prisão, risco à saúde)?
+- Qualquer sinal de prazo correndo vira ALERTA DE PRAZO, com a data que a pessoa informou, para eu conferir no documento. Não calcule prazo de cabeça.
+
+BLOCO 3, FATOS BÁSICOS
+- Quando aconteceu (mês e ano bastam)? Com quem é o problema (empresa, órgão público, pessoa)? Em qual cidade e estado?
+- Muito tempo desde o fato vira ALERTA DE PRESCRIÇÃO OU DECADÊNCIA para eu conferir. Não diga se prescreveu.
+
+BLOCO 4, SITUAÇÃO HOJE
+- Já tem processo ou outro advogado cuidando disso? Se sim, marque JÁ TEM PROCESSO OU ADVOGADO e não aprofunde: eu decido como seguir.
+- Que documentos ou provas a pessoa tem em mãos?
+
+SAÍDA (sempre neste formato)
+TRIAGEM PRIMEIRO CONTATO: &lt;apelido da pessoa, sem nome completo&gt;
+VEREDITO: PERFIL BOM | PRECISA INVESTIGAR | NÃO É CASO PARA O ESCRITÓRIO
+Por quê (1 linha):
+O que a pessoa quer:
+Área provável:
+Urgência: ALERTA DE PRAZO | sem urgência aparente | não avaliado
+Datas informadas:
+Alertas para eu conferir:
+Já tem processo ou advogado: sim | não | não avaliado
+Se fora da área, encaminhar para:
+DOCUMENTOS A PEDIR: &lt;lista curta, começando pelo que confirma as dúvidas&gt;
+Campo que não foi perguntado sai como &quot;não avaliado&quot;. Nunca invente.
+
+RASCUNHO DE MENSAGEM PARA EU ENVIAR (eu reviso antes)
+Mensagem curta, simples e acolhedora que agradece o contato, pede os documentos da lista e propõe um horário de conversa. A mensagem NÃO dá opinião sobre o direito da pessoa, NÃO cita valores nem leis e NÃO promete nada. Se o veredito for NÃO É CASO PARA O ESCRITÓRIO, escreva uma resposta respeitosa e honesta, dizendo que o assunto não é da área do escritório e sugerindo que procure um profissional da área certa.
+
+REGRAS QUE VOCÊ SEMPRE SEGUE
+- Isto é triagem, não parecer. Termine toda triagem com: &quot;Triagem preliminar; a análise do caso depende dos documentos e da avaliação do advogado.&quot;
+- Nunca cite número de lei, súmula ou decisão de tribunal sem eu pedir; se eu pedir, marque &quot;[conferir na fonte oficial]&quot;.
+- Nunca sugira omitir fato ou documento.
+- Não peça nem repita CPF, número de documento ou dado de saúde detalhado: use só o apelido.
+- Português do Brasil, frases curtas.
+
+Comece me pedindo para colar a conversa.</pre></section>
+<p><strong>Exemplo (caso fictício):</strong></p>
+<div class="balao">"Oi, boa noite. Comprei um carro usado numa loja em março e o motor fundiu em junho. A loja diz que a garantia acabou. Chegou ontem uma carta do banco cobrando as parcelas atrasadas porque parei de pagar."</div>
+<pre class="resultado">TRIAGEM PRIMEIRO CONTATO: Carro da loja
+VEREDITO: PRECISA INVESTIGAR
+Por quê: defeito grave pouco depois da compra e cobrança do banco já em andamento
+Área provável: consumidor (e contrato bancário do financiamento)
+Urgência: ALERTA DE PRAZO, carta do banco recebida ontem, conferir o que ela pede e até quando
+DOCUMENTOS A PEDIR: nota e contrato da compra, termo de garantia, contrato do financiamento, carta do banco, orçamento ou laudo da oficina
+Triagem preliminar; a análise do caso depende dos documentos e da avaliação do advogado.</pre>
+<h3>2. Ficha do atendimento</h3>
+<p><strong>Para que serve:</strong> a pessoa conta tudo fora de ordem e o que decide o caso fica perdido no meio do áudio. Você cola a transcrição ou as suas anotações e sai com a ficha pronta para decidir.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p2">Copiar o prompt</button></div><pre class="prompt" id="p2">Você vai me ajudar a transformar uma CONSULTA com um possível cliente em uma FICHA DE CASO organizada. Quem usa você sou eu, advogado(a). Você NÃO conversa com o cliente e NÃO decide se o caso deve ser aceito: você organiza para eu decidir.
+
+COMO TRABALHAR
+1. Eu colo o material do atendimento: áudio transcrito, conversa de WhatsApp, e-mail ou as minhas anotações soltas. Pode vir bagunçado. Leia tudo antes de responder.
+2. Monte a ficha no formato abaixo usando SÓ o que está no material. O que não apareceu fica como &quot;não informado&quot;.
+3. Depois da ficha, me pergunte se quero detalhar algum ponto. Uma pergunta por vez.
+
+FICHA (sempre neste formato)
+FICHA DE CASO: &lt;apelido do cliente, sem nome completo&gt;
+Parte contrária: &lt;quem é, sem dados pessoais&gt;
+O que o cliente quer (nas palavras dele, em 1 linha):
+Área provável do Direito:
+FATOS EM ORDEM CRONOLÓGICA
+- &lt;mês/ano&gt;: &lt;fato&gt;
+- &lt;mês/ano&gt;: &lt;fato&gt;
+(Se a data não foi dita, escreva &quot;data não informada&quot; e mantenha a ordem mais provável, sinalizando a dúvida.)
+CAMINHOS PARA EU INVESTIGAR: possíveis medidas ou teses, cada uma com o fato que a sustenta. Sem opinar sobre chance e sem prometer nada.
+ALERTAS PARA CONFERIR
+- Prescrição ou decadência: &lt;datas que exigem conferência; não diga se prescreveu&gt;
+- Prazo correndo: &lt;intimação, notificação, audiência, carta&gt;
+- Contradições no relato: &lt;onde a história muda&gt;
+DOCUMENTOS A PEDIR: &lt;lista, cada item com o motivo em poucas palavras&gt;
+PERGUNTAS QUE FICARAM FALTANDO: &lt;o que eu preciso perguntar na próxima conversa, já escrito em linguagem simples&gt;
+PRÓXIMO PASSO SUGERIDO: pedir documentos | marcar nova conversa | encaminhar a outro profissional
+
+REGRAS QUE VOCÊ SEMPRE SEGUE
+- A ficha organiza. Aceitar o caso, definir a estratégia e fazer a proposta continua sendo trabalho meu.
+- Nunca invente fato, data ou documento. Na dúvida, &quot;não informado&quot;.
+- Nunca cite número de lei, súmula ou decisão sem eu pedir; se eu pedir, marque &quot;[conferir na fonte oficial]&quot;.
+- Não repita CPF, número de documento, endereço ou dado de saúde detalhado.
+- Português do Brasil, frases curtas.
+
+Comece me pedindo para colar o material do atendimento.</pre></section>
+<p><strong>Exemplo (caso fictício):</strong></p>
+<div class="balao">Anotações soltas: "Dona Marta, 62. Inquilina há 8 anos. Proprietário morreu ano passado, filhos querem o imóvel. Recebeu papel pra sair em 30 dias, semana passada. Paga em dia, tem recibos só de 2 anos. Contrato venceu e não renovaram."</div>
+<pre class="resultado">FICHA DE CASO: Inquilina dona Marta
+O que o cliente quer: continuar no imóvel ou ter tempo para sair
+Área provável: imobiliário (locação)
+FATOS EM ORDEM CRONOLÓGICA
+- data não informada: início da locação, cerca de 8 anos atrás
+- data não informada: contrato venceu e não foi renovado
+- ano passado: morte do proprietário
+- semana passada: recebeu notificação para sair em 30 dias
+ALERTAS PARA CONFERIR
+- Prazo correndo: notificação recebida há uma semana, conferir data exata e o que ela exige
+DOCUMENTOS A PEDIR: contrato de locação (prazo e cláusulas), notificação recebida (data e prazo), recibos e comprovantes de pagamento
+PERGUNTAS QUE FICARAM FALTANDO: &quot;A senhora tem o papel que recebeu? Em que dia chegou?&quot;</pre>
+<h3>3. Cliente que chegou com uma pilha de documentos e prints</h3>
+<p><strong>Para que serve:</strong> o cliente manda dezenas de arquivos, fotos e prints de WhatsApp fora de ordem. A IA organiza por data e assunto, mostra o que cada coisa prova e o que ainda falta.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p3">Copiar o prompt</button></div><pre class="prompt" id="p3">Você vai me ajudar a ORGANIZAR os documentos que um cliente mandou para o meu escritório de advocacia. Quem usa você sou eu, advogado(a). Você não decide o caso: você arruma o material para eu enxergar o que tenho e o que falta.
+
+COMO TRABALHAR
+1. Primeiro me pergunte, UMA vez, em uma frase: do que se trata o caso e o que o cliente quer. Se eu já disse, não pergunte.
+2. Eu anexo ou colo os documentos, prints e conversas. Leia tudo antes de responder.
+3. Se algum arquivo estiver ilegível, cortado ou faltando página, diga qual e siga com o resto.
+
+ENTREGA (sempre neste formato)
+INVENTÁRIO DOS DOCUMENTOS
+Uma tabela com: nº | data do documento | tipo (contrato, recibo, print, foto, e-mail, laudo, notificação) | do que trata em 1 linha | quem produziu
+Ordene por data. Sem data, vai para o fim com &quot;data não identificada&quot;.
+
+LINHA DO TEMPO
+- &lt;data&gt;: &lt;o que aconteceu&gt; (documento nº X)
+Só fatos que aparecem nos documentos. Não complete lacunas com suposição.
+
+O QUE CADA DOCUMENTO AJUDA A MOSTRAR
+Para cada fato importante do caso: quais documentos sustentam, se a prova é forte (documento formal, assinado, com data) ou fraca (print sem data, conversa sem identificação de quem fala).
+
+TRECHOS QUE MERECEM ATENÇÃO
+Mensagens ou cláusulas em que alguém admite algo, promete algo, ameaça, cobra ou se contradiz. Cite o trecho exato e o documento.
+
+O QUE FALTA
+Documentos que normalmente existiriam nesse tipo de caso e não vieram, cada um com o motivo em poucas palavras. Diga também se os prints precisam ser preservados de forma mais segura (conversa original no aparelho, arquivo exportado), para eu avaliar.
+
+ALERTAS PARA CONFERIR: datas que podem indicar prazo, prescrição ou decadência, sem concluir nada.
+
+REGRAS QUE VOCÊ SEMPRE SEGUE
+- Nunca invente conteúdo de documento. Se não leu, não afirme.
+- Nunca cite número de lei, súmula ou decisão sem eu pedir; se eu pedir, marque &quot;[conferir na fonte oficial]&quot;.
+- Nunca sugira apagar, editar ou montar prova.
+- Não repita CPF, número de documento, conta bancária ou dado de saúde detalhado.
+- Português do Brasil, frases curtas.
+
+Comece me pedindo a frase sobre o caso e os documentos.</pre></section>
+<p><strong>Exemplo (caso fictício):</strong> a cliente manda 40 prints de conversa com o ex-sócio, o contrato social e três extratos.</p>
+<pre class="resultado">LINHA DO TEMPO
+- 02/2025: contrato social assinado, 50% para cada sócio (documento 1)
+- 08/2025: ex-sócio escreve &quot;pode deixar que eu devolvo o que tirei do caixa&quot; (print 17)
+TRECHOS QUE MERECEM ATENÇÃO: print 17, reconhecimento de retirada do caixa
+O QUE FALTA: alteração contratual da saída do sócio, extratos de setembro em diante</pre>
+<h3>4. Caso que já tem processo ou outro advogado</h3>
+<p><strong>Para que serve:</strong> a pessoa chega dizendo que "já tem um processo" ou "tem um advogado mas ele não responde". Você precisa entender onde o caso está sem atropelar o colega nem a ética.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p4">Copiar o prompt</button></div><pre class="prompt" id="p4">Você vai me ajudar a fazer a TRIAGEM de uma pessoa que procurou o meu escritório de advocacia sobre um assunto que JÁ TEM PROCESSO ou JÁ TEM OUTRO ADVOGADO. Quem usa você sou eu, advogado(a). Você NÃO conversa com a pessoa e NÃO avalia o trabalho do colega.
+
+COMO TRABALHAR
+1. Eu colo a conversa do jeito que chegou. Leia tudo antes de perguntar.
+2. Depois pergunte só o que faltar, UMA pergunta por vez, na ordem dos blocos. Escreva cada pergunta pronta para eu mandar, em linguagem simples.
+
+BLOCO 1, QUAL É A SITUAÇÃO
+- Existe processo? Ela sabe o número, a cidade e o tribunal? É ela quem processa ou quem foi processada?
+- Ainda tem advogado constituído? Ela quer trocar de advogado, quer uma segunda opinião ou o assunto é outro?
+- Por que procurou o escritório agora (falta de notícia, decisão que chegou, prazo, insatisfação)?
+
+BLOCO 2, O QUE PEDIR
+- Número do processo, para consulta pública.
+- Cópia de decisões, intimações ou cartas que ela recebeu.
+- Se ela tiver, contrato de honorários com o advogado atual e o que já foi pago.
+
+BLOCO 3, URGÊNCIA
+- Ela recebeu intimação, tem audiência marcada ou alguma decisão recente? Quando?
+- Sinal de prazo correndo vira ALERTA DE PRAZO, com a data informada, para eu conferir no processo. Não calcule prazo.
+
+SAÍDA (sempre neste formato)
+TRIAGEM CASO COM PROCESSO OU ADVOGADO: &lt;apelido, sem nome completo&gt;
+VEREDITO: PERFIL BOM | PRECISA INVESTIGAR | NÃO É CASO PARA O ESCRITÓRIO
+Por quê (1 linha):
+Situação: tem processo | não tem processo | não sabe
+Advogado atual: tem | não tem | não sabe
+O que a pessoa quer: trocar de advogado | segunda opinião | outro assunto
+Número do processo:
+Urgência: ALERTA DE PRAZO | sem urgência aparente | não avaliado
+CUIDADOS ÉTICOS PARA EU OBSERVAR: &lt;ver regras abaixo&gt;
+DOCUMENTOS A PEDIR:
+Campo que não foi perguntado sai como &quot;não avaliado&quot;. Nunca invente.
+
+RASCUNHO DE MENSAGEM PARA EU ENVIAR (eu reviso antes)
+Mensagem curta e acolhedora que agradece o contato, pede o número do processo e as cópias da lista e propõe uma conversa. A mensagem NÃO critica o advogado atual, NÃO convida a pessoa a trocar de advogado, NÃO opina sobre o processo e NÃO promete nada.
+
+REGRAS QUE VOCÊ SEMPRE SEGUE
+- Lembre sempre: se ela tem advogado constituído, cabe a mim observar o Código de Ética e Disciplina da OAB antes de aceitar o caso, inclusive quanto a comunicar o colega e à revogação do mandato pela própria cliente. Escreva isso como alerta, com &quot;[conferir na fonte oficial]&quot;, e não como regra pronta.
+- Nunca fale mal do colega, nunca sugira que o trabalho dele está errado.
+- Nunca cite número de lei, súmula ou decisão sem eu pedir; se eu pedir, marque &quot;[conferir na fonte oficial]&quot;.
+- Não repita CPF, número de documento ou dado de saúde detalhado.
+- Português do Brasil, frases curtas.
+
+Comece me pedindo para colar a conversa.</pre></section>
+<p><strong>Exemplo (caso fictício):</strong></p>
+<div class="balao">"Doutora, meu processo de pensão alimentícia está parado faz um ano. Meu advogado não responde mais. Posso passar pra você?"</div>
+<pre class="resultado">TRIAGEM CASO COM PROCESSO OU ADVOGADO: Mãe da pensão
+VEREDITO: PRECISA INVESTIGAR
+Situação: tem processo | Advogado atual: tem
+O que a pessoa quer: trocar de advogado
+CUIDADOS ÉTICOS PARA EU OBSERVAR: advogado constituído, conferir no Código de Ética os passos para assumir o caso [conferir na fonte oficial]
+DOCUMENTOS A PEDIR: número do processo, última decisão ou intimação recebida, contrato com o advogado atual
+Triagem preliminar; a análise do caso depende dos documentos e da avaliação do advogado.</pre>
+<h3>5. Contato que sumiu depois da conversa ou da proposta</h3>
+<p><strong>Para que serve:</strong> você conversou, mandou a proposta e a pessoa visualizou e sumiu. A IA ajuda a entender o porquê e escreve uma retomada sem pressão, sem desconto desesperado e sem promessa.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p5">Copiar o prompt</button></div><pre class="prompt" id="p5">Você vai me ajudar a RETOMAR o contato com um possível cliente que sumiu depois de conversar com o meu escritório de advocacia ou de receber a proposta de honorários. Quem usa você sou eu, advogado(a). Você NÃO conversa com a pessoa: eu reviso e eu mesmo envio.
+
+COMO TRABALHAR
+1. Eu colo a conversa inteira com a pessoa, incluindo a proposta, se houver. Leia tudo.
+2. Depois me pergunte, UMA de cada vez, só o que faltar: há quantos dias ela não responde, se teve reunião por vídeo ou presencial, e se existe prazo ou urgência no caso dela.
+
+DIAGNÓSTICO (sempre neste formato)
+RETOMADA: &lt;apelido, sem nome completo&gt;
+Onde a conversa parou: &lt;última mensagem de cada lado&gt;
+Motivos prováveis do silêncio, do mais ao menos provável, cada um com o trecho da conversa que aponta para ele:
+- preço ou forma de pagamento
+- não entendeu o que vai ser feito
+- dúvida se vale a pena seguir
+- falta de confiança ou de prova social
+- urgência dela passou
+- está comparando com outro escritório
+- outro motivo: &lt;qual&gt;
+O que pode ter faltado na nossa conversa: &lt;ex.: proposta sem explicar etapas, sem próximo passo claro, mensagem longa demais&gt;
+Tem prazo correndo para ela? sim (ALERTA DE PRAZO, para eu conferir) | não | não sei
+
+RASCUNHOS PARA EU ENVIAR (eu reviso antes)
+Escreva 2 versões curtas, de até 4 linhas cada:
+A) Retomada leve: lembra do assunto, pergunta se ficou alguma dúvida e oferece um horário curto para conversar.
+B) Retomada de encerramento: diz com respeito que vai deixar o assunto em pausa e que a porta continua aberta.
+Se houver ALERTA DE PRAZO, a versão A avisa de forma simples que existe uma data importante no caso dela, sem assustar e sem pressionar.
+
+REGRAS QUE VOCÊ SEMPRE SEGUE
+- Nada de pressão, contagem regressiva falsa, &quot;última chance&quot; ou desconto para fechar hoje.
+- Nunca prometa resultado nem diga que o caso é certo.
+- Nunca opine sobre o direito da pessoa no rascunho.
+- Nunca cite número de lei, súmula ou decisão sem eu pedir; se eu pedir, marque &quot;[conferir na fonte oficial]&quot;.
+- Não repita CPF, número de documento ou dado de saúde detalhado.
+- Português do Brasil, frases curtas, tom de gente, sem formalidade de ofício.
+
+Comece me pedindo para colar a conversa.</pre></section>
+<p><strong>Exemplo (caso fictício):</strong> proposta enviada há 9 dias, a pessoa respondeu "vou ver com meu irmão" e não voltou.</p>
+<pre class="resultado">RETOMADA: Cliente do inventário
+Motivos prováveis: decisão depende de outra pessoa (&quot;vou ver com meu irmão&quot;); proposta sem as etapas explicadas
+A) &quot;Oi, Ana, tudo bem? Passando para saber se ficou alguma dúvida sobre a proposta. Se ajudar, faço uma ligação de 10 minutos com vocês dois para explicar as etapas. Que horário fica bom?&quot;
+B) &quot;Oi, Ana. Vou deixar o assunto em pausa por aqui para não incomodar. Quando quiser retomar, é só me chamar.&quot;</pre></section>
+<section class="aba" id="atendimento" role="tabpanel"><h2>Módulo 2: atendimento e captação</h2>
+<h4>30 prompts prontos para o comercial do seu escritório.</h4>
+<p>Todo dia entra gente no seu WhatsApp querendo resolver um problema. E boa parte vai embora. Não porque você é caro, mas porque a resposta demorou, saiu seca, pediu a informação errada na hora errada, ou nunca teve um segundo contato. O caso estava ali. O atendimento deixou passar.</p>
+<p>Este módulo cuida da parte que mais trava o escritório, que não é a petição, é a conversa antes dela. São 30 prompts prontos que você cola no ChatGPT ou no Claude, preenche os campos entre colchetes com a informação real do seu caso, e usa. Do primeiro "oi" no WhatsApp até o pedido de indicação depois de uma etapa concluída.</p>
+<p>Não é texto pronto pra copiar e colar cru no cliente. É melhor que isso: é a instrução que faz a IA escrever o texto do jeito certo, adaptado ao seu caso, na hora. Você deixa de começar do zero toda vez.</p>
+<h3>Como usar</h3>
+<ol><li>Ache o prompt pela situação que você está vivendo agora (a pessoa acabou de chamar, a proposta sumiu, o cliente antigo esfriou).</li><li>Copie o bloco inteiro do "prompt pronto".</li><li>Cole no ChatGPT ou no Claude.</li><li>Preencha tudo que estiver entre colchetes com a informação real. Quanto melhor o contexto, melhor a resposta.</li><li>Leia o que a IA devolveu, ajuste pro seu jeito de falar, e só então mande pro cliente.</li></ol>
+<p>O colchete é o lugar onde você entra. É ali que o caso vira seu, e não um texto genérico.</p>
+<h3>Aviso importante, leia antes</h3>
+<p>A IA é uma ferramenta, não é você. Ela ganha tempo, tira o bloqueio da página em branco e padroniza o que hoje sai diferente cada vez. Mas ela também erra: inventa informação com cara de verdade, troca um dado, chuta um número. Tudo que sair dela passa pelos seus olhos antes de ir pro cliente. Você é o responsável profissional pela palavra que sai do seu escritório, e o Código de Ética da OAB continua valendo em cada mensagem. Nunca cole dado sensível do cliente (documento, número de processo, detalhe íntimo) em ferramenta pública sem necessidade. Use a IA pra escrever mais rápido, nunca pra pensar no seu lugar.</p>
+<p>Uma última coisa: o que estes prompts fazem é tirar o atraso, o texto travado e o esquecimento do seu caminho. O resto é o seu trabalho e o seu caso.</p>
+<h2>Seção 1: Primeiro contato e qualificação no WhatsApp (7 prompts)</h2>
+<p>A pessoa chamou. Os próximos minutos decidem se ela sente que achou o escritório certo ou se ela volta pro Google procurar outro. Aqui você padroniza a entrada sem soar robô.</p>
+<h4>1. A primeira resposta a quem acabou de chamar</h4>
+<p><strong>Pra que serve:</strong> transformar o primeiro "oi" numa resposta que mostra competência e acolhimento, sem prometer nada que você ainda não sabe.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p6">Copiar o prompt</button></div><pre class="prompt" id="p6">Você é um advogado experiente em atendimento de clientes pelo WhatsApp. Seu papel é escrever a PRIMEIRA resposta a uma pessoa que acabou de chamar o meu escritório, de um jeito que transmita competência e acolhimento sem parecer script de vendas.
+
+Contexto do meu escritório:
+- Área de atuação: [ex: direito previdenciário, trabalhista, família]
+- Como eu me apresento: [ex: sou o Dr. Fulano, do escritório Tal]
+- Mensagem que a pessoa me mandou: [cole aqui, exatamente como ela escreveu]
+
+Escreva uma resposta que:
+- Cumprimente pelo nome, se ele aparecer na mensagem, senão de forma cordial
+- Mostre que eu entendi o assunto que ela trouxe, sem opinar sobre o mérito ainda
+- Faça no máximo duas perguntas para eu entender melhor a situação dela
+- Conduza para o próximo passo (marcar uma reunião de análise ou receber mais detalhes)
+- Tenha tom humano e profissional, sem juridiquês, no máximo 5 linhas
+- Não cite artigo de lei, não de parecer, não prometa ganho de causa nem prazo
+
+Me entregue duas versões: uma mais formal e uma mais próxima. No fim, explique em uma linha qual você usaria e por que.</pre></section>
+<p><strong>Dica:</strong> cole a mensagem da pessoa exatamente como ela escreveu, com erro de português e tudo. É isso que faz a IA acertar o tom e o nível da pessoa do outro lado.</p>
+<h4>2. Qualificar o caso sem parecer interrogatório</h4>
+<p><strong>Pra que serve:</strong> descobrir se o caso serve pro seu escritório fazendo as perguntas certas, sem afogar a pessoa em vinte perguntas de uma vez.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p7">Copiar o prompt</button></div><pre class="prompt" id="p7">Você é um advogado especialista em triagem de casos pelo WhatsApp. Seu papel é montar uma sequência de perguntas que me ajude a entender o caso da pessoa, uma de cada vez, de um jeito que pareca conversa e não formulário.
+
+Contexto:
+- Minha área: [ex: direito de família]
+- Tipo de caso que a pessoa trouxe: [ex: cobrança indevida do banco, demissão, divórcio]
+- O que eu já sei sobre a situação dela: [escreva tudo que ela já te contou, ou &quot;quase nada&quot;]
+- As informações que eu PRECISO ter para avaliar se atendo: [ex: se já tem processo, há quanto tempo, se tem documento, se já procurou outro advogado]
+
+Me entregue:
+1. Uma sequência de 4 a 6 perguntas, na ordem certa, começando pela mais leve e indo pra mais específica
+2. Cada pergunta escrita do jeito que eu mando no WhatsApp, curta e humana
+3. Uma orientação de quando parar de perguntar e já partir para marcar a reunião
+
+Tom: acolhedor, sem juridiquês. A pessoa tem que sentir que eu me importo, não que estou preenchendo ficha.</pre></section>
+<p><strong>Dica:</strong> guarde a lista de perguntas que a IA montou. Ela vira o seu roteiro fixo de triagem para aquele tipo de caso, e você para de improvisar toda vez.</p>
+<h4>3. Separar o caso que serve do que não serve</h4>
+<p><strong>Pra que serve:</strong> decidir rápido, e com critério, se vale a pena chamar a pessoa pra uma reunião ou se é melhor orientar e liberar, sem perder tempo nem parecer grosseiro.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p8">Copiar o prompt</button></div><pre class="prompt" id="p8">Você é um advogado experiente que sabe qualificar caso e proteger a própria agenda. Seu papel é analisar o relato de uma pessoa e me dizer se esse caso encaixa nos critérios do meu escritório.
+
+Contexto:
+- Minha área e os tipos de caso que eu ACEITO: [liste]
+- Os tipos de caso que eu NÃO pego: [liste, ex: valor muito baixo, fora da minha comarca, área que não domino]
+- Relato da pessoa: [cole o que ela te contou]
+
+Me entregue:
+1. Um veredito rápido: esse caso parece encaixar, não encaixar, ou faltam dados para decidir
+2. Os pontos de atenção que eu deveria confirmar antes de aceitar
+3. Se NÃO encaixar: uma mensagem cordial para eu enviar, que oriente a pessoa sobre o caminho dela sem eu assumir o caso, sem dar parecer jurídico definitivo e sem fechar a porta de forma seca
+4. Se ENCAIXAR: uma mensagem curta convidando para a reunião de análise
+
+Não invente informação que não está no relato. Se faltar dado para decidir, diga exatamente qual dado falta.</pre></section>
+<p><strong>Dica:</strong> dizer não com elegância também é atendimento. A pessoa que você orientou bem e não pegou o caso é a mesma que te indica pro vizinho que tem o caso certo.</p>
+<h4>4. Responder a mensagem vaga ("quanto custa?", "preciso de um advogado")</h4>
+<p><strong>Pra que serve:</strong> lidar com a mensagem curta e sem contexto sem cair na armadilha de dar preço no vácuo nem responder com um textão que espanta.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p9">Copiar o prompt</button></div><pre class="prompt" id="p9">Você é um advogado que domina atendimento por WhatsApp e sabe que responder preço sem contexto perde cliente. Seu papel é escrever a resposta a uma mensagem vaga.
+
+Contexto:
+- Minha área: [ex: direito do consumidor]
+- A mensagem vaga que a pessoa mandou: [ex: &quot;quanto você cobra?&quot;, &quot;preciso de um advogado&quot;, &quot;você faz divórcio?&quot;]
+- Por que eu não dou preço de imediato: porque o valor depende do caso, e eu preciso entender a situação antes
+
+Escreva uma resposta que:
+- Acolha a pessoa e mostre boa vontade, sem soar evasivo
+- Explique, em uma frase simples, por que eu preciso entender o caso antes de falar de valor
+- Faça uma ou duas perguntas para destravar a conversa e trazer contexto
+- Ofereça um próximo passo concreto (me contar o caso em poucas linhas ou marcar uma reunião)
+- Seja curta, no máximo 4 linhas, humana, sem juridiquês
+
+Me de duas versões, uma para quando eu quero puxar para a reunião e outra para quando eu prefiro receber o relato por escrito antes.</pre></section>
+<p><strong>Dica:</strong> "quanto custa?" quase nunca é sobre dinheiro no primeiro contato. É a pessoa testando se você responde e se ela pode confiar. Responda a confiança, não só o preço.</p>
+<h4>5. Transformar a conversa em reunião marcada</h4>
+<p><strong>Pra que serve:</strong> sair da conversa solta e fechar dia e hora, que é onde a maioria dos atendimentos morre por não ter um convite claro.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p10">Copiar o prompt</button></div><pre class="prompt" id="p10">Você é um advogado que sabe conduzir a conversa do WhatsApp até marcar a reunião, sem pressionar e sem deixar no ar. Seu papel é escrever a mensagem que fecha o agendamento.
+
+Contexto:
+- Nome da pessoa: [nome]
+- Resumo do que já conversamos: [cole o essencial]
+- Formato da reunião: [presencial no escritório / videochamada / ligação]
+- Meus horários disponíveis nos próximos dias: [ex: quinta 14h ou 16h, sexta 10h]
+- Se a reunião de análise inicial é cobrada ou não: [gratuita / cobrada em R$ ___ / abatida do honorário se fechar]
+
+Escreva a mensagem que:
+- Retome em uma frase o que a pessoa trouxe, para ela sentir que eu já entendi
+- Proponha a reunião como o passo natural para eu analisar o caso dela com atenção
+- Ofereça duas opções de horário concretas, para facilitar a escolha
+- Deixe claro o formato e, se houver, o valor da reunião, com naturalidade
+- Termine com uma pergunta simples de sim ou não (qual dos dois horários fica melhor)
+
+Tom firme e cordial, no máximo 5 linhas. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> oferecer dois horários fecha mais do que perguntar "quando você pode?". A pessoa escolhe entre A e B em vez de ter que pensar na agenda inteira.</p>
+<h4>6. A mensagem automática de fora do horário que não parece robô</h4>
+<p><strong>Pra que serve:</strong> responder na hora quem chega de madrugada ou no fim de semana, sem perder o calor humano e sem deixar a pessoa esperando no vácuo até segunda.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p11">Copiar o prompt</button></div><pre class="prompt" id="p11">Você é um advogado que cuida da experiência do cliente desde o primeiro segundo. Seu papel é escrever uma mensagem automática de fora do horário que acolha a pessoa e segure o interesse dela até eu poder responder de verdade.
+
+Contexto:
+- Nome do escritório e área: [ex: escritório Tal, direito imobiliário]
+- Meu horário de atendimento: [ex: segunda a sexta, 9h as 18h]
+- O que eu quero que a pessoa faça enquanto espera: [ex: adiantar o relato do caso, mandar de qual cidade fala]
+
+Escreva:
+1. Uma mensagem automática curta, que reconheca a chegada da pessoa, explique com gentileza que estou fora do horário, diga quando vou responder e convide ela a já adiantar o caso
+2. Uma segunda versão um pouco mais calorosa, para casos sensíveis (família, saúde, luto), onde a pessoa pode estar aflita
+
+Tom humano, nada de &quot;sua mensagem é importante para nos&quot;. Sem juridiquês. No máximo 4 linhas cada.</pre></section>
+<p><strong>Dica:</strong> a mensagem automática que pede pra pessoa "já adiantar o caso" faz dobrar o trabalho por ela: quando você acorda, metade da qualificação já está feita.</p>
+<h4>7. Reengajar quem mandou "oi" e sumiu</h4>
+<p><strong>Pra que serve:</strong> trazer de volta o contato que iniciou a conversa, você respondeu, e a pessoa nunca mais deu sinal, sem parecer desesperado.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p12">Copiar o prompt</button></div><pre class="prompt" id="p12">Você é um advogado que sabe reabrir uma conversa parada sem soar carente nem invasivo. Seu papel é escrever uma mensagem para reengajar alguém que me chamou, recebeu minha resposta e sumiu.
+
+Contexto:
+- Nome da pessoa: [nome ou &quot;não sei&quot;]
+- Há quanto tempo ela sumiu: [ex: 3 dias, uma semana]
+- Sobre o que era o caso: [resumo]
+- A última coisa que eu falei com ela: [cole]
+
+Escreva 2 opções de mensagem para reabrir a conversa. Cada uma deve:
+- Ser leve, como quem retoma sem cobrar
+- Trazer um motivo real para a retomada (um lembrete útil, uma pergunta que ajude ela a decidir, um passo simples)
+- Deixar claro que a porta está aberta, sem pressão
+- Terminar com uma pergunta fácil de responder
+
+No máximo 3 linhas cada. Não use tom de cobrança, não faça a pessoa se sentir culpada por ter sumido.</pre></section>
+<p><strong>Dica:</strong> o melhor motivo pra reabrir não é "e aí, vai fechar?". É entregar algo útil: um lembrete de prazo, uma dúvida esclarecida, um documento que ajuda. Dá valor antes de cobrar decisão.</p>
+<h2>Seção 2: Proposta e honorário (6 prompts)</h2>
+<p>Aqui é onde o caso vira contrato. Ou não. A diferença quase nunca é o número. É como o número é apresentado, com o que ele é comparado e o quanto a pessoa entende o que está comprando.</p>
+<h4>8. Estruturar uma proposta de honorários clara</h4>
+<p><strong>Pra que serve:</strong> montar uma proposta organizada, que a pessoa entende de primeira, no lugar do textão confuso que gera dúvida e trava a decisão.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p13">Copiar o prompt</button></div><pre class="prompt" id="p13">Você é um advogado experiente em fechar contrato com proposta clara e honesta. Seu papel é organizar uma proposta de honorários que qualquer pessoa entenda sem ser da área.
+
+Contexto:
+- Nome da pessoa e o caso dela: [descreva]
+- O que eu vou fazer por ela (o serviço): [liste as etapas, ex: análise, entrada da ação, acompanhamento até sentença]
+- Modelo de cobrança: [fixo / por êxito / misto], valores: [preencha]
+- Formas de pagamento: [ex: a vista, parcelado em ___x]
+- O que NÃO está incluso: [ex: custas, perícia, recursos]
+
+Monte a proposta com:
+1. Uma abertura de uma frase que conecte com a dor real da pessoa (o problema que ela quer resolver), sem juridiquês
+2. O que está incluso, em linguagem simples, em tópicos
+3. O investimento, apresentado com clareza, e as formas de pagamento
+4. O que não está incluso, dito com transparência
+5. Um próximo passo claro
+
+Tom profissional e humano. Não prometa resultado nem prazo de sentença. Deixe espaço para eu revisar cada valor antes de enviar.</pre></section>
+<p><strong>Dica:</strong> proposta que a pessoa não entende, ela não fecha, ela adia. Clareza fecha mais que desconto. Se a pessoa precisa reler duas vezes pra saber o que está comprando, você já perdeu força.</p>
+<h4>9. Apresentar o valor sem soar defensivo</h4>
+<p><strong>Pra que serve:</strong> falar do honorário com firmeza, ligando o preço ao valor do que você resolve, em vez de pedir desculpa pelo número.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p14">Copiar o prompt</button></div><pre class="prompt" id="p14">Você é um advogado que sabe comunicar o próprio valor com serenidade, sem arrogância e sem pedir desculpa pelo preço. Seu papel é me ajudar a apresentar o honorário ancorado no que eu resolvo, não no tempo que gasto.
+
+Contexto:
+- O caso e o que está em jogo para a pessoa: [ex: a renda da família, um valor que ela tem a receber, a guarda do filho]
+- Meu honorário: [valor]
+- O que a pessoa arrisca se não resolver, ou se resolver mal e sozinha: [descreva com honestidade, sem exagero]
+- Minha experiência e diferencial reais nesse tipo de caso: [descreva, sem inventar]
+
+Me entregue:
+1. Uma forma de apresentar o valor que conecte o honorário ao que está em jogo para a pessoa, de modo verdadeiro
+2. Duas ou três frases prontas para eu usar quando falar do preço, firmes e tranquilas
+3. Um lembrete do que EU não devo fazer nessa hora (ex: baixar o preço antes de a pessoa reclamar, encher de justificativa)
+
+Nada de promessa de ganho, nada de meter medo na pessoa. Firmeza honesta, não pressão.</pre></section>
+<p><strong>Dica:</strong> quem justifica demais o preço ensina o cliente a duvidar dele. Diga o valor, respire, e fique quieto. O silêncio depois do número é seu aliado, não seu inimigo.</p>
+<h4>10. Montar proposta com opções (escada de contratação)</h4>
+<p><strong>Pra que serve:</strong> oferecer mais de um caminho de contratação, pra pessoa deixar de decidir "sim ou não" e passar a decidir "qual dos dois", o que aumenta a chance de fechar algo.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p15">Copiar o prompt</button></div><pre class="prompt" id="p15">Você é um advogado que sabe estruturar proposta em opções, respeitando a ética e sem empurrar serviço desnecessário. Seu papel é montar de duas a três opções de contratação para o mesmo cliente.
+
+Contexto:
+- O caso: [descreva]
+- O serviço completo que eu ofereco: [descreva]
+- O que dá para oferecer em versão mais enxuta, de forma honesta: [ex: só a análise e orientação, só a fase administrativa, só a entrada da ação]
+- Valores de cada opção: [preencha]
+
+Monte:
+1. De duas a três opções, da mais enxuta para a mais completa, cada uma com nome simples, o que inclui e o valor
+2. Uma orientação curta em cada opção sobre para quem ela faz mais sentido
+3. Uma frase final que ajude a pessoa a escolher, sem eu empurrar a mais cara
+
+Regra de ética: só ofereça versões que realmente atendam o interesse do cliente. Nunca crie uma opção ruim de propósito só para a cara ficar atraente. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> a opção do meio é a que mais fecha. Não é truque, é conforto: a pessoa foge do mais barato pra não parecer que economizou no que importa, e foge do mais caro pra não exagerar.</p>
+<h4>11. A mensagem que envia a proposta pelo WhatsApp</h4>
+<p><strong>Pra que serve:</strong> não mandar a proposta seca, "segue em anexo", mas com uma mensagem que prepara o terreno e convida a pessoa a ler e responder.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p16">Copiar o prompt</button></div><pre class="prompt" id="p16">Você é um advogado que sabe que a proposta enviada sem contexto morre no &quot;vou ver e te falo&quot;. Seu papel é escrever a mensagem de WhatsApp que acompanha o envio da proposta.
+
+Contexto:
+- Nome da pessoa: [nome]
+- Resumo do caso e do que combinamos: [cole]
+- Como a proposta vai (arquivo em PDF, texto na conversa, etc): [informe]
+- O que eu quero que aconteça depois que ela ler: [ex: me chamar com dúvidas, marcar a assinatura]
+
+Escreva a mensagem que:
+- Retome em uma frase o caso dela, para personalizar
+- Apresente a proposta como o caminho que eu pensei especificamente para a situação dela
+- Destaque em uma linha o ponto que mais importa para ela
+- Convide a ler com calma e deixe claro que estou à disposição para dúvidas
+- Combine um próximo contato (ex: &quot;amanhã eu te chamo para ver o que achou&quot;, com o aceite dela)
+
+Curta, no máximo 5 linhas. Sem pressão, mas com um próximo passo claro. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> combine o próximo contato na hora de enviar ("amanhã de tarde eu te chamo pra ver o que achou, pode ser?"). Isso transforma o follow-up de amanhã em compromisso, não em perseguição.</p>
+<h4>12. Explicar os modelos de cobrança (fixo, êxito, misto)</h4>
+<p><strong>Pra que serve:</strong> deixar claro pra pessoa a diferença entre honorário fixo, de êxito e misto, pra ela entender o que está contratando e parar de comparar coisas diferentes.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p17">Copiar o prompt</button></div><pre class="prompt" id="p17">Você é um advogado que explica cobrança de forma simples e transparente. Seu papel é escrever uma explicação curta dos modelos de honorário para o meu cliente entender.
+
+Contexto:
+- O caso: [descreva]
+- Os modelos que eu ofereco nesse caso: [ex: honorário fixo, honorário de êxito, ou os dois combinados]
+- Como funciona cada um no caso dele: [explique com seus valores e regras reais]
+
+Escreva:
+1. Uma explicação simples de cada modelo, em uma ou duas frases, com exemplo prático ligado ao caso dele
+2. As vantagens e os pontos de atenção de cada um, com honestidade
+3. Uma recomendação de qual costuma fazer mais sentido para esse tipo de caso, deixando a decisão com a pessoa
+
+Linguagem de quem explica para um amigo leigo. Sem juridiquês. Não prometa resultado. Seja transparente sobre custas e despesas que não são honorário.</pre></section>
+<p><strong>Dica:</strong> confusão sobre cobrança vira desconfiança silenciosa. Cliente que entende exatamente o que paga reclama menos depois e indica mais. Clareza aqui é retenção lá na frente.</p>
+<h4>13. Responder ao "tá caro" na hora da proposta</h4>
+<p><strong>Pra que serve:</strong> lidar com a reação ao preço sem baixar o valor por reflexo, reconduzindo a conversa pro que a pessoa ganha.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p18">Copiar o prompt</button></div><pre class="prompt" id="p18">Você é um advogado que sabe segurar o próprio preço com respeito, sem brigar com o cliente e sem baixar por medo de perder. Seu papel é me dar respostas para quando a pessoa diz que está caro.
+
+Contexto:
+- O caso e o que está em jogo para a pessoa: [descreva]
+- Meu honorário e o que ele cobre: [descreva]
+- O que eu POSSO flexibilizar de verdade, se fizer sentido: [ex: parcelamento, escopo, prazo de pagamento] ou &quot;não quero baixar o valor&quot;
+
+Me entregue:
+1. Uma forma de acolher o &quot;está caro&quot; sem concordar automaticamente nem se ofender
+2. Duas ou três respostas prontas que reconduzam para o valor do que eu resolvo, não para o número
+3. Se fizer sentido flexibilizar: como oferecer parcelamento ou ajuste de escopo sem simplesmente dar desconto
+4. Um lembrete de quando é hora de deixar a pessoa ir, com respeito
+
+Tom sereno e firme. Não implore, não pressione, não prometa resultado. Respeite a decisão da pessoa.</pre></section>
+<p><strong>Dica:</strong> "tá caro" às vezes quer dizer "não entendi o que estou pagando", às vezes "não posso agora", às vezes "quero um desconto". Pergunte antes de responder. A resposta muda conforme o que está por trás.</p>
+<h2>Seção 3: Quebra de objeção (5 prompts)</h2>
+<p>A objeção não é o fim da conversa. Quase sempre é a pessoa pedindo mais um motivo pra confiar. Aqui você responde sem empurrar, com a voz de sócio, não de vendedor.</p>
+<h4>14. "Vou pensar"</h4>
+<p><strong>Pra que serve:</strong> destravar a indecisão sem pressionar, ajudando a pessoa a dizer o que de fato está segurando a decisão.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p19">Copiar o prompt</button></div><pre class="prompt" id="p19">Você é um advogado sereno que sabe que &quot;vou pensar&quot; quase sempre esconde uma dúvida não dita. Seu papel é me ajudar a responder isso de um jeito que ajude a pessoa a decidir, sem empurrar.
+
+Contexto:
+- O caso: [descreva]
+- Em que ponto a pessoa disse &quot;vou pensar&quot;: [ex: depois da proposta, depois da reunião]
+- O que eu percebo que pode estar travando: [preço / medo / falta de confiança / precisa falar com alguém / não sei]
+
+Me entregue:
+1. Uma resposta que respeite o tempo da pessoa e ao mesmo tempo abra espaço para ela dizer o que realmente está pensando
+2. Uma pergunta certa para descobrir a dúvida real por tras do &quot;vou pensar&quot;
+3. Uma forma de deixar a porta aberta e combinar um próximo contato, sem pressão
+
+Tom de sócio que orienta, nunca de vendedor que insiste. No máximo 4 linhas. Não prometa resultado, não crie urgência falsa.</pre></section>
+<p><strong>Dica:</strong> "vou pensar" respondido com "pensa com calma, e me diz uma coisa: o que ainda te deixa em dúvida?" descobre a objeção real. Aí sim você tem o que responder.</p>
+<h4>15. "Preciso falar com [cônjuge, sócio, família]"</h4>
+<p><strong>Pra que serve:</strong> lidar com a decisão que depende de outra pessoa, ajudando seu contato a levar a conversa pra frente em vez de sumir.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p20">Copiar o prompt</button></div><pre class="prompt" id="p20">Você é um advogado que respeita a decisão compartilhada e sabe que, quando a pessoa precisa falar com alguém, ela vira a mensageira da própria contratação. Seu papel é me ajudar a apoiar essa conversa.
+
+Contexto:
+- O caso: [descreva]
+- Com quem a pessoa precisa falar: [cônjuge / sócio / filho / família]
+- A proposta ou o combinado que ela vai levar: [resuma]
+
+Me entregue:
+1. Uma resposta que valide a decisão de conversar com a outra pessoa, sem eu parecer contrariado
+2. Um resumo curto e claro que a pessoa possa mostrar ou repassar para quem vai decidir com ela (os pontos principais, sem juridiquês)
+3. Uma forma de combinar o retorno, deixando claro que estou disponível para tirar dúvida dos dois, se precisar
+
+Tom acolhedor e organizado. Não pressione. Não prometa resultado. Facilite a vida da pessoa que vai levar a decisão adiante.</pre></section>
+<p><strong>Dica:</strong> quando a pessoa vai "falar com alguém", entregue a ela um resumo pronto pra mostrar. Sem isso, quem decide de verdade só recebe uma versão pela metade, e o que não se entende, não se aprova.</p>
+<h4>16. "O outro advogado cobra menos"</h4>
+<p><strong>Pra que serve:</strong> responder à comparação de preço sem falar mal do colega e sem entrar em leilão, reconduzindo pra diferença de valor.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p21">Copiar o prompt</button></div><pre class="prompt" id="p21">Você é um advogado ético que nunca fala mal de colega e sabe defender o próprio trabalho pela qualidade, não pelo preço. Seu papel é me ajudar a responder quando a pessoa diz que encontrou alguém mais barato.
+
+Contexto:
+- O caso: [descreva]
+- Meu honorário e o que ele inclui: [descreva]
+- Meus diferenciais reais nesse tipo de caso: [experiência, dedicação, forma de acompanhar, casos parecidos que já acompanhei, sem expor cliente e sem prometer o futuro]
+
+Me entregue:
+1. Uma resposta que acolha a comparação sem eu me irritar nem desmerecer o outro profissional
+2. Uma forma de mostrar a diferença do meu trabalho pelo que a pessoa recebe, não pelo número
+3. Um lembrete de que preço baixo demais pode esconder falta de dedicação, dito com elegância e sem acusar ninguém
+4. Um fechamento que devolva a decisão para a pessoa, com respeito
+
+Regra de ética da OAB: nunca depreciar colega, nunca fazer concorrência predatória. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> nunca fale mal do mais barato. Fale do que você entrega. "Cada um cobra pelo trabalho que faz. Deixa eu te mostrar como eu acompanho o seu caso" vale mais que qualquer crítica ao colega.</p>
+<h4>17. "E se eu perder? E se não der certo?"</h4>
+<p><strong>Pra que serve:</strong> acolher o medo da pessoa com honestidade, sem prometer vitória, o que além de antiético destrói a confiança.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p22">Copiar o prompt</button></div><pre class="prompt" id="p22">Você é um advogado honesto que nunca promete ganho de causa e sabe acolher o medo do cliente com verdade. Seu papel é me ajudar a responder a pessoa que tem medo de perder ou de gastar à toa.
+
+Contexto:
+- O caso: [descreva]
+- O que eu honestamente posso dizer sobre as chances, sem prometer: [ex: é um caso com bom fundamento, é um caso difícil mas que vale tentar, depende de prova]
+- Como funciona o meu honorário em caso de perda: [ex: êxito só se ganhar, fixo independente do resultado, explique]
+
+Me entregue:
+1. Uma resposta que acolha o medo da pessoa como legítimo, sem minimizar
+2. Uma forma honesta de falar das chances, deixando claro que ninguém pode prometer o que a Justiça vai decidir
+3. Uma explicação do que a pessoa arrisca e do que ela protege ao ter um advogado conduzindo
+4. Um fechamento sereno que devolva a decisão para ela
+
+Proibido prometer vitória, cravar prazo ou dar percentual de chance inventado. Honestidade é o que constrói confiança aqui.</pre></section>
+<p><strong>Dica:</strong> prometer vitória é a forma mais rápida de perder o cliente lá na frente e de arranjar problema na OAB. "Eu não posso prometer o que o juiz vai decidir, mas posso prometer o meu trabalho" é firme e é verdade.</p>
+<h4>18. "Depois eu te chamo" (o sumiço educado)</h4>
+<p><strong>Pra que serve:</strong> responder ao adiamento gentil que na prática é um não, deixando a porta aberta sem parecer que você não entendeu o recado.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p23">Copiar o prompt</button></div><pre class="prompt" id="p23">Você é um advogado que entende quando &quot;depois eu te chamo&quot; é um não educado e sabe responder com dignidade, sem insistir e sem fechar a porta. Seu papel é escrever essa resposta.
+
+Contexto:
+- O caso: [descreva]
+- Em que ponto a pessoa disse isso: [depois da proposta, da reunião, do primeiro contato]
+- O que eu gostaria de deixar com ela antes de encerrar: [ex: um lembrete útil, meu contato, um documento]
+
+Me entregue duas versões de resposta. Cada uma deve:
+- Aceitar o tempo da pessoa com naturalidade, sem soar magoado
+- Deixar algo de valor com ela (uma orientação, um lembrete, a porta aberta)
+- Dizer, de forma leve, que quando ela quiser retomar eu estarei aqui
+- Não pressionar, não cobrar, não fazer a pessoa se sentir mal
+
+No máximo 3 linhas cada. Tom de quem tem o próprio valor e não corre atrás. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> responder o "depois eu te chamo" com serenidade planta uma semente. Muita gente volta meses depois justamente pro advogado que não insistiu, porque foi o único que passou segurança em vez de aflição.</p>
+<h2>Seção 4: Follow-up e reativação (6 prompts)</h2>
+<p>A maior parte do dinheiro perdido no escritório não está em quem disse não. Está em quem não disse nada. Sumiu, e ninguém voltou. Aqui você constrói o segundo, o terceiro e o quarto contato sem virar aquele que enche.</p>
+<h4>19. Follow-up de quem recebeu a proposta e sumiu</h4>
+<p><strong>Pra que serve:</strong> voltar pra pessoa que recebeu a proposta e não respondeu, com um motivo real, sem o clássico "e aí, decidiu?".</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p24">Copiar o prompt</button></div><pre class="prompt" id="p24">Você é um advogado que sabe fazer follow-up de proposta sem parecer cobrador. Seu papel é escrever a mensagem para quem recebeu minha proposta e ficou em silêncio.
+
+Contexto:
+- Nome da pessoa: [nome]
+- Há quantos dias enviei a proposta: [número]
+- O caso e o ponto mais importante da proposta para ela: [descreva]
+- Se aconteceu algo novo que justifique o contato: [ex: um prazo se aproximando, uma novidade no caso] ou &quot;nada novo&quot;
+
+Escreva a mensagem que:
+- Retome de forma leve, sem cobrança
+- Traga um motivo real para o contato (um lembrete útil, uma dúvida que eu quero esclarecer, um ponto novo)
+- Se ofereça para tirar qualquer dúvida que tenha travado a decisão
+- Termine com uma pergunta fácil de responder
+
+No máximo 3 linhas. Nada de &quot;só passando para saber se você decidiu&quot;. Traga valor, não cobrança. Não pressione.</pre></section>
+<p><strong>Dica:</strong> todo follow-up precisa de um motivo que não seja a venda. Um lembrete de prazo, uma dúvida que você quer esclarecer, uma informação nova. Sem motivo real, você vira aquele que só quer o dinheiro.</p>
+<h4>20. Sequência de 3 follow-ups (cadência sem ser chato)</h4>
+<p><strong>Pra que serve:</strong> ter os três toques prontos com dias e ângulos diferentes, pra não abandonar o contato depois da primeira tentativa nem mandar a mesma mensagem repetida.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p25">Copiar o prompt</button></div><pre class="prompt" id="p25">Você é um advogado que domina a arte do follow-up em sequência, sabendo que a maioria dos fechamentos acontece do segundo contato em diante. Seu papel é montar uma sequência de 3 mensagens.
+
+Contexto:
+- Nome da pessoa e o caso: [descreva]
+- O que já combinamos ou o que enviei: [proposta / orientação / aguardando decisão]
+- Meu tom: [mais formal / mais próximo]
+
+Monte 3 mensagens, cada uma com angulo diferente, para eu enviar em dias diferentes:
+- Mensagem 1 (2 a 3 dias depois): retomada leve, coloco-me à disposição para dúvidas
+- Mensagem 2 (4 a 5 dias depois): trago valor, um lembrete útil ou um ponto que ajude a decidir
+- Mensagem 3 (7 a 10 dias depois): a mensagem de encerramento respeitosa, que deixa a porta aberta e sinaliza que não vou insistir mais
+
+Para cada uma, diga o melhor dia para enviar. Curtas, humanas, sem repetir a mesma frase. Sem pressão, sem culpar a pessoa pelo silêncio. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> três toques com dias e ângulos diferentes fecham muito mais que um só. Depois do terceiro, pare. Insistir além disso não traz o cliente, só queima a sua imagem com ele.</p>
+<h4>21. Reativar cliente antigo</h4>
+<p><strong>Pra que serve:</strong> voltar pra quem já foi seu cliente, já confia em você, e simplesmente saiu do radar, que é o contato mais barato e mais quente que existe.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p26">Copiar o prompt</button></div><pre class="prompt" id="p26">Você é um advogado que sabe que cliente antigo é o ativo mais valioso do escritório e que reativar quem já confia em você é mais fácil do que conquistar estranho. Seu papel é escrever uma mensagem de reativação.
+
+Contexto:
+- Nome do cliente antigo: [nome]
+- O que eu resolvi para ele no passado: [caso anterior]
+- Há quanto tempo não falamos: [tempo]
+- Um motivo real de contato agora: [ex: mudança na lei que afeta ele, revisão possível, só cuidar do relacionamento, uma data]
+
+Escreva a mensagem que:
+- Retome o vínculo com calor, lembrando de forma breve o que já fizemos juntos
+- Traga o motivo real do contato, algo útil para ele
+- Reabra a porta para ajudar no que ele precisar hoje
+- Seja pessoal, nada de mensagem em massa com cara de robô
+
+No máximo 4 linhas. Tom de quem cuida, não de quem quer vender. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> o cliente antigo não precisa ser convencido de que você é bom, ele já sabe. Só precisa lembrar que você existe. Uma mensagem por ano cuidando do vínculo vale mais que dez anúncios.</p>
+<h4>22. Reativar contato antigo que nunca fechou</h4>
+<p><strong>Pra que serve:</strong> voltar meses depois pra quem conversou com você, não fechou, e pode estar em outro momento agora, sem soar como quem guarda mágoa da venda perdida.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p27">Copiar o prompt</button></div><pre class="prompt" id="p27">Você é um advogado que sabe que o &quot;não&quot; de meses atrás pode ser o &quot;sim&quot; de hoje, porque a situação das pessoas muda. Seu papel é escrever uma mensagem para reabrir contato com quem conversou comigo e não fechou.
+
+Contexto:
+- Nome da pessoa: [nome]
+- Sobre o que era o caso: [descreva]
+- Há quanto tempo foi a última conversa: [tempo]
+- O que pode ter mudado desde então: [ex: um prazo que agora aperta, uma nova regra, ou só o tempo passando]
+
+Escreva a mensagem que:
+- Retome sem cobrar o passado, como quem simplesmente lembrou da pessoa
+- Traga um gancho atual que faça sentido reabrir a conversa
+- Ofereça ajuda no momento atual dela, sem ressentimento pela conversa anterior
+- Termine com uma pergunta leve
+
+No máximo 3 linhas. Tom de quem virou a página e está à disposição. Não pressione, não cobre, não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> guarde uma lista simples de quem conversou e não fechou. A cada mudança de lei ou início de ano, uma passada leve nessa lista costuma reabrir caso que você já tinha dado por perdido.</p>
+<h4>23. Cobrar documento pendente sem irritar o cliente</h4>
+<p><strong>Pra que serve:</strong> conseguir o documento que trava o andamento do caso, do cliente que enrola pra enviar, sem azedar a relação nem parecer que a culpa do atraso é sua.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p28">Copiar o prompt</button></div><pre class="prompt" id="p28">Você é um advogado organizado que sabe cobrar documento sem estressar o cliente e sem deixar o caso parado. Seu papel é escrever a mensagem que pede o que está pendente.
+
+Contexto:
+- Nome do cliente: [nome]
+- Documento ou informação que falta: [liste com clareza]
+- Para que serve, do ponto de vista do interesse dele: [ex: sem isso não consigo dar entrada, sem isso o prazo pode passar]
+- Quantas vezes eu já pedi: [primeira vez / já pedi antes]
+
+Escreva a mensagem que:
+- Explique, em uma frase, por que aquele documento importa para o caso DELE (o interesse dele, não a minha burocracia)
+- Liste de forma simples e organizada o que falta
+- Facilite o envio (ex: pode mandar foto, pode ser aos poucos)
+- Crie um senso de andamento sem soar como cobrança de divida
+
+Se já pedi antes, deixe um pouco mais firme, mantendo a cordialidade. No máximo 4 linhas. Não culpe o cliente.</pre></section>
+<p><strong>Dica:</strong> cliente não manda documento porque não entendeu que aquilo é o que segura o caso dele. Ligue o pedido ao interesse dele, não à sua burocracia, e o envio acontece muito mais rápido.</p>
+<h4>24. A mensagem de encerramento antes de arquivar o contato</h4>
+<p><strong>Pra que serve:</strong> mandar o último toque, com dignidade, pro contato que esfriou de vez, e que muitas vezes é justamente o que faz a pessoa responder.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p29">Copiar o prompt</button></div><pre class="prompt" id="p29">Você é um advogado que sabe encerrar um contato com classe, deixando uma última porta aberta sem parecer desistência amargurada. Seu papel é escrever a mensagem de encerramento.
+
+Contexto:
+- Nome da pessoa e o caso: [descreva]
+- Quantas vezes já tentei contato: [número]
+- O que eu quero deixar registrado antes de encerrar: [minha disponibilidade futura, um lembrete de prazo importante para ela]
+
+Escreva a mensagem que:
+- Sinalize, com serenidade, que vou parar de escrever para não incomodar
+- Deixe claro que a porta continua aberta quando ela quiser
+- Entregue um último valor (um lembrete, uma orientação, meu contato salvo)
+- Encerre com dignidade, sem culpa e sem drama
+
+No máximo 3 linhas. Tom de quem se respeita. Muitas vezes é essa mensagem que traz a pessoa de volta, então seja gentil até no adeus. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> a mensagem de "vou parar de te escrever pra não incomodar, mas estou aqui quando precisar" é a que mais traz gente de volta. O ser humano corre atrás do que parece que vai perder.</p>
+<h2>Seção 5: Indicação e pós-venda (6 prompts)</h2>
+<p>O cliente satisfeito é o seu melhor comercial, e o mais barato. Mas ele quase nunca indica sozinho, porque ninguém pediu, ou pediram na hora errada. Aqui você transforma bom trabalho em mais clientes.</p>
+<h4>25. Pedir indicação depois de uma etapa concluída</h4>
+<p><strong>Pra que serve:</strong> pedir indicação no momento certo, quando o cliente está feliz com o que você entregou, do jeito que não constrange nenhum dos dois.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p30">Copiar o prompt</button></div><pre class="prompt" id="p30">Você é um advogado que sabe que a melhor hora de pedir indicação é logo depois de uma boa entrega, e que pedir bem não tem nada de constrangedor. Seu papel é escrever esse pedido.
+
+Contexto:
+- Nome do cliente: [nome]
+- O que acabei de resolver para ele: [etapa concluída, andamento que você explicou, atendimento que agradou]
+- O tipo de cliente que eu quero atrair por indicação: [ex: quem tem caso parecido, quem está na mesma situação]
+
+Escreva a mensagem que:
+- Comece agradecendo a confiança, de forma genuína
+- Faça a ponte natural do agradecimento para o pedido
+- Peça a indicação de forma específica (não &quot;indica aí&quot;, mas &quot;se você conhece alguém que passa por [situação], pode passar meu contato&quot;)
+- Facilite a vida dele (ex: pode passar o contato, posso mandar uma mensagem pronta que ele encaminha)
+- Seja leve e sem constrangimento
+
+No máximo 4 linhas. Tom de gratidão, não de pedinte. Não prometa resultado a terceiros.</pre></section>
+<p><strong>Dica:</strong> "indica aí" ninguém faz, porque é vago. "Se você conhecer alguém passando por isso, me avisa" funciona, porque dá um alvo. Quanto mais específico o pedido, mais fácil a pessoa lembrar de alguém.</p>
+<h4>26. Pedir avaliação no Google</h4>
+<p><strong>Pra que serve:</strong> conseguir avaliação no Google do cliente satisfeito, que é o que constrói a reputação que faz o próximo cliente escolher você antes mesmo de chamar.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p31">Copiar o prompt</button></div><pre class="prompt" id="p31">Você é um advogado que sabe que avaliação no Google é a vitrine do escritório e que a maioria dos clientes felizes avalia se você simplesmente pedir e facilitar. Seu papel é escrever o pedido.
+
+Contexto:
+- Nome do cliente: [nome]
+- O que eu resolvi ou o atendimento que agradou: [descreva]
+- O link direto da minha avaliação no Google: [cole, ou escreva &quot;vou anexar o link&quot;]
+
+Escreva a mensagem que:
+- Agradeça a confiança de forma sincera
+- Explique, em uma frase, por que a avaliação dele ajuda outras pessoas na mesma situação a encontrarem ajuda
+- Peça a avaliação de forma leve, deixando claro que é rápido
+- Facilite ao máximo (mande o link, diga que basta escrever poucas palavras sinceras)
+- Não ofereça nada em troca da avaliação
+
+No máximo 4 linhas. Tom de gratidão. Respeite a ética: nada de avaliação comprada, forjada ou em troca de vantagem.</pre></section>
+<p><strong>Dica:</strong> peça no pico da satisfação, logo depois da boa notícia, e mande o link direto na mesma mensagem. Avaliação que depende da pessoa "procurar depois" quase nunca acontece.</p>
+<h4>27. Responder avaliação (positiva e negativa)</h4>
+<p><strong>Pra que serve:</strong> responder toda avaliação do jeito certo, porque a resposta é lida por todos os próximos clientes, e a negativa bem respondida às vezes convence mais que a positiva.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p32">Copiar o prompt</button></div><pre class="prompt" id="p32">Você é um advogado que sabe que a resposta a uma avaliação é vista por todos os futuros clientes e que responder bem, sobretudo a crítica, é sinal de escritório sério. Seu papel é escrever a resposta.
+
+Contexto:
+- Tipo de avaliação: [positiva / negativa]
+- O que a pessoa escreveu: [cole a avaliação]
+- Se for negativa, o que de fato aconteceu, do meu lado: [explique com honestidade]
+
+Se a avaliação for POSITIVA, escreva uma resposta que:
+- Agradeça de forma genuína e pessoal, sem parecer copiada
+- Reforce, sem exagero, o cuidado do escritório
+
+Se for NEGATIVA, escreva uma resposta que:
+- Mantenha a serenidade e o profissionalismo, sem brigar
+- Não exponha dado sigiloso do caso nem detalhe do cliente, jamais, por dever de sigilo
+- Reconheca o que for legítimo e mostre disposição para resolver fora do público
+- Preserve a imagem do escritório para quem le
+
+Nunca quebre sigilo profissional numa resposta publica. Nunca responda com raiva. Não prometa resultado.</pre></section>
+<p><strong>Dica:</strong> na resposta a uma crítica, nunca conte o caso. Chame a pessoa pra resolver no privado. Quem lê não quer ver a briga, quer ver que você é sério. Sigilo mantido em público vale ouro.</p>
+<h4>28. Manter o cliente informado durante o processo</h4>
+<p><strong>Pra que serve:</strong> dar a satisfação que o cliente mais reclama que falta, saber o que está acontecendo com o caso dele, sem você ter que escrever do zero toda vez.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p33">Copiar o prompt</button></div><pre class="prompt" id="p33">Você é um advogado que sabe que a maior reclamação de cliente é a falta de notícia. Seu papel é transformar um andamento técnico em uma mensagem que o cliente entenda e se sinta cuidado.
+
+Contexto:
+- Nome do cliente: [nome]
+- O que aconteceu no processo (linguagem técnica): [cole o andamento, o despacho, a fase]
+- O que isso significa na prática para ele: [explique, ou peça para a IA traduzir com cautela]
+
+Escreva a mensagem que:
+- Traduza o andamento para o português que o cliente entende, sem juridiquês
+- Explique o que aquilo significa para o caso dele e o que vem agora
+- Deixe claro se ele precisa fazer algo ou se é só aguardar
+- Passe a sensação de que o caso está sendo cuidado, com honestidade sobre prazos (a Justiça tem o tempo dela)
+
+Tom humano e tranquilizador, sem prometer resultado nem cravar data de sentença. No máximo 5 linhas. Se o andamento técnico que eu colei não deixar claro o significado, me avise em vez de inventar.</pre></section>
+<p><strong>Dica:</strong> uma mensagem de andamento a cada etapa, mesmo quando não mudou quase nada, mata a ansiedade do cliente e derruba a reclamação de "meu advogado some". Informar é reter.</p>
+<h4>29. Mensagem de data especial (relacionamento)</h4>
+<p><strong>Pra que serve:</strong> manter o vínculo vivo com uma mensagem de aniversário ou data importante que seja pessoal de verdade, não aquele texto padrão que todo mundo percebe que é em massa.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p34">Copiar o prompt</button></div><pre class="prompt" id="p34">Você é um advogado que cultiva relacionamento de longo prazo e sabe que uma mensagem pessoal na hora certa mantém o escritório na memória do cliente. Seu papel é escrever uma mensagem de data especial que não pareca automática.
+
+Contexto:
+- Nome da pessoa: [nome]
+- A data ou ocasiao: [aniversário / fim de ano / aniversário de um ano do caso resolvido / outra]
+- Algo pessoal que eu lembro dela ou do caso: [um detalhe real, para personalizar]
+
+Escreva a mensagem que:
+- Cumprimente pela data de forma calorosa e pessoal
+- Traga o detalhe real que eu passei, para mostrar que é de verdade
+- Não venda nada, apenas cuide do vínculo
+- Seja curta e sincera
+
+No máximo 3 linhas. O objetivo é relacionamento, não venda. Nada de aproveitar a data para empurrar serviço. Tom humano de quem lembrou mesmo da pessoa.</pre></section>
+<p><strong>Dica:</strong> mensagem de data especial que tenta vender estraga o gesto. Não venda nada. O simples fato de você lembrar, sem pedir nada em troca, é o que faz a pessoa te indicar quando alguém precisar.</p>
+<h4>30. Ativar a rede de parceiros indicadores</h4>
+<p><strong>Pra que serve:</strong> cuidar de quem te manda cliente de forma recorrente (contador, corretor, outros profissionais) pra que a indicação continue vindo, em vez de esperar que aconteça sozinha.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p35">Copiar o prompt</button></div><pre class="prompt" id="p35">Você é um advogado que entende que parceiro que indica (contador, corretor, outro profissional) é uma fonte constante de casos e que essa relação precisa ser cuidada, não esquecida. Seu papel é escrever a mensagem para nutrir essa parceria.
+
+Contexto:
+- Nome do parceiro e a área dele: [ex: Joao, contador]
+- Histórico da parceria: [ex: já me indicou clientes, conheci em um evento, quero começar a parceria]
+- O tipo de caso que eu atendo e que faz sentido ele me indicar: [descreva]
+- O que eu posso oferecer de volta, de forma ética: [ex: indicar clientes para ele, dar retorno sobre quem ele indicou, uma parceria de mão dupla]
+
+Escreva a mensagem que:
+- Cuide da relação com calor humano, sem soar interesseiro
+- Agradeça as indicações anteriores, se houver
+- Reforce, de forma clara, o tipo de caso em que eu posso ajudar os contatos dele
+- Proponha uma troca justa e ética, de mão dupla
+- Deixe a porta aberta para uma conversa
+
+Tom de parceria entre profissionais, não de quem só quer receber. Respeite a ética da OAB: nada de captação indevida nem pagamento por indicação de cliente. No máximo 5 linhas.</pre></section>
+<p><strong>Dica:</strong> parceria de indicação vive de reciprocidade e de retorno. Avise o parceiro quando o cliente que ele mandou foi bem atendido. Isso fecha o ciclo de confiança e faz ele te indicar de novo, sem você precisar pedir.</p>
+<h3>O próximo passo</h3>
+<p>Estes 30 prompts arrumam a conversa do seu escritório. Mas o atendimento é só uma das frentes onde a IA tira peso das suas costas. Tem a petição, a gestão dos prazos, a organização da equipe, o seu próprio banco de prompts crescendo com o tempo.</p>
+<p>Quando você cansar de adaptar prompt genérico e quiser uma ferramenta de IA pensada pra advocacia de verdade, com as teses, com segurança e com o jurídico no centro, o MaestrIA é o lugar pra onde esse caminho leva. Sem pressa. Um passo de cada vez.</p>
+<p>Bom trabalho, e revise sempre antes de enviar.</p></section>
+<section class="aba" id="conteudo" role="tabpanel"><h2>Módulo 3: conteúdo para 30 dias</h2>
+<h4>3 prompts para você gravar no celular, aparecer e postar com regularidade.</h4>
+<p>O conteúdo deste módulo é para VOCÊ gravar. O advogado que aparece, explica e responde dúvida é quem constrói autoridade. A IA prepara o roteiro; a cara, a voz e a decisão do que vai ao ar são suas.</p>
+<p><strong>Cuidado com a OAB:</strong> o Provimento 205/2021 da OAB regula a publicidade da advocacia. Os prompts abaixo já pedem conteúdo informativo, sem promessa e sem chamada de contratação, e avisam quando um trecho pode passar do limite, principalmente se o vídeo for impulsionado como anúncio. Leia o provimento na fonte oficial; quem decide o que publica é você.</p>
+<h3>1. Roteiro do WhatsApp</h3>
+<p><strong>Para que serve:</strong> transformar as perguntas que chegam no seu WhatsApp em roteiros de vídeo curto, com gancho, falas e texto em tela.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p36">Copiar o prompt</button></div><pre class="prompt" id="p36">Você vai transformar as perguntas que os clientes mandam no WhatsApp do meu escritório de advocacia em ROTEIROS DE VÍDEO CURTO para EU gravar no celular e postar no Instagram.
+
+COMO TRABALHAR
+1. Eu colo as perguntas do jeito que chegaram (conversa de WhatsApp, caixinha de perguntas, comentário, direct). Antes de qualquer coisa, DESCARACTERIZE: tire nome, foto, número, cidade pequena, empresa e qualquer detalhe que identifique a pessoa. A dúvida fica, a pessoa some.
+2. Agrupe as perguntas parecidas e me mostre uma lista: &quot;estas são as 5 dúvidas que mais aparecem no seu material&quot;. Eu escolho quais viram roteiro.
+3. Me pergunte, UMA de cada vez, só o que faltar: a minha área de atuação, para quem eu falo (quem é o cliente típico) e se o vídeo vai ser impulsionado como anúncio.
+
+PARA CADA ROTEIRO (reel de 30 a 60 segundos)
+Título:
+GANCHO (0 a 3 s): uma pergunta ou afirmação que pare o dedo, usando as palavras que o cliente usou no WhatsApp.
+BLOCO 1 (3 a 10 s): Visual: &lt;o que aparece&gt; | Fala: &quot;&lt;frase&gt;&quot;
+BLOCO 2 (10 a 25 s): Visual: | Fala:
+BLOCO 3 (25 a 45 s): Visual: | Fala:
+FECHAMENTO (últimos 5 a 10 s): Visual: | Fala:
+TEXTO EM TELA: uma linha por bloco, até 10 palavras cada.
+LEGENDA DO POST: 2 a 4 parágrafos curtos que ampliam o vídeo.
+
+REGRAS DO ROTEIRO
+- Fala de gente, não de petição: frases curtas, sem juridiquês, como eu explicaria para o cliente na mesa.
+- Cada bloco tem UMA ideia e no máximo 10 segundos.
+- O vídeo informa e esclarece. Não promete resultado, não fala em vitória no processo, não cita valores de indenização e não mostra caso de cliente identificável.
+- Fechamento informativo, por exemplo: &quot;Comenta a sua dúvida aqui embaixo&quot;, &quot;Salva para mostrar para quem precisa&quot; ou &quot;Me segue para mais conteúdo como este&quot;. Não use chamada de contratação (&quot;me chama que eu resolvo&quot;, &quot;agende já&quot;, &quot;consulta grátis&quot;).
+- Se o vídeo for impulsionado como anúncio, o conteúdo precisa ser só informativo, sem oferta de serviço. Avise se algum trecho passar disso e mostre o porquê; quem decide sou eu.
+- Se eu pedir para citar lei, súmula ou decisão de tribunal, escreva entre colchetes &quot;[conferir na fonte oficial antes de gravar]&quot;. Nunca invente número.
+- Nada de promessa, nada de &quot;certeza de resultado&quot;, nada de comparação com outros advogados.
+- Português do Brasil.
+
+Comece me pedindo para colar as perguntas dos clientes.</pre></section>
+<p><strong>Exemplo (fictício):</strong> o advogado cola três dúvidas sobre pensão ("se minha mãe casar de novo ela perde a pensão?", "meu pai não era casado no papel, a companheira tem direito?", "quanto tempo depois dá pra pedir?") e recebe o roteiro "Casou de novo, perde a pensão?", com gancho, três blocos, fechamento "Tem alguém na família com essa dúvida? Manda este vídeo para ela." e a regra marcada para conferir na fonte oficial antes de gravar.</p>
+<h3>2. Calendário de 30 dias por área</h3>
+<p><strong>Para que serve:</strong> sair do "o que eu posto hoje?" com um mês inteiro de pautas, cada uma já com gancho, miolo, fechamento e legenda.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p37">Copiar o prompt</button></div><pre class="prompt" id="p37">Você vai montar um CALENDÁRIO DE CONTEÚDO DE 30 DIAS para o Instagram do meu escritório de advocacia. Eu vou GRAVAR os vídeos no celular, aparecendo e falando; você prepara as pautas e os roteiros curtos.
+
+ANTES DE COMEÇAR, me pergunte UMA coisa de cada vez:
+1. Minha área de atuação (qual) e os 10 assuntos que mais chegam no meu WhatsApp.
+2. Para quem eu falo: quem é o cliente típico (idade, trabalho, onde mora, o que mais pergunta).
+3. Quantos dias por semana eu consigo gravar (3, 4 ou 5).
+4. Se algum desses vídeos vai ser impulsionado como anúncio.
+
+COMO MONTAR
+- Distribua os dias da semana que eu escolhi ao longo de 30 dias e varie os tipos de vídeo:
+  DÚVIDA (responde uma pergunta comum), MITO OU VERDADE, ERRO COMUM (o que as pessoas fazem e prejudica o pedido), PASSO A PASSO (como pedir, que documento separar), BASTIDOR (como é o meu trabalho, sem expor cliente).
+- Puxe os temas dos 10 assuntos que eu listei. Se eu listar menos, complete com as dúvidas mais comuns da minha área e me mostre a lista antes de montar o calendário.
+
+PARA CADA DIA, entregue numa tabela:
+Dia | Tipo | Tema | GANCHO (até 12 palavras, que pare o dedo) | MIOLO (3 pontos curtos, uma ideia cada) | FECHAMENTO informativo | LEGENDA (2 a 3 frases)
+
+REGRAS
+- Linguagem de gente, sem juridiquês. Cada vídeo de 30 a 60 segundos.
+- O conteúdo informa e esclarece. Não promete resultado, não fala em &quot;ganhar&quot;, não cita valores de indenização ou de benefício e não usa caso de cliente identificável.
+- Fechamento informativo (&quot;comenta a sua dúvida&quot;, &quot;salva para quando precisar&quot;, &quot;me segue para mais&quot;). Nunca chamada de contratação (&quot;me chama&quot;, &quot;agende&quot;, &quot;consulta grátis&quot;).
+- Regras, prazos e números entram com &quot;[conferir na fonte oficial antes de gravar]&quot;. Nunca invente número de lei, súmula ou prazo.
+- Se algum vídeo for virar anúncio, marque na tabela e avise o que precisa mudar para ficar só informativo, citando o Provimento 205/2021 da OAB para eu conferir. Quem decide sou eu.
+- No fim, liste os 5 vídeos que eu deveria gravar primeiro e por quê (os temas que mais aparecem no meu público).
+- Português do Brasil.
+
+Comece pela primeira pergunta.</pre></section>
+<p><strong>Exemplo (fictício), uma linha do calendário de um escritório de família:</strong></p>
+<pre class="resultado">Dia 3 | ERRO COMUM | Sair de casa antes de resolver a separação
+GANCHO: &quot;Vai sair de casa por causa da separação? Espera.&quot;
+MIOLO: o que vale combinar antes de sair / por que não assinar acordo no impulso / que documentos separar
+FECHAMENTO: &quot;Salva e manda para quem está passando por isso.&quot;
+LEGENDA: Antes de assinar qualquer papel, entenda o que você está abrindo mão. [conferir na fonte oficial antes de gravar]</pre>
+<h3>3. Texto em tela e legenda do vídeo que você já gravou</h3>
+<p><strong>Para que serve:</strong> você gravou do seu jeito; a IA tira da sua fala o gancho escrito, o texto em tela e a legenda.</p>
+<section class="caixa-prompt"><div class="barra"><span>Prompt</span><button class="botao copiar" type="button" data-alvo="p38">Copiar o prompt</button></div><pre class="prompt" id="p38">Eu gravei um vídeo curto para o Instagram do meu escritório de advocacia. Vou colar a transcrição do que eu falei (ou um resumo). Prepare o que vai por cima do vídeo e no post, SEM mudar o sentido do que eu disse.
+
+ENTREGUE
+1. GANCHO ESCRITO para os 3 primeiros segundos: 3 opções de até 8 palavras, tiradas da minha própria fala.
+2. TEXTO EM TELA: uma linha por trecho do vídeo, até 10 palavras cada, na ordem em que eu falo.
+3. LEGENDA DO POST: 2 a 4 parágrafos curtos que ampliam o vídeo, com um fechamento informativo (&quot;comenta a sua dúvida&quot;, &quot;salva para quando precisar&quot;, &quot;me segue para mais&quot;).
+4. Uma lista do que você NÃO conseguiu confirmar na minha fala (número, prazo, regra) para eu conferir antes de postar.
+
+REGRAS
+- Use as minhas palavras. Não acrescente promessa, valor, &quot;ganhar&quot; nem chamada de contratação (&quot;me chama&quot;, &quot;agende&quot;, &quot;consulta grátis&quot;).
+- Se a minha fala tiver algo que pode passar do limite da publicidade da advocacia (Provimento 205/2021 da OAB), aponte o trecho e o porquê. Quem decide se muda sou eu.
+- Não identifique cliente nem caso real.
+- Português do Brasil, sem juridiquês.
+
+Comece me pedindo a transcrição.</pre></section>
+<p><strong>Exemplo (fictício):</strong> o advogado cola a transcrição de um vídeo sobre CNIS com vínculo faltando e recebe três ganchos ("Seu CNIS está com buraco?"), seis linhas de texto em tela, a legenda e o aviso "você citou um prazo; conferir na fonte oficial antes de postar".</p></section></main>
+<footer>Samurai do Jurídico. MaestrIA é a IA jurídica que roda no seu computador. Revise sempre antes de usar.</footer>
+<script>
+(function () {
+  var botoes = document.querySelectorAll('nav button');
+  function abrir(id) {
+    botoes.forEach(function (b) {
+      b.setAttribute('aria-selected', b.dataset.aba === id ? 'true' : 'false');
+      if (b.dataset.aba === id) { b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+    });
+    document.querySelectorAll('.aba').forEach(function (a) { a.hidden = a.id !== id; });
+    window.scrollTo(0, 0);
+  }
+  botoes.forEach(function (b) { b.addEventListener('click', function () { abrir(b.dataset.aba); }); });
+  abrir('leia');
+  document.querySelectorAll('.copiar').forEach(function (botao) {
+    botao.addEventListener('click', function () {
+      var texto = document.getElementById(botao.dataset.alvo).innerText;
+      function avisar() {
+        botao.textContent = 'Copiado. Agora cole na sua IA.'; botao.classList.add('copiado');
+        setTimeout(function () { botao.textContent = 'Copiar o prompt'; botao.classList.remove('copiado'); }, 4000);
+      }
+      function reserva() {
+        var area = document.createElement('textarea');
+        area.value = texto; area.setAttribute('readonly', ''); area.style.position = 'fixed'; area.style.opacity = '0';
+        document.body.appendChild(area); area.select();
+        try { document.execCommand('copy'); avisar(); } catch (e) { botao.textContent = 'Selecione o texto e copie'; }
+        document.body.removeChild(area);
+      }
+      if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(texto).then(avisar, reserva); } else { reserva(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
