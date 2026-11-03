@@ -91,7 +91,9 @@ details[open] summary::after { content:'\2212'; }
 details p { margin-top:10px; }
 .fixo { position:fixed; left:0; right:0; bottom:0; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(0,0,0,.92); border-top:1px solid var(--bd2); display:none; z-index:5; }
 .fixo .botao { width:100%; }
-footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; color:var(--dim); }
+footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; color:var(--dim); display:flex; flex-direction:column; gap:8px; }
+footer .linha { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; }
+footer .linha span:last-child { color:var(--muted); }
 @media (max-width:700px) { .fixo { display:block; } body { font-size:16.5px; } .sub { font-size:17.5px; } }
 @media (min-width:701px) {
   main { max-width:960px; }
@@ -494,7 +496,7 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias para pedir o dinheiro de volta pela própria Kiwify.</p></details>
     </div>
   </section>
-  <footer>Samurai do Jurídico.</footer>
+  <footer><div class="linha"><span>© 2026 Samurai do Jurídico. Todos os direitos reservados.</span><span>Feito com muito ☕ e muito ❤️ por Samurai do Jurídico.</span></div></footer>
 </main>
 <div class="fixo"><a class="botao" href="#comprar">Quero o meu ano por R$ 67</a></div>
 
