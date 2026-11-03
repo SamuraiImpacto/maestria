@@ -37,6 +37,12 @@ h3 { color:var(--txt); font-size:18px; font-weight:800; line-height:1.3; }
 .botao.grande { font-size:18px; padding:18px 28px; width:100%; }
 .botao.copiado { background:var(--card2); color:var(--ok); }
 .nota { font-size:14px; color:var(--dim); }
+.faixa-67 { display:flex; flex-direction:column; gap:12px; text-decoration:none; color:var(--muted); background:rgba(74,222,128,.06); border:1px solid rgba(74,222,128,.35); border-radius:var(--r); padding:18px 20px; text-align:left; transition:border-color .15s; }
+.faixa-67:hover { border-color:var(--ok); }
+.faixa-67 .selo { align-self:flex-start; color:var(--ok); background:rgba(74,222,128,.1); border-color:rgba(74,222,128,.35); }
+.faixa-67 b { color:var(--txt); display:block; margin-bottom:2px; }
+.faixa-67 .ir { align-self:flex-start; font-weight:800; color:#fff; background:var(--cta); border-radius:var(--rs); padding:11px 18px; }
+@media (min-width:701px) { .faixa-67 { flex-direction:row; align-items:center; gap:20px; align-self:center; width:100%; max-width:820px; } .faixa-67 .selo, .faixa-67 .ir { align-self:center; flex-shrink:0; } }
 .hero { gap:22px; padding-top:8px; }
 .hero .acoes { display:flex; flex-wrap:wrap; gap:12px 18px; align-items:center; }
 .zap { background:var(--zap); border:1px solid var(--bd2); border-radius:22px; padding:16px; display:flex; flex-direction:column; gap:10px; max-width:440px; width:100%; }
@@ -176,6 +182,7 @@ footer .linha span:last-child { color:var(--muted); }
     <h1>Você ainda pede para a IA <em>"dar uma olhada"</em> na sua peça?</h1>
     <p class="sub">Ela olha. Elogia. Devolve um texto bonito e genérico. E se você deixar, cita uma decisão que ninguém sabe de onde saiu. <b>O problema não é a IA. É o pedido.</b> Aqui estão 20 pedidos prontos, desenvolvidos em conjunto com os escritórios que a gente acompanha.</p>
     <div class="acoes"><a class="botao" href="#os-20">Ver os 20 prompts</a><span class="nota">ChatGPT, Claude, Gemini: funciona em qualquer uma.</span></div>
+    <a class="faixa-67" href="https://maestria.samurailab.com.br/reels/"><span class="selo">R$ 67</span><span><b>Os prompts cuidam do processo. E o que você grava amanhã?</b> Informe o seu @ e até 3 teses: a IA entrega o raio-x do seu Instagram e 365 roteiros de reels das suas teses, um por dia.</span><span class="ir">Quero os meus 365 roteiros</span></a>
   </section>
 
   <section>
@@ -200,6 +207,7 @@ footer .linha span:last-child { color:var(--muted); }
     <h2>20 momentos em que o escritório <em>trava</em></h2>
     <p>Cada prompt nasceu de uma cena que se repete toda semana. Escolha a sua e pule direto.</p>
     <ul class="indice"><li><a href="#p1"><b>01</b><div>O revisor que não elogia<span>Antes de protocolar</span></div></a></li><li><a href="#p2"><b>02</b><div>O mapa da contestação antes da réplica<span>Antes da réplica</span></div></a></li><li><a href="#p3"><b>03</b><div>A pilha de documentos do cliente<span>Quando o cliente despeja tudo no WhatsApp</span></div></a></li><li><a href="#p4"><b>04</b><div>Sentença ruim: o que vale recorrer<span>Depois da sentença ruim</span></div></a></li><li><a href="#p5"><b>05</b><div>O laudo que se contradiz<span>Quando o laudo veio contra</span></div></a></li><li><a href="#p6"><b>06</b><div>A audiência antes da audiência<span>Três dias antes da audiência</span></div></a></li><li><a href="#p7"><b>07</b><div>A conferência de citações<span>Antes de assinar o que a IA escreveu</span></div></a></li><li><a href="#p8"><b>08</b><div>Uma página para o juiz<span>Na hora de despachar</span></div></a></li><li><a href="#p9"><b>09</b><div>A decisão explicada ao cliente<span>Quando o cliente pergunta &quot;e aí?&quot;</span></div></a></li><li><a href="#p10"><b>10</b><div>A pergunta do cliente que vira vídeo<span>Quando você não sabe o que gravar</span></div></a></li><li><a href="#p11"><b>11</b><div>O que essa intimação manda fazer<span>Quando chega a intimação</span></div></a></li><li><a href="#p12"><b>12</b><div>Do relato do cliente à petição inicial<span>Antes de escrever a inicial</span></div></a></li><li><a href="#p13"><b>13</b><div>O processo que caiu no seu colo<span>Quando você assume um caso andando</span></div></a></li><li><a href="#p14"><b>14</b><div>O acórdão em dez linhas<span>Quando o acórdão tem 40 páginas</span></div></a></li><li><a href="#p15"><b>15</b><div>A proposta de acordo que chegou<span>Quando a outra parte propõe acordo</span></div></a></li><li><a href="#p16"><b>16</b><div>A prova que falta para cada fato<span>Antes de fechar a prova</span></div></a></li><li><a href="#p17"><b>17</b><div>O print de WhatsApp da outra parte<span>Quando juntam print contra o seu cliente</span></div></a></li><li><a href="#p18"><b>18</b><div>As cláusulas que mordem<span>Antes de assinar o contrato</span></div></a></li><li><a href="#p19"><b>19</b><div>Recusar o caso sem queimar a ponte<span>Quando o caso não é para você</span></div></a></li><li><a href="#p20"><b>20</b><div>A segunda-feira em ordem<span>Segunda de manhã</span></div></a></li></ul>
+    <a class="faixa-67" href="https://maestria.samurailab.com.br/reels/"><span class="selo">R$ 67</span><span><b>Os prompts cuidam do processo. E o que você grava amanhã?</b> Informe o seu @ e até 3 teses: a IA entrega o raio-x do seu Instagram e 365 roteiros de reels das suas teses, um por dia.</span><span class="ir">Quero os meus 365 roteiros</span></a>
   </section>
 
   <section>
@@ -487,18 +495,18 @@ Os prazos são os que eu informei: não calcule nem altere data. Se algum item e
 
   <section class="cuidado"><strong>Leia antes de usar o que voltou</strong>A IA erra, e erra com confiança. Por isso todo prompt aqui manda ela marcar lei, súmula e decisão como "conferir na fonte oficial". Confira cada uma. Quem assina é você.</section>
 
-  <section class="oferta" id="kit">
+  <section class="oferta" id="reels">
     <p class="olho">Próximo passo</p>
-    <h2>Esses 20 cuidam do processo. <em>E o marketing do escritório?</em></h2>
-    <p>Você informa o seu @ do Instagram e a sua área. Em uns 3 minutos a IA entrega, feito para você: o raio-x do perfil com a bio nova, 30 roteiros de vídeo da sua área, as mensagens de venda do WhatsApp e a sua primeira campanha de tráfego. Sem prompt nenhum.</p>
-    <div class="tira"><span>Raio-x e bio nova</span><span>30 roteiros</span><span>10 mensagens de venda</span><span>Primeira campanha</span></div>
-    <div class="preco">R$ 47<small>pagamento único</small></div>
-    <a class="botao grande" href="/kit/">Quero ver o meu escritório pronto</a>
+    <h2>Esses 20 cuidam do processo. <em>E o que você grava amanhã?</em></h2>
+    <p>Você informa o seu @ do Instagram e até três teses que defende. Em poucos minutos a IA entrega, feito para você: o raio-x do perfil com a bio nova e 365 roteiros de reels das suas teses, um por dia, na ordem que faz a pessoa confiar antes de chamar. Sem prompt nenhum.</p>
+    <div class="tira"><span>Raio-x e bio nova</span><span>365 roteiros</span><span>Guia dos convites</span><span>Rotina de stories</span></div>
+    <div class="preco">R$ 67<small>pagamento único</small></div>
+    <a class="botao grande" href="https://maestria.samurailab.com.br/reels/">Quero os meus 365 roteiros</a>
   </section>
 
   <footer><p>Prompt é ponto de partida: o MaestrIA faz isso dentro do seu computador, com o modelo do seu escritório e a jurisprudência conferida na fonte oficial.</p><div class="linha"><span>© 2026 Samurai do Jurídico. Todos os direitos reservados.</span><span>Feito com muito ☕ e muito ❤️ por Samurai do Jurídico.</span></div></footer>
 </main>
-<div class="fixo"><a class="botao" href="#os-20">Pegar os 20 prompts</a></div>
+<div class="fixo"><a class="botao" href="https://maestria.samurailab.com.br/reels/">365 roteiros das suas teses por R$ 67</a></div>
 <script>
 (function () {
   function copiar(botao) {
