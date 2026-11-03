@@ -224,6 +224,15 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 .passos li span { color:var(--muted); font-size:15.5px; }
 .rv .hero .txt, .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
 .rv .oferta .lado-preco { display:flex; flex-direction:column; gap:16px; }
+.bio { display:grid; gap:24px; background:var(--card); border:1px solid var(--bd); border-radius:22px; padding:20px; }
+.bio img { width:100%; aspect-ratio:1; object-fit:cover; object-position:50% 30%; border-radius:var(--r); display:block; }
+.bio .txt { display:flex; flex-direction:column; gap:14px; }
+.bio .fatos { display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+.bio .fatos div { border-top:2px solid var(--red); padding-top:10px; }
+.bio .fatos b { display:block; font-family:'Playfair Display',serif; font-weight:900; font-size:30px; line-height:1.1; color:var(--txt); }
+.bio .fatos span { font-size:14px; color:var(--dim); }
+.regras-st { list-style:none; display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+.regras-st li { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:12px 14px; color:var(--txt); font-size:15px; }
 .compara .risco { color:var(--dim); text-decoration:line-through; text-decoration-color:var(--red); }
 .partes { display:grid; gap:12px; }
 .partes div { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:18px 20px; display:flex; flex-direction:column; gap:6px; }
@@ -287,6 +296,10 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   .rv .faq { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:64px; align-items:start; }
   .rv .faq .perg { display:flex; flex-direction:column; gap:10px; }
   .rv .faq h2 { position:sticky; top:96px; }
+  .rv .fita { justify-content:space-between; border-top:1px solid var(--bd); border-bottom:1px solid var(--bd); padding:18px 0; }
+  .rv .bio img { aspect-ratio:4/5; }
+  .rv .bio { grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); gap:48px; align-items:center; padding:32px; }
+  .rv .bio h2 { font-size:46px; }
   .rv section > .lista { align-self:flex-start; max-width:none; }
   .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
 }

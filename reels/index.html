@@ -224,6 +224,15 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 .passos li span { color:var(--muted); font-size:15.5px; }
 .rv .hero .txt, .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
 .rv .oferta .lado-preco { display:flex; flex-direction:column; gap:16px; }
+.bio { display:grid; gap:24px; background:var(--card); border:1px solid var(--bd); border-radius:22px; padding:20px; }
+.bio img { width:100%; aspect-ratio:1; object-fit:cover; object-position:50% 30%; border-radius:var(--r); display:block; }
+.bio .txt { display:flex; flex-direction:column; gap:14px; }
+.bio .fatos { display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+.bio .fatos div { border-top:2px solid var(--red); padding-top:10px; }
+.bio .fatos b { display:block; font-family:'Playfair Display',serif; font-weight:900; font-size:30px; line-height:1.1; color:var(--txt); }
+.bio .fatos span { font-size:14px; color:var(--dim); }
+.regras-st { list-style:none; display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+.regras-st li { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:12px 14px; color:var(--txt); font-size:15px; }
 .compara .risco { color:var(--dim); text-decoration:line-through; text-decoration-color:var(--red); }
 .partes { display:grid; gap:12px; }
 .partes div { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:18px 20px; display:flex; flex-direction:column; gap:6px; }
@@ -287,13 +296,17 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   .rv .faq { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:64px; align-items:start; }
   .rv .faq .perg { display:flex; flex-direction:column; gap:10px; }
   .rv .faq h2 { position:sticky; top:96px; }
+  .rv .fita { justify-content:space-between; border-top:1px solid var(--bd); border-bottom:1px solid var(--bd); padding:18px 0; }
+  .rv .bio img { aspect-ratio:4/5; }
+  .rv .bio { grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); gap:48px; align-items:center; padding:32px; }
+  .rv .bio h2 { font-size:46px; }
   .rv section > .lista { align-self:flex-start; max-width:none; }
   .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
 }
 </style>
 <header class="rv-top"><div class="in">
   <a class="rv-marca" href="#topo"><i></i>Samurai do Jurídico</a>
-  <nav><a href="#chega">O que chega</a><a href="#caso">Caso real</a><a href="#explicado">Como usar</a><a href="#conta">Faça a conta</a><a href="#perguntas">Perguntas</a></nav>
+  <nav><a href="#chega">O que chega</a><a href="#caso">Caso real</a><a href="#explicado">Como usar</a><a href="#conta">Faça a conta</a><a href="#quem">Quem criou</a><a href="#perguntas">Perguntas</a></nav>
   <a class="botao" href="#comprar">Quero por R$ 67</a>
 </div></header>
 <main class="rv" id="topo">
@@ -400,7 +413,7 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <h2>O story que você não posta <em>passa a ter roteiro também.</em></h2>
     <p class="sub">Uma semana de stories, dia a dia, com exemplos das suas teses. Aqui, com a tese do caso real: leilão de imóveis.</p>
     <div class="semana"><div><b>Segunda</b><strong>Bastidor da semana</strong><span>Foto ou vídeo da sua mesa, da pasta, do fórum. Texto: &quot;Essa semana o assunto por aqui é leilão de imóveis.&quot; Mostra que você trabalha com isso de verdade.</span></div><div><b>Terça</b><strong>Caixinha de perguntas</strong><span>Abra a caixinha: &quot;Qual a sua dúvida sobre leilão de imóveis?&quot; Cada pergunta que chegar é um vídeo pronto para depois.</span></div><div><b>Quarta</b><strong>Respostas em 15 segundos</strong><span>Responda duas ou três perguntas da caixinha falando para a câmera. Sem nome de quem perguntou.</span></div><div><b>Quinta</b><strong>O reel com enquete</strong><span>Reposte o vídeo do dia e coloque uma enquete: &quot;Isso já aconteceu com alguém da sua família? Sim ou não.&quot; Quem responde sim é quem você quer.</span></div><div><b>Sexta</b><strong>Mito ou verdade</strong><span>Um teste de duas opções sobre leilão de imóveis. No story seguinte, a resposta em uma frase.</span></div><div><b>Sábado</b><strong>Você, fora do escritório</strong><span>Um café, um passeio, a família se você quiser. Gente confia em gente, não em logomarca.</span></div><div><b>Domingo</b><strong>O mais visto da semana</strong><span>Reposte o vídeo que foi melhor e convide: &quot;Se você perdeu, é esse aqui.&quot;</span></div></div>
-    <ul class="lista"><li>De 3 a 7 stories por dia é suficiente.</li><li>Apareça falando em pelo menos um deles.</li><li>Nunca mostre dado, rosto ou documento de cliente.</li><li>Uma vez por semana, termine com o convite para o WhatsApp do link.</li></ul>
+    <ul class="regras-st"><li>De 3 a 7 stories por dia é suficiente.</li><li>Apareça falando em pelo menos um deles.</li><li>Nunca mostre dado, rosto ou documento de cliente.</li><li>Uma vez por semana, termine com o convite para o WhatsApp do link.</li></ul>
   </section>
 
   <section id="conta">
@@ -429,7 +442,6 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   </section>
 
   <section>
-    <p class="olho">É para você se</p>
     <div class="duo">
       <div class="lado bom"><span class="tag">É para você se</span><ul class="lista">
         <li>Sabe que precisa aparecer e nunca sabe o que gravar.</li>
@@ -452,6 +464,22 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
       <div class="preco">R$ 67<small>pagamento único</small></div>
       <a class="botao grande" href="https://pay.kiwify.com.br/OeXlH4s">Quero o meu ano de vídeos</a>
       <p class="nota">7 dias para pedir o dinheiro de volta pela Kiwify. Feito pela IA a partir do seu perfil público e das teses que você informar. Qualquer área do Direito.</p>
+    </div>
+  </section>
+
+  <section id="quem">
+    <div class="bio">
+      <img src="/img/rodrigo-goltzman.jpg" alt="Rodrigo Goltzman, o Samurai do Jurídico, falando num evento de advocacia" width="720" height="900">
+      <div class="txt">
+        <p class="olho">Quem criou</p>
+        <h2>Rodrigo Goltzman, <em>o Samurai do Jurídico.</em></h2>
+        <p class="sub">À frente da Impacto Marketing Jurídico, ele acompanha escritórios de advocacia no marketing de todo dia: o perfil, o conteúdo, o tráfego e a conversa que vira contrato.</p>
+        <p>Foi de dentro desses escritórios que saiu o método destes roteiros: primeiro a pessoa se reconhece, depois sente a dor, só então ouve falar do direito. É o mesmo método que a equipe aplica na operação e que ele leva para o palco nos eventos de advocacia. Os 365 roteiros são esse método, escrito para as suas teses.</p>
+        <div class="fatos">
+          <div><b>300+</b><span>escritórios acompanhados no marketing jurídico</span></div>
+          <div><b>Gente, dor, tese</b><span>o método aplicado na operação, todo dia</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
