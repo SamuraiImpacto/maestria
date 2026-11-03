@@ -753,7 +753,7 @@ h2 {
 
   <!-- OFERTA -->
   <section class="tela" data-tela="oferta">
-    <div class="prazo" id="prazoBox">De R$ 1.497 por R$ 997</div>
+    <div class="prazo" id="prazoBox">De R$ 997 por R$ 697</div>
     <h1>MaestrIA <span class="vermelho">Previdenciário</span></h1>
     <p class="sub">As 9 skills, instaladas no seu computador em uns 30 minutos. Uma vez só, sem mensalidade.</p>
 
@@ -764,15 +764,15 @@ h2 {
         <li><span class="ic">✅</span><span><strong>Calibragem no seu padrão</strong>: seu timbrado, seu estilo, seus modelos</span></li>
         <li><span class="ic">✅</span><span><strong>Atualizações incluídas</strong>: skill nova e melhoria entram sem custo</span></li>
         <li><span class="ic">✅</span><span><strong>Suporte pela própria skill</strong>, com a correção chegando pra todo mundo no /atualizar-skill</span></li>
-        <li><span class="ic">✅</span><span><strong>Suporte direto</strong> pelo seu painel, com resposta de gente</span></li>
+        <li><span class="ic">✅</span><span><strong>Grupo da comunidade</strong>, onde as dúvidas são respondidas</span></li>
       </ul>
       <div class="sep" style="margin:22px 0;"></div>
       <div class="preco-linha">
-        <span class="preco-cifra">R$</span><span class="preco-valor">997</span>
+        <span class="preco-cifra">R$</span><span class="preco-valor">697</span>
       </div>
-      <p class="preco-depois" id="precoDepois">em vez de R$ 1.497, com 12 meses de acesso</p>
+      <p class="preco-depois" id="precoDepois">em vez de R$ 997, com 12 meses de acesso</p>
       <p class="preco-parcela">ou em até 12x no cartão</p>
-      <a href="https://pay.kiwify.com.br/q5QEizf?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO POR R$ 997</a>
+      <a href="https://pay.kiwify.com.br/q5QEizf?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO POR R$ 697</a>
       <div class="garantia">
         <span style="font-size:20px;">🛡️</span>
         <p><strong>7 dias de garantia.</strong> Instala, roda numa peça de verdade e vê. Se não fizer sentido pro seu escritório, você pede o reembolso e pronto. Sem justificativa, sem estresse.</p>
@@ -803,34 +803,16 @@ h2 {
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
   var TOTAL_PASSOS = 6;
 
-  // Preco do Previdenciario desde 14/10/2026: R$ 997, ancorado em R$ 1.497.
-  // O lote fundador de R$ 697 acabou e a Kiwify esta no preco novo.
-  // ⛔ Nao ha data de virada nova. Enquanto nao houver, a pagina nao anuncia
-  // prazo nenhum: prazo vencido no ar e pior do que nao ter prazo, e preco
-  // anunciado diferente do que o checkout cobra e o pior jeito de receber um
-  // cliente novo. Se voltar a ter lote com data, a virada volta aqui.
-  var PRECO = 997;
-  /* Oferta de 16/10/2026: R$ 697 ate as 23h59 de Brasilia (= 02:59:59 UTC do
-     dia 17). A pagina volta SOZINHA para 997 na virada, sem deploy nenhum.
-     ⛔ Hora absoluta em UTC, nunca o relogio local do visitante. */
-  var PROMO_FIM = Date.UTC(2026, 9, 17, 2, 59, 59);
-  var PROMO = 697;
-
-  function promoValendo() { return Date.now() <= PROMO_FIM; }
+  // Preco do Previdenciario desde 03/11/2026: R$ 697, ancorado em R$ 997
+  // (esteira decidida pelo Samurai em 01/11/2026, Kiwify conferida em 03/11).
+  // Sem prazo nem contagem: preco anunciado tem que ser o que o checkout cobra.
+  var PRECO = 697;
 
   function aplicaLote() {
-    var preco = promoValendo() ? PROMO : PRECO;
-    $(".preco-valor").textContent = preco;
-    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + preco;
-    $("#prazoBox").textContent = promoValendo()
-      ? "Só hoje, até as 23h59: R$ 697"
-      : "De R$ 1.497 por R$ 997";
-    $("#precoDepois").textContent = promoValendo()
-      ? "só hoje, até as 23h59. À meia-noite volta para R$ 997"
-      : "em vez de R$ 1.497, com 12 meses de acesso";
-    if (promoValendo()) {
-      setTimeout(aplicaLote, Math.min(PROMO_FIM - Date.now() + 1000, 1800000));
-    }
+    $(".preco-valor").textContent = PRECO;
+    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + PRECO;
+    $("#prazoBox").textContent = "De R$ 997 por R$ " + PRECO;
+    $("#precoDepois").textContent = "em vez de R$ 997, com 12 meses de acesso";
   }
 
   var respostas = {};

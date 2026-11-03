@@ -154,7 +154,7 @@ HERO = '''<header class="hero">
       <a href="#pacotes" class="btn btn-red">Quero os dois por R$ 997</a>
       <a href="#diferenca" class="btn btn-ghost">Ver a diferença na prática</a>
     </div>
-    <p class="hero-tiny">Previdenciário e Marketing juntos, com 12 meses de acesso. Separados, cada um sai por R$ 997. Único pré-requisito: uma assinatura do Claude.</p>
+    <p class="hero-tiny">Previdenciário e Marketing juntos, com 12 meses de acesso. Único pré-requisito: uma assinatura do Claude.</p>
 
     <div class="term" id="term">
       <div class="term-bar">
@@ -234,6 +234,9 @@ custo = custo.replace('<span class="gf-rot">MaestrIA Marketing<em>uma vez, 1 ano
                       '<span class="gf-rot">MaestrIA Prev + Marketing<em>os dois pacotes, 1 ano de atualizações</em></span>')
 custo = custo.replace('<span>o pacote inteiro: menos que um mês de social media</span>',
                       '<span>os dois pacotes: menos que um mês de social media</span>')
+# O gráfico vem da página do Marketing, que mostra o preço dele sozinho: aqui vale o do combo
+assert custo.count('R$ 297')==2, 'o gráfico do Marketing mudou de forma'
+custo = custo.replace('R$ 297', 'R$ 997')
 custo = re.sub(r'Compare com o pacote inteiro,[^<]*', 'Compare com os dois pacotes da MaestrIA juntos: R$ 997 por 12 meses, com o operacional do previdenciário de brinde.', custo)
 
 instalacao = bloco(P, '<section id="instalacao"')
@@ -273,14 +276,13 @@ PACOTE = f'''<section id="pacotes" style="padding-top:20px">
     </div>
 
     <div class="emb combo reveal">
-      <span class="emb-tag">Dois pacotes pelo preço de um</span>
+      <span class="emb-tag">Os dois pacotes juntos</span>
       <div class="emb-name">MaestrIA Previdenciário + Marketing</div>
       <p class="emb-sub">Do cálculo do caso ao cliente novo chegando pelo Instagram, com a sua voz e citando fonte oficial.</p>
       <div class="emb-price">
-        <span class="from">R$ 1.994</span>
         <span class="now"><span class="cur">R$</span><span class="val">997</span><span class="per">12 meses de acesso</span></span>
       </div>
-      <p class="combo-soma">Separados: <s>R$ 997 + R$ 997</s>. Juntos: R$ 997, à vista ou parcelado no cartão.</p>
+      <p class="combo-soma">Uma compra, uma instalação, os dois pacotes. R$ 997 à vista ou 12x de R$ 103,11 no cartão.</p>
       <a href="{CHECKOUT}?src=lp-prev-marketing" class="btn btn-red" data-pacote="prev-marketing">Quero os dois por R$ 997</a>
       <div class="seals">
         <span><span class="s-ck">✓</span> Compra segura</span>

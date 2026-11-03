@@ -11,8 +11,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 P = (RAIZ / 'trab/index.html').read_text(encoding='utf-8').split('\n')
 M = (RAIZ / 'marketing/index.html').read_text(encoding='utf-8').split('\n')
 CHECKOUT = 'https://pay.kiwify.com.br/3J6V58l'
-PRECO = '1.497'          # preço do combo nesse checkout, conferido na Kiwify em 02/11/2026
-PARCELA = '12x de R$ 154,82'
+PRECO = '997'            # preço do combo nesse checkout, conferido na Kiwify em 03/11/2026
+PARCELA = '12x de R$ 103,11'
 
 
 def trecho(linhas, ini, fim):
@@ -157,7 +157,7 @@ HERO = '''<header class="hero">
       <a href="#pacotes" class="btn btn-red">Quero os dois por R$ {PRECO}</a>
       <a href="#diferenca" class="btn btn-ghost">Ver a diferença na prática</a>
     </div>
-    <p class="hero-tiny">Trabalhista e Marketing juntos, com 12 meses de acesso. Separados, cada um sai por R$ 997. Único pré-requisito: uma assinatura do Claude.</p>
+    <p class="hero-tiny">Trabalhista e Marketing juntos, com 12 meses de acesso. Único pré-requisito: uma assinatura do Claude.</p>
 
     <div class="term" id="term">
       <div class="term-bar">
@@ -254,6 +254,9 @@ custo = custo.replace('<span class="gf-rot">MaestrIA Marketing<em>uma vez, 1 ano
                       '<span class="gf-rot">MaestrIA Trab + Marketing<em>os dois pacotes, 1 ano de atualizações</em></span>')
 custo = custo.replace('<span>o pacote inteiro: menos que um mês de social media</span>',
                       '<span>os dois pacotes: menos que um mês de social media</span>')
+# O gráfico vem da página do Marketing, que mostra o preço dele sozinho: aqui vale o do combo
+assert custo.count('R$ 297')==2, 'o gráfico do Marketing mudou de forma'
+custo = custo.replace('R$ 297', f'R$ {PRECO}')
 custo = re.sub(r'Compare com o pacote inteiro,[^<]*', f'Compare com os dois pacotes da MaestrIA juntos: R$ {PRECO} por 12 meses, com o operacional do trabalhista junto.', custo)
 
 instalacao = bloco(P, '<section id="instalacao"')
@@ -299,10 +302,9 @@ PACOTE = f'''<section id="pacotes" style="padding-top:20px">
       <div class="emb-name">MaestrIA Trabalhista + Marketing</div>
       <p class="emb-sub">Da rescisão calculada ao cliente novo chegando pelo Instagram, com a sua voz e citando fonte oficial.</p>
       <div class="emb-price">
-        <span class="from">R$ 1.994</span>
         <span class="now"><span class="cur">R$</span><span class="val">{PRECO}</span><span class="per">12 meses de acesso</span></span>
       </div>
-      <p class="combo-soma">Separados: <s>R$ 997 + R$ 997</s>. Juntos: R$ {PRECO} à vista ou {PARCELA} no cartão.</p>
+      <p class="combo-soma">Uma compra, uma instalação, os dois pacotes. R$ {PRECO} à vista ou {PARCELA} no cartão.</p>
       <a href="{CHECKOUT}?src=lp-trab-marketing" class="btn btn-red" data-pacote="trab-marketing">Quero os dois por R$ {PRECO}</a>
       <div class="seals">
         <span><span class="s-ck">✓</span> Compra segura</span>
@@ -394,7 +396,7 @@ html = '\n'.join([
 html = html.replace('{PRECO}', PRECO).replace('{PARCELA}', PARCELA)
 assert '{PRECO' not in html and '{PARCELA' not in html
 # Travas: nada do checkout avulso, nada de promoção vencida, nada de travessão
-for proibido in ('zRpxcta', 'Ln4ErJJ', 'urkdMlQ', 'so-promo', '\u2014', 'Quero o Trabalhista', 'Quero o Marketing', 'INSS', 'auxílio-acidente', 'R$ 997</a>'):
+for proibido in ('zRpxcta', 'Ln4ErJJ', 'urkdMlQ', 'so-promo', '\u2014', 'Quero o Trabalhista', 'Quero o Marketing', 'INSS', 'auxílio-acidente', 'R$ 1.497'):
     assert proibido not in html.split('</style>', 1)[1], proibido
 ids = re.findall(r'\bid="([^"]+)"', html)
 assert len(ids) == len(set(ids)), sorted({i for i in ids if ids.count(i) > 1})
