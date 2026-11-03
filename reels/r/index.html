@@ -264,7 +264,18 @@ footer .linha span:last-child { color:var(--muted); }
 @media (min-width:960px) {
   .rv .partes { grid-template-columns:repeat(5,minmax(0,1fr)); }
   .rv .convites div { grid-template-columns:minmax(0,.8fr) minmax(0,1.1fr) minmax(0,1.4fr); gap:20px; align-items:baseline; }
-  .rv .semana { grid-template-columns:repeat(7,minmax(0,1fr)); }
+  /* Títulos que abrem uma seção sozinhos ficam centralizados; os pares título e texto (.cols) seguem lado a lado. */
+  .rv section > .olho, .rv section > h2, .rv section > h3, .rv section > .sub, .rv section > .nota { align-self:center; text-align:center; }
+  .rv section > h2 { max-width:30ch; }
+  .rv section > .sub, .rv section > .nota { max-width:760px; }
+  .rv .faq > h2 { align-self:start; text-align:left; }
+  /* Stories: uma linha por dia (dia, o que postar, como), em vez de 7 colunas estreitas */
+  .rv .semana { grid-template-columns:1fr; gap:0; border:1px solid var(--bd); border-radius:var(--r); overflow:hidden; }
+  .rv .semana div { display:grid; grid-template-columns:120px 260px minmax(0,1fr); gap:24px; align-items:baseline; border:0; border-radius:0; border-bottom:1px solid var(--bd); padding:18px 24px; }
+  .rv .semana div:last-child { border-bottom:0; }
+  .rv .semana span { font-size:15.5px; }
+  .rv .regras-st { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .rv .regras-st li { background:none; border:0; border-top:2px solid var(--red); border-radius:0; padding:12px 0 0; color:var(--muted); font-size:14.5px; }
   .rv .grade.seis { grid-template-columns:repeat(3,minmax(0,1fr)); }
   .rv-top nav { display:flex; }
   main.rv { max-width:1180px; padding:56px 32px 120px; gap:120px; }
@@ -300,8 +311,7 @@ footer .linha span:last-child { color:var(--muted); }
   .rv .faq h2 { position:sticky; top:96px; }
   .rv .fita { justify-content:space-between; border-top:1px solid var(--bd); border-bottom:1px solid var(--bd); padding:18px 0; }
   .rv .bio img { aspect-ratio:4/5; }
-  .rv .bio { grid-template-columns:1fr; padding:40px 48px; }
-  .rv .bio .txt { max-width:860px; }
+  .rv .bio { grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); gap:48px; align-items:center; padding:32px; }
   .rv .bio h2 { font-size:46px; }
   .rv section > .lista { align-self:flex-start; max-width:none; }
   .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
