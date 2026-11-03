@@ -35,7 +35,7 @@
     q5QEizf: { valor: 697, nome: "Pacote Previdenciario" },
     zRpxcta: { valor: 697, nome: "Pacote Trabalhista" },
     Ln4ErJJ: { valor: 297, nome: "Pacote Marketing Juridico" },
-    Lvo0094: { valor: 1497, nome: "Combo Previdenciario + Trabalhista" },
+    Lvo0094: { valor: 1397, nome: "Combo Previdenciario + Trabalhista" },
     urkdMlQ: { valor: 997, nome: "Combo Previdenciario + Marketing" },
     "3J6V58l": { valor: 997, nome: "Combo Trabalhista + Marketing" },
     gQZKu4v: { valor: 47, nome: "Kit de Prompts do Escritorio com IA" },
