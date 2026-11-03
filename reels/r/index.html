@@ -197,8 +197,101 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 .acoes-mat { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
 @media (min-width:701px) { .ano-grade, .compara, .pilha { align-self:center; } .duo { align-self:center; width:100%; max-width:820px; } }
 @media print { .meses, .fil, .busca, .acoes-mat { display:none !important; } }
+</style><style>
+.rv-top { position:sticky; top:0; z-index:6; background:rgba(0,0,0,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--bd); }
+.rv-top .in { max-width:1180px; margin:0 auto; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.rv-marca { display:flex; align-items:center; gap:10px; color:var(--txt); font-weight:800; font-size:15px; text-decoration:none; letter-spacing:.01em; }
+.rv-marca i { width:22px; height:3px; background:var(--red); display:block; }
+.rv-top nav { display:none; gap:26px; font-size:14px; }
+.rv-top nav a { color:var(--muted); text-decoration:none; }
+.rv-top nav a:hover { color:var(--txt); }
+.rv-top .botao { padding:9px 16px; font-size:14px; }
+.tel { background:#070707; border:1px solid var(--bd2); border-radius:34px; padding:14px; width:100%; max-width:360px; box-shadow:0 30px 80px rgba(239,39,39,.12), 0 0 0 6px #0d0d0d; }
+.tel .tela { background:var(--card); border-radius:24px; padding:18px 16px; display:flex; flex-direction:column; gap:12px; }
+.tel .cab { display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--dim); font-weight:700; }
+.tel h3 { font-size:17px; }
+.tel .gancho { color:var(--txt); font-weight:700; font-size:15px; line-height:1.45; }
+.tel .fala { font-size:14px; line-height:1.55; color:var(--muted); display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden; }
+.tel .rot-tela { font-size:12.5px; color:var(--dim); border-top:1px solid var(--bd); padding-top:10px; }
+.tel .mes { display:grid; grid-template-columns:repeat(31,1fr); gap:2px; }
+.tel .mes i { aspect-ratio:1; border-radius:2px; display:block; }
+.tel .mes i.gente { background:#7cc4ff; } .tel .mes i.dor { background:#ffb15a; } .tel .mes i.tese { background:#4ade80; }
+.fita { display:flex; flex-wrap:wrap; gap:8px 22px; color:var(--muted); font-size:14px; font-weight:600; }
+.fita span::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--red); margin-right:10px; vertical-align:middle; }
+.passos { list-style:none; display:grid; gap:12px; counter-reset:p; }
+.passos li { counter-increment:p; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; color:var(--txt); display:flex; flex-direction:column; gap:6px; }
+.passos li::before { content:counter(p); font-family:'Playfair Display',serif; font-weight:900; font-size:40px; line-height:1; color:var(--red2); }
+.passos li span { color:var(--muted); font-size:15.5px; }
+.rv .hero .txt, .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
+.rv .oferta .lado-preco { display:flex; flex-direction:column; gap:16px; }
+.compara .risco { color:var(--dim); text-decoration:line-through; text-decoration-color:var(--red); }
+.partes { display:grid; gap:12px; }
+.partes div { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:18px 20px; display:flex; flex-direction:column; gap:6px; }
+.partes b { color:var(--txt); font-size:17px; }
+.partes p { font-size:15px; }
+.convites { display:grid; gap:10px; }
+.convites div { display:grid; gap:4px; background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:14px 16px; }
+.convites b { color:var(--txt); }
+.convites b small { display:block; color:var(--ok); font-weight:700; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; }
+.convites q { color:var(--txt); font-style:italic; quotes:none; }
+.convites span { color:var(--dim); font-size:14.5px; }
+.semana { display:grid; gap:10px; }
+.semana div { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+.semana b { color:var(--red2); font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; }
+.semana strong { color:var(--txt); }
+.semana span { font-size:14.5px; }
+.lado .rot-ex { display:flex; flex-direction:column; gap:6px; font-size:15px; }
+.lado .rot-ex i { font-style:normal; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin-top:6px; }
+.lado .rot-ex p { color:var(--txt); }
+.lado.ruim .rot-ex mark { background:var(--redbg); color:var(--red2); border-radius:4px; padding:0 4px; }
+@media (min-width:701px) {
+  .partes, .semana { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .partes, .semana, .convites { width:100%; text-align:left; }
+}
+.objetivo { font-size:12.5px; font-weight:700; color:var(--ok); }
+.objetivo.anuncio { color:#ffb15a; }
+@media (min-width:960px) {
+  .rv .partes { grid-template-columns:repeat(5,minmax(0,1fr)); }
+  .rv .convites div { grid-template-columns:minmax(0,.8fr) minmax(0,1.1fr) minmax(0,1.4fr); gap:20px; align-items:baseline; }
+  .rv .semana { grid-template-columns:repeat(7,minmax(0,1fr)); }
+  .rv .grade.seis { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .rv-top nav { display:flex; }
+  main.rv { max-width:1180px; padding:56px 32px 120px; gap:120px; }
+  .rv section { align-items:stretch; text-align:left; }
+  .rv section > h1, .rv section > h2, .rv section > p, .rv .sub { max-width:none; }
+  .rv .selo, .rv .olho { align-self:flex-start; }
+  .rv .olho { display:flex; align-items:center; gap:12px; color:var(--red2); }
+  .rv .olho::before { content:''; width:28px; height:2px; background:var(--red); }
+  .rv .faca { border-left:3px solid var(--red); padding:4px 0 4px 18px; text-align:left; max-width:none; }
+  .rv .faca::before { display:none; }
+  .rv .duo, .rv .grade, .rv .compara, .rv .pilha, .rv .ano-grade, .rv .cuidado, .rv .oferta { align-self:stretch; max-width:none; width:100%; }
+  .rv .legenda-ano { justify-content:flex-start; }
+  .rv section > h2 { font-size:46px; max-width:18ch; }
+  .rv .cols { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:64px; align-items:start; }
+  .rv .cols > div { display:flex; flex-direction:column; gap:18px; }
+  .rv .cols h2 { font-size:46px; }
+  .rv .hero { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:56px; align-items:center; padding-top:0; }
+  .rv .hero .txt { display:flex; flex-direction:column; gap:24px; }
+  .rv .hero h1 { font-size:72px; line-height:1.02; }
+  .rv .hero .acoes { justify-content:flex-start; }
+  .rv .hero .tel { justify-self:center; }
+  .rv .grade.quatro { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .rv .pilha { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .rv .passos { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .rv .compara div { padding:18px 22px; }
+  .rv .compara em { font-size:18px; }
+  .rv .oferta { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); gap:48px; align-items:center; padding:48px; text-align:left; }
+  .rv .oferta .lado-preco { display:flex; flex-direction:column; gap:16px; align-items:stretch; background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:28px; }
+  .rv .oferta .tira { justify-content:flex-start; }
+  .rv .oferta .botao.grande { max-width:none; }
+  .rv .faq { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:64px; align-items:start; }
+  .rv .faq .perg { display:flex; flex-direction:column; gap:10px; }
+  .rv .faq h2 { position:sticky; top:96px; }
+  .rv section > .lista { align-self:flex-start; max-width:none; }
+  .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
+}
 </style>
-<div class="nav" id="nav" hidden><a href="#raio-x">Raio-x</a><a href="#ano">O ano</a><a href="#lapidar">Lapidar</a><a href="#proximo">Próximo passo</a></div>
+<div class="nav" id="nav" hidden><a href="#raio-x">Raio-x</a><a href="#guia">Como usar</a><a href="#ano">O ano</a><a href="#stories">Stories</a><a href="#lapidar">Lapidar</a><a href="#proximo">Próximo passo</a></div>
 <main id="app">
   <section class="hero" id="carregando"><span class="selo">Carregando</span><h1>Abrindo o seu ano de vídeos...</h1></section>
 </main>
@@ -227,6 +320,17 @@ function ler(k) { try { return localStorage.getItem(k); } catch (e) { return nul
   }).catch(function () { document.getElementById('carregando').querySelector('h1').textContent = 'Não consegui abrir agora. Recarregue a página.'; });
 
   var NOMES = { gente: 'Gente', dor: 'Dor', tese: 'Tese' };
+  var GUIA = {"partes": [["Gancho", "Os 3 primeiros segundos. É a frase que faz a pessoa parar de rolar a tela, e ela só para se se reconhecer nela. Fale olhando para a câmera, sem \"oi, tudo bem\"."], ["Fala", "O que você diz depois do gancho, de 30 a 60 segundos. Não decore: leia duas vezes e fale do seu jeito. Se travar, corte e grave de novo a partir da frase."], ["Texto na tela", "A frase curta que aparece escrita no vídeo. Muita gente assiste sem som: é ela que segura quem está no ônibus ou na fila."], ["Legenda", "O texto que vai embaixo do post, no Instagram. Ela completa o vídeo para quem quer ler mais. Cole como está ou ajuste."], ["Convite no fim", "A chamada para ação: o que você pede para a pessoa fazer quando o vídeo acaba. Cada roteiro já vem com um, escolhido pelo objetivo do dia."]], "convites": [["Seguir", "Atrair seguidores", "\"Me segue para ver o resto dessa conversa.\"", "Nos vídeos de gente: a pessoa se reconheceu e ainda não conhece você."], ["Comentar", "Puxar conversa", "\"Comenta aqui a sua dúvida.\"", "Quando o assunto gera pergunta. Cada comentário mostra o vídeo para mais gente, e responder vira conteúdo."], ["Compartilhar", "Chegar em gente nova", "\"Manda para quem precisa ver isso.\"", "Quando quem precisa não é quem assiste: o filho que manda para a mãe, o colega que manda para o colega."], ["Salvar", "Virar referência", "\"Salva para não esquecer o que juntar.\"", "Em listas e passos: documentos, prazos, o que fazer primeiro."], ["Chamar no WhatsApp", "Virar conversa com você", "\"Se isso é com você, me chama no WhatsApp do link.\"", "Nos vídeos de tese, para quem já entendeu o direito. Convida, nunca promete."]], "trafego": "Os roteiros de tese com convite para o WhatsApp são os que, mais para frente, podem virar anúncio. Mas anúncio é a página 2. A página 1 é ter perfil que convence e vídeo toda semana: quem chega por um anúncio olha o seu perfil antes de chamar. Comece pela produção de conteúdo.", "stories": [["Segunda", "Bastidor da semana", "Foto ou vídeo da sua mesa, da pasta, do fórum. Texto: \"Essa semana o assunto por aqui é {tese}.\" Mostra que você trabalha com isso de verdade."], ["Terça", "Caixinha de perguntas", "Abra a caixinha: \"Qual a sua dúvida sobre {tese}?\" Cada pergunta que chegar é um vídeo pronto para depois."], ["Quarta", "Respostas em 15 segundos", "Responda duas ou três perguntas da caixinha falando para a câmera. Sem nome de quem perguntou."], ["Quinta", "O reel com enquete", "Reposte o vídeo do dia e coloque uma enquete: \"Isso já aconteceu com alguém da sua família? Sim ou não.\" Quem responde sim é quem você quer."], ["Sexta", "Mito ou verdade", "Um teste de duas opções sobre {tese}. No story seguinte, a resposta em uma frase."], ["Sábado", "Você, fora do escritório", "Um café, um passeio, a família se você quiser. Gente confia em gente, não em logomarca."], ["Domingo", "O mais visto da semana", "Reposte o vídeo que foi melhor e convide: \"Se você perdeu, é esse aqui.\""]], "regras": ["De 3 a 7 stories por dia é suficiente.", "Apareça falando em pelo menos um deles.", "Nunca mostre dado, rosto ou documento de cliente.", "Uma vez por semana, termine com o convite para o WhatsApp do link."]};
+  // O objetivo do convite sai do próprio texto do convite, sem IA.
+  function objetivo(cta) {
+    var c = (cta || '').toLowerCase();
+    if (/whats|me chama|chama no|direct|link da bio/.test(c)) return 'Chamar no WhatsApp: virar conversa com você';
+    if (/salv/.test(c)) return 'Salvar: virar referência';
+    if (/mand|envi|compartilh|marc/.test(c)) return 'Compartilhar: chegar em gente nova';
+    if (/coment|responde|conta aqui|escreve/.test(c)) return 'Comentar: puxar conversa';
+    if (/segu/.test(c)) return 'Seguir: atrair seguidores';
+    return '';
+  }
   function secao(id, olho, titulo, apoio) {
     var s = el('section'); s.id = id;
     s.appendChild(el('p', 'olho', olho)); s.appendChild(el('h2', null, titulo));
@@ -252,14 +356,17 @@ function ler(k) { try { return localStorage.getItem(k); } catch (e) { return nul
     k.appendChild(el('p', 'nota', 'Na tela: ' + (d.tela || '')));
     k.appendChild(el('p', 'nota', 'Legenda: ' + (d.legenda || '')));
     k.appendChild(el('p', 'nota', 'No fim: ' + (d.cta || '')));
+    var ob = objetivo(d.cta);
+    if (ob) k.appendChild(el('p', 'objetivo', 'Objetivo do convite: ' + ob));
+    if (d.fase === 'tese' && /^Chamar/.test(ob)) k.appendChild(el('p', 'objetivo anuncio', 'Pode virar anúncio mais para frente (página 2).'));
     k.appendChild(botaoCopiar(textoRoteiro(d), 'Copiar roteiro'));
     return k;
   }
   function baixarPlanilha(ano) {
-    var cols = ['dia', 'fase', 'angulo', 'tese', 'titulo', 'gancho', 'fala', 'tela', 'legenda', 'cta'];
+    var cols = ['dia', 'fase', 'angulo', 'tese', 'titulo', 'gancho', 'fala', 'tela', 'legenda', 'cta', 'objetivo do convite'];
     var esc = function (v) { v = String(v == null ? '' : v).replace(/"/g, '""'); return '"' + v + '"'; };
     var linhas = [cols.join(';')].concat(ano.map(function (d) {
-      return [d.d, NOMES[d.fase] || d.fase, d.angulo, d.tese, d.titulo, d.gancho, d.fala, d.tela, d.legenda, d.cta].map(esc).join(';');
+      return [d.d, NOMES[d.fase] || d.fase, d.angulo, d.tese, d.titulo, d.gancho, d.fala, d.tela, d.legenda, d.cta, objetivo(d.cta)].map(esc).join(';');
     }));
     var blob = new Blob(['\ufeff' + linhas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'meus-365-roteiros.csv';
@@ -316,6 +423,20 @@ function ler(k) { try { return localStorage.getItem(k); } catch (e) { return nul
     }
     if (x.simples_funciona) { var sf = el('div', 'oferta'); sf.style.textAlign = 'left'; sf.appendChild(el('p', 'olho', 'Por que o simples funciona no seu perfil')); sf.appendChild(el('p', null, x.simples_funciona)); sx.appendChild(sf); }
 
+    // Como usar cada roteiro
+    var sg = secao('guia', 'Antes de gravar', 'O que é cada parte do roteiro', 'Cada roteiro tem cinco partes. Você não lê tudo em voz alta: cada uma tem uma função.');
+    var gp = el('div', 'partes');
+    GUIA.partes.forEach(function (x) { var k = el('div'); k.appendChild(el('b', null, x[0])); k.appendChild(el('p', null, x[1])); gp.appendChild(k); });
+    sg.appendChild(gp);
+    sg.appendChild(el('h3', null, 'Para que serve cada convite no fim'));
+    var gc = el('div', 'convites');
+    GUIA.convites.forEach(function (x) {
+      var k = el('div'); var b = el('b', null, x[0]); b.appendChild(el('small', null, x[1])); k.appendChild(b);
+      k.appendChild(el('q', null, x[2])); k.appendChild(el('span', null, x[3])); gc.appendChild(k);
+    });
+    sg.appendChild(gc);
+    var gt = el('div', 'cuidado'); gt.appendChild(el('strong', null, 'E o tráfego pago?')); gt.appendChild(el('p', null, GUIA.trafego)); sg.appendChild(gt);
+
     // O ano
     var sa = secao('ano', 'Os 365 roteiros', 'Um por dia, na ordem gente, dor, tese', 'Grave três seguidos, com a mesma roupa, e poste um por dia. Escolha o mês, filtre por tese ou fase, ou procure um assunto.');
     var meses = el('div', 'meses'); sa.appendChild(meses);
@@ -348,6 +469,18 @@ function ler(k) { try { return localStorage.getItem(k); } catch (e) { return nul
     var espera; busca.addEventListener('input', function () { clearTimeout(espera); espera = setTimeout(function () { termo = busca.value.trim().toLowerCase(); desenhar(mesAtual); }, 250); });
     desenhar(1);
     window.addEventListener('afterprint', function () { desenhar(mesAtual); });
+
+    // Rotina de stories, com as teses do comprador
+    var teses = r.teses || [];
+    var ss = secao('stories', 'Rotina de stories', 'O que postar nos stories, dia a dia', 'Uma semana que se repete. A tese do exemplo muda a cada dia, entre as suas.');
+    var sm = el('div', 'semana');
+    GUIA.stories.forEach(function (x, i) {
+      var tese = teses.length ? teses[i % teses.length] : 'a sua área';
+      var k = el('div'); k.appendChild(el('b', null, x[0])); k.appendChild(el('strong', null, x[1]));
+      k.appendChild(el('span', null, x[2].split('{tese}').join(tese))); sm.appendChild(k);
+    });
+    ss.appendChild(sm);
+    var rs = el('ul', 'lista'); GUIA.regras.forEach(function (x) { rs.appendChild(el('li', null, x)); }); ss.appendChild(rs);
 
     // Lapidar
     var sl = secao('lapidar', 'Para lapidar', 'O prompt que deixa qualquer roteiro do seu jeito', 'Cole na IA que você já usa (ChatGPT, Claude, Gemini), diga o que quer mudar e cole o roteiro. Ele já sabe as regras do método e da OAB.');

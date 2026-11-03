@@ -197,44 +197,180 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 .acoes-mat { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
 @media (min-width:701px) { .ano-grade, .compara, .pilha { align-self:center; } .duo { align-self:center; width:100%; max-width:820px; } }
 @media print { .meses, .fil, .busca, .acoes-mat { display:none !important; } }
+</style><style>
+.rv-top { position:sticky; top:0; z-index:6; background:rgba(0,0,0,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--bd); }
+.rv-top .in { max-width:1180px; margin:0 auto; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.rv-marca { display:flex; align-items:center; gap:10px; color:var(--txt); font-weight:800; font-size:15px; text-decoration:none; letter-spacing:.01em; }
+.rv-marca i { width:22px; height:3px; background:var(--red); display:block; }
+.rv-top nav { display:none; gap:26px; font-size:14px; }
+.rv-top nav a { color:var(--muted); text-decoration:none; }
+.rv-top nav a:hover { color:var(--txt); }
+.rv-top .botao { padding:9px 16px; font-size:14px; }
+.tel { background:#070707; border:1px solid var(--bd2); border-radius:34px; padding:14px; width:100%; max-width:360px; box-shadow:0 30px 80px rgba(239,39,39,.12), 0 0 0 6px #0d0d0d; }
+.tel .tela { background:var(--card); border-radius:24px; padding:18px 16px; display:flex; flex-direction:column; gap:12px; }
+.tel .cab { display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--dim); font-weight:700; }
+.tel h3 { font-size:17px; }
+.tel .gancho { color:var(--txt); font-weight:700; font-size:15px; line-height:1.45; }
+.tel .fala { font-size:14px; line-height:1.55; color:var(--muted); display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden; }
+.tel .rot-tela { font-size:12.5px; color:var(--dim); border-top:1px solid var(--bd); padding-top:10px; }
+.tel .mes { display:grid; grid-template-columns:repeat(31,1fr); gap:2px; }
+.tel .mes i { aspect-ratio:1; border-radius:2px; display:block; }
+.tel .mes i.gente { background:#7cc4ff; } .tel .mes i.dor { background:#ffb15a; } .tel .mes i.tese { background:#4ade80; }
+.fita { display:flex; flex-wrap:wrap; gap:8px 22px; color:var(--muted); font-size:14px; font-weight:600; }
+.fita span::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--red); margin-right:10px; vertical-align:middle; }
+.passos { list-style:none; display:grid; gap:12px; counter-reset:p; }
+.passos li { counter-increment:p; background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; color:var(--txt); display:flex; flex-direction:column; gap:6px; }
+.passos li::before { content:counter(p); font-family:'Playfair Display',serif; font-weight:900; font-size:40px; line-height:1; color:var(--red2); }
+.passos li span { color:var(--muted); font-size:15.5px; }
+.rv .hero .txt, .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
+.rv .oferta .lado-preco { display:flex; flex-direction:column; gap:16px; }
+.compara .risco { color:var(--dim); text-decoration:line-through; text-decoration-color:var(--red); }
+.partes { display:grid; gap:12px; }
+.partes div { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:18px 20px; display:flex; flex-direction:column; gap:6px; }
+.partes b { color:var(--txt); font-size:17px; }
+.partes p { font-size:15px; }
+.convites { display:grid; gap:10px; }
+.convites div { display:grid; gap:4px; background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:14px 16px; }
+.convites b { color:var(--txt); }
+.convites b small { display:block; color:var(--ok); font-weight:700; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; }
+.convites q { color:var(--txt); font-style:italic; quotes:none; }
+.convites span { color:var(--dim); font-size:14.5px; }
+.semana { display:grid; gap:10px; }
+.semana div { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+.semana b { color:var(--red2); font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; }
+.semana strong { color:var(--txt); }
+.semana span { font-size:14.5px; }
+.lado .rot-ex { display:flex; flex-direction:column; gap:6px; font-size:15px; }
+.lado .rot-ex i { font-style:normal; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin-top:6px; }
+.lado .rot-ex p { color:var(--txt); }
+.lado.ruim .rot-ex mark { background:var(--redbg); color:var(--red2); border-radius:4px; padding:0 4px; }
+@media (min-width:701px) {
+  .partes, .semana { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .partes, .semana, .convites { width:100%; text-align:left; }
+}
+.objetivo { font-size:12.5px; font-weight:700; color:var(--ok); }
+.objetivo.anuncio { color:#ffb15a; }
+@media (min-width:960px) {
+  .rv .partes { grid-template-columns:repeat(5,minmax(0,1fr)); }
+  .rv .convites div { grid-template-columns:minmax(0,.8fr) minmax(0,1.1fr) minmax(0,1.4fr); gap:20px; align-items:baseline; }
+  .rv .semana { grid-template-columns:repeat(7,minmax(0,1fr)); }
+  .rv .grade.seis { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .rv-top nav { display:flex; }
+  main.rv { max-width:1180px; padding:56px 32px 120px; gap:120px; }
+  .rv section { align-items:stretch; text-align:left; }
+  .rv section > h1, .rv section > h2, .rv section > p, .rv .sub { max-width:none; }
+  .rv .selo, .rv .olho { align-self:flex-start; }
+  .rv .olho { display:flex; align-items:center; gap:12px; color:var(--red2); }
+  .rv .olho::before { content:''; width:28px; height:2px; background:var(--red); }
+  .rv .faca { border-left:3px solid var(--red); padding:4px 0 4px 18px; text-align:left; max-width:none; }
+  .rv .faca::before { display:none; }
+  .rv .duo, .rv .grade, .rv .compara, .rv .pilha, .rv .ano-grade, .rv .cuidado, .rv .oferta { align-self:stretch; max-width:none; width:100%; }
+  .rv .legenda-ano { justify-content:flex-start; }
+  .rv section > h2 { font-size:46px; max-width:18ch; }
+  .rv .cols { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:64px; align-items:start; }
+  .rv .cols > div { display:flex; flex-direction:column; gap:18px; }
+  .rv .cols h2 { font-size:46px; }
+  .rv .hero { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:56px; align-items:center; padding-top:0; }
+  .rv .hero .txt { display:flex; flex-direction:column; gap:24px; }
+  .rv .hero h1 { font-size:72px; line-height:1.02; }
+  .rv .hero .acoes { justify-content:flex-start; }
+  .rv .hero .tel { justify-self:center; }
+  .rv .grade.quatro { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .rv .pilha { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .rv .passos { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .rv .compara div { padding:18px 22px; }
+  .rv .compara em { font-size:18px; }
+  .rv .oferta { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); gap:48px; align-items:center; padding:48px; text-align:left; }
+  .rv .oferta .lado-preco { display:flex; flex-direction:column; gap:16px; align-items:stretch; background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:28px; }
+  .rv .oferta .tira { justify-content:flex-start; }
+  .rv .oferta .botao.grande { max-width:none; }
+  .rv .faq { display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:64px; align-items:start; }
+  .rv .faq .perg { display:flex; flex-direction:column; gap:10px; }
+  .rv .faq h2 { position:sticky; top:96px; }
+  .rv section > .lista { align-self:flex-start; max-width:none; }
+  .rv .oferta .txt { display:flex; flex-direction:column; gap:18px; }
+}
 </style>
-<main>
+<header class="rv-top"><div class="in">
+  <a class="rv-marca" href="#topo"><i></i>Samurai do Jurídico</a>
+  <nav><a href="#chega">O que chega</a><a href="#caso">Caso real</a><a href="#explicado">Como usar</a><a href="#conta">Faça a conta</a><a href="#perguntas">Perguntas</a></nav>
+  <a class="botao" href="#comprar">Quero por R$ 67</a>
+</div></header>
+<main class="rv" id="topo">
   <section class="hero">
-    <span class="selo">365 Roteiros de Reels para Advogado</span>
-    <h1>Um ano de vídeos do seu escritório, <em>pronto em minutos.</em></h1>
-    <p class="sub">Você informa o seu @ do Instagram e até três teses que defende. A IA lê o seu perfil e entrega: <b>o raio-x do seu Instagram com a bio nova, 365 roteiros adaptados às suas teses, um por dia, e o prompt para lapidar cada um na IA que você já usa.</b></p>
-    <div class="acoes"><a class="botao" href="#comprar">Quero o meu ano por R$ 67</a><span class="nota">Sem aula, sem curso, sem escrever prompt.</span></div>
+    <div class="txt">
+      <span class="selo">365 Roteiros de Reels para Advogado</span>
+      <h1>Um ano de vídeos do seu escritório, <em>pronto em minutos.</em></h1>
+      <p class="sub">Você informa o seu @ do Instagram e até três teses que defende. A IA lê o seu perfil e entrega: <b>o raio-x do seu Instagram com a bio nova, 365 roteiros adaptados às suas teses, um por dia, e o prompt para lapidar cada um na IA que você já usa.</b></p>
+      <div class="acoes"><a class="botao" href="#comprar">Quero o meu ano por R$ 67</a><span class="nota">Sem aula, sem curso, sem escrever prompt.</span></div>
+    </div>
+    <div class="tel" aria-label="Exemplo do dia 1 de um ano real">
+      <div class="tela">
+        <div class="cab"><span>Dia 1 de 365</span><span class="fase gente">Gente</span></div>
+        <h3>Dez anos de aluguel e um anúncio</h3>
+        <p class="gancho">Se você paga aluguel há dez anos e viu um imóvel de leilão pela metade do preço, esse vídeo é para você.</p>
+        <p class="fala">Você trabalha, paga o aluguel todo mês e vê esse dinheiro sumir. Aí aparece no celular uma casa bem abaixo do preço de mercado. O coração acelera. Mas a cabeça fala: tem alguma coisa errada aí. Você não conhece ninguém que comprou em leilão. Não sabe nem por onde começar. E fica com medo de perder o pouco que juntou. Então eu te pergunto: o que te impede hoje de pelo menos entender como isso funciona?</p>
+        <p class="rot-tela">Na tela: Imóvel de leilão: oportunidade ou furada?</p>
+        <div class="mes" aria-hidden="true"><i class="gente"></i><i class="dor"></i><i class="tese"></i><i class="gente"></i><i class="dor"></i><i class="gente"></i><i class="gente"></i><i class="dor"></i><i class="tese"></i><i class="gente"></i><i class="dor"></i><i class="gente"></i><i class="gente"></i><i class="dor"></i><i class="tese"></i><i class="gente"></i><i class="dor"></i><i class="gente"></i><i class="gente"></i><i class="dor"></i><i class="tese"></i><i class="gente"></i><i class="dor"></i><i class="gente"></i><i class="gente"></i><i class="dor"></i><i class="tese"></i><i class="gente"></i><i class="dor"></i><i class="gente"></i><i class="gente"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fita"><span>Raio-x do seu perfil</span><span>Bio nova pronta para colar</span><span>365 roteiros das suas teses</span><span>Gente, dor, tese</span><span>Prompt de lapidar</span><span>Planilha e PDF do ano</span></div>
+
+  <section>
+    <div class="cols">
+      <div><p class="olho">A pergunta de toda noite</p>
+        <h2>Você sabe que precisa aparecer. <em>O problema é o que gravar amanhã.</em></h2></div>
+      <div><p class="sub">Você abre a câmera, pensa num tema, desiste. Promete que essa semana vai. Não vai. E quando acha um pacote de roteiros prontos, ele serve para qualquer advogado: você passa a noite adaptando um por um, e o vídeo sai igual ao de todo mundo.</p>
+        <p class="faca">Roteiro genérico é o mesmo trabalho com outro nome. O seu já chega com as suas teses.</p></div>
+    </div>
   </section>
 
   <section>
-    <p class="olho">A pergunta de toda noite</p>
-    <h2>Você sabe que precisa aparecer. <em>O problema é o que gravar amanhã.</em></h2>
-    <p class="sub">Você abre a câmera, pensa num tema, desiste. Promete que essa semana vai. Não vai. E quando acha um pacote de roteiros prontos, ele serve para qualquer advogado: você passa a noite adaptando um por um, e o vídeo sai igual ao de todo mundo.</p>
-    <p class="faca">Roteiro genérico é o mesmo trabalho com outro nome. O seu já chega com as suas teses.</p>
+    <p class="olho">Pacote genérico x o seu</p>
+    <h2>O mesmo dia 1, <em>em dois pacotes.</em></h2>
+    <p class="sub">Os pacotes de roteiro e de copy do mercado são escritos para qualquer advogado. Quem adapta para o seu nicho é você, um por um. O seu chega adaptado às suas teses e ao seu cliente.</p>
+    <div class="duo">
+      <div class="lado ruim"><span class="tag">Roteiro genérico do mercado</span><div class="rot-ex">
+        <i>Gancho</i><p>Você sabia que pode ter direitos que nem imagina?</p>
+        <i>Fala</i><p>Muitas pessoas deixam de buscar os seus direitos por falta de informação. <mark>[fale aqui sobre a sua área]</mark> Por isso é tão importante contar com um profissional de confiança.</p>
+        <i>No fim</i><p>Siga para mais dicas!</p></div>
+        <p class="nota">Exemplo do tipo de roteiro que se vende pronto: serve para qualquer área, então não fala com ninguém.</p></div>
+      <div class="lado bom"><span class="tag">O seu, já adaptado</span><div class="rot-ex">
+        <i>Gancho</i><p>Se você paga aluguel há dez anos e viu um imóvel de leilão pela metade do preço, esse vídeo é para você.</p>
+        <i>Fala</i><p>Você trabalha, paga o aluguel todo mês e vê esse dinheiro sumir. Aí aparece no celular uma casa bem abaixo do preço de mercado. O coração acelera. Mas a cabeça fala: tem alguma coisa errada aí. Você não conhece ninguém que comprou em leilão. Não sabe nem por onde começar. E fica com medo de perder o pouco que juntou. Então eu te pergunto: o que te impede hoje de pelo menos entender como isso funciona?</p>
+        <i>No fim</i><p>Me segue para ver o resto dessa conversa.</p></div>
+        <p class="nota">Dia 1 do caso real mostrado abaixo, como a IA entregou.</p></div>
+    </div>
   </section>
 
-  <section>
+  <section id="chega">
     <p class="olho">O que chega na sua tela</p>
     <h2>Não é curso. Não é prompt. <em>É o seu ano de vídeos.</em></h2>
-    <div class="grade">
+    <div class="grade seis">
       <div class="cartao"><span class="num">36<small style="font-size:18px;color:var(--dim)">/100</small></span><h3>Raio-x do seu Instagram</h3><p>O que um cliente entende do seu perfil em 3 segundos, o que já está bom, o que está errado e quanto isso custa, o que fazer na ordem e a bio nova pronta para colar.</p></div>
       <div class="cartao"><span class="num">365</span><h3>Roteiros, um por dia</h3><p>Adaptados às até três teses que você defende. Cada um com gancho de 3 segundos, o que falar, o texto da tela, a legenda e o convite no fim.</p></div>
       <div class="cartao"><span class="num">3</span><h3>Fases, na ordem certa</h3><p>Primeiro a pessoa se reconhece, depois sente a dor, só então você fala do direito. É o método que a gente aplica nos escritórios que acompanha.</p></div>
       <div class="cartao"><span class="num">1</span><h3>Prompt para lapidar</h3><p>Quer mais curto, com um caso, do seu jeito de falar? Cola na IA que você já usa. Ele já sabe as regras do método e da OAB.</p></div>
+      <div class="cartao"><span class="num">5</span><h3>Convites, explicados</h3><p>O que é cada parte do roteiro e para que serve cada convite no fim: seguir, comentar, compartilhar, salvar ou chamar no WhatsApp.</p></div>
+      <div class="cartao"><span class="num">7</span><h3>Rotina de stories</h3><p>O que postar em cada dia da semana, com exemplos das suas teses. Para quem nunca sabe o que pôr no story.</p></div>
     </div>
     <p class="nota">Nota de um perfil real lido pela IA, mostrado abaixo. A sua nota é a do seu perfil.</p>
   </section>
 
   <section>
-    <p class="olho">O seu ano, desenhado</p>
-    <h2>Cada linha é um mês. <em>Cada cor, uma fase.</em></h2>
-    <p class="sub">O mesmo assunto aparece três vezes no ano, sempre nessa ordem: a pessoa se reconhece, sente o incômodo, entende o direito. Nos dois primeiros meses vem mais gente, porque ninguém confia em quem só fala de lei.</p>
-    <div class="legenda-ano"><span class="gente">Gente: a pessoa se reconhece</span><span class="dor">Dor: o incômodo, na voz dela</span><span class="tese">Tese: o direito e o caminho</span></div>
+    <div class="cols">
+      <div><p class="olho">O seu ano, desenhado</p>
+        <h2>Cada linha é um mês. <em>Cada cor, uma fase.</em></h2></div>
+      <div><p class="sub">O mesmo assunto aparece três vezes no ano, sempre nessa ordem: a pessoa se reconhece, sente o incômodo, entende o direito. Nos dois primeiros meses vem mais gente, porque ninguém confia em quem só fala de lei.</p>
+        <div class="legenda-ano"><span class="gente">Gente: a pessoa se reconhece</span><span class="dor">Dor: o incômodo, na voz dela</span><span class="tese">Tese: o direito e o caminho</span></div></div>
+    </div>
     <div class="ano-grade" aria-label="Os 365 dias de um ano real, coloridos por fase"><i class="gente" title="Dia 1: gente"></i><i class="dor" title="Dia 2: dor"></i><i class="tese" title="Dia 3: tese"></i><i class="gente" title="Dia 4: gente"></i><i class="dor" title="Dia 5: dor"></i><i class="gente" title="Dia 6: gente"></i><i class="gente" title="Dia 7: gente"></i><i class="dor" title="Dia 8: dor"></i><i class="tese" title="Dia 9: tese"></i><i class="gente" title="Dia 10: gente"></i><i class="dor" title="Dia 11: dor"></i><i class="gente" title="Dia 12: gente"></i><i class="gente" title="Dia 13: gente"></i><i class="dor" title="Dia 14: dor"></i><i class="tese" title="Dia 15: tese"></i><i class="gente" title="Dia 16: gente"></i><i class="dor" title="Dia 17: dor"></i><i class="gente" title="Dia 18: gente"></i><i class="gente" title="Dia 19: gente"></i><i class="dor" title="Dia 20: dor"></i><i class="tese" title="Dia 21: tese"></i><i class="gente" title="Dia 22: gente"></i><i class="dor" title="Dia 23: dor"></i><i class="gente" title="Dia 24: gente"></i><i class="gente" title="Dia 25: gente"></i><i class="dor" title="Dia 26: dor"></i><i class="tese" title="Dia 27: tese"></i><i class="gente" title="Dia 28: gente"></i><i class="dor" title="Dia 29: dor"></i><i class="gente" title="Dia 30: gente"></i><i class="gente" title="Dia 31: gente"></i><i class="dor" title="Dia 32: dor"></i><i class="tese" title="Dia 33: tese"></i><i class="gente" title="Dia 34: gente"></i><i class="dor" title="Dia 35: dor"></i><i class="gente" title="Dia 36: gente"></i><i class="gente" title="Dia 37: gente"></i><i class="dor" title="Dia 38: dor"></i><i class="tese" title="Dia 39: tese"></i><i class="gente" title="Dia 40: gente"></i><i class="dor" title="Dia 41: dor"></i><i class="gente" title="Dia 42: gente"></i><i class="gente" title="Dia 43: gente"></i><i class="dor" title="Dia 44: dor"></i><i class="tese" title="Dia 45: tese"></i><i class="gente" title="Dia 46: gente"></i><i class="dor" title="Dia 47: dor"></i><i class="gente" title="Dia 48: gente"></i><i class="gente" title="Dia 49: gente"></i><i class="dor" title="Dia 50: dor"></i><i class="tese" title="Dia 51: tese"></i><i class="gente" title="Dia 52: gente"></i><i class="gente" title="Dia 53: gente"></i><i class="dor" title="Dia 54: dor"></i><i class="gente" title="Dia 55: gente"></i><i class="tese" title="Dia 56: tese"></i><i class="dor" title="Dia 57: dor"></i><i class="gente" title="Dia 58: gente"></i><i class="gente" title="Dia 59: gente"></i><i class="dor" title="Dia 60: dor"></i><i class="tese" title="Dia 61: tese"></i><i class="dor" title="Dia 62: dor"></i><i class="gente" title="Dia 63: gente"></i><i class="tese" title="Dia 64: tese"></i><i class="dor" title="Dia 65: dor"></i><i class="gente" title="Dia 66: gente"></i><i class="tese" title="Dia 67: tese"></i><i class="dor" title="Dia 68: dor"></i><i class="gente" title="Dia 69: gente"></i><i class="tese" title="Dia 70: tese"></i><i class="dor" title="Dia 71: dor"></i><i class="gente" title="Dia 72: gente"></i><i class="tese" title="Dia 73: tese"></i><i class="dor" title="Dia 74: dor"></i><i class="gente" title="Dia 75: gente"></i><i class="tese" title="Dia 76: tese"></i><i class="dor" title="Dia 77: dor"></i><i class="tese" title="Dia 78: tese"></i><i class="gente" title="Dia 79: gente"></i><i class="dor" title="Dia 80: dor"></i><i class="tese" title="Dia 81: tese"></i><i class="gente" title="Dia 82: gente"></i><i class="dor" title="Dia 83: dor"></i><i class="tese" title="Dia 84: tese"></i><i class="gente" title="Dia 85: gente"></i><i class="dor" title="Dia 86: dor"></i><i class="tese" title="Dia 87: tese"></i><i class="gente" title="Dia 88: gente"></i><i class="dor" title="Dia 89: dor"></i><i class="tese" title="Dia 90: tese"></i><i class="tese" title="Dia 91: tese"></i><i class="dor" title="Dia 92: dor"></i><i class="gente" title="Dia 93: gente"></i><i class="tese" title="Dia 94: tese"></i><i class="dor" title="Dia 95: dor"></i><i class="gente" title="Dia 96: gente"></i><i class="tese" title="Dia 97: tese"></i><i class="dor" title="Dia 98: dor"></i><i class="gente" title="Dia 99: gente"></i><i class="tese" title="Dia 100: tese"></i><i class="dor" title="Dia 101: dor"></i><i class="gente" title="Dia 102: gente"></i><i class="tese" title="Dia 103: tese"></i><i class="dor" title="Dia 104: dor"></i><i class="gente" title="Dia 105: gente"></i><i class="tese" title="Dia 106: tese"></i><i class="dor" title="Dia 107: dor"></i><i class="tese" title="Dia 108: tese"></i><i class="gente" title="Dia 109: gente"></i><i class="dor" title="Dia 110: dor"></i><i class="tese" title="Dia 111: tese"></i><i class="gente" title="Dia 112: gente"></i><i class="dor" title="Dia 113: dor"></i><i class="tese" title="Dia 114: tese"></i><i class="gente" title="Dia 115: gente"></i><i class="dor" title="Dia 116: dor"></i><i class="tese" title="Dia 117: tese"></i><i class="gente" title="Dia 118: gente"></i><i class="dor" title="Dia 119: dor"></i><i class="tese" title="Dia 120: tese"></i><i class="gente" title="Dia 121: gente"></i><i class="tese" title="Dia 122: tese"></i><i class="dor" title="Dia 123: dor"></i><i class="tese" title="Dia 124: tese"></i><i class="dor" title="Dia 125: dor"></i><i class="gente" title="Dia 126: gente"></i><i class="tese" title="Dia 127: tese"></i><i class="dor" title="Dia 128: dor"></i><i class="gente" title="Dia 129: gente"></i><i class="tese" title="Dia 130: tese"></i><i class="dor" title="Dia 131: dor"></i><i class="gente" title="Dia 132: gente"></i><i class="tese" title="Dia 133: tese"></i><i class="dor" title="Dia 134: dor"></i><i class="gente" title="Dia 135: gente"></i><i class="tese" title="Dia 136: tese"></i><i class="dor" title="Dia 137: dor"></i><i class="tese" title="Dia 138: tese"></i><i class="gente" title="Dia 139: gente"></i><i class="dor" title="Dia 140: dor"></i><i class="tese" title="Dia 141: tese"></i><i class="gente" title="Dia 142: gente"></i><i class="dor" title="Dia 143: dor"></i><i class="tese" title="Dia 144: tese"></i><i class="gente" title="Dia 145: gente"></i><i class="dor" title="Dia 146: dor"></i><i class="tese" title="Dia 147: tese"></i><i class="gente" title="Dia 148: gente"></i><i class="dor" title="Dia 149: dor"></i><i class="tese" title="Dia 150: tese"></i><i class="gente" title="Dia 151: gente"></i><i class="tese" title="Dia 152: tese"></i><i class="dor" title="Dia 153: dor"></i><i class="tese" title="Dia 154: tese"></i><i class="dor" title="Dia 155: dor"></i><i class="gente" title="Dia 156: gente"></i><i class="tese" title="Dia 157: tese"></i><i class="dor" title="Dia 158: dor"></i><i class="gente" title="Dia 159: gente"></i><i class="tese" title="Dia 160: tese"></i><i class="dor" title="Dia 161: dor"></i><i class="gente" title="Dia 162: gente"></i><i class="tese" title="Dia 163: tese"></i><i class="dor" title="Dia 164: dor"></i><i class="gente" title="Dia 165: gente"></i><i class="tese" title="Dia 166: tese"></i><i class="dor" title="Dia 167: dor"></i><i class="tese" title="Dia 168: tese"></i><i class="gente" title="Dia 169: gente"></i><i class="dor" title="Dia 170: dor"></i><i class="tese" title="Dia 171: tese"></i><i class="gente" title="Dia 172: gente"></i><i class="dor" title="Dia 173: dor"></i><i class="tese" title="Dia 174: tese"></i><i class="gente" title="Dia 175: gente"></i><i class="dor" title="Dia 176: dor"></i><i class="tese" title="Dia 177: tese"></i><i class="gente" title="Dia 178: gente"></i><i class="dor" title="Dia 179: dor"></i><i class="tese" title="Dia 180: tese"></i><i class="gente" title="Dia 181: gente"></i><i class="dor" title="Dia 182: dor"></i><i class="tese" title="Dia 183: tese"></i><i class="tese" title="Dia 184: tese"></i><i class="dor" title="Dia 185: dor"></i><i class="gente" title="Dia 186: gente"></i><i class="tese" title="Dia 187: tese"></i><i class="dor" title="Dia 188: dor"></i><i class="gente" title="Dia 189: gente"></i><i class="tese" title="Dia 190: tese"></i><i class="dor" title="Dia 191: dor"></i><i class="gente" title="Dia 192: gente"></i><i class="tese" title="Dia 193: tese"></i><i class="dor" title="Dia 194: dor"></i><i class="gente" title="Dia 195: gente"></i><i class="tese" title="Dia 196: tese"></i><i class="dor" title="Dia 197: dor"></i><i class="tese" title="Dia 198: tese"></i><i class="gente" title="Dia 199: gente"></i><i class="dor" title="Dia 200: dor"></i><i class="tese" title="Dia 201: tese"></i><i class="gente" title="Dia 202: gente"></i><i class="dor" title="Dia 203: dor"></i><i class="tese" title="Dia 204: tese"></i><i class="gente" title="Dia 205: gente"></i><i class="dor" title="Dia 206: dor"></i><i class="tese" title="Dia 207: tese"></i><i class="gente" title="Dia 208: gente"></i><i class="dor" title="Dia 209: dor"></i><i class="tese" title="Dia 210: tese"></i><i class="gente" title="Dia 211: gente"></i><i class="dor" title="Dia 212: dor"></i><i class="tese" title="Dia 213: tese"></i><i class="tese" title="Dia 214: tese"></i><i class="dor" title="Dia 215: dor"></i><i class="gente" title="Dia 216: gente"></i><i class="tese" title="Dia 217: tese"></i><i class="dor" title="Dia 218: dor"></i><i class="gente" title="Dia 219: gente"></i><i class="tese" title="Dia 220: tese"></i><i class="dor" title="Dia 221: dor"></i><i class="gente" title="Dia 222: gente"></i><i class="tese" title="Dia 223: tese"></i><i class="dor" title="Dia 224: dor"></i><i class="gente" title="Dia 225: gente"></i><i class="tese" title="Dia 226: tese"></i><i class="dor" title="Dia 227: dor"></i><i class="tese" title="Dia 228: tese"></i><i class="gente" title="Dia 229: gente"></i><i class="dor" title="Dia 230: dor"></i><i class="tese" title="Dia 231: tese"></i><i class="gente" title="Dia 232: gente"></i><i class="dor" title="Dia 233: dor"></i><i class="tese" title="Dia 234: tese"></i><i class="gente" title="Dia 235: gente"></i><i class="dor" title="Dia 236: dor"></i><i class="tese" title="Dia 237: tese"></i><i class="gente" title="Dia 238: gente"></i><i class="dor" title="Dia 239: dor"></i><i class="tese" title="Dia 240: tese"></i><i class="gente" title="Dia 241: gente"></i><i class="dor" title="Dia 242: dor"></i><i class="tese" title="Dia 243: tese"></i><i class="tese" title="Dia 244: tese"></i><i class="dor" title="Dia 245: dor"></i><i class="gente" title="Dia 246: gente"></i><i class="tese" title="Dia 247: tese"></i><i class="dor" title="Dia 248: dor"></i><i class="gente" title="Dia 249: gente"></i><i class="tese" title="Dia 250: tese"></i><i class="dor" title="Dia 251: dor"></i><i class="gente" title="Dia 252: gente"></i><i class="tese" title="Dia 253: tese"></i><i class="dor" title="Dia 254: dor"></i><i class="gente" title="Dia 255: gente"></i><i class="tese" title="Dia 256: tese"></i><i class="dor" title="Dia 257: dor"></i><i class="gente" title="Dia 258: gente"></i><i class="tese" title="Dia 259: tese"></i><i class="dor" title="Dia 260: dor"></i><i class="tese" title="Dia 261: tese"></i><i class="gente" title="Dia 262: gente"></i><i class="dor" title="Dia 263: dor"></i><i class="tese" title="Dia 264: tese"></i><i class="gente" title="Dia 265: gente"></i><i class="dor" title="Dia 266: dor"></i><i class="tese" title="Dia 267: tese"></i><i class="gente" title="Dia 268: gente"></i><i class="dor" title="Dia 269: dor"></i><i class="tese" title="Dia 270: tese"></i><i class="gente" title="Dia 271: gente"></i><i class="dor" title="Dia 272: dor"></i><i class="tese" title="Dia 273: tese"></i><i class="tese" title="Dia 274: tese"></i><i class="dor" title="Dia 275: dor"></i><i class="gente" title="Dia 276: gente"></i><i class="tese" title="Dia 277: tese"></i><i class="dor" title="Dia 278: dor"></i><i class="gente" title="Dia 279: gente"></i><i class="tese" title="Dia 280: tese"></i><i class="dor" title="Dia 281: dor"></i><i class="gente" title="Dia 282: gente"></i><i class="tese" title="Dia 283: tese"></i><i class="dor" title="Dia 284: dor"></i><i class="gente" title="Dia 285: gente"></i><i class="tese" title="Dia 286: tese"></i><i class="dor" title="Dia 287: dor"></i><i class="gente" title="Dia 288: gente"></i><i class="tese" title="Dia 289: tese"></i><i class="dor" title="Dia 290: dor"></i><i class="tese" title="Dia 291: tese"></i><i class="gente" title="Dia 292: gente"></i><i class="dor" title="Dia 293: dor"></i><i class="tese" title="Dia 294: tese"></i><i class="gente" title="Dia 295: gente"></i><i class="dor" title="Dia 296: dor"></i><i class="tese" title="Dia 297: tese"></i><i class="gente" title="Dia 298: gente"></i><i class="dor" title="Dia 299: dor"></i><i class="tese" title="Dia 300: tese"></i><i class="gente" title="Dia 301: gente"></i><i class="dor" title="Dia 302: dor"></i><i class="tese" title="Dia 303: tese"></i><i class="gente" title="Dia 304: gente"></i><i class="tese" title="Dia 305: tese"></i><i class="dor" title="Dia 306: dor"></i><i class="tese" title="Dia 307: tese"></i><i class="dor" title="Dia 308: dor"></i><i class="gente" title="Dia 309: gente"></i><i class="tese" title="Dia 310: tese"></i><i class="dor" title="Dia 311: dor"></i><i class="gente" title="Dia 312: gente"></i><i class="tese" title="Dia 313: tese"></i><i class="dor" title="Dia 314: dor"></i><i class="gente" title="Dia 315: gente"></i><i class="tese" title="Dia 316: tese"></i><i class="dor" title="Dia 317: dor"></i><i class="gente" title="Dia 318: gente"></i><i class="tese" title="Dia 319: tese"></i><i class="dor" title="Dia 320: dor"></i><i class="tese" title="Dia 321: tese"></i><i class="gente" title="Dia 322: gente"></i><i class="dor" title="Dia 323: dor"></i><i class="tese" title="Dia 324: tese"></i><i class="gente" title="Dia 325: gente"></i><i class="dor" title="Dia 326: dor"></i><i class="tese" title="Dia 327: tese"></i><i class="gente" title="Dia 328: gente"></i><i class="dor" title="Dia 329: dor"></i><i class="tese" title="Dia 330: tese"></i><i class="gente" title="Dia 331: gente"></i><i class="dor" title="Dia 332: dor"></i><i class="tese" title="Dia 333: tese"></i><i class="gente" title="Dia 334: gente"></i><i class="tese" title="Dia 335: tese"></i><i class="dor" title="Dia 336: dor"></i><i class="tese" title="Dia 337: tese"></i><i class="dor" title="Dia 338: dor"></i><i class="gente" title="Dia 339: gente"></i><i class="tese" title="Dia 340: tese"></i><i class="dor" title="Dia 341: dor"></i><i class="gente" title="Dia 342: gente"></i><i class="tese" title="Dia 343: tese"></i><i class="dor" title="Dia 344: dor"></i><i class="gente" title="Dia 345: gente"></i><i class="tese" title="Dia 346: tese"></i><i class="dor" title="Dia 347: dor"></i><i class="gente" title="Dia 348: gente"></i><i class="tese" title="Dia 349: tese"></i><i class="dor" title="Dia 350: dor"></i><i class="tese" title="Dia 351: tese"></i><i class="gente" title="Dia 352: gente"></i><i class="dor" title="Dia 353: dor"></i><i class="tese" title="Dia 354: tese"></i><i class="gente" title="Dia 355: gente"></i><i class="dor" title="Dia 356: dor"></i><i class="tese" title="Dia 357: tese"></i><i class="gente" title="Dia 358: gente"></i><i class="dor" title="Dia 359: dor"></i><i class="tese" title="Dia 360: tese"></i><i class="gente" title="Dia 361: gente"></i><i class="dor" title="Dia 362: dor"></i><i class="tese" title="Dia 363: tese"></i><i class="gente" title="Dia 364: gente"></i><i class="dor" title="Dia 365: dor"></i></div>
     <p class="nota">Este é o ano de verdade do caso abaixo, com três teses.</p>
   </section>
 
-  <section>
+  <section id="caso">
     <p class="olho">Um caso real</p>
     <h2>Direito imobiliário, 1,1 mil seguidores. <em>Leilão, ITBI e usucapião.</em></h2>
     <p class="sub">Perfil público, nome escondido. Trechos copiados do que a IA entregou, sem edição.</p>
@@ -250,25 +386,45 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <p class="nota">Dia 1 é gente, dia 2 é dor, dia 3 é tese. Os 362 seguintes seguem o mesmo método.</p>
   </section>
 
+  <section id="explicado">
+    <p class="olho">Cada roteiro vem explicado</p>
+    <h2>Você não recebe um bloco de texto. <em>Recebe cada parte com nome e função.</em></h2>
+    <div class="partes"><div><b>Gancho</b><p>Os 3 primeiros segundos. É a frase que faz a pessoa parar de rolar a tela, e ela só para se se reconhecer nela. Fale olhando para a câmera, sem &quot;oi, tudo bem&quot;.</p></div><div><b>Fala</b><p>O que você diz depois do gancho, de 30 a 60 segundos. Não decore: leia duas vezes e fale do seu jeito. Se travar, corte e grave de novo a partir da frase.</p></div><div><b>Texto na tela</b><p>A frase curta que aparece escrita no vídeo. Muita gente assiste sem som: é ela que segura quem está no ônibus ou na fila.</p></div><div><b>Legenda</b><p>O texto que vai embaixo do post, no Instagram. Ela completa o vídeo para quem quer ler mais. Cole como está ou ajuste.</p></div><div><b>Convite no fim</b><p>A chamada para ação: o que você pede para a pessoa fazer quando o vídeo acaba. Cada roteiro já vem com um, escolhido pelo objetivo do dia.</p></div></div>
+    <h3>Para que serve cada convite no fim</h3>
+    <div class="convites"><div><b>Seguir<small>Atrair seguidores</small></b><q>&quot;Me segue para ver o resto dessa conversa.&quot;</q><span>Nos vídeos de gente: a pessoa se reconheceu e ainda não conhece você.</span></div><div><b>Comentar<small>Puxar conversa</small></b><q>&quot;Comenta aqui a sua dúvida.&quot;</q><span>Quando o assunto gera pergunta. Cada comentário mostra o vídeo para mais gente, e responder vira conteúdo.</span></div><div><b>Compartilhar<small>Chegar em gente nova</small></b><q>&quot;Manda para quem precisa ver isso.&quot;</q><span>Quando quem precisa não é quem assiste: o filho que manda para a mãe, o colega que manda para o colega.</span></div><div><b>Salvar<small>Virar referência</small></b><q>&quot;Salva para não esquecer o que juntar.&quot;</q><span>Em listas e passos: documentos, prazos, o que fazer primeiro.</span></div><div><b>Chamar no WhatsApp<small>Virar conversa com você</small></b><q>&quot;Se isso é com você, me chama no WhatsApp do link.&quot;</q><span>Nos vídeos de tese, para quem já entendeu o direito. Convida, nunca promete.</span></div></div>
+    <div class="cuidado"><strong>E o tráfego pago?</strong><p>Os roteiros de tese com convite para o WhatsApp são os que, mais para frente, podem virar anúncio. Mas anúncio é a página 2. A página 1 é ter perfil que convence e vídeo toda semana: quem chega por um anúncio olha o seu perfil antes de chamar. Comece pela produção de conteúdo.</p></div>
+  </section>
+
   <section>
-    <p class="olho">Faça a conta</p>
-    <h2>O que custaria chegar <em>no mesmo lugar.</em></h2>
-    <div class="compara">
-      <div><b>Curso de marketing jurídico ou de tráfego</b><em>R$ 97 a R$ 697,90</em><span>De 5 a 12 horas de aula. Depois você ainda escreve tudo sozinho.</span></div>
-      <div><b>Social media terceirizado</b><em>a partir de R$ 497,99/mês</em><span>Todo mês. E quem escreve não conhece as suas teses.</span></div>
-      <div><b>Pacote de roteiros genéricos</b><em>barato</em><span>Serve para qualquer advogado. Você adapta um por um.</span></div>
-      <div class="nosso"><b>365 Roteiros de Reels para Advogado</b><em>R$ 67, uma vez</em><span>Um ano das suas teses, com o raio-x do seu perfil, pronto em minutos. Sem assistir aula.</span></div>
+    <p class="olho">Junto: rotina de stories</p>
+    <h2>O story que você não posta <em>passa a ter roteiro também.</em></h2>
+    <p class="sub">Uma semana de stories, dia a dia, com exemplos das suas teses. Aqui, com a tese do caso real: leilão de imóveis.</p>
+    <div class="semana"><div><b>Segunda</b><strong>Bastidor da semana</strong><span>Foto ou vídeo da sua mesa, da pasta, do fórum. Texto: &quot;Essa semana o assunto por aqui é leilão de imóveis.&quot; Mostra que você trabalha com isso de verdade.</span></div><div><b>Terça</b><strong>Caixinha de perguntas</strong><span>Abra a caixinha: &quot;Qual a sua dúvida sobre leilão de imóveis?&quot; Cada pergunta que chegar é um vídeo pronto para depois.</span></div><div><b>Quarta</b><strong>Respostas em 15 segundos</strong><span>Responda duas ou três perguntas da caixinha falando para a câmera. Sem nome de quem perguntou.</span></div><div><b>Quinta</b><strong>O reel com enquete</strong><span>Reposte o vídeo do dia e coloque uma enquete: &quot;Isso já aconteceu com alguém da sua família? Sim ou não.&quot; Quem responde sim é quem você quer.</span></div><div><b>Sexta</b><strong>Mito ou verdade</strong><span>Um teste de duas opções sobre leilão de imóveis. No story seguinte, a resposta em uma frase.</span></div><div><b>Sábado</b><strong>Você, fora do escritório</strong><span>Um café, um passeio, a família se você quiser. Gente confia em gente, não em logomarca.</span></div><div><b>Domingo</b><strong>O mais visto da semana</strong><span>Reposte o vídeo que foi melhor e convide: &quot;Se você perdeu, é esse aqui.&quot;</span></div></div>
+    <ul class="lista"><li>De 3 a 7 stories por dia é suficiente.</li><li>Apareça falando em pelo menos um deles.</li><li>Nunca mostre dado, rosto ou documento de cliente.</li><li>Uma vez por semana, termine com o convite para o WhatsApp do link.</li></ul>
+  </section>
+
+  <section id="conta">
+    <div class="cols">
+      <div><p class="olho">Faça a conta</p>
+        <h2>O que custaria chegar <em>no mesmo lugar.</em></h2>
+        <p class="sub">Curso ensina, mas quem escreve depois é você. Social media escreve, mas não conhece as suas teses. Aqui o ano chega pronto, das suas teses, em minutos.</p></div>
+      <div class="compara">
+        <div><b>Curso de marketing jurídico ou de tráfego</b><em class="risco">R$ 97 a R$ 1.497</em><span>Horas de aula. Depois você ainda escreve tudo sozinho.</span></div>
+        <div><b>Social media terceirizado</b><em class="risco">R$ 997 a R$ 1.497/mês</em><span>Todo mês. E quem escreve não conhece as suas teses.</span></div>
+        <div><b>Pacote de roteiros ou de copy genéricos</b><em>barato</em><span>Serve para qualquer advogado. Você adapta ao seu nicho, um por um.</span></div>
+        <div class="nosso"><b>365 Roteiros de Reels para Advogado</b><em>R$ 67, uma vez</em><span>Um ano das suas teses, com o raio-x do seu perfil, pronto em minutos. Sem assistir aula.</span></div>
+      </div>
     </div>
-    <p class="nota">Preços de cursos conferidos nas páginas oficiais em 03/11/2026. Social media: preço publicado por um fornecedor para advogados, também em 03/11/2026.</p>
+    <p class="nota">Faixas de preço praticadas no mercado em novembro de 2026.</p>
   </section>
 
   <section>
     <p class="olho">Como funciona</p>
     <h2>Três passos. <em>O último é seu.</em></h2>
-    <ol class="lista">
-      <li>Você paga. Leva um minuto.</li>
-      <li>Na tela seguinte, informa o seu @, a sua área e até três teses. Cidade, se quiser.</li>
-      <li>Em poucos minutos o ano está pronto na tela, e o link chega no seu e-mail e no seu WhatsApp. Você lê, ajusta ao seu jeito e grava.</li>
+    <ol class="passos">
+      <li>Você paga.<span>Leva um minuto, no Pix ou no cartão.</span></li>
+      <li>Informa as suas teses.<span>Na tela seguinte: o seu @, a sua área e até três teses. Cidade, se quiser.</span></li>
+      <li>Lê, ajusta e grava.<span>Em poucos minutos o ano está pronto na tela, e o link chega no seu e-mail e no seu WhatsApp.</span></li>
     </ol>
   </section>
 
@@ -287,22 +443,28 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   </section>
 
   <section class="oferta" id="comprar">
-    <p class="olho">365 Roteiros de Reels para Advogado</p>
-    <h2>Pague, informe as teses, <em>receba o ano.</em></h2>
-    <div class="tira"><span>Raio-x e bio nova</span><span>365 roteiros</span><span>Na ordem gente, dor, tese</span><span>Prompt de lapidar</span><span>Planilha do ano</span></div>
-    <div class="preco">R$ 67<small>pagamento único</small></div>
-    <a class="botao grande" href="https://pay.kiwify.com.br/OeXlH4s">Quero o meu ano de vídeos</a>
-    <p class="nota">7 dias para pedir o dinheiro de volta pela Kiwify. Feito pela IA a partir do seu perfil público e das teses que você informar. Qualquer área do Direito.</p>
+    <div class="txt">
+      <p class="olho">365 Roteiros de Reels para Advogado</p>
+      <h2>Pague, informe as teses, <em>receba o ano.</em></h2>
+      <div class="tira"><span>Raio-x e bio nova</span><span>365 roteiros</span><span>Na ordem gente, dor, tese</span><span>Prompt de lapidar</span><span>Guia dos convites</span><span>Rotina de stories</span><span>Planilha do ano</span></div>
+    </div>
+    <div class="lado-preco">
+      <div class="preco">R$ 67<small>pagamento único</small></div>
+      <a class="botao grande" href="https://pay.kiwify.com.br/OeXlH4s">Quero o meu ano de vídeos</a>
+      <p class="nota">7 dias para pedir o dinheiro de volta pela Kiwify. Feito pela IA a partir do seu perfil público e das teses que você informar. Qualquer área do Direito.</p>
+    </div>
   </section>
 
-  <section>
+  <section class="faq" id="perguntas">
     <h2>Perguntas</h2>
+    <div class="perg">
     <details><summary>Preciso saber usar IA?</summary><p>Não. Você informa o @, a área e as teses e recebe tudo pronto. A IA só entra se você quiser lapidar algum roteiro, e o prompt já vai pronto.</p></details>
     <details><summary>Serve para a minha área?</summary><p>Serve para qualquer área: previdenciário, trabalhista, família, bancário, imobiliário, criminal, tributário e outras. Os roteiros são das teses que você informar.</p></details>
     <details><summary>Quanto tempo demora?</summary><p>O raio-x fica pronto em cerca de um minuto e meio. O ano inteiro, em poucos minutos. A página acompanha e abre sozinha, e o link chega no seu e-mail e no WhatsApp.</p></details>
     <details><summary>E a OAB?</summary><p>Os roteiros informam, não prometem ganho de causa, não falam de honorário e terminam com um convite. O que depende de número ou regra que muda vem marcado para você conferir antes de gravar. A publicidade é sua: leia antes de postar (Provimento 205/2021).</p></details>
     <details><summary>Meu perfil é novo, pequeno ou privado. Serve?</summary><p>Serve. O raio-x mostra o que fazer primeiro. Se o perfil for privado, a IA monta tudo pelas suas teses e avisa que não conseguiu ler o perfil.</p></details>
     <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias para pedir o dinheiro de volta pela própria Kiwify.</p></details>
+    </div>
   </section>
   <footer>Samurai do Jurídico.</footer>
 </main>
