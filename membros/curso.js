@@ -64,7 +64,15 @@
     AREAS_DO_CLIENTE = p.replace("pacote_", "").split("_").filter(Boolean);
   }
 
+  // ⛔ Área de pacote personalizado (feito para um escritório) só aparece para
+  // quem tem esse pacote, nem para o Full: a aula fala do jeito daquele
+  // escritório e das skills que só ele tem.
+  var AREAS_PERSONALIZADAS = ["certa"];
+
   function temArea(area) {
+    if (AREAS_PERSONALIZADAS.indexOf(area) !== -1) {
+      return !!AREAS_DO_CLIENTE && AREAS_DO_CLIENTE.indexOf(area) !== -1;
+    }
     if (!AREAS_DO_CLIENTE) return true;
     if (area === "universal") return true;
     return AREAS_DO_CLIENTE.indexOf(area) !== -1;
@@ -243,7 +251,8 @@
     var prog = progresso();
     var feitas = aulas().filter(function (m) { return prog[m.slug]; }).length;
     var proxima = aulas().filter(function (m) { return !prog[m.slug]; })[0] || null;
-    return { total: CURSO.length, feitas: feitas, proxima: proxima };
+    // ⛔ o total é o das aulas que ESTE cliente vê, não o do curso inteiro
+    return { total: aulas().length, feitas: feitas, proxima: proxima };
   }
 
   // Preenche o grupo Aulas do menu lateral principal

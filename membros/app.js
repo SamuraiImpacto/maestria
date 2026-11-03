@@ -187,7 +187,7 @@ function renderizarPainel(dados) {
 
   const primeiroNome = (c.nome || "").split(" ")[0];
   $("pl-saudacao").textContent = primeiroNome ? "Olá, " + primeiroNome : "Bem-vindo";
-  $("pl-plano").textContent = c.plano_legivel;
+  $("pl-plano").textContent = nomeDoPlano(c);
 
   const statusEl = $("pl-status");
   statusEl.classList.add("ok");
@@ -200,6 +200,11 @@ function renderizarPainel(dados) {
   renderizarGuia(dados);
 
   // Aulas na barra lateral + entrada pelo Início (dashboard)
+  // ⛔ o curso precisa saber o pacote ANTES de montar o menu: aula de área
+  // personalizada só aparece para quem tem a área.
+  if (window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.definirAreas) {
+    window.MAESTRIA_CURSO.definirAreas(c.plano || "");
+  }
   if (window.MAESTRIA_CURSO) window.MAESTRIA_CURSO.montarMenu();
   renderizarInicio(dados);
   mostrarView("inicio");
@@ -210,7 +215,7 @@ function renderizarInicio(dados) {
   const c = dados.cliente;
   const primeiroNome = (c.nome || "").split(" ")[0];
   $("ini-saudacao").textContent = primeiroNome ? "Olá, " + primeiroNome : "Bem-vindo";
-  $("ini-plano").textContent = (c.plano_legivel || "") +
+  $("ini-plano").textContent = nomeDoPlano(c) +
     (c.vitalicio ? " · licença vitalícia" : c.vence_em ? " · ativa até " + dataBr(c.vence_em) : "");
 
   // ⛔ Quem ainda NAO instalou ve um caminho so. O mural de seis cards e o que
@@ -284,8 +289,26 @@ function renderizarInicio(dados) {
 // ---------- Áreas do direito: nome de gente para o código ----------
 // Usado pela aba Downloads e pela aba Guia. Uma cópia só, de propósito: duas
 // listas iguais em lugares diferentes é uma delas ficando velha sem ninguém ver.
+// ---------- Pacotes personalizados (feitos para um escritório) ----------
+// ⛔ O nome legível que vem do servidor monta o plano pelas partes
+// ("MaestrIA certa + Previdenciário"), o que serve para pacote de prateleira e
+// fica feio no pacote feito sob medida. E pacote personalizado não recebe
+// oferta de outras áreas nem cadeado de skill: foi fechado com o escritório.
+const PACOTES_PERSONALIZADOS = {
+  pacote_certa: "MaestrIA Certa: Previdenciário e Revisional Bancária",
+};
+function pacotePersonalizado(plano) {
+  const p = String(plano || "");
+  return Object.keys(PACOTES_PERSONALIZADOS).find((k) => p === k || p.indexOf(k + "_") === 0) || null;
+}
+function nomeDoPlano(c) {
+  const k = pacotePersonalizado(c && c.plano);
+  return k ? PACOTES_PERSONALIZADOS[k] : ((c && c.plano_legivel) || "");
+}
+
 const NOME_AREA = {
   prev: "Previdenciário", trab: "Trabalhista", marketing: "Marketing jurídico",
+  bancario: "Revisional bancária",
   familia: "Família", consumidor: "Consumidor", criminal: "Criminal",
   saude: "Saúde", tributario: "Tributário", imob: "Imobiliário",
   empresarial: "Empresarial", universal: "Serve para qualquer área",
@@ -694,7 +717,7 @@ function renderizarDownloads(dados) {
 
   const bloqueadas = dados.skills_bloqueadas || [];
   const upsell = $("dl-upsell");
-  if (!bloqueadas.length) {
+  if (!bloqueadas.length || pacotePersonalizado(dados.cliente && dados.cliente.plano)) {
     upsell.classList.add("hidden");
     return;
   }
@@ -930,8 +953,9 @@ function montarUpgrade(dados, jaInstalou) {
   const plano = dados && dados.cliente ? dados.cliente.plano : "";
   const tem = areasDoPlano(plano);
 
-  // ⛔ Não aparece para quem ainda está instalando, nem para quem já tem tudo.
-  if (!jaInstalou || tem === "TUDO") {
+  // ⛔ Não aparece para quem ainda está instalando, nem para quem já tem tudo,
+  // nem para pacote personalizado.
+  if (!jaInstalou || tem === "TUDO" || pacotePersonalizado(plano)) {
     caixa.classList.add("hidden");
     return;
   }
