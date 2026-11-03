@@ -39,6 +39,7 @@
     urkdMlQ: { valor: 997, nome: "Combo Previdenciario + Marketing" },
     "3J6V58l": { valor: 997, nome: "Combo Trabalhista + Marketing" },
     gQZKu4v: { valor: 47, nome: "Kit de Prompts do Escritorio com IA" },
+    OeXlH4s: { valor: 67, nome: "365 Roteiros de Reels para Advogado" },
   };
 
   /* Delegação no document: pega o clique mesmo em botão criado depois,

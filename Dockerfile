@@ -60,6 +60,8 @@ COPY modelos-video/ ./modelos-video/
 # Geradas por C:/Acervo/Iscas/MaestrIA-2026-11/paginas_funil.py a partir dos .md testados.
 COPY prompts/ ./prompts/
 COPY kit/ ./kit/
+# Low ticket de R$ 67 (365 roteiros): venda, começar e entrega. Geradas por paginas_reels.py.
+COPY reels/ ./reels/
 
 EXPOSE 80
 
