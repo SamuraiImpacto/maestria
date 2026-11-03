@@ -170,7 +170,9 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 <style>
 .fase { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border-radius:99px; padding:3px 9px; border:1px solid currentColor; }
 .fase.gente { color:#7cc4ff; } .fase.dor { color:#ffb15a; } .fase.tese { color:#4ade80; }
-.ano-grade { display:grid; grid-template-columns:repeat(auto-fill, minmax(11px, 1fr)); gap:3px; width:100%; max-width:820px; }
+.ano-grade { display:grid; grid-template-columns:repeat(31, minmax(0, 1fr)); gap:3px; width:100%; max-width:820px; }
+.pilha { display:grid; gap:12px; width:100%; max-width:820px; text-align:left; }
+.cuidado p { margin-top:4px; }
 .ano-grade i { aspect-ratio:1; border-radius:2px; display:block; }
 .ano-grade i.gente { background:#7cc4ff; } .ano-grade i.dor { background:#ffb15a; } .ano-grade i.tese { background:#4ade80; }
 .legenda-ano { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; font-size:14px; color:var(--dim); }
@@ -192,7 +194,7 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
 .fil { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
 .busca { font:inherit; font-size:16px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:11px 14px; width:100%; max-width:520px; }
 .acoes-mat { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
-@media (min-width:701px) { .ano-grade { align-self:center; } .compara { align-self:center; } }
+@media (min-width:701px) { .ano-grade, .compara, .pilha { align-self:center; } .duo { align-self:center; width:100%; max-width:820px; } }
 @media print { .meses, .fil, .busca, .acoes-mat { display:none !important; } }
 </style>
 <main>
