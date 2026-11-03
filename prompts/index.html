@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>10 prompts para o escritório | Samurai do Jurídico</title>
-<meta name="description" content="Dez prompts grátis para advogado: revisar a peça, mapear a contestação, desmontar o laudo, preparar a audiência e mais. Sem cadastro.">
+<title>20 prompts para o escritório | Samurai do Jurídico</title>
+<meta name="description" content="Vinte prompts grátis para advogado: revisar a peça, mapear a contestação, desmontar o laudo, preparar a audiência e mais. Sem cadastro.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,9 @@ h3 { color:var(--txt); font-size:18px; font-weight:800; line-height:1.3; }
 .grade { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
 .cartao { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:8px; }
 .cartao .num { font-family:'Playfair Display',serif; font-weight:900; font-size:44px; line-height:1; color:var(--red2); font-variant-numeric:tabular-nums; }
-.indice { list-style:none; display:grid; gap:8px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+.indice { list-style:none; display:grid; gap:8px; grid-template-columns:minmax(0,1fr); }
+.indice li { display:flex; }
+.indice a { flex:1; }
 .indice a { display:flex; gap:12px; align-items:baseline; color:var(--txt); text-decoration:none; background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:12px 14px; font-size:15.5px; transition:border-color .15s; }
 .indice a:hover { border-color:var(--bd2); background:var(--card2); }
 .indice a b { color:var(--red2); font-variant-numeric:tabular-nums; min-width:22px; }
@@ -105,11 +107,12 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   .duo, .grade, .indice, .caixa, details, .cuidado, .lado, .cartao { text-align:left; }
   section > .lista { align-self:center; text-align:left; max-width:620px; }
   .tira { justify-content:center; }
-  .item { align-items:stretch; text-align:left; max-width:820px; }
+  /* Prompt, aviso e oferta na mesma coluna, centralizada */
+  .item, .cuidado, .oferta, .indice { align-self:center; width:100%; max-width:820px; }
+  .indice { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .item { align-items:stretch; text-align:left; }
   .item > .olho { align-self:flex-start; }
-  .oferta { max-width:720px; align-self:center; width:100%; }
   .oferta .botao.grande { max-width:420px; }
-  .cuidado { max-width:720px; }
 }
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
 
@@ -168,8 +171,8 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
   <section class="hero">
     <span class="selo">Grátis · sem cadastro · sem e-mail</span>
     <h1>Você ainda pede para a IA <em>"dar uma olhada"</em> na sua peça?</h1>
-    <p class="sub">Ela olha. Elogia. Devolve um texto bonito e genérico. E se você deixar, cita uma decisão que ninguém sabe de onde saiu. <b>O problema não é a IA. É o pedido.</b> Aqui estão 10 pedidos prontos, do jeito que eu uso no escritório.</p>
-    <div class="acoes"><a class="botao" href="#os-10">Ver os 10 prompts</a><span class="nota">ChatGPT, Claude, Gemini: funciona em qualquer uma.</span></div>
+    <p class="sub">Ela olha. Elogia. Devolve um texto bonito e genérico. E se você deixar, cita uma decisão que ninguém sabe de onde saiu. <b>O problema não é a IA. É o pedido.</b> Aqui estão 20 pedidos prontos, desenvolvidos em conjunto com os escritórios que a gente acompanha.</p>
+    <div class="acoes"><a class="botao" href="#os-20">Ver os 20 prompts</a><span class="nota">ChatGPT, Claude, Gemini: funciona em qualquer uma.</span></div>
   </section>
 
   <section>
@@ -189,11 +192,11 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <p class="faca">IA que elogia a sua peça não te protege de nada. O juiz não vai elogiar.</p>
   </section>
 
-  <section id="os-10">
+  <section id="os-20">
     <p class="olho">O pack</p>
-    <h2>10 momentos em que o escritório <em>trava</em></h2>
+    <h2>20 momentos em que o escritório <em>trava</em></h2>
     <p>Cada prompt nasceu de uma cena que se repete toda semana. Escolha a sua e pule direto.</p>
-    <ul class="indice"><li><a href="#p1"><b>01</b><div>O revisor que não elogia<span>Antes de protocolar</span></div></a></li><li><a href="#p2"><b>02</b><div>O mapa da contestação antes da réplica<span>Antes da réplica</span></div></a></li><li><a href="#p3"><b>03</b><div>A pilha de documentos do cliente<span>Quando o cliente despeja tudo no WhatsApp</span></div></a></li><li><a href="#p4"><b>04</b><div>Sentença ruim: o que vale recorrer<span>Depois da sentença ruim</span></div></a></li><li><a href="#p5"><b>05</b><div>O laudo que se contradiz<span>Quando o laudo veio contra</span></div></a></li><li><a href="#p6"><b>06</b><div>A audiência antes da audiência<span>Três dias antes da audiência</span></div></a></li><li><a href="#p7"><b>07</b><div>A conferência de citações<span>Antes de assinar o que a IA escreveu</span></div></a></li><li><a href="#p8"><b>08</b><div>Uma página para o juiz<span>Na hora de despachar</span></div></a></li><li><a href="#p9"><b>09</b><div>A decisão explicada ao cliente<span>Quando o cliente pergunta &quot;e aí?&quot;</span></div></a></li><li><a href="#p10"><b>10</b><div>A pergunta do cliente que vira vídeo<span>Quando você não sabe o que gravar</span></div></a></li></ul>
+    <ul class="indice"><li><a href="#p1"><b>01</b><div>O revisor que não elogia<span>Antes de protocolar</span></div></a></li><li><a href="#p2"><b>02</b><div>O mapa da contestação antes da réplica<span>Antes da réplica</span></div></a></li><li><a href="#p3"><b>03</b><div>A pilha de documentos do cliente<span>Quando o cliente despeja tudo no WhatsApp</span></div></a></li><li><a href="#p4"><b>04</b><div>Sentença ruim: o que vale recorrer<span>Depois da sentença ruim</span></div></a></li><li><a href="#p5"><b>05</b><div>O laudo que se contradiz<span>Quando o laudo veio contra</span></div></a></li><li><a href="#p6"><b>06</b><div>A audiência antes da audiência<span>Três dias antes da audiência</span></div></a></li><li><a href="#p7"><b>07</b><div>A conferência de citações<span>Antes de assinar o que a IA escreveu</span></div></a></li><li><a href="#p8"><b>08</b><div>Uma página para o juiz<span>Na hora de despachar</span></div></a></li><li><a href="#p9"><b>09</b><div>A decisão explicada ao cliente<span>Quando o cliente pergunta &quot;e aí?&quot;</span></div></a></li><li><a href="#p10"><b>10</b><div>A pergunta do cliente que vira vídeo<span>Quando você não sabe o que gravar</span></div></a></li><li><a href="#p11"><b>11</b><div>O que essa intimação manda fazer<span>Quando chega a intimação</span></div></a></li><li><a href="#p12"><b>12</b><div>Do relato do cliente à petição inicial<span>Antes de escrever a inicial</span></div></a></li><li><a href="#p13"><b>13</b><div>O processo que caiu no seu colo<span>Quando você assume um caso andando</span></div></a></li><li><a href="#p14"><b>14</b><div>O acórdão em dez linhas<span>Quando o acórdão tem 40 páginas</span></div></a></li><li><a href="#p15"><b>15</b><div>A proposta de acordo que chegou<span>Quando a outra parte propõe acordo</span></div></a></li><li><a href="#p16"><b>16</b><div>A prova que falta para cada fato<span>Antes de fechar a prova</span></div></a></li><li><a href="#p17"><b>17</b><div>O print de WhatsApp da outra parte<span>Quando juntam print contra o seu cliente</span></div></a></li><li><a href="#p18"><b>18</b><div>As cláusulas que mordem<span>Antes de assinar o contrato</span></div></a></li><li><a href="#p19"><b>19</b><div>Recusar o caso sem queimar a ponte<span>Quando o caso não é para você</span></div></a></li><li><a href="#p20"><b>20</b><div>A segunda-feira em ordem<span>Segunda de manhã</span></div></a></li></ul>
   </section>
 
   <section>
@@ -201,7 +204,7 @@ footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; col
     <ol class="lista">
       <li>Abra uma conversa nova na IA que você já usa. Um prompt por conversa.</li>
       <li>Copie o prompt inteiro e cole.</li>
-      <li>Mande o material que ela pedir. Antes, tire nome, CPF e tudo que identifique o cliente.</li>
+      <li>Mande o material que ela pedir.</li>
     </ol>
   </section>
 
@@ -335,7 +338,7 @@ Escreva uma mensagem para eu revisar e mandar:
 Tom calmo e respeitoso, sem promessa de resultado, sem previsão de prazo que eu não confirmei, sem minimizar uma notícia ruim. Até 10 linhas. Se a decisão for desfavorável, escreva também uma versão para eu falar por áudio.</pre></div></section>
 <section class="item" id="p10"><p class="olho">10 · Quando você não sabe o que gravar</p><h3>A pergunta do cliente que vira vídeo</h3><p class="quando"><b>Quando usar:</b> você quer aparecer e não sabe sobre o que falar.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t10">Copiar o prompt</button></div><pre class="prompt" id="t10">Você vai transformar as perguntas que os clientes mandam no WhatsApp do meu escritório em roteiros de vídeo curto para EU gravar no celular. Sou advogado de [sua área].
 
-1. Eu colo as perguntas do jeito que chegaram. Antes de tudo, tire nome, número, cidade pequena, empresa e qualquer detalhe que identifique a pessoa. A dúvida fica, a pessoa some.
+1. Eu colo as perguntas do jeito que chegaram. O roteiro fala da dúvida, nunca de quem perguntou.
 2. Agrupe as parecidas e me mostre as 5 que mais aparecem. Eu escolho quais viram roteiro.
 
 Para cada roteiro (30 a 60 segundos):
@@ -345,12 +348,145 @@ FECHAMENTO: &quot;Comenta a sua dúvida&quot;, &quot;Salva para mostrar a quem p
 TEXTO EM TELA e LEGENDA do post.
 
 Regras: fala de gente, sem juridiquês; informa, não promete resultado nem cita valor de indenização; se eu pedir lei ou decisão, escreva [conferir na fonte oficial antes de gravar]. Comece me pedindo as perguntas.</pre></div></section>
+<section class="item" id="p11"><p class="olho">11 · Quando chega a intimação</p><h3>O que essa intimação manda fazer</h3><p class="quando"><b>Quando usar:</b> chegou intimação e você quer saber exatamente o que fazer e até quando conferir.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t11">Copiar o prompt</button></div><pre class="prompt" id="t11">Chegou uma intimação e eu quero ter certeza do que ela manda fazer. Sou advogado de [sua área].
+
+Vou colar o texto da intimação ou do despacho e uma linha sobre o processo.
+
+Me entregue:
+1. O que o juiz determinou, em linguagem direta.
+2. Quem precisa agir: eu, o cliente, a outra parte, o perito, o cartório.
+3. A providência concreta que eu preciso tomar.
+4. O prazo indicado no texto, se houver, e a forma de contagem como [conferir na fonte oficial]. Não calcule a data final.
+5. O que eu preciso pedir ao cliente, se for o caso, em mensagem curta para WhatsApp.
+6. Riscos se eu não cumprir.
+
+Use só o que está no texto. Se algo estiver ambíguo, diga o que precisa ser conferido nos autos.</pre></div></section>
+<section class="item" id="p12"><p class="olho">12 · Antes de escrever a inicial</p><h3>Do relato do cliente à petição inicial</h3><p class="quando"><b>Quando usar:</b> o cliente contou a história toda e você vai começar a inicial.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t12">Copiar o prompt</button></div><pre class="prompt" id="t12">Meu cliente me contou o caso e eu vou começar a petição inicial. Antes de escrever, quero organizar fatos, provas e pedidos. Atue como advogado de [sua área].
+
+Vou colar o relato do cliente (sem dados pessoais) e a lista de documentos que ele tem.
+
+Me entregue:
+1. Os fatos relevantes em ordem cronológica, numerados, só o que ele contou.
+2. Para cada fato: o documento que prova ou &quot;sem prova ainda&quot;.
+3. As perguntas que eu ainda preciso fazer ao cliente, porque o relato deixou lacuna.
+4. Os pedidos possíveis, do principal ao subsidiário, com o fato que sustenta cada um.
+5. O risco mais óbvio que a defesa vai explorar.
+6. Competência, rito e prazo prescricional como [conferir na fonte oficial].
+
+Não escreva a inicial ainda. Não invente fato para completar a história. Lei e julgado como [conferir na fonte oficial].</pre></div></section>
+<section class="item" id="p13"><p class="olho">13 · Quando você assume um caso andando</p><h3>O processo que caiu no seu colo</h3><p class="quando"><b>Quando usar:</b> você assumiu um processo no meio do caminho.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t13">Copiar o prompt</button></div><pre class="prompt" id="t13">Assumi um processo que já estava andando e preciso entender onde ele está. Sou advogado de [sua área].
+
+Vou colar as principais peças e decisões (ou o andamento do processo).
+
+Me entregue:
+1. Do que trata o processo, em três linhas.
+2. Uma linha do tempo: data | ato | quem fez | o que mudou.
+3. O que já foi decidido e não dá mais para discutir, e o que ainda está em aberto.
+4. Prazos ou pendências que podem estar correndo agora, como [conferir nos autos].
+5. Erros ou omissões do advogado anterior que ainda dá para corrigir.
+6. As três primeiras providências que eu deveria tomar, em ordem.
+
+Não deduza nada que não esteja no material. Se faltar peça importante, diga qual.
+
+Todo artigo, lei, súmula, tema ou julgado que você mencionar vem com [conferir na fonte oficial] na mesma linha, inclusive em observações. Se o número não for necessário, cite só a regra.
+Não afirme intimação, prazo ou recurso que não esteja no material: trate como pendência a conferir.</pre></div></section>
+<section class="item" id="p14"><p class="olho">14 · Quando o acórdão tem 40 páginas</p><h3>O acórdão em dez linhas</h3><p class="quando"><b>Quando usar:</b> saiu um acórdão longo e você precisa entender o que mudou.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t14">Copiar o prompt</button></div><pre class="prompt" id="t14">Saiu um acórdão longo e eu preciso entender rápido o que foi decidido. Sou advogado de [sua área].
+
+Vou colar o acórdão.
+
+Me entregue:
+1. O resultado em uma frase: o que foi provido, desprovido ou anulado.
+2. O que foi decidido em cada ponto, em até dez linhas no total.
+3. O fundamento central de cada ponto, com o trecho do voto.
+4. Se houve voto vencido, o que ele dizia, porque pode abrir caminho.
+5. Omissões ou contradições que poderiam justificar embargos de declaração.
+6. Os recursos que parecem possíveis a partir daqui e o que cada um exige, com cabimento e prazo como [conferir na fonte oficial].
+
+Não acrescente nada que não esteja no acórdão. Toda lei, súmula ou tema citado aparece como [conferir na fonte oficial].</pre></div></section>
+<section class="item" id="p15"><p class="olho">15 · Quando a outra parte propõe acordo</p><h3>A proposta de acordo que chegou</h3><p class="quando"><b>Quando usar:</b> a outra parte ofereceu acordo e você precisa orientar o cliente.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t15">Copiar o prompt</button></div><pre class="prompt" id="t15">A outra parte fez uma proposta de acordo e eu preciso orientar meu cliente. Atue como advogado de [sua área] que negocia com método.
+
+Vou colar a proposta, o que meu cliente pediu no processo e em que fase o caso está.
+
+Me entregue:
+1. A proposta traduzida: valor, forma de pagamento, prazos, o que meu cliente abre mão, multa por atraso, quem paga custas e honorários.
+2. O que falta na proposta e deveria constar.
+3. Uma comparação qualitativa: aceitar agora contra seguir o processo (tempo, risco, custo), sem prever resultado.
+4. Pontos que dá para negociar e uma contraproposta com campos entre colchetes para eu preencher os valores.
+5. Um texto curto para eu explicar a proposta ao cliente e deixar a decisão com ele.
+
+Não invente valores nem calcule o que o cliente &quot;receberia&quot; no processo. Lei como [conferir na fonte oficial].</pre></div></section>
+<section class="item" id="p16"><p class="olho">16 · Antes de fechar a prova</p><h3>A prova que falta para cada fato</h3><p class="quando"><b>Quando usar:</b> antes de especificar provas ou de ajuizar, para ver o que está descoberto.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t16">Copiar o prompt</button></div><pre class="prompt" id="t16">Quero saber, fato por fato, se eu tenho prova suficiente. Atue como advogado de [sua área] que pensa como o juiz na hora de decidir o ônus da prova.
+
+Vou colar os fatos que preciso provar e a lista de provas que tenho.
+
+Me entregue:
+1. Uma tabela: fato | prova que tenho | força da prova (forte, fraca, nenhuma) | quem tem o ônus de provar, como [conferir na fonte oficial].
+2. Os fatos descobertos, sem prova suficiente.
+3. Para cada fato descoberto, a prova possível: documento a pedir, testemunha, perícia, ofício, exibição de documento.
+4. Pedidos de produção de prova que eu deveria fazer, com a justificativa de cada um.
+5. Prova que eu tenho e que pode me prejudicar se juntada sem cuidado.
+
+Não invente prova nem fato. Lei como [conferir na fonte oficial].
+
+Resposta enxuta: no máximo 700 palavras, em tópicos curtos. Entregue todos os itens; se faltar espaço, encurte os primeiros, nunca corte o último.
+Todo artigo, lei, súmula, tema ou julgado que você mencionar vem com [conferir na fonte oficial] na mesma linha, inclusive em observações. Se o número não for necessário, cite só a regra.</pre></div></section>
+<section class="item" id="p17"><p class="olho">17 · Quando juntam print contra o seu cliente</p><h3>O print de WhatsApp da outra parte</h3><p class="quando"><b>Quando usar:</b> a outra parte juntou prints, áudios ou fotos e você quer saber o que questionar.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t17">Copiar o prompt</button></div><pre class="prompt" id="t17">A outra parte juntou prints de conversa, fotos ou transcrição de áudio como prova. Quero saber o que dá para questionar e o que eu preciso aceitar. Sou advogado de [sua área].
+
+Vou colar a descrição ou o texto das provas e o que a outra parte afirma que elas provam.
+
+Me entregue:
+1. O que cada prova realmente mostra, separado do que a outra parte diz que ela mostra.
+2. Problemas de integridade possíveis: recorte de conversa, falta de data, falta de identificação de quem fala, ausência do arquivo original, só se houver sinal disso no material.
+3. O que eu posso pedir: arquivo original, ata notarial, perícia, exibição da conversa completa. Fundamentos como [conferir na fonte oficial].
+4. O trecho que, mesmo verdadeiro, não prova o que a outra parte alega.
+5. O que eu não devo contestar, porque a contestação sem base enfraquece minha credibilidade.
+
+Não afirme que houve montagem sem sinal concreto. Não invente fato.
+
+Todo artigo, lei, súmula, tema ou julgado que você mencionar vem com [conferir na fonte oficial] na mesma linha, inclusive em observações. Se o número não for necessário, cite só a regra.</pre></div></section>
+<section class="item" id="p18"><p class="olho">18 · Antes de assinar o contrato</p><h3>As cláusulas que mordem</h3><p class="quando"><b>Quando usar:</b> o cliente vai assinar um contrato e pediu sua opinião.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t18">Copiar o prompt</button></div><pre class="prompt" id="t18">Meu cliente vai assinar um contrato e me pediu uma revisão. Ele é a parte [contratante ou contratada]. Atue como advogado de [sua área] que lê contrato procurando onde o cliente sai perdendo.
+
+Vou colar o contrato.
+
+Me entregue:
+1. O que o contrato é, em três linhas, como eu explicaria ao cliente.
+2. Uma tabela: cláusula | o que diz em linguagem simples | risco para o meu cliente (alto, médio, baixo) | sugestão de redação.
+3. Multas, prazos de aviso, renovação automática, foro e rescisão: tudo que gera custo ou prende o cliente.
+4. O que está faltando e deveria estar no contrato.
+5. As três mudanças que eu negociaria primeiro, em ordem.
+
+Não reescreva o contrato inteiro. Lei como [conferir na fonte oficial]. Se uma cláusula for ambígua, mostre as duas leituras possíveis.
+
+Resposta enxuta: no máximo 700 palavras, em tópicos curtos. Entregue todos os itens; se faltar espaço, encurte os primeiros, nunca corte o último.</pre></div></section>
+<section class="item" id="p19"><p class="olho">19 · Quando o caso não é para você</p><h3>Recusar o caso sem queimar a ponte</h3><p class="quando"><b>Quando usar:</b> você não vai pegar o caso e quer dizer isso bem.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t19">Copiar o prompt</button></div><pre class="prompt" id="t19">Decidi não pegar um caso e preciso responder ao possível cliente. Quero recusar com respeito, sem dar parecer de graça e sem deixar a pessoa perdida. Sou advogado de [sua área].
+
+Vou colar o que a pessoa me mandou e o motivo da recusa: [fora da minha área, conflito de interesse, agenda, caso que não acredito, valor].
+
+Escreva:
+1. Uma mensagem curta para WhatsApp recusando, com o motivo dito de forma adequada (sem detalhar conflito de interesse, por exemplo).
+2. Uma orientação geral do próximo passo que ela pode tomar (procurar advogado da área, Defensoria, órgão competente), sem análise do mérito.
+3. Um aviso, se houver sinal de prazo correndo, para ela procurar orientação logo, sem afirmar qual é o prazo.
+4. Uma versão para falar por ligação.
+
+Sem opinião sobre a chance do caso, sem julgamento sobre a pessoa e sem prometer indicação que eu não vou fazer.</pre></div></section>
+<section class="item" id="p20"><p class="olho">20 · Segunda de manhã</p><h3>A segunda-feira em ordem</h3><p class="quando"><b>Quando usar:</b> começo do dia ou da semana, com tudo misturado na cabeça.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t20">Copiar o prompt</button></div><pre class="prompt" id="t20">Tenho muita coisa para fazer e tudo parece urgente. Quero organizar o meu dia de trabalho no escritório. Sou advogado de [sua área].
+
+Vou colar a lista do que tenho pendente, do jeito que vier: prazos, ligações, reuniões, peças, cobranças. Também vou dizer quantas horas tenho hoje: [horas].
+
+Me entregue:
+1. A lista separada em: prazo processual, compromisso com hora marcada, trabalho de peça, atendimento ao cliente, administrativo.
+2. O que precisa ser feito hoje, o que pode ser amanhã e o que pode ser delegado.
+3. Uma agenda do dia em blocos, respeitando as horas que tenho, com o trabalho mais difícil no começo.
+4. O que eu deveria delegar e a quem (estagiário, secretária, outro advogado), com uma instrução de uma linha.
+5. O que dá para recusar ou adiar sem prejuízo.
+
+Os prazos são os que eu informei: não calcule nem altere data. Se algum item estiver sem prazo, pergunte.</pre></div></section>
 
   <section class="cuidado"><strong>Leia antes de usar o que voltou</strong>A IA erra, e erra com confiança. Por isso todo prompt aqui manda ela marcar lei, súmula e decisão como "conferir na fonte oficial". Confira cada uma. Quem assina é você.</section>
 
   <section class="oferta" id="kit">
     <p class="olho">Próximo passo</p>
-    <h2>Esses 10 cuidam do processo. <em>E o marketing do escritório?</em></h2>
+    <h2>Esses 20 cuidam do processo. <em>E o marketing do escritório?</em></h2>
     <p>Você informa o seu @ do Instagram e a sua área. Em uns 3 minutos a IA entrega, feito para você: o raio-x do perfil com a bio nova, 30 roteiros de vídeo da sua área, as mensagens de venda do WhatsApp e a sua primeira campanha de tráfego. Sem prompt nenhum.</p>
     <div class="tira"><span>Raio-x e bio nova</span><span>30 roteiros</span><span>10 mensagens de venda</span><span>Primeira campanha</span></div>
     <div class="preco">R$ 47<small>pagamento único</small></div>
@@ -359,7 +495,7 @@ Regras: fala de gente, sem juridiquês; informa, não promete resultado nem cita
 
   <footer>Samurai do Jurídico. Prompt é ponto de partida: o MaestrIA faz isso dentro do seu computador, com o modelo do seu escritório e a jurisprudência conferida na fonte oficial.</footer>
 </main>
-<div class="fixo"><a class="botao" href="#os-10">Pegar os 10 prompts</a></div>
+<div class="fixo"><a class="botao" href="#os-20">Pegar os 20 prompts</a></div>
 <script>
 (function () {
   function copiar(botao) {
