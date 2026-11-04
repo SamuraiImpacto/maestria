@@ -261,7 +261,7 @@ L_MKT = [('Conteúdo com a sua voz', 'reels, carrosséis, estáticos e artigos c
          ('Edição de vídeo', 'pausas fora, legenda e gancho no vídeo que você gravou'),
          ('Calendário editorial', 'o mês inteiro de pauta da sua área em minutos'),
          ('Site do escritório no ar', 'com blog, no seu domínio, hospedado de graça'),
-         ('Páginas de campanha', 'prontas para anúncio, com Pixel e WhatsApp'),
+         ('Páginas de campanha', 'prontas para receber o anúncio do seu gestor de tráfego, com Pixel e WhatsApp'),
          ('Google Meu Negócio', 'da criação à rotina de quem procura advogado perto de casa'),
          ('Compliance OAB automático', 'tudo filtrado pelo Provimento 205 antes de sair')]
 vitrines = re.search(r'    <div class="vitrines reveal">.*?\n    </div>\n', '\n'.join(M), re.S).group(0)
@@ -303,6 +303,7 @@ PACOTE = f'''<section id="pacotes" style="padding-top:20px">
 
     <p class="pacotes-pe">O pacote inclui <b>12 meses de acesso</b> com todas as atualizações do período e o <b>grupo da comunidade</b>, onde as dúvidas de uso são resolvidas.</p>
 
+    <p class="pacotes-pe" data-aviso="trafego"><b>O anúncio pago continua com quem opera tráfego todo dia.</b> A MaestrIA entrega a página, o conteúdo e a pesquisa de praça que o seu gestor de tráfego precisa para subir a campanha. Ainda não tem um? A <b>Impacto Marketing Jurídico</b> opera o tráfego de escritórios de advocacia.</p>
 {vitrines}
 {prereq}  </div>
 </section>'''
@@ -322,6 +323,8 @@ GARANTIA = '''<section style="padding-top:0">
 FAQS = [
     ('Eu já uso o Claude. Por que preciso da MaestrIA?',
      'Porque o Claude sozinho não tem o motor de cálculo do INSS, não confere jurisprudência na base do CNJ, não conhece o seu timbrado nem a sua marca, não busca as suas intimações e não edita vídeo. A MaestrIA dá isso a ele. Você continua usando o mesmo Claude, só que ele passa a trabalhar como alguém do seu escritório.'),
+    ('Substitui a agência de tráfego?',
+     'Não. A MaestrIA produz o site, a landing, o conteúdo e a pesquisa de praça. O anúncio pago continua com quem opera tráfego todo dia: subir a campanha, acompanhar a verba e ajustar o que não converte. Ela entrega o material que o seu gestor de tráfego precisa. Ainda não tem um? A Impacto Marketing Jurídico opera o tráfego de escritórios de advocacia.'),
     ('Inventa acórdão como o ChatGPT?',
      'Não. Toda decisão passa pela base do CNJ e pelo site do tribunal, e leis, súmulas e temas são conferidos em fonte oficial. Quando não dá pra confirmar, ela avisa em vez de inventar.'),
     ('Os dados dos meus clientes ficam seguros?',
