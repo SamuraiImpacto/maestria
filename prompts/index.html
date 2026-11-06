@@ -100,7 +100,7 @@ details p { margin-top:10px; }
 footer { border-top:1px solid var(--bd); padding-top:24px; font-size:13.5px; color:var(--dim); display:flex; flex-direction:column; gap:8px; }
 footer .linha { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; }
 footer .linha span:last-child { color:var(--muted); }
-@media (max-width:700px) { .fixo { display:block; } body { font-size:16.5px; } .sub { font-size:17.5px; } }
+@media (max-width:700px) { .fixo.ativa { display:block; } body { font-size:16.5px; } .sub { font-size:17.5px; } }
 @media (min-width:701px) {
   main { max-width:960px; }
   section { align-items:center; text-align:center; }
@@ -171,6 +171,7 @@ footer .linha span:last-child { color:var(--muted); }
 .filtros button[aria-pressed="true"] { background:var(--txt); color:#000; }
 .copiar-s { font:inherit; font-weight:700; font-size:13px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:8px; padding:6px 12px; cursor:pointer; align-self:flex-start; }
 .copiar-s:hover { border-color:var(--ok); }
+.meio-67 { display:flex; justify-content:center; margin:8px 0 28px; }
 .aviso-ia { font-size:14px; color:var(--dim); max-width:680px; }
 </style>
 <script src="/js/pixel.js" defer></script>
@@ -182,7 +183,6 @@ footer .linha span:last-child { color:var(--muted); }
     <h1>Você ainda pede para a IA <em>"dar uma olhada"</em> na sua peça?</h1>
     <p class="sub">Ela olha. Elogia. Devolve um texto bonito e genérico. E se você deixar, cita uma decisão que ninguém sabe de onde saiu. <b>O problema não é a IA. É o pedido.</b> Aqui estão 20 pedidos prontos, desenvolvidos em conjunto com os escritórios que a gente acompanha.</p>
     <div class="acoes"><a class="botao" href="#os-20">Ver os 20 prompts</a><span class="nota">ChatGPT, Claude, Gemini: funciona em qualquer uma.</span></div>
-    <a class="faixa-67" href="https://maestria.samurailab.com.br/reels/"><span class="selo">R$ 67</span><span><b>Os prompts cuidam do processo. E o que você grava amanhã?</b> Informe o seu @ e até 3 teses: a IA entrega o raio-x do seu Instagram e 365 roteiros de reels das suas teses, um por dia.</span><span class="ir">Quero os meus 365 roteiros</span></a>
   </section>
 
   <section>
@@ -207,7 +207,6 @@ footer .linha span:last-child { color:var(--muted); }
     <h2>20 momentos em que o escritório <em>trava</em></h2>
     <p>Cada prompt nasceu de uma cena que se repete toda semana. Escolha a sua e pule direto.</p>
     <ul class="indice"><li><a href="#p1"><b>01</b><div>O revisor que não elogia<span>Antes de protocolar</span></div></a></li><li><a href="#p2"><b>02</b><div>O mapa da contestação antes da réplica<span>Antes da réplica</span></div></a></li><li><a href="#p3"><b>03</b><div>A pilha de documentos do cliente<span>Quando o cliente despeja tudo no WhatsApp</span></div></a></li><li><a href="#p4"><b>04</b><div>Sentença ruim: o que vale recorrer<span>Depois da sentença ruim</span></div></a></li><li><a href="#p5"><b>05</b><div>O laudo que se contradiz<span>Quando o laudo veio contra</span></div></a></li><li><a href="#p6"><b>06</b><div>A audiência antes da audiência<span>Três dias antes da audiência</span></div></a></li><li><a href="#p7"><b>07</b><div>A conferência de citações<span>Antes de assinar o que a IA escreveu</span></div></a></li><li><a href="#p8"><b>08</b><div>Uma página para o juiz<span>Na hora de despachar</span></div></a></li><li><a href="#p9"><b>09</b><div>A decisão explicada ao cliente<span>Quando o cliente pergunta &quot;e aí?&quot;</span></div></a></li><li><a href="#p10"><b>10</b><div>A pergunta do cliente que vira vídeo<span>Quando você não sabe o que gravar</span></div></a></li><li><a href="#p11"><b>11</b><div>O que essa intimação manda fazer<span>Quando chega a intimação</span></div></a></li><li><a href="#p12"><b>12</b><div>Do relato do cliente à petição inicial<span>Antes de escrever a inicial</span></div></a></li><li><a href="#p13"><b>13</b><div>O processo que caiu no seu colo<span>Quando você assume um caso andando</span></div></a></li><li><a href="#p14"><b>14</b><div>O acórdão em dez linhas<span>Quando o acórdão tem 40 páginas</span></div></a></li><li><a href="#p15"><b>15</b><div>A proposta de acordo que chegou<span>Quando a outra parte propõe acordo</span></div></a></li><li><a href="#p16"><b>16</b><div>A prova que falta para cada fato<span>Antes de fechar a prova</span></div></a></li><li><a href="#p17"><b>17</b><div>O print de WhatsApp da outra parte<span>Quando juntam print contra o seu cliente</span></div></a></li><li><a href="#p18"><b>18</b><div>As cláusulas que mordem<span>Antes de assinar o contrato</span></div></a></li><li><a href="#p19"><b>19</b><div>Recusar o caso sem queimar a ponte<span>Quando o caso não é para você</span></div></a></li><li><a href="#p20"><b>20</b><div>A segunda-feira em ordem<span>Segunda de manhã</span></div></a></li></ul>
-    <a class="faixa-67" href="https://maestria.samurailab.com.br/reels/"><span class="selo">R$ 67</span><span><b>Os prompts cuidam do processo. E o que você grava amanhã?</b> Informe o seu @ e até 3 teses: a IA entrega o raio-x do seu Instagram e 365 roteiros de reels das suas teses, um por dia.</span><span class="ir">Quero os meus 365 roteiros</span></a>
   </section>
 
   <section>
@@ -359,6 +358,7 @@ FECHAMENTO: &quot;Comenta a sua dúvida&quot;, &quot;Salva para mostrar a quem p
 TEXTO EM TELA e LEGENDA do post.
 
 Regras: fala de gente, sem juridiquês; informa, não promete resultado nem cita valor de indenização; se eu pedir lei ou decisão, escreva [conferir na fonte oficial antes de gravar]. Comece me pedindo as perguntas.</pre></div></section>
+<div class="meio-67"><a class="faixa-67" href="https://maestria.samurailab.com.br/reels/"><span class="selo">R$ 67</span><span><b>Os prompts cuidam do processo. E o que você grava amanhã?</b> Informe o seu @ e até 3 teses: a IA entrega o raio-x do seu Instagram e 365 roteiros de reels das suas teses, um por dia.</span><span class="ir">Quero os meus 365 roteiros</span></a></div>
 <section class="item" id="p11"><p class="olho">11 · Quando chega a intimação</p><h3>O que essa intimação manda fazer</h3><p class="quando"><b>Quando usar:</b> chegou intimação e você quer saber exatamente o que fazer e até quando conferir.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t11">Copiar o prompt</button></div><pre class="prompt" id="t11">Chegou uma intimação e eu quero ter certeza do que ela manda fazer. Sou advogado de [sua área].
 
 Vou colar o texto da intimação ou do despacho e uma linha sobre o processo.
@@ -507,6 +507,16 @@ Os prazos são os que eu informei: não calcule nem altere data. Se algum item e
   <footer><p>Prompt é ponto de partida: o MaestrIA faz isso dentro do seu computador, com o modelo do seu escritório e a jurisprudência conferida na fonte oficial.</p><div class="linha"><span>© 2026 Samurai do Jurídico. Todos os direitos reservados.</span><span>Feito com muito ☕ e muito ❤️ por Samurai do Jurídico.</span></div></footer>
 </main>
 <div class="fixo"><a class="botao" href="https://maestria.samurailab.com.br/reels/">365 roteiros das suas teses por R$ 67</a></div>
+<script>
+// A oferta fixa do celular só aparece depois que a pessoa já está nos prompts (a partir do 3).
+(function () {
+  var barra = document.querySelector('.fixo'), alvo = document.getElementById('p3');
+  if (!barra || !alvo) return;
+  function conferir() { if (alvo.getBoundingClientRect().top < window.innerHeight) { barra.classList.add('ativa'); window.removeEventListener('scroll', conferir); } }
+  window.addEventListener('scroll', conferir, { passive: true }); conferir();
+})();
+</script>
+
 <script>
 (function () {
   function copiar(botao) {
