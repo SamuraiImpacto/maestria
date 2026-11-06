@@ -210,15 +210,17 @@ footer .linha span:last-child { color:var(--muted); }
   <section class="hero" id="passo-form">
     <span class="selo">Pagamento confirmado</span>
     <h1>Falta <em>1 passo.</em></h1>
-    <p class="sub">Confirme o seu @ do Instagram, a sua área e até três teses que você defende. Em poucos minutos a IA monta o raio-x do seu perfil e os seus 365 roteiros.</p>
+    <p class="sub" id="sub-token">Confirme o seu @ do Instagram, a sua área e até três teses que você defende. Em poucos minutos a IA monta o raio-x do seu perfil e os seus 365 roteiros.</p>
+    <p class="sub" id="sub-email" hidden>Para montar e abrir os seus 365 roteiros, use o <b>link pessoal</b> que chegou no seu e-mail e no seu WhatsApp. Não achou? Digite o e-mail da compra que ele chega de novo.</p>
     <form class="form" id="form" novalidate>
-      <label>E-mail da compra<span>O mesmo que você usou na Kiwify.</span><input id="email" type="email" autocomplete="email" required></label>
-      <label>Seu @ do Instagram<span>O perfil onde os vídeos vão sair.</span><input id="instagram" type="text" placeholder="@seuperfil" autocapitalize="off" autocorrect="off" spellcheck="false" required></label>
-      <label>Sua área principal<select id="area" required><option value="">Escolha</option><option>Previdenciário</option><option>Trabalhista</option><option>Família e sucessões</option><option>Cível e consumidor</option><option>Bancário</option><option>Criminal</option><option>Tributário</option><option>Empresarial</option><option>Imobiliário</option><option>Saúde</option><option>Outra</option></select></label>
+      <label id="email-l" hidden>E-mail da compra<span>O mesmo que você usou na Kiwify.</span><input id="email" type="email" autocomplete="email"></label>
+      <p class="nota" id="neutra" role="status" hidden></p>
+      <label class="so-token">Seu @ do Instagram<span>O perfil onde os vídeos vão sair.</span><input id="instagram" type="text" placeholder="@seuperfil" autocapitalize="off" autocorrect="off" spellcheck="false" required></label>
+      <label class="so-token">Sua área principal<select id="area" required><option value="">Escolha</option><option>Previdenciário</option><option>Trabalhista</option><option>Família e sucessões</option><option>Cível e consumidor</option><option>Bancário</option><option>Criminal</option><option>Tributário</option><option>Empresarial</option><option>Imobiliário</option><option>Saúde</option><option>Outra</option></select></label>
       <label id="outra-l" hidden>Qual área?<input id="outra" type="text" maxlength="80"></label>
-      <label>As teses que você defende<span>Até três. Seja específico: "auxílio-acidente", "revisão da vida toda", "leilão de imóveis".</span>
+      <label class="so-token">As teses que você defende<span>Até três. Seja específico: "auxílio-acidente", "revisão da vida toda", "leilão de imóveis".</span>
         <div class="teses-in"><input id="t1" type="text" maxlength="100" placeholder="Tese 1 (obrigatória)" required><input id="t2" type="text" maxlength="100" placeholder="Tese 2 (opcional)"><input id="t3" type="text" maxlength="100" placeholder="Tese 3 (opcional)"></div></label>
-      <label>Cidade ou região<span>Opcional. Ajuda a IA a falar do seu público.</span><input id="cidade" type="text" maxlength="80"></label>
+      <label class="so-token">Cidade ou região<span>Opcional. Ajuda a IA a falar do seu público.</span><input id="cidade" type="text" maxlength="80"></label>
       <p class="erro" id="erro" role="alert"></p>
       <button class="botao grande" type="submit" id="enviar">Montar o meu ano</button>
     </form>
@@ -257,6 +259,20 @@ function ler(k) { try { return localStorage.getItem(k); } catch (e) { return nul
 (function () {
   var q = new URLSearchParams(location.search);
   var form = document.getElementById('form'), erro = document.getElementById('erro');
+  // Dois caminhos: com o link pessoal (?t= ou o que ficou guardado neste aparelho) o formulário é o de
+  // sempre; sem ele, só o e-mail da compra, para receber o link pessoal de novo.
+  var chave = q.get('t') || (q.get('e') ? null : ler('reels_t'));
+  function modoEmail(msg) {
+    chave = null;
+    document.querySelectorAll('.so-token').forEach(function (l) { l.hidden = true; });
+    document.getElementById('outra-l').hidden = true;
+    document.getElementById('sub-token').hidden = true;
+    document.getElementById('sub-email').hidden = false;
+    document.getElementById('email-l').hidden = false;
+    document.getElementById('enviar').textContent = 'Receber o meu link';
+    if (msg) erro.textContent = msg;
+  }
+  if (!chave) modoEmail();
   if (q.get('e')) document.getElementById('email').value = q.get('e');
   var area = document.getElementById('area');
   area.addEventListener('change', function () { document.getElementById('outra-l').hidden = area.value !== 'Outra'; });
@@ -290,22 +306,40 @@ function ler(k) { try { return localStorage.getItem(k); } catch (e) { return nul
     }
     olhar();
   }
-  var salvo = q.get('t') || (q.get('e') ? null : ler('reels_t'));
-  if (salvo) {
-    fetch(API + '?acao=status&t=' + encodeURIComponent(salvo)).then(function (r) { return r.json(); }).then(function (s) {
+  if (chave) {
+    var salvo = chave;
+    fetch(API + '?acao=status&t=' + encodeURIComponent(salvo)).then(function (r) { return r.json().then(function (s) { return { ok: r.ok, s: s }; }); }).then(function (x) {
+      var s = x.s;
+      if (!x.ok) { if (ler('reels_t') === salvo) guardar('reels_t', ''); modoEmail(q.get('t') ? 'Esse link não abre mais. Digite o e-mail da compra que o link pessoal chega de novo.' : ''); return; }
+      guardar('reels_t', salvo);
       if (s.estado === 'pronto') location.href = '/reels/r/?t=' + encodeURIComponent(salvo);
       else if (s.estado === 'gerando') acompanhar(salvo);
     }).catch(function () {});
   }
   form.addEventListener('submit', function (ev) {
     ev.preventDefault(); erro.textContent = '';
+    var b = document.getElementById('enviar');
+    if (!chave) {
+      // Sem o link pessoal: a resposta é sempre a mesma frase, exista ou não a compra.
+      var em = document.getElementById('email').value.trim(), neutra = document.getElementById('neutra');
+      if (!em) { erro.textContent = 'Digite o e-mail da compra.'; return; }
+      b.disabled = true; b.textContent = 'Enviando...';
+      fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ acao: 'comecar', tipo: 'reels', email: em }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          b.disabled = false; b.textContent = 'Receber o meu link';
+          neutra.textContent = j.mensagem || 'Se esse e-mail tiver uma compra, o link pessoal acabou de chegar nele.'; neutra.hidden = false;
+        })
+        .catch(function () { b.disabled = false; b.textContent = 'Receber o meu link'; erro.textContent = 'Sem conexão. Tente de novo.'; });
+      return;
+    }
     var a = area.value === 'Outra' ? document.getElementById('outra').value.trim() : area.value;
     var teses = ['t1', 't2', 't3'].map(function (id) { return document.getElementById(id).value.trim(); }).filter(function (x) { return x.length >= 3; });
-    var dados = { acao: 'comecar', tipo: 'reels', email: document.getElementById('email').value.trim(), instagram: document.getElementById('instagram').value.trim(),
+    var dados = { acao: 'comecar', tipo: 'reels', t: chave, instagram: document.getElementById('instagram').value.trim(),
                   area: a, teses: teses, cidade: document.getElementById('cidade').value.trim() };
-    if (!dados.email || !dados.instagram || !a) { erro.textContent = 'Preencha o e-mail, o @ e a área.'; return; }
+    if (!dados.instagram || !a) { erro.textContent = 'Preencha o @ e a área.'; return; }
     if (!teses.length) { erro.textContent = 'Escreva pelo menos uma tese que você defende.'; return; }
-    var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Começando...';
+    b.disabled = true; b.textContent = 'Começando...';
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (x) {
