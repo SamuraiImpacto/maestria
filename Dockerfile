@@ -62,6 +62,14 @@ COPY prompts/ ./prompts/
 COPY kit/ ./kit/
 # Low ticket de R$ 67 (365 roteiros): venda, começar e entrega. Geradas por paginas_reels.py.
 COPY reels/ ./reels/
+# Áreas lançadas em 07/11/2026 e a página do Full: cada pasta nova precisa do seu COPY.
+COPY familia/ ./familia/
+COPY criminal/ ./criminal/
+COPY imobiliario/ ./imobiliario/
+COPY consumidor/ ./consumidor/
+COPY empresarial/ ./empresarial/
+COPY bancario/ ./bancario/
+COPY full/ ./full/
 
 EXPOSE 80
 
