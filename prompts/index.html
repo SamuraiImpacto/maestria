@@ -173,6 +173,21 @@ footer .linha span:last-child { color:var(--muted); }
 .copiar-s:hover { border-color:var(--ok); }
 .meio-67 { display:flex; justify-content:center; margin:8px 0 28px; }
 .aviso-ia { font-size:14px; color:var(--dim); max-width:680px; }
+
+.faixa-grupo { display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--muted); background:rgba(37,211,102,.07); border:1px solid rgba(37,211,102,.4); border-radius:var(--r); padding:14px 18px; text-align:left; max-width:620px; }
+.faixa-grupo:hover { border-color:#25d366; }
+.faixa-grupo .bola { flex:0 0 40px; height:40px; border-radius:50%; background:#25d366; display:flex; align-items:center; justify-content:center; color:#04130a; font-weight:900; font-size:18px; }
+.faixa-grupo b { color:var(--txt); display:block; font-size:15.5px; }
+.faixa-grupo .ir { margin-left:auto; color:#25d366; font-weight:800; white-space:nowrap; font-size:14.5px; }
+.historia { background:var(--card); border:1px solid var(--bd2); border-radius:22px; padding:28px 22px; display:flex; flex-direction:column; gap:14px; align-self:center; width:100%; max-width:820px; margin:8px 0 28px; }
+.historia h2 { margin:0; }
+.historia p { margin:0; }
+.historia .acoes { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+.grupo-final { border-color:rgba(37,211,102,.45); background:linear-gradient(180deg, rgba(37,211,102,.08), var(--card2)); }
+.botao.zap-btn { background:#25d366; color:#04130a; }
+.botao.zap-btn:hover { background:#3ae07a; }
+.fixo .botao.zap-btn { color:#04130a; }
+@media (max-width:560px){ .faixa-grupo .ir { display:none; } }
 </style>
 <script src="/js/pixel.js" defer></script>
 </head>
@@ -183,6 +198,7 @@ footer .linha span:last-child { color:var(--muted); }
     <h1>Você ainda pede para a IA <em>"dar uma olhada"</em> na sua peça?</h1>
     <p class="sub">Ela olha. Elogia. Devolve um texto bonito e genérico. E se você deixar, cita uma decisão que ninguém sabe de onde saiu. <b>O problema não é a IA. É o pedido.</b> Aqui estão 20 pedidos prontos, desenvolvidos em conjunto com os escritórios que a gente acompanha.</p>
     <div class="acoes"><a class="botao" href="#os-20">Ver os 20 prompts</a><span class="nota">ChatGPT, Claude, Gemini: funciona em qualquer uma.</span></div>
+    <a class="faixa-grupo" href="https://chat.whatsapp.com/JEkIHiM7JGF2gqvmJaJLp2"><span class="bola" aria-hidden="true">✓</span><span><b>Tem mais no grupo gratuito do WhatsApp</b>Uma pílula por dia, ao meio-dia, para usar no escritório na mesma tarde.</span><span class="ir">Entrar no grupo</span></a>
   </section>
 
   <section>
@@ -358,7 +374,14 @@ FECHAMENTO: &quot;Comenta a sua dúvida&quot;, &quot;Salva para mostrar a quem p
 TEXTO EM TELA e LEGENDA do post.
 
 Regras: fala de gente, sem juridiquês; informa, não promete resultado nem cita valor de indenização; se eu pedir lei ou decisão, escreva [conferir na fonte oficial antes de gravar]. Comece me pedindo as perguntas.</pre></div></section>
-<div class="meio-67"><a class="faixa-67" href="https://maestria.samurailab.com.br/reels/"><span class="selo">R$ 67</span><span><b>Os prompts cuidam do processo. E o que você grava amanhã?</b> Informe o seu @ e até 3 teses: a IA entrega o raio-x do seu Instagram e 365 roteiros de reels das suas teses, um por dia.</span><span class="ir">Quero os meus 365 roteiros</span></a></div>
+<section class="historia">
+  <p class="olho">Agora, uma cena</p>
+  <h2>Domingo, 21h. Você abre a câmera do celular. <em>E não sai nada.</em></h2>
+  <p>O prompt 10 resolve um vídeo: o da pergunta que chegou hoje. Mas e amanhã? E na outra semana? É aí que quase todo advogado para. Não por falta de conhecimento. Por falta de pauta.</p>
+  <p>Aí o perfil fica parado. E a pessoa que alguém te indicou abre o seu Instagram, vê o último vídeo de dois meses atrás, e não te chama.</p>
+  <p><b>Foi para isso que a gente fez os 365 roteiros.</b> Você manda o seu @ e até três teses que defende. Em poucos minutos a IA lê o seu perfil e devolve o raio-x com a bio nova e um roteiro por dia, das suas teses, o ano inteiro.</p>
+  <div class="acoes"><a class="botao" href="https://maestria.samurailab.com.br/reels/">Ver exemplos prontos</a><span class="nota">R$ 67, uma vez só. Menos que um combo no McDonald's 🍔</span></div>
+</section>
 <section class="item" id="p11"><p class="olho">11 · Quando chega a intimação</p><h3>O que essa intimação manda fazer</h3><p class="quando"><b>Quando usar:</b> chegou intimação e você quer saber exatamente o que fazer e até quando conferir.</p><div class="caixa"><div class="barra"><span>O prompt</span><button class="botao copiar" type="button" data-alvo="t11">Copiar o prompt</button></div><pre class="prompt" id="t11">Chegou uma intimação e eu quero ter certeza do que ela manda fazer. Sou advogado de [sua área].
 
 Vou colar o texto da intimação ou do despacho e uma linha sobre o processo.
@@ -495,10 +518,18 @@ Os prazos são os que eu informei: não calcule nem altere data. Se algum item e
 
   <section class="cuidado"><strong>Leia antes de usar o que voltou</strong>A IA erra, e erra com confiança. Por isso todo prompt aqui manda ela marcar lei, súmula e decisão como "conferir na fonte oficial". Confira cada uma. Quem assina é você.</section>
 
+  <section class="oferta grupo-final" id="grupo">
+    <p class="olho">Todo dia tem mais</p>
+    <h2>Os 20 são o começo. <em>A conversa continua no grupo.</em></h2>
+    <p>Todo dia, ao meio-dia, sai uma pílula de 1 minuto no meu grupo gratuito do WhatsApp: um prompt novo, um jeito de responder o cliente, uma ideia de vídeo. É lá também que eu aviso das aulas ao vivo, de graça.</p>
+    <p class="nota">Só eu e a equipe postamos. Nada de mil "bom dia" 😅</p>
+    <a class="botao grande zap-btn" href="https://chat.whatsapp.com/JEkIHiM7JGF2gqvmJaJLp2">Entrar no grupo gratuito</a>
+  </section>
+
   <section class="oferta" id="reels">
     <p class="olho">Próximo passo</p>
     <h2>Esses 20 cuidam do processo. <em>E o que você grava amanhã?</em></h2>
-    <p>Você informa o seu @ do Instagram e até três teses que defende. Em poucos minutos a IA entrega, feito para você: o raio-x do perfil com a bio nova e 365 roteiros de reels das suas teses, um por dia, na ordem que faz a pessoa confiar antes de chamar. Sem prompt nenhum.</p>
+    <p>Quem trava no vídeo não trava por falta de conhecimento. Trava na pauta: "sobre o que eu falo hoje?". Você manda o seu @ do Instagram e até três teses que defende, e em poucos minutos recebe o raio-x do perfil com a bio nova e 365 roteiros das suas teses, um por dia, na ordem que faz a pessoa confiar antes de chamar. Sem prompt nenhum.</p>
     <div class="tira"><span>Raio-x e bio nova</span><span>365 roteiros</span><span>Guia dos convites</span><span>Rotina de stories</span></div>
     <div class="preco">R$ 67<small>pagamento único</small></div>
     <a class="botao grande" href="https://maestria.samurailab.com.br/reels/">Quero os meus 365 roteiros</a>
@@ -506,7 +537,7 @@ Os prazos são os que eu informei: não calcule nem altere data. Se algum item e
 
   <footer><p>Prompt é ponto de partida: o MaestrIA faz isso dentro do seu computador, com o modelo do seu escritório e a jurisprudência conferida na fonte oficial.</p><div class="linha"><span>© 2026 Samurai do Jurídico. Todos os direitos reservados.</span><span>Feito com muito ☕ e muito ❤️ por Samurai do Jurídico.</span></div></footer>
 </main>
-<div class="fixo"><a class="botao" href="https://maestria.samurailab.com.br/reels/">365 roteiros das suas teses por R$ 67</a></div>
+<div class="fixo"><a class="botao zap-btn" href="https://chat.whatsapp.com/JEkIHiM7JGF2gqvmJaJLp2">Entrar no grupo gratuito do WhatsApp</a></div>
 <script>
 // A oferta fixa do celular só aparece depois que a pessoa já está nos prompts (a partir do 3).
 (function () {
