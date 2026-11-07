@@ -43,7 +43,7 @@
     background-repeat:no-repeat}
   .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
   a{color:inherit;text-decoration:none}
-  h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.02em}
+  h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.005em;word-spacing:.12em}
   /* pretty evita palavra orfa sozinha na ultima linha dos paragrafos longos */
   p{margin:0;text-wrap:pretty}
   .red{color:var(--red-ink)}
@@ -732,6 +732,33 @@
   .emb.combo .duas-listas{grid-template-columns:1fr}
   }
 
+  
+  
+  
+  
+  /* centralizar-desktop: inicio */
+  @media (min-width:701px){
+    header.hero .wrap{text-align:center}
+    header.hero .eyebrow{margin-left:auto;margin-right:auto}
+    header.hero h1.big{margin-left:auto;margin-right:auto;max-width:20ch}
+    header.hero .hero-sub{margin-left:auto;margin-right:auto}
+    header.hero .hero-cta{justify-content:center}
+    header.hero .term,header.hero .term *{text-align:left}
+    .hero-art{opacity:.22!important}
+    section > .wrap > .kicker{display:flex;justify-content:center;text-align:center}
+    section > .wrap > h2.sec{text-align:center;margin-left:auto;margin-right:auto;max-width:24ch}
+    section > .wrap > .lead,section > .wrap > p.lead{text-align:center;margin-left:auto;margin-right:auto}
+    section > .wrap > .reveal.kicker{display:flex}
+    section + section > .wrap:has(> .kicker)::before,section + section > .wrap:has(> h2.sec)::before{margin-left:auto!important;margin-right:auto!important}
+  }
+  @media (max-width:700px){
+    .nav-in .logo .sub{display:none}
+    .nav-in .logo .word{height:15px}
+    .nav-cta{white-space:nowrap;padding:9px 13px!important;font-size:12.5px!important}
+    .col-txt,.col-mock{min-width:0;max-width:100%}
+    .col-mock *{overflow-wrap:anywhere}
+  }
+/* centralizar-desktop: fim */
 </style>
 
 <nav>
