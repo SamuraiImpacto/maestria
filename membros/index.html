@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261021c">
+  <link rel="stylesheet" href="style.css?v=20261110ins">
 </head>
 <body>
 
@@ -61,13 +61,14 @@
       </div>
 
       <nav class="menu-nav">
+        <button type="button" class="menu-item menu-item--instalar" data-view="instalar"><span class="menu-icone">⬇️</span><span>Instalar a MaestrIA</span></button>
         <button type="button" class="menu-item" data-view="inicio"><span class="menu-icone">🏠</span><span>Início</span></button>
 
         <div class="menu-grupo" id="menu-grupo-aulas">Aulas</div>
         <div id="menu-aulas"></div>
 
         <div class="menu-grupo">Minha conta</div>
-        <button type="button" class="menu-item" data-view="downloads"><span class="menu-icone">⬇️</span><span>Downloads</span></button>
+        <button type="button" class="menu-item" data-view="downloads"><span class="menu-icone">🧰</span><span>O que vem no pacote</span></button>
         <button type="button" class="menu-item" data-view="guia"><span class="menu-icone">📖</span><span>Guia das skills</span></button>
         <button type="button" class="menu-item" data-view="licenca"><span class="menu-icone">🔑</span><span>Minha licença</span></button>
         <button type="button" class="menu-item" data-view="chamados"><span class="menu-icone">💬</span><span>Suporte</span></button>
@@ -92,51 +93,14 @@
           <button type="button" id="ini-continuar" class="btn-principal btn-inline">Continuar de onde parei →</button>
         </div>
 
-        <!-- ⛔ Primeiros passos: aparece SO para quem ainda nao instalou.
-             Quem precisa de uma coisa nao pode receber seis. -->
-        <div id="ini-primeiros-passos" class="hidden">
-          <div class="pp-caixa">
-            <h3 class="pp-titulo">Vamos colocar a sua MaestrIA para funcionar</h3>
-            <p class="pp-sub">3 passos, uns 10 minutos. Faça pelo computador, não pelo celular.</p>
-
-            <div class="pp-passo">
-              <span class="pp-num">1</span>
-              <div class="pp-corpo">
-                <strong>Entre no grupo</strong>
-                <p>Travou em qualquer ponto, manda um print lá. A gente resolve na hora.</p>
-                <a class="pp-btn pp-btn--verde" href="https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7" target="_blank" rel="noopener">
-                  ENTRAR NO GRUPO</a>
-              </div>
-            </div>
-
-            <div class="pp-passo">
-              <span class="pp-num">2</span>
-              <div class="pp-corpo">
-                <strong>Você já usa o Claude no computador?</strong>
-                <p>É dentro dele que a MaestrIA funciona. A aula te leva pela mão.</p>
-                <button type="button" class="pp-btn pp-btn--claro" data-abrir-aula="01-instalacao">
-                  AINDA NÃO TENHO, QUERO A AULA</button>
-                <button type="button" class="pp-btn pp-btn--vazado" id="pp-ja-tenho">
-                  JÁ TENHO O CLAUDE</button>
-              </div>
-            </div>
-
-            <div class="pp-passo pp-passo--travado" id="pp-passo3">
-              <span class="pp-num">3</span>
-              <div class="pp-corpo">
-                <strong>Baixe e instale a sua MaestrIA</strong>
-                <p>Baixe o arquivo, <b>arraste para dentro da conversa do Claude</b> e escreva:
-                  <b>instala pra mim</b>. Ele faz o resto, sem você digitar nada.</p>
-                <button type="button" class="pp-btn pp-btn--azul" data-view-destino="downloads">
-                  BAIXAR A MINHA MAESTRIA</button>
-                <p class="pp-fim">No fim: <b>feche o Claude por completo</b>, abra e digite <b>/maestria</b>.</p>
-              </div>
-            </div>
-
-            <p class="pp-rodape">Já instalou e quer ver o resto?
-              <button type="button" class="pp-link" id="pp-ja-instalei">Mostrar tudo</button>
-            </p>
+        <!-- Situação da instalação: a próxima ação de quem já instalou. -->
+        <div id="ini-instalada" class="ini-instalada hidden">
+          <span class="ini-instalada-icone" aria-hidden="true">✓</span>
+          <div class="ini-instalada-texto">
+            <strong id="ini-instalada-titulo">Sua MaestrIA está instalada</strong>
+            <span id="ini-instalada-sub">Vai usar em outro computador ou quer reinstalar? O caminho é o mesmo.</span>
           </div>
+          <button type="button" class="ini-instalada-btn" data-view-destino="instalar">Instalar em outro computador →</button>
         </div>
 
         <!-- Upgrade: só para quem já instalou. Quem está nos primeiros passos
@@ -155,15 +119,15 @@
         </div>
 
         <div class="grid-acoes">
-          <button type="button" class="card-acao" data-abrir-aula="01-instalacao">
-            <span class="acao-icone">⚙️</span>
-            <strong>Guia de instalação</strong>
-            <span>A aula que te leva do zero ao /maestria funcionando, passo a passo, aqui dentro.</span>
-          </button>
-          <button type="button" class="card-acao card-acao--destaque" data-view-destino="downloads">
+          <button type="button" class="card-acao card-acao--destaque" data-view-destino="instalar">
             <span class="acao-icone">⬇️</span>
-            <strong>Baixar meu pacote</strong>
-            <span>Um arquivo só instala e atualiza todas as suas skills.</span>
+            <strong>Instalar a MaestrIA</strong>
+            <span>Os 5 passos, com a imagem de cada clique e o botão do seu instalador.</span>
+          </button>
+          <button type="button" class="card-acao" data-abrir-aula="02-primeira-peca">
+            <span class="acao-icone">📄</span>
+            <strong>Sua primeira peça</strong>
+            <span>Instalou? A aula que leva da primeira pergunta ao Word pronto, em 25 minutos.</span>
           </button>
           <button type="button" class="card-acao" data-view-destino="guia">
             <span class="acao-icone">📖</span>
@@ -178,33 +142,222 @@
         </div>
       </div>
 
+      <!-- ============ INSTALAR A MAESTRIA ============
+           ⛔ Um caminho só, um passo aberto por vez, com a imagem do clique.
+           Os passos seguem o que o instalador faz de verdade: o ZIP não tem
+           programa para clicar duas vezes; quem instala é o Claude, na aba
+           Code, em Este computador, lendo o LEIA-PRIMEIRO-MAESTRIA.txt. -->
+      <div id="view-instalar" class="view hidden">
+        <div class="ins-topo">
+          <p class="ins-kicker">Instalar a MaestrIA</p>
+          <h1 class="ins-titulo">Sua MaestrIA funcionando em 5 passos</h1>
+          <p class="ins-sub">Uns 15 minutos, no computador. Siga na ordem: cada passo mostra onde clicar.</p>
+          <div class="ins-so" role="group" aria-label="Seu computador">
+            <span class="ins-so-rotulo">Seu computador:</span>
+            <button type="button" class="ins-so-btn" data-so="win">Windows</button>
+            <button type="button" class="ins-so-btn" data-so="mac">Mac</button>
+            <span class="ins-so-nota" id="ins-so-nota"></span>
+          </div>
+          <p class="ins-ajuda-topo">Travou em qualquer passo? <a href="https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7" target="_blank" rel="noopener">Peça ajuda no grupo</a>, a gente resolve ao vivo.</p>
+          <p class="ins-celular hidden" id="ins-celular">📱 Você está no celular. A instalação é feita no
+            <b>computador</b>: abra <b>maestria.samurailab.com.br/membros</b> nele e entre com o mesmo código.</p>
+        </div>
+
+        <div class="ins-grade">
+          <ol class="ins-trilha" id="ins-trilha" aria-label="Andamento da instalação">
+            <li data-ir="1"><span>1</span>Ter o Claude</li>
+            <li data-ir="2"><span>2</span>Baixar o instalador</li>
+            <li data-ir="3"><span>3</span>Abrir o Claude certo</li>
+            <li data-ir="4"><span>4</span>Pedir a instalação</li>
+            <li data-ir="5"><span>5</span>Testar</li>
+          </ol>
+
+          <div class="ins-passos">
+            <!-- PASSO 1 -->
+            <section class="ins-passo" data-passo="1">
+              <button type="button" class="ins-cabeca"><span class="ins-num">1</span>
+                <span class="ins-cabeca-txt"><strong>Tenha o Claude no computador</strong>
+                <small>O aplicativo onde a MaestrIA funciona</small></span><span class="ins-estado"></span></button>
+              <div class="ins-corpo">
+                <p>A MaestrIA funciona dentro do <b>Claude</b>, o aplicativo de inteligência artificial da Anthropic.
+                  Mais exatamente na parte dele chamada <b>Code</b>, por isso você vai ouvir falar em
+                  “Claude Code”: é a parte do Claude que consegue mexer nos arquivos do seu computador.
+                  Você precisa de uma assinatura do Claude que dê acesso ao Code.</p>
+                <div class="ins-acoes">
+                  <a class="ins-btn ins-btn--claro" href="https://claude.ai/download" target="_blank" rel="noopener">Baixar o Claude (site oficial)</a>
+                </div>
+                <div class="ins-bloco so-win">
+                  <strong>Só no Windows: rode o preparador (uma vez só)</strong>
+                  <p>Ele confere dois programas que o Claude usa por trás (Git e Python), instala o que faltar e
+                    cria a pasta <b>MaestrIA-Arquivos</b> para os seus documentos.</p>
+                  <ol>
+                    <li>Clique no botão abaixo. O arquivo <b>Preparar-meu-PC.bat</b> vai para a pasta Downloads.</li>
+                    <li>Abra a pasta Downloads e clique <b>duas vezes</b> nele. Na janela preta, aperte qualquer tecla e espere.</li>
+                    <li>Quando terminar, feche e abra o Claude de novo.</li>
+                  </ol>
+                  <a class="ins-btn ins-btn--vazado" href="/Preparar-meu-PC.bat" download>Baixar o preparador do Windows</a>
+                  <p class="ins-nota">Se o Windows mostrar um aviso de proteção, não desative nada: mande um print no grupo que a gente te guia.</p>
+                </div>
+                <div class="ins-bloco so-mac">
+                  <strong>No Mac não tem preparador</strong>
+                  <p>Se, durante a instalação, aparecer uma janela do próprio Mac pedindo para instalar as
+                    “ferramentas de linha de comando”, clique em <b>Instalar</b> e espere terminar. É um
+                    programa da Apple que o Claude usa por trás.</p>
+                </div>
+                <button type="button" class="ins-feito" data-feito="1">Já tenho o Claude, próximo passo →</button>
+              </div>
+            </section>
+
+            <!-- PASSO 2 -->
+            <section class="ins-passo" data-passo="2">
+              <button type="button" class="ins-cabeca"><span class="ins-num">2</span>
+                <span class="ins-cabeca-txt"><strong>Baixe o seu instalador</strong>
+                <small>Um arquivo só, feito para você</small></span><span class="ins-estado"></span></button>
+              <div class="ins-corpo">
+                <p>É <b>um arquivo só</b>, montado agora para você: já vem com <b id="ins-qtd-skills">as ferramentas</b>
+                  do seu pacote <b id="ins-plano"></b> e com a <b>sua licença dentro</b>.
+                  Você não vai digitar código nem CPF.</p>
+                <button type="button" class="ins-btn ins-btn--grande" id="btn-instalador-perso">⬇ Baixar o meu instalador</button>
+                <div id="dl-perso-ajuda" class="ins-ajuda-dl"></div>
+                <div class="ins-bloco">
+                  <p>O arquivo se chama <b>MaestrIA-Instalar.zip</b> e vai para a sua pasta <b>Downloads</b>.
+                    <b>Não precisa abrir nem descompactar</b>: quem abre é o Claude, no passo 4.</p>
+                  <p class="ins-nota">Não mande este arquivo para ninguém: ele leva a sua licença.</p>
+                </div>
+                <button type="button" class="ins-feito" data-feito="2">Baixei, próximo passo →</button>
+              </div>
+            </section>
+
+            <!-- PASSO 3 -->
+            <section class="ins-passo" data-passo="3">
+              <button type="button" class="ins-cabeca"><span class="ins-num">3</span>
+                <span class="ins-cabeca-txt"><strong>Abra o Claude na aba Code, no seu computador</strong>
+                <small>Três cliques, e uma conferência</small></span><span class="ins-estado"></span></button>
+              <div class="ins-corpo">
+                <div class="ins-clique">
+                  <span class="ins-letra">a</span>
+                  <div><p>Abra o Claude e clique no ícone <b>&lt;/&gt;</b>, no alto. Esse é o <b>Code</b>.</p>
+                    <figure><img src="/img/guia/20261023/code.png" width="330" height="90" alt="Parte de cima do Claude, com o ícone de Code à direita" loading="lazy"></figure></div>
+                </div>
+                <div class="ins-clique">
+                  <span class="ins-letra">b</span>
+                  <div><p>Embaixo da caixa de mensagem, clique no seletor de lugar e escolha <b>Este computador</b>.</p>
+                    <figure><img src="/img/guia/20261023/local.png" width="340" height="70" alt="Opção Este computador marcada" loading="lazy"></figure></div>
+                </div>
+                <div class="ins-clique">
+                  <span class="ins-letra">c</span>
+                  <div><p>Logo ao lado, clique em <b>Abrir pasta…</b> e escolha a pasta <b>MaestrIA-Arquivos</b>.
+                    <span class="so-win">O preparador do passo 1 já criou essa pasta dentro da sua pasta de usuário (a mesma onde fica Downloads).</span>
+                    <span class="so-mac">No Mac, crie antes uma pasta com esse nome na sua pasta pessoal, pelo Finder (Arquivo, Nova Pasta).</span>
+                    Depois clique em <b>Selecionar pasta</b>.</p>
+                    <figure><img src="/img/guia/20261023/abrir-pasta.png" width="353" height="45" alt="Opção Abrir pasta" loading="lazy"></figure></div>
+                </div>
+                <div class="ins-bloco ins-bloco--ok">
+                  <strong>Confira antes de seguir</strong>
+                  <p>Na barra de baixo aparecem <b>Este computador</b> e o nome da sua pasta, assim:</p>
+                  <figure><img src="/img/guia/20261023/pasta-confirmada.png" width="307" height="38" alt="Este computador e MaestrIA-Arquivos na barra de baixo do Claude" loading="lazy"></figure>
+                  <p class="ins-nota">Sem isso o Claude responde “não consigo instalar daqui”: ele só mexe no computador quando está em Code e em Este computador.</p>
+                </div>
+                <p class="ins-nota so-mac">As imagens são do Windows. No Mac os botões têm os mesmos nomes.</p>
+                <button type="button" class="ins-feito" data-feito="3">Estou no Code, com a pasta escolhida →</button>
+              </div>
+            </section>
+
+            <!-- PASSO 4 -->
+            <section class="ins-passo" data-passo="4">
+              <button type="button" class="ins-cabeca"><span class="ins-num">4</span>
+                <span class="ins-cabeca-txt"><strong>Entregue o arquivo ao Claude e peça a instalação</strong>
+                <small>Ele faz o resto, você só responde</small></span><span class="ins-estado"></span></button>
+              <div class="ins-corpo">
+                <div class="ins-clique">
+                  <span class="ins-letra">a</span>
+                  <div><p>Clique no <b>+</b> ao lado da caixa de mensagem, depois em <b>Adicionar arquivos ou fotos</b>,
+                    e escolha <b>MaestrIA-Instalar.zip</b> na pasta Downloads. Também dá para arrastar o arquivo para a conversa.</p>
+                    <figure><img src="/img/guia/20261023/anexar.png" width="357" height="77" alt="Menu do botão mais com Adicionar arquivos ou fotos" loading="lazy"></figure></div>
+                </div>
+                <div class="ins-clique">
+                  <span class="ins-letra">b</span>
+                  <div><p>Escreva esta frase e envie:</p>
+                    <div class="ins-copiar"><code>instala pra mim</code><button type="button" data-copiar="instala pra mim">Copiar</button></div></div>
+                </div>
+                <div class="ins-clique">
+                  <span class="ins-letra">c</span>
+                  <div><p>O Claude trabalha sozinho por alguns minutos e faz perguntas. <b>Leia e responda.</b>
+                    Quando ele perguntar se pode registrar este computador na sua licença, responda que <b>pode</b>.
+                    Se ele pedir licença para usar arquivos, clique em permitir.</p>
+                    <figure><img src="/img/guia/20261023/confirmacao.png" width="520" height="217" alt="Claude pergunta se pode registrar a instalação" loading="lazy"></figure></div>
+                </div>
+                <div class="ins-bloco ins-bloco--ok">
+                  <strong>Terminou quando aparece a lista conferida</strong>
+                  <figure><img src="/img/guia/20261023/copia-conferida.png" width="575" height="210" alt="Lista de etapas da instalação concluídas" loading="lazy"></figure>
+                </div>
+                <button type="button" class="ins-feito" data-feito="4">O Claude terminou, próximo passo →</button>
+              </div>
+            </section>
+
+            <!-- PASSO 5 -->
+            <section class="ins-passo" data-passo="5">
+              <button type="button" class="ins-cabeca"><span class="ins-num">5</span>
+                <span class="ins-cabeca-txt"><strong>Deu certo? Teste agora</strong>
+                <small>Um comando e um pedido de exemplo</small></span><span class="ins-estado"></span></button>
+              <div class="ins-corpo">
+                <div class="ins-clique">
+                  <span class="ins-letra">a</span>
+                  <div><p><b>Feche o Claude inteiro</b>, não só a conversa.
+                    <span class="so-win">No Windows, feche a janela e confira se o ícone do Claude sumiu da barra perto do relógio; se ficou lá, clique nele com o botão direito e escolha Sair.</span>
+                    <span class="so-mac">No Mac, aperte <b>Cmd + Q</b> com o Claude aberto.</span>
+                    Abra de novo, entre em <b>Code</b>, na mesma pasta, e comece uma conversa nova.</p></div>
+                </div>
+                <div class="ins-clique">
+                  <span class="ins-letra">b</span>
+                  <div><p>Envie este comando:</p>
+                    <div class="ins-copiar"><code>/maestria</code><button type="button" data-copiar="/maestria">Copiar</button></div>
+                    <p>Deu certo quando aparece o <b>menu da MaestrIA</b> perguntando o que você quer fazer.</p></div>
+                </div>
+                <div class="ins-clique">
+                  <span class="ins-letra">c</span>
+                  <div><p>Para ter certeza, peça um exemplo com dados inventados:</p>
+                    <div class="ins-copiar"><code>faz um exemplo com dados fictícios para eu ver funcionando</code><button type="button" data-copiar="faz um exemplo com dados fictícios para eu ver funcionando">Copiar</button></div>
+                    <p>Pronto quando ele salva um arquivo na sua pasta e você consegue abrir.</p></div>
+                </div>
+                <div class="ins-bloco">
+                  <strong>O /maestria não apareceu?</strong>
+                  <p>Feche o Claude inteiro e abra de novo. Se continuar, mande no grupo um print da última
+                    resposta do Claude no passo 4, sem mostrar a sua licença.</p>
+                </div>
+                <button type="button" class="ins-feito ins-feito--fim" data-feito="5">Funcionou! Ir para a minha primeira peça →</button>
+              </div>
+            </section>
+
+            <p class="ins-rodape">Já instalou? <button type="button" class="pp-link" id="pp-ja-instalei">Ir para o início</button>
+              · Vai atualizar? Na MaestrIA, envie <code>/maestria:atualizar-skill</code>.</p>
+          </div>
+
+          <aside class="ins-lado">
+            <div class="ins-socorro">
+              <strong>Travou em algum passo?</strong>
+              <p>A gente resolve ao vivo, no grupo. Mande o print da tela e diga o número do passo.</p>
+              <a class="ins-btn ins-btn--verde" href="https://chat.whatsapp.com/KQcIy0D6Tp5IWtWY2WXRx7" target="_blank" rel="noopener">Pedir ajuda no grupo</a>
+              <p class="ins-nota">No print, esconda a sua licença e os dados de clientes.</p>
+            </div>
+            <div class="ins-video">
+              <strong>Prefere ver em vídeo?</strong>
+              <p>A aula mostra cada tela, com a voz do Samurai.</p>
+              <button type="button" class="ins-btn ins-btn--vazado" data-abrir-aula="01-instalacao">Ver a aula de instalação</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+
       <!-- Aula do curso (preenchida pelo curso.js) -->
       <div id="view-aula" class="view hidden"></div>
 
       <!-- Downloads -->
       <div id="view-downloads" class="view hidden">
-        <h2 class="view-titulo">Downloads</h2>
-        <p class="view-sub">Aqui tem UM arquivo só: o instalador do seu pacote. Ele instala e atualiza tudo de uma vez, sempre nas versões mais recentes.</p>
+        <h2 class="view-titulo">O que vem no seu pacote</h2>
+        <p class="view-sub">Tudo isto entra junto, num arquivo só. Para instalar ou atualizar, use
+          <button type="button" class="link-aula" data-view-destino="instalar">Instalar a MaestrIA</button>.</p>
         <div id="dl-skills" class="grid-skills"></div>
-
-        <div class="como-instalar">
-          <h3>Como instalar (3 passos, sem mistério)</h3>
-          <div class="passos-visuais">
-            <div class="passo-visual">
-              <span class="passo-num">1</span>
-              <div><strong>Instale o Claude</strong> no seu computador (uma vez só). <button type="button" class="link-aula" data-abrir-aula="01-instalacao">A aula de instalação te leva pela mão</button>, feita pra quem nunca mexeu com isso.</div>
-            </div>
-            <div class="passo-visual">
-              <span class="passo-num">2</span>
-              <div><strong>Baixe o seu pacote</strong> no botão acima e <strong>arraste o arquivo pra conversa</strong> do Claude com a frase: <em>"instala pra mim"</em>. Ele faz o resto sozinho.</div>
-            </div>
-            <div class="passo-visual">
-              <span class="passo-num">3</span>
-              <div><strong>Feche o Claude por completo e abra o <code>/maestria</code></strong>: feche o aplicativo inteiro (não só a conversa), abra de novo, comece uma conversa nova e digite <code>/maestria</code>. Sua licença já vem dentro do arquivo: você <strong>não digita código nem CPF</strong> aqui.</div>
-            </div>
-          </div>
-          <p class="mini" style="margin-top:14px;"><strong>Já tinha instalado antes e quer atualizar?</strong> Mesmo caminho: baixa o pacote de novo e manda "instala pra mim". Ele atualiza por cima sem perder nada que você configurou.</p>
-        </div>
 
         <details class="como-instalar acordeao">
           <summary><h3>🖋 Petição saindo sem o SEU logo e timbrado?</h3></summary>
@@ -290,9 +443,9 @@
   </div>
 </main>
 
-<script src="guia-skills.js?v=20261103certa"></script>
-<script src="app.js?v=20261103certa"></script>
-<script src="conteudo.js?v=20261103certa"></script>
-<script src="curso.js?v=20261103certa"></script>
+<script src="guia-skills.js?v=20261110ins"></script>
+<script src="app.js?v=20261110ins"></script>
+<script src="conteudo.js?v=20261110ins"></script>
+<script src="curso.js?v=20261110ins"></script>
 </body>
 </html>

@@ -60,9 +60,9 @@ function limparCredenciais() {
 let dadosAtuais = null;
 
 // ---------- navegação entre views ----------
-// Views: "inicio" (dashboard), "aula" (curso), "downloads", "guia", "licenca", "chamados", "comunidade"
+// Views: "inicio" (dashboard), "instalar" (os 5 passos), "aula" (curso), "downloads" (o que vem no pacote), "guia", "licenca", "chamados", "comunidade"
 function mostrarView(nome) {
-  ["inicio", "aula", "downloads", "guia", "licenca", "chamados", "comunidade"].forEach((v) => {
+  ["inicio", "instalar", "aula", "downloads", "guia", "licenca", "chamados", "comunidade"].forEach((v) => {
     const el = $("view-" + v);
     if (el) el.classList.toggle("hidden", v !== nome);
   });
@@ -206,8 +206,23 @@ function renderizarPainel(dados) {
     window.MAESTRIA_CURSO.definirAreas(c.plano || "");
   }
   if (window.MAESTRIA_CURSO) window.MAESTRIA_CURSO.montarMenu();
+  montarInstalacao(dados);
   renderizarInicio(dados);
-  mostrarView("inicio");
+  // ⛔ Quem ainda não instalou entra direto no caminho de instalar: um caminho
+  // só, e não um mural. A prova é a máquina registrada pelo próprio instalador
+  // (skill_version "instalacao"). Quem já instalou entra no Início.
+  mostrarView(jaInstalou(dados) || lerLocal("maestria_pulou_passos") ? "inicio" : "instalar");
+}
+
+function jaInstalou(dados) {
+  return ((dados && dados.instalacoes) || []).length > 0;
+}
+// localStorage pode falhar (janela anônima, bloqueio): a página segue sem ele.
+function lerLocal(chave) {
+  try { return localStorage.getItem(chave); } catch { return null; }
+}
+function gravarLocal(chave, valor) {
+  try { localStorage.setItem(chave, valor); } catch { /* segue sem lembrar */ }
 }
 
 // ---------- Início (dashboard) ----------
@@ -218,47 +233,15 @@ function renderizarInicio(dados) {
   $("ini-plano").textContent = nomeDoPlano(c) +
     (c.vitalicio ? " · licença vitalícia" : c.vence_em ? " · ativa até " + dataBr(c.vence_em) : "");
 
-  // ⛔ Quem ainda NAO instalou ve um caminho so. O mural de seis cards e o que
-  // trava a pessoa que acabou de comprar: ela precisa de uma coisa de cada vez.
-  // A prova de instalacao e a maquina registrada, a mesma que a aba de licenca
-  // mostra. Se a deteccao falhar, o pior caso e ver a tela antiga.
-  const jaInstalou = ((dados && dados.instalacoes) || []).length > 0;
-  const pp = $("ini-primeiros-passos");
-  const grade = document.querySelector(".grid-acoes");
-  const progresso = document.querySelector(".progresso-wrap");
-  if (pp) {
-    const mostrarPasso = !jaInstalou && !localStorage.getItem("maestria_pulou_passos");
-    pp.classList.toggle("hidden", !mostrarPasso);
-    if (grade) grade.classList.toggle("hidden", mostrarPasso);
-    if (progresso) progresso.classList.toggle("hidden", mostrarPasso);
-    // ⛔ o banner "Bem-vindo" come 144px antes do bloco e nao diz nada a quem
-    // acabou de chegar. Com ele na tela, o passo 3 (baixar e instalar) cai para
-    // fora do campo de visao, e quem esta travado nao rola: faz o que esta la.
-    const hero = document.querySelector("#view-inicio .inicio-hero");
-    if (hero) hero.classList.toggle("hidden", mostrarPasso);
-    // ⛔ o botao do curso vive FORA da .progresso-wrap: esconder so a barra
-    // deixava um "Comecar: ..." solto por cima do passo 1.
-    const btnCurso = $("ini-continuar");
-    if (btnCurso) btnCurso.classList.toggle("hidden", mostrarPasso);
-    const liberar = () => {
-      const p3 = $("pp-passo3");
-      if (p3) p3.classList.add("pp-liberado");
-    };
-    const jaTenho = $("pp-ja-tenho");
-    if (jaTenho) jaTenho.onclick = liberar;
-    // quem vai ver a aula tambem destrava o passo 3 para quando voltar
-    pp.querySelectorAll("[data-abrir-aula]").forEach((b) => b.addEventListener("click", liberar));
-    const pular = $("pp-ja-instalei");
-    if (pular) {
-      pular.onclick = () => {
-        localStorage.setItem("maestria_pulou_passos", "1");
-        pp.classList.add("hidden");
-        if (grade) grade.classList.remove("hidden");
-        if (progresso) progresso.classList.remove("hidden");
-        if (hero) hero.classList.remove("hidden");
-        if (btnCurso) btnCurso.classList.remove("hidden");
-      };
-    }
+  // Quem já instalou vê, no topo, a situação e a próxima ação (padrão do Media).
+  // Quem não instalou nem chega aqui de entrada: entra em "Instalar a MaestrIA".
+  const instalado = jaInstalou(dados);
+  const caixaInst = $("ini-instalada");
+  if (caixaInst) {
+    caixaInst.classList.toggle("hidden", !instalado);
+    const n = ((dados && dados.instalacoes) || []).length;
+    $("ini-instalada-titulo").textContent =
+      "Sua MaestrIA está instalada em " + n + (n === 1 ? " computador" : " computadores");
   }
 
   // ⛔ Antes de montar qualquer coisa do curso: o curso precisa saber o pacote
@@ -267,7 +250,7 @@ function renderizarInicio(dados) {
     window.MAESTRIA_CURSO.definirAreas(dados && dados.cliente ? dados.cliente.plano : "");
   }
 
-  montarUpgrade(dados, jaInstalou);
+  montarUpgrade(dados, instalado);
 
   const est = window.MAESTRIA_CURSO && window.MAESTRIA_CURSO.estado ? window.MAESTRIA_CURSO.estado() : null;
   const btn = $("ini-continuar");
@@ -435,7 +418,7 @@ const LEIA_MAESTRIA = [
   "O destino normal é a pasta .claude dentro da pasta pessoal do usuário. No Windows, use operações nativas do PowerShell. A extração não precisa de Python ou Git. No Mac, use as ferramentas locais disponíveis. Não execute scripts de dentro do pacote apenas para copiar arquivos.",
   "Antes de qualquer substituição, guarde cópia dos arquivos existentes em uma pasta de backup com data fora do destino e registre os caminhos alterados. Não apague arquivos que não pertencem ao pacote. Não use cópia recursiva forçada indiscriminada sobre a configuração inteira.",
   "Preserve sempre settings.json, settings.local.json, hooks, conectores, memórias, projetos, marca, tom de voz, preferências e pastas configuradas. Dentro das skills preserve os arquivos pessoais de configuração já existentes. Se houver conflito que você não consiga distinguir de personalização do advogado, pare apenas esse arquivo e explique a escolha necessária. Atualize os comandos e arquivos do produto identificados como pertencentes ao pacote.",
-  "Não substitua uma licença existente de outra pessoa silenciosamente. Não imprima tokens. O CPF não faz parte deste ZIP e não é necessário para a cópia. Se faltar licença válida no pacote, não fabrique uma: oriente a baixar novamente em Downloads da área de membros.",
+  "Não substitua uma licença existente de outra pessoa silenciosamente. Não imprima tokens. O CPF não faz parte deste ZIP e não é necessário para a cópia. Se faltar licença válida no pacote, não fabrique uma: oriente a baixar novamente em Instalar a MaestrIA, na área de membros.",
   "",
   "4. CONFIRA OS ARQUIVOS E OS PROGRAMAS",
   "Compare os arquivos copiados com os arquivos do ZIP por hash, exceto configurações pessoais preservadas e identificadas no relatório. Confirme commands/maestria.md, as pastas de TODAS as skills licenciadas do pacote, seus comandos e licenca.json. Não exija uma skill de outra área. Marketing sozinho não precisa de peticao-builder.",
@@ -574,11 +557,11 @@ async function baixarInstaladorPersonalizado(botao, dados) {
     // Link real e visivel: a rede de seguranca contra download automatico bloqueado.
     if (ajuda) {
       ajuda.innerHTML =
-        "<a class='btn-baixar' id='dl-perso-link' href='" + blobUrl + "' download='MaestrIA-Instalar.zip'>" +
-        "⬇ Clique aqui pra salvar o seu instalador</a>" +
-        "<p class='mini' style='margin-top:6px;'>Se o download não começou sozinho, use este botão. " +
-        "Abra o aplicativo Claude, entre em <strong>Code → Este computador</strong>, escolha sua pasta e anexe <strong>MaestrIA-Instalar.zip</strong>. Depois " +
-        "escreve <strong>instala pra mim</strong>.</p>";
+        "<p class='ins-dl-ok'>✓ Pronto: o arquivo <b>MaestrIA-Instalar.zip</b> foi para a sua pasta Downloads. " +
+        "Agora siga para o passo 3.</p>" +
+        "<p class='mini' style='margin-top:6px;'>O download não começou sozinho? " +
+        "<a class='ins-link-dl' id='dl-perso-link' href='" + blobUrl + "' download='MaestrIA-Instalar.zip'>" +
+        "Clique aqui para salvar o arquivo</a>.</p>";
     }
     // Tenta tambem o automatico (funciona na maioria das maquinas).
     const a = document.createElement("a");
@@ -607,48 +590,126 @@ async function baixarInstaladorPersonalizado(botao, dados) {
           "mande um print no grupo da comunidade, sem mostrar sua licença.</p>"
         : "<p class='mini' style='color:var(--vermelho,#e33);'>Não foi possível baixar ou montar o pacote e não deu " +
           "para concluir o download agora. Tente novamente. Se continuar, mande um print no grupo.</p>" +
-          "<button type='button' class='btn-baixar' id='dl-perso-retry'>Tentar de novo</button>";
+          "<button type='button' class='ins-btn ins-btn--vazado' id='dl-perso-retry'>Tentar de novo</button>";
       const rb = $("dl-perso-retry");
       if (rb) rb.addEventListener("click", function () { baixarInstaladorPersonalizado(botao, dados); });
     }
   }
 }
 
+// ---------- Instalar a MaestrIA (os 5 passos) ----------
+// ⛔ Um passo aberto por vez, como a "próxima ação" do Impacto Media: o leigo
+// faz o que está na frente dele. Os outros continuam a um clique, na trilha.
+function detectarSistema() {
+  const ua = navigator.userAgent || "";
+  const plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  const celular = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+  const mac = !celular && /Mac/i.test(plat + " " + ua);
+  return { so: mac ? "mac" : "win", celular: celular, certeza: !celular && /Mac|Win/i.test(plat + " " + ua) };
+}
+
+function montarInstalacao(dados) {
+  const raiz = $("view-instalar");
+  if (!raiz) return;
+  const det = detectarSistema();
+  let so = lerLocal("maestria_so") || det.so;
+
+  const aplicarSo = (novo) => {
+    so = novo;
+    raiz.setAttribute("data-so", so);
+    raiz.querySelectorAll(".ins-so-btn").forEach((b) => {
+      const ativo = b.getAttribute("data-so") === so;
+      b.classList.toggle("ativo", ativo);
+      b.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+    const nota = $("ins-so-nota");
+    if (nota) {
+      nota.textContent = lerLocal("maestria_so")
+        ? "(escolhido por você)"
+        : det.certeza ? "(detectado automaticamente)" : "";
+    }
+  };
+  raiz.querySelectorAll(".ins-so-btn").forEach((b) => {
+    b.onclick = () => { gravarLocal("maestria_so", b.getAttribute("data-so")); aplicarSo(b.getAttribute("data-so")); };
+  });
+  aplicarSo(so);
+  const avisoCel = $("ins-celular");
+  if (avisoCel) avisoCel.classList.toggle("hidden", !det.celular);
+
+  // O pacote, em palavras de gente
+  const skills = (dados && dados.skills) || [];
+  const qtd = $("ins-qtd-skills");
+  if (qtd) qtd.textContent = skills.length ? "as " + skills.length + " ferramentas" : "as ferramentas";
+  const plano = $("ins-plano");
+  const nomePlano = nomeDoPlano(dados && dados.cliente).replace(/^MaestrIA\s*/, "");
+  if (plano) plano.textContent = nomePlano ? "(" + nomePlano + ")" : "";
+
+  // Passos: o primeiro não feito fica aberto
+  const feitos = new Set(String(lerLocal("maestria_passos_feitos") || "").split(",").filter(Boolean));
+  const passos = Array.from(raiz.querySelectorAll(".ins-passo"));
+  const trilha = Array.from(raiz.querySelectorAll("#ins-trilha li"));
+  const abrir = (n, rolar) => {
+    passos.forEach((p) => p.classList.toggle("aberto", p.getAttribute("data-passo") === String(n)));
+    trilha.forEach((li) => li.classList.toggle("atual", li.getAttribute("data-ir") === String(n)));
+    if (rolar) {
+      const alvo = raiz.querySelector('.ins-passo[data-passo="' + n + '"]');
+      if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+  const pintar = () => {
+    passos.forEach((p) => {
+      const feito = feitos.has(p.getAttribute("data-passo"));
+      p.classList.toggle("feito", feito);
+      const est = p.querySelector(".ins-estado");
+      if (est) est.textContent = feito ? "Feito ✓" : "";
+    });
+    trilha.forEach((li) => li.classList.toggle("feito", feitos.has(li.getAttribute("data-ir"))));
+  };
+  passos.forEach((p) => {
+    const n = p.getAttribute("data-passo");
+    p.querySelector(".ins-cabeca").onclick = () =>
+      p.classList.contains("aberto") ? p.classList.remove("aberto") : abrir(n, false);
+  });
+  trilha.forEach((li) => { li.onclick = () => abrir(li.getAttribute("data-ir"), true); });
+  raiz.querySelectorAll("[data-feito]").forEach((b) => {
+    b.onclick = () => {
+      const n = Number(b.getAttribute("data-feito"));
+      feitos.add(String(n));
+      gravarLocal("maestria_passos_feitos", Array.from(feitos).join(","));
+      pintar();
+      if (n < passos.length) abrir(n + 1, true);
+      else if (window.MAESTRIA_CURSO) window.MAESTRIA_CURSO.abrir("02-primeira-peca");
+    };
+  });
+  pintar();
+  const primeiro = passos.map((p) => p.getAttribute("data-passo")).find((n) => !feitos.has(n)) || "1";
+  abrir(jaInstalou(dados) ? "2" : primeiro, false);
+
+  // Copiar a frase ou o comando com um clique
+  raiz.querySelectorAll("[data-copiar]").forEach((b) => {
+    b.onclick = async () => {
+      const texto = b.getAttribute("data-copiar");
+      try { await navigator.clipboard.writeText(texto); b.textContent = "Copiado ✓"; }
+      catch { b.textContent = "Selecione e copie"; }
+      setTimeout(() => { b.textContent = "Copiar"; }, 2500);
+    };
+  });
+
+  // O botão do instalador do plano
+  const btn = $("btn-instalador-perso");
+  if (btn) btn.onclick = function () { baixarInstaladorPersonalizado(this, dados); };
+
+  const pular = $("pp-ja-instalei");
+  if (pular) pular.onclick = () => { gravarLocal("maestria_pulou_passos", "1"); mostrarView("inicio"); };
+}
+
 function renderizarDownloads(dados) {
   const grid = $("dl-skills");
   grid.innerHTML = "";
 
-  // O guia fica antes dos downloads para orientar ambiente e pasta.
-  const prep = document.createElement("div");
-  prep.className = "card";
-  prep.innerHTML =
-    "<h3>1. Veja onde clicar antes de instalar</h3>" +
-    "<p>Abra o aplicativo Claude, entre em <strong>Code</strong>, escolha <strong>Este computador</strong> e uma pasta sua. O vídeo mostra cada controle.</p>" +
-    "<button type='button' class='btn-baixar link-aula' data-abrir-aula='01-instalacao'>Assistir à instalação, tela a tela</button>" +
-    "<h3>2. Confira os programas de apoio</h3>" +
-    "<p>No Windows, o preparador confere e instala Git e Python quando faltam. Leia o resultado antes de continuar. O tempo depende do computador e da conexão.</p>" +
-    "<a class='btn-baixar' href='/Preparar-meu-PC.bat' download>Baixar o preparador do Windows</a>" +
-    "<p class='mini'>Se o Windows bloquear, confira a origem e peça ajuda no grupo ou ao responsável pelo computador. Não desative as proteções. No Mac, siga a orientação específica do guia, sem executar este arquivo.</p>";
-  grid.appendChild(prep);
-
-  // Card ÚNICO de download: um arquivo instala (e atualiza) o pacote inteiro.
-  // Decisão 09/07: NUNCA listar zips individuais aqui, comprador leigo se confunde.
-  // Desde 13/07 o botão gera o instalador PERSONALIZADO (licença embutida):
-  // o Claude não pede código, só a confirmação do CPF/CNPJ.
-  const inst = document.createElement("div");
-  inst.className = "card";
-  inst.style.borderColor = "var(--vermelho, #e33)";
-  inst.innerHTML =
-    "<h3>3. Baixe seu pacote e peça a instalação</h3>" +
-    "<p>Este arquivo já vem com <strong>todas as suas skills e a sua licença dentro</strong>. Na sessão local de <strong>Code → Este computador</strong>, anexe o ZIP e escreva <strong>instala pra mim</strong>. A instalação confere o ambiente e preserva suas configurações. Depois, abra <strong>/maestria</strong> para conferir. Já instalou? Atualize com <strong>/maestria:atualizar-skill</strong>.</p>" +
-    "<button type='button' class='btn-baixar' id='btn-instalador-perso'>Baixar meu instalador</button>" +
-    "<div id='dl-perso-ajuda' style='margin-top:10px;'></div>" +
-    "<p class='mini' style='margin-top:8px;'>Vai usar em <strong>outra máquina</strong>? É só entrar nesta área de membros no outro computador e baixar de novo, funciona igual. Chegou no limite de máquinas? Você mesmo libera uma na aba <strong>Licença</strong>, na hora.</p>" +
-    "<p class='mini' style='margin-top:8px;'>Travou? <button type='button' class='link-aula' data-abrir-aula='01-instalacao'>A aula de instalação te destrava</button>, aqui mesmo.</p>";
-  grid.appendChild(inst);
-  inst.querySelector("#btn-instalador-perso").addEventListener("click", function () {
-    baixarInstaladorPersonalizado(this, dados);
-  });
+  // ⛔ O botão de baixar e os passos de instalação moram em "Instalar a MaestrIA"
+  // (montarInstalacao). Aqui fica só o que vem no pacote: duas telas mandando
+  // instalar de jeitos diferentes era o que confundia quem é leigo.
 
   // Lista informativa do que vem dentro (SEM botão de download, só transparência)
   const skills = dados.skills || [];
@@ -697,9 +758,9 @@ function renderizarDownloads(dados) {
       ? "<h3>Você tem o catálogo completo</h3>" +
         "<p class='mini'>Todas as " + skills.length + " skills publicadas hoje" +
         (listaDeAreas ? ": " + esc(listaDeAreas) + ", mais as que servem para qualquer área" : "") +
-        ". Tudo isso entra junto no instalador acima: instalou, tá tudo dentro.</p>"
+        ". Tudo isso entra junto no seu instalador: instalou, tá tudo dentro.</p>"
       : "<h3>O que vem no seu pacote</h3>" +
-        "<p class='mini'>Tudo isso entra junto no instalador acima. Instalou, tá tudo dentro.</p>";
+        "<p class='mini'>Tudo isso entra junto no seu instalador. Instalou, tá tudo dentro.</p>";
 
     const rodapeEmBreve = (emBreve.length && emBreve.some((s) => s.inclusa_no_seu_plano))
       ? "<p class='mini' style='margin-top:14px; border-left:3px solid rgba(255,255,255,.2); padding-left:10px'>" +
@@ -863,7 +924,7 @@ function renderizarLicenca(dados) {
   const ul = $("lic-maquinas");
   ul.innerHTML = "";
   if (maquinas.length === 0) {
-    ul.innerHTML = "<li>Nenhum computador ativado ainda. Baixe seu instalador em Downloads e abra o /maestria uma vez.</li>";
+    ul.innerHTML = "<li>Nenhum computador ativado ainda. Siga os passos de Instalar a MaestrIA, aqui no menu.</li>";
   } else {
     maquinas.forEach((m) => {
       const li = document.createElement("li");
