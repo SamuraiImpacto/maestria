@@ -70,6 +70,8 @@ COPY consumidor/ ./consumidor/
 COPY empresarial/ ./empresarial/
 COPY bancario/ ./bancario/
 COPY full/ ./full/
+# Página da aula ao vivo de 11/11/2026 (QR code dos slides): tudo o que a MaestrIA faz e os links.
+COPY aula/ ./aula/
 
 EXPOSE 80
 
