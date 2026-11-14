@@ -72,6 +72,8 @@ COPY bancario/ ./bancario/
 COPY full/ ./full/
 # Página da aula ao vivo de 11/11/2026 (QR code dos slides): tudo o que a MaestrIA faz e os links.
 COPY aula/ ./aula/
+# Lista de espera da Implementação de IA (14/11/2026): formulário que grava pela edge lista-espera.
+COPY lista-de-espera/ ./lista-de-espera/
 
 EXPOSE 80
 

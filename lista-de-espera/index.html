@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lista de espera da primeira turma de Implementação de IA: encontros em grupo, uma implementação por semana.">
+<meta name="robots" content="noindex">
+<title>MaestrIA: lista de espera da Implementação de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Implementação de IA: lista de espera da primeira turma">
+<meta property="og:description" content="Encontros em grupo, uma implementação por semana. Quem entrar na lista fica sabendo primeiro.">
+<meta property="og:url" content="https://maestria.samurailab.com.br/lista-de-espera/">
+<meta property="og:image" content="https://maestria.samurailab.com.br/img/og-image.png">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#141417;--panel-2:#1b1b20;
+    --line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.18);
+    --txt:#f4f4f5;--muted:#9a9aa4;
+    --red:#ef2727;--red-ink:#ff5a48;--red-soft:rgba(239,39,39,.13);--green:#46d17f;
+    --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+    --sans:'Inter',system-ui,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:17px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(900px 520px at 80% -8%,rgba(239,39,39,.10),transparent 60%);background-repeat:no-repeat}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:6px}
+  nav{border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;height:60px}
+  .logo{display:inline-flex;align-items:center;gap:10px;line-height:0;text-decoration:none}
+  .logo .sym{height:28px;width:auto}
+  .logo .word{height:16px;width:auto}
+  .logo .sub{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1;margin-left:4px}
+  header{padding:44px 0 8px}
+  .kicker{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,7vw,2.9rem);line-height:1.08;margin:12px 0 0;text-wrap:balance}
+  .lead{margin:16px 0 0;color:var(--muted);font-size:1.05rem;max-width:56ch}
+  .aviso{margin:18px 0 0;padding:14px 16px;border:1px solid var(--line-strong);border-radius:12px;background:var(--panel);font-size:.98rem}
+  form{padding:28px 0 64px;display:flex;flex-direction:column;gap:26px}
+  .campo{display:flex;flex-direction:column;gap:8px;border:0;padding:0;margin:0;min-width:0}
+  label.rot,legend{font-weight:700;font-size:1rem;padding:0}
+  .dica{color:var(--muted);font-size:.9rem;font-weight:400}
+  .obrig{color:var(--red-ink)}
+  input[type=text],input[type=tel],input[type=email],textarea{
+    width:100%;background:var(--panel);color:var(--txt);border:1px solid var(--line-strong);border-radius:12px;
+    padding:14px 14px;font:inherit;font-size:16px}
+  textarea{min-height:104px;resize:vertical}
+  input:focus,textarea:focus{outline:2px solid var(--red-ink);outline-offset:1px;border-color:transparent}
+  .ops{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .op{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid var(--line-strong);border-radius:12px;background:var(--panel);cursor:pointer}
+  .op input{width:20px;height:20px;accent-color:var(--red);flex:0 0 auto;margin:0}
+  .op:has(input:checked){border-color:var(--red);background:var(--red-soft)}
+  .op:has(input:disabled){opacity:.45;cursor:not-allowed}
+  .isca{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .btn{font-family:var(--sans);font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:18px 28px;font-size:17px;
+    background:var(--red);color:#fff;box-shadow:0 10px 30px -12px rgba(239,39,39,.7)}
+  .btn:disabled{opacity:.6;cursor:wait}
+  .erro{color:var(--red-ink);font-weight:600;margin:0}
+  .feito{padding:56px 0 80px}
+  .feito h2{font-family:var(--serif);font-size:clamp(1.8rem,6vw,2.4rem);line-height:1.1;margin:0 0 14px}
+  .feito p{color:var(--muted);margin:0;font-size:1.08rem}
+  .selo{display:inline-block;width:44px;height:44px;border-radius:50%;background:rgba(70,209,127,.15);color:var(--green);
+    font-size:24px;line-height:44px;text-align:center;font-weight:800;margin-bottom:18px}
+  footer{border-top:1px solid var(--line);padding:22px 0 32px;color:var(--muted);font-size:.85rem}
+</style>
+
+<nav><div class="wrap nav-in">
+  <a class="logo" href="/" aria-label="MaestrIA"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Lista de espera</span></a>
+</div></nav>
+
+<main class="wrap">
+  <div id="tela-form">
+    <header>
+      <span class="kicker">Primeira turma</span>
+      <h1>Implementação de IA</h1>
+      <p class="lead">Encontros em grupo, uma implementação por semana. Todo mundo implementa junto, no encontro.</p>
+      <p class="aviso">Ainda sem valor e sem data. Quem entrar na lista fica sabendo primeiro. As suas respostas definem o que vai entrar no conteúdo.</p>
+    </header>
+
+    <form id="f" novalidate>
+      <div class="campo">
+        <label class="rot" for="nome">Nome <span class="obrig">*</span></label>
+        <input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required>
+      </div>
+      <div class="campo">
+        <label class="rot" for="whatsapp">WhatsApp com DDD <span class="obrig">*</span></label>
+        <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required>
+      </div>
+      <div class="campo">
+        <label class="rot" for="email">E-mail</label>
+        <input type="email" id="email" name="email" autocomplete="email" maxlength="160">
+      </div>
+      <div class="campo">
+        <label class="rot" for="area">Área de atuação</label>
+        <input type="text" id="area" name="area" maxlength="120" placeholder="Previdenciário, trabalhista, família...">
+      </div>
+
+      <fieldset class="campo">
+        <legend>Tamanho do escritório</legend>
+        <div class="ops" data-grupo="tamanho_escritorio" data-tipo="radio"></div>
+      </fieldset>
+      <fieldset class="campo">
+        <legend>Como você usa IA hoje? <span class="dica">Pode marcar mais de uma.</span></legend>
+        <div class="ops" data-grupo="usa_ia" data-tipo="checkbox"></div>
+      </fieldset>
+      <fieldset class="campo">
+        <legend>Onde você mais perde tempo hoje? <span class="dica">Marque até 3.</span></legend>
+        <div class="ops" data-grupo="perde_tempo" data-tipo="checkbox" data-max="3"></div>
+      </fieldset>
+      <fieldset class="campo">
+        <legend>O que mais trava você com IA?</legend>
+        <div class="ops" data-grupo="trava" data-tipo="radio"></div>
+      </fieldset>
+      <div class="campo">
+        <label class="rot" for="tentou">O que você já tentou fazer com IA e não deu certo?</label>
+        <textarea id="tentou" name="tentou" maxlength="2000"></textarea>
+      </div>
+      <div class="campo">
+        <label class="rot" for="uma_coisa">Se a IA resolvesse UMA coisa para você nos próximos 30 dias, qual seria? <span class="obrig">*</span></label>
+        <textarea id="uma_coisa" name="uma_coisa" maxlength="2000" required></textarea>
+      </div>
+      <fieldset class="campo">
+        <legend>Como você se vira com tecnologia?</legend>
+        <div class="ops" data-grupo="tecnologia" data-tipo="radio"></div>
+      </fieldset>
+      <fieldset class="campo">
+        <legend>Melhor horário para encontros em grupo <span class="dica">Pode marcar mais de um.</span></legend>
+        <div class="ops" data-grupo="horarios" data-tipo="checkbox"></div>
+      </fieldset>
+
+      <div class="isca" aria-hidden="true"><label>Site <input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+
+      <p class="erro" id="erro" role="alert" hidden></p>
+      <button class="btn" id="enviar" type="submit">Entrar na lista de espera</button>
+    </form>
+  </div>
+
+  <div class="feito" id="tela-feito" hidden>
+    <span class="selo">✓</span>
+    <h2>Recebi.</h2>
+    <p>Assim que o conteúdo programático estiver fechado, o Samurai te chama no privado.</p>
+  </div>
+</main>
+
+<footer><div class="wrap">MaestrIA by Samurai Lab</div></footer>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/lista-espera";
+  var OPCOES = {
+    tamanho_escritorio: ["Trabalho sozinho", "2 a 5 pessoas", "6 a 15 pessoas", "Mais de 15 pessoas"],
+    usa_ia: ["Só a MaestrIA", "Para escrever textos e mensagens", "Para peças e documentos", "Para marketing e conteúdo", "Para atendimento", "Quase não uso"],
+    perde_tempo: ["Atendimento no WhatsApp", "Organizar documentos do cliente", "Escrever peças", "Acompanhar prazos e processos", "Criar conteúdo para o Instagram", "Editar vídeo", "Anúncios", "Financeiro e cobrança", "Gestão da equipe", "Outro"],
+    trava: ["Não sei por onde começar", "Não confio no que ela entrega", "Não tenho tempo para aprender", "Minha equipe não usa", "Acho as ferramentas complicadas", "Outro"],
+    tecnologia: ["Sou leigo total", "Me viro", "Gosto e fuço"],
+    horarios: ["Manhã", "Tarde", "Noite", "Sábado de manhã"]
+  };
+
+  // Monta as opções a partir da lista acima (a mesma que a edge aceita).
+  document.querySelectorAll(".ops").forEach(function (caixa) {
+    var grupo = caixa.dataset.grupo, tipo = caixa.dataset.tipo;
+    OPCOES[grupo].forEach(function (rotulo) {
+      var l = document.createElement("label"); l.className = "op";
+      var i = document.createElement("input"); i.type = tipo; i.name = grupo; i.value = rotulo;
+      var s = document.createElement("span"); s.textContent = rotulo;
+      l.appendChild(i); l.appendChild(s); caixa.appendChild(l);
+    });
+    var max = parseInt(caixa.dataset.max || "0", 10);
+    if (max) caixa.addEventListener("change", function () {
+      var marcados = caixa.querySelectorAll("input:checked").length;
+      caixa.querySelectorAll("input:not(:checked)").forEach(function (i) { i.disabled = marcados >= max; });
+    });
+  });
+
+  var f = document.getElementById("f"), erro = document.getElementById("erro"), botao = document.getElementById("enviar");
+  function marcados(nome) { return Array.prototype.map.call(f.querySelectorAll('input[name="' + nome + '"]:checked'), function (i) { return i.value; }); }
+  function mostrarErro(msg, campo) {
+    erro.textContent = msg; erro.hidden = false;
+    if (campo) { campo.focus(); campo.scrollIntoView({ block: "center" }); }
+  }
+
+  f.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    erro.hidden = true;
+    var nome = f.nome.value.trim(), zap = f.whatsapp.value.replace(/\D/g, ""), uma = f.uma_coisa.value.trim();
+    if (nome.length < 2) return mostrarErro("Escreva o seu nome.", f.nome);
+    if (zap.length < 10 || zap.length > 13) return mostrarErro("Confira o WhatsApp: precisa do DDD e do número.", f.whatsapp);
+    if (f.email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())) return mostrarErro("Confira o e-mail.", f.email);
+    if (uma.length < 3) return mostrarErro("Conte qual é a uma coisa que você quer que a IA resolva.", f.uma_coisa);
+
+    var dados = {
+      lista: "implementacao-ia",
+      nome: nome, whatsapp: zap, email: f.email.value.trim(), area: f.area.value.trim(),
+      tamanho_escritorio: marcados("tamanho_escritorio")[0] || "",
+      usa_ia: marcados("usa_ia"), perde_tempo: marcados("perde_tempo"),
+      trava: marcados("trava")[0] || "",
+      tentou: f.tentou.value.trim(), uma_coisa: uma,
+      tecnologia: marcados("tecnologia")[0] || "",
+      horarios: marcados("horarios"),
+      site: f.site.value,
+      origem: "lista-de-espera",
+      utm: location.search.slice(1, 500)
+    };
+
+    botao.disabled = true; botao.textContent = "Enviando...";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.j.ok) {
+          document.getElementById("tela-form").hidden = true;
+          document.getElementById("tela-feito").hidden = false;
+          window.scrollTo(0, 0);
+        } else {
+          botao.disabled = false; botao.textContent = "Entrar na lista de espera";
+          mostrarErro(res.j.erro || "Não consegui enviar agora. Tente de novo em um minuto.");
+        }
+      })
+      .catch(function () {
+        botao.disabled = false; botao.textContent = "Entrar na lista de espera";
+        mostrarErro("Sem conexão agora. Confira a internet e tente de novo.");
+      });
+  });
+})();
+</script>
+</html>
