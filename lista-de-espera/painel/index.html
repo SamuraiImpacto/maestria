@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Painel da lista de espera</title>
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a0c">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#141417;--panel-2:#1b1b20;
+    --line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.18);
+    --txt:#f4f4f5;--muted:#9a9aa4;--red:#ef2727;--red-ink:#ff5a48;--green:#46d17f;
+    --serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:28px 0 18px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
+  h1{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.1;margin:6px 0 0}
+  h2{font-size:1rem;margin:0 0 12px;font-weight:700}
+  .btn{font:inherit;font-weight:700;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--txt);border-radius:999px;padding:10px 16px}
+  .btn:hover{border-color:var(--red);color:var(--red-ink)}
+  .btn-red{background:var(--red);border-color:var(--red);color:#fff}
+  .numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:22px 0}
+  .num{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .num b{display:block;font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums}
+  .num span{color:var(--muted);font-size:.88rem}
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .bloco{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+  .barra{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin-bottom:10px;font-size:.92rem}
+  .barra .q{font-variant-numeric:tabular-nums;color:var(--muted)}
+  .barra .t{grid-column:1/-1;height:7px;background:var(--panel-2);border-radius:99px;overflow:hidden}
+  .barra .t i{display:block;height:100%;background:var(--red);border-radius:99px}
+  section{margin:26px 0}
+  .pessoa{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+  .pessoa .topo{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px}
+  .pessoa .nome{font-weight:700}
+  .pessoa .quando{color:var(--muted);font-size:.85rem}
+  .pessoa a{color:var(--green);font-weight:600;text-decoration:none}
+  .pessoa .meta{color:var(--muted);font-size:.88rem;margin-top:4px}
+  .pessoa .resp{margin-top:10px;font-size:.95rem}
+  .pessoa .resp b{color:var(--muted);font-weight:600;font-size:.82rem;display:block;text-transform:uppercase;letter-spacing:.06em}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:.8rem;border:1px solid var(--line-strong);border-radius:99px;padding:2px 9px;color:var(--muted)}
+  .entrada{max-width:420px;margin:60px auto;display:flex;flex-direction:column;gap:12px}
+  .entrada input{background:var(--panel);color:var(--txt);border:1px solid var(--line-strong);border-radius:12px;padding:14px;font:inherit;font-size:16px}
+  .erro{color:var(--red-ink);font-weight:600}
+  .vazio{color:var(--muted)}
+  :focus-visible{outline:2px solid var(--red-ink);outline-offset:3px}
+</style>
+
+<div class="wrap">
+  <div id="entrada" class="entrada" hidden>
+    <span class="kicker">Painel</span>
+    <h1>Lista de espera</h1>
+    <label for="chave">Chave do painel</label>
+    <input id="chave" type="password" autocomplete="current-password">
+    <button class="btn btn-red" id="entrar">Abrir o painel</button>
+    <p class="erro" id="erro-entrada" hidden></p>
+  </div>
+
+  <div id="painel" hidden>
+    <header>
+      <div><span class="kicker">MaestrIA Cohort Essentials</span><h1>Lista de espera</h1></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="atualizar">Atualizar</button>
+        <button class="btn" id="sair">Sair</button>
+      </div>
+    </header>
+    <p class="erro" id="erro" hidden></p>
+    <div class="numeros" id="numeros"></div>
+    <section><h2>O que eles marcaram</h2><div class="grade" id="contagens"></div></section>
+    <section><h2>Quem entrou</h2><div id="pessoas"></div></section>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/lista-espera";
+  var GUARDA = "maestria-painel-lista";
+  var TITULOS = {
+    perde_tempo: "Onde mais perde tempo", trava: "O que mais trava com IA", usa_ia: "Como usa IA hoje",
+    tamanho_escritorio: "Tamanho do escritório", tecnologia: "Como se vira com tecnologia", horarios: "Melhor horário"
+  };
+  var ORDEM = ["perde_tempo", "trava", "usa_ia", "tamanho_escritorio", "tecnologia", "horarios"];
+
+  function ler() { try { return localStorage.getItem(GUARDA) || ""; } catch (e) { return ""; } }
+  function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+  // A chave pode chegar pelo fim do link (#chave=...), que o navegador não manda a servidor nenhum.
+  var h = location.hash.match(/chave=([^&]+)/);
+  if (h) { gravar(decodeURIComponent(h[1])); history.replaceState(null, "", location.pathname); }
+
+  function entrada(msg) {
+    document.getElementById("painel").hidden = true;
+    document.getElementById("entrada").hidden = false;
+    var e = document.getElementById("erro-entrada"); e.hidden = !msg; e.textContent = msg || "";
+  }
+
+  function carregar() {
+    var chave = ler();
+    if (!chave) return entrada();
+    document.getElementById("atualizar").textContent = "Atualizando...";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "painel", chave: chave }) })
+      .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
+      .then(function (res) {
+        document.getElementById("atualizar").textContent = "Atualizar";
+        if (res.s === 401) { gravar(""); return entrada("Chave inválida."); }
+        if (!res.j.ok) { var e = document.getElementById("erro"); e.hidden = false; e.textContent = res.j.erro || "Não consegui ler agora."; return; }
+        document.getElementById("entrada").hidden = true;
+        document.getElementById("painel").hidden = false;
+        desenhar(res.j.respostas || [], res.j.opcoes || {});
+      })
+      .catch(function () {
+        document.getElementById("atualizar").textContent = "Atualizar";
+        var e = document.getElementById("erro"); e.hidden = false; e.textContent = "Sem conexão. Tente de novo.";
+      });
+  }
+
+  function desenhar(rs, opcoes) {
+    document.getElementById("erro").hidden = true;
+    var agora = Date.now();
+    var dia = rs.filter(function (r) { return agora - new Date(r.created_at).getTime() < 864e5; }).length;
+    var comEmail = rs.filter(function (r) { return r.email; }).length;
+    var nums = document.getElementById("numeros"); nums.innerHTML = "";
+    [[rs.length, "inscritos"], [dia, "nas últimas 24 horas"], [comEmail, "deixaram e-mail"]].forEach(function (n) {
+      var d = el("div", "num"); d.appendChild(el("b", null, n[0])); d.appendChild(el("span", null, n[1])); nums.appendChild(d);
+    });
+
+    var box = document.getElementById("contagens"); box.innerHTML = "";
+    ORDEM.forEach(function (campo) {
+      var cont = {}; (opcoes[campo] || []).forEach(function (o) { cont[o] = 0; });
+      rs.forEach(function (r) {
+        var v = r[campo]; if (v == null || v === "") return;
+        (Array.isArray(v) ? v : [v]).forEach(function (x) { cont[x] = (cont[x] || 0) + 1; });
+      });
+      var linhas = Object.keys(cont).map(function (k) { return [k, cont[k]]; }).sort(function (a, b) { return b[1] - a[1]; });
+      var b = el("div", "bloco"); b.appendChild(el("h2", null, TITULOS[campo]));
+      linhas.forEach(function (l) {
+        var pct = rs.length ? Math.round(l[1] * 100 / rs.length) : 0;
+        var bar = el("div", "barra");
+        bar.appendChild(el("span", null, l[0]));
+        bar.appendChild(el("span", "q", l[1] + " (" + pct + "%)"));
+        var t = el("span", "t"); var i = el("i"); i.style.width = pct + "%"; t.appendChild(i); bar.appendChild(t);
+        b.appendChild(bar);
+      });
+      box.appendChild(b);
+    });
+
+    var ps = document.getElementById("pessoas"); ps.innerHTML = "";
+    if (!rs.length) ps.appendChild(el("p", "vazio", "Ninguém entrou ainda."));
+    rs.forEach(function (r) {
+      var c = el("div", "pessoa");
+      var topo = el("div", "topo");
+      topo.appendChild(el("span", "nome", r.nome));
+      var d = new Date(r.created_at);
+      topo.appendChild(el("span", "quando", d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })));
+      c.appendChild(topo);
+      var m = el("div", "meta");
+      var a = el("a", null, "WhatsApp " + r.whatsapp.replace(/^55(\d{2})(\d+)(\d{4})$/, "($1) $2-$3"));
+      a.href = "https://wa.me/" + r.whatsapp; a.target = "_blank"; a.rel = "noopener";
+      m.appendChild(a);
+      var extra = [r.email, r.area, r.tamanho_escritorio, r.tecnologia].filter(Boolean).join(" · ");
+      if (extra) m.appendChild(document.createTextNode("  ·  " + extra));
+      c.appendChild(m);
+      var chips = el("div", "chips");
+      (r.perde_tempo || []).concat(r.trava ? [r.trava] : []).forEach(function (x) { chips.appendChild(el("span", "chip", x)); });
+      if (chips.childNodes.length) c.appendChild(chips);
+      [["Se a IA resolvesse uma coisa", r.uma_coisa], ["Já tentou e não deu certo", r.tentou]].forEach(function (p) {
+        if (!p[1]) return;
+        var q = el("div", "resp"); q.appendChild(el("b", null, p[0])); q.appendChild(document.createTextNode(p[1])); c.appendChild(q);
+      });
+      ps.appendChild(c);
+    });
+  }
+
+  document.getElementById("entrar").addEventListener("click", function () {
+    var v = document.getElementById("chave").value.trim(); if (!v) return; gravar(v); carregar();
+  });
+  document.getElementById("chave").addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("entrar").click(); });
+  document.getElementById("atualizar").addEventListener("click", carregar);
+  document.getElementById("sair").addEventListener("click", function () { gravar(""); entrada(); });
+  carregar();
+})();
+</script>
+</html>
