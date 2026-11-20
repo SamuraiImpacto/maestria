@@ -577,3 +577,18 @@ textarea { resize: vertical; }
 }
 .ins-ajuda-topo { margin: 14px auto 0; font-size: 14px; color: var(--text-muted); }
 .ins-ajuda-topo a { color: #25d366; font-weight: 700; text-decoration: underline; }
+
+/* ---------- Teste grátis de 7 dias: aviso no alto da área ---------- */
+.aviso-teste {
+  background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 12px; padding: 16px 18px; margin: 0 0 18px; line-height: 1.5;
+}
+.aviso-teste strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+.aviso-teste p { margin: 0 0 12px; opacity: 0.9; }
+.aviso-teste--fim { background: var(--vermelho-bg); border-color: var(--vermelho-border); }
+.aviso-teste-btn {
+  display: inline-block; background: var(--vermelho); color: #fff; font-weight: 700;
+  padding: 12px 20px; border-radius: 8px; text-decoration: none;
+}
+.aviso-teste-btn:hover { background: var(--vermelho-soft); }
+.aviso-teste-mini { display: block; margin-top: 10px; font-size: 0.9rem; }
