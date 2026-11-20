@@ -32,10 +32,53 @@ if '<meta name="robots"' not in cabeca:
 CSS_TESTE = r'''
   /* ===== teste grátis de 7 dias ===== */
   /* A manchete do teste é menor que a das páginas de venda: a primeira dobra precisa mostrar o texto e o botão. */
-  header.hero{padding-top:48px}
-  header.hero{padding-top:34px}
-  header.hero h1.big{font-size:clamp(1.9rem,3.5vw,2.9rem);line-height:1.1;max-width:26ch;margin-top:14px}
-  header.hero .hero-sub{margin-top:14px;max-width:60ch}
+  header.hero{padding-top:30px;padding-bottom:34px}
+  header.hero h1.big{font-size:clamp(2rem,3.5vw,3.15rem);line-height:1.07;max-width:17ch;margin-top:16px}
+  header.hero .hero-sub{margin-top:16px;max-width:52ch;font-size:clamp(1rem,1.25vw,1.1rem);line-height:1.55}
+  header.hero .term{margin-top:30px}
+  .hero-prova{display:flex;gap:12px;align-items:flex-start;margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5;color:var(--muted);text-align:left}
+  .hero-prova svg{width:20px;height:20px;flex:0 0 auto;color:var(--green);margin-top:1px}
+  .hero-prova b{color:var(--txt)}
+  @media (min-width:981px){
+    header.hero .wrap{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:46px;align-items:center;text-align:left}
+    header.hero .eyebrow,header.hero h1.big,header.hero .hero-sub{margin-left:0;margin-right:0}
+    header.hero .hero-cta,header.hero .hero-fatos{justify-content:flex-start}
+    header.hero .term{margin-top:0}
+    header.hero .term-body{font-size:13px}
+  }
+  @media (max-width:980px){.hero-prova{max-width:56ch;margin-left:auto;margin-right:auto}}
+  /* tudo o que ela faz */
+  .fx-rot{display:flex;align-items:center;gap:12px;margin:40px 0 0;font-size:12.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--red-ink);text-align:left}
+  .fx-rot::after{content:"";flex:1;height:1px;background:var(--line)}
+  .fx{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px;text-align:left}
+  .fx .cardy{padding:20px;display:flex;flex-direction:column}
+  .fx h3{font-size:16.5px;line-height:1.3;margin:0 0 6px}
+  .fx p{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .fx-ic{display:inline-flex;width:38px;height:38px;border-radius:50%;background:var(--red-soft);color:var(--red-ink);align-items:center;justify-content:center;margin-bottom:14px;flex:0 0 auto}
+  .fx-ic svg{width:20px;height:20px}
+  .fx .cardy.topo{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;gap:8px 22px;align-items:center;padding:26px;border-color:rgba(239,39,39,.5);background:linear-gradient(100deg,rgba(239,39,39,.16),rgba(239,39,39,.03) 70%)}
+  .fx .cardy.topo .fx-ic{width:54px;height:54px;margin:0}
+  .fx .cardy.topo .fx-ic svg{width:27px;height:27px}
+  .fx .cardy.topo h3{font-family:var(--serif);font-size:clamp(1.3rem,2.1vw,1.7rem)}
+  .fx .cardy.topo p{font-size:15.5px;max-width:64ch}
+  .fx-pedido{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;color:var(--green);background:rgba(70,209,127,.08);border:1px solid rgba(70,209,127,.25);border-radius:10px;padding:10px 14px;max-width:30ch;line-height:1.45}
+  .fx-pedido small{display:block;font:700 10.5px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);margin-bottom:4px}
+  @media (max-width:980px){.fx{grid-template-columns:1fr 1fr}.fx .cardy.topo{grid-template-columns:auto 1fr}.fx-pedido{grid-column:1/-1;max-width:none}}
+  @media (max-width:560px){.fx{grid-template-columns:1fr}.fx .cardy.topo{grid-template-columns:1fr}}
+  /* quem já usa */
+  .deps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:38px;text-align:left}
+  .dep{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:16px;margin:0}
+  .dep::before{content:"\201C";font-family:var(--serif);font-size:54px;line-height:.6;color:var(--red-ink);height:22px}
+  .dep blockquote{margin:0;font-size:clamp(1.02rem,1.3vw,1.14rem);line-height:1.58;color:var(--txt)}
+  .dep blockquote b{color:var(--red-ink);font-weight:700}
+  .dep figcaption{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+  .dep figcaption b{display:block;color:var(--txt);font-size:15.5px}
+  .piloto{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+  .piloto div{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--panel)}
+  .piloto b{display:block;font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.1;color:var(--txt)}
+  .piloto span{display:block;margin-top:6px;font-size:14px;color:var(--muted);line-height:1.45}
+  .sub-h{font-size:1.15rem;margin:44px 0 0;text-align:center}
+  @media (max-width:800px){.deps,.piloto{grid-template-columns:1fr}}
   /* segurança */
   .seg-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;text-align:left}
   .seg-grade .cardy{padding:24px}
@@ -73,7 +116,7 @@ CSS_TESTE = r'''
   @media (max-width:900px){.seg-grade,.porque{grid-template-columns:1fr 1fr}.seg-vs{grid-template-columns:1fr}}
   @media (max-width:560px){.seg-grade,.porque{grid-template-columns:1fr}.conta-l{grid-template-columns:1fr}.conta-l .v{text-align:left}}
   header.hero .hero-cta{margin-top:22px}
-  @media (min-width:701px){.hero-fatos{justify-content:center}}
+  .hero-fatos{justify-content:center}
   .hero-fatos{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:14.5px;color:var(--muted)}
   .hero-fatos span{display:inline-flex;align-items:center;gap:8px}
   .hero-fatos b{color:var(--green);font-weight:800}
@@ -133,10 +176,10 @@ NAV = '''<nav>
   <div class="wrap nav-in">
     <a class="logo" href="#topo" aria-label="MaestrIA: voltar ao topo"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
     <div class="nav-links">
-      <a href="#diferenca">O que ela faz</a>
+      <a href="#funcoes">O que ela faz</a>
+      <a href="#quem-usa">Quem já usa</a>
       <a href="#seguranca">Segurança</a>
       <a href="#custo">Quanto custa</a>
-      <a href="#precisa">O que você precisa</a>
       <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>
   </div>
@@ -145,34 +188,110 @@ NAV = '''<nav>
 HERO = '''<header class="hero" id="topo">
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
-    <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
-    <h1 class="big">Teste a MaestrIA por 7&nbsp;dias, <span class="red">sem pagar nada</span>.</h1>
-    <p class="hero-sub">A inteligência artificial que faz o operacional do escritório previdenciário, do documento do cliente à petição pronta, e ainda o conteúdo do seu Instagram. <b>Roda no seu computador. Quem revisa e decide é você.</b></p>
-    <div class="hero-cta">
-      <a href="#teste" class="btn btn-red">Quero testar por 7 dias</a>
-      <a href="#diferenca" class="btn btn-ghost">Ver o que ela faz</a>
+    <div class="hero-txt">
+      <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
+      <h1 class="big">A pasta do cliente entra. <span class="red">O caso pronto para protocolar sai.</span></h1>
+      <p class="hero-sub">Linha do tempo, cálculo, petição, quesitos, procuração e contrato, no seu timbrado. Na aula ao vivo, um caso com 15 documentos, um deles com mais de 300 páginas, ficou montado em <b>22 minutos</b>. E ela ainda faz o conteúdo do seu Instagram.</p>
+      <div class="hero-cta">
+        <a href="#teste" class="btn btn-red">Quero testar 7 dias grátis</a>
+        <a href="#funcoes" class="btn btn-ghost">Ver tudo o que ela faz</a>
+      </div>
+      <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
+      <p class="hero-prova"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Feita e testada por previdenciaristas.</b> Já rodou em mais de 30 escritórios na fase piloto.</span></p>
     </div>
-    <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Os dois pacotes completos</span><span><b>✓</b> Com os seus casos</span></div>
 
     <div class="term" id="term">
       <div class="term-bar">
         <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-        <span class="term-title">Você escreve o pedido. A MaestrIA devolve o trabalho pronto.</span>
+        <span class="term-title">Você pede. Ela devolve pronto.</span>
       </div>
       <div class="term-body" id="termbody">
         <p class="tl t-cmd"><span class="p">&gt;</span>quero dar entrada no auxílio-acidente desse cliente, faz tudo até o protocolo</p>
-        <p class="tl t-resp">Lendo a pasta do cliente: carta de concessão, laudo, extrato de contribuições...</p>
+        <p class="tl t-resp">Lendo a pasta: carta de concessão, laudo, extrato de contribuições...</p>
         <p class="tl t-resp">Linha do tempo montada. Faltam 2 documentos, já anotados para você pedir.</p>
         <p class="tl t-ok">✓ Cálculo com a memória aberta, mês a mês, em Excel</p>
         <p class="tl t-ok">✓ Petição no seu timbrado, quesitos, procuração e contrato, em Word</p>
+        <p class="tl t-ok">✓ Pasta de protocolo pronta, em PDF</p>
         <p class="tl t-cmd"><span class="p">&gt;</span>cria um carrossel sobre quem tem direito ao auxílio-acidente</p>
-        <p class="tl t-resp">Usando o seu tom de voz. Filtro das regras da OAB aplicado: sem promessa de resultado.</p>
-        <p class="tl t-ok">✓ 8 lâminas com a sua marca e a legenda prontas para você revisar</p>
+        <p class="tl t-ok">✓ 8 lâminas com a sua marca e a legenda, dentro das regras da OAB</p>
         <p class="tl t-dim">Exemplo ilustrativo. O advogado revisa tudo antes de usar.<span class="cursor" id="cur"></span></p>
       </div>
     </div>
   </div>
 </header>'''
+
+I_CADEADO = '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'
+I_PASTA = '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/>'
+I_ESCUDO = '<path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/>'
+I_OLHO = '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>'
+I_MOEDA = '<circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M15 9.5h-4.5a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 1 0 3.5H9"/>'
+I_LUPA = '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'
+I_IMAGEM = '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-8 8"/>'
+I_PINO = '<path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>'
+sem_classe = lambda d: KI(d).replace('class="ki" ', '')
+fx = lambda ic, h, p: f'      <div class="cardy"><span class="fx-ic">{sem_classe(ic)}</span><h3>{h}</h3><p>{p}</p></div>'
+
+FX_PREV = [
+    (g('I_CALC'), 'Cálculo com a memória aberta', 'RMI, auxílio-acidente, atrasados e tempo especial. Mês a mês, em Excel, com a fonte de cada índice.'),
+    (g('I_DOC'), 'Petição no seu timbrado', 'Escrita do jeito do seu escritório, com um revisor treinado nos seus critérios.'),
+    (g('I_BALANCA'), 'Jurisprudência que existe', 'Cada decisão é conferida no CNJ e no site do tribunal. O que não existe, ela joga fora.'),
+    (I_LUPA, 'Auditor de CNIS', 'Vínculo faltando e contribuição não computada, apontados em minutos.'),
+    (I_ESCUDO, 'Perícia de ponta a ponta', 'Quesitos, impugnação de PPP e de laudo, e o cliente preparado para o dia.'),
+    (I_CHECK, 'Qualificador de auxílio-acidente', 'Acidente, sequela e qualidade de segurado. Tem direito ou não tem? A resposta sai na hora.'),
+    (g('I_BARRA'), 'Jurimetria por vara', 'Procedência e acordo com dados oficiais do CNJ, antes de você ajuizar.'),
+    (g('I_SINO'), 'Intimações pela sua OAB', 'As publicações do dia, com o vencimento de cada prazo já calculado.'),
+]
+FX_MKT = [
+    (g('I_ESTRELA'), 'Conteúdo com a sua voz', 'Reels, carrosséis, estáticos e artigos que soam como você, e não como robô.'),
+    (g('I_VIDEO'), 'Edição de vídeo', 'Você grava no celular. Ela tira pausa e gagueira, põe legenda e animação.'),
+    (I_IMAGEM, 'Arte pronta', 'Imagens com a sua marca, ou o design direto na sua conta do Canva.'),
+    (g('I_GRADE'), 'Calendário do mês inteiro', 'A pauta da sua área para 30 dias, em minutos.'),
+    (g('I_GLOBO'), 'Site do escritório no ar', 'Com blog, no seu domínio, hospedado de graça.'),
+    (g('I_RAIO'), 'Página de campanha', 'Pronta para receber o anúncio, com Pixel e botão de WhatsApp.'),
+    (I_PINO, 'Google Meu Negócio', 'Da criação à rotina, para quem procura advogado perto de casa.'),
+    (I_CADEADO, 'Filtro do Provimento 205', 'Tudo passa pelas regras da OAB antes de chegar em você.'),
+]
+NL = chr(10)
+FUNCOES = f'''<section id="funcoes">
+  <div class="wrap sec-center">
+    <span class="kicker reveal">{KI(I_RAIO)}<span>Tudo o que ela faz</span></span>
+    <h2 class="sec reveal">Você pede em português. <span class="red">Ela entrega pronto.</span></h2>
+    <p class="lead reveal">Sem comando difícil e sem tela nova para aprender. Você escreve o que precisa, como falaria com um estagiário, e recebe em Word, Excel e PDF.</p>
+    <div class="fx-rot reveal">Previdenciário</div>
+    <div class="fx reveal">
+      <div class="cardy topo">
+        <span class="fx-ic">{sem_classe(I_PASTA)}</span>
+        <div><h3>O caso completo, do zero ao protocolo</h3><p>Ela lê a pasta do cliente, monta a linha do tempo, aponta o documento que falta, mostra os caminhos possíveis, calcula, escreve a petição, os quesitos, a procuração, a declaração e o contrato. No fim, entrega a pasta de protocolo em PDF.</p></div>
+        <div class="fx-pedido"><small>Você escreve</small>faz tudo desse cliente até o protocolo</div>
+      </div>
+{NL.join(fx(*x) for x in FX_PREV)}
+    </div>
+    <div class="fx-rot reveal">Marketing</div>
+    <div class="fx reveal">
+{NL.join(fx(*x) for x in FX_MKT)}
+    </div>
+    <div class="cta-meio" style="padding-top:34px">
+      <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar tudo isso por 7 dias</a>
+      <p class="reveal">Tudo liberado no teste. Sem cartão.</p>
+    </div>
+  </div>
+</section>'''
+
+dep = lambda fala, nome, quem: f'      <figure class="dep"><blockquote>{fala}</blockquote><figcaption><b>{nome}</b>{quem}</figcaption></figure>'
+DEPOIMENTOS = f'''<section id="quem-usa" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal">{KI(I_ESTRELA)}<span>Quem já usa</span></span>
+    <h2 class="sec reveal">Feita e testada por previdenciaristas. <span class="red">Mais de 30 escritórios</span> na fase piloto.</h2>
+    <p class="lead reveal">Antes de abrir este teste, a MaestrIA rodou em escritório de verdade, com caso de verdade. As falas abaixo são de advogados que usam, ditas na aula ao vivo de 11 de novembro de 2026.</p>
+    <div class="deps reveal">
+{dep('Teve uma cliente que chegou num dia de manhã. No outro dia, a gente já tinha mandado o protocolo para ela. <b>Literalmente em 24 horas.</b> Isso jamais na história da humanidade iria acontecer manualmente.', 'Jean', 'Advogado previdenciarista')}
+{dep('Antes ficava ali 30 dias esperando para sair a inicial. Agora, se está tudo na mão, <b>sai no dia, com certeza.</b> Eu consigo fazer muito mais sem contratar ninguém.', 'Cleice', 'Advogada previdenciarista, auxílio-acidente')}
+{dep('Se tem uma coisa que eu não gosto é gravar vídeo. Abri a câmera, falei o que tinha que falar e coloquei na MaestrIA. Ela tirou a gagueira, tirou tudo. <b>Não parecia eu, parecia uma jornalista falando.</b>', 'Érika', 'Advogada de família, usa a parte de Marketing')}
+{dep('A MaestrIA me ajudou muito. <b>Em questão de horas</b> está pronta toda a documentação, as petições. Eu não tinha habilidade com tecnologia. Agora estou aprendendo e usando, pelo bem do escritório.', 'Joel', 'Advogado, atua sozinho')}
+    </div>
+    <p class="seg-nota reveal">São relatos da experiência de cada escritório, e não promessa de resultado. Cada caso depende dos documentos e da revisão do advogado.</p>
+  </div>
+</section>'''
 
 DIFERENCA = g('DIFERENCA')
 DIFERENCA = DIFERENCA.replace('O mesmo pedido. <span class="red">Duas respostas diferentes</span>.',
@@ -195,6 +314,32 @@ SEGURANCA = f'''<section id="seguranca" style="padding-top:0">
     <span class="kicker reveal">{KI(I_CADEADO)}<span>Segurança e sigilo</span></span>
     <h2 class="sec reveal">Os documentos do seu cliente ficam <span class="red">no seu computador</span>.</h2>
     <p class="lead reveal">Laudo médico, CPF e histórico de contribuição são o dado mais sensível da advocacia. Por isso a MaestrIA não é um site onde você envia arquivo: é uma ferramenta instalada na sua máquina.</p>
+    <div class="seg-grade reveal">
+      <div class="cardy"><span class="seg-ic">{sem_classe(I_PASTA)}</span><h3>Nada de cliente vem para nós</h3><p>O que a MaestrIA confere pela internet é só o código da sua licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</p></div>
+      <div class="cardy"><span class="seg-ic">{sem_classe(I_CADEADO)}</span><h3>A IA roda na sua conta</h3><p>A inteligência é a do Claude, da Anthropic, usada pela sua própria assinatura. O que a IA lê para trabalhar segue as regras e as configurações de privacidade da sua conta lá, que você controla.</p></div>
+      <div class="cardy"><span class="seg-ic">{sem_classe(I_ESCUDO)}</span><h3>Não inventa jurisprudência</h3><p>Cada decisão citada é conferida na base do CNJ e no site do tribunal. O que não se confirma fica fora da peça, e ela avisa.</p></div>
+      <div class="cardy"><span class="seg-ic">{sem_classe(I_OLHO)}</span><h3>Você vê de onde saiu cada dado</h3><p>O cálculo vem com a memória aberta, mês a mês, e a fonte de cada índice. A leitura dos documentos aponta a página de onde tirou a informação.</p></div>
+      <div class="cardy"><span class="seg-ic">{sem_classe(I_CHECK)}</span><h3>Nada sai sem a sua revisão</h3><p>A MaestrIA não protocola, não envia mensagem e não fala com o seu cliente. Ela entrega o trabalho pronto para você revisar, decidir e assinar.</p></div>
+      <div class="cardy"><span class="seg-ic">{sem_classe(g('I_BALANCA'))}</span><h3>Dentro das regras da OAB</h3><p>O conteúdo de marketing passa por um filtro do Provimento 205/2021 antes de chegar em você: sem promessa de resultado e sem captação indevida.</p></div>
+    </div>
+    <p class="seg-nota reveal">Transparência: para a IA trabalhar, o texto dos documentos é lido pelo Claude, na sua conta. A MaestrIA não guarda cópia de nada disso.</p>
+  </div>
+</section>'''
+
+CUSTO = f'''<section id="custo" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal">{KI(I_MOEDA)}<span>A conta</span></span>
+    <h2 class="sec reveal">Quanto custa, e por que sai <span class="red">mais barato</span> do que contratar cada coisa separada.</h2>
+    <p class="lead reveal">Para ter o que a MaestrIA entrega, o escritório costuma pagar vários fornecedores, quase todos com mensalidade. Veja a soma em um ano.</p>
+    <div class="conta reveal">
+      <div class="conta-l"><div><b>Social media terceirizado</b><span>R$ 800 a R$ 2.500 por mês, para postar no seu Instagram</span></div><div class="v">R$ 10 a 30 mil</div></div>
+      <div class="conta-l"><div><b>Site feito por web designer</b><span>pago uma vez, e você depende dele para mexer</span></div><div class="v">R$ 3 a 8 mil</div></div>
+      <div class="conta-l"><div><b>Plataforma de jurimetria</b><span>cerca de R$ 300 por mês</span></div><div class="v">R$ 3,6 mil</div></div>
+      <div class="conta-l"><div><b>Cálculo previdenciário feito na mão</b><span>2 a 3 horas de trabalho repetitivo por caso, toda vez</span></div><div class="v">as suas horas</div></div>
+      <div class="conta-l soma"><div><b>Em um ano, separado</b><span>sem contar as horas do cálculo e da petição</span></div><div class="v">R$ 16 a 41 mil</div></div>
+      <div class="conta-l nossa"><div><b>MaestrIA Previdenciário + Marketing</b><span>os dois pacotes, 12 meses, com as atualizações</span></div><div class="v">R$ 997<small>menos de R$ 84 por mês</small></div></div>
+    </div>
+    <h3 class="sub-h reveal">E a diferença para um sistema jurídico online comum</h3>
     <div class="seg-vs reveal">
       <div class="outro">
         <span class="rot">Sistema jurídico online comum</span>
@@ -215,31 +360,6 @@ SEGURANCA = f'''<section id="seguranca" style="padding-top:0">
         </ul>
       </div>
     </div>
-    <div class="seg-grade reveal">
-      <div class="cardy"><span class="seg-ic">{sem_classe(I_PASTA)}</span><h3>Nada de cliente vem para nós</h3><p>O que a MaestrIA confere pela internet é só o código da sua licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</p></div>
-      <div class="cardy"><span class="seg-ic">{sem_classe(I_CADEADO)}</span><h3>A IA roda na sua conta</h3><p>A inteligência é a do Claude, da Anthropic, usada pela sua própria assinatura. O que a IA lê para trabalhar segue as regras e as configurações de privacidade da sua conta lá, que você controla.</p></div>
-      <div class="cardy"><span class="seg-ic">{sem_classe(I_ESCUDO)}</span><h3>Não inventa jurisprudência</h3><p>Cada decisão citada é conferida na base do CNJ e no site do tribunal. O que não se confirma fica fora da peça, e ela avisa.</p></div>
-      <div class="cardy"><span class="seg-ic">{sem_classe(I_OLHO)}</span><h3>Você vê de onde saiu cada dado</h3><p>O cálculo vem com a memória aberta, mês a mês, e a fonte de cada índice. A leitura dos documentos aponta a página de onde tirou a informação.</p></div>
-      <div class="cardy"><span class="seg-ic">{sem_classe(I_CHECK)}</span><h3>Nada sai sem a sua revisão</h3><p>A MaestrIA não protocola, não envia mensagem e não fala com o seu cliente. Ela entrega o trabalho pronto para você revisar, decidir e assinar.</p></div>
-      <div class="cardy"><span class="seg-ic">{sem_classe(g('I_BALANCA'))}</span><h3>Dentro das regras da OAB</h3><p>O conteúdo de marketing passa por um filtro do Provimento 205/2021 antes de chegar em você: sem promessa de resultado e sem captação indevida.</p></div>
-    </div>
-    <p class="seg-nota reveal">Transparência: para a IA trabalhar, o texto dos documentos é lido pelo Claude, na sua conta. A MaestrIA não guarda cópia de nada disso.</p>
-  </div>
-</section>'''
-
-CUSTO = f'''<section id="custo" style="padding-top:0">
-  <div class="wrap sec-center">
-    <span class="kicker reveal">{KI(I_MOEDA)}<span>A conta</span></span>
-    <h2 class="sec reveal">Por que sai <span class="red">mais barato</span> do que contratar cada coisa separada.</h2>
-    <p class="lead reveal">Para ter o que a MaestrIA entrega, o escritório costuma pagar vários fornecedores, quase todos com mensalidade. Veja a soma em um ano.</p>
-    <div class="conta reveal">
-      <div class="conta-l"><div><b>Social media terceirizado</b><span>R$ 800 a R$ 2.500 por mês, para postar no seu Instagram</span></div><div class="v">R$ 10 a 30 mil</div></div>
-      <div class="conta-l"><div><b>Site feito por web designer</b><span>pago uma vez, e você depende dele para mexer</span></div><div class="v">R$ 3 a 8 mil</div></div>
-      <div class="conta-l"><div><b>Plataforma de jurimetria</b><span>cerca de R$ 300 por mês</span></div><div class="v">R$ 3,6 mil</div></div>
-      <div class="conta-l"><div><b>Cálculo previdenciário feito na mão</b><span>2 a 3 horas de trabalho repetitivo por caso, toda vez</span></div><div class="v">as suas horas</div></div>
-      <div class="conta-l soma"><div><b>Em um ano, separado</b><span>sem contar as horas do cálculo e da petição</span></div><div class="v">R$ 16 a 41 mil</div></div>
-      <div class="conta-l nossa"><div><b>MaestrIA Previdenciário + Marketing</b><span>os dois pacotes, 12 meses, com as atualizações</span></div><div class="v">R$ 997<small>menos de R$ 84 por mês</small></div></div>
-    </div>
     <div class="porque reveal">
       <div class="cardy"><h3>Não tem mensalidade por usuário</h3><p>A licença é do escritório, por 12 meses, em até 3 computadores. Não cresce a conta a cada pessoa que usa.</p></div>
       <div class="cardy"><h3>Não mantemos servidor com os seus casos</h3><p>Como tudo roda no seu computador, não existe o custo de guardar e processar os seus documentos em um sistema nosso. Esse custo não vai para o seu preço.</p></div>
@@ -251,8 +371,8 @@ CUSTO = f'''<section id="custo" style="padding-top:0">
 
 CTA_MEIO = '''<section class="cta-meio">
   <div class="wrap">
-    <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar tudo isso por 7 dias</a>
-    <p class="reveal">Sem cartão. Você libera o teste em um minuto.</p>
+    <a href="#teste" class="btn btn-red btn-lg reveal">Quero ver isso no meu escritório</a>
+    <p class="reveal">7 dias grátis, sem cartão. Você libera o teste em um minuto.</p>
   </div>
 </section>'''
 
@@ -375,8 +495,8 @@ FAQ = (f'''<section id="faq" style="padding-top:0">
 
 FINAL = '''<section class="final">
   <div class="wrap">
-    <h2 class="reveal">Sete dias para ver funcionando <span class="red">no seu escritório</span>.</h2>
-    <p class="reveal">Instala em meia hora e, no mesmo dia, roda o primeiro cálculo e o primeiro carrossel no padrão do seu escritório.</p>
+    <h2 class="reveal">Sete dias, com os seus casos, <span class="red">sem pagar nada</span>.</h2>
+    <p class="reveal">Instale hoje e rode o primeiro caso ainda hoje. Se não for para você, é só não fazer nada: o teste pausa sozinho.</p>
     <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar por 7 dias</a>
     <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu e prefere comprar direto? <a href="/prev-marketing/#pacotes" style="color:var(--red-ink)">Ver o pacote por R$ 997</a>.</p>
     <p class="cta-meta reveal"><span>Sem cartão</span><span>Os dois pacotes completos</span><span>No seu computador</span><span>Você decide no fim</span></p>
@@ -462,9 +582,9 @@ SCRIPT_FORM = r'''<script>
 
 html = '\n'.join([
     cabeca, '<style>', g('css_prev'), g('css_mkt'), g('CSS_COMBO'), CSS_TESTE, '</style>', '',
-    NAV, '', HERO, '', g('MARQ'), '', DIFERENCA, '', SEGURANCA, '', g('acoes'), '', CTA_MEIO, '',
-    g('DIV_PREV'), '', g('prev_rows'), '', g('DIV_MKT'), '', g('mkt_rows'), '', CUSTO, '',
-    PRECISA, '', DIAS, '', instalacao, '', TESTE, '', FAQ, '', FINAL, '', rodape, '', g('script'), SCRIPT_FORM, '</html>', ''])
+    NAV, '', HERO, '', g('MARQ'), '', FUNCOES, '', DEPOIMENTOS, '', g('acoes'), '', CTA_MEIO, '',
+    g('DIV_PREV'), '', g('prev_rows'), '', g('DIV_MKT'), '', g('mkt_rows'), '', SEGURANCA, '',
+    PRECISA, '', DIAS, '', instalacao, '', DIFERENCA, '', CUSTO, '', TESTE, '', FAQ, '', FINAL, '', rodape, '', g('script'), SCRIPT_FORM, '</html>', ''])
 
 # Travas: nada de checkout nem de preço na página do teste, nada de travessão, ids únicos
 corpo = html.split('</style>', 1)[1]
