@@ -177,6 +177,34 @@ $("btn-sair").addEventListener("click", () => {
   $("form-login").reset();
 });
 
+// ---------- teste grátis de 7 dias ----------
+// Quem está no teste vê, no alto da área, até quando ele vale e o botão de compra.
+// Quando o teste acaba, o aviso fica vermelho e é a primeira coisa da tela.
+function avisoDoTeste(dados) {
+  const c = dados.cliente || {};
+  let caixa = $("aviso-teste");
+  if (!c.teste) { if (caixa) caixa.remove(); return; }
+  const oferta = dados.oferta_teste || {};
+  const links = oferta.links || {};
+  if (!caixa) {
+    caixa = document.createElement("div");
+    caixa.id = "aviso-teste";
+    const alvo = $("app-conteudo") || $("tela-painel");
+    alvo.insertBefore(caixa, alvo.firstChild);
+  }
+  caixa.className = "aviso-teste" + (c.expirou ? " aviso-teste--fim" : "");
+  const botoes = oferta.oferta === "separados"
+    ? "<a class='aviso-teste-btn' href='" + (links.combo || "#") + "' target='_blank' rel='noopener'>Quero os dois: Previdenciário + Marketing</a>" +
+      "<span class='aviso-teste-mini'>Ou só um: <a href='" + (links.prev || "#") + "' target='_blank' rel='noopener'>Previdenciário</a> · " +
+      "<a href='" + (links.marketing || "#") + "' target='_blank' rel='noopener'>Marketing</a></span>"
+    : "<a class='aviso-teste-btn' href='" + (links.combo || "#") + "' target='_blank' rel='noopener'>Quero continuar com a MaestrIA</a>";
+  caixa.innerHTML = c.expirou
+    ? "<strong>Seu teste de 7 dias acabou.</strong><p>As ferramentas ficaram pausadas no seu computador, com tudo o que você fez guardado. " +
+      "Comprando com o mesmo e-mail do teste, elas voltam a funcionar sem instalar nada de novo.</p>" + botoes
+    : "<strong>Você está no teste grátis, até " + dataBr(c.vence_em) + ".</strong><p>Use à vontade neste computador. " +
+      "Se quiser garantir desde já, a compra mantém tudo instalado.</p>" + botoes;
+}
+
 // ---------- painel ----------
 function renderizarPainel(dados) {
   const c = dados.cliente;
@@ -193,7 +221,10 @@ function renderizarPainel(dados) {
   statusEl.classList.add("ok");
   statusEl.textContent = c.vitalicio
     ? "Licença vitalícia"
+    : c.teste
+    ? (c.expirou ? "Teste encerrado" : "Teste grátis até " + dataBr(c.vence_em))
     : "Ativa até " + dataBr(c.vence_em);
+  avisoDoTeste(dados);
 
   renderizarDownloads(dados);
   renderizarLicenca(dados);
@@ -458,6 +489,18 @@ const LEIA_MAESTRIA = [
   "",
 ].join("\n");
 
+// Trecho a mais do LEIA para quem está no teste grátis de 7 dias.
+const LEIA_TESTE = [
+  "",
+  "8. ESTA LICENÇA É UM TESTE GRÁTIS DE 7 DIAS",
+  "Diga ao advogado, com estas palavras: \"Esta é a versão de teste, que vale 7 dias neste computador. Vou ligar a conferência do teste: ela consulta a validade pela internet e, quando o teste acabar, a MaestrIA pausa e mostra o link para continuar. Seus arquivos não são apagados.\"",
+  "Depois de copiar os arquivos, rode com o Python instalado: python \"<pasta pessoal>/.claude/maestria/teste/trava.py\" instalar. No Windows use o caminho completo do python.exe conferido no passo 4, nunca o atalho da Microsoft Store. O comando faz uma cópia do settings.json e acrescenta dois ganchos, sem apagar nada do que já existe. Esta é a única alteração permitida no settings.json nesta instalação, e ela é obrigatória no teste.",
+  "Confira rodando: python \"<pasta pessoal>/.claude/maestria/teste/trava.py\" conferir. A resposta deve trazer licenca_de_teste verdadeiro e pode_usar verdadeiro. Se não trouxer, explique a pendência e peça um print no grupo. Não diga que a instalação terminou sem essa conferência.",
+  "Cada licenca.json deste pacote tem o campo teste verdadeiro. Não remova nem altere esse campo. O teste vale para um computador.",
+  "Quando o teste acabar, a MaestrIA mostra o link de compra. Depois da compra aprovada, ela volta a funcionar neste mesmo computador, sem reinstalar. Não ofereça meios de contornar a conferência.",
+  "",
+].join("\n");
+
 // Mapeia o plano do cliente pro bundle generico ja-instalado (sem licenca).
 // Devolve uma LISTA de candidatos, do mais especifico pro mais abrangente.
 //
@@ -544,13 +587,22 @@ async function baixarInstaladorPersonalizado(botao, dados) {
     botao.disabled = true;
     if (!skills.length) throw new Error("sem-skills");
     let bytes = await fetchPrimeiroDisponivel(candidatos);
-    const lic = new TextEncoder().encode(
-      JSON.stringify({ token: cred.token, ativo: true, ativado_em: "area-de-membros" }, null, 2),
-    );
+    const ehTeste = !!(dados && dados.cliente && dados.cliente.teste);
+    const licenca = { token: cred.token, ativo: true, ativado_em: "area-de-membros" };
+    if (ehTeste) licenca.teste = true;
+    const lic = new TextEncoder().encode(JSON.stringify(licenca, null, 2));
     skills.forEach((s) => {
       if (s.skill_id) bytes = anexarAoZip(bytes, ".claude/" + s.skill_id + "/licenca.json", lic);
     });
-    bytes = anexarAoZip(bytes, "LEIA-PRIMEIRO-MAESTRIA.txt", new TextEncoder().encode(LEIA_MAESTRIA));
+    let leia = LEIA_MAESTRIA;
+    if (ehTeste) {
+      // Teste grátis: vai junto a trava (um programa pequeno que confere a validade do
+      // teste) e a instrução para o Claude ligá-la. Sem a trava o instalador não sai.
+      const trava = await fetchPacote("/membros/teste/trava.py", 2);
+      bytes = anexarAoZip(bytes, ".claude/maestria/teste/trava.py", trava);
+      leia += LEIA_TESTE;
+    }
+    bytes = anexarAoZip(bytes, "LEIA-PRIMEIRO-MAESTRIA.txt", new TextEncoder().encode(leia));
     const blob = new Blob([bytes], { type: "application/zip" });
     const blobUrl = URL.createObjectURL(blob);
 

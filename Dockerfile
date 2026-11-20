@@ -74,6 +74,8 @@ COPY full/ ./full/
 COPY aula/ ./aula/
 # Lista de espera da Implementação de IA (14/11/2026): formulário que grava pela edge lista-espera.
 COPY lista-de-espera/ ./lista-de-espera/
+# Teste grátis de 7 dias (20/11/2026): página de entrada do teste.
+COPY teste/ ./teste/
 
 EXPOSE 80
 

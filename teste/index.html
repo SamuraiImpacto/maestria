@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Teste a MaestrIA Previdenciário + Marketing por 7 dias, no seu computador, sem cartão.">
+<meta name="robots" content="noindex">
+<title>Teste a MaestrIA por 7 dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Teste a MaestrIA por 7 dias">
+<meta property="og:description" content="Previdenciário e Marketing liberados no seu computador por 7 dias. Sem cartão.">
+<meta property="og:url" content="https://maestria.samurailab.com.br/teste/">
+<meta property="og:image" content="https://maestria.samurailab.com.br/img/og-image.png">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#141417;--panel-2:#1b1b20;
+    --line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.18);
+    --txt:#f4f4f5;--muted:#9a9aa4;
+    --red:#ef2727;--red-ink:#ff5a48;--red-soft:rgba(239,39,39,.13);--green:#46d17f;
+    --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+    --sans:'Inter',system-ui,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:17px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(900px 520px at 80% -8%,rgba(239,39,39,.10),transparent 60%);background-repeat:no-repeat}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  .estreito{max-width:680px}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:6px}
+  nav{border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;height:60px}
+  .logo{display:inline-flex;align-items:center;gap:10px;line-height:0;text-decoration:none}
+  .logo .sym{height:28px;width:auto}
+  .logo .word{height:16px;width:auto}
+  .logo .sub{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1;margin-left:4px}
+
+  .topo{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start;padding:48px 0 56px}
+  .kicker{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(2.1rem,5.2vw,3.3rem);line-height:1.06;margin:12px 0 0;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--red-ink)}
+  .lead{margin:18px 0 0;color:var(--muted);font-size:1.1rem;max-width:52ch}
+  .lead strong{color:var(--txt)}
+  .marcas{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:12px}
+  .marcas li{display:flex;gap:12px;align-items:flex-start}
+  .marcas .ok{flex:0 0 24px;height:24px;border-radius:50%;background:rgba(70,209,127,.15);color:var(--green);
+    font-weight:800;font-size:14px;line-height:24px;text-align:center;margin-top:2px}
+
+  .cartao{background:var(--panel);border:1px solid var(--line-strong);border-radius:18px;padding:26px 24px}
+  .cartao h2{font-size:1.25rem;margin:0 0 4px}
+  .cartao .sub{color:var(--muted);font-size:.95rem;margin:0 0 18px}
+  form{display:flex;flex-direction:column;gap:16px}
+  .campo{display:flex;flex-direction:column;gap:6px}
+  label.rot{font-weight:700;font-size:.97rem}
+  .dica{color:var(--muted);font-size:.86rem;font-weight:400}
+  input[type=text],input[type=tel],input[type=email]{
+    width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--line-strong);border-radius:12px;
+    padding:14px;font:inherit;font-size:16px}
+  input:focus{outline:2px solid var(--red-ink);outline-offset:1px;border-color:transparent}
+  .isca{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .btn{font-family:var(--sans);font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:17px 26px;font-size:17px;
+    background:var(--red);color:#fff;box-shadow:0 10px 30px -12px rgba(239,39,39,.7);text-decoration:none;display:inline-block;text-align:center;
+    transition:transform .15s ease,background .15s ease}
+  .btn:hover{background:var(--red-ink);transform:translateY(-1px)}
+  .btn:disabled{opacity:.6;cursor:wait;transform:none}
+  .btn .gira{display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;
+    vertical-align:-2px;margin-right:8px;animation:gira .8s linear infinite}
+  .btn.carregando .gira{display:inline-block}
+  @keyframes gira{to{transform:rotate(360deg)}}
+  .erro{color:var(--red-ink);font-weight:600;margin:0}
+  .legal{color:var(--muted);font-size:.82rem;margin:0}
+  .selo{display:inline-block;width:44px;height:44px;border-radius:50%;background:rgba(70,209,127,.15);color:var(--green);
+    font-size:24px;line-height:44px;text-align:center;font-weight:800;margin-bottom:14px}
+  .hidden{display:none !important}
+
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  h2.sec{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.12;margin:0 0 8px;text-wrap:balance}
+  .sec-sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+  .grade{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .item .rot{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink)}
+  .item h3{margin:8px 0 6px;font-size:1.08rem}
+  .item p{margin:0;color:var(--muted);font-size:.97rem}
+  .diga{margin-top:12px;background:var(--bg);border:1px dashed var(--line-strong);border-radius:10px;padding:10px 12px;font-size:.92rem}
+  .diga b{color:var(--muted);font-weight:600;font-size:.8rem;display:block;margin-bottom:2px}
+  .passos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:p}
+  .passo{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px;counter-increment:p}
+  .passo::before{content:counter(p);display:inline-block;width:34px;height:34px;border-radius:50%;background:var(--red);
+    font-weight:800;line-height:34px;text-align:center;margin-bottom:12px}
+  .passo h3{margin:0 0 6px;font-size:1.05rem}
+  .passo p{margin:0;color:var(--muted);font-size:.96rem}
+  .precisa{background:var(--panel-2);border:1px solid var(--line-strong);border-radius:14px;padding:22px}
+  .precisa ul{margin:10px 0 0;padding-left:20px}
+  .precisa li{margin:6px 0}
+  details{border-bottom:1px solid var(--line);padding:16px 0}
+  summary{cursor:pointer;font-weight:700;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";float:right;color:var(--red-ink);font-weight:800}
+  details[open] summary::after{content:"−"}
+  details p{color:var(--muted);margin:10px 0 0}
+  .final{text-align:center}
+  footer{border-top:1px solid var(--line);padding:22px 0 32px;color:var(--muted);font-size:.85rem}
+
+  /* O conteúdo é visível por padrão: a animação só acrescenta a entrada. */
+  .sobe{animation:sobe .6s ease both}
+  .sobe.d2{animation-delay:.12s}
+  @keyframes sobe{from{opacity:0;transform:translateY(14px)}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .sobe{animation:none}
+    .btn,.btn:hover{transition:none;transform:none}
+    .btn .gira{animation:none}
+  }
+  @media (max-width:860px){
+    .topo{grid-template-columns:1fr;gap:30px;padding:34px 0 44px}
+    .grade,.passos{grid-template-columns:1fr}
+    section{padding:44px 0}
+  }
+</style>
+
+<nav><div class="wrap nav-in">
+  <a class="logo" href="/" aria-label="MaestrIA"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
+</div></nav>
+
+<main>
+  <div class="wrap topo">
+    <div class="sobe">
+      <span class="kicker">7 dias grátis, sem cartão</span>
+      <h1>Teste a MaestrIA no seu escritório <em>antes de decidir</em>.</h1>
+      <p class="lead">Durante 7 dias você usa o <strong>Previdenciário</strong> e o <strong>Marketing</strong> completos, no seu computador, com os seus casos. Se gostar, continua. Se não, não paga nada.</p>
+      <ul class="marcas">
+        <li><span class="ok">✓</span><span>Do documento do cliente à pasta pronta para protocolar: petição, cálculo, quesitos e documentos para assinar.</span></li>
+        <li><span class="ok">✓</span><span>Carrossel, roteiro de reel e post no seu tom de voz, com o cuidado das regras da OAB.</span></li>
+        <li><span class="ok">✓</span><span>Você pede em português comum. A MaestrIA pergunta só o que os documentos não respondem.</span></li>
+        <li><span class="ok">✓</span><span>Tudo roda no seu computador. O advogado revisa e decide.</span></li>
+      </ul>
+    </div>
+
+    <div class="cartao sobe d2" id="cartao">
+      <div id="tela-form">
+        <h2>Liberar meu teste de 7 dias</h2>
+        <p class="sub">Leva um minuto. O acesso chega na hora.</p>
+        <form id="f" novalidate>
+          <div class="campo">
+            <label class="rot" for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required>
+          </div>
+          <div class="campo">
+            <label class="rot" for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" maxlength="160" required>
+          </div>
+          <div class="campo">
+            <label class="rot" for="whatsapp">WhatsApp com DDD</label>
+            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required>
+          </div>
+          <div class="campo">
+            <label class="rot" for="cpf">CPF <span class="dica">É a chave da sua área de membros, e garante um teste por pessoa.</span></label>
+            <input type="text" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required>
+          </div>
+          <div class="isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
+          <p class="erro hidden" id="erro" role="alert"></p>
+          <button type="submit" class="btn" id="enviar"><span class="gira"></span><span id="enviar-txt">Quero testar por 7 dias</span></button>
+          <p class="legal">Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA. Sem cartão e sem cobrança automática.</p>
+        </form>
+      </div>
+
+      <div id="tela-ok" class="hidden">
+        <span class="selo">✓</span>
+        <h2 id="ok-titulo">Teste liberado!</h2>
+        <p class="sub" id="ok-texto"></p>
+        <a class="btn" id="ok-btn" href="/membros/">Instalar agora, passo a passo</a>
+        <p class="legal" style="margin-top:14px">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2 class="sec">O que dá para fazer nesses 7 dias</h2>
+      <p class="sec-sub">Não é demonstração com caso inventado. É a ferramenta inteira, com os documentos do seu cliente.</p>
+      <div class="grade">
+        <div class="item">
+          <span class="rot">Previdenciário</span>
+          <h3>O caso inteiro, até o protocolo</h3>
+          <p>Ela lê a pasta do cliente, monta a linha do tempo, mostra os caminhos possíveis, calcula e entrega petição, quesitos, procuração, declaração e contrato.</p>
+          <div class="diga"><b>Você escreve:</b>Quero dar entrada no benefício desse cliente, faz tudo até o protocolo.</div>
+        </div>
+        <div class="item">
+          <span class="rot">Previdenciário</span>
+          <h3>Cálculo com memória</h3>
+          <p>Renda mensal inicial e atrasados, com a memória de cálculo e as fontes de cada índice para você conferir.</p>
+          <div class="diga"><b>Você escreve:</b>Calcula os atrasados desse auxílio-acidente.</div>
+        </div>
+        <div class="item">
+          <span class="rot">Previdenciário</span>
+          <h3>Perícia e recurso</h3>
+          <p>Quesitos para a perícia, impugnação de laudo, impugnação de PPP e recurso administrativo no INSS.</p>
+          <div class="diga"><b>Você escreve:</b>Faz os quesitos para a perícia desse caso.</div>
+        </div>
+        <div class="item">
+          <span class="rot">Marketing</span>
+          <h3>Conteúdo no seu tom</h3>
+          <p>Carrossel, roteiro de reel, post e calendário do mês, escritos do jeito que você fala e apontando o que a OAB pede atenção.</p>
+          <div class="diga"><b>Você escreve:</b>Cria um carrossel sobre auxílio-acidente para o meu Instagram.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="sec">Como funciona</h2>
+      <p class="sec-sub">Três passos, uns 15 minutos, no computador.</p>
+      <div class="passos">
+        <div class="passo"><h3>Libere o teste</h3><p>Preencha o formulário desta página. O acesso sai na hora e também vai para o seu e-mail.</p></div>
+        <div class="passo"><h3>Instale com o passo a passo</h3><p>A área de membros mostra cada tela e onde clicar. Travou? Manda um print no grupo e a gente resolve.</p></div>
+        <div class="passo"><h3>Use por 7 dias</h3><p>Com os seus casos, do seu jeito. No fim você decide se continua.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap estreito">
+      <h2 class="sec">O que você precisa ter</h2>
+      <div class="precisa">
+        <ul>
+          <li><strong>Um computador</strong>, Windows ou Mac. Não funciona no celular.</li>
+          <li><strong>O aplicativo Claude com assinatura paga.</strong> A MaestrIA funciona dentro dele. Se você ainda não tem, a área de membros mostra como assinar e instalar.</li>
+          <li><strong>Uns 15 minutos</strong> para instalar, uma vez só.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap estreito">
+      <h2 class="sec">Perguntas comuns</h2>
+      <details><summary>Precisa de cartão?</summary><p>Não. Você não informa cartão e não existe cobrança automática no fim.</p></details>
+      <details><summary>O que acontece depois dos 7 dias?</summary><p>As ferramentas pausam no seu computador. Nada do que você fez é apagado: suas petições, cálculos e arquivos continuam na sua pasta. Para seguir usando, é só comprar a licença com o mesmo e-mail do teste, e ela volta a funcionar sem instalar nada de novo.</p></details>
+      <details><summary>Posso usar com casos reais?</summary><p>Pode. É a ferramenta completa. Os arquivos ficam na pasta que você escolher no seu computador. A inteligência artificial é do Claude, da Anthropic, e segue as regras da sua conta lá.</p></details>
+      <details><summary>Em quantos computadores?</summary><p>O teste vale para um computador. A licença comprada vale para mais de um.</p></details>
+      <details><summary>Não entendo nada de tecnologia. Consigo?</summary><p>Consegue. A instalação é guiada, com a imagem de cada tela, e o suporte é no grupo: você manda um print e a gente diz o que fazer.</p></details>
+      <details><summary>A MaestrIA substitui o advogado?</summary><p>Não. Ela faz o trabalho braçal e mostra os caminhos. Quem revisa, decide e assina é você.</p></details>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap estreito">
+      <h2 class="sec">Sete dias para ver funcionando no seu escritório</h2>
+      <p class="sec-sub" style="margin-left:auto;margin-right:auto">Sem cartão. Você só decide depois de usar.</p>
+      <a class="btn" href="#cartao">Liberar meu teste de 7 dias</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">MaestrIA by Samurai Lab · <a href="/termos.html">Termos</a> · <a href="/privacidade.html">Privacidade</a></div></footer>
+
+<script>
+(function () {
+  var EDGE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
+  var f = document.getElementById("f");
+  var erro = document.getElementById("erro");
+  var btn = document.getElementById("enviar");
+  var btnTxt = document.getElementById("enviar-txt");
+  var celular = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "");
+
+  // De onde a pessoa veio: /teste/?o=evento, ?o=grupo-melissa...
+  var origem = "site";
+  try { origem = (new URLSearchParams(location.search).get("o") || "site").slice(0, 60); } catch (e) {}
+
+  var cpf = document.getElementById("cpf");
+  cpf.addEventListener("input", function () {
+    var d = cpf.value.replace(/\D/g, "").slice(0, 11);
+    cpf.value = d.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+  });
+  var zap = document.getElementById("whatsapp");
+  zap.addEventListener("input", function () {
+    var d = zap.value.replace(/\D/g, "").slice(0, 11);
+    zap.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4)
+      : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
+  });
+
+  function mostrarErro(msg) { erro.textContent = msg; erro.classList.remove("hidden"); }
+  function carregando(sim) {
+    btn.disabled = sim; btn.classList.toggle("carregando", sim);
+    btnTxt.textContent = sim ? "Liberando o seu teste..." : "Quero testar por 7 dias";
+  }
+
+  f.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    erro.classList.add("hidden");
+    var dados = {
+      nome: document.getElementById("nome").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      whatsapp: zap.value, cpf: cpf.value,
+      site: document.getElementById("site").value, origem: origem
+    };
+    if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
+    if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
+    if (cpf.value.replace(/\D/g, "").length !== 11) return mostrarErro("Confira o CPF: são 11 números.");
+    carregando(true);
+    fetch(EDGE, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
+      .then(function (r) { return r.json().then(function (j) { return { status: r.status, j: j }; }); })
+      .then(function (res) {
+        carregando(false);
+        var j = res.j || {};
+        if (!j.ok) {
+          if (j.link_compra) return mostrarErro("O seu teste grátis já foi usado. Para continuar com a MaestrIA, fale com a gente no grupo ou garanta a sua licença.");
+          return mostrarErro(j.erro || "Não consegui liberar agora. Tente de novo em instantes.");
+        }
+        // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
+        if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.cpf })); } catch (e) {} }
+        var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
+        document.getElementById("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
+        var texto = document.getElementById("ok-texto");
+        var okBtn = document.getElementById("ok-btn");
+        if (celular) {
+          texto.textContent = "Vale até " + ate + ". A instalação é no computador: abra lá o e-mail que acabamos de mandar e clique no botão azul.";
+          okBtn.classList.add("hidden");
+        } else {
+          texto.textContent = "Vale até " + ate + ". Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
+        }
+        document.getElementById("tela-form").classList.add("hidden");
+        document.getElementById("tela-ok").classList.remove("hidden");
+        document.getElementById("cartao").scrollIntoView({ block: "center" });
+      })
+      .catch(function () { carregando(false); mostrarErro("Sem conexão agora. Confira a internet e tente de novo."); });
+  });
+})();
+</script>
+</html>
