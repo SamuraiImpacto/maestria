@@ -765,8 +765,45 @@
   /* ===== teste grátis de 7 dias ===== */
   /* A manchete do teste é menor que a das páginas de venda: a primeira dobra precisa mostrar o texto e o botão. */
   header.hero{padding-top:48px}
-  header.hero h1.big{font-size:clamp(2.1rem,4.4vw,3.5rem);line-height:1.08;max-width:20ch;margin-top:18px}
-  header.hero .hero-sub{margin-top:16px}
+  header.hero{padding-top:34px}
+  header.hero h1.big{font-size:clamp(1.9rem,3.5vw,2.9rem);line-height:1.1;max-width:26ch;margin-top:14px}
+  header.hero .hero-sub{margin-top:14px;max-width:60ch}
+  /* segurança */
+  .seg-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;text-align:left}
+  .seg-grade .cardy{padding:24px}
+  .seg-grade .cardy h3{font-size:17px}
+  .seg-grade .cardy p{font-size:15px}
+  .seg-ic{display:inline-flex;width:38px;height:38px;border-radius:50%;background:rgba(70,209,127,.13);color:var(--green);align-items:center;justify-content:center;margin-bottom:14px}
+  .seg-ic svg{width:20px;height:20px}
+  .seg-vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;text-align:left}
+  .seg-vs>div{border-radius:14px;padding:22px 24px;border:1px solid var(--line)}
+  .seg-vs .outro{background:var(--panel)}
+  .seg-vs .nosso{border-color:rgba(70,209,127,.35);background:linear-gradient(180deg,rgba(70,209,127,.07),transparent)}
+  .seg-vs .rot{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2)}
+  .seg-vs .nosso .rot{color:var(--green)}
+  .seg-vs ul{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:9px}
+  .seg-vs li{font-size:15px;line-height:1.5;color:var(--muted);display:flex;gap:10px}
+  .seg-vs .outro li::before{content:"✕";color:var(--muted-2);font-weight:800}
+  .seg-vs .nosso li::before{content:"✓";color:var(--green);font-weight:800}
+  .seg-vs .nosso li{color:var(--txt)}
+  .seg-nota{margin:20px auto 0;max-width:70ch;color:var(--muted-2);font-size:14px;line-height:1.6}
+  /* custo */
+  .conta{margin:38px auto 0;max-width:900px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel);text-align:left}
+  .conta-l{display:grid;grid-template-columns:1.5fr 1fr;gap:12px;padding:16px 22px;border-top:1px solid var(--line);align-items:center}
+  .conta-l:first-child{border-top:0}
+  .conta-l b{display:block;font-size:16px}
+  .conta-l span{color:var(--muted);font-size:14.5px}
+  .conta-l .v{text-align:right;font-weight:800;font-size:1.15rem;color:var(--muted)}
+  .conta-l.soma{background:var(--panel-2)}
+  .conta-l.soma .v{color:var(--txt)}
+  .conta-l.nossa{background:linear-gradient(90deg,rgba(239,39,39,.12),transparent 90%);border-top:2px solid var(--red)}
+  .conta-l.nossa .v{color:var(--red-ink);font-size:1.6rem;font-family:var(--serif)}
+  .conta-l.nossa .v small{display:block;font:600 13px var(--sans);color:var(--muted)}
+  .porque{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px;text-align:left}
+  .porque .cardy h3{font-size:16.5px}
+  .porque .cardy p{font-size:15px}
+  @media (max-width:900px){.seg-grade,.porque{grid-template-columns:1fr 1fr}.seg-vs{grid-template-columns:1fr}}
+  @media (max-width:560px){.seg-grade,.porque{grid-template-columns:1fr}.conta-l{grid-template-columns:1fr}.conta-l .v{text-align:left}}
   header.hero .hero-cta{margin-top:22px}
   @media (min-width:701px){.hero-fatos{justify-content:center}}
   .hero-fatos{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:14.5px;color:var(--muted)}
@@ -830,9 +867,9 @@
     <a class="logo" href="/" aria-label="MaestrIA: teste grátis"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
     <div class="nav-links">
       <a href="#diferenca">O que ela faz</a>
-      <a href="#acoes">Veja funcionando</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#custo">Quanto custa</a>
       <a href="#precisa">O que você precisa</a>
-      <a href="#dias">Como são os 7 dias</a>
       <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>
   </div>
@@ -843,7 +880,7 @@
   <div class="wrap">
     <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
     <h1 class="big">Teste a MaestrIA por 7&nbsp;dias, <span class="red">sem pagar nada</span>.</h1>
-    <p class="hero-sub">A MaestrIA é uma inteligência artificial que se instala no seu computador e faz o trabalho operacional do escritório previdenciário: lê os documentos do cliente, calcula, escreve a petição no seu timbrado, confere a jurisprudência e ainda produz o conteúdo do seu Instagram com a sua voz. Você pede em português comum, como numa conversa. <b>Quem revisa e decide é você.</b></p>
+    <p class="hero-sub">A inteligência artificial que faz o operacional do escritório previdenciário, do documento do cliente à petição pronta, e ainda o conteúdo do seu Instagram. <b>Roda no seu computador. Quem revisa e decide é você.</b></p>
     <div class="hero-cta">
       <a href="#teste" class="btn btn-red">Quero testar por 7 dias</a>
       <a href="#diferenca" class="btn btn-ghost">Ver o que ela faz</a>
@@ -894,6 +931,43 @@
       <div class="vs-row" role="row"><div class="tema" role="cell"><span>Ter um site</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Te dá um código solto e você que se vire para colocar no ar.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Constrói o site com blog e te guia até o ar, <b>no seu domínio, com hospedagem gratuita</b>.</div></div>
     </div>
     <p class="vs-pe reveal">A MaestrIA se instala dentro do Claude: não é outro site, outro login nem outra tela para aprender.</p>
+  </div>
+</section>
+
+<section id="seguranca" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Segurança e sigilo</span></span>
+    <h2 class="sec reveal">Os documentos do seu cliente ficam <span class="red">no seu computador</span>.</h2>
+    <p class="lead reveal">Laudo médico, CPF e histórico de contribuição são o dado mais sensível da advocacia. Por isso a MaestrIA não é um site onde você envia arquivo: é uma ferramenta instalada na sua máquina.</p>
+    <div class="seg-vs reveal">
+      <div class="outro">
+        <span class="rot">Sistema jurídico online comum</span>
+        <ul>
+          <li>Você envia os documentos do cliente para o servidor da empresa.</li>
+          <li>Os casos ficam guardados em um banco de dados que não é seu.</li>
+          <li>Se você cancela, depende da empresa para tirar tudo de lá.</li>
+          <li>Mensalidade por usuário, para sempre.</li>
+        </ul>
+      </div>
+      <div class="nosso">
+        <span class="rot">MaestrIA</span>
+        <ul>
+          <li>Os arquivos ficam em pastas suas, no seu computador.</li>
+          <li>A MaestrIA não tem servidor que recebe documento de cliente.</li>
+          <li>Se você sair, tudo o que foi feito continua com você, em Word, Excel e PDF.</li>
+          <li>Sem mensalidade por usuário.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="seg-grade reveal">
+      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span><h3>Nada de cliente vem para nós</h3><p>O que a MaestrIA confere pela internet é só o código da sua licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</p></div>
+      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>A IA roda na sua conta</h3><p>A inteligência é a do Claude, da Anthropic, usada pela sua própria assinatura. O que a IA lê para trabalhar segue as regras e as configurações de privacidade da sua conta lá, que você controla.</p></div>
+      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Não inventa jurisprudência</h3><p>Cada decisão citada é conferida na base do CNJ e no site do tribunal. O que não se confirma fica fora da peça, e ela avisa.</p></div>
+      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Você vê de onde saiu cada dado</h3><p>O cálculo vem com a memória aberta, mês a mês, e a fonte de cada índice. A leitura dos documentos aponta a página de onde tirou a informação.</p></div>
+      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><h3>Nada sai sem a sua revisão</h3><p>A MaestrIA não protocola, não envia mensagem e não fala com o seu cliente. Ela entrega o trabalho pronto para você revisar, decidir e assinar.</p></div>
+      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0Z"/><path d="m19 7-3 7a4 4 0 0 0 6 0Z"/></svg></span><h3>Dentro das regras da OAB</h3><p>O conteúdo de marketing passa por um filtro do Provimento 205/2021 antes de chegar em você: sem promessa de resultado e sem captação indevida.</p></div>
+    </div>
+    <p class="seg-nota reveal">Transparência: para a IA trabalhar, o texto dos documentos é lido pelo Claude, na sua conta. A MaestrIA não guarda cópia de nada disso.</p>
   </div>
 </section>
 
@@ -1276,34 +1350,25 @@
   </div>
 </section>
 
-<section id="sigilo" >
-  <div class="wrap">
-    <div class="row rev">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Roda no SEU computador</span></span>
-        <h2 class="rt">Laudo e CPF do seu cliente <span class="red">nunca sobem</span> pra servidor nosso.</h2>
-        <p class="rp">Laudo médico, CPF e histórico são o dado mais sensível que existe na advocacia. A MaestrIA não é um site que você acessa: é ferramenta instalada na sua máquina. A peça nasce na pasta do cliente e abre direto no seu Word.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Sigilo de verdade: nada em servidor de terceiros</li>
-          <li><span class="ck">✓</span> Licença no seu CPF, ativa em até 3 computadores seus</li>
-          <li><span class="ck">✓</span> Atualiza com um comando: <span class="cmd">/atualizar-skill</span> traz as melhorias da semana</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="card">
-          <div class="tree">
-            <div class="fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Clientes</div>
-            <div class="ind fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Cliente A, auxílio-acidente</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Recurso_INSS_v1.docx</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>CNIS.pdf</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Calculo_RMI.xlsx</div>
-            <div class="ind fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Cliente B, aposentadoria</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Planejamento.docx</div>
-            <div class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>&nbsp;Tudo no seu computador ou no seu Google Drive. Nada sobe pra servidor nosso.</div>
-          </div>
-        </div>
-      </div>
+<section id="custo" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M15 9.5h-4.5a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 1 0 3.5H9"/></svg><span>A conta</span></span>
+    <h2 class="sec reveal">Por que sai <span class="red">mais barato</span> do que contratar cada coisa separada.</h2>
+    <p class="lead reveal">Para ter o que a MaestrIA entrega, o escritório costuma pagar vários fornecedores, quase todos com mensalidade. Veja a soma em um ano.</p>
+    <div class="conta reveal">
+      <div class="conta-l"><div><b>Social media terceirizado</b><span>R$ 800 a R$ 2.500 por mês, para postar no seu Instagram</span></div><div class="v">R$ 10 a 30 mil</div></div>
+      <div class="conta-l"><div><b>Site feito por web designer</b><span>pago uma vez, e você depende dele para mexer</span></div><div class="v">R$ 3 a 8 mil</div></div>
+      <div class="conta-l"><div><b>Plataforma de jurimetria</b><span>cerca de R$ 300 por mês</span></div><div class="v">R$ 3,6 mil</div></div>
+      <div class="conta-l"><div><b>Cálculo previdenciário feito na mão</b><span>2 a 3 horas de trabalho repetitivo por caso, toda vez</span></div><div class="v">as suas horas</div></div>
+      <div class="conta-l soma"><div><b>Em um ano, separado</b><span>sem contar as horas do cálculo e da petição</span></div><div class="v">R$ 16 a 41 mil</div></div>
+      <div class="conta-l nossa"><div><b>MaestrIA Previdenciário + Marketing</b><span>os dois pacotes, 12 meses, com as atualizações</span></div><div class="v">R$ 997<small>menos de R$ 84 por mês</small></div></div>
     </div>
+    <div class="porque reveal">
+      <div class="cardy"><h3>Não tem mensalidade por usuário</h3><p>A licença é do escritório, por 12 meses, em até 3 computadores. Não cresce a conta a cada pessoa que usa.</p></div>
+      <div class="cardy"><h3>Não mantemos servidor com os seus casos</h3><p>Como tudo roda no seu computador, não existe o custo de guardar e processar os seus documentos em um sistema nosso. Esse custo não vai para o seu preço.</p></div>
+      <div class="cardy"><h3>A inteligência você paga direto</h3><p>A assinatura do Claude é sua, contratada na Anthropic, sem intermediário cobrando por cima. É o único custo fora da MaestrIA.</p></div>
+    </div>
+    <p class="seg-nota reveal">Valores de mercado são referências médias e variam por cidade e fornecedor. O preço da MaestrIA é o da página oficial do pacote. Durante o teste de 7 dias você não paga nada à MaestrIA.</p>
   </div>
 </section>
 
@@ -1448,6 +1513,8 @@
     <details class="faq reveal"><summary>Posso usar com casos reais?</summary><div class="ans">Pode. É a ferramenta completa. Os arquivos ficam em pastas suas, no seu computador. A inteligência artificial é a do Claude e segue as regras da sua conta lá.</div></details>
     <details class="faq reveal"><summary>Não entendo nada de tecnologia. Consigo?</summary><div class="ans">Consegue. A instalação é guiada, com a imagem de cada tela, e o suporte é no grupo da comunidade: você manda um print e a gente diz o que fazer. No uso, você escreve o pedido em português comum.</div></details>
     <details class="faq reveal"><summary>Inventa acórdão como o ChatGPT?</summary><div class="ans">Não. Toda decisão passa pela base do CNJ e pelo site do tribunal, e leis, súmulas e temas são conferidos em fonte oficial. Quando não dá para confirmar, ela avisa em vez de inventar.</div></details>
+    <details class="faq reveal"><summary>Quanto custa depois do teste?</summary><div class="ans">O pacote Previdenciário + Marketing custa R$ 997 por 12 meses, com as atualizações do período. Não é mensalidade por usuário. Fora isso, só a assinatura do Claude, que você paga direto à Anthropic.</div></details>
+    <details class="faq reveal"><summary>Os dados dos meus clientes ficam seguros?</summary><div class="ans">Os arquivos ficam em pastas suas, no seu computador. A MaestrIA não tem servidor que recebe documento de cliente: pela internet ela confere só o código da licença e o nome do computador. Para trabalhar, a inteligência artificial do Claude lê o texto dos documentos, pela sua própria conta, seguindo as configurações de privacidade que você controla lá.</div></details>
     <details class="faq reveal"><summary>Em quantos computadores posso testar?</summary><div class="ans">O teste vale para um computador. A licença comprada vale para até 3.</div></details>
     <details class="faq reveal"><summary>A MaestrIA substitui o advogado?</summary><div class="ans">Não. Ela faz o trabalho operacional e mostra os caminhos. Quem revisa, decide e assina é você.</div></details>
   </div>
@@ -1458,6 +1525,7 @@
     <h2 class="reveal">Sete dias para ver funcionando <span class="red">no seu escritório</span>.</h2>
     <p class="reveal">Instala em meia hora e, no mesmo dia, roda o primeiro cálculo e o primeiro carrossel no padrão do seu escritório.</p>
     <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar por 7 dias</a>
+    <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu e prefere comprar direto? <a href="/prev-marketing/#pacotes" style="color:var(--red-ink)">Ver o pacote por R$ 997</a>.</p>
     <p class="cta-meta reveal"><span>Sem cartão</span><span>Os dois pacotes completos</span><span>No seu computador</span><span>Você decide no fim</span></p>
   </div>
 </section>
@@ -1749,6 +1817,8 @@
         carregando(false);
         j = j || {};
         if (!j.ok) return mostrarErro(j.erro || "Não consegui liberar agora. Tente de novo em instantes.");
+        // Cadastro feito: avisa o pixel, para a campanha otimizar por quem libera o teste.
+        try { if (window.fbq && j.token) fbq("track", "Lead", { content_name: "Teste 7 dias MaestrIA", content_category: origem }); } catch (e) {}
         // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
         if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.cpf })); } catch (e) {} }
         var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
