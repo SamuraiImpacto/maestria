@@ -79,8 +79,8 @@ CSS_TESTE = r'''
   .hero-fatos b{color:var(--green);font-weight:800}
   .precisa{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;text-align:left}
   .precisa .cardy{padding:24px}
-  .precisa .num{display:inline-flex;width:38px;height:38px;border-radius:50%;background:var(--red-soft);color:var(--red-ink);align-items:center;justify-content:center;margin-bottom:14px}
-  .precisa .num svg{width:20px;height:20px}
+  .precisa .pre-ic{display:inline-flex;width:38px;height:38px;border-radius:50%;background:var(--red-soft);color:var(--red-ink);align-items:center;justify-content:center;margin-bottom:14px}
+  .precisa .pre-ic svg{width:20px;height:20px}
   .precisa h3{font-size:17px}
   .precisa p{font-size:15px}
   .precisa a{color:var(--red-ink)}
@@ -263,17 +263,17 @@ PRECISA = f'''<section id="precisa">
     <p class="lead reveal">São só três coisas. Se faltar alguma, a área de membros mostra como resolver, com a imagem de cada tela.</p>
     <div class="precisa reveal">
       <div class="cardy">
-        <span class="num">{KI(I_PC).replace('class="ki"', '')}</span>
+        <span class="pre-ic">{KI(I_PC).replace('class="ki"', '')}</span>
         <h3>1. Um computador</h3>
         <p>Windows ou Mac. A MaestrIA trabalha com os arquivos do seu computador, por isso <b>não funciona no celular</b>. Não precisa ser uma máquina potente.</p>
       </div>
       <div class="cardy red-edge">
-        <span class="num">{KI(I_ESTRELA).replace('class="ki"', '')}</span>
+        <span class="pre-ic">{KI(I_ESTRELA).replace('class="ki"', '')}</span>
         <h3>2. O aplicativo Claude, com assinatura</h3>
         <p>O Claude é o aplicativo de inteligência artificial onde a MaestrIA se instala. Ele tem uma <b>assinatura própria</b>, contratada direto em <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. É o único custo durante o teste, e você continua com ele mesmo se não ficar com a MaestrIA.</p>
       </div>
       <div class="cardy">
-        <span class="num">{KI(I_RELOGIO).replace('class="ki"', '')}</span>
+        <span class="pre-ic">{KI(I_RELOGIO).replace('class="ki"', '')}</span>
         <h3>3. Meia hora para instalar</h3>
         <p>Uma vez só. Você baixa um arquivo, entrega ao Claude e escreve "instala pra mim". <b>Não precisa saber programar.</b> Travou? Manda um print no grupo e a gente resolve.</p>
       </div>
