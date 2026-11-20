@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Painel do teste grátis</title>
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a0c">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#141417;--panel-2:#1b1b20;
+    --line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.18);
+    --txt:#f4f4f5;--muted:#9a9aa4;--red:#ef2727;--red-ink:#ff5a48;--green:#46d17f;--amber:#f0b541;--blue:#6aa9ff;
+    --serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px 60px}
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:28px 0 18px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
+  h1{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.1;margin:6px 0 0}
+  h2{font-size:1rem;margin:0 0 12px;font-weight:700}
+  .quando-li{color:var(--muted);font-size:.85rem;margin:10px 0 0}
+  .btn{font:inherit;font-weight:700;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--txt);border-radius:999px;padding:10px 16px}
+  .btn:hover{border-color:var(--red);color:var(--red-ink)}
+  .btn-red{background:var(--red);border-color:var(--red);color:#fff}
+  .numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:22px 0}
+  .num{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .num b{display:block;font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums}
+  .num span{color:var(--muted);font-size:.88rem}
+  .num.destaque b{color:var(--green)}
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .bloco{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+  .barra{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin-bottom:10px;font-size:.92rem}
+  .barra .q{font-variant-numeric:tabular-nums;color:var(--muted)}
+  .barra .t{grid-column:1/-1;height:7px;background:var(--panel-2);border-radius:99px;overflow:hidden}
+  .barra .t i{display:block;height:100%;background:var(--red);border-radius:99px}
+  section{margin:26px 0}
+  .filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .filtro{font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--muted);border-radius:999px;padding:7px 13px}
+  .filtro[aria-pressed="true"]{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+  .pessoa{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+  .pessoa .topo{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 12px}
+  .pessoa .nome{font-weight:700}
+  .pessoa a{color:var(--green);font-weight:600;text-decoration:none}
+  .pessoa .meta{color:var(--muted);font-size:.88rem;margin-top:4px;overflow-wrap:anywhere}
+  .selo{font-size:.78rem;font-weight:700;border-radius:99px;padding:3px 10px;border:1px solid currentColor;white-space:nowrap}
+  .selo.comprou{color:var(--green)}
+  .selo.usando{color:var(--blue)}
+  .selo.parado{color:var(--amber)}
+  .selo.fim{color:var(--muted)}
+  .entrada{max-width:420px;margin:60px auto;display:flex;flex-direction:column;gap:12px}
+  .entrada input{background:var(--panel);color:var(--txt);border:1px solid var(--line-strong);border-radius:12px;padding:14px;font:inherit;font-size:16px}
+  .erro{color:var(--red-ink);font-weight:600}
+  .vazio{color:var(--muted)}
+  .esqueleto{background:var(--panel);border:1px solid var(--line);border-radius:14px;height:74px;margin-bottom:10px;animation:pulsa 1.2s ease-in-out infinite}
+  @keyframes pulsa{50%{opacity:.45}}
+  .entra{animation:entra .25s ease-out}
+  @keyframes entra{from{opacity:0;transform:translateY(6px)}}
+  @media (prefers-reduced-motion:reduce){.esqueleto,.entra{animation:none}}
+  :focus-visible{outline:2px solid var(--red-ink);outline-offset:3px}
+</style>
+
+<div class="wrap">
+  <div id="entrada" class="entrada" hidden>
+    <span class="kicker">Painel</span>
+    <h1>Teste grátis de 7 dias</h1>
+    <label for="chave">Chave do painel</label>
+    <input id="chave" type="password" autocomplete="current-password">
+    <button class="btn btn-red" id="entrar">Abrir o painel</button>
+    <p class="erro" id="erro-entrada" hidden></p>
+  </div>
+
+  <div id="carregando" hidden aria-label="Carregando">
+    <div class="esqueleto" style="height:110px;margin-top:28px"></div>
+    <div class="esqueleto"></div><div class="esqueleto"></div><div class="esqueleto"></div>
+  </div>
+
+  <div id="painel" hidden>
+    <header>
+      <div><span class="kicker">MaestrIA Previdenciário + Marketing</span><h1>Teste grátis de 7 dias</h1></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="atualizar">Atualizar</button>
+        <button class="btn" id="sair">Sair</button>
+      </div>
+    </header>
+    <p class="quando-li" id="quando-li"></p>
+    <p class="erro" id="erro" hidden></p>
+    <div class="numeros" id="numeros"></div>
+    <section><div class="grade">
+      <div class="bloco"><h2>De onde vieram</h2><div id="origens"></div></div>
+      <div class="bloco"><h2>O caminho até a compra</h2><div id="funil"></div></div>
+    </div></section>
+    <section>
+      <h2>Quem se cadastrou</h2>
+      <div class="filtros" id="filtros"></div>
+      <div id="pessoas"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
+  // Mesma guarda do painel da lista de espera: quem já entrou lá, entra aqui sem digitar de novo.
+  var GUARDA = "maestria-painel-lista";
+  var SITUACOES = {
+    comprou: "Comprou", usando: "Instalou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
+  };
+  var dados = [], filtro = "todos", relogio = null;
+
+  function ler() { try { return localStorage.getItem(GUARDA) || ""; } catch (e) { return ""; } }
+  function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function mostrar(id) {
+    ["entrada", "carregando", "painel"].forEach(function (x) { document.getElementById(x).hidden = x !== id; });
+  }
+
+  // A chave pode chegar pelo fim do link (#chave=...), que o navegador não manda a servidor nenhum.
+  var h = location.hash.match(/chave=([^&]+)/);
+  if (h) { gravar(decodeURIComponent(h[1])); history.replaceState(null, "", location.pathname); }
+
+  function entrada(msg) {
+    mostrar("entrada");
+    var e = document.getElementById("erro-entrada"); e.hidden = !msg; e.textContent = msg || "";
+  }
+
+  function situacao(r) {
+    if (r.teste_convertido_em) return "comprou";
+    if (r.expires_at && new Date(r.expires_at).getTime() < Date.now()) return "fim";
+    return r.primeira_ativacao_em ? "usando" : "parado";
+  }
+
+  function carregar(silencioso) {
+    var chave = ler();
+    if (!chave) return entrada();
+    if (!silencioso && !dados.length) mostrar("carregando");
+    document.getElementById("atualizar").textContent = "Atualizando...";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "painel", chave: chave }) })
+      .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
+      .then(function (res) {
+        document.getElementById("atualizar").textContent = "Atualizar";
+        if (res.s === 401) { gravar(""); return entrada("Chave inválida."); }
+        mostrar("painel");
+        var e = document.getElementById("erro");
+        if (!res.j.ok) { e.hidden = false; e.textContent = res.j.erro || "Não consegui ler agora."; return; }
+        e.hidden = true;
+        dados = (res.j.testes || []).map(function (r) { r._s = situacao(r); return r; });
+        document.getElementById("quando-li").textContent = "Lido às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) + ". Atualiza sozinho a cada minuto.";
+        desenhar(!silencioso);
+      })
+      .catch(function () {
+        document.getElementById("atualizar").textContent = "Atualizar";
+        mostrar("painel");
+        var e = document.getElementById("erro"); e.hidden = false; e.textContent = "Sem conexão. Tente de novo.";
+      });
+  }
+
+  function barras(caixa, linhas, total) {
+    caixa.innerHTML = "";
+    if (!linhas.length) caixa.appendChild(el("p", "vazio", "Sem dados ainda."));
+    linhas.forEach(function (l) {
+      var pct = total ? Math.round(l[1] * 100 / total) : 0;
+      var bar = el("div", "barra");
+      bar.appendChild(el("span", null, l[0]));
+      bar.appendChild(el("span", "q", l[1] + " (" + pct + "%)"));
+      var t = el("span", "t"); var i = el("i"); i.style.width = pct + "%"; t.appendChild(i); bar.appendChild(t);
+      caixa.appendChild(bar);
+    });
+  }
+
+  function desenhar(animar) {
+    var agora = Date.now(), n = dados.length;
+    function conta(s) { return dados.filter(function (r) { return r._s === s; }).length; }
+    var dia = dados.filter(function (r) { return r.teste_criado_em && agora - new Date(r.teste_criado_em).getTime() < 864e5; }).length;
+    var instalaram = dados.filter(function (r) { return r.primeira_ativacao_em; }).length;
+    var compraram = conta("comprou");
+
+    var nums = document.getElementById("numeros"); nums.innerHTML = "";
+    [[n, "cadastros"], [dia, "nas últimas 24 horas"], [instalaram, "instalaram"], [conta("parado"), "ainda não instalaram"], [conta("fim"), "terminaram sem comprar"], [compraram, "compraram", true]].forEach(function (x) {
+      var d = el("div", "num" + (x[2] ? " destaque" : "")); d.appendChild(el("b", null, x[0])); d.appendChild(el("span", null, x[1])); nums.appendChild(d);
+    });
+
+    var porOrigem = {};
+    dados.forEach(function (r) { var o = r.teste_origem || "sem origem"; porOrigem[o] = (porOrigem[o] || 0) + 1; });
+    barras(document.getElementById("origens"), Object.keys(porOrigem).map(function (k) { return [k, porOrigem[k]]; }).sort(function (a, b) { return b[1] - a[1]; }), n);
+    barras(document.getElementById("funil"), n ? [["Cadastraram", n], ["Instalaram", instalaram], ["Compraram", compraram]] : [], n);
+
+    var fs = document.getElementById("filtros"); fs.innerHTML = "";
+    [["todos", "Todos (" + n + ")"]].concat(Object.keys(SITUACOES).map(function (k) { return [k, SITUACOES[k] + " (" + conta(k) + ")"]; })).forEach(function (f) {
+      var b = el("button", "filtro", f[1]); b.type = "button"; b.setAttribute("aria-pressed", String(filtro === f[0]));
+      b.addEventListener("click", function () { filtro = f[0]; desenhar(true); });
+      fs.appendChild(b);
+    });
+
+    var ps = document.getElementById("pessoas"); ps.innerHTML = "";
+    var lista = dados.filter(function (r) { return filtro === "todos" || r._s === filtro; });
+    if (!lista.length) ps.appendChild(el("p", "vazio", n ? "Ninguém nesta situação." : "Ninguém se cadastrou ainda."));
+    lista.forEach(function (r) {
+      var c = el("div", "pessoa" + (animar ? " entra" : ""));
+      var topo = el("div", "topo");
+      topo.appendChild(el("span", "nome", r.nome || "(sem nome)"));
+      topo.appendChild(el("span", "selo " + r._s, SITUACOES[r._s]));
+      c.appendChild(topo);
+
+      var m = el("div", "meta");
+      var zap = String(r.telefone || "").replace(/\D/g, "");
+      if (zap) {
+        var a = el("a", null, "WhatsApp " + zap.replace(/^55(\d{2})(\d+)(\d{4})$/, "($1) $2-$3"));
+        a.href = "https://wa.me/" + zap; a.target = "_blank"; a.rel = "noopener";
+        m.appendChild(a);
+      }
+      var partes = [r.email, r.teste_origem ? "veio de: " + r.teste_origem : ""].filter(Boolean).join("  ·  ");
+      if (partes) m.appendChild(document.createTextNode((zap ? "  ·  " : "") + partes));
+      c.appendChild(m);
+
+      var linha = [];
+      if (r.teste_criado_em) { var d = new Date(r.teste_criado_em); linha.push("Cadastro em " + d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })); }
+      if (r._s === "comprou") linha.push("comprou em " + new Date(r.teste_convertido_em).toLocaleDateString("pt-BR"));
+      else if (r.expires_at) {
+        var falta = Math.ceil((new Date(r.expires_at).getTime() - agora) / 864e5);
+        linha.push(falta > 1 ? "faltam " + falta + " dias" : falta === 1 ? "termina em menos de 1 dia" : "terminou em " + new Date(r.expires_at).toLocaleDateString("pt-BR"));
+      }
+      if (r.ultima_ativacao_em && r._s !== "comprou") linha.push("último uso em " + new Date(r.ultima_ativacao_em).toLocaleDateString("pt-BR"));
+      c.appendChild(el("div", "meta", linha.join("  ·  ")));
+      ps.appendChild(c);
+    });
+  }
+
+  document.getElementById("entrar").addEventListener("click", function () {
+    var v = document.getElementById("chave").value.trim(); if (!v) return; gravar(v); carregar();
+  });
+  document.getElementById("chave").addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("entrar").click(); });
+  document.getElementById("atualizar").addEventListener("click", function () { carregar(); });
+  document.getElementById("sair").addEventListener("click", function () { gravar(""); dados = []; entrada(); });
+  carregar();
+  relogio = setInterval(function () { if (!document.hidden && ler() && !document.getElementById("painel").hidden) carregar(true); }, 60000);
+})();
+</script>
+</html>
