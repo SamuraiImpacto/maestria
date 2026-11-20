@@ -93,7 +93,8 @@
     <p class="erro" id="erro" hidden></p>
     <div class="numeros" id="numeros"></div>
     <section><div class="grade">
-      <div class="bloco"><h2>De onde vieram</h2><div id="origens"></div></div>
+      <div class="bloco"><h2>Quem abriu a página (30 dias)</h2><div id="visitas"></div></div>
+      <div class="bloco"><h2>De onde vieram os cadastros</h2><div id="origens"></div></div>
       <div class="bloco"><h2>O caminho até a compra</h2><div id="funil"></div></div>
     </div></section>
     <section>
@@ -113,7 +114,7 @@
   var SITUACOES = {
     comprou: "Comprou", usando: "Instalou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
   };
-  var dados = [], filtro = "todos", relogio = null;
+  var dados = [], visitas = {}, filtro = "todos", relogio = null;
 
   function ler() { try { return localStorage.getItem(GUARDA) || localStorage.getItem(GUARDA_LISTA) || ""; } catch (e) { return ""; } }
   function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
@@ -152,6 +153,7 @@
         if (!res.j.ok) { e.hidden = false; e.textContent = res.j.erro || "Não consegui ler agora."; return; }
         e.hidden = true;
         dados = (res.j.testes || []).map(function (r) { r._s = situacao(r); return r; });
+        visitas = res.j.visitas || {};
         document.getElementById("quando-li").textContent = "Lido às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) + ". Atualiza sozinho a cada minuto.";
         desenhar(!silencioso);
       })
@@ -182,15 +184,29 @@
     var instalaram = dados.filter(function (r) { return r.primeira_ativacao_em; }).length;
     var compraram = conta("comprou");
 
+    var abriram = 0, comecaram = 0;
+    Object.keys(visitas).forEach(function (k) { abriram += visitas[k].visita || 0; comecaram += visitas[k].formulario || 0; });
+    var cx = document.getElementById("visitas"); cx.innerHTML = "";
+    if (!abriram) cx.appendChild(el("p", "vazio", "Ninguém abriu a página ainda (a contagem começou em 20/11)."));
+    Object.keys(visitas).sort(function (a, b) { return (visitas[b].visita || 0) - (visitas[a].visita || 0); }).forEach(function (k) {
+      var v = visitas[k], cad = dados.filter(function (r) { return (r.teste_origem || "site") === k; }).length;
+      var pct = abriram ? Math.round((v.visita || 0) * 100 / abriram) : 0;
+      var bar = el("div", "barra");
+      bar.appendChild(el("span", null, k));
+      bar.appendChild(el("span", "q", (v.visita || 0) + " abriram · " + (v.formulario || 0) + " começaram · " + cad + " cadastraram"));
+      var tr = el("span", "t"); var i = el("i"); i.style.width = pct + "%"; tr.appendChild(i); bar.appendChild(tr);
+      cx.appendChild(bar);
+    });
+
     var nums = document.getElementById("numeros"); nums.innerHTML = "";
-    [[n, "cadastros"], [dia, "nas últimas 24 horas"], [instalaram, "instalaram"], [conta("parado"), "ainda não instalaram"], [conta("fim"), "terminaram sem comprar"], [compraram, "compraram", true]].forEach(function (x) {
+    [[abriram, "abriram a página"], [comecaram, "começaram a preencher"], [n, "cadastros"], [dia, "nas últimas 24 horas"], [instalaram, "instalaram"], [conta("parado"), "ainda não instalaram"], [conta("fim"), "terminaram sem comprar"], [compraram, "compraram", true]].forEach(function (x) {
       var d = el("div", "num" + (x[2] ? " destaque" : "")); d.appendChild(el("b", null, x[0])); d.appendChild(el("span", null, x[1])); nums.appendChild(d);
     });
 
     var porOrigem = {};
     dados.forEach(function (r) { var o = r.teste_origem || "sem origem"; porOrigem[o] = (porOrigem[o] || 0) + 1; });
     barras(document.getElementById("origens"), Object.keys(porOrigem).map(function (k) { return [k, porOrigem[k]]; }).sort(function (a, b) { return b[1] - a[1]; }), n);
-    barras(document.getElementById("funil"), n ? [["Cadastraram", n], ["Instalaram", instalaram], ["Compraram", compraram]] : [], n);
+    barras(document.getElementById("funil"), (n || abriram) ? [["Abriram a página", abriram], ["Começaram a preencher", comecaram], ["Cadastraram", n], ["Instalaram", instalaram], ["Compraram", compraram]] : [], Math.max(abriram, n));
 
     var fs = document.getElementById("filtros"); fs.innerHTML = "";
     [["todos", "Todos (" + n + ")"]].concat(Object.keys(SITUACOES).map(function (k) { return [k, SITUACOES[k] + " (" + conta(k) + ")"]; })).forEach(function (f) {

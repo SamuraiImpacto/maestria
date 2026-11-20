@@ -13,6 +13,8 @@ const $ = (id) => document.getElementById(id);
 
 // ---------- utilitários ----------
 function mascaraCpf(valor) {
+  // Teste grátis: a segunda chave é o e-mail do cadastro, que passa sem máscara.
+  if (/[a-zA-Z@]/.test(valor)) return valor.trim().slice(0, 160);
   // Aceita CPF (11 dígitos) e CNPJ (14 dígitos, compra pela empresa)
   const d = valor.replace(/\D/g, "").slice(0, 14);
   if (d.length > 11) {
@@ -126,7 +128,8 @@ $("inp-cpf").addEventListener("input", (e) => {
 $("form-login").addEventListener("submit", async (e) => {
   e.preventDefault();
   const token = $("inp-token").value.trim();
-  const cpf = $("inp-cpf").value.replace(/\D/g, "");
+  const bruto = $("inp-cpf").value.trim();
+  const cpf = bruto.includes("@") ? bruto.toLowerCase() : bruto.replace(/\D/g, "");
   const erroEl = $("login-erro");
   // Erro mais comum: colar o email no lugar do código
   if (token.includes("@")) {
@@ -1127,10 +1130,11 @@ function listaBonita(nomes) {
 (async function init() {
   // Link direto do e-mail: /membros/#entrar=<código>~<CPF>. O que vem depois do # não vai a servidor
   // nenhum; guardamos o acesso nesta aba e limpamos o endereço para ele não ficar exposto.
-  const direto = (location.hash || "").match(/^#entrar=([^~&]+)~(\d{11,14})$/);
+  // No teste grátis a segunda parte é o e-mail do cadastro, e não o CPF.
+  const direto = (location.hash || "").match(/^#entrar=([^~&]+)~(\d{11,14}|[^~&\s]+(?:@|%40)[^~&\s]+)$/);
   if (direto) {
     try {
-      salvarCredenciais(decodeURIComponent(direto[1]), direto[2]);
+      salvarCredenciais(decodeURIComponent(direto[1]), decodeURIComponent(direto[2]).toLowerCase());
       history.replaceState(null, "", location.pathname);
     } catch (e) {}
   }
