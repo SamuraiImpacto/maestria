@@ -424,12 +424,11 @@ TESTE = f'''<section id="teste">
       <div class="teste-form reveal" id="cartao">
         <div id="tela-form">
           <h3>Liberar meu teste de 7 dias</h3>
-          <p class="sub">Leva um minuto. O acesso chega na hora.</p>
+          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora.</p>
           <form id="f" novalidate>
             <div class="tf-campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
             <div class="tf-campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
             <div class="tf-campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
-            <div class="tf-campo"><label for="cpf">CPF<span class="dica">É a chave da sua área de membros, e garante um teste por pessoa.</span></label><input type="text" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" required></div>
             <div class="tf-isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
             <p class="tf-erro tf-oculto" id="erro" role="alert"></p>
             <button type="submit" class="btn btn-red btn-lg" id="enviar"><span class="tf-gira"></span><span id="enviar-txt">Quero testar por 7 dias</span></button>
@@ -522,11 +521,25 @@ SCRIPT_FORM = r'''<script>
   var origem = "site";
   try { origem = (new URLSearchParams(location.search).get("o") || "site").slice(0, 60); } catch (e) {}
 
-  var cpf = document.getElementById("cpf");
-  cpf.addEventListener("input", function () {
-    var d = cpf.value.replace(/\D/g, "").slice(0, 11);
-    cpf.value = d.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
-  });
+  // Contador: avisa que a página foi aberta e, depois, que a pessoa começou a preencher.
+  // Não manda nome nem e-mail: só a origem e um código sorteado neste navegador.
+  var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var visitante = "";
+  try {
+    visitante = localStorage.getItem("maestria-teste-visitante") || "";
+    if (!visitante) { visitante = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10); localStorage.setItem("maestria-teste-visitante", visitante); }
+  } catch (e) {}
+  function contar(evento) {
+    if (local) return;
+    try {
+      fetch(EDGE, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ acao: "visita", evento: evento, origem: origem, visitante: visitante }) }).catch(function () {});
+    } catch (e) {}
+  }
+  contar("visita");
+  var comecou = false;
+  f.addEventListener("input", function () { if (!comecou) { comecou = true; contar("formulario"); } });
+
   var zap = document.getElementById("whatsapp");
   zap.addEventListener("input", function () {
     var d = zap.value.replace(/\D/g, "").slice(0, 11);
@@ -544,13 +557,12 @@ SCRIPT_FORM = r'''<script>
     var dados = {
       nome: document.getElementById("nome").value.trim(),
       email: document.getElementById("email").value.trim(),
-      whatsapp: zap.value, cpf: cpf.value,
+      whatsapp: zap.value,
       site: document.getElementById("site").value, origem: origem
     };
     if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
     if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
-    if (cpf.value.replace(/\D/g, "").length !== 11) return mostrarErro("Confira o CPF: são 11 números.");
     carregando(true);
     fetch(EDGE, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
       .then(function (r) { return r.json(); })
@@ -561,7 +573,7 @@ SCRIPT_FORM = r'''<script>
         // Cadastro feito: avisa o pixel, para a campanha otimizar por quem libera o teste.
         try { if (window.fbq && j.token) fbq("track", "Lead", { content_name: "Teste 7 dias MaestrIA", content_category: origem }); } catch (e) {}
         // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
-        if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.cpf })); } catch (e) {} }
+        if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.contato || dados.email })); } catch (e) {} }
         var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
         document.getElementById("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
         var texto = document.getElementById("ok-texto");
