@@ -284,10 +284,10 @@ DEPOIMENTOS = f'''<section id="quem-usa" style="padding-top:0">
     <h2 class="sec reveal">Feita e testada por previdenciaristas. <span class="red">Mais de 30 escritórios</span> na fase piloto.</h2>
     <p class="lead reveal">Antes de abrir este teste, a MaestrIA rodou em escritório de verdade, com caso de verdade. As falas abaixo são de advogados que usam, ditas na aula ao vivo de 11 de novembro de 2026.</p>
     <div class="deps reveal">
-{dep('Teve uma cliente que chegou num dia de manhã. No outro dia, a gente já tinha mandado o protocolo para ela. <b>Literalmente em 24 horas.</b> Isso jamais na história da humanidade iria acontecer manualmente.', 'Jean', 'Advogado previdenciarista')}
-{dep('Antes ficava ali 30 dias esperando para sair a inicial. Agora, se está tudo na mão, <b>sai no dia, com certeza.</b> Eu consigo fazer muito mais sem contratar ninguém.', 'Cleice', 'Advogada previdenciarista, auxílio-acidente')}
-{dep('Se tem uma coisa que eu não gosto é gravar vídeo. Abri a câmera, falei o que tinha que falar e coloquei na MaestrIA. Ela tirou a gagueira, tirou tudo. <b>Não parecia eu, parecia uma jornalista falando.</b>', 'Érika', 'Advogada de família, usa a parte de Marketing')}
-{dep('A MaestrIA me ajudou muito. <b>Em questão de horas</b> está pronta toda a documentação, as petições. Eu não tinha habilidade com tecnologia. Agora estou aprendendo e usando, pelo bem do escritório.', 'Joel', 'Advogado, atua sozinho')}
+{dep('Teve uma cliente que chegou num dia de manhã. No outro dia, a gente já tinha mandado o protocolo para ela. <b>Literalmente em 24 horas.</b> Isso jamais na história da humanidade iria acontecer manualmente.', 'Jean Piaça', 'Advogado previdenciarista')}
+{dep('Antes ficava ali 30 dias esperando para sair a inicial. Agora, se está tudo na mão, <b>sai no dia, com certeza.</b> Eu consigo fazer muito mais sem contratar ninguém.', 'Cleice Wiedthauger', 'Advogada previdenciarista, auxílio-acidente')}
+{dep('Se tem uma coisa que eu não gosto é gravar vídeo. Abri a câmera, falei o que tinha que falar e coloquei na MaestrIA. Ela tirou a gagueira, tirou tudo. <b>Não parecia eu, parecia uma jornalista falando.</b>', 'Érika Neves', 'Advogada de família, usa a parte de Marketing')}
+{dep('A MaestrIA me ajudou muito. <b>Em questão de horas</b> está pronta toda a documentação, as petições. Eu não tinha habilidade com tecnologia. Agora estou aprendendo e usando, pelo bem do escritório.', 'Joel Sidney de Christo Machado', 'Advogado, atua sozinho')}
     </div>
     <p class="seg-nota reveal">São relatos da experiência de cada escritório, e não promessa de resultado. Cada caso depende dos documentos e da revisão do advogado.</p>
   </div>
