@@ -1120,6 +1120,15 @@ function listaBonita(nomes) {
 
 // ---------- sessão persistida ----------
 (async function init() {
+  // Link direto do e-mail: /membros/#entrar=<código>~<CPF>. O que vem depois do # não vai a servidor
+  // nenhum; guardamos o acesso nesta aba e limpamos o endereço para ele não ficar exposto.
+  const direto = (location.hash || "").match(/^#entrar=([^~&]+)~(\d{11,14})$/);
+  if (direto) {
+    try {
+      salvarCredenciais(decodeURIComponent(direto[1]), direto[2]);
+      history.replaceState(null, "", location.pathname);
+    } catch (e) {}
+  }
   const cred = credenciais();
   if (cred && cred.token) {
     await entrar(cred.token, cred.cpf, false);
