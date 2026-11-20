@@ -559,6 +559,59 @@
   .pacotes-pe a{color:var(--red-ink);font-weight:600}
   @media(max-width:820px){.pacotes-3{grid-template-columns:1fr}}
 
+  /* PACOTES: as oito áreas, o Marketing e o teste */
+  .pacotes-sub{text-align:center;color:var(--muted);font-size:15.5px;max-width:60ch;margin:10px auto 0}
+  .pacotes-8{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1100px;margin:28px auto 0}
+  .pacotes-8 .pk{padding:22px 20px}
+  .pacotes-8 .pk-preco{font-size:34px}
+  .pacotes-8 .pk-desc{font-size:13.5px}
+  .pacotes-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1100px;margin:14px auto 0}
+  .pk.larga{flex-direction:row;align-items:center;gap:22px;flex-wrap:wrap}
+  .pk.larga .pk-corpo{flex:1;min-width:230px;display:flex;flex-direction:column}
+  .pk.larga .pk-desc{margin-top:8px;flex:none}
+  .pk.larga .pk-btn{margin-top:0;white-space:nowrap;padding:13px 22px}
+  .pk.gratis{border-color:rgba(70,209,127,.4);background:linear-gradient(120deg,rgba(70,209,127,.1),transparent 70%)}
+  .pk.gratis .pk-tag{color:var(--green)}
+  .pk.gratis .pk-btn{background:var(--green);border-color:var(--green);color:#04130a}
+  .pk.gratis:hover{border-color:var(--green)}
+  .pk.gratis:hover .pk-btn{background:var(--green);border-color:var(--green)}
+  @media(max-width:1000px){.pacotes-8{grid-template-columns:1fr 1fr}}
+  @media(max-width:820px){.pacotes-2{grid-template-columns:1fr}}
+  @media(max-width:520px){.pacotes-8{grid-template-columns:1fr}}
+
+  /* COMPARAÇÃO COM AS FERRAMENTAS DO MERCADO */
+  .mk{margin:40px auto 0;max-width:1080px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel);text-align:left}
+  .mk-head,.mk-row{display:grid;grid-template-columns:1fr 1.5fr 1.6fr}
+  .mk-head div{padding:15px 20px;font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);background:var(--panel-2)}
+  .mk-head div:last-child{color:var(--red-ink)}
+  .mk-row{border-top:1px solid var(--line)}
+  .mk-row>div{padding:17px 20px;font-size:15px;line-height:1.55}
+  .mk-row .tema{font-weight:700;color:#fff}
+  .mk-row .fora{color:var(--muted)}
+  .mk-row .fora b{color:#fff;font-weight:700;white-space:nowrap}
+  .mk-row .aqui{background:linear-gradient(90deg,rgba(239,39,39,.08),transparent 85%);color:#e6e6ea}
+  .mk-row .aqui b{color:var(--red-ink)}
+  .mk-row .rot{display:none}
+  .mk-soma{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1080px;margin:14px auto 0;text-align:left}
+  .mk-soma>div{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--panel)}
+  .mk-soma .rot{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2)}
+  .mk-soma .v{font-family:var(--serif);font-weight:900;font-size:clamp(28px,4vw,40px);line-height:1.1;margin-top:8px;color:var(--muted)}
+  .mk-soma p{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.55}
+  .mk-soma .nossa{border-color:rgba(239,39,39,.45);background:linear-gradient(180deg,var(--red-soft,rgba(239,39,39,.1)),transparent)}
+  .mk-soma .nossa .rot{color:var(--red-ink)}
+  .mk-soma .nossa .v{color:#fff}
+  .mk-nota{margin:18px auto 0;max-width:72ch;color:var(--muted-2);font-size:13.5px;line-height:1.6;text-align:center}
+  @media(max-width:820px){
+    .mk-head{display:none}
+    .mk-row{grid-template-columns:1fr}
+    .mk-row>div{padding:6px 18px}
+    .mk-row .tema{padding-top:18px;font-size:16.5px}
+    .mk-row .aqui{padding-bottom:18px;background:none}
+    .mk-row .rot{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+    .mk-row .aqui .rot{color:var(--red-ink)}
+    .mk-soma{grid-template-columns:1fr}
+  }
+
   /* ROADMAP */
   .road{margin:40px auto 0;max-width:760px}
   .road-item{display:flex;align-items:center;gap:16px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--panel);flex-wrap:wrap}
@@ -1388,6 +1441,29 @@
 
 
 
+<section id="mercado" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0Z"/><path d="m19 7-3 7a4 4 0 0 0 6 0Z"/></svg><span>MaestrIA x o que tem no mercado</span></span>
+    <h2 class="sec reveal">Quantas assinaturas o seu escritório paga pra fazer <span class="red">o que cabe numa só</span>?</h2>
+    <p class="lead reveal">No mercado, cada pedaço do trabalho é uma ferramenta diferente, quase sempre com mensalidade. Veja lado a lado.</p>
+    <div class="mk reveal" role="table" aria-label="Comparação entre as ferramentas do mercado e a MaestrIA">
+      <div class="mk-head" role="row"><div role="columnheader">Você precisa de</div><div role="columnheader">No mercado</div><div role="columnheader">Na MaestrIA</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">O cálculo do caso</div><div class="fora" role="cell"><span class="rot">No mercado</span>Calculadora jurídica por assinatura: cerca de <b>R$ 240 por mês</b>. Entrega o número, e a peça continua sendo sua.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>O cálculo sai com a <b>memória aberta</b> e já entra na petição, com a lei aplicada.</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">Jurimetria</div><div class="fora" role="cell"><span class="rot">No mercado</span>Plataforma de jurimetria: cerca de <b>R$ 300 por mês</b>.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>Procedência por vara e tempo até a sentença, com o <b>dado oficial do CNJ</b>, sem custo extra.</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">A petição</div><div class="fora" role="cell"><span class="rot">No mercado</span>IA de conversa: texto genérico, que você copia e formata. E o risco de citar julgado que não existe.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>Lê os documentos do caso, escreve <b>no seu timbrado</b> e confere cada citação na fonte oficial.</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">Sistema do escritório</div><div class="fora" role="cell"><span class="rot">No mercado</span>Sistema jurídico online: <b>mensalidade por usuário</b>, com os casos guardados no servidor da empresa.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>Licença do escritório por 12 meses, em até 3 computadores. Os arquivos ficam <b>no seu computador</b>.</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">Conteúdo no Instagram</div><div class="fora" role="cell"><span class="rot">No mercado</span>Social media terceirizado: <b>R$ 800 a R$ 2.500 por mês</b>.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>Carrossel, reel e artigo <b>com a sua voz</b>, de olho no Provimento 205.</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">Site do escritório</div><div class="fora" role="cell"><span class="rot">No mercado</span>Web designer: <b>R$ 3 a 8 mil</b>, e você depende dele para mexer.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>Site com blog, <b>no seu domínio</b>, com hospedagem gratuita.</div></div>
+      <div class="mk-row" role="row"><div class="tema" role="cell">Aprender a usar IA</div><div class="fora" role="cell"><span class="rot">No mercado</span>Curso ou mentoria: <b>R$ 2 a 4 mil</b> e semanas para você montar a sua própria ferramenta.</div><div class="aqui" role="cell"><span class="rot">Na MaestrIA</span>Ferramenta pronta: instala em <b>30 minutos</b> e você pede em português.</div></div>
+    </div>
+    <div class="mk-soma reveal">
+      <div><span class="rot">Separado, em um ano</span><div class="v">R$ 19 a 44 mil</div><p>Calculadora, jurimetria, social media e site. Sem contar o curso, o sistema do escritório e as suas horas.</p></div>
+      <div class="nossa"><span class="rot">MaestrIA, em um ano</span><div class="v">R$ 697 a R$ 1.997</div><p>De uma área só até todas as áreas com o Marketing. Sem mensalidade por usuário.</p></div>
+    </div>
+    <p class="mk-nota reveal">Os valores de mercado são referências médias e variam por cidade e por fornecedor. Fora da MaestrIA, o único custo é a assinatura do Claude, que você paga direto à Anthropic.</p>
+  </div>
+</section>
+
 <section id="planos" style="padding-top:20px">
   <div class="wrap">
     <div class="price-head reveal">
@@ -1497,34 +1573,86 @@
       </div>
     </div>
 
-    <h3 class="pacotes-titulo">Ou comece por uma área só</h3>
-    <div class="pacotes-3">
+    <h3 class="pacotes-titulo">Ou comece só pela sua área</h3>
+    <p class="pacotes-sub">Oito áreas no ar. Cada pacote leva junto o gerador de petições no seu timbrado, a busca de jurisprudência conferida e o preparador de audiência.</p>
+    <div class="pacotes-8">
       <a class="pk" href="https://pay.kiwify.com.br/q5QEizf" data-pacote="prev">
         <span class="pk-tag">Previdenciário</span>
         <span class="pk-preco"><small>R$</small>697</span>
         <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
-        <span class="pk-desc">RMI e atrasados, planejamento, auditor de CNIS, perícia completa e recurso administrativo. Mais jurimetria e as 3 universais.</span>
+        <span class="pk-desc">Renda inicial e atrasados, planejamento, auditor de CNIS, perícia completa e recurso administrativo.</span>
         <span class="pk-btn">Quero o Previdenciário</span>
       </a>
       <a class="pk" href="https://pay.kiwify.com.br/zRpxcta" data-pacote="trab">
         <span class="pk-tag">Trabalhista</span>
         <span class="pk-preco"><small>R$</small>697</span>
         <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
-        <span class="pk-desc">Rescisão, hora extra pela ADC 58, insalubridade, FGTS, contestação e acordo do 484-A. Mais jurimetria e as 3 universais.</span>
+        <span class="pk-desc">Rescisão, hora extra, insalubridade, FGTS, contestação e minuta de acordo.</span>
         <span class="pk-btn">Quero o Trabalhista</span>
       </a>
-      <a class="pk" href="https://pay.kiwify.com.br/Ln4ErJJ" data-pacote="marketing">
-        <span class="pk-tag">Marketing Jurídico</span>
-        <span class="pk-preco"><small>R$</small>297</span>
+      <a class="pk" href="/familia/#pacotes" data-pacote="familia">
+        <span class="pk-tag">Família</span>
+        <span class="pk-preco"><small>R$</small>697</span>
         <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
-        <span class="pk-desc">Site com SEO e blog, Google Meu Negócio, landing com Pixel, conteúdo na sua voz e arte no seu Canva. Todo CTA no Provimento 205.</span>
-        <span class="pk-btn">Quero o Marketing</span>
+        <span class="pk-desc">Débito alimentar mês a mês, prisão ou penhora, partilha, alimentos e divórcio consensual.</span>
+        <span class="pk-btn">Ver o pacote</span>
+      </a>
+      <a class="pk" href="/consumidor/#pacotes" data-pacote="consumidor">
+        <span class="pk-tag">Consumidor</span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
+        <span class="pk-desc">Triagem com o prazo na frente, devolução em dobro item a item e a peça do Juizado.</span>
+        <span class="pk-btn">Ver o pacote</span>
+      </a>
+      <a class="pk" href="/bancario/#pacotes" data-pacote="bancario">
+        <span class="pk-tag">Bancário</span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
+        <span class="pk-desc">Revisional com a taxa média do Banco Central, consignado, RMC e superendividamento.</span>
+        <span class="pk-btn">Ver o pacote</span>
+      </a>
+      <a class="pk" href="/criminal/#pacotes" data-pacote="criminal">
+        <span class="pk-tag">Criminal</span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
+        <span class="pk-desc">Defesa no flagrante, habeas corpus, execução penal, prescrição e dosimetria.</span>
+        <span class="pk-btn">Ver o pacote</span>
+      </a>
+      <a class="pk" href="/imobiliario/#pacotes" data-pacote="imobiliario">
+        <span class="pk-tag">Imobiliário</span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
+        <span class="pk-desc">Despejo com o demonstrativo, distrato pela lei, atraso de obra e cotas condominiais.</span>
+        <span class="pk-btn">Ver o pacote</span>
+      </a>
+      <a class="pk" href="/empresarial/#pacotes" data-pacote="empresarial">
+        <span class="pk-tag">Empresarial</span>
+        <span class="pk-preco"><small>R$</small>697</span>
+        <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
+        <span class="pk-desc">Defesa de auto de infração, execução fiscal, exclusão do Simples e provisão do passivo.</span>
+        <span class="pk-btn">Ver o pacote</span>
       </a>
     </div>
-    <p class="pacotes-pe" style="font-size:15px;color:var(--txt)">Atua em outra área? Também estão no ar:
-      <a href="/familia/">Família</a> · <a href="/consumidor/">Consumidor</a> · <a href="/bancario/">Bancário</a> ·
-      <a href="/criminal/">Criminal</a> · <a href="/imobiliario/">Imobiliário</a> · <a href="/empresarial/">Empresarial</a>.
-      Ou <a href="/teste/area/?o=home">teste 7 dias grátis na sua área</a>, com o Marketing junto.</p>
+    <div class="pacotes-2">
+      <a class="pk larga" href="https://pay.kiwify.com.br/Ln4ErJJ" data-pacote="marketing">
+        <span class="pk-corpo">
+          <span class="pk-tag">Marketing Jurídico</span>
+          <span class="pk-preco"><small>R$</small>297</span>
+          <span class="pk-nota">de R$ 997, com 12 meses de acesso</span>
+          <span class="pk-desc">Site com blog, Google Meu Negócio, página de campanha, conteúdo na sua voz e arte no seu Canva. Tudo de olho no Provimento 205.</span>
+        </span>
+        <span class="pk-btn">Quero o Marketing</span>
+      </a>
+      <a class="pk larga gratis" href="/teste/area/?o=home" data-pacote="teste">
+        <span class="pk-corpo">
+          <span class="pk-tag">Ainda na dúvida?</span>
+          <span class="pk-preco"><small>R$</small>0</span>
+          <span class="pk-nota">7 dias, sem cartão e sem cobrança no fim</span>
+          <span class="pk-desc">Teste a sua área com o Marketing junto, num caso seu. Só paga se quiser continuar.</span>
+        </span>
+        <span class="pk-btn">Testar 7 dias grátis</span>
+      </a>
+    </div>
     <p class="pacotes-pe">Todo pacote dá <b>12 meses de acesso</b> com todas as atualizações do período, as 3 skills universais, licença em 3 computadores e garantia de 7 dias. Depois do primeiro ano, a <b>renovação custa metade do que você pagou</b>: R$ 348,50 para quem entrou numa área por R$ 697 e R$ 148,50 para quem entrou no Marketing por R$ 297. Já comprou uma área? Você paga só a diferença: <a href="suporte.html#mensagem">fale com a gente</a>.</p>
     <div class="vitrines reveal">
       <span class="vem-h">Antes de decidir, veja o que sai da máquina.</span>
