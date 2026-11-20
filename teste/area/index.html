@@ -11,172 +11,409 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#000; --card:#0b0b0b; --card2:#141414; --txt:#fff; --muted:#bdbdbd; --dim:#8a8a8a;
+:root { --bg:#000; --card:#0b0b0b; --card2:#131313; --txt:#fff; --muted:#bdbdbd; --dim:#8a8a8a;
   --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.08); --redbd:rgba(239,39,39,.32);
   --cta:#14a44d; --cta2:#1cc25c; --ok:#4ade80; --okbg:rgba(74,222,128,.08); --okbd:rgba(74,222,128,.4);
   --bd:#1f1f1f; --bd2:#2c2c2c; --r:16px; --rs:10px; }
 * { box-sizing:border-box; margin:0; padding:0; }
 [hidden] { display:none !important; }
 html { scroll-behavior:smooth; }
-body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
-main { max-width:820px; margin:0 auto; padding:40px 16px 96px; display:flex; flex-direction:column; gap:56px; }
-section { display:flex; flex-direction:column; gap:18px; }
-.selo { align-self:flex-start; font-size:12.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--ok); background:var(--okbg); border:1px solid var(--okbd); border-radius:999px; padding:6px 14px; }
-h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(34px,6.4vw,56px); line-height:1.08; text-wrap:balance; letter-spacing:-.01em; }
+body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+.wrap { width:100%; max-width:1040px; margin:0 auto; padding:0 16px; }
+.estreito { max-width:760px; }
+section { padding:44px 0; }
+h1, h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); text-wrap:balance; letter-spacing:-.01em; }
+h1 { font-size:clamp(36px,6.6vw,64px); line-height:1.05; }
+h2 { font-size:clamp(27px,4.4vw,40px); line-height:1.12; }
 h1 em, h2 em { font-style:italic; color:var(--red2); }
-h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(24px,4.2vw,34px); line-height:1.15; text-wrap:balance; }
 h3 { color:var(--txt); font-size:17px; font-weight:800; line-height:1.3; }
-.sub { font-size:19px; max-width:60ch; }
-p b { color:var(--txt); }
-.olho { font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); }
+p b, li b { color:var(--txt); }
+.olho { display:block; font-size:12.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--red2); margin-bottom:12px; }
+.lead { font-size:19px; max-width:62ch; margin-top:14px; }
 .nota { font-size:14px; color:var(--dim); }
 .nota a { color:var(--txt); }
-a:focus-visible, button:focus-visible, input:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
 
-.areas { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; border:0; }
-.areas legend { padding:0; margin-bottom:12px; color:var(--txt); font-weight:800; font-size:18px; }
+/* topo */
+.topo { padding:18px 0 0; }
+.topo .wrap { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+.logo .sym { height:30px; width:auto; }
+.logo .word { height:17px; width:auto; }
+.topo-selo { font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--ok); background:var(--okbg); border:1px solid var(--okbd); border-radius:999px; padding:6px 13px; white-space:nowrap; }
+
+@media (max-width:479px) { .so-largo { display:none; } }
+
+/* abertura */
+.hero { position:relative; padding:44px 0 26px; }
+.hero::before { content:""; position:absolute; inset:-140px 0 auto 0; height:560px; background:radial-gradient(60% 60% at 50% 0%, rgba(239,39,39,.24), transparent 70%); pointer-events:none; }
+.hero .wrap { position:relative; display:flex; flex-direction:column; gap:20px; }
+.hero .lead { margin-top:0; }
+.fatos { display:flex; flex-wrap:wrap; gap:8px 20px; list-style:none; font-size:15px; color:var(--txt); font-weight:600; }
+.fatos li { display:flex; align-items:center; gap:8px; }
+.fatos li::before { content:"✓"; color:var(--ok); font-weight:900; }
+
+/* escolha da área + demonstração */
+.palco { padding-top:10px; }
+.palco-grade { display:grid; gap:22px; align-items:start; }
+.areas { border:0; display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+.areas legend { padding:0; margin-bottom:12px; color:var(--txt); font-weight:800; font-size:19px; }
 .area { position:relative; }
 .area input { position:absolute; opacity:0; inset:0; width:100%; height:100%; cursor:pointer; }
-.area span { display:flex; align-items:center; justify-content:center; text-align:center; min-height:54px; padding:10px 12px; border-radius:var(--rs); background:var(--card); border:1px solid var(--bd2); color:var(--txt); font-weight:700; font-size:16px; transition:border-color .15s, background .15s, transform .15s; }
-.area input:hover + span { border-color:var(--dim); }
+.area span { display:flex; align-items:center; justify-content:center; text-align:center; min-height:52px; padding:10px 12px; border-radius:var(--rs); background:var(--card); border:1px solid var(--bd2); color:var(--txt); font-weight:700; font-size:16px; transition:border-color .15s, background .15s, transform .15s; }
+.area input:hover + span { border-color:var(--dim); transform:translateY(-1px); }
 .area input:checked + span { background:var(--okbg); border-color:var(--ok); color:var(--ok); }
 .area input:focus-visible + span { outline:3px solid var(--ok); outline-offset:3px; }
+.cena { margin-top:18px; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(20px,2.6vw,25px); line-height:1.3; text-wrap:balance; min-height:3.9em; }
+.cena small { display:block; font-family:'Inter',sans-serif; font-style:normal; font-size:12.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
 
-.painel { background:var(--card); border:1px solid var(--bd2); border-radius:22px; padding:26px 22px; display:flex; flex-direction:column; gap:20px; }
-.recebe { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
-.recebe ul { list-style:none; display:flex; flex-direction:column; gap:8px; margin-top:10px; }
-.recebe li { position:relative; padding-left:24px; font-size:16px; line-height:1.45; }
-.recebe li::before { content:"✓"; position:absolute; left:0; color:var(--ok); font-weight:800; }
-.vazio { color:var(--dim); font-size:16px; border:1px dashed var(--bd2); border-radius:var(--rs); padding:18px; text-align:center; }
-.entra { animation:entra .35s ease both; }
-@keyframes entra { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.janela { background:linear-gradient(180deg,#101010,#070707); border:1px solid var(--bd2); border-radius:20px; overflow:hidden; box-shadow:0 30px 80px -30px rgba(239,39,39,.35), 0 0 0 1px rgba(255,255,255,.02) inset; }
+.barra { display:flex; align-items:center; gap:7px; padding:12px 16px; border-bottom:1px solid var(--bd); background:#0d0d0d; }
+.barra i { width:10px; height:10px; border-radius:50%; background:#2f2f2f; }
+.barra span { margin-left:8px; font-size:13px; color:var(--dim); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.conversa { padding:20px 18px 22px; display:flex; flex-direction:column; gap:18px; }
+.rot { display:block; font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-bottom:7px; }
+.pedido { align-self:flex-end; max-width:92%; }
+.pedido .rot { text-align:right; }
+.pedido p { background:#1c1c1c; border:1px solid var(--bd2); color:var(--txt); border-radius:16px 16px 4px 16px; padding:13px 16px; font-size:16.5px; line-height:1.45; }
+.entregas { list-style:none; display:grid; gap:9px; }
+.entregas li { display:flex; gap:12px; align-items:flex-start; background:var(--card2); border:1px solid var(--bd2); border-radius:12px; padding:12px 14px; }
+.entregas .ic { flex:none; width:34px; height:34px; border-radius:9px; background:var(--okbg); border:1px solid var(--okbd); color:var(--ok); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; }
+.entregas b { display:block; color:var(--txt); font-size:16px; line-height:1.3; }
+.entregas small { color:var(--dim); font-size:14px; line-height:1.4; display:block; margin-top:2px; }
+.entregas li.mkt .ic { background:var(--redbg); border-color:var(--redbd); color:var(--red2); }
+.sobe { animation:sobe .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes sobe { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
 
-form { display:flex; flex-direction:column; gap:14px; }
+/* cadastro */
+.cadastro { background:var(--card); border:1px solid var(--bd2); border-radius:22px; padding:26px 20px; display:flex; flex-direction:column; gap:16px; margin-top:26px; }
+.cadastro h2 { font-size:clamp(23px,3.4vw,30px); }
+form { display:grid; gap:12px; }
 .campo { display:flex; flex-direction:column; gap:6px; }
 .campo label { color:var(--txt); font-weight:700; font-size:15px; }
-.campo input { font:inherit; color:var(--txt); background:#000; border:1px solid var(--bd2); border-radius:var(--rs); padding:14px 14px; width:100%; }
+.campo input { font:inherit; color:var(--txt); background:#000; border:1px solid var(--bd2); border-radius:var(--rs); padding:14px; width:100%; }
 .campo input:focus { border-color:var(--ok); outline:none; }
 .isca { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-.botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:inherit; font-weight:800; font-size:18px; color:#fff; background:var(--cta); border:0; border-radius:var(--rs); padding:18px 28px; width:100%; cursor:pointer; text-decoration:none; transition:background .15s, transform .15s; }
+.botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:inherit; font-weight:800; font-size:18px; color:#fff; background:var(--cta); border:0; border-radius:var(--rs); padding:18px 26px; width:100%; cursor:pointer; text-decoration:none; text-align:center; transition:background .15s, transform .15s, box-shadow .15s; box-shadow:0 14px 34px -14px rgba(20,164,77,.8); }
 .botao:hover { background:var(--cta2); transform:translateY(-1px); }
 .botao[disabled] { opacity:.75; cursor:progress; transform:none; }
 .gira { width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,.35); border-top-color:#fff; display:none; animation:gira .8s linear infinite; }
 .botao.carregando .gira { display:inline-block; }
 @keyframes gira { to { transform:rotate(360deg); } }
 .erro { color:#ffb4b4; background:var(--redbg); border:1px solid var(--redbd); border-radius:var(--rs); padding:12px 14px; font-size:15px; }
-.pronto { align-items:flex-start; }
 .pronto .bola { width:54px; height:54px; border-radius:50%; background:var(--okbg); border:1px solid var(--okbd); color:var(--ok); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900; }
 
-.precisa { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-.precisa div { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:18px; display:flex; flex-direction:column; gap:6px; font-size:15.5px; }
-footer { border-top:1px solid var(--bd); padding-top:22px; font-size:13.5px; color:var(--dim); display:flex; flex-direction:column; gap:6px; }
-@media (min-width:701px) { main { padding-top:64px; gap:64px; } .painel { padding:34px 32px; } .hero, .hero .selo { align-items:center; align-self:center; text-align:center; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .entra, .gira { animation:none; } .botao, .area span { transition:none; } .botao:hover { transform:none; } }
+/* blocos de apoio */
+.cards { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin-top:26px; }
+.card { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:7px; font-size:15.5px; }
+.vs { margin-top:26px; display:grid; gap:12px; }
+.vs-linha { display:grid; gap:0; border:1px solid var(--bd2); border-radius:var(--r); overflow:hidden; background:var(--card); }
+.vs-linha > div { padding:16px 18px; font-size:15.5px; }
+.vs-tema { color:var(--txt); font-weight:800; background:#0f0f0f; }
+.vs-so { border-top:1px solid var(--bd); }
+.vs-com { border-top:1px solid var(--bd); background:var(--okbg); color:#d7f5e1; }
+.vs-linha .rot { margin-bottom:4px; }
+.vs-com .rot { color:var(--ok); }
+.faca { margin-top:26px; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(21px,3vw,28px); line-height:1.3; text-wrap:balance; border-left:3px solid var(--red); padding-left:18px; }
+.dias { margin-top:26px; display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); }
+.dia { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:6px; font-size:15.5px; }
+.dia .q { font-size:12.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red2); }
+.dia b { color:var(--txt); font-size:17px; }
+.dia.fim { border-color:var(--okbd); background:var(--okbg); }
+.dia.fim .q { color:var(--ok); }
+details { border-bottom:1px solid var(--bd); }
+details summary { cursor:pointer; list-style:none; padding:18px 34px 18px 0; color:var(--txt); font-weight:700; font-size:17px; position:relative; }
+details summary::-webkit-details-marker { display:none; }
+details summary::after { content:"+"; position:absolute; right:4px; top:14px; font-size:24px; font-weight:400; color:var(--dim); transition:transform .2s; }
+details[open] summary::after { transform:rotate(45deg); }
+details .ans { padding:0 0 18px; font-size:16px; max-width:66ch; }
+.final { text-align:center; padding:64px 0 40px; position:relative; }
+.final::before { content:""; position:absolute; inset:auto 0 0 0; height:360px; background:radial-gradient(55% 70% at 50% 100%, rgba(239,39,39,.2), transparent 70%); pointer-events:none; }
+.final .wrap { position:relative; display:flex; flex-direction:column; align-items:center; gap:18px; }
+.final .botao { width:auto; max-width:100%; }
+footer { border-top:1px solid var(--bd); padding:22px 0 110px; font-size:13.5px; color:var(--dim); }
+footer .wrap { display:flex; flex-direction:column; gap:6px; }
+
+/* botão fixo no celular */
+.fixo { position:fixed; left:0; right:0; bottom:0; z-index:20; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(0,0,0,.9); backdrop-filter:blur(10px); border-top:1px solid var(--bd2); transform:translateY(110%); transition:transform .25s; }
+.fixo.vis { transform:none; }
+.fixo .botao { padding:15px 18px; font-size:16.5px; }
+
+.revela { opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+.revela.dentro { opacity:1; transform:none; }
+
+@media (min-width:860px) {
+  section { padding:60px 0; }
+  .hero { padding:64px 0 30px; text-align:center; }
+  .hero .wrap { align-items:center; }
+  .fatos { justify-content:center; }
+  .palco-grade { grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:36px; }
+  .conversa { padding:24px 24px 26px; }
+  .cadastro { padding:34px 32px; }
+  form { grid-template-columns:repeat(3,1fr); }
+  form .largo { grid-column:1 / -1; }
+  .vs-linha { grid-template-columns:1fr 1.25fr 1.5fr; }
+  .vs-so, .vs-com { border-top:0; border-left:1px solid var(--bd); }
+  .fixo { display:none; }
+  footer { padding-bottom:40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .sobe, .gira { animation:none; }
+  .revela { opacity:1; transform:none; transition:none; }
+  .botao, .area span, .fixo, details summary::after { transition:none; }
+  .botao:hover, .area input:hover + span { transform:none; }
+}
 </style>
 </head>
 <body>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="MaestrIA"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"></a>
+    <span class="topo-selo">7 dias grátis<span class="so-largo"> · sem cartão</span></span>
+  </div>
+</header>
+
 <main>
   <section class="hero">
-    <span class="selo">Teste grátis · 7 dias · sem cartão</span>
-    <h1>7 dias da MaestrIA <em>na sua área</em>. Com o Marketing junto.</h1>
-    <p class="sub">Prompt resolve um pedaço de cada vez. A MaestrIA faz o caminho inteiro: você entrega o caso e ela devolve o trabalho montado, no seu computador, dentro do Claude. <b>Escolha a sua área e teste com um caso seu.</b></p>
+    <div class="wrap">
+      <h1>Você entrega a pasta do cliente. Ela devolve <em>o caso montado</em>.</h1>
+      <p class="lead">Quanto da sua semana vai embora antes de você começar a pensar na tese? Ler documento, fazer conta, formatar petição, lembrar de postar. A MaestrIA faz essa parte, no seu computador, dentro do Claude. <b>Teste 7 dias com um caso seu, na sua área, com o Marketing junto.</b></p>
+      <ul class="fatos">
+        <li>Sem cartão</li>
+        <li>Sem cobrança no fim</li>
+        <li>Os arquivos do cliente ficam com você</li>
+      </ul>
+    </div>
   </section>
 
-  <section class="painel" id="cadastro">
-    <div id="tela-form" style="display:flex;flex-direction:column;gap:22px">
-      <fieldset class="areas" id="areas">
-        <legend>1. Qual é a sua área?</legend>
-      </fieldset>
+  <section class="palco" id="cadastro">
+    <div class="wrap">
+      <div id="tela-form">
+        <div class="palco-grade">
+          <div>
+            <fieldset class="areas" id="areas">
+              <legend>Qual é a sua área?</legend>
+            </fieldset>
+            <p class="cena" id="cena" aria-live="polite"><small>Toque na sua área</small>E veja o que ela devolve quando você entrega um caso.</p>
+          </div>
+          <div class="janela" aria-live="polite">
+            <div class="barra"><i></i><i></i><i></i><span id="d-titulo">Claude, com a MaestrIA instalada</span></div>
+            <div class="conversa">
+              <div class="pedido"><span class="rot">Você escreve</span><p id="d-pedido">Leia a pasta do cliente e monte o caso.</p></div>
+              <div><span class="rot">Ela devolve, para você revisar</span><ul class="entregas" id="d-entregas"></ul></div>
+            </div>
+          </div>
+        </div>
 
-      <div id="recebe-caixa" aria-live="polite">
-        <p class="vazio" id="recebe-vazio">Toque na sua área para ver o que vem no teste.</p>
-        <div id="recebe" hidden></div>
+        <div class="cadastro">
+          <h2 id="f-titulo">Para onde eu mando o seu acesso?</h2>
+          <form id="f" novalidate>
+            <div class="campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
+            <div class="campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
+            <div class="campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
+            <div class="isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
+            <p class="erro largo" id="erro" role="alert" hidden></p>
+            <button type="submit" class="botao largo" id="enviar"><span class="gira"></span><span id="enviar-txt">Liberar meu teste de 7 dias</span></button>
+            <p class="nota largo">O acesso sai na hora. Sem cartão e sem cobrança no fim. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA.</p>
+          </form>
+        </div>
       </div>
 
-      <form id="f" novalidate>
-        <h3>2. Para onde eu mando o acesso?</h3>
-        <div class="campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
-        <div class="campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
-        <div class="campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
-        <div class="isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
-        <p class="erro" id="erro" role="alert" hidden></p>
-        <button type="submit" class="botao" id="enviar"><span class="gira"></span><span id="enviar-txt">Liberar meu teste de 7 dias</span></button>
-        <p class="nota">Sem cartão e sem cobrança no fim. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA.</p>
-      </form>
-    </div>
-
-    <div id="tela-ok" class="pronto" hidden style="display:flex;flex-direction:column;gap:16px">
-      <span class="bola" aria-hidden="true">✓</span>
-      <h2 id="ok-titulo">Teste liberado!</h2>
-      <p id="ok-texto"></p>
-      <a class="botao" id="ok-btn" href="/membros/">Instalar agora, passo a passo</a>
-      <p class="nota">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
+      <div id="tela-ok" class="cadastro pronto" hidden>
+        <span class="bola" aria-hidden="true">✓</span>
+        <h2 id="ok-titulo">Teste liberado!</h2>
+        <p id="ok-texto"></p>
+        <a class="botao" id="ok-btn" href="/membros/">Instalar agora, passo a passo</a>
+        <p class="nota">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
+      </div>
     </div>
   </section>
 
   <section>
-    <p class="olho">Antes de começar</p>
-    <h2>O que você precisa ter</h2>
-    <div class="precisa">
-      <div><h3>Um computador</h3>Windows ou Mac. A instalação é feita nele, e não no celular.</div>
-      <div><h3>O aplicativo Claude</h3>Com a assinatura paga dele, contratada direto em claude.ai. É a inteligência que roda a MaestrIA.</div>
-      <div><h3>Meia hora</h3>A instalação é guiada, com a imagem de cada tela. Travou, manda um print no grupo.</div>
+    <div class="wrap">
+      <span class="olho revela">Prompt x MaestrIA</span>
+      <h2 class="revela">O prompt te dá um texto. E o resto, <em>quem faz</em>?</h2>
+      <p class="lead revela">Prompt bom ajuda. Mas depois dele ainda é você que confere a jurisprudência, refaz a conta, cola no Word e arruma o timbrado. Veja a diferença, pedido por pedido.</p>
+      <div class="vs revela">
+        <div class="vs-linha"><div class="vs-tema">Citar jurisprudência</div><div class="vs-so"><span class="rot">Com um prompt</span>Pode vir número de processo que não existe, escrito com toda a segurança do mundo.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Cada decisão é conferida <b>na fonte oficial</b>. O que não se confirma fica fora da peça, e ela avisa.</div></div>
+        <div class="vs-linha"><div class="vs-tema">Fazer o cálculo</div><div class="vs-so"><span class="rot">Com um prompt</span>A conta sai na conversa. Você refaz para confiar.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>O cálculo vem com a <b>memória aberta</b>: você vê de onde saiu cada número.</div></div>
+        <div class="vs-linha"><div class="vs-tema">Escrever a petição</div><div class="vs-so"><span class="rot">Com um prompt</span>Texto genérico, que você copia, ajusta e formata.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Ela lê os documentos do caso e escreve <b>no seu estilo e no seu timbrado</b>, a partir dos seus modelos.</div></div>
+        <div class="vs-linha"><div class="vs-tema">Postar no Instagram</div><div class="vs-so"><span class="rot">Com um prompt</span>Legenda com cara de robô e nenhuma arte.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Carrossel, reel e artigo <b>com a sua voz</b>, de olho no Provimento 205 da OAB.</div></div>
+      </div>
+      <p class="faca revela">Prompt resolve um pedaço de cada vez. O seu dia não tem só um pedaço.</p>
     </div>
-    <p class="nota">Quem revisa, decide e assina é você. A MaestrIA faz o trabalho operacional e mostra os caminhos.</p>
   </section>
 
-  <footer>
+  <section>
+    <div class="wrap">
+      <span class="olho revela">O Marketing vem junto</span>
+      <h2 class="revela">Caso bom não cai do céu. <em>Alguém precisa te achar.</em></h2>
+      <p class="lead revela">Quantas semanas o seu perfil já ficou parado porque o escritório engoliu o seu tempo? No mesmo teste você leva o pacote de Marketing inteiro.</p>
+      <div class="cards revela">
+        <div class="card"><h3>Conteúdo com a sua voz</h3>Carrossel, reel e artigo que soam como você, e não como robô.</div>
+        <div class="card"><h3>A pauta do mês inteiro</h3>O calendário de conteúdo da sua área, para você não travar na frente da tela em branco.</div>
+        <div class="card"><h3>Edição do vídeo que você gravou</h3>Você grava no celular. Ela tira as pausas e põe a legenda.</div>
+        <div class="card"><h3>De olho no Provimento 205</h3>O conteúdo passa pelas regras de publicidade da OAB antes de chegar em você.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="olho revela">Os 7 dias</span>
+      <h2 class="revela">Como é o teste, <em>do primeiro ao último dia</em>.</h2>
+      <div class="dias revela">
+        <div class="dia"><span class="q">Hoje</span><b>Você libera o teste</b>Escolhe a área e preenche três campos. O acesso sai na hora e também vai para o seu e-mail.</div>
+        <div class="dia"><span class="q">Dia 1</span><b>Instala e faz o primeiro pedido</b>Você arrasta um arquivo no Claude e escreve "instala pra mim". No mesmo dia roda um caso seu.</div>
+        <div class="dia"><span class="q">Dias 2 a 7</span><b>Usa à vontade</b>Tudo liberado, em um computador, com os seus casos e o seu conteúdo.</div>
+        <div class="dia fim"><span class="q">Dia 8</span><b>Você decide</b>O teste pausa sozinho. O que você fez continua na sua pasta. Só paga se quiser continuar.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="olho revela">Sigilo</span>
+      <h2 class="revela">Os documentos do seu cliente ficam <em>no seu computador</em>.</h2>
+      <div class="cards revela">
+        <div class="card"><h3>Nada de cliente vem para nós</h3>Pela internet a MaestrIA confere só o código da licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</div>
+        <div class="card"><h3>Não inventa jurisprudência</h3>O que não se confirma na fonte oficial fica fora da peça, e ela avisa.</div>
+        <div class="card"><h3>Nada sai sem a sua revisão</h3>Ela não protocola, não envia mensagem e não fala com o seu cliente. Quem revisa, decide e assina é você.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="olho revela">Antes de começar</span>
+      <h2 class="revela">O que você precisa ter.</h2>
+      <div class="cards revela">
+        <div class="card"><h3>Um computador</h3>Windows ou Mac. A instalação é feita nele, e não no celular.</div>
+        <div class="card"><h3>O aplicativo Claude</h3>Com a assinatura paga dele, contratada direto em claude.ai. É a inteligência que roda a MaestrIA, e o único custo durante o teste.</div>
+        <div class="card"><h3>Meia hora</h3>A instalação é guiada, com a imagem de cada tela. Travou, manda um print no grupo.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap estreito">
+      <span class="olho revela">Perguntas comuns</span>
+      <h2 class="revela" style="margin-bottom:18px">O que mais perguntam sobre o teste.</h2>
+      <details class="revela"><summary>Precisa de cartão? Vou ser cobrado no fim?</summary><div class="ans">Não. Você não informa cartão e não existe cobrança automática. No fim dos 7 dias o teste pausa, e você só paga se decidir comprar.</div></details>
+      <details class="revela"><summary>O que é o Claude, e por que preciso dele?</summary><div class="ans">O Claude é um aplicativo de inteligência artificial, da empresa Anthropic. Ele é a inteligência que faz o trabalho pesado, e a MaestrIA é a camada jurídica e de marketing que se instala dentro dele. A assinatura do Claude é contratada direto em claude.ai.</div></details>
+      <details class="revela"><summary>Não entendo nada de tecnologia. Consigo?</summary><div class="ans">Consegue. A instalação é guiada, com a imagem de cada tela, e o suporte é no grupo da comunidade: você manda um print e a gente diz o que fazer. No uso, você escreve o pedido em português comum.</div></details>
+      <details class="revela"><summary>Posso usar com casos reais?</summary><div class="ans">Pode. É a ferramenta completa. Os arquivos ficam em pastas suas, no seu computador. A inteligência artificial é a do Claude e segue as regras da sua conta lá.</div></details>
+      <details class="revela"><summary>O que acontece depois dos 7 dias?</summary><div class="ans">As ferramentas pausam no seu computador. Nada do que você fez é apagado. Para seguir usando, é só comprar a licença com o mesmo e-mail do teste: ela volta a funcionar sem instalar nada de novo.</div></details>
+      <details class="revela"><summary>Quanto custa depois do teste?</summary><div class="ans">Depende da área que você escolher. A licença vale por 12 meses, com as atualizações do período, e não é mensalidade por usuário. O valor está na página de cada área, e você só vê isso se quiser continuar.</div></details>
+      <details class="revela"><summary>Atuo em mais de uma área. E agora?</summary><div class="ans">Escolha a área do caso que você quer testar primeiro. O teste vale para uma área, com o Marketing junto.</div></details>
+      <details class="revela"><summary>A MaestrIA substitui o advogado?</summary><div class="ans">Não. Ela faz o trabalho operacional e mostra os caminhos. Quem revisa, decide e assina é você.</div></details>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2 class="revela">Sete dias, com um caso seu, <em>sem pagar nada</em>.</h2>
+      <p class="lead revela" style="margin-top:0">Se não servir, você não fez nada além de testar. Se servir, a sua segunda-feira muda.</p>
+      <a class="botao revela" href="#cadastro" id="final-btn">Escolher a minha área e liberar o teste</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
     <span>© 2026 Samurai do Jurídico. Todos os direitos reservados.</span>
     <span>Já conhece e quer comprar direto? <a href="/" style="color:var(--txt)">Ver todas as áreas</a>.</span>
-  </footer>
-</main>
+  </div>
+</footer>
+
+<div class="fixo" id="fixo"><a class="botao" href="#cadastro" id="fixo-btn">Liberar meu teste de 7 dias</a></div>
 
 <script>
 (function () {
   "use strict";
   var EDGE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
-  // O que cada área entrega no teste. Os nomes seguem as ferramentas do pacote.
+  var TIMBRADO = ["Petição no seu timbrado", "Escrita a partir dos seus modelos, com a jurisprudência conferida na fonte oficial."];
+  // Cada área: código, nome, a cena, o pedido de exemplo e o que volta. Os itens seguem as ferramentas do pacote.
   var AREAS = [
-    ["prev", "Previdenciário", ["Cálculo de renda inicial e de atrasados, com memória aberta", "Auditoria do benefício e comparação de regras", "Quesitos para a perícia e impugnação de laudo", "Impugnação de PPP", "Recurso administrativo no INSS"]],
-    ["trab", "Trabalhista", ["Cálculo de rescisão, horas extras e FGTS", "Contestação trabalhista", "Minuta de acordo trabalhista"]],
-    ["familia", "Família", ["Cálculo de pensão em atraso", "Ação de alimentos", "Divórcio consensual"]],
-    ["consumidor", "Consumidor", ["Ação de consumo, da triagem à inicial", "Ação de dano moral do consumidor"]],
-    ["bancario", "Bancário", ["Cálculo revisional, com a taxa média do Banco Central", "Ação revisional bancária"]],
-    ["criminal", "Criminal", ["Cálculo de pena e de prescrição", "Defesa no flagrante e pedido de liberdade", "Habeas corpus"]],
-    ["imobiliario", "Imobiliário", ["Distrato de compra de imóvel, com o cálculo", "Locação residencial: cobrança e reajuste do aluguel"]],
-    ["empresarial", "Empresarial", ["Defesa trabalhista da empresa", "Defesa tributária na esfera administrativa"]]
+    ["prev", "Previdenciário", "O indeferimento chegou de manhã. O CNIS tem buraco, o PPP veio errado e a perícia é semana que vem.",
+      "Leia a pasta do seu João e monte o caso do auxílio-acidente.",
+      [["Cálculo de renda inicial e de atrasados", "Com a memória aberta, e a comparação entre as regras."],
+       ["Auditoria do benefício", "O que o INSS deixou de computar, apontado."],
+       ["Quesitos da perícia e impugnação", "De laudo e de PPP, mais o recurso administrativo no INSS."]]],
+    ["trab", "Trabalhista", "Audiência na quinta. O cliente trouxe o termo de rescisão, uma pilha de holerites e pressa.",
+      "Calcule a rescisão, as horas extras e o FGTS da Ana.",
+      [["Cálculo de rescisão, horas extras e FGTS", "Com a memória aberta, verba por verba."],
+       ["Contestação trabalhista", "Montada em cima dos documentos do caso."],
+       ["Minuta de acordo trabalhista", "Pronta para você ajustar e levar à audiência."]]],
+    ["familia", "Família", "A mãe chega com dois anos de pensão atrasada e um punhado de comprovantes de Pix.",
+      "Calcule a pensão em atraso da Júlia e monte a ação de alimentos.",
+      [["Cálculo da pensão em atraso", "Com a memória aberta, para você conferir cada parcela."],
+       ["Ação de alimentos", "Montada em cima dos documentos do caso."],
+       ["Divórcio consensual", "A minuta pronta para os dois lados lerem."]]],
+    ["consumidor", "Consumidor", "Nome negativado por uma dívida que o cliente nunca fez. Ele trouxe prints, protocolos e raiva.",
+      "Faça a triagem do caso do Paulo e monte a ação de dano moral.",
+      [["Triagem do caso", "O que tem de prova, o que falta e o caminho, antes de você escrever uma linha."],
+       ["Ação de dano moral do consumidor", "Da triagem à inicial."]]],
+    ["bancario", "Bancário", "Financiamento com juros que ninguém explicou. O cliente só quer saber: quanto eu paguei a mais?",
+      "Compare a taxa do contrato da Carla com a média do Banco Central e monte a revisional.",
+      [["Cálculo revisional", "Com a taxa média do Banco Central e a memória aberta."],
+       ["Ação revisional bancária", "Montada em cima do contrato e do cálculo."]]],
+    ["criminal", "Criminal", "Flagrante na sexta à noite. A audiência de custódia é amanhã cedo.",
+      "Leia o auto de prisão do Diego e monte o pedido de liberdade.",
+      [["Defesa no flagrante e pedido de liberdade", "Em cima do auto de prisão, para você revisar ainda hoje."],
+       ["Habeas corpus", "Montado a partir da decisão que você quer atacar."],
+       ["Cálculo de pena e de prescrição", "Com o passo a passo da conta."]]],
+    ["imobiliario", "Imobiliário", "O cliente desistiu do apartamento na planta. A construtora quer ficar com metade do que ele pagou.",
+      "Calcule o distrato do Renato e monte a ação.",
+      [["Distrato de compra de imóvel", "Com o cálculo do que volta para o cliente."],
+       ["Locação residencial", "Cobrança e reajuste do aluguel."]]],
+    ["empresarial", "Empresarial", "A empresa recebeu uma autuação e uma reclamação trabalhista na mesma semana. O dono quer resposta hoje.",
+      "Leia a autuação que a empresa recebeu e monte a defesa.",
+      [["Defesa tributária na esfera administrativa", "Em cima da autuação e dos documentos da empresa."],
+       ["Defesa trabalhista da empresa", "Montada a partir da reclamação recebida."]]]
   ];
-  var SEMPRE = ["Petição no seu timbrado, com o seu modelo", "Jurisprudência conferida na fonte oficial", "Briefing do caso e preparo da audiência"];
-  var MKT = ["Carrossel, reel e artigo com a sua voz", "Calendário de conteúdo do mês", "De olho no Provimento 205 da OAB"];
+  var GERAL = [["O caso organizado e o que falta de documento", "Antes de você escrever uma linha."],
+               ["O cálculo com a memória aberta", "Você vê de onde saiu cada número."], TIMBRADO];
+  var MKT = ["Marketing: o carrossel da semana com a sua voz", "Mais reel, artigo e o calendário do mês, de olho no Provimento 205."];
 
   var f = document.getElementById("f"), erro = document.getElementById("erro");
   var btn = document.getElementById("enviar"), btnTxt = document.getElementById("enviar-txt");
-  var caixaAreas = document.getElementById("areas"), recebe = document.getElementById("recebe");
+  var caixaAreas = document.getElementById("areas");
   var celular = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "");
   var q = null; try { q = new URLSearchParams(location.search); } catch (e) {}
   var origem = ((q && q.get("o")) || "site").slice(0, 60);
   var escolhida = "";
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
-  function lista(titulo, itens) {
-    var d = el("div"); d.appendChild(el("h3", null, titulo));
-    var ul = el("ul"); itens.forEach(function (i) { ul.appendChild(el("li", null, i)); }); d.appendChild(ul); return d;
+  function entregas(itens) {
+    var ul = document.getElementById("d-entregas"); ul.innerHTML = "";
+    itens.concat([MKT]).forEach(function (it, n) {
+      var li = el("li", "sobe" + (it === MKT ? " mkt" : "")); li.style.animationDelay = (n * 90) + "ms";
+      li.appendChild(el("span", "ic", it === MKT ? "+" : "✓"));
+      var d = el("div"); d.appendChild(el("b", null, it[0])); d.appendChild(el("small", null, it[1])); li.appendChild(d);
+      ul.appendChild(li);
+    });
   }
   function mostrarArea(id) {
     var a = AREAS.filter(function (x) { return x[0] === id; })[0];
     if (!a) return;
     escolhida = id;
-    recebe.innerHTML = "";
-    var g = el("div", "recebe entra");
-    g.appendChild(lista(a[1], a[2]));
-    g.appendChild(lista("Em todas as áreas", SEMPRE));
-    g.appendChild(lista("Marketing", MKT));
-    recebe.appendChild(g);
-    recebe.hidden = false;
-    document.getElementById("recebe-vazio").hidden = true;
-    btnTxt.textContent = "Liberar meu teste: " + a[1] + " + Marketing";
+    var cena = document.getElementById("cena"); cena.innerHTML = "";
+    cena.appendChild(el("small", null, "A cena"));
+    cena.appendChild(document.createTextNode(a[2]));
+    document.getElementById("d-titulo").textContent = "Claude, com a MaestrIA " + a[1];
+    document.getElementById("d-pedido").textContent = a[3];
+    entregas(a[4].concat([TIMBRADO]));
+    var rotulo = "Liberar meu teste: " + a[1] + " + Marketing";
+    btnTxt.textContent = rotulo;
+    document.getElementById("fixo-btn").textContent = rotulo;
+    document.getElementById("final-btn").textContent = rotulo;
+    document.getElementById("f-titulo").textContent = a[1] + " + Marketing, por 7 dias. Para onde eu mando o acesso?";
     erro.hidden = true;
   }
+  entregas(GERAL);
   AREAS.forEach(function (a) {
     var l = el("label", "area"), i = el("input"); i.type = "radio"; i.name = "area"; i.value = a[0];
     i.addEventListener("change", function () { mostrarArea(a[0]); });
@@ -184,6 +421,14 @@ footer { border-top:1px solid var(--bd); padding-top:22px; font-size:13.5px; col
   });
   var pre = q && q.get("a");
   if (pre) { var r = caixaAreas.querySelector('input[value="' + pre.replace(/[^a-z]/g, "") + '"]'); if (r) { r.checked = true; mostrarArea(r.value); } }
+
+  // Entrada suave dos blocos e botão fixo do celular (some quando o cadastro está na tela).
+  var blocos = document.querySelectorAll(".revela"), fixo = document.getElementById("fixo");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("dentro"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
+    blocos.forEach(function (b) { io.observe(b); });
+    new IntersectionObserver(function (es) { fixo.classList.toggle("vis", !es[0].isIntersecting); }, { threshold: 0 }).observe(document.getElementById("cadastro"));
+  } else { blocos.forEach(function (b) { b.classList.add("dentro"); }); }
 
   // Contador: página aberta e começo de preenchimento. Sem nome nem e-mail.
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
@@ -212,7 +457,7 @@ footer { border-top:1px solid var(--bd); padding-top:22px; font-size:13.5px; col
       : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
   });
   function mostrarErro(msg) { erro.textContent = msg; erro.hidden = false; }
-  function carregando(sim, rotulo) {
+  function carregando(sim) {
     btn.disabled = sim; btn.classList.toggle("carregando", sim);
     if (sim) { btn.dataset.rotulo = btnTxt.textContent; btnTxt.textContent = "Liberando o seu teste..."; }
     else if (btn.dataset.rotulo) btnTxt.textContent = btn.dataset.rotulo;
@@ -226,7 +471,7 @@ footer { border-top:1px solid var(--bd); padding-top:22px; font-size:13.5px; col
       whatsapp: zap.value, area: escolhida,
       site: document.getElementById("site").value, origem: origem
     };
-    if (!escolhida) { caixaAreas.scrollIntoView({ block: "center" }); return mostrarErro("Escolha a sua área ali em cima, no passo 1."); }
+    if (!escolhida) { caixaAreas.scrollIntoView({ block: "center" }); return mostrarErro("Escolha a sua área ali em cima primeiro."); }
     if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
     if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
@@ -249,9 +494,10 @@ footer { border-top:1px solid var(--bd); padding-top:22px; font-size:13.5px; col
         } else {
           texto.textContent = pacote + "Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
         }
-        document.getElementById("tela-form").style.display = "none";
+        document.getElementById("tela-form").hidden = true;
         var ok = document.getElementById("tela-ok"); ok.hidden = false;
-        document.getElementById("cadastro").scrollIntoView({ block: "center" });
+        fixo.hidden = true;
+        document.getElementById("cadastro").scrollIntoView({ block: "start" });
       })
       .catch(function () { carregando(false); mostrarErro("Sem conexão agora. Confira a internet e tente de novo."); });
   });
