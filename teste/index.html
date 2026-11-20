@@ -763,6 +763,12 @@
 
 
   /* ===== teste grátis de 7 dias ===== */
+  /* A manchete do teste é menor que a das páginas de venda: a primeira dobra precisa mostrar o texto e o botão. */
+  header.hero{padding-top:48px}
+  header.hero h1.big{font-size:clamp(2.1rem,4.4vw,3.5rem);line-height:1.08;max-width:20ch;margin-top:18px}
+  header.hero .hero-sub{margin-top:16px}
+  header.hero .hero-cta{margin-top:22px}
+  @media (min-width:701px){.hero-fatos{justify-content:center}}
   .hero-fatos{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:14.5px;color:var(--muted)}
   .hero-fatos span{display:inline-flex;align-items:center;gap:8px}
   .hero-fatos b{color:var(--green);font-weight:800}
@@ -836,7 +842,7 @@
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
     <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
-    <h1 class="big">Use a MaestrIA no seu escritório por 7 dias. <span class="red">Só decida depois de ver funcionando</span>.</h1>
+    <h1 class="big">Teste a MaestrIA por 7 dias, <span class="red">sem pagar nada</span>.</h1>
     <p class="hero-sub">A MaestrIA é uma inteligência artificial que se instala no seu computador e faz o trabalho operacional do escritório previdenciário: lê os documentos do cliente, calcula, escreve a petição no seu timbrado, confere a jurisprudência e ainda produz o conteúdo do seu Instagram com a sua voz. Você pede em português comum, como numa conversa. <b>Quem revisa e decide é você.</b></p>
     <div class="hero-cta">
       <a href="#teste" class="btn btn-red">Quero testar por 7 dias</a>
