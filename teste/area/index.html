@@ -9,110 +9,126 @@
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 <style>
 :root { --bg:#000; --card:#0b0b0b; --card2:#131313; --txt:#fff; --muted:#bdbdbd; --dim:#8a8a8a;
   --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.08); --redbd:rgba(239,39,39,.32);
   --cta:#14a44d; --cta2:#1cc25c; --ok:#4ade80; --okbg:rgba(74,222,128,.08); --okbd:rgba(74,222,128,.4);
-  --bd:#1f1f1f; --bd2:#2c2c2c; --r:16px; --rs:10px; }
+  --bd:#1f1f1f; --bd2:#2c2c2c; --r:16px; --rs:10px; --mono:'JetBrains Mono',ui-monospace,Consolas,monospace; }
 * { box-sizing:border-box; margin:0; padding:0; }
 [hidden] { display:none !important; }
 html { scroll-behavior:smooth; }
 body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-.wrap { width:100%; max-width:1040px; margin:0 auto; padding:0 16px; }
+.wrap { width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
 .estreito { max-width:760px; }
 section { padding:44px 0; }
 h1, h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); text-wrap:balance; letter-spacing:-.01em; }
-h1 { font-size:clamp(36px,6.6vw,64px); line-height:1.05; }
+h1 { font-size:clamp(33px,5.6vw,58px); line-height:1.07; }
 h2 { font-size:clamp(27px,4.4vw,40px); line-height:1.12; }
 h1 em, h2 em { font-style:italic; color:var(--red2); }
 h3 { color:var(--txt); font-size:17px; font-weight:800; line-height:1.3; }
 p b, li b { color:var(--txt); }
 .olho { display:block; font-size:12.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--red2); margin-bottom:12px; }
 .lead { font-size:19px; max-width:62ch; margin-top:14px; }
-.nota { font-size:14px; color:var(--dim); }
-.nota a { color:var(--txt); }
+.nota { font-size:13.5px; color:var(--dim); line-height:1.5; }
 a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
 
-/* topo */
-.topo { padding:18px 0 0; }
+.topo { padding:18px 0 0; position:relative; z-index:2; }
 .topo .wrap { display:flex; align-items:center; justify-content:space-between; gap:12px; }
 .logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
 .logo .sym { height:30px; width:auto; }
 .logo .word { height:17px; width:auto; }
 .topo-selo { font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--ok); background:var(--okbg); border:1px solid var(--okbd); border-radius:999px; padding:6px 13px; white-space:nowrap; }
-
 @media (max-width:479px) { .so-largo { display:none; } }
 
 /* abertura */
-.hero { position:relative; padding:44px 0 26px; }
-.hero::before { content:""; position:absolute; inset:-140px 0 auto 0; height:560px; background:radial-gradient(60% 60% at 50% 0%, rgba(239,39,39,.24), transparent 70%); pointer-events:none; }
-.hero .wrap { position:relative; display:flex; flex-direction:column; gap:20px; }
-.hero .lead { margin-top:0; }
-.fatos { display:flex; flex-wrap:wrap; gap:8px 20px; list-style:none; font-size:15px; color:var(--txt); font-weight:600; }
-.fatos li { display:flex; align-items:center; gap:8px; }
-.fatos li::before { content:"✓"; color:var(--ok); font-weight:900; }
+.hero { position:relative; padding:38px 0 8px; }
+.hero::before { content:""; position:absolute; inset:-160px 0 auto 0; height:640px; background:radial-gradient(60% 60% at 50% 0%, rgba(239,39,39,.26), transparent 70%); pointer-events:none; }
+.hero .wrap { position:relative; display:flex; flex-direction:column; gap:18px; }
+.hero h1 { min-height:3.2em; }
+.hero .lead { margin-top:0; min-height:4.8em; }
+.troca { animation:troca .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes troca { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
 
-/* escolha da área + demonstração */
-.palco { padding-top:10px; }
-.palco-grade { display:grid; gap:22px; align-items:start; }
-.areas { border:0; display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
-.areas legend { padding:0; margin-bottom:12px; color:var(--txt); font-weight:800; font-size:19px; }
+.areas { border:0; display:grid; grid-template-columns:repeat(2,1fr); gap:9px; width:100%; }
+.areas legend { padding:0; margin-bottom:12px; color:var(--txt); font-weight:800; font-size:18px; width:100%; }
 .area { position:relative; }
 .area input { position:absolute; opacity:0; inset:0; width:100%; height:100%; cursor:pointer; }
-.area span { display:flex; align-items:center; justify-content:center; text-align:center; min-height:52px; padding:10px 12px; border-radius:var(--rs); background:var(--card); border:1px solid var(--bd2); color:var(--txt); font-weight:700; font-size:16px; transition:border-color .15s, background .15s, transform .15s; }
+.area span { display:flex; align-items:center; justify-content:center; text-align:center; min-height:50px; padding:9px 14px; border-radius:999px; background:rgba(255,255,255,.03); border:1px solid var(--bd2); color:var(--txt); font-weight:700; font-size:15.5px; transition:border-color .15s, background .15s, transform .15s; }
 .area input:hover + span { border-color:var(--dim); transform:translateY(-1px); }
-.area input:checked + span { background:var(--okbg); border-color:var(--ok); color:var(--ok); }
+.area input:checked + span { background:var(--red); border-color:var(--red); color:#fff; box-shadow:0 10px 30px -12px rgba(239,39,39,.9); }
 .area input:focus-visible + span { outline:3px solid var(--ok); outline-offset:3px; }
-.cena { margin-top:18px; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(20px,2.6vw,25px); line-height:1.3; text-wrap:balance; min-height:3.9em; }
-.cena small { display:block; font-family:'Inter',sans-serif; font-style:normal; font-size:12.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+.areas.pulsa .area span { animation:pulsa 2.4s ease-in-out infinite; }
+.areas.pulsa .area:nth-child(even) span { animation-delay:.3s; }
+@keyframes pulsa { 0%,100% { border-color:var(--bd2); } 50% { border-color:rgba(239,39,39,.6); } }
 
-.janela { background:linear-gradient(180deg,#101010,#070707); border:1px solid var(--bd2); border-radius:20px; overflow:hidden; box-shadow:0 30px 80px -30px rgba(239,39,39,.35), 0 0 0 1px rgba(255,255,255,.02) inset; }
+/* palco: a demonstração e o cadastro lado a lado */
+.palco { padding-top:26px; }
+.palco-grade { display:grid; gap:20px; align-items:start; }
+.janela { background:linear-gradient(180deg,#101010,#060606); border:1px solid var(--bd2); border-radius:20px; overflow:hidden; box-shadow:0 40px 90px -40px rgba(239,39,39,.45), 0 0 0 1px rgba(255,255,255,.02) inset; }
 .barra { display:flex; align-items:center; gap:7px; padding:12px 16px; border-bottom:1px solid var(--bd); background:#0d0d0d; }
-.barra i { width:10px; height:10px; border-radius:50%; background:#2f2f2f; }
-.barra span { margin-left:8px; font-size:13px; color:var(--dim); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.conversa { padding:20px 18px 22px; display:flex; flex-direction:column; gap:18px; }
-.rot { display:block; font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-bottom:7px; }
-.pedido { align-self:flex-end; max-width:92%; }
-.pedido .rot { text-align:right; }
-.pedido p { background:#1c1c1c; border:1px solid var(--bd2); color:var(--txt); border-radius:16px 16px 4px 16px; padding:13px 16px; font-size:16.5px; line-height:1.45; }
-.entregas { list-style:none; display:grid; gap:9px; }
-.entregas li { display:flex; gap:12px; align-items:flex-start; background:var(--card2); border:1px solid var(--bd2); border-radius:12px; padding:12px 14px; }
-.entregas .ic { flex:none; width:34px; height:34px; border-radius:9px; background:var(--okbg); border:1px solid var(--okbd); color:var(--ok); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px; }
-.entregas b { display:block; color:var(--txt); font-size:16px; line-height:1.3; }
-.entregas small { color:var(--dim); font-size:14px; line-height:1.4; display:block; margin-top:2px; }
-.entregas li.mkt .ic { background:var(--redbg); border-color:var(--redbd); color:var(--red2); }
-.sobe { animation:sobe .45s cubic-bezier(.2,.7,.2,1) both; }
-@keyframes sobe { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+.barra i { width:10px; height:10px; border-radius:50%; background:#ff5f57; }
+.barra i:nth-child(2) { background:#febc2e; }
+.barra i:nth-child(3) { background:#28c840; }
+.barra span { margin-left:8px; font-family:var(--mono); font-size:12.5px; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tela { padding:18px 18px 20px; display:flex; flex-direction:column; gap:10px; min-height:470px; }
+.cmd { font-family:var(--mono); font-size:14.5px; color:var(--txt); line-height:1.55; }
+.cmd::before { content:"> "; color:var(--red2); font-weight:600; }
+.cmd.digitando::after { content:"▍"; color:var(--red2); animation:pisca .8s steps(1) infinite; }
+@keyframes pisca { 50% { opacity:0; } }
+.passo { font-family:var(--mono); font-size:13.5px; color:var(--muted); line-height:1.5; display:flex; gap:9px; }
+.passo::before { content:"✓"; color:var(--ok); font-weight:700; flex:none; }
+.entregue { margin-top:6px; font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+.arquivos { list-style:none; display:grid; gap:8px; }
+.arquivos li { display:flex; gap:12px; align-items:center; background:var(--card2); border:1px solid var(--bd2); border-radius:12px; padding:11px 13px; }
+.arquivos .tipo { flex:none; width:44px; height:44px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.02em; background:rgba(59,130,246,.12); border:1px solid rgba(59,130,246,.4); color:#93c5fd; }
+.arquivos .tipo.xls { background:var(--okbg); border-color:var(--okbd); color:var(--ok); }
+.arquivos .tipo.mkt { background:var(--redbg); border-color:var(--redbd); color:var(--red2); }
+.arquivos b { display:block; color:var(--txt); font-size:15.5px; line-height:1.3; }
+.arquivos small { color:var(--dim); font-size:13.5px; line-height:1.4; display:block; margin-top:2px; }
+.sobe { animation:troca .4s cubic-bezier(.2,.7,.2,1) both; }
+.rodape-tela { margin-top:auto; padding-top:8px; font-size:13px; color:var(--dim); }
 
-/* cadastro */
-.cadastro { background:var(--card); border:1px solid var(--bd2); border-radius:22px; padding:26px 20px; display:flex; flex-direction:column; gap:16px; margin-top:26px; }
-.cadastro h2 { font-size:clamp(23px,3.4vw,30px); }
-form { display:grid; gap:12px; }
-.campo { display:flex; flex-direction:column; gap:6px; }
-.campo label { color:var(--txt); font-weight:700; font-size:15px; }
-.campo input { font:inherit; color:var(--txt); background:#000; border:1px solid var(--bd2); border-radius:var(--rs); padding:14px; width:100%; }
+.cadastro { background:var(--card); border:1px solid var(--bd2); border-radius:20px; padding:24px 20px; display:flex; flex-direction:column; gap:14px; }
+.cadastro h2 { font-size:clamp(22px,2.6vw,27px); }
+.cadastro .leva { list-style:none; display:grid; gap:7px; font-size:15px; }
+.cadastro .leva li { position:relative; padding-left:24px; }
+.cadastro .leva li::before { content:"✓"; position:absolute; left:0; color:var(--ok); font-weight:900; }
+form { display:grid; gap:11px; }
+.campo { display:flex; flex-direction:column; gap:5px; }
+.campo label { color:var(--txt); font-weight:700; font-size:14.5px; }
+.campo input { font:inherit; color:var(--txt); background:#000; border:1px solid var(--bd2); border-radius:var(--rs); padding:13px 14px; width:100%; }
 .campo input:focus { border-color:var(--ok); outline:none; }
 .isca { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-.botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:inherit; font-weight:800; font-size:18px; color:#fff; background:var(--cta); border:0; border-radius:var(--rs); padding:18px 26px; width:100%; cursor:pointer; text-decoration:none; text-align:center; transition:background .15s, transform .15s, box-shadow .15s; box-shadow:0 14px 34px -14px rgba(20,164,77,.8); }
+.botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:inherit; font-weight:800; font-size:17.5px; color:#fff; background:var(--cta); border:0; border-radius:var(--rs); padding:17px 22px; width:100%; cursor:pointer; text-decoration:none; text-align:center; line-height:1.25; transition:background .15s, transform .15s; box-shadow:0 14px 34px -14px rgba(20,164,77,.8); }
 .botao:hover { background:var(--cta2); transform:translateY(-1px); }
 .botao[disabled] { opacity:.75; cursor:progress; transform:none; }
-.gira { width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,.35); border-top-color:#fff; display:none; animation:gira .8s linear infinite; }
+.gira { width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,.35); border-top-color:#fff; display:none; flex:none; animation:gira .8s linear infinite; }
 .botao.carregando .gira { display:inline-block; }
 @keyframes gira { to { transform:rotate(360deg); } }
 .erro { color:#ffb4b4; background:var(--redbg); border:1px solid var(--redbd); border-radius:var(--rs); padding:12px 14px; font-size:15px; }
 .pronto .bola { width:54px; height:54px; border-radius:50%; background:var(--okbg); border:1px solid var(--okbd); color:var(--ok); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900; }
 
-/* blocos de apoio */
-.cards { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin-top:26px; }
-.card { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:7px; font-size:15.5px; }
+/* faixa */
+.faixa { border-top:1px solid var(--bd); border-bottom:1px solid var(--bd); padding:16px 0; margin-top:34px; overflow:hidden; }
+.faixa-trilho { display:flex; gap:38px; width:max-content; animation:corre 38s linear infinite; font-size:14px; font-weight:700; color:var(--txt); white-space:nowrap; }
+.faixa-trilho span::before { content:"•"; color:var(--red); margin-right:38px; }
+@keyframes corre { to { transform:translateX(-50%); } }
+
+/* blocos */
+.itens { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); margin-top:26px; }
+.item { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; font-size:15px; line-height:1.55; transition:border-color .2s, transform .2s; }
+.item:hover { border-color:var(--redbd); transform:translateY(-2px); }
+.item b { display:block; color:var(--txt); font-size:16.5px; margin-bottom:6px; }
+.item.mkt { border-color:var(--redbd); background:linear-gradient(180deg,var(--redbg),transparent); }
+.sub-h { margin-top:34px; color:var(--txt); font-weight:800; font-size:19px; }
 .vs { margin-top:26px; display:grid; gap:12px; }
-.vs-linha { display:grid; gap:0; border:1px solid var(--bd2); border-radius:var(--r); overflow:hidden; background:var(--card); }
+.vs-linha { display:grid; border:1px solid var(--bd2); border-radius:var(--r); overflow:hidden; background:var(--card); }
 .vs-linha > div { padding:16px 18px; font-size:15.5px; }
 .vs-tema { color:var(--txt); font-weight:800; background:#0f0f0f; }
 .vs-so { border-top:1px solid var(--bd); }
 .vs-com { border-top:1px solid var(--bd); background:var(--okbg); color:#d7f5e1; }
-.vs-linha .rot { margin-bottom:4px; }
+.rot { display:block; font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-bottom:4px; }
 .vs-com .rot { color:var(--ok); }
 .faca { margin-top:26px; font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(21px,3vw,28px); line-height:1.3; text-wrap:balance; border-left:3px solid var(--red); padding-left:18px; }
 .dias { margin-top:26px; display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); }
@@ -128,30 +144,31 @@ details summary::after { content:"+"; position:absolute; right:4px; top:14px; fo
 details[open] summary::after { transform:rotate(45deg); }
 details .ans { padding:0 0 18px; font-size:16px; max-width:66ch; }
 .final { text-align:center; padding:64px 0 40px; position:relative; }
-.final::before { content:""; position:absolute; inset:auto 0 0 0; height:360px; background:radial-gradient(55% 70% at 50% 100%, rgba(239,39,39,.2), transparent 70%); pointer-events:none; }
+.final::before { content:""; position:absolute; inset:auto 0 0 0; height:380px; background:radial-gradient(55% 70% at 50% 100%, rgba(239,39,39,.22), transparent 70%); pointer-events:none; }
 .final .wrap { position:relative; display:flex; flex-direction:column; align-items:center; gap:18px; }
 .final .botao { width:auto; max-width:100%; }
 footer { border-top:1px solid var(--bd); padding:22px 0 110px; font-size:13.5px; color:var(--dim); }
 footer .wrap { display:flex; flex-direction:column; gap:6px; }
 
-/* botão fixo no celular */
 .fixo { position:fixed; left:0; right:0; bottom:0; z-index:20; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(0,0,0,.9); backdrop-filter:blur(10px); border-top:1px solid var(--bd2); transform:translateY(110%); transition:transform .25s; }
 .fixo.vis { transform:none; }
-.fixo .botao { padding:15px 18px; font-size:16.5px; }
-
+.fixo .botao { padding:15px 18px; font-size:16px; }
 .revela { opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
 .revela.dentro { opacity:1; transform:none; }
 
-@media (min-width:860px) {
-  section { padding:60px 0; }
-  .hero { padding:64px 0 30px; text-align:center; }
+@media (min-width:640px) { .areas { grid-template-columns:repeat(4,1fr); } }
+@media (min-width:900px) {
+  section { padding:64px 0; }
+  .hero { padding:56px 0 8px; text-align:center; }
   .hero .wrap { align-items:center; }
-  .fatos { justify-content:center; }
-  .palco-grade { grid-template-columns:minmax(0,5fr) minmax(0,6fr); gap:36px; }
-  .conversa { padding:24px 24px 26px; }
-  .cadastro { padding:34px 32px; }
-  form { grid-template-columns:repeat(3,1fr); }
-  form .largo { grid-column:1 / -1; }
+  .hero h1 { max-width:19ch; min-height:2.2em; }
+  .hero .lead { min-height:3.2em; }
+  .areas { max-width:860px; }
+  .areas legend { text-align:center; }
+  .palco-grade { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:24px; }
+  .tela { padding:22px 24px 24px; }
+  .cmd { font-size:15.5px; }
+  .cadastro { padding:28px 26px; position:sticky; top:20px; }
   .vs-linha { grid-template-columns:1fr 1.25fr 1.5fr; }
   .vs-so, .vs-com { border-top:0; border-left:1px solid var(--bd); }
   .fixo { display:none; }
@@ -159,10 +176,10 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
-  .sobe, .gira { animation:none; }
+  .sobe, .troca, .gira, .faixa-trilho, .areas.pulsa .area span, .cmd.digitando::after { animation:none; }
   .revela { opacity:1; transform:none; transition:none; }
-  .botao, .area span, .fixo, details summary::after { transition:none; }
-  .botao:hover, .area input:hover + span { transform:none; }
+  .botao, .area span, .fixo, .item, details summary::after { transition:none; }
+  .botao:hover, .item:hover, .area input:hover + span { transform:none; }
 }
 </style>
 </head>
@@ -178,55 +195,72 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
 <main>
   <section class="hero">
     <div class="wrap">
-      <h1>Você entrega a pasta do cliente. Ela devolve <em>o caso montado</em>.</h1>
-      <p class="lead">Quanto da sua semana vai embora antes de você começar a pensar na tese? Ler documento, fazer conta, formatar petição, lembrar de postar. A MaestrIA faz essa parte, no seu computador, dentro do Claude. <b>Teste 7 dias com um caso seu, na sua área, com o Marketing junto.</b></p>
-      <ul class="fatos">
-        <li>Sem cartão</li>
-        <li>Sem cobrança no fim</li>
-        <li>Os arquivos do cliente ficam com você</li>
-      </ul>
+      <h1 id="h1">Você entrega a pasta do cliente. Ela devolve <em>o caso montado</em>.</h1>
+      <p class="lead" id="sub">Quanto da sua semana vai embora antes de você começar a pensar na tese? A MaestrIA lê os documentos, faz a conta e escreve a peça no seu timbrado, no seu computador, dentro do Claude. <b>Teste 7 dias, com o Marketing junto.</b></p>
+      <fieldset class="areas pulsa" id="areas">
+        <legend>Toque na sua área e veja ela trabalhando:</legend>
+      </fieldset>
     </div>
   </section>
 
   <section class="palco" id="cadastro">
     <div class="wrap">
-      <div id="tela-form">
-        <div class="palco-grade">
-          <div>
-            <fieldset class="areas" id="areas">
-              <legend>Qual é a sua área?</legend>
-            </fieldset>
-            <p class="cena" id="cena" aria-live="polite"><small>Toque na sua área</small>E veja o que ela devolve quando você entrega um caso.</p>
-          </div>
-          <div class="janela" aria-live="polite">
-            <div class="barra"><i></i><i></i><i></i><span id="d-titulo">Claude, com a MaestrIA instalada</span></div>
-            <div class="conversa">
-              <div class="pedido"><span class="rot">Você escreve</span><p id="d-pedido">Leia a pasta do cliente e monte o caso.</p></div>
-              <div><span class="rot">Ela devolve, para você revisar</span><ul class="entregas" id="d-entregas"></ul></div>
-            </div>
-          </div>
+      <div class="palco-grade" id="tela-form">
+        <div class="janela">
+          <div class="barra"><i></i><i></i><i></i><span id="d-titulo">Claude, com a MaestrIA instalada</span></div>
+          <div class="tela" id="tela" aria-label="Demonstração do que a MaestrIA devolve"></div>
         </div>
 
         <div class="cadastro">
-          <h2 id="f-titulo">Para onde eu mando o seu acesso?</h2>
+          <h2 id="f-titulo">7 dias grátis. Para onde eu mando o seu acesso?</h2>
+          <ul class="leva">
+            <li id="leva-area">O pacote da sua área, completo</li>
+            <li>O pacote de Marketing, completo</li>
+            <li>Sem cartão e sem cobrança no fim</li>
+          </ul>
           <form id="f" novalidate>
             <div class="campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
             <div class="campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
             <div class="campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
             <div class="isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
-            <p class="erro largo" id="erro" role="alert" hidden></p>
-            <button type="submit" class="botao largo" id="enviar"><span class="gira"></span><span id="enviar-txt">Liberar meu teste de 7 dias</span></button>
-            <p class="nota largo">O acesso sai na hora. Sem cartão e sem cobrança no fim. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA.</p>
+            <p class="erro" id="erro" role="alert" hidden></p>
+            <button type="submit" class="botao" id="enviar"><span class="gira"></span><span id="enviar-txt">Liberar meu teste de 7 dias</span></button>
+            <p class="nota">O acesso sai na hora. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA.</p>
           </form>
         </div>
       </div>
 
-      <div id="tela-ok" class="cadastro pronto" hidden>
+      <div id="tela-ok" class="cadastro pronto estreito" hidden style="margin:0 auto">
         <span class="bola" aria-hidden="true">✓</span>
         <h2 id="ok-titulo">Teste liberado!</h2>
         <p id="ok-texto"></p>
         <a class="botao" id="ok-btn" href="/membros/">Instalar agora, passo a passo</a>
         <p class="nota">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
+      </div>
+    </div>
+
+    <div class="faixa" aria-hidden="true">
+      <div class="faixa-trilho">
+        <span>Não inventa jurisprudência</span><span>Os arquivos do cliente ficam no seu computador</span><span>Petição no seu timbrado</span><span>Cálculo com a memória aberta</span><span>Roda dentro do Claude</span><span>Quem assina é você</span>
+        <span>Não inventa jurisprudência</span><span>Os arquivos do cliente ficam no seu computador</span><span>Petição no seu timbrado</span><span>Cálculo com a memória aberta</span><span>Roda dentro do Claude</span><span>Quem assina é você</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="olho revela">Tudo liberado nos 7 dias</span>
+      <h2 class="revela" id="vem-titulo">O que vem no seu teste.</h2>
+      <p class="lead revela" id="vem-sub">Você não testa uma amostra. Testa o pacote inteiro da sua área, com os seus casos.</p>
+      <div class="itens revela" id="vem-itens"></div>
+      <p class="sub-h revela">E o Marketing inteiro, no mesmo teste</p>
+      <div class="itens revela">
+        <div class="item mkt"><b>Conteúdo com a sua voz</b>Carrossel, reel e artigo que soam como você, e não como robô.</div>
+        <div class="item mkt"><b>A pauta do mês inteiro</b>O calendário de conteúdo da sua área, para você não travar na tela em branco.</div>
+        <div class="item mkt"><b>Edição do vídeo que você gravou</b>Você grava no celular. Ela tira as pausas e põe a legenda.</div>
+        <div class="item mkt"><b>Site e página de campanha</b>O site do escritório com blog e a página pronta para receber anúncio.</div>
+        <div class="item mkt"><b>Google Meu Negócio</b>Da criação à rotina, para quem procura advogado perto de casa.</div>
+        <div class="item mkt"><b>De olho no Provimento 205</b>O conteúdo passa pelas regras de publicidade da OAB antes de chegar em você.</div>
       </div>
     </div>
   </section>
@@ -235,28 +269,14 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
     <div class="wrap">
       <span class="olho revela">Prompt x MaestrIA</span>
       <h2 class="revela">O prompt te dá um texto. E o resto, <em>quem faz</em>?</h2>
-      <p class="lead revela">Prompt bom ajuda. Mas depois dele ainda é você que confere a jurisprudência, refaz a conta, cola no Word e arruma o timbrado. Veja a diferença, pedido por pedido.</p>
+      <p class="lead revela">Prompt bom ajuda. Mas depois dele ainda é você que confere a jurisprudência, refaz a conta, cola no Word e arruma o timbrado.</p>
       <div class="vs revela">
         <div class="vs-linha"><div class="vs-tema">Citar jurisprudência</div><div class="vs-so"><span class="rot">Com um prompt</span>Pode vir número de processo que não existe, escrito com toda a segurança do mundo.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Cada decisão é conferida <b>na fonte oficial</b>. O que não se confirma fica fora da peça, e ela avisa.</div></div>
-        <div class="vs-linha"><div class="vs-tema">Fazer o cálculo</div><div class="vs-so"><span class="rot">Com um prompt</span>A conta sai na conversa. Você refaz para confiar.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>O cálculo vem com a <b>memória aberta</b>: você vê de onde saiu cada número.</div></div>
-        <div class="vs-linha"><div class="vs-tema">Escrever a petição</div><div class="vs-so"><span class="rot">Com um prompt</span>Texto genérico, que você copia, ajusta e formata.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Ela lê os documentos do caso e escreve <b>no seu estilo e no seu timbrado</b>, a partir dos seus modelos.</div></div>
+        <div class="vs-linha"><div class="vs-tema">Fazer o cálculo</div><div class="vs-so"><span class="rot">Com um prompt</span>A conta sai na conversa. Você refaz para confiar.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Não é estimativa de IA: é <b>motor de cálculo</b>, com a memória aberta para você conferir.</div></div>
+        <div class="vs-linha"><div class="vs-tema">Escrever a petição</div><div class="vs-so"><span class="rot">Com um prompt</span>Texto genérico, que você copia, ajusta e formata.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Ela lê os documentos do caso e escreve <b>no seu estilo e no seu timbrado</b>, em Word.</div></div>
         <div class="vs-linha"><div class="vs-tema">Postar no Instagram</div><div class="vs-so"><span class="rot">Com um prompt</span>Legenda com cara de robô e nenhuma arte.</div><div class="vs-com"><span class="rot">Com a MaestrIA</span>Carrossel, reel e artigo <b>com a sua voz</b>, de olho no Provimento 205 da OAB.</div></div>
       </div>
       <p class="faca revela">Prompt resolve um pedaço de cada vez. O seu dia não tem só um pedaço.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <span class="olho revela">O Marketing vem junto</span>
-      <h2 class="revela">Caso bom não cai do céu. <em>Alguém precisa te achar.</em></h2>
-      <p class="lead revela">Quantas semanas o seu perfil já ficou parado porque o escritório engoliu o seu tempo? No mesmo teste você leva o pacote de Marketing inteiro.</p>
-      <div class="cards revela">
-        <div class="card"><h3>Conteúdo com a sua voz</h3>Carrossel, reel e artigo que soam como você, e não como robô.</div>
-        <div class="card"><h3>A pauta do mês inteiro</h3>O calendário de conteúdo da sua área, para você não travar na frente da tela em branco.</div>
-        <div class="card"><h3>Edição do vídeo que você gravou</h3>Você grava no celular. Ela tira as pausas e põe a legenda.</div>
-        <div class="card"><h3>De olho no Provimento 205</h3>O conteúdo passa pelas regras de publicidade da OAB antes de chegar em você.</div>
-      </div>
     </div>
   </section>
 
@@ -277,10 +297,10 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
     <div class="wrap">
       <span class="olho revela">Sigilo</span>
       <h2 class="revela">Os documentos do seu cliente ficam <em>no seu computador</em>.</h2>
-      <div class="cards revela">
-        <div class="card"><h3>Nada de cliente vem para nós</h3>Pela internet a MaestrIA confere só o código da licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</div>
-        <div class="card"><h3>Não inventa jurisprudência</h3>O que não se confirma na fonte oficial fica fora da peça, e ela avisa.</div>
-        <div class="card"><h3>Nada sai sem a sua revisão</h3>Ela não protocola, não envia mensagem e não fala com o seu cliente. Quem revisa, decide e assina é você.</div>
+      <div class="itens revela">
+        <div class="item"><b>Nada de cliente vem para nós</b>Pela internet a MaestrIA confere só o código da licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</div>
+        <div class="item"><b>Não inventa jurisprudência</b>O que não se confirma na fonte oficial fica fora da peça, e ela avisa.</div>
+        <div class="item"><b>Nada sai sem a sua revisão</b>Ela não protocola, não envia mensagem e não fala com o seu cliente. Quem revisa, decide e assina é você.</div>
       </div>
     </div>
   </section>
@@ -289,10 +309,10 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
     <div class="wrap">
       <span class="olho revela">Antes de começar</span>
       <h2 class="revela">O que você precisa ter.</h2>
-      <div class="cards revela">
-        <div class="card"><h3>Um computador</h3>Windows ou Mac. A instalação é feita nele, e não no celular.</div>
-        <div class="card"><h3>O aplicativo Claude</h3>Com a assinatura paga dele, contratada direto em claude.ai. É a inteligência que roda a MaestrIA, e o único custo durante o teste.</div>
-        <div class="card"><h3>Meia hora</h3>A instalação é guiada, com a imagem de cada tela. Travou, manda um print no grupo.</div>
+      <div class="itens revela">
+        <div class="item"><b>Um computador</b>Windows ou Mac. A instalação é feita nele, e não no celular.</div>
+        <div class="item"><b>O aplicativo Claude</b>Com a assinatura paga dele, contratada direto em claude.ai. É a inteligência que roda a MaestrIA, e o único custo durante o teste.</div>
+        <div class="item"><b>Meia hora</b>A instalação é guiada, com a imagem de cada tela. Travou, manda um print no grupo.</div>
       </div>
     </div>
   </section>
@@ -306,7 +326,7 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
       <details class="revela"><summary>Não entendo nada de tecnologia. Consigo?</summary><div class="ans">Consegue. A instalação é guiada, com a imagem de cada tela, e o suporte é no grupo da comunidade: você manda um print e a gente diz o que fazer. No uso, você escreve o pedido em português comum.</div></details>
       <details class="revela"><summary>Posso usar com casos reais?</summary><div class="ans">Pode. É a ferramenta completa. Os arquivos ficam em pastas suas, no seu computador. A inteligência artificial é a do Claude e segue as regras da sua conta lá.</div></details>
       <details class="revela"><summary>O que acontece depois dos 7 dias?</summary><div class="ans">As ferramentas pausam no seu computador. Nada do que você fez é apagado. Para seguir usando, é só comprar a licença com o mesmo e-mail do teste: ela volta a funcionar sem instalar nada de novo.</div></details>
-      <details class="revela"><summary>Quanto custa depois do teste?</summary><div class="ans">Depende da área que você escolher. A licença vale por 12 meses, com as atualizações do período, e não é mensalidade por usuário. O valor está na página de cada área, e você só vê isso se quiser continuar.</div></details>
+      <details class="revela"><summary>Quanto custa depois do teste?</summary><div class="ans">Depende da área que você escolher. A licença vale por 12 meses, com as atualizações do período, e não é mensalidade por usuário. O valor está na página de cada área, e você só precisa olhar isso se quiser continuar.</div></details>
       <details class="revela"><summary>Atuo em mais de uma área. E agora?</summary><div class="ans">Escolha a área do caso que você quer testar primeiro. O teste vale para uma área, com o Marketing junto.</div></details>
       <details class="revela"><summary>A MaestrIA substitui o advogado?</summary><div class="ans">Não. Ela faz o trabalho operacional e mostra os caminhos. Quem revisa, decide e assina é você.</div></details>
     </div>
@@ -334,100 +354,158 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
 (function () {
   "use strict";
   var EDGE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
-  var TIMBRADO = ["Petição no seu timbrado", "Escrita a partir dos seus modelos, com a jurisprudência conferida na fonte oficial."];
-  // Cada área: código, nome, a cena, o pedido de exemplo e o que volta. Os itens seguem as ferramentas do pacote.
-  var AREAS = [
-    ["prev", "Previdenciário", "O indeferimento chegou de manhã. O CNIS tem buraco, o PPP veio errado e a perícia é semana que vem.",
-      "Leia a pasta do seu João e monte o caso do auxílio-acidente.",
-      [["Cálculo de renda inicial e de atrasados", "Com a memória aberta, e a comparação entre as regras."],
-       ["Auditoria do benefício", "O que o INSS deixou de computar, apontado."],
-       ["Quesitos da perícia e impugnação", "De laudo e de PPP, mais o recurso administrativo no INSS."]]],
-    ["trab", "Trabalhista", "Audiência na quinta. O cliente trouxe o termo de rescisão, uma pilha de holerites e pressa.",
-      "Calcule a rescisão, as horas extras e o FGTS da Ana.",
-      [["Cálculo de rescisão, horas extras e FGTS", "Com a memória aberta, verba por verba."],
-       ["Contestação trabalhista", "Montada em cima dos documentos do caso."],
-       ["Minuta de acordo trabalhista", "Pronta para você ajustar e levar à audiência."]]],
-    ["familia", "Família", "A mãe chega com dois anos de pensão atrasada e um punhado de comprovantes de Pix.",
-      "Calcule a pensão em atraso da Júlia e monte a ação de alimentos.",
-      [["Cálculo da pensão em atraso", "Com a memória aberta, para você conferir cada parcela."],
-       ["Ação de alimentos", "Montada em cima dos documentos do caso."],
-       ["Divórcio consensual", "A minuta pronta para os dois lados lerem."]]],
-    ["consumidor", "Consumidor", "Nome negativado por uma dívida que o cliente nunca fez. Ele trouxe prints, protocolos e raiva.",
-      "Faça a triagem do caso do Paulo e monte a ação de dano moral.",
-      [["Triagem do caso", "O que tem de prova, o que falta e o caminho, antes de você escrever uma linha."],
-       ["Ação de dano moral do consumidor", "Da triagem à inicial."]]],
-    ["bancario", "Bancário", "Financiamento com juros que ninguém explicou. O cliente só quer saber: quanto eu paguei a mais?",
-      "Compare a taxa do contrato da Carla com a média do Banco Central e monte a revisional.",
-      [["Cálculo revisional", "Com a taxa média do Banco Central e a memória aberta."],
-       ["Ação revisional bancária", "Montada em cima do contrato e do cálculo."]]],
-    ["criminal", "Criminal", "Flagrante na sexta à noite. A audiência de custódia é amanhã cedo.",
-      "Leia o auto de prisão do Diego e monte o pedido de liberdade.",
-      [["Defesa no flagrante e pedido de liberdade", "Em cima do auto de prisão, para você revisar ainda hoje."],
-       ["Habeas corpus", "Montado a partir da decisão que você quer atacar."],
-       ["Cálculo de pena e de prescrição", "Com o passo a passo da conta."]]],
-    ["imobiliario", "Imobiliário", "O cliente desistiu do apartamento na planta. A construtora quer ficar com metade do que ele pagou.",
-      "Calcule o distrato do Renato e monte a ação.",
-      [["Distrato de compra de imóvel", "Com o cálculo do que volta para o cliente."],
-       ["Locação residencial", "Cobrança e reajuste do aluguel."]]],
-    ["empresarial", "Empresarial", "A empresa recebeu uma autuação e uma reclamação trabalhista na mesma semana. O dono quer resposta hoje.",
-      "Leia a autuação que a empresa recebeu e monte a defesa.",
-      [["Defesa tributária na esfera administrativa", "Em cima da autuação e dos documentos da empresa."],
-       ["Defesa trabalhista da empresa", "Montada a partir da reclamação recebida."]]]
-  ];
-  var GERAL = [["O caso organizado e o que falta de documento", "Antes de você escrever uma linha."],
-               ["O cálculo com a memória aberta", "Você vê de onde saiu cada número."], TIMBRADO];
-  var MKT = ["Marketing: o carrossel da semana com a sua voz", "Mais reel, artigo e o calendário do mês, de olho no Provimento 205."];
+  var FONTE = "Citações conferidas na fonte oficial";
+  // Cada área segue o que a página do pacote dela descreve: título, resumo, pedido de exemplo,
+  // o que a tela mostra, os arquivos que voltam e o que vem no teste.
+  var AREAS = {
+    prev: { nome: "Previdenciário",
+      h1: "No previdenciário, o gargalo não é achar caso. É <em>o que cada caso consome</em> antes de virar petição.",
+      sub: "Ela lê a pasta do cliente, monta a linha do tempo, calcula e escreve a petição no seu timbrado.",
+      cmd: "Leia a pasta do seu João e monte o caso do auxílio-acidente.",
+      passos: ["Lendo a pasta: CNIS, carta de concessão, laudo e PPP", "Linha do tempo montada, com o documento que falta apontado", "Renda inicial e atrasados calculados, com os reajustes oficiais"],
+      arq: [["doc", "Petição inicial", "No seu timbrado, em Word."], ["xls", "Cálculo de atrasados", "Em Excel, com a memória aberta, mês a mês."], ["doc", "Quesitos da perícia", "Prontos para juntar."]],
+      vem: [["Cálculo previdenciário", "Renda inicial, atrasados, tempo especial e simulação, com a memória aberta."], ["Planejamento previdenciário", "Aposentar agora ou esperar, com relatório para o cliente."], ["Auditor de CNIS", "Vínculo faltando e contribuição não computada, apontados em minutos."], ["Kit perícia completo", "Quesitos, impugnação de laudo e de PPP, e o cliente preparado para o dia."], ["Recurso contra indeferimento", "Argumentado com os dados do caso, no mesmo dia."], ["Qualificador de auxílio-acidente", "Você cola a conversa do cliente e recebe a resposta na hora."]] },
+    trab: { nome: "Trabalhista",
+      h1: "A reclamatória tem cálculo, prazo e audiência. E o escritório <em>só tem você</em>.",
+      sub: "Ela lê a carteira, os contracheques e o ponto, calcula verba por verba e escreve a peça.",
+      cmd: "Calcule a rescisão, as horas extras e o FGTS da Ana.",
+      passos: ["Lendo carteira de trabalho, contracheques, ponto e termo de rescisão", "Verbas calculadas: aviso prévio, 13º, férias com um terço, FGTS e multa de 40%", "Horas extras apuradas, com os reflexos"],
+      arq: [["xls", "Cálculo da rescisão", "Em Excel, com a memória aberta, verba por verba."], ["doc", "Peça trabalhista", "No seu timbrado, em Word."], ["doc", "Minuta de acordo", "Com o cálculo junto."]],
+      vem: [["Verbas rescisórias", "Qualquer modalidade, com FGTS e multa de 40%."], ["Hora extra com reflexos", "Horas extras e adicional noturno, com a correção aplicada."], ["Insalubridade e periculosidade", "O adicional com os reflexos e a prescrição."], ["Contestação trabalhista", "A defesa da empresa, tese a tese."], ["Acordo trabalhista", "A minuta pronta, com o cálculo junto."], ["Jurimetria por tribunal", "Procedência e acordo por vara, com dado oficial do CNJ."]] },
+    familia: { nome: "Família",
+      h1: "Na família, a pensão atrasa todo mês. E a planilha <em>volta pra sua mesa</em> toda vez.",
+      sub: "Ela lê o título e os comprovantes, calcula o débito mês a mês e escreve a peça no seu estilo.",
+      cmd: "Calcule a pensão em atraso da Júlia e monte a execução.",
+      passos: ["Lendo o título e os comprovantes de pagamento", "Débito calculado mês a mês, com correção e juros", "Separado o que vai pela prisão e o que vai pela penhora"],
+      arq: [["xls", "Planilha do débito alimentar", "Com a memória aberta, parcela por parcela."], ["doc", "Execução de alimentos", "No seu timbrado, com o cálculo dentro da peça."]],
+      vem: [["Débito alimentar", "Mês a mês, com correção, juros e a memória aberta."], ["Prisão ou penhora", "A separação pela data do ajuizamento, pronta para a execução."], ["Partilha e quinhão", "Meação, quinhão de cada herdeiro e o caminho: escritura, arrolamento ou inventário."], ["Ação de alimentos", "Ela lê os documentos e emenda o cálculo direto na peça."], ["Divórcio consensual", "A minuta completa, no seu timbrado."], ["51 modelos de família", "No banco de petições, prontos para virar o seu padrão."]] },
+    consumidor: { nome: "Consumidor",
+      h1: "No consumidor, o caso é pequeno. O problema é <em>o volume e o prazo que corre</em>.",
+      sub: "Ela faz a triagem com o prazo na frente, calcula a devolução item a item e escreve a peça do Juizado.",
+      cmd: "Faça a triagem do caso do Paulo e monte a inicial da cobrança indevida.",
+      passos: ["Triagem feita: decadência e prescrição conferidas", "Caminho indicado: consumidor.gov.br, Juizado ou Justiça Comum", "Devolução calculada item a item: o que vai em dobro e o que vai simples"],
+      arq: [["doc", "Ficha de triagem", "A tese, o prazo e os documentos a pedir."], ["xls", "Cálculo da devolução", "O dobro e o simples, separados."], ["doc", "Inicial do Juizado", "No seu timbrado, em Word."]],
+      vem: [["Triagem do caso", "Decadência e prescrição conferidas, com o caminho e os documentos."], ["Repetição do indébito", "O dobro e o simples separados, item a item."], ["Dano moral do consumidor", "Da triagem à inicial."], ["Transporte aéreo", "Voo e bagagem, com modelo próprio."], ["Vício do produto e arrependimento", "A peça no seu timbrado."], ["Régua do Juizado", "Alçada, foro, custas e prazos, com a fonte de cada regra."]] },
+    bancario: { nome: "Bancário",
+      h1: "O cliente do bancário não chega pedindo revisional. Chega <em>com um sintoma</em>.",
+      sub: "Ela ouve o sintoma, acha a tese, busca a taxa média do Banco Central na fonte, calcula e escreve.",
+      cmd: "Compare a taxa do contrato da Carla com a média do Banco Central e monte a revisional.",
+      passos: ["Triagem feita: tese e prazo identificados", "Taxa média do Banco Central buscada na fonte, com a data da consulta", "Revisional calculada pela Tabela Price, parcela a parcela"],
+      arq: [["xls", "Cálculo revisional", "Em Excel, com a memória parcela a parcela."], ["doc", "Ação revisional", "No seu timbrado, em Word."]],
+      vem: [["Triagem bancária", "O sintoma do cliente vira tese, prazo e lista de documentos."], ["Cálculo revisional", "Pela Tabela Price, com a taxa média do Banco Central buscada na fonte."], ["Consignado não contratado", "No benefício do INSS, com modelo próprio."], ["Cartão consignado RMC e RCC", "O cálculo e a peça."], ["Busca e apreensão", "A contestação pronta para a sua revisão."], ["Superendividamento", "O plano de pagamento e a peça."]] },
+    criminal: { nome: "Criminal",
+      h1: "No criminal, o telefone toca de madrugada. E a peça tem que estar pronta <em>antes da custódia</em>.",
+      sub: "Ela lê o auto de prisão e a decisão, calcula pena e prescrição e escreve o pedido no seu estilo.",
+      cmd: "Leia o auto de prisão do Diego e monte o pedido de liberdade.",
+      passos: ["Lendo o auto de prisão, a decisão e a folha de antecedentes", "Pedido montado com os dados do caso", "Lei penal de 2025 e 2026 considerada"],
+      arq: [["doc", "Pedido de liberdade", "No seu timbrado, para você revisar antes da audiência."], ["doc", "Habeas corpus", "Montado em cima da decisão."]],
+      vem: [["Defesa no flagrante", "Ela lê o auto de prisão e monta o pedido antes da custódia."], ["Habeas corpus", "Com os dados do caso e cada citação conferida."], ["Execução penal", "Progressão, livramento, remição e detração pela lei do tempo do crime."], ["Prescrição", "Em abstrato, retroativa, intercorrente e executória, com o último dia de cada prazo."], ["Dosimetria", "As três fases do art. 68 do Código Penal, com o regime inicial."], ["Revogação da preventiva", "O pedido montado com os dados do caso."]] },
+    imobiliario: { nome: "Imobiliário",
+      h1: "No imobiliário, a tese você já sabe. O que trava é <em>a conta que vem antes da peça</em>.",
+      sub: "Ela lê o contrato e o extrato, faz a conta do distrato ou do despejo e escreve a peça.",
+      cmd: "Calcule o distrato do Renato e monte a ação.",
+      passos: ["Lendo o contrato e o extrato de pagamentos", "Regime do contrato confirmado: ela pergunta antes de presumir", "Distrato calculado pela Lei 13.786/2018, cada dedução com o artigo ao lado"],
+      arq: [["xls", "Cálculo do distrato", "O que volta para o cliente, com a memória aberta."], ["doc", "Ação de distrato", "Com pedido de restituição, no seu timbrado."]],
+      vem: [["Débito locatício", "Atualizado linha a linha, com o valor para a purga da mora."], ["Despejo com cobrança", "A peça sai com o demonstrativo junto."], ["Distrato", "A conta da Lei 13.786/2018, pelo regime do contrato."], ["Atraso de obra", "A indenização calculada."], ["Cotas condominiais", "A execução, com multa, juros e correção."], ["Reajuste do aluguel", "O novo valor, com a memória da conta."]] },
+    empresarial: { nome: "Empresarial",
+      h1: "A empresa liga com um auto, uma citação ou uma reclamação. <em>O prazo já está correndo</em>.",
+      sub: "Ela lê o auto, a certidão de dívida ou a inicial, conta o prazo na regra conferida e escreve a defesa.",
+      cmd: "Leia o auto de infração que a empresa recebeu e monte a defesa.",
+      passos: ["Lendo o auto de infração e os documentos da empresa", "Prazo contado na regra que vale hoje, com o último dia", "Defesa montada com os dados do caso"],
+      arq: [["doc", "Defesa do auto de infração", "No seu timbrado, em Word."], ["xls", "Provisão do passivo trabalhista", "Pedido a pedido, com o fundamento escrito."]],
+      vem: [["Auto de infração do trabalho", "A defesa pronta antes do prazo apertar."], ["Auto de infração federal", "A impugnação, com o prazo contado."], ["Exclusão do Simples", "A impugnação pronta para a sua revisão."], ["Execução fiscal", "Exceção de pré-executividade por prescrição."], ["Provisão do passivo trabalhista", "Pedido a pedido, na regra contábil."], ["Contestação trabalhista", "A defesa da empresa, tese a tese."]] }
+  };
+  var ORDEM = ["prev", "trab", "familia", "consumidor", "bancario", "criminal", "imobiliario", "empresarial"];
+  var GERAL = { cmd: "Leia a pasta do cliente e monte o caso.",
+    passos: ["Lendo os documentos da pasta", "Caso organizado, com o documento que falta apontado", "Cálculo feito, com a memória aberta"],
+    arq: [["doc", "A petição", "No seu timbrado, em Word."], ["xls", "O cálculo", "Com a memória aberta, para você conferir."]],
+    vem: [["O pacote da sua área", "Toque na sua área lá em cima para ver a lista completa."], ["Petição no seu timbrado", "Escrita a partir dos seus modelos, em Word."], ["Jurisprudência conferida", "Na fonte oficial, antes de entrar na peça."], ["Briefing do caso", "A pasta do cliente vira resumo, linha do tempo e pendências."], ["Preparo da audiência", "O roteiro e os pontos de atenção."], ["Revisor nos seus critérios", "Aprende com as suas melhores peças."]] };
+  var MKT = ["mkt", "E o carrossel da semana", "Marketing junto: com a sua voz, de olho no Provimento 205."];
+  var SEMPRE = [["Petição no seu timbrado", "Escrita a partir dos seus modelos, em Word."], ["Jurisprudência conferida", "Na fonte oficial, antes de entrar na peça."]];
 
   var f = document.getElementById("f"), erro = document.getElementById("erro");
   var btn = document.getElementById("enviar"), btnTxt = document.getElementById("enviar-txt");
-  var caixaAreas = document.getElementById("areas");
+  var caixaAreas = document.getElementById("areas"), tela = document.getElementById("tela");
   var celular = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "");
+  var calmo = false; try { calmo = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
   var q = null; try { q = new URLSearchParams(location.search); } catch (e) {}
   var origem = ((q && q.get("o")) || "site").slice(0, 60);
-  var escolhida = "";
+  var escolhida = "", rodada = 0;
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
-  function entregas(itens) {
-    var ul = document.getElementById("d-entregas"); ul.innerHTML = "";
-    itens.concat([MKT]).forEach(function (it, n) {
-      var li = el("li", "sobe" + (it === MKT ? " mkt" : "")); li.style.animationDelay = (n * 90) + "ms";
-      li.appendChild(el("span", "ic", it === MKT ? "+" : "✓"));
-      var d = el("div"); d.appendChild(el("b", null, it[0])); d.appendChild(el("small", null, it[1])); li.appendChild(d);
-      ul.appendChild(li);
+
+  // A demonstração: o pedido é digitado, os passos aparecem e os arquivos chegam.
+  function rodar(d) {
+    var minha = ++rodada;
+    tela.innerHTML = "";
+    var cmd = el("p", "cmd"); tela.appendChild(cmd);
+    var fila = [];
+    d.passos.concat([FONTE]).forEach(function (p) { fila.push(function () { tela.appendChild(el("p", "passo sobe", p)); }); });
+    fila.push(function () {
+      tela.appendChild(el("p", "entregue sobe", "Entregue na pasta do cliente, para você revisar"));
+      var ul = el("ul", "arquivos"); tela.appendChild(ul);
+      d.arq.concat([MKT]).forEach(function (a, n) {
+        var li = el("li", "sobe"); li.style.animationDelay = (n * 110) + "ms";
+        li.appendChild(el("span", "tipo " + a[0], a[0] === "doc" ? "WORD" : a[0] === "xls" ? "CONTA" : "POST"));
+        var c = el("div"); c.appendChild(el("b", null, a[1])); c.appendChild(el("small", null, a[2])); li.appendChild(c);
+        ul.appendChild(li);
+      });
+      tela.appendChild(el("p", "rodape-tela sobe", "Exemplo ilustrativo de um pedido. Quem revisa, decide e assina é você."));
     });
+    if (calmo) { cmd.textContent = d.cmd; fila.forEach(function (fn) { fn(); }); return; }
+    cmd.classList.add("digitando");
+    var i = 0;
+    (function digita() {
+      if (minha !== rodada) return;
+      cmd.textContent = d.cmd.slice(0, ++i);
+      if (i < d.cmd.length) return setTimeout(digita, 16);
+      cmd.classList.remove("digitando");
+      (function proximo() {
+        if (minha !== rodada || !fila.length) return;
+        setTimeout(function () { if (minha !== rodada) return; fila.shift()(); proximo(); }, 480);
+      })();
+    })();
+  }
+  function listaVem(itens) {
+    var g = document.getElementById("vem-itens"); g.innerHTML = "";
+    itens.forEach(function (it) { var d = el("div", "item"); d.appendChild(el("b", null, it[0])); d.appendChild(document.createTextNode(it[1])); g.appendChild(d); });
   }
   function mostrarArea(id) {
-    var a = AREAS.filter(function (x) { return x[0] === id; })[0];
-    if (!a) return;
+    var a = AREAS[id]; if (!a) return;
     escolhida = id;
-    var cena = document.getElementById("cena"); cena.innerHTML = "";
-    cena.appendChild(el("small", null, "A cena"));
-    cena.appendChild(document.createTextNode(a[2]));
-    document.getElementById("d-titulo").textContent = "Claude, com a MaestrIA " + a[1];
-    document.getElementById("d-pedido").textContent = a[3];
-    entregas(a[4].concat([TIMBRADO]));
-    var rotulo = "Liberar meu teste: " + a[1] + " + Marketing";
+    caixaAreas.classList.remove("pulsa");
+    var h1 = document.getElementById("h1"), sub = document.getElementById("sub");
+    h1.innerHTML = a.h1; sub.innerHTML = "";
+    sub.appendChild(document.createTextNode(a.sub + " "));
+    sub.appendChild(el("b", null, "Teste 7 dias com um caso seu, com o Marketing junto."));
+    [h1, sub].forEach(function (x) { x.classList.remove("troca"); void x.offsetWidth; x.classList.add("troca"); });
+    document.getElementById("d-titulo").textContent = "Claude, com a MaestrIA " + a.nome;
+    rodar(a);
+    document.getElementById("vem-titulo").innerHTML = "O que vem no seu teste de <em>" + a.nome + "</em>.";
+    listaVem(a.vem.concat(SEMPRE));
+    var rotulo = "Liberar meu teste: " + a.nome + " + Marketing";
     btnTxt.textContent = rotulo;
     document.getElementById("fixo-btn").textContent = rotulo;
     document.getElementById("final-btn").textContent = rotulo;
-    document.getElementById("f-titulo").textContent = a[1] + " + Marketing, por 7 dias. Para onde eu mando o acesso?";
+    document.getElementById("f-titulo").textContent = a.nome + " + Marketing, 7 dias grátis. Para onde eu mando o acesso?";
+    document.getElementById("leva-area").textContent = "O pacote " + a.nome + ", completo";
     erro.hidden = true;
   }
-  entregas(GERAL);
-  AREAS.forEach(function (a) {
-    var l = el("label", "area"), i = el("input"); i.type = "radio"; i.name = "area"; i.value = a[0];
-    i.addEventListener("change", function () { mostrarArea(a[0]); });
-    l.appendChild(i); l.appendChild(el("span", null, a[1])); caixaAreas.appendChild(l);
+  ORDEM.forEach(function (id) {
+    var l = el("label", "area"), i = el("input"); i.type = "radio"; i.name = "area"; i.value = id;
+    i.addEventListener("change", function () { mostrarArea(id); });
+    l.appendChild(i); l.appendChild(el("span", null, AREAS[id].nome)); caixaAreas.appendChild(l);
   });
-  var pre = q && q.get("a");
-  if (pre) { var r = caixaAreas.querySelector('input[value="' + pre.replace(/[^a-z]/g, "") + '"]'); if (r) { r.checked = true; mostrarArea(r.value); } }
+  var pre = q && q.get("a"), preOk = false;
+  if (pre) { var r = caixaAreas.querySelector('input[value="' + pre.replace(/[^a-z]/g, "") + '"]'); if (r) { r.checked = true; mostrarArea(r.value); preOk = true; } }
+  if (!preOk) { rodar(GERAL); listaVem(GERAL.vem); }
 
   // Entrada suave dos blocos e botão fixo do celular (some quando o cadastro está na tela).
   var blocos = document.querySelectorAll(".revela"), fixo = document.getElementById("fixo");
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("dentro"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
     blocos.forEach(function (b) { io.observe(b); });
-    new IntersectionObserver(function (es) { fixo.classList.toggle("vis", !es[0].isIntersecting); }, { threshold: 0 }).observe(document.getElementById("cadastro"));
+    new IntersectionObserver(function (es) { fixo.classList.toggle("vis", !es[0].isIntersecting); }, { threshold: 0 }).observe(f);
   } else { blocos.forEach(function (b) { b.classList.add("dentro"); }); }
 
   // Contador: página aberta e começo de preenchimento. Sem nome nem e-mail.
@@ -471,7 +549,7 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
       whatsapp: zap.value, area: escolhida,
       site: document.getElementById("site").value, origem: origem
     };
-    if (!escolhida) { caixaAreas.scrollIntoView({ block: "center" }); return mostrarErro("Escolha a sua área ali em cima primeiro."); }
+    if (!escolhida) { caixaAreas.scrollIntoView({ block: "center" }); caixaAreas.classList.add("pulsa"); return mostrarErro("Escolha a sua área ali em cima primeiro."); }
     if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
     if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
@@ -495,7 +573,7 @@ footer .wrap { display:flex; flex-direction:column; gap:6px; }
           texto.textContent = pacote + "Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
         }
         document.getElementById("tela-form").hidden = true;
-        var ok = document.getElementById("tela-ok"); ok.hidden = false;
+        document.getElementById("tela-ok").hidden = false;
         fixo.hidden = true;
         document.getElementById("cadastro").scrollIntoView({ block: "start" });
       })
