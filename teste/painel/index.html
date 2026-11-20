@@ -138,7 +138,24 @@
     return r.primeira_ativacao_em ? "usando" : "parado";
   }
 
+  // O navegador guarda a página do painel. A cada leitura, confere se saiu versão nova e recarrega sozinho.
+  function conferirVersao() {
+    try {
+      fetch(location.pathname, { method: "HEAD", cache: "no-store" }).then(function (r) {
+        var noAr = Date.parse(r.headers.get("last-modified") || ""), aqui = Date.parse(document.lastModified);
+        if (!noAr || !aqui || noAr - aqui < 5000) return;
+        // Trava contra laço: só recarrega uma vez por versão.
+        var ja = ""; try { ja = sessionStorage.getItem("painel-recarregou") || ""; } catch (e) {}
+        if (ja === String(noAr)) return;
+        try { sessionStorage.setItem("painel-recarregou", String(noAr)); } catch (e) {}
+        location.reload();
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  conferirVersao();
+
   function carregar(silencioso) {
+    conferirVersao();
     var chave = ler();
     if (!chave) return entrada();
     if (!silencioso && !dados.length) mostrar("carregando");
