@@ -131,7 +131,7 @@ CSS_TESTE = r'''
 
 NAV = '''<nav>
   <div class="wrap nav-in">
-    <a class="logo" href="/" aria-label="MaestrIA: teste grátis"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
+    <a class="logo" href="#topo" aria-label="MaestrIA: voltar ao topo"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
     <div class="nav-links">
       <a href="#diferenca">O que ela faz</a>
       <a href="#seguranca">Segurança</a>
@@ -142,7 +142,7 @@ NAV = '''<nav>
   </div>
 </nav>'''
 
-HERO = '''<header class="hero">
+HERO = '''<header class="hero" id="topo">
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
     <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
@@ -385,6 +385,9 @@ FINAL = '''<section class="final">
 
 rodape = g('rodape')
 rodape = rodape.replace('<a href="#pacotes">O pacote</a>', '<a href="#teste">Testar 7 dias</a>')
+# O logo desta página volta ao topo dela, e não à página de todas as áreas.
+assert rodape.count('<a class="logo" href="/"') == 1
+rodape = rodape.replace('<a class="logo" href="/"', '<a class="logo" href="#topo"')
 
 SCRIPT_FORM = r'''<script>
 (function () {
