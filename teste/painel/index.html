@@ -108,14 +108,14 @@
 (function () {
   "use strict";
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
-  // Mesma guarda do painel da lista de espera: quem já entrou lá, entra aqui sem digitar de novo.
-  var GUARDA = "maestria-painel-lista";
+  // Guarda própria deste painel. Quem já entrou no painel da lista de espera entra aqui com a chave de lá.
+  var GUARDA = "maestria-painel-teste", GUARDA_LISTA = "maestria-painel-lista";
   var SITUACOES = {
     comprou: "Comprou", usando: "Instalou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
   };
   var dados = [], filtro = "todos", relogio = null;
 
-  function ler() { try { return localStorage.getItem(GUARDA) || ""; } catch (e) { return ""; } }
+  function ler() { try { return localStorage.getItem(GUARDA) || localStorage.getItem(GUARDA_LISTA) || ""; } catch (e) { return ""; } }
   function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function mostrar(id) {
