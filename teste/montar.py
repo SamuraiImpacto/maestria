@@ -109,7 +109,7 @@ HERO = '''<header class="hero">
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
     <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
-    <h1 class="big">Teste a MaestrIA por 7 dias, <span class="red">sem pagar nada</span>.</h1>
+    <h1 class="big">Teste a MaestrIA por 7&nbsp;dias, <span class="red">sem pagar nada</span>.</h1>
     <p class="hero-sub">A MaestrIA é uma inteligência artificial que se instala no seu computador e faz o trabalho operacional do escritório previdenciário: lê os documentos do cliente, calcula, escreve a petição no seu timbrado, confere a jurisprudência e ainda produz o conteúdo do seu Instagram com a sua voz. Você pede em português comum, como numa conversa. <b>Quem revisa e decide é você.</b></p>
     <div class="hero-cta">
       <a href="#teste" class="btn btn-red">Quero testar por 7 dias</a>
