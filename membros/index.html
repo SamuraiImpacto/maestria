@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261120direto">
+  <link rel="stylesheet" href="style.css?v=20261120umarquivo">
 </head>
 <body>
 
@@ -151,7 +151,7 @@
         <div class="ins-topo">
           <p class="ins-kicker">Instalar a MaestrIA</p>
           <h1 class="ins-titulo">Sua MaestrIA funcionando em 5 passos</h1>
-          <p class="ins-sub">Uns 15 minutos, no computador. Siga na ordem: cada passo mostra onde clicar.</p>
+          <p class="ins-sub">Cerca de meia hora, no computador, uma vez só. Siga na ordem: cada passo mostra onde clicar.</p>
           <div class="ins-so" role="group" aria-label="Seu computador">
             <span class="ins-so-rotulo">Seu computador:</span>
             <button type="button" class="ins-so-btn" data-so="win">Windows</button>
@@ -186,10 +186,15 @@
                 <div class="ins-acoes">
                   <a class="ins-btn ins-btn--claro" href="https://claude.ai/download" target="_blank" rel="noopener">Baixar o Claude (site oficial)</a>
                 </div>
-                <div class="ins-bloco so-win">
-                  <strong>Só no Windows: rode o preparador (uma vez só)</strong>
-                  <p>Ele confere dois programas que o Claude usa por trás (Git e Python), instala o que faltar e
-                    cria a pasta <b>MaestrIA-Arquivos</b> para os seus documentos.</p>
+                <div class="ins-bloco">
+                  <strong>Já tinha o Claude instalado? Atualize antes</strong>
+                  <p>Abra o Claude, clique no menu <b>Ajuda</b> e em <b>Buscar atualizações</b>. Com o Claude em dia,
+                    você <b>não precisa instalar mais nada</b>: o que faltar, ele mesmo instala no passo 4, pedindo a sua permissão.</p>
+                </div>
+                <details class="ins-bloco so-win">
+                  <summary><strong>Apareceu o aviso “Git é necessário”? Clique aqui</strong></summary>
+                  <p>Isso acontece em versão antiga do Claude. Primeiro atualize o aplicativo, como está acima.
+                    Se o aviso continuar, rode o preparador, uma vez só:</p>
                   <ol>
                     <li>Clique no botão abaixo. O arquivo <b>Preparar-meu-PC.bat</b> vai para a pasta Downloads.</li>
                     <li>Abra a pasta Downloads e clique <b>duas vezes</b> nele. Na janela preta, aperte qualquer tecla e espere.</li>
@@ -197,7 +202,7 @@
                   </ol>
                   <a class="ins-btn ins-btn--vazado" href="/Preparar-meu-PC.bat" download>Baixar o preparador do Windows</a>
                   <p class="ins-nota">Se o Windows mostrar um aviso de proteção, não desative nada: mande um print no grupo que a gente te guia.</p>
-                </div>
+                </details>
                 <div class="ins-bloco so-mac">
                   <strong>No Mac não tem preparador</strong>
                   <p>Se, durante a instalação, aparecer uma janela do próprio Mac pedindo para instalar as
@@ -247,7 +252,7 @@
                 <div class="ins-clique">
                   <span class="ins-letra">c</span>
                   <div><p>Logo ao lado, clique em <b>Abrir pasta…</b> e escolha a pasta <b>MaestrIA-Arquivos</b>.
-                    <span class="so-win">O preparador do passo 1 já criou essa pasta dentro da sua pasta de usuário (a mesma onde fica Downloads).</span>
+                    <span class="so-win">Ela ainda não existe? Na janela que abrir, clique em <b>Nova pasta</b>, no alto, escreva <b>MaestrIA-Arquivos</b> e aperte Enter. É nela que vão ficar os seus documentos.</span>
                     <span class="so-mac">No Mac, crie antes uma pasta com esse nome na sua pasta pessoal, pelo Finder (Arquivo, Nova Pasta).</span>
                     Depois clique em <b>Selecionar pasta</b>.</p>
                     <figure><img src="/img/guia/20261023/abrir-pasta.png" width="353" height="45" alt="Opção Abrir pasta" loading="lazy"></figure></div>
@@ -284,6 +289,7 @@
                   <span class="ins-letra">c</span>
                   <div><p>O Claude trabalha sozinho por alguns minutos e faz perguntas. <b>Leia e responda.</b>
                     Quando ele perguntar se pode registrar este computador na sua licença, responda que <b>pode</b>.
+                    Se ele disser que falta o <b>Python</b> e pedir para instalar, responda que <b>pode</b> também: é um programa oficial e gratuito.
                     Se ele pedir licença para usar arquivos, clique em permitir.</p>
                     <figure><img src="/img/guia/20261023/confirmacao.png" width="520" height="217" alt="Claude pergunta se pode registrar a instalação" loading="lazy"></figure></div>
                 </div>
@@ -444,7 +450,7 @@
 </main>
 
 <script src="guia-skills.js?v=20261110ins"></script>
-<script src="app.js?v=20261120direto"></script>
+<script src="app.js?v=20261120umarquivo"></script>
 <script src="conteudo.js?v=20261110ins"></script>
 <script src="curso.js?v=20261110ins"></script>
 </body>

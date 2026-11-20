@@ -592,3 +592,7 @@ textarea { resize: vertical; }
 }
 .aviso-teste-btn:hover { background: var(--vermelho-soft); }
 .aviso-teste-mini { display: block; margin-top: 10px; font-size: 0.9rem; }
+
+/* Plano B recolhido na tela de instalar (aviso de Git em versão antiga do Claude) */
+details.ins-bloco > summary{cursor:pointer;list-style-position:inside}
+details.ins-bloco[open] > summary{margin-bottom:10px}
