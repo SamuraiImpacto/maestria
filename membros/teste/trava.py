@@ -42,7 +42,7 @@ SETTINGS = CLAUDE / "settings.json"
 CONFERIR_A_CADA = 6 * 3600       # confere no servidor no máximo a cada 6 horas
 SEM_INTERNET_ATE = 24 * 3600     # sem conferir por mais de 24 horas, trava
 MARCA = "maestria-teste-trava"   # identifica os ganchos desta trava no settings.json
-LINK_PADRAO = "https://maestria.samurailab.com.br/prev-marketing/"
+LINK_PADRAO = "https://maestria.samurailab.com.br/"
 
 
 def agora():
@@ -173,8 +173,16 @@ def eh_da_maestria(evento):
     if nome == "PreToolUse":
         entrada = evento.get("tool_input") or {}
         alvo = " ".join(str(entrada.get(k) or "") for k in ("skill", "command", "name", "file_path", "path", "args")).lower()
-        return "maestria" in alvo or any(p in alvo for p in ("peticao-builder", "calculo-previdenciario", "quesitos-pericia",
-                                                              "briefing-do-caso", "marketing-juridico", "auditor-previdenciario"))
+        if "maestria" in alvo:
+            return True
+        # As ferramentas instaladas neste teste, seja qual for a área (cada uma tem a sua pasta com a licença).
+        nomes = {"peticao-builder", "calculo-previdenciario", "quesitos-pericia", "briefing-do-caso",
+                 "marketing-juridico", "auditor-previdenciario"}
+        try:
+            nomes.update(lic.parent.name.lower() for lic, _ in licencas_de_teste())
+        except Exception:
+            pass
+        return any(p in alvo for p in nomes)
     return False
 
 

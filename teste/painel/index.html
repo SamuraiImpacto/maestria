@@ -232,7 +232,8 @@
         a.href = "https://wa.me/" + zap; a.target = "_blank"; a.rel = "noopener";
         m.appendChild(a);
       }
-      var partes = [r.email, r.teste_origem ? "veio de: " + r.teste_origem : ""].filter(Boolean).join("  ·  ");
+      var area = String(r.plano || "").replace("pacote_", "").split("_").filter(function (x) { return x && x !== "marketing"; }).join(" + ");
+      var partes = [r.email, area ? "área: " + area : "", r.teste_origem ? "veio de: " + r.teste_origem : ""].filter(Boolean).join("  ·  ");
       if (partes) m.appendChild(document.createTextNode((zap ? "  ·  " : "") + partes));
       c.appendChild(m);
 

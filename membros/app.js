@@ -196,7 +196,13 @@ function avisoDoTeste(dados) {
     alvo.insertBefore(caixa, alvo.firstChild);
   }
   caixa.className = "aviso-teste" + (c.expirou ? " aviso-teste--fim" : "");
-  const botoes = oferta.oferta === "separados"
+  // A oferta segue a área que a pessoa testou. Fora do previdenciário, a área e o Marketing são comprados em separado.
+  const areaNome = String(oferta.area_nome || "Previdenciário").replace(/[<>&"']/g, "");
+  const outraArea = !!oferta.area && oferta.area !== "prev";
+  const botoes = oferta.oferta === "separados" && outraArea
+    ? "<a class='aviso-teste-btn' href='" + (links.prev || links.combo || "#") + "' target='_blank' rel='noopener'>Quero continuar com o pacote " + areaNome + "</a>" +
+      "<span class='aviso-teste-mini'>Para manter também o Marketing: <a href='" + (links.marketing || "#") + "' target='_blank' rel='noopener'>ver o Marketing</a></span>"
+    : oferta.oferta === "separados"
     ? "<a class='aviso-teste-btn' href='" + (links.combo || "#") + "' target='_blank' rel='noopener'>Quero os dois: Previdenciário + Marketing</a>" +
       "<span class='aviso-teste-mini'>Ou só um: <a href='" + (links.prev || "#") + "' target='_blank' rel='noopener'>Previdenciário</a> · " +
       "<a href='" + (links.marketing || "#") + "' target='_blank' rel='noopener'>Marketing</a></span>"
