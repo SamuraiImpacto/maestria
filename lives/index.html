@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Maratona de Lives do Samurai</title>
+<meta name="description" content="Convite para a Maratona de Lives do Samurai do Jurídico: escolha a data, o tema e receba a arte e a legenda prontas.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050506">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#050506; --card:#0d0d10; --card2:#15151a; --txt:#f6f3ee; --muted:#b9b6b0; --dim:#7d7a75;
+  --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.08); --redbd:rgba(239,39,39,.32);
+  --cta:#14a44d; --cta2:#1cc25c; --ok:#4ade80; --bd:rgba(255,255,255,.07); --bd2:rgba(255,255,255,.13); --r:20px; --rs:12px; }
+* { box-sizing:border-box; margin:0; padding:0; }
+[hidden] { display:none !important; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative; }
+body::before { content:""; position:absolute; inset:0 0 auto 0; height:820px; pointer-events:none;
+  background:radial-gradient(700px 420px at 84% 2%, rgba(239,39,39,.22), transparent 70%), radial-gradient(520px 380px at 2% 34%, rgba(239,39,39,.07), transparent 70%); }
+main { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:34px 20px 110px; display:flex; flex-direction:column; gap:56px; }
+section { display:flex; flex-direction:column; gap:20px; }
+.marca { display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--txt); }
+.marca i { width:9px; height:9px; border-radius:50%; background:var(--red); box-shadow:0 0 0 5px rgba(239,39,39,.18); }
+.selo { align-self:flex-start; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red2); background:var(--redbg); border:1px solid var(--redbd); border-radius:999px; padding:7px 15px; }
+h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(38px,7vw,68px); line-height:1.03; text-wrap:balance; letter-spacing:-.02em; }
+h1 em, h2 em { font-style:italic; color:var(--red2); }
+h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(26px,4.2vw,36px); line-height:1.14; text-wrap:balance; }
+h3 { color:var(--txt); font-size:17px; font-weight:800; }
+p b { color:var(--txt); }
+.sub { font-size:19px; max-width:60ch; }
+.nota { font-size:14px; color:var(--dim); }
+.fatos { display:flex; flex-wrap:wrap; gap:8px 18px; font-size:14px; color:var(--dim); }
+.fatos b { color:var(--ok); margin-right:6px; }
+.botao { display:inline-flex; align-items:center; justify-content:center; text-align:center; gap:10px; font:inherit; font-weight:800; font-size:16px; color:#fff; background:linear-gradient(180deg,var(--cta2),var(--cta)); border:0; border-radius:var(--rs); padding:15px 24px; cursor:pointer; text-decoration:none; box-shadow:0 10px 30px -12px rgba(28,194,92,.7); transition:transform .15s, filter .15s; }
+.botao:hover { transform:translateY(-2px); filter:brightness(1.07); }
+.botao:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+.botao.grande { font-size:18px; padding:18px 28px; width:100%; }
+.botao.sec { background:var(--card2); border:1px solid var(--bd2); box-shadow:none; }
+.botao:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
+.caixa { background:linear-gradient(180deg,#121217,#0b0b0e); border:1px solid var(--bd2); border-radius:24px; padding:28px; display:flex; flex-direction:column; gap:22px; box-shadow:0 30px 80px -40px rgba(239,39,39,.45); }
+.barra { height:6px; background:var(--card2); border-radius:99px; overflow:hidden; }
+.barra i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--red),var(--red2)); border-radius:99px; transition:width .35s ease; }
+.passo { font-size:12.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--red2); }
+.pergunta { font-family:'Playfair Display',serif; color:var(--txt); font-size:clamp(23px,3.6vw,30px); font-weight:700; line-height:1.22; text-wrap:balance; }
+.entra { animation:entra .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes entra { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+/* Datas */
+.datas { display:grid; grid-template-columns:repeat(auto-fill,minmax(118px,1fr)); gap:10px; }
+.data { font:inherit; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:12px 10px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; transition:border-color .15s, background .15s, transform .15s; }
+.data small { font-size:11.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+.data b { font-family:'Playfair Display',serif; font-size:28px; line-height:1.1; }
+.data span { font-size:12.5px; color:var(--dim); }
+.data:hover:not(:disabled) { border-color:var(--red2); transform:translateY(-1px); }
+.data.marcada { border-color:var(--red2); background:var(--redbg); }
+.data:disabled { opacity:.35; cursor:not-allowed; }
+.data:disabled span { color:var(--red2); }
+
+/* Temas */
+.temas { display:flex; flex-direction:column; gap:10px; }
+.tema { text-align:left; font:inherit; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:14px 16px; cursor:pointer; display:flex; flex-direction:column; gap:3px; transition:border-color .15s, background .15s; }
+.tema b { font-size:16px; }
+.tema span { font-size:14px; color:var(--dim); }
+.tema:hover:not(:disabled) { border-color:var(--red2); }
+.tema.marcada { border-color:var(--red2); background:var(--redbg); }
+.tema:disabled { opacity:.35; cursor:not-allowed; }
+
+/* Formulário */
+.campos { display:grid; gap:16px; }
+@media (min-width:700px) { .campos.duo { grid-template-columns:1fr 1fr; } }
+label { display:flex; flex-direction:column; gap:7px; color:var(--txt); font-weight:700; font-size:14.5px; }
+label span { color:var(--dim); font-weight:400; }
+input[type=text], input[type=tel], input[type=email], textarea { font:inherit; font-size:16px; color:var(--txt); background:#08080a; border:1px solid var(--bd2); border-radius:var(--rs); padding:14px; width:100%; }
+textarea { min-height:104px; resize:vertical; line-height:1.5; }
+input:focus, textarea:focus { border-color:var(--red2); box-shadow:0 0 0 4px rgba(239,39,39,.14); outline:0; }
+.foto { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.foto img { width:84px; height:84px; border-radius:50%; object-fit:cover; border:2px solid var(--red); background:var(--card2); }
+.ajuste { display:grid; gap:18px; align-items:center; grid-template-columns:150px 1fr; }
+.ajuste .previa { width:150px; height:200px; border-radius:18px; border:2px solid var(--red); background:var(--card2); }
+input[type=range] { width:100%; accent-color:var(--red); }
+@media (max-width:480px) { .ajuste { grid-template-columns:1fr; justify-items:center; } }
+.isca { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+.erro { color:var(--red2); font-weight:700; font-size:15px; }
+.nav { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+.voltar { background:none; border:0; color:var(--dim); font:inherit; font-size:14px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+
+/* Resultado */
+.artes { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); align-items:start; }
+.arte { display:flex; flex-direction:column; gap:10px; }
+.arte canvas { width:100%; height:auto; border-radius:16px; border:1px solid var(--bd2); display:block; background:#000; }
+.legenda { background:#0b141a; border:1px solid #1f2c33; border-radius:4px 18px 18px 18px; padding:18px 20px; color:#e9edef; font-size:16px; white-space:pre-wrap; }
+.lista { display:flex; flex-direction:column; gap:10px; list-style:none; counter-reset:n; }
+.lista li { counter-increment:n; padding-left:40px; position:relative; }
+.lista li::before { content:counter(n); position:absolute; left:0; top:1px; width:26px; height:26px; border-radius:8px; display:grid; place-items:center; font-size:13px; font-weight:800; color:#fff; background:var(--red); }
+.esq { height:18px; border-radius:8px; background:linear-gradient(90deg,var(--card2),#22222a,var(--card2)); background-size:200% 100%; animation:brilho 1.2s linear infinite; }
+@keyframes brilho { from { background-position:200% 0; } to { background-position:-200% 0; } }
+footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 20px 44px; font-size:13.5px; color:var(--dim); }
+@media (max-width:560px) { main { gap:44px; padding:26px 16px 90px; } .caixa { padding:20px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<main>
+
+  <section class="entra" id="topo">
+    <div class="marca"><i></i>Samurai do Jurídico</div>
+    <span class="selo">Maratona de Lives do Samurai · 01 a 18 de dezembro · 19h</span>
+    <h1 id="titulo">Bora fazer uma <em>live</em> comigo?</h1>
+    <p class="sub">Para fechar o ano e começar 2027 com força total, eu vou fazer uma maratona de lives no Instagram: <b>uma conversa por noite, de segunda a sexta, às 19h</b>, cada uma com alguém que eu admiro. Quero você numa delas.</p>
+    <p class="sub">Aqui embaixo você escolhe o dia e o assunto. Em 3 minutos sai com a data na agenda e com a arte e a legenda prontas para postar.</p>
+    <div class="fatos"><span><b>✓</b>Ao vivo no Instagram</span><span><b>✓</b>Cerca de 40 minutos</span><span><b>✓</b>Arte e legenda prontas</span></div>
+  </section>
+
+  <section id="fluxo">
+    <div class="caixa" aria-live="polite">
+      <div class="barra" aria-hidden="true"><i id="progresso"></i></div>
+      <div id="carregando"><div class="esq" style="width:55%"></div><div class="esq" style="margin-top:12px"></div><div class="esq" style="width:75%;margin-top:12px"></div></div>
+      <div id="tela"></div>
+    </div>
+  </section>
+
+  <div id="resultado" hidden style="display:flex;flex-direction:column;gap:56px"></div>
+
+</main>
+<footer>Rodrigo Goltzman, o Samurai · Impacto Marketing Jurídico e MaestrIA. Seus dados e a sua foto são usados só para organizar e divulgar a live.</footer>
+
+<img id="foto-samurai" src="/img/rodrigo-goltzman.jpg" alt="" hidden>
+
+<script>
+(function () {
+  "use strict";
+  var FUNCAO = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/lives-maratona";
+  var qs = new URLSearchParams(location.search);
+  var ENSAIO = qs.get("ensaio") === "1";
+  var CONVIDADO = (qs.get("c") || "").replace(/[^A-Za-zÀ-ÿ' ]/g, "").slice(0, 40);
+  var HORA = "19h", PERFIL = "@samuraidojuridico";
+
+  // Dias úteis de 01 a 18/12/2026, às 19h.
+  var DIAS = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18"];
+  var SEMANA = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+  var SEMANA_LONGA = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+
+  // Cada tema: título da arte, linha de apoio e a abertura da legenda, na voz do convidado.
+  var TEMAS = [
+    { k: "ia-escritorio", t: "IA no escritório, de verdade", s: "O que já dá para tirar das suas costas hoje", q: "o advogado que quer usar IA sem virar refém dela",
+      a: "Muito advogado já testou IA. Pouco advogado mudou a rotina por causa dela.\n\nA diferença não está na ferramenta. Está em saber o que entregar para ela e o que continua sendo seu.\n\nPrompt dá texto. Rotina dá resultado." },
+    { k: "atendimento", t: "Atendimento que vira contrato", s: "O que acontece entre o lead chegar e assinar", q: "quem recebe mensagem todo dia e fecha menos do que deveria",
+      a: "O escritório não perde cliente no anúncio. Perde no WhatsApp.\n\nA pessoa chegou com dúvida e medo. Recebeu um \"em que posso ajudar?\" e nunca mais respondeu.\n\nAtender bem não é responder rápido. É fazer a pessoa sentir que chegou no lugar certo." },
+    { k: "trafego", t: "Tráfego pago sem ilusão", s: "O que o anúncio resolve e o que ele só amplifica", q: "quem já investiu em anúncio e não viu o contrato chegar",
+      a: "O tráfego pago não resolve o problema de um advogado que ainda não sabe por que deveria ser escolhido.\n\nDá para aparecer para milhares de pessoas e continuar sendo só mais um.\n\nAnúncio amplia a mensagem. Se a mensagem é fraca, ele amplia a fraqueza." },
+    { k: "posicionamento", t: "Ser escolhido, não só encontrado", s: "Posicionamento que tira você da briga por preço", q: "quem cansou de ser comparado pelo valor do honorário",
+      a: "Ser excelente tecnicamente não basta. É preciso ser percebido como excelente.\n\nQuem não consegue se diferenciar acaba sendo comparado pelo preço.\n\nPosicionamento é o que faz a pessoa certa olhar para você e pensar: é esse." },
+    { k: "conteudo", t: "Aparecer sem medo da OAB", s: "Conteúdo e vídeo dentro do Provimento 205", q: "quem sabe que precisa aparecer e trava na hora de gravar",
+      a: "O medo da OAB virou a melhor desculpa para não aparecer.\n\nSó que o Provimento 205 não proíbe você de existir. Ele diz como.\n\nQuem conhece a regra grava com tranquilidade. Quem não conhece, some." },
+    { k: "equipe", t: "Montar equipe sem criar passivo", s: "Contratar, cobrar e desligar do jeito certo", q: "o dono de escritório que virou o gargalo da própria operação",
+      a: "Todo escritório cresce até o tamanho da paciência do dono.\n\nDepois disso, ou ele aprende a montar equipe, ou vira o funcionário mais caro e mais cansado da casa.\n\nContratar não é o problema. O problema é contratar sem método." },
+    { k: "gestao", t: "O escritório como empresa", s: "Números, rotina e processo para parar de apagar incêndio", q: "quem advoga bem e administra no improviso",
+      a: "Ninguém ensinou o advogado a ser dono de empresa.\n\nEle aprende sozinho, do jeito mais caro: errando com o próprio dinheiro.\n\nGestão não é planilha bonita. É saber, toda semana, o que entrou, o que saiu e o que precisa mudar." },
+    { k: "honorarios", t: "Cobrar o que o seu trabalho vale", s: "Honorários, proposta e a conversa do dinheiro", q: "quem ainda sente vergonha de falar de preço",
+      a: "O cliente não acha caro. Ele acha que não entendeu o que está comprando.\n\nQuando o advogado se desculpa pelo preço, o cliente pede desconto.\n\nCobrar bem começa antes do número: começa em como você apresenta o seu trabalho." },
+    { k: "nicho", t: "Escolher uma área e ser lembrado", s: "Nichar sem medo de perder cliente", q: "quem atende de tudo e não é lembrado por nada",
+      a: "\"Eu faço um pouco de tudo\" é a frase que mais custa caro na advocacia.\n\nQuem faz tudo não é indicado para nada.\n\nEscolher uma área não é fechar porta. É finalmente ter uma porta com o seu nome." },
+    { k: "vendas", t: "Fechar contrato sem empurrar", s: "A reunião de fechamento, passo a passo", q: "quem atende muito e fecha pouco",
+      a: "Advogado não gosta de vender. E é por isso que tanto caso bom vai embora.\n\nVender não é convencer. É ajudar a pessoa a decidir.\n\nQuem conduz a conversa fecha. Quem só responde pergunta, perde." },
+    { k: "previdenciario", t: "Previdenciário na prática", s: "O que os casos e os números estão mostrando", q: "o previdenciarista que quer decidir com dado, não com achismo",
+      a: "No previdenciário, quase todo mundo posta a mesma coisa.\n\nO que separa um escritório do outro não está no post. Está em como ele escolhe o caso, prepara a prova e decide onde ajuizar.\n\nDetalhe de bastidor que muda o resultado." },
+    { k: "carreira", t: "Do advogado sozinho ao escritório", s: "As fases, os erros e o que eu faria diferente", q: "quem está começando ou quer dar o próximo passo",
+      a: "Ninguém conta a parte feia de montar um escritório.\n\nO mês em que não entrou nada. O cliente que deu errado. A decisão que custou caro.\n\nÉ dessa parte que sai o que realmente ensina." },
+    { k: "livre", t: "", s: "Um assunto que não está na lista", q: "quem quer sair do lugar-comum",
+      a: "Tem assunto que ninguém fala em voz alta na advocacia.\n\nE é justamente por isso que precisa ser falado.\n\nResolvi abrir essa conversa." }
+  ];
+
+  var estado = { passo: 0, dia: null, tema: null, titulo: "", recorte: "", nome: "", insta: "", zap: "", email: "", bio: "", foto: null, fotoImg: null, zoom: 1, fy: .32 };
+  var ocupadas = [], temasUsados = [];
+  var tela = document.getElementById("tela"), barra = document.getElementById("progresso");
+
+  if (CONVIDADO) document.getElementById("titulo").innerHTML = CONVIDADO.split(" ")[0].replace(/[<>&]/g, "") + ", bora fazer uma <em>live</em> comigo?";
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function dataDe(iso) { var p = iso.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function ddmm(iso) { var p = iso.split("-"); return p[2] + "/" + p[1]; }
+  function temaDe(k) { return TEMAS.filter(function (t) { return t.k === k; })[0]; }
+  function chamar(corpo) {
+    return fetch(FUNCAO, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); });
+  }
+
+  // ---------------------------------------------------------------- passos
+  function desenhar() {
+    barra.style.width = [8, 36, 64, 90][estado.passo] + "%";
+    tela.innerHTML = "";
+    var c = el("div", "entra"); c.style.display = "flex"; c.style.flexDirection = "column"; c.style.gap = "20px";
+    [passoData, passoTema, passoVoce, passoConfere][estado.passo](c);
+    tela.appendChild(c);
+  }
+  function navegacao(c, podeSeguir, rotulo, aoSeguir) {
+    var n = el("div", "nav");
+    var b = el("button", "botao", rotulo || "Continuar"); b.type = "button"; b.disabled = !podeSeguir;
+    b.addEventListener("click", aoSeguir || function () { estado.passo++; desenhar(); });
+    n.appendChild(b);
+    if (estado.passo > 0) { var v = el("button", "voltar", "Voltar"); v.type = "button"; v.addEventListener("click", function () { estado.passo--; desenhar(); }); n.appendChild(v); }
+    c.appendChild(n); return b;
+  }
+
+  function passoData(c) {
+    c.appendChild(el("div", "passo", "Passo 1 de 4"));
+    c.appendChild(el("div", "pergunta", "Qual noite fica boa para você?"));
+    c.appendChild(el("p", "nota", "Todas às 19h, horário de Brasília. As datas riscadas já foram escolhidas por outro convidado."));
+    var g = el("div", "datas");
+    DIAS.forEach(function (iso) {
+      var d = dataDe(iso), b = el("button", "data" + (estado.dia === iso ? " marcada" : "")); b.type = "button";
+      var tomada = ocupadas.indexOf(iso) >= 0; b.disabled = tomada;
+      b.appendChild(el("small", null, SEMANA[d.getDay()])); b.appendChild(el("b", null, iso.slice(8))); b.appendChild(el("span", null, tomada ? "ocupada" : "dezembro"));
+      b.addEventListener("click", function () { estado.dia = iso; desenhar(); });
+      g.appendChild(b);
+    });
+    c.appendChild(g);
+    navegacao(c, !!estado.dia);
+  }
+
+  function passoTema(c) {
+    c.appendChild(el("div", "passo", "Passo 2 de 4"));
+    c.appendChild(el("div", "pergunta", "Sobre o que a gente conversa?"));
+    c.appendChild(el("p", "nota", "Escolha o assunto que é mais a sua praia. Os que já têm dono aparecem apagados, para a maratona não repetir tema."));
+    var g = el("div", "temas");
+    TEMAS.forEach(function (t) {
+      var usado = t.k !== "livre" && temasUsados.indexOf(t.k) >= 0;
+      var b = el("button", "tema" + (estado.tema === t.k ? " marcada" : "")); b.type = "button"; b.disabled = usado;
+      b.appendChild(el("b", null, t.t || "Outro tema")); b.appendChild(el("span", null, usado ? "já escolhido por outro convidado" : t.s));
+      b.addEventListener("click", function () { estado.tema = t.k; if (t.t) estado.titulo = t.t; else if (temaDe(estado.tema).t === "") estado.titulo = ""; desenhar(); });
+      g.appendChild(b);
+    });
+    c.appendChild(g);
+    if (estado.tema) {
+      var cx = el("div", "campos");
+      var l1 = el("label", null, "Título da live "); l1.appendChild(el("span", null, "(é o que vai na arte, até 46 letras)"));
+      var i1 = el("input"); i1.type = "text"; i1.maxLength = 46; i1.value = estado.titulo; i1.placeholder = "Ex.: O erro que mais vejo em audiência";
+      l1.appendChild(i1); cx.appendChild(l1);
+      var l2 = el("label", null, "O seu recorte "); l2.appendChild(el("span", null, "(uma frase: o que você quer mostrar nessa conversa)"));
+      var i2 = el("textarea"); i2.maxLength = 220; i2.value = estado.recorte; i2.placeholder = "Ex.: os três sinais de que o atendimento está perdendo cliente antes da proposta";
+      l2.appendChild(i2); cx.appendChild(l2);
+      c.appendChild(cx);
+      var seguir = navegacao(c, false);
+      var conf = function () { estado.titulo = i1.value.trim(); estado.recorte = i2.value.trim(); seguir.disabled = !(estado.titulo.length >= 6 && estado.recorte.length >= 12); };
+      i1.addEventListener("input", conf); i2.addEventListener("input", conf); conf();
+    } else navegacao(c, false);
+  }
+
+  function passoVoce(c) {
+    c.appendChild(el("div", "passo", "Passo 3 de 4"));
+    c.appendChild(el("div", "pergunta", "Agora você, para a arte e para a agenda"));
+    function campo(rot, extra, tipo, chave, ph, max) {
+      var l = el("label", null, rot + " "); if (extra) l.appendChild(el("span", null, extra));
+      var i = tipo === "area" ? el("textarea") : el("input"); if (tipo !== "area") i.type = tipo;
+      i.value = estado[chave]; i.maxLength = max; if (ph) i.placeholder = ph;
+      i.addEventListener("input", function () { estado[chave] = i.value; conf(); });
+      l.appendChild(i); return l;
+    }
+    var a = el("div", "campos duo");
+    a.appendChild(campo("Nome como aparece na arte", "", "text", "nome", "Ex.: Dra. Ana Souza", 40));
+    a.appendChild(campo("Seu Instagram", "", "text", "insta", "@seuperfil", 40));
+    a.appendChild(campo("WhatsApp com DDD", "", "tel", "zap", "(11) 99999-9999", 20));
+    a.appendChild(campo("E-mail", "(para o convite da agenda)", "email", "email", "voce@email.com", 120));
+    c.appendChild(a);
+    var b = el("div", "campos");
+    var lb = campo("Sua bio", "(vai na legenda do post e é como eu te apresento na live. Escreva em terceira pessoa, de 3 a 5 linhas)", "area", "bio", "Ex.: Advogada previdenciarista em Curitiba, com 12 anos de atuação em benefícios por incapacidade. Sócia do escritório Souza Advocacia, professora de prática previdenciária e autora do perfil @anasouza.adv, onde explica o INSS em linguagem simples.", 600);
+    lb.querySelector("textarea").style.minHeight = "170px";
+    var conta = el("span", null, ""); conta.style.alignSelf = "flex-end"; lb.appendChild(conta);
+    lb.querySelector("textarea").addEventListener("input", function () { conta.textContent = estado.bio.length + " de 600"; }); conta.textContent = estado.bio.length + " de 600";
+    b.appendChild(lb);
+    c.appendChild(b);
+    var f = el("div", "foto"), img = el("img"); img.alt = "Prévia da sua foto"; img.hidden = !estado.foto; if (estado.foto) img.src = estado.foto;
+    var lf = el("label", null, "Sua foto "); lf.appendChild(el("span", null, "(de rosto, bem iluminada; ela entra na arte)"));
+    var inp = el("input"); inp.type = "file"; inp.accept = "image/*"; lf.appendChild(inp);
+    f.appendChild(img); f.appendChild(lf); c.appendChild(f);
+    // Enquadramento: a pessoa aproxima e sobe ou desce a foto vendo como fica no cartão da arte.
+    var aj = el("div", "ajuste"); aj.hidden = !estado.foto;
+    var pv = document.createElement("canvas"); pv.width = 300; pv.height = 400; pv.className = "previa";
+    function previa() {
+      if (!estado.foto) return;
+      (estado.fotoImg ? Promise.resolve(estado.fotoImg) : carregar(estado.foto)).then(function (im) {
+        estado.fotoImg = im; var x = pv.getContext("2d"); x.clearRect(0, 0, 300, 400);
+        var m = Math.max(300 / im.width, 400 / im.height) * estado.zoom, iw = im.width * m, ih = im.height * m;
+        x.drawImage(im, Math.min(0, Math.max(300 - iw, 150 - iw * .5)), Math.min(0, Math.max(400 - ih, 160 - ih * estado.fy)), iw, ih);
+      });
+    }
+    function regua(rot, chave, min, max) {
+      var l = el("label", null, rot); var r = el("input"); r.type = "range"; r.min = min; r.max = max; r.step = "0.01"; r.value = estado[chave];
+      r.addEventListener("input", function () { estado[chave] = +r.value; previa(); }); l.appendChild(r); return l;
+    }
+    var rg = el("div", "campos"); rg.appendChild(regua("Aproximar", "zoom", 1, 2.4)); rg.appendChild(regua("Subir ou descer", "fy", 0, 1));
+    rg.appendChild(el("p", "nota", "É assim que a sua foto aparece na arte. Deixe o rosto no meio do quadro."));
+    aj.appendChild(pv); aj.appendChild(rg); c.appendChild(aj); previa();
+    var isca = el("div", "isca"); isca.setAttribute("aria-hidden", "true"); var site = el("input"); site.type = "text"; site.id = "site"; site.tabIndex = -1; site.autocomplete = "off"; isca.appendChild(site); c.appendChild(isca);
+    var seguir = navegacao(c, false);
+    function conf() {
+      var zap = estado.zap.replace(/\D/g, "");
+      seguir.disabled = !(estado.nome.trim().length >= 3 && estado.insta.trim().length >= 3 && zap.length >= 10 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(estado.email.trim()) && estado.bio.trim().length >= 60 && estado.foto);
+    }
+    inp.addEventListener("change", function () {
+      var arq = inp.files && inp.files[0]; if (!arq) return;
+      var r = new FileReader();
+      r.onload = function () {
+        var im = new Image();
+        im.onload = function () {
+          // Reduz a foto no navegador: lado maior de 1000 px, em JPEG.
+          var m = Math.min(1, 1000 / Math.max(im.width, im.height)), cv = document.createElement("canvas");
+          cv.width = Math.round(im.width * m); cv.height = Math.round(im.height * m);
+          cv.getContext("2d").drawImage(im, 0, 0, cv.width, cv.height);
+          estado.foto = cv.toDataURL("image/jpeg", .86); estado.fotoImg = null;
+          img.src = estado.foto; img.hidden = false; aj.hidden = false; previa(); conf();
+        };
+        im.src = r.result;
+      };
+      r.readAsDataURL(arq);
+    });
+    conf();
+  }
+
+  function passoConfere(c) {
+    var t = temaDe(estado.tema), d = dataDe(estado.dia);
+    c.appendChild(el("div", "passo", "Passo 4 de 4"));
+    c.appendChild(el("div", "pergunta", "Confere se está tudo certo"));
+    var r = el("div", "campos");
+    [["Quando", SEMANA[d.getDay()] + ", " + ddmm(estado.dia) + ", às " + HORA], ["Título", estado.titulo], ["Seu recorte", estado.recorte], ["Na arte", estado.nome + " · " + arroba(estado.insta)]].forEach(function (x) {
+      var p = el("p"); var b = el("b", null, x[0] + ": "); p.appendChild(b); p.appendChild(document.createTextNode(x[1])); r.appendChild(p);
+    });
+    c.appendChild(r);
+    var erro = el("p", "erro"); erro.hidden = true; erro.setAttribute("role", "alert"); c.appendChild(erro);
+    var botao = navegacao(c, true, "Confirmar a minha live", function () {
+      erro.hidden = true; botao.disabled = true; botao.textContent = "Reservando a sua data...";
+      var corpo = { acao: "reservar", dia: estado.dia, tema: estado.tema, titulo: estado.titulo, recorte: estado.recorte, nome: estado.nome.trim(), instagram: arroba(estado.insta),
+        whatsapp: estado.zap.replace(/\D/g, ""), email: estado.email.trim(), bio: estado.bio.trim(), foto: estado.foto, convite: qs.get("o") === "teste-publicacao" ? "teste-publicacao" : CONVIDADO, site: (document.getElementById("site") || {}).value || "" };
+      (ENSAIO ? Promise.resolve({ ok: true, j: { ok: true, numero: DIAS.indexOf(estado.dia) + 1 } }) : chamar(corpo))
+        .then(function (x) {
+          if (!x.ok || !x.j.ok) throw new Error((x.j && x.j.erro) || "Não consegui reservar agora.");
+          mostrarResultado(x.j.numero || DIAS.indexOf(estado.dia) + 1);
+        })
+        .catch(function (e) { botao.disabled = false; botao.textContent = "Confirmar a minha live"; erro.textContent = e.message || "Não consegui reservar agora. Tente de novo em um minuto."; erro.hidden = false; });
+    });
+  }
+  function arroba(s) { s = String(s || "").trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/[\/?].*$/, "").replace(/^@+/, ""); return "@" + s; }
+
+  // ---------------------------------------------------------------- legenda
+  function legenda() {
+    var t = temaDe(estado.tema), dm = ddmm(estado.dia);
+    return t.a + "\n\nNa live eu quero mostrar " + estado.recorte.replace(/^[A-ZÀ-Ý]/, function (m) { return m.toLowerCase(); }).replace(/\.$/, "") + ".\n\n" +
+      "No dia " + dm + ", às " + HORA + ", eu converso sobre isso com o " + PERFIL + ", na Maratona de Lives do Samurai, para fechar o ano e começar 2027 com força total.\n\n" +
+      "Anote na agenda: " + dm + ", às " + HORA + ", ao vivo aqui no Instagram.\n\n" +
+      "Essa conversa é para " + t.q + ".\n\n" +
+      "Quem vai estar na conversa:\n\n" +
+      estado.nome.trim() + " (" + arroba(estado.insta) + "): " + estado.bio.trim().replace(/\s*\n+\s*/g, " ") + "\n\n" +
+      "Rodrigo Goltzman (" + PERFIL + "): o Samurai do Jurídico, CEO da Impacto Marketing Jurídico e criador da MaestrIA.";
+  }
+
+  // ---------------------------------------------------------------- arte
+  function carregar(src) { return new Promise(function (ok, erro) { var i = new Image(); i.onload = function () { ok(i); }; i.onerror = erro; i.src = src; }); }
+  function quebra(ctx, texto, largura) {
+    var pal = texto.split(/\s+/), linhas = [], atual = "";
+    pal.forEach(function (p) { var t = atual ? atual + " " + p : p; if (ctx.measureText(t).width > largura && atual) { linhas.push(atual); atual = p; } else atual = t; });
+    if (atual) linhas.push(atual); return linhas;
+  }
+  function caminho(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r); ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+  // Cartão de retrato: a foto preenche o cartão, enquadrada no rosto, com o nome escrito sobre um degradê.
+  function cartao(ctx, img, x, y, w, h, o) {
+    ctx.save(); caminho(ctx, x, y, w, h, 34); ctx.clip();
+    ctx.fillStyle = "#15151a"; ctx.fillRect(x, y, w, h);
+    var m = Math.max(w / img.width, h / img.height) * (o.zoom || 1), iw = img.width * m, ih = img.height * m;
+    var ix = Math.min(x, Math.max(x + w - iw, x + w / 2 - iw * (o.fx == null ? .5 : o.fx)));
+    var iy = Math.min(y, Math.max(y + h - ih, y + h * .4 - ih * (o.fy == null ? .32 : o.fy)));
+    ctx.drawImage(img, ix, iy, iw, ih);
+    var g = ctx.createLinearGradient(0, y + h * .46, 0, y + h); g.addColorStop(0, "rgba(5,5,6,0)"); g.addColorStop(.62, "rgba(5,5,6,.82)"); g.addColorStop(1, "rgba(5,5,6,.97)");
+    ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+    ctx.textAlign = "left"; ctx.fillStyle = "#ff5d5d"; ctx.font = "800 20px Inter"; ctx.letterSpacing = "4px"; ctx.fillText(o.papel, x + 30, y + h - 104); ctx.letterSpacing = "0px";
+    var c = 42; ctx.fillStyle = "#f6f3ee"; do { ctx.font = "800 " + c + "px Inter"; c -= 2; } while (ctx.measureText(o.nome).width > w - 60 && c > 24);
+    ctx.fillText(o.nome, x + 30, y + h - 58);
+    ctx.fillStyle = "#b9b6b0"; ctx.font = "600 25px Inter"; ctx.fillText(o.arroba, x + 30, y + h - 24);
+    ctx.restore();
+    caminho(ctx, x, y, w, h, 34); ctx.lineWidth = o.destaque ? 5 : 2; ctx.strokeStyle = o.destaque ? "#ef2727" : "rgba(255,255,255,.22)"; ctx.stroke();
+  }
+  function pintar(cv, alto, numero, convidado, samurai) {
+    var W = 1080, H = alto ? 1920 : 1350, ctx = cv.getContext("2d"); cv.width = W; cv.height = H;
+    var d = dataDe(estado.dia), M = 72, topo = alto ? 270 : 104, faixaH = 176, base = alto ? H - 330 : H - 64;
+    // fundo: preto, brilho vermelho e linhas finas
+    ctx.fillStyle = "#050506"; ctx.fillRect(0, 0, W, H);
+    var g = ctx.createRadialGradient(W * .92, H * .06, 0, W * .92, H * .06, W * 1.05); g.addColorStop(0, "rgba(239,39,39,.50)"); g.addColorStop(.55, "rgba(239,39,39,.10)"); g.addColorStop(1, "rgba(239,39,39,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    var g2 = ctx.createRadialGradient(0, H * .72, 0, 0, H * .72, W * .8); g2.addColorStop(0, "rgba(239,39,39,.20)"); g2.addColorStop(1, "rgba(239,39,39,0)"); ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(255,255,255,.035)"; ctx.lineWidth = 1;
+    for (var lx = M; lx < W; lx += 117) { ctx.beginPath(); ctx.moveTo(lx, 0); ctx.lineTo(lx, H); ctx.stroke(); }
+    ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+    // número da live, enorme e quase apagado, atrás de tudo
+    ctx.fillStyle = "rgba(255,255,255,.05)"; ctx.font = "italic 900 520px 'Playfair Display'"; ctx.textAlign = "right"; ctx.fillText(String(numero).padStart(2, "0"), W + 30, topo + 400); ctx.textAlign = "left";
+    // cabeçalho
+    ctx.fillStyle = "#f6f3ee"; ctx.font = "800 26px Inter"; ctx.letterSpacing = "6px"; ctx.fillText("MARATONA DE LIVES DO SAMURAI", M, topo);
+    var selo = "AO VIVO"; ctx.font = "800 24px Inter"; ctx.letterSpacing = "4px"; var sw = ctx.measureText(selo).width + 76;
+    caminho(ctx, W - M - sw, topo - 36, sw, 52, 26); ctx.fillStyle = "#ef2727"; ctx.fill();
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(W - M - sw + 28, topo - 10, 8, 0, Math.PI * 2); ctx.fill(); ctx.fillText(selo, W - M - sw + 48, topo - 1); ctx.letterSpacing = "0px";
+    ctx.fillStyle = "#ef2727"; ctx.fillRect(M, topo + 26, 92, 5);
+    ctx.fillStyle = "#d9d5cf"; ctx.font = "italic 700 33px 'Playfair Display'"; ctx.fillText("Para fechar o ano e começar 2027 com força total", M, topo + 84);
+    // título: última linha em itálico vermelho
+    var corpo = 112, linhas;
+    do { ctx.font = "900 " + corpo + "px 'Playfair Display'"; linhas = quebra(ctx, estado.titulo, W - 2 * M); corpo -= 6; } while (linhas.length > 3 && corpo > 62);
+    corpo += 6; var y = topo + 116 + corpo;
+    linhas.forEach(function (l, k) { var ult = k === linhas.length - 1 && linhas.length > 1; ctx.fillStyle = ult ? "#ff5d5d" : "#f6f3ee"; ctx.font = (ult ? "italic " : "") + "900 " + corpo + "px 'Playfair Display'"; ctx.fillText(l, M, y); y += corpo * 1.06; });
+    // retratos em cartão, lado a lado
+    var fy0 = base - faixaH, vao = 26, cw = (W - 2 * M - vao) / 2, cyTopo = y - corpo * .5 + 34, ch = Math.min(alto ? 760 : 620, fy0 - 44 - cyTopo);
+    cyTopo = fy0 - 44 - ch;
+    cartao(ctx, convidado, M, cyTopo, cw, ch, { nome: estado.nome.trim(), arroba: arroba(estado.insta), papel: "QUEM VEM", destaque: true, zoom: estado.zoom || 1, fy: estado.fy == null ? .32 : estado.fy });
+    cartao(ctx, samurai, M + cw + vao, cyTopo, cw, ch, { nome: "Rodrigo Goltzman", arroba: PERFIL, papel: "QUEM RECEBE", zoom: 1.18, fx: .475, fy: .27 });
+    // selo redondo entre as duas fotos
+    var bx = W / 2, by = cyTopo + ch * .40; ctx.beginPath(); ctx.arc(bx, by, 50, 0, Math.PI * 2); ctx.fillStyle = "#050506"; ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = "#ef2727"; ctx.stroke();
+    ctx.fillStyle = "#f6f3ee"; ctx.font = "italic 900 40px 'Playfair Display'"; ctx.textAlign = "center"; ctx.fillText("com", bx, by + 12); ctx.textAlign = "left";
+    // faixa vermelha com a data
+    caminho(ctx, M, fy0, W - 2 * M, faixaH, 30); var gf = ctx.createLinearGradient(M, 0, W - M, 0); gf.addColorStop(0, "#ef2727"); gf.addColorStop(1, "#b3161b"); ctx.fillStyle = gf; ctx.fill();
+    ctx.fillStyle = "#fff"; ctx.font = "900 112px 'Playfair Display'"; ctx.fillText(ddmm(estado.dia), M + 34, fy0 + 124);
+    var larg = ctx.measureText(ddmm(estado.dia)).width, tx = M + 34 + larg + 30;
+    ctx.fillStyle = "rgba(255,255,255,.35)"; ctx.fillRect(tx - 15, fy0 + 40, 2, faixaH - 80);
+    ctx.fillStyle = "#fff"; ctx.font = "800 38px Inter"; ctx.letterSpacing = "3px"; ctx.fillText(SEMANA_LONGA[d.getDay()].toUpperCase() + " · " + HORA.toUpperCase(), tx, fy0 + 78);
+    ctx.font = "600 25px Inter"; ctx.letterSpacing = "2px"; ctx.fillStyle = "rgba(255,255,255,.88)"; ctx.fillText("NO INSTAGRAM " + PERFIL, tx, fy0 + 122); ctx.letterSpacing = "0px";
+  }
+
+  function mostrarResultado(numero) {
+    document.getElementById("fluxo").hidden = true; document.getElementById("topo").hidden = true;
+    var alvo = document.getElementById("resultado"); alvo.hidden = false; alvo.innerHTML = "";
+    var d = dataDe(estado.dia), primeiro = estado.nome.trim().replace(/^(Dra?\.?|Doutora?)\s+/i, "").split(" ")[0];
+
+    var s1 = el("section", "entra");
+    s1.innerHTML = "<div class='marca'><i></i>Samurai do Jurídico</div><span class='selo'>Live " + String(numero).padStart(2, "0") + " confirmada</span>";
+    var h = el("h1"); h.innerHTML = "Fechado, <em></em>"; h.querySelector("em").textContent = primeiro + "!"; s1.appendChild(h);
+    s1.appendChild(el("p", "sub", "A nossa live é " + SEMANA[d.getDay()].toLowerCase() + ", " + ddmm(estado.dia) + ", às " + HORA + ", ao vivo no Instagram. O convite já foi para o seu e-mail e eu te chamo no WhatsApp para combinar os detalhes."));
+    var ini = estado.dia.replace(/-/g, "") + "T220000Z", fim = estado.dia.replace(/-/g, "") + "T230000Z";
+    var ag = el("a", "botao sec", "Pôr na minha agenda do Google"); ag.target = "_blank"; ag.rel = "noopener";
+    ag.href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("Live com o Samurai: " + estado.titulo) + "&dates=" + ini + "/" + fim + "&details=" + encodeURIComponent("Maratona de Lives do Samurai do Jurídico, ao vivo no Instagram " + PERFIL + ". Entre 10 minutos antes.") + "&location=" + encodeURIComponent("Instagram " + PERFIL);
+    var nv = el("div", "nav"); nv.appendChild(ag); s1.appendChild(nv);
+    alvo.appendChild(s1);
+
+    var s2 = el("section", "entra");
+    s2.innerHTML = "<h2>A sua <em>arte</em> está pronta</h2><p>Uma para o feed e uma para os stories. É só baixar.</p>";
+    var artes = el("div", "artes"); s2.appendChild(artes); alvo.appendChild(s2);
+    var s3 = el("section", "entra");
+    s3.innerHTML = "<h2>A <em>legenda</em> do post</h2><p>Escrevi na sua voz, a partir do tema e do recorte que você escolheu. Mude o que quiser.</p>";
+    var texto = legenda(), cx = el("div", "legenda", texto); s3.appendChild(cx);
+    var cp = el("button", "botao sec", "Copiar a legenda"); cp.type = "button";
+    cp.addEventListener("click", function () { (navigator.clipboard ? navigator.clipboard.writeText(texto) : Promise.reject()).then(function () { cp.textContent = "Copiada ✓"; }, function () { cp.textContent = "Selecione o texto acima e copie"; }); });
+    var n3 = el("div", "nav"); n3.appendChild(cp); s3.appendChild(n3); alvo.appendChild(s3);
+
+    var s4 = el("section", "entra");
+    s4.innerHTML = "<h2>Como postar, em <em>colaboração</em> comigo</h2>" +
+      "<ol class='lista'><li>No Instagram, crie um post novo com a arte do feed.</li><li>Cole a legenda.</li><li>Toque em <b>Marcar pessoas</b> e depois em <b>Convidar colaborador</b>.</li><li>Procure por <b>" + PERFIL + "</b> e confirme. Eu aceito e o post aparece nos dois perfis.</li><li>Poste a arte dos stories no mesmo dia e de novo na manhã da live.</li></ol>" +
+      "<p class='nota'>O melhor dia para postar é de 3 a 5 dias antes da live.</p>";
+    alvo.appendChild(s4);
+
+    Promise.all([estado.fotoImg ? Promise.resolve(estado.fotoImg) : carregar(estado.foto), carregar(document.getElementById("foto-samurai").src), document.fonts ? document.fonts.ready : null]).then(function (r) {
+      estado.fotoImg = r[0];
+      [["Feed (4:5)", false, "live-feed"], ["Stories (9:16)", true, "live-stories"]].forEach(function (a) {
+        var bloco = el("div", "arte"), cv = document.createElement("canvas"); pintar(cv, a[1], numero, r[0], r[1]); bloco.appendChild(cv);
+        var b = el("a", "botao sec", "Baixar: " + a[0]); b.download = a[2] + "-" + ddmm(estado.dia).replace("/", "-") + ".png"; b.href = cv.toDataURL("image/png"); bloco.appendChild(b);
+        artes.appendChild(bloco);
+      });
+    }).catch(function () { artes.appendChild(el("p", "erro", "Não consegui montar a arte neste navegador. Eu te mando pelo WhatsApp.")); });
+    alvo.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+
+  // ---------------------------------------------------------------- início
+  function comecar() { document.getElementById("carregando").hidden = true; desenhar(); }
+  // Fontes da arte já pedidas, para o desenho não sair na fonte padrão.
+  if (document.fonts && document.fonts.load) { document.fonts.load("900 80px 'Playfair Display'"); document.fonts.load("italic 900 80px 'Playfair Display'"); document.fonts.load("800 30px Inter"); document.fonts.load("600 24px Inter"); }
+  // Amostra para aprovação: ?ensaio=1&demo=<tema> pula direto para o resultado, com uma convidada fictícia.
+  if (ENSAIO && qs.get("demo")) {
+    var cvD = document.createElement("canvas"); cvD.width = cvD.height = 600; var cD = cvD.getContext("2d");
+    cD.fillStyle = "#26262d"; cD.fillRect(0, 0, 600, 600); cD.fillStyle = "#4a4a55";
+    cD.beginPath(); cD.arc(300, 235, 105, 0, Math.PI * 2); cD.fill(); cD.beginPath(); cD.ellipse(300, 560, 190, 180, 0, 0, Math.PI * 2); cD.fill();
+    cD.fillStyle = "#b9b6b0"; cD.font = "700 30px Inter, sans-serif"; cD.textAlign = "center"; cD.fillText("foto do convidado", 300, 590);
+    var tD = temaDe(qs.get("demo")) || temaDe("atendimento");
+    estado = { passo: 3, dia: "2026-12-03", tema: tD.k, titulo: tD.t || "O que ninguém fala sobre audiência", recorte: "os três sinais de que o atendimento está perdendo cliente antes da proposta",
+      nome: "Dra. Ana Souza", insta: "@anasouza.adv", zap: "", email: "", bio: "Advogada previdenciarista em Curitiba, com 12 anos de atuação em benefícios por incapacidade. Sócia do escritório Souza Advocacia e professora de prática previdenciária. No Instagram, explica o INSS em linguagem simples para quem nunca entrou num fórum.", foto: cvD.toDataURL("image/jpeg", .9), fotoImg: null };
+    document.getElementById("carregando").hidden = true; mostrarResultado(3); return;
+  }
+  if (ENSAIO) { ocupadas = ["2026-12-02"]; temasUsados = ["trafego"]; comecar(); }
+  else chamar({ acao: "agenda" }).then(function (x) { if (x.j && x.j.ok) { ocupadas = x.j.ocupadas || []; temasUsados = x.j.temas || []; } comecar(); }).catch(comecar);
+})();
+</script>
+</body>
+</html>
