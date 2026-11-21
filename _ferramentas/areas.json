@@ -1,0 +1,409 @@
+{
+ "prev": {
+  "nome": "Previdenciário",
+  "h1": "No previdenciário, o gargalo não é achar caso. É <em>o que cada caso consome</em> antes de virar petição.",
+  "sub": "Ela lê a pasta do cliente, monta a linha do tempo, calcula e escreve a petição no seu timbrado.",
+  "cmd": "Leia a pasta do seu João e monte o caso do auxílio-acidente.",
+  "passos": [
+   "Lendo a pasta: CNIS, carta de concessão, laudo e PPP",
+   "Linha do tempo montada, com o documento que falta apontado",
+   "Renda inicial e atrasados calculados, com os reajustes oficiais"
+  ],
+  "arq": [
+   [
+    "doc",
+    "Petição inicial",
+    "No seu timbrado, em Word."
+   ],
+   [
+    "xls",
+    "Cálculo de atrasados",
+    "Em Excel, com a memória aberta, mês a mês."
+   ],
+   [
+    "doc",
+    "Quesitos da perícia",
+    "Prontos para juntar."
+   ]
+  ],
+  "vem": [
+   [
+    "Cálculo previdenciário",
+    "Renda inicial, atrasados, tempo especial e simulação, com a memória aberta."
+   ],
+   [
+    "Planejamento previdenciário",
+    "Aposentar agora ou esperar, com relatório para o cliente."
+   ],
+   [
+    "Auditor de CNIS",
+    "Vínculo faltando e contribuição não computada, apontados em minutos."
+   ],
+   [
+    "Kit perícia completo",
+    "Quesitos, impugnação de laudo e de PPP, e o cliente preparado para o dia."
+   ],
+   [
+    "Recurso contra indeferimento",
+    "Argumentado com os dados do caso, no mesmo dia."
+   ],
+   [
+    "Qualificador de auxílio-acidente",
+    "Você cola a conversa do cliente e recebe a resposta na hora."
+   ]
+  ]
+ },
+ "trab": {
+  "nome": "Trabalhista",
+  "h1": "A reclamatória tem cálculo, prazo e audiência. E o escritório <em>só tem você</em>.",
+  "sub": "Ela lê a carteira, os contracheques e o ponto, calcula verba por verba e escreve a peça.",
+  "cmd": "Calcule a rescisão, as horas extras e o FGTS da Ana.",
+  "passos": [
+   "Lendo carteira de trabalho, contracheques, ponto e termo de rescisão",
+   "Verbas calculadas: aviso prévio, 13º, férias com um terço, FGTS e multa de 40%",
+   "Horas extras apuradas, com os reflexos"
+  ],
+  "arq": [
+   [
+    "xls",
+    "Cálculo da rescisão",
+    "Em Excel, com a memória aberta, verba por verba."
+   ],
+   [
+    "doc",
+    "Peça trabalhista",
+    "No seu timbrado, em Word."
+   ],
+   [
+    "doc",
+    "Minuta de acordo",
+    "Com o cálculo junto."
+   ]
+  ],
+  "vem": [
+   [
+    "Verbas rescisórias",
+    "Qualquer modalidade, com FGTS e multa de 40%."
+   ],
+   [
+    "Hora extra com reflexos",
+    "Horas extras e adicional noturno, com a correção aplicada."
+   ],
+   [
+    "Insalubridade e periculosidade",
+    "O adicional com os reflexos e a prescrição."
+   ],
+   [
+    "Contestação trabalhista",
+    "A defesa da empresa, tese a tese."
+   ],
+   [
+    "Acordo trabalhista",
+    "A minuta pronta, com o cálculo junto."
+   ],
+   [
+    "Jurimetria por tribunal",
+    "Procedência e acordo por vara, com dado oficial do CNJ."
+   ]
+  ]
+ },
+ "familia": {
+  "nome": "Família",
+  "h1": "Na família, a pensão atrasa todo mês. E a planilha <em>volta pra sua mesa</em> toda vez.",
+  "sub": "Ela lê o título e os comprovantes, calcula o débito mês a mês e escreve a peça no seu estilo.",
+  "cmd": "Calcule a pensão em atraso da Júlia e monte a execução.",
+  "passos": [
+   "Lendo o título e os comprovantes de pagamento",
+   "Débito calculado mês a mês, com correção e juros",
+   "Separado o que vai pela prisão e o que vai pela penhora"
+  ],
+  "arq": [
+   [
+    "xls",
+    "Planilha do débito alimentar",
+    "Com a memória aberta, parcela por parcela."
+   ],
+   [
+    "doc",
+    "Execução de alimentos",
+    "No seu timbrado, com o cálculo dentro da peça."
+   ]
+  ],
+  "vem": [
+   [
+    "Débito alimentar",
+    "Mês a mês, com correção, juros e a memória aberta."
+   ],
+   [
+    "Prisão ou penhora",
+    "A separação pela data do ajuizamento, pronta para a execução."
+   ],
+   [
+    "Partilha e quinhão",
+    "Meação, quinhão de cada herdeiro e o caminho: escritura, arrolamento ou inventário."
+   ],
+   [
+    "Ação de alimentos",
+    "Ela lê os documentos e emenda o cálculo direto na peça."
+   ],
+   [
+    "Divórcio consensual",
+    "A minuta completa, no seu timbrado."
+   ],
+   [
+    "51 modelos de família",
+    "No banco de petições, prontos para virar o seu padrão."
+   ]
+  ]
+ },
+ "consumidor": {
+  "nome": "Consumidor",
+  "h1": "No consumidor, o caso é pequeno. O problema é <em>o volume e o prazo que corre</em>.",
+  "sub": "Ela faz a triagem com o prazo na frente, calcula a devolução item a item e escreve a peça do Juizado.",
+  "cmd": "Faça a triagem do caso do Paulo e monte a inicial da cobrança indevida.",
+  "passos": [
+   "Triagem feita: decadência e prescrição conferidas",
+   "Caminho indicado: consumidor.gov.br, Juizado ou Justiça Comum",
+   "Devolução calculada item a item: o que vai em dobro e o que vai simples"
+  ],
+  "arq": [
+   [
+    "doc",
+    "Ficha de triagem",
+    "A tese, o prazo e os documentos a pedir."
+   ],
+   [
+    "xls",
+    "Cálculo da devolução",
+    "O dobro e o simples, separados."
+   ],
+   [
+    "doc",
+    "Inicial do Juizado",
+    "No seu timbrado, em Word."
+   ]
+  ],
+  "vem": [
+   [
+    "Triagem do caso",
+    "Decadência e prescrição conferidas, com o caminho e os documentos."
+   ],
+   [
+    "Repetição do indébito",
+    "O dobro e o simples separados, item a item."
+   ],
+   [
+    "Dano moral do consumidor",
+    "Da triagem à inicial."
+   ],
+   [
+    "Transporte aéreo",
+    "Voo e bagagem, com modelo próprio."
+   ],
+   [
+    "Vício do produto e arrependimento",
+    "A peça no seu timbrado."
+   ],
+   [
+    "Régua do Juizado",
+    "Alçada, foro, custas e prazos, com a fonte de cada regra."
+   ]
+  ]
+ },
+ "bancario": {
+  "nome": "Bancário",
+  "h1": "O cliente do bancário não chega pedindo revisional. Chega <em>com um sintoma</em>.",
+  "sub": "Ela ouve o sintoma, acha a tese, busca a taxa média do Banco Central na fonte, calcula e escreve.",
+  "cmd": "Compare a taxa do contrato da Carla com a média do Banco Central e monte a revisional.",
+  "passos": [
+   "Triagem feita: tese e prazo identificados",
+   "Taxa média do Banco Central buscada na fonte, com a data da consulta",
+   "Revisional calculada pela Tabela Price, parcela a parcela"
+  ],
+  "arq": [
+   [
+    "xls",
+    "Cálculo revisional",
+    "Em Excel, com a memória parcela a parcela."
+   ],
+   [
+    "doc",
+    "Ação revisional",
+    "No seu timbrado, em Word."
+   ]
+  ],
+  "vem": [
+   [
+    "Triagem bancária",
+    "O sintoma do cliente vira tese, prazo e lista de documentos."
+   ],
+   [
+    "Cálculo revisional",
+    "Pela Tabela Price, com a taxa média do Banco Central buscada na fonte."
+   ],
+   [
+    "Consignado não contratado",
+    "No benefício do INSS, com modelo próprio."
+   ],
+   [
+    "Cartão consignado RMC e RCC",
+    "O cálculo e a peça."
+   ],
+   [
+    "Busca e apreensão",
+    "A contestação pronta para a sua revisão."
+   ],
+   [
+    "Superendividamento",
+    "O plano de pagamento e a peça."
+   ]
+  ]
+ },
+ "criminal": {
+  "nome": "Criminal",
+  "h1": "No criminal, o telefone toca de madrugada. E a peça tem que estar pronta <em>antes da custódia</em>.",
+  "sub": "Ela lê o auto de prisão e a decisão, calcula pena e prescrição e escreve o pedido no seu estilo.",
+  "cmd": "Leia o auto de prisão do Diego e monte o pedido de liberdade.",
+  "passos": [
+   "Lendo o auto de prisão, a decisão e a folha de antecedentes",
+   "Pedido montado com os dados do caso",
+   "Lei penal de 2025 e 2026 considerada"
+  ],
+  "arq": [
+   [
+    "doc",
+    "Pedido de liberdade",
+    "No seu timbrado, para você revisar antes da audiência."
+   ],
+   [
+    "doc",
+    "Habeas corpus",
+    "Montado em cima da decisão."
+   ]
+  ],
+  "vem": [
+   [
+    "Defesa no flagrante",
+    "Ela lê o auto de prisão e monta o pedido antes da custódia."
+   ],
+   [
+    "Habeas corpus",
+    "Com os dados do caso e cada citação conferida."
+   ],
+   [
+    "Execução penal",
+    "Progressão, livramento, remição e detração pela lei do tempo do crime."
+   ],
+   [
+    "Prescrição",
+    "Em abstrato, retroativa, intercorrente e executória, com o último dia de cada prazo."
+   ],
+   [
+    "Dosimetria",
+    "As três fases do art. 68 do Código Penal, com o regime inicial."
+   ],
+   [
+    "Revogação da preventiva",
+    "O pedido montado com os dados do caso."
+   ]
+  ]
+ },
+ "imobiliario": {
+  "nome": "Imobiliário",
+  "h1": "No imobiliário, a tese você já sabe. O que trava é <em>a conta que vem antes da peça</em>.",
+  "sub": "Ela lê o contrato e o extrato, faz a conta do distrato ou do despejo e escreve a peça.",
+  "cmd": "Calcule o distrato do Renato e monte a ação.",
+  "passos": [
+   "Lendo o contrato e o extrato de pagamentos",
+   "Regime do contrato confirmado: ela pergunta antes de presumir",
+   "Distrato calculado pela Lei 13.786/2018, cada dedução com o artigo ao lado"
+  ],
+  "arq": [
+   [
+    "xls",
+    "Cálculo do distrato",
+    "O que volta para o cliente, com a memória aberta."
+   ],
+   [
+    "doc",
+    "Ação de distrato",
+    "Com pedido de restituição, no seu timbrado."
+   ]
+  ],
+  "vem": [
+   [
+    "Débito locatício",
+    "Atualizado linha a linha, com o valor para a purga da mora."
+   ],
+   [
+    "Despejo com cobrança",
+    "A peça sai com o demonstrativo junto."
+   ],
+   [
+    "Distrato",
+    "A conta da Lei 13.786/2018, pelo regime do contrato."
+   ],
+   [
+    "Atraso de obra",
+    "A indenização calculada."
+   ],
+   [
+    "Cotas condominiais",
+    "A execução, com multa, juros e correção."
+   ],
+   [
+    "Reajuste do aluguel",
+    "O novo valor, com a memória da conta."
+   ]
+  ]
+ },
+ "empresarial": {
+  "nome": "Empresarial",
+  "h1": "A empresa liga com um auto, uma citação ou uma reclamação. <em>O prazo já está correndo</em>.",
+  "sub": "Ela lê o auto, a certidão de dívida ou a inicial, conta o prazo na regra conferida e escreve a defesa.",
+  "cmd": "Leia o auto de infração que a empresa recebeu e monte a defesa.",
+  "passos": [
+   "Lendo o auto de infração e os documentos da empresa",
+   "Prazo contado na regra que vale hoje, com o último dia",
+   "Defesa montada com os dados do caso"
+  ],
+  "arq": [
+   [
+    "doc",
+    "Defesa do auto de infração",
+    "No seu timbrado, em Word."
+   ],
+   [
+    "xls",
+    "Provisão do passivo trabalhista",
+    "Pedido a pedido, com o fundamento escrito."
+   ]
+  ],
+  "vem": [
+   [
+    "Auto de infração do trabalho",
+    "A defesa pronta antes do prazo apertar."
+   ],
+   [
+    "Auto de infração federal",
+    "A impugnação, com o prazo contado."
+   ],
+   [
+    "Exclusão do Simples",
+    "A impugnação pronta para a sua revisão."
+   ],
+   [
+    "Execução fiscal",
+    "Exceção de pré-executividade por prescrição."
+   ],
+   [
+    "Provisão do passivo trabalhista",
+    "Pedido a pedido, na regra contábil."
+   ],
+   [
+    "Contestação trabalhista",
+    "A defesa da empresa, tese a tese."
+   ]
+  ]
+ }
+}
