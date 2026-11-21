@@ -11,117 +11,188 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#000; --card:#0b0b0b; --card2:#141414; --txt:#fff; --muted:#bdbdbd; --dim:#7f7f7f;
+:root { --bg:#050506; --card:#0d0d10; --card2:#15151a; --txt:#f6f3ee; --muted:#b9b6b0; --dim:#7d7a75;
   --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.08); --redbd:rgba(239,39,39,.32);
   --cta:#14a44d; --cta2:#1cc25c; --ok:#4ade80; --okbg:rgba(74,222,128,.07); --okbd:rgba(74,222,128,.35);
-  --amar:#facc15; --bd:#1f1f1f; --bd2:#2c2c2c; --r:16px; --rs:10px; }
+  --amar:#facc15; --bd:rgba(255,255,255,.07); --bd2:rgba(255,255,255,.13); --r:20px; --rs:12px; }
 * { box-sizing:border-box; margin:0; padding:0; }
 [hidden] { display:none !important; }
 html { scroll-behavior:smooth; }
-body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-main { max-width:820px; margin:0 auto; padding:40px 16px 120px; display:flex; flex-direction:column; gap:64px; }
-section { display:flex; flex-direction:column; gap:18px; }
-.selo { align-self:flex-start; font-size:12.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--red2); background:var(--redbg); border:1px solid var(--redbd); border-radius:999px; padding:6px 14px; }
-h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(34px,6.4vw,58px); line-height:1.08; text-wrap:balance; letter-spacing:-.01em; }
+body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative; }
+body::before { content:""; position:absolute; inset:0 0 auto 0; height:900px; pointer-events:none; z-index:0;
+  background:radial-gradient(700px 420px at 82% 4%, rgba(239,39,39,.20), transparent 70%), radial-gradient(520px 380px at 4% 30%, rgba(239,39,39,.07), transparent 70%); }
+main { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:34px 20px 120px; display:flex; flex-direction:column; gap:84px; }
+section { display:flex; flex-direction:column; gap:20px; }
+.marca { display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--txt); }
+.marca i { width:9px; height:9px; border-radius:50%; background:var(--red); box-shadow:0 0 0 5px rgba(239,39,39,.18); }
+.marca span { color:var(--dim); font-weight:600; letter-spacing:.08em; }
+.selo { align-self:flex-start; font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red2); background:var(--redbg); border:1px solid var(--redbd); border-radius:999px; padding:7px 15px; }
+h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(40px,7.4vw,74px); line-height:1.02; text-wrap:balance; letter-spacing:-.02em; }
 h1 em, h2 em { font-style:italic; color:var(--red2); }
-h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(26px,4.4vw,38px); line-height:1.15; text-wrap:balance; }
+h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(28px,4.6vw,42px); line-height:1.12; text-wrap:balance; letter-spacing:-.01em; }
 h3 { color:var(--txt); font-size:18px; font-weight:800; line-height:1.3; }
 p b, li b { color:var(--txt); }
-.sub { font-size:19px; max-width:62ch; }
-.faca { font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(22px,3.6vw,30px); line-height:1.25; border-left:3px solid var(--red); padding:4px 0 4px 18px; text-wrap:balance; }
+.sub { font-size:19px; max-width:58ch; }
+.faca { font-family:'Playfair Display',serif; font-style:italic; font-weight:700; color:var(--txt); font-size:clamp(22px,3.4vw,30px); line-height:1.28; border-left:3px solid var(--red); padding:4px 0 4px 20px; text-wrap:balance; }
 .nota { font-size:14px; color:var(--dim); }
-.botao { display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:inherit; font-weight:800; font-size:16px; color:#fff; background:var(--cta); border:0; border-radius:var(--rs); padding:14px 22px; cursor:pointer; text-decoration:none; transition:background .15s, transform .15s; }
-.botao:hover { background:var(--cta2); transform:translateY(-1px); }
+.botao { display:inline-flex; align-items:center; justify-content:center; text-align:center; gap:10px; font-family:inherit; font-weight:800; font-size:16px; color:#fff; background:linear-gradient(180deg,var(--cta2),var(--cta)); border:0; border-radius:var(--rs); padding:15px 24px; cursor:pointer; text-decoration:none; box-shadow:0 10px 30px -12px rgba(28,194,92,.7); transition:transform .15s, box-shadow .15s, filter .15s; }
+.botao:hover { transform:translateY(-2px); filter:brightness(1.07); box-shadow:0 16px 36px -12px rgba(28,194,92,.8); }
 .botao:disabled { opacity:.6; cursor:wait; transform:none; }
-.botao.grande { font-size:18px; padding:18px 28px; width:100%; }
-.botao.sec { background:var(--card2); border:1px solid var(--bd2); }
-.botao.sec:hover { background:#1c1c1c; }
+.botao.grande { font-size:18px; padding:19px 28px; width:100%; }
+.botao.sec { background:var(--card2); border:1px solid var(--bd2); box-shadow:none; }
+.botao.sec:hover { background:#1d1d23; }
 .botao:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
-.cartao { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:22px; display:flex; flex-direction:column; gap:12px; }
-.cartao.verm { border-color:var(--redbd); background:var(--redbg); }
-.cartao.verde { border-color:var(--okbd); background:var(--okbg); }
-.lista { display:flex; flex-direction:column; gap:10px; padding-left:0; list-style:none; }
-.lista li { padding-left:26px; position:relative; }
-.lista li::before { content:"⚔"; position:absolute; left:0; color:var(--red2); font-size:14px; top:2px; }
-.lista.ok li::before { content:"✓"; color:var(--ok); font-weight:900; }
-.lista.nao li::before { content:"✕"; color:var(--red2); font-weight:900; }
+.cartao { background:linear-gradient(180deg,#111115,var(--card)); border:1px solid var(--bd); border-radius:var(--r); padding:24px; display:flex; flex-direction:column; gap:12px; }
+.cartao.verm { border-color:var(--redbd); background:linear-gradient(180deg,rgba(239,39,39,.12),rgba(239,39,39,.04)); }
+.cartao.verde { border-color:var(--okbd); background:linear-gradient(180deg,rgba(74,222,128,.10),rgba(74,222,128,.03)); }
+.lista { display:flex; flex-direction:column; gap:11px; padding-left:0; list-style:none; }
+.lista li { padding-left:28px; position:relative; }
+.lista li::before { content:""; position:absolute; left:4px; top:.62em; width:8px; height:8px; border-radius:2px; background:var(--red2); transform:rotate(45deg); }
+.lista.ok li::before { content:"✓"; background:none; transform:none; width:auto; height:auto; left:0; top:0; color:var(--ok); font-weight:900; }
+.lista.nao li::before { content:"✕"; background:none; transform:none; width:auto; height:auto; left:0; top:0; color:var(--red2); font-weight:900; }
 .duo { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
 
+/* Abertura */
+.abre { display:grid; gap:26px; align-items:center; }
+.abre-txt { display:flex; flex-direction:column; gap:20px; }
+.abre-fatos { display:flex; flex-wrap:wrap; gap:8px 18px; font-size:14px; color:var(--dim); }
+.abre-fatos b { color:var(--ok); font-weight:800; margin-right:6px; }
+.chapa { position:relative; border:1px solid var(--bd2); border-radius:24px; padding:18px 14px 12px; background:radial-gradient(120% 90% at 50% 0%, rgba(239,39,39,.14), transparent 60%), #0a0a0d; overflow:hidden; }
+.chapa::after { content:""; position:absolute; left:0; right:0; top:-30%; height:30%; background:linear-gradient(180deg, transparent, rgba(255,93,93,.16), transparent); animation:varre 4.2s ease-in-out infinite; }
+@keyframes varre { 0% { top:-30%; } 60%, 100% { top:105%; } }
+.chapa-rot { display:flex; justify-content:space-between; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); padding:0 6px 4px; }
+.radar { display:block; width:100%; height:auto; max-width:380px; margin:0 auto; }
+.radar .anel { fill:none; stroke:rgba(255,255,255,.09); stroke-width:1; }
+.radar .eixo { stroke:rgba(255,255,255,.09); stroke-width:1; }
+.radar .area { fill:rgba(239,39,39,.22); stroke:var(--red2); stroke-width:2; stroke-linejoin:round; }
+.radar .ponto { fill:var(--txt); stroke:var(--red); stroke-width:2; }
+.radar text { fill:var(--muted); font-family:'Inter',sans-serif; font-size:11.5px; font-weight:700; }
+.radar text.v { fill:var(--txt); font-size:12.5px; font-weight:800; }
+@media (min-width:860px) { .abre { grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:44px; } }
+
+/* Por que eu montei */
+.porque { border:1px solid var(--bd); border-radius:var(--r); padding:30px 28px; background:linear-gradient(180deg,#0f0f13,#0a0a0d); position:relative; }
+.porque::before { content:"“"; position:absolute; right:22px; top:-14px; font-family:'Playfair Display',serif; font-size:150px; line-height:1; color:rgba(239,39,39,.16); pointer-events:none; }
+.assina { display:flex; align-items:center; gap:12px; margin-top:6px; }
+.assina i { width:34px; height:2px; background:var(--red); }
+
 /* Perguntas */
-.quiz { background:var(--card); border:1px solid var(--bd2); border-radius:var(--r); padding:24px; display:flex; flex-direction:column; gap:20px; }
+.quiz { background:linear-gradient(180deg,#121217,#0b0b0e); border:1px solid var(--bd2); border-radius:24px; padding:28px; display:flex; flex-direction:column; gap:22px; box-shadow:0 30px 80px -40px rgba(239,39,39,.45); }
 .barra { height:6px; background:var(--card2); border-radius:99px; overflow:hidden; }
-.barra i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--red),var(--red2)); transition:width .35s ease; }
-.passo { font-size:13px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); }
-.pergunta { color:var(--txt); font-size:clamp(20px,3.2vw,24px); font-weight:800; line-height:1.3; }
+.barra i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--red),var(--red2)); border-radius:99px; transition:width .35s ease; }
+.passo { font-size:12.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--red2); }
+.pergunta { font-family:'Playfair Display',serif; color:var(--txt); font-size:clamp(23px,3.6vw,31px); font-weight:700; line-height:1.22; text-wrap:balance; }
 .ajuda { font-size:15px; color:var(--dim); margin-top:-10px; }
-.opcoes { display:flex; flex-direction:column; gap:10px; }
-.opcoes.grade { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); }
-.op { text-align:left; font:inherit; font-size:16px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:14px 16px; cursor:pointer; transition:border-color .15s, background .15s, transform .15s; }
+.opcoes { display:flex; flex-direction:column; gap:10px; counter-reset:op; }
+.opcoes.grade { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
+.op { counter-increment:op; display:flex; align-items:center; gap:14px; text-align:left; font:inherit; font-size:16px; font-weight:600; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:14px 16px; cursor:pointer; transition:border-color .15s, background .15s, transform .15s; }
+.op::before { content:counter(op, upper-alpha); flex:none; width:28px; height:28px; border-radius:8px; display:grid; place-items:center; font-size:12.5px; font-weight:800; color:var(--dim); border:1px solid var(--bd2); transition:inherit; }
 .op:hover { border-color:var(--red2); transform:translateY(-1px); }
+.op:hover::before, .op.marcada::before { color:#fff; background:var(--red); border-color:var(--red); }
 .op.marcada { border-color:var(--red2); background:var(--redbg); }
-.voltar { align-self:flex-start; background:none; border:0; color:var(--dim); font:inherit; font-size:14px; cursor:pointer; text-decoration:underline; }
-.entra { animation:entra .35s ease both; }
-@keyframes entra { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.voltar { align-self:flex-start; background:none; border:0; color:var(--dim); font:inherit; font-size:14px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+.entra { animation:entra .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes entra { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
 
 /* Prévia e notas */
+.laudo { display:grid; gap:22px; align-items:center; border:1px solid var(--bd2); border-radius:24px; padding:26px; background:radial-gradient(120% 100% at 0% 0%, rgba(239,39,39,.13), transparent 60%), #0b0b0e; }
+@media (min-width:760px) { .laudo { grid-template-columns:auto minmax(0,1fr) minmax(0,300px); } }
 .placar { display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
-.numero { font-family:'Playfair Display',serif; font-weight:900; font-size:72px; line-height:1; color:var(--txt); }
-.numero small { font-size:24px; color:var(--dim); }
-.frentes { display:flex; flex-direction:column; gap:14px; }
-.frente .topo { display:flex; justify-content:space-between; gap:10px; color:var(--txt); font-weight:700; font-size:15.5px; }
-.frente .trilho { height:10px; background:var(--card2); border-radius:99px; overflow:hidden; margin-top:6px; }
-.frente .trilho i { display:block; height:100%; border-radius:99px; width:0; transition:width .8s ease; }
-.frente p { font-size:15px; margin-top:8px; }
-.borrado { filter:blur(6px); user-select:none; pointer-events:none; }
+.medidor { --p:0; --c:var(--red); width:148px; height:148px; border-radius:50%; display:grid; place-items:center; flex:none; background:conic-gradient(var(--c) calc(var(--p) * 1%), #1c1c22 0); position:relative; }
+.medidor::before { content:""; position:absolute; inset:9px; border-radius:50%; background:#0b0b0e; }
+.numero { position:relative; font-family:'Playfair Display',serif; font-weight:900; font-size:54px; line-height:1; color:var(--txt); }
+.numero small { font-family:'Inter',sans-serif; font-size:15px; font-weight:700; color:var(--dim); }
+.frentes { display:flex; flex-direction:column; gap:16px; }
+.frente { border:1px solid var(--bd); border-radius:var(--rs); padding:16px 18px; background:var(--card); }
+.frente .topo { display:flex; justify-content:space-between; gap:10px; color:var(--txt); font-weight:800; font-size:15.5px; }
+.frente .trilho { height:8px; background:var(--card2); border-radius:99px; overflow:hidden; margin-top:10px; }
+.frente .trilho i { display:block; height:100%; border-radius:99px; width:0; transition:width .9s cubic-bezier(.2,.7,.2,1); }
+.frente p { font-size:15px; margin-top:10px; }
+.borrado { filter:blur(7px); user-select:none; pointer-events:none; opacity:.8; }
 
 /* Formulário */
+.portao { border:1px solid var(--bd2); border-radius:24px; padding:28px; background:linear-gradient(180deg,#121217,#0b0b0e); display:grid; gap:26px; }
+@media (min-width:760px) { .portao { grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; } }
 form { display:flex; flex-direction:column; gap:16px; }
-label { display:flex; flex-direction:column; gap:6px; color:var(--txt); font-weight:700; font-size:15px; }
+label { display:flex; flex-direction:column; gap:7px; color:var(--txt); font-weight:700; font-size:14.5px; }
 label span { color:var(--dim); font-weight:400; }
-input[type=text], input[type=tel], input[type=email] { font:inherit; font-size:16px; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:14px; width:100%; }
+input[type=text], input[type=tel], input[type=email] { font:inherit; font-size:16px; color:var(--txt); background:#08080a; border:1px solid var(--bd2); border-radius:var(--rs); padding:15px; width:100%; transition:border-color .15s, box-shadow .15s; }
+input[type=text]:focus, input[type=tel]:focus, input[type=email]:focus { border-color:var(--red2); box-shadow:0 0 0 4px rgba(239,39,39,.14); outline:0; }
 .isca { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
 .erro { color:var(--red2); font-weight:700; font-size:15px; }
 
 /* Resultado */
-.roteiro { background:var(--card); border:1px solid var(--bd); border-radius:var(--r); padding:20px; display:flex; flex-direction:column; gap:10px; }
-.roteiro .n { font-size:12.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--red2); }
-.roteiro .gancho { color:var(--txt); font-weight:700; font-size:17px; border-left:3px solid var(--red); padding-left:12px; }
-.roteiro .oab { font-size:14px; color:var(--amar); }
-.msg { background:#0b141a; border:1px solid var(--bd2); border-radius:14px; padding:16px; color:#e9edef; font-size:16px; white-space:pre-wrap; }
-.mix { display:flex; flex-direction:column; gap:10px; }
-.mix .linha { display:grid; grid-template-columns:120px 1fr 46px; gap:10px; align-items:center; font-size:15px; }
+.etapa { align-self:flex-start; font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--red2); }
+.roteiros { display:flex; flex-direction:column; gap:14px; counter-reset:rot; }
+.roteiro { counter-increment:rot; background:linear-gradient(180deg,#111115,var(--card)); border:1px solid var(--bd); border-radius:var(--r); padding:24px 24px 22px 92px; display:flex; flex-direction:column; gap:10px; position:relative; }
+.roteiro::before { content:counter(rot); position:absolute; left:24px; top:14px; font-family:'Playfair Display',serif; font-style:italic; font-weight:900; font-size:64px; line-height:1; color:rgba(255,93,93,.55); }
+.roteiro .n { font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+.roteiro .gancho { font-family:'Playfair Display',serif; font-style:italic; color:var(--txt); font-weight:700; font-size:19px; line-height:1.35; }
+.roteiro .oab { font-size:14px; color:var(--amar); border-top:1px dashed var(--bd2); padding-top:10px; }
+.msg { background:#0b141a; border:1px solid #1f2c33; border-radius:4px 18px 18px 18px; padding:16px 18px; color:#e9edef; font-size:16px; white-space:pre-wrap; max-width:620px; }
+.mix { display:flex; flex-direction:column; gap:12px; border:1px solid var(--bd); border-radius:var(--r); padding:22px; background:var(--card); }
+.mix .linha { display:grid; grid-template-columns:120px 1fr 46px; gap:12px; align-items:center; font-size:15px; }
 .mix .linha b { color:var(--txt); }
+.mix .linha span { text-align:right; font-weight:800; color:var(--txt); }
 .mix .trilho { height:12px; background:var(--card2); border-radius:99px; overflow:hidden; }
-.mix .trilho i { display:block; height:100%; background:var(--red); border-radius:99px; }
+.mix .trilho i { display:block; height:100%; background:linear-gradient(90deg,var(--red),var(--red2)); border-radius:99px; }
 .dias { display:flex; flex-direction:column; gap:8px; counter-reset:dia; list-style:none; }
-.dias li { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:12px 14px 12px 64px; position:relative; }
-.dias li::before { counter-increment:dia; content:"Dia " counter(dia); position:absolute; left:14px; top:12px; font-size:13px; font-weight:800; color:var(--red2); }
+.dias li { background:var(--card); border:1px solid var(--bd); border-radius:var(--rs); padding:14px 16px 14px 78px; position:relative; }
+.dias li::before { counter-increment:dia; content:"Dia " counter(dia); position:absolute; left:16px; top:14px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--red2); }
 .carregando { display:flex; flex-direction:column; gap:12px; }
-.esq { height:18px; border-radius:8px; background:linear-gradient(90deg,var(--card2),#1d1d1d,var(--card2)); background-size:200% 100%; animation:brilho 1.2s linear infinite; }
+.esq { height:18px; border-radius:8px; background:linear-gradient(90deg,var(--card2),#22222a,var(--card2)); background-size:200% 100%; animation:brilho 1.2s linear infinite; }
 @keyframes brilho { from { background-position:200% 0; } to { background-position:-200% 0; } }
-footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; color:var(--dim); }
-@media (max-width:520px) { .mix .linha { grid-template-columns:92px 1fr 40px; } .quiz, .cartao { padding:18px; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } html { scroll-behavior:auto; } }
-@media print { body { background:#fff; color:#222; } h1,h2,h3,.numero,.pergunta,.frente .topo,p b,li b { color:#000; } .cartao,.roteiro,.dias li { border-color:#ccc; background:#fff; } .naoimprime { display:none !important; } .msg { background:#f3f3f3; color:#111; } main { gap:28px; padding-top:0; } }
+
+/* Bloco de venda do teste */
+.venda { border:1px solid var(--okbd); border-radius:28px; padding:34px 28px; background:radial-gradient(110% 80% at 100% 0%, rgba(28,194,92,.16), transparent 60%), linear-gradient(180deg,#0f1512,#0a0c0b); display:grid; gap:28px; }
+@media (min-width:820px) { .venda { grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); align-items:center; padding:42px 40px; } }
+.venda-txt { display:flex; flex-direction:column; gap:18px; }
+.venda .etapa { color:var(--ok); }
+.venda h2 em { color:var(--ok); }
+.venda-fatos { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:14px; color:var(--dim); }
+.venda-fatos b { color:var(--ok); margin-right:6px; }
+.tela { border:1px solid var(--bd2); border-radius:16px; overflow:hidden; background:#07090a; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13.5px; line-height:1.6; }
+.tela-topo { display:flex; align-items:center; gap:7px; padding:11px 14px; border-bottom:1px solid var(--bd); color:var(--dim); font-family:'Inter',sans-serif; font-size:12.5px; font-weight:700; }
+.tela-topo i { width:10px; height:10px; border-radius:50%; background:#33333b; }
+.tela-corpo { padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; }
+.tela-corpo .c { color:var(--txt); }
+.tela-corpo .c::before { content:"> "; color:var(--ok); }
+.tela-corpo .r { color:var(--dim); }
+.tela-corpo .k { color:var(--ok); }
+
+footer { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:0 20px 48px; font-size:13.5px; color:var(--dim); }
+@media (max-width:560px) { main { gap:64px; padding:26px 16px 100px; } .mix .linha { grid-template-columns:92px 1fr 40px; } .quiz, .cartao, .portao, .laudo, .porque { padding:20px; } .roteiro { padding:74px 20px 20px 20px; } .roteiro::before { left:20px; top:10px; font-size:54px; } .venda { padding:26px 20px; } .medidor { width:124px; height:124px; } .numero { font-size:44px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } html { scroll-behavior:auto; } .chapa::after { display:none; } }
+@media print { body { background:#fff; color:#222; } body::before { display:none; } h1,h2,h3,.numero,.pergunta,.frente .topo,p b,li b,.roteiro .gancho,.mix .linha span { color:#000; } .cartao,.roteiro,.dias li,.frente,.mix,.laudo { border-color:#ccc; background:#fff; } .naoimprime, .venda { display:none !important; } .msg { background:#f3f3f3; color:#111; border-color:#ccc; } .medidor { background:none; } .medidor::before { display:none; } .radar text, .radar text.v { fill:#000; } .radar .anel, .radar .eixo { stroke:#bbb; } main { gap:28px; padding-top:0; } }
 </style>
 </head>
 <body>
 <main>
 
   <section class="entra" id="topo">
-    <span class="selo">Grátis · 4 minutos · feito para advogado</span>
-    <h1>Raio-X da <em>marca</em> do advogado</h1>
-    <p class="sub">Descubra como o seu cliente te reconhece, qual frente da sua autoridade está escondida e saia com <b>5 vídeos roteirizados para a sua área</b>, dentro do que o Provimento 205 da OAB permite.</p>
+    <div class="marca naoimprime"><i></i>Samurai do Jurídico <span>· Raio-X da marca</span></div>
+    <div class="abre">
+      <div class="abre-txt">
+        <span class="selo">Grátis · 4 minutos · feito para advogado</span>
+        <h1>Raio-X da <em>marca</em> do advogado</h1>
+        <p class="sub">Descubra como o seu cliente te reconhece, qual frente da sua autoridade está escondida e saia com <b>5 vídeos roteirizados para a sua área</b>, dentro do que o Provimento 205 da OAB permite.</p>
+        <div class="naoimprime"><a class="botao grande" href="#raio" id="comecar">Fazer o meu Raio-X</a></div>
+        <div class="abre-fatos naoimprime"><span><b>✓</b>12 perguntas</span><span><b>✓</b>Resultado na hora</span><span><b>✓</b>Roteiros da sua área</span></div>
+      </div>
+      <div class="chapa naoimprime" aria-hidden="true">
+        <div class="chapa-rot"><span>As cinco frentes</span><span>Exemplo</span></div>
+        <svg class="radar" id="radar-exemplo" viewBox="0 0 390 300"></svg>
+      </div>
+    </div>
     <p class="faca">O cliente não contrata o advogado que mais sabe. Contrata o que ele reconhece.</p>
-    <div class="naoimprime"><a class="botao grande" href="#raio" id="comecar">Fazer o meu Raio-X</a></div>
   </section>
 
-  <section class="naoimprime">
+  <section class="naoimprime porque">
     <h2>Por que eu montei isso</h2>
     <p>No Safe Experience, ouvi o Alfredo Soares falar de identidade: ela não é o que você acha de si, é como os outros te reconhecem. Voltei e fiz o teste comigo. Mandei para clientes e advogados uma pergunta só: <b>"como você me reconhece, em três palavras?"</b></p>
     <p>O que voltou não era o que eu achava que transmitia. Quase ninguém falou de técnica. Falaram de <b>guia, parceiro, generoso, acessível</b>. E um advogado me disse: "você é mais simpático pessoalmente do que no Instagram". Ou seja: o meu perfil mostrava o professor e escondia a pessoa que o cliente escolhe.</p>
     <p>Aposto que com você acontece o mesmo. Então transformei o exercício num Raio-X para advogado, com a régua da OAB junto, porque é o medo dela que trava a maioria na hora de aparecer.</p>
-    <p class="nota">Rodrigo Goltzman, o Samurai · CEO da Impacto Marketing Jurídico e criador da MaestrIA</p>
+    <div class="assina"><i></i><p class="nota">Rodrigo Goltzman, o Samurai · CEO da Impacto Marketing Jurídico e criador da MaestrIA</p></div>
   </section>
 
   <section id="raio" class="naoimprime">
@@ -133,9 +204,10 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
 
   <section id="previa" hidden>
     <span class="selo">Seu Raio-X</span>
-    <div class="placar">
-      <div class="numero" id="nota-geral">0<small>/100</small></div>
+    <div class="laudo">
+      <div class="medidor" id="medidor"><div class="numero" id="nota-geral">0<small>/100</small></div></div>
       <p class="sub" id="leitura-geral"></p>
+      <svg class="radar" id="radar-previa" viewBox="0 0 390 300" role="img" aria-label="Desenho das suas cinco frentes"></svg>
     </div>
     <div class="cartao verm"><h3 id="fraca-titulo"></h3><p id="fraca-texto"></p></div>
     <div class="frentes borrado" id="frentes-previa" aria-hidden="true"></div>
@@ -143,6 +215,7 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
 
   <section id="cadastro" class="naoimprime" hidden>
     <h2>Libere o resultado <em>completo</em></h2>
+    <div class="portao">
     <div class="cartao">
       <ul class="lista ok">
         <li><b>A nota de cada frente</b> e o que ela diz sobre o seu perfil.</li>
@@ -162,12 +235,13 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
       <button class="botao grande" type="submit" id="enviar">Ver o meu resultado completo</button>
       <p class="nota">Seus dados ficam só comigo. Nada de lista vendida nem spam.</p>
     </form>
+    </div>
     <div class="carregando" id="carregando" hidden aria-label="Carregando o resultado">
       <div class="esq" style="width:60%"></div><div class="esq"></div><div class="esq" style="width:80%"></div><div class="esq" style="width:70%"></div>
     </div>
   </section>
 
-  <div id="completo" hidden style="display:flex;flex-direction:column;gap:64px"></div>
+  <div id="completo" hidden style="display:flex;flex-direction:column;gap:84px"></div>
 
 </main>
 <footer>
@@ -283,6 +357,29 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
     });
   }
 
+  // Radar das cinco frentes. Sem notas, desenha o exemplo da abertura.
+  var CURTO = { identidade: "Identidade", bastidores: "Bastidores", ambiente: "Ambiente", raciocinio: "Raciocínio", clareza: "Clareza" };
+  function desenhaRadar(svg, valores, comNumero) {
+    if (!svg) return;
+    var NS = "http://www.w3.org/2000/svg", cx = 195, cy = 152, R = 104, chaves = Object.keys(CURTO), n = chaves.length;
+    function no(tag, at) { var e = document.createElementNS(NS, tag); Object.keys(at).forEach(function (k) { e.setAttribute(k, at[k]); }); svg.appendChild(e); return e; }
+    function pt(i, raio) { var a = (-90 + i * 360 / n) * Math.PI / 180; return [cx + raio * Math.cos(a), cy + raio * Math.sin(a)]; }
+    function poli(raio) { return chaves.map(function (_, i) { return pt(i, raio).map(function (v) { return v.toFixed(1); }).join(","); }).join(" "); }
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    [.25, .5, .75, 1].forEach(function (k) { no("polygon", { points: poli(R * k), "class": "anel" }); });
+    chaves.forEach(function (_, i) { var p = pt(i, R); no("line", { x1: cx, y1: cy, x2: p[0], y2: p[1], "class": "eixo" }); });
+    var pts = chaves.map(function (c, i) { return pt(i, R * Math.max(8, valores[c]) / 100); });
+    no("polygon", { points: pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "), "class": "area" });
+    pts.forEach(function (p) { no("circle", { cx: p[0], cy: p[1], r: 4, "class": "ponto" }); });
+    chaves.forEach(function (c, i) {
+      var p = pt(i, R + 20), x = p[0], anc = Math.abs(x - cx) < 6 ? "middle" : x > cx ? "start" : "end";
+      var t = no("text", { x: x, y: p[1] + (i === 0 ? -2 : 4), "text-anchor": anc });
+      t.textContent = CURTO[c];
+      if (comNumero) { var v = no("text", { x: x, y: p[1] + (i === 0 ? 13 : 19), "text-anchor": anc, "class": "v" }); v.textContent = valores[c]; }
+    });
+  }
+  desenhaRadar(document.getElementById("radar-exemplo"), { identidade: 34, bastidores: 58, ambiente: 22, raciocinio: 86, clareza: 47 }, false);
+
   function terminaPerguntas() {
     barra.style.width = "100%";
     notas = calculaNotas();
@@ -290,6 +387,8 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
     geral = Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length);
     fraca = Object.keys(notas).sort(function (a, b) { return notas[a] - notas[b]; })[0];
     document.getElementById("nota-geral").innerHTML = geral + "<small>/100</small>";
+    var med = document.getElementById("medidor"); med.style.setProperty("--p", geral); med.style.setProperty("--c", cor(geral));
+    desenhaRadar(document.getElementById("radar-previa"), notas, false);
     document.getElementById("leitura-geral").textContent =
       geral < 40 ? "Hoje o seu perfil fala de direito, mas quase não fala de você. O cliente ainda não tem por que te escolher e não outro."
       : geral < 70 ? "Você já aparece, mas a sua marca ainda não é reconhecível. Dá para subir rápido com poucos ajustes."
@@ -345,12 +444,14 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
 
     // 1. Notas por frente
     var s1 = bloco("<h2>" + esc(primeiro) + ", estas são as suas <em>cinco frentes</em></h2><p>Autoridade não é uma coisa só. Resultado gera respeito, execução gera admiração, ambiente e pessoas geram vontade de estar perto. Quem só mostra a parte técnica deixa quatro portas fechadas.</p>");
+    var rd = document.createElementNS("http://www.w3.org/2000/svg", "svg"); rd.setAttribute("class", "radar"); rd.setAttribute("viewBox", "0 0 390 300"); rd.setAttribute("role", "img"); rd.setAttribute("aria-label", "As suas cinco frentes, com a nota de cada uma");
+    s1.appendChild(rd); desenhaRadar(rd, notas, true);
     var fr = el("div", "frentes"); s1.appendChild(fr); alvo.appendChild(s1); desenhaFrentes(fr, true);
 
     // 2. Exercício das três palavras
     var msg = "Oi, [nome]! Estou fazendo um exercício aqui no escritório e queria muito a sua ajuda, sem cerimônia: se você fosse me descrever para um amigo em três palavras, quais seriam? Pode ser bem sincero, é exatamente isso que eu quero ouvir. 🙏";
     var s2 = bloco(
-      "<h2>Passo 1: descubra como te <em>reconhecem</em></h2>" +
+      "<span class='etapa'>Passo 1 de 4</span><h2>Descubra como te <em>reconhecem</em></h2>" +
       "<p>A sua identidade não é o que você acha de si. É o que os outros já percebem. Mande esta mensagem para <b>5 clientes</b> (os que gostam de você e um que deu trabalho) e, se tiver, para 2 pessoas da equipe:</p>" +
       "<div class='msg' id='msg'>" + esc(msg) + "</div>" +
       "<div class='naoimprime'><button class='botao sec' type='button' id='copiar'>Copiar a mensagem</button></div>" +
@@ -369,7 +470,7 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
     // 3. A mistura do feed
     var tecTxt = ["quase todo o seu conteúdo é técnico", "mais da metade do seu conteúdo é técnico", "o técnico já é metade ou menos do seu conteúdo"][respostas.tecnico];
     var s3 = bloco(
-      "<h2>Passo 2: acerte a <em>mistura</em> do feed</h2>" +
+      "<span class='etapa'>Passo 2 de 4</span><h2>Acerte a <em>mistura</em> do feed</h2>" +
       "<p>Você marcou que " + tecTxt + ". O técnico continua importante, mas sozinho não faz ninguém te escolher. A proporção que eu uso como régua:</p>" +
       "<div class='mix'>" +
       "<div class='linha'><b>Identidade</b><div class='trilho'><i style='width:40%'></i></div><span>40%</span></div>" +
@@ -391,11 +492,12 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
       { t: "A dúvida que eu mais ouço", g: "\"Toda semana alguém me pergunta: " + A.duvida.replace(/"/g, "") + "\"", r: "Responda mostrando como você pensa: o que você pergunta antes de responder, o que muda a resposta, qual é o erro mais comum. Feche dizendo que cada caso precisa de análise.", o: "Conteúdo informativo é a essência do marketing jurídico (art. 2º, II). Fale em tese, nunca de um caso concreto seu (art. 5º, § 3º)." },
       { t: "No que eu acredito", g: "\"Uma opinião que muita gente da minha área não vai gostar: " + A.crenca.charAt(0).toLowerCase() + A.crenca.slice(1).replace(/"/g, "") + "\"", r: "Defenda a ideia com um porquê e com o que você observa no dia a dia. A frase acima é um exemplo: troque pela sua. Crença forte é o que faz o cliente pensar \"esse advogado pensa como eu\".", o: "Opinião técnica pode. Não ataque colegas nem incite o litígio (art. 3º, § 1º)." }
     ];
-    var s4 = bloco("<h2>Passo 3: os <em>5 vídeos</em> que faltam no seu perfil</h2><p>Grave na ordem. Até 60 segundos cada, de selfie, no seu ambiente de trabalho. Fixe os três primeiros no topo do perfil: são eles que apresentam você a quem chega.</p>");
+    var s4 = bloco("<span class='etapa'>Passo 3 de 4</span><h2>Os <em>5 vídeos</em> que faltam no seu perfil</h2><p>Grave na ordem. Até 60 segundos cada, de selfie, no seu ambiente de trabalho. Fixe os três primeiros no topo do perfil: são eles que apresentam você a quem chega.</p>");
+    var lista = el("div", "roteiros"); s4.appendChild(lista);
     videos.forEach(function (v, i) {
       var c = el("div", "roteiro");
       c.innerHTML = "<span class='n'>Vídeo " + (i + 1) + "</span><h3>" + esc(v.t) + "</h3><p class='gancho'>" + esc(v.g) + "</p><p>" + esc(v.r) + "</p><p class='oab'>OAB: " + esc(v.o) + "</p>";
-      s4.appendChild(c);
+      lista.appendChild(c);
     });
     alvo.appendChild(s4);
 
@@ -406,7 +508,7 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
       tempo: "Você marcou falta de tempo. Reserve uma hora no sábado e grave os 5 vídeos de uma vez. Durante a semana, você só posta.",
       assunto: "Você marcou que não sabe o que falar. Abra o seu WhatsApp: cada dúvida que um cliente mandou esta semana é um vídeo pronto."
     }[trava];
-    var s5 = bloco("<h2>Passo 4: os próximos <em>7 dias</em></h2><div class='cartao verde'><p>" + esc(dica) + "</p></div>" +
+    var s5 = bloco("<span class='etapa'>Passo 4 de 4</span><h2>Os próximos <em>7 dias</em></h2><div class='cartao verde'><p>" + esc(dica) + "</p></div>" +
       "<ol class='dias'>" +
       "<li>Mande a mensagem das três palavras para 5 clientes e 2 pessoas da equipe.</li>" +
       "<li>Junte as respostas e escolha os seus até 5 elementos de identidade.</li>" +
@@ -437,14 +539,37 @@ footer { max-width:820px; margin:0 auto; padding:0 16px 48px; font-size:13.5px; 
       "<p class='faca'>Bastidor de trabalho, sim. Ostentação e caso de cliente, nunca.</p>");
     alvo.appendChild(s6);
 
-    // 7. Próximo passo
+    // 7. Próximo passo: o teste da MaestrIA Marketing, na área que a pessoa marcou
+    var PAGINA = { "Trabalhista": "trab/", "Família": "familia/", "Bancário": "bancario/", "Consumidor": "consumidor/", "Criminal": "criminal/", "Empresarial": "empresarial/", "Imobiliário": "imobiliario/", "Tributário": "empresarial/" };
+    var linkTeste = "https://maestria.samurailab.com.br/teste/" + (PAGINA[respostas.area] || "") + "?o=raio-x";
     var s7 = bloco(
-      "<h2>Quer fazer isso com a <em>IA</em> do seu lado?</h2>" +
-      "<p>Os roteiros, as legendas e os carrosséis desse plano saem em minutos na MaestrIA, a IA que eu criei para advogados, já na voz do seu escritório e dentro da régua da OAB. Dá para testar 7 dias de graça.</p>" +
-      "<div class='naoimprime' style='display:flex;flex-wrap:wrap;gap:12px'>" +
-      "<a class='botao' href='https://maestria.samurailab.com.br/teste/area/?o=raio-x' target='_blank' rel='noopener'>Testar a MaestrIA 7 dias</a>" +
-      "<button class='botao sec' type='button' id='pdf'>Salvar este resultado em PDF</button></div>" +
-      "<p class='nota'>Guardei o seu resultado. Se quiser conversar sobre ele, me chama no privado.</p>");
+      "<div class='venda'>" +
+      "<div class='venda-txt'>" +
+      "<span class='etapa'>O próximo passo</span>" +
+      "<h2>O plano você já tem. A <em>MaestrIA Marketing</em> escreve com você.</h2>" +
+      "<p>Você saiu daqui com 5 vídeos para gravar e uma mistura para o feed. O que trava agora é sentar e escrever. Na MaestrIA Marketing você pede em português e recebe pronto, na voz do seu escritório.</p>" +
+      "<ul class='lista ok'>" +
+      "<li><b>Os roteiros dos seus vídeos</b>, calibrados no seu jeito de falar, e não no de um robô.</li>" +
+      "<li><b>Carrossel e legenda da semana</b>, com a arte na sua marca.</li>" +
+      "<li><b>O calendário do mês</b> já na mistura de identidade, técnico, crenças e desejo.</li>" +
+      "<li><b>O filtro do Provimento 205</b> passa em tudo antes de chegar em você.</li></ul>" +
+      "<div class='naoimprime'><a class='botao grande' href='" + linkTeste + "' target='_blank' rel='noopener'>Testar a MaestrIA Marketing por 7 dias</a></div>" +
+      "<div class='venda-fatos'><span><b>✓</b>Sem cartão</span><span><b>✓</b>Sem cobrança automática</span><span><b>✓</b>Roda no seu computador</span></div>" +
+      "<p class='nota'>Você revisa tudo antes de postar. A MaestrIA escreve e organiza; quem decide e assina é você.</p>" +
+      "</div>" +
+      "<div class='tela' aria-hidden='true'><div class='tela-topo'><i></i><i></i><i></i><span>Você pede. Ela devolve pronto.</span></div><div class='tela-corpo'>" +
+      "<span class='c'>escreve o roteiro do vídeo 1, quem sou e por que advogo</span>" +
+      "<span class='r'>Lendo o seu tom de voz e os seus elementos de identidade...</span>" +
+      "<span class='k'>✓ Roteiro de 60 segundos, com gancho, na sua voz</span>" +
+      "<span class='c'>agora o carrossel da semana sobre " + esc(respostas.area === "Outra" ? "a dúvida que o seu cliente mais traz" : A.dor) + "</span>" +
+      "<span class='k'>✓ 8 lâminas com a sua marca e a legenda</span>" +
+      "<span class='k'>✓ Filtro do Provimento 205 aplicado</span>" +
+      "<span class='r'>Exemplo ilustrativo. O advogado revisa tudo antes de usar.</span>" +
+      "</div></div>" +
+      "</div>" +
+      "<div class='naoimprime' style='display:flex;flex-wrap:wrap;gap:12px;align-items:center'>" +
+      "<button class='botao sec' type='button' id='pdf'>Salvar este resultado em PDF</button>" +
+      "<p class='nota'>Guardei o seu resultado. Se quiser conversar sobre ele, me chama no privado.</p></div>");
     alvo.appendChild(s7);
     s7.querySelector("#pdf").addEventListener("click", function () { window.print(); });
 
