@@ -102,6 +102,11 @@
       <div class="filtros" id="filtros"></div>
       <div id="pessoas"></div>
     </section>
+    <section>
+      <h2 id="raio-titulo">Quem fez o Raio-X da marca</h2>
+      <div id="raio-origens" class="meta" style="margin:0 0 12px"></div>
+      <div id="raio"></div>
+    </section>
   </div>
 </div>
 
@@ -114,7 +119,7 @@
   var SITUACOES = {
     comprou: "Comprou", usando: "Instalou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
   };
-  var dados = [], visitas = {}, filtro = "todos", relogio = null;
+  var dados = [], visitas = {}, raioX = [], filtro = "todos", relogio = null;
 
   function ler() { try { return localStorage.getItem(GUARDA) || localStorage.getItem(GUARDA_LISTA) || ""; } catch (e) { return ""; } }
   function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
@@ -171,6 +176,8 @@
         e.hidden = true;
         dados = (res.j.testes || []).map(function (r) { r._s = situacao(r); return r; });
         visitas = res.j.visitas || {};
+        // O cadastro fictício do ensaio de publicação não entra na conta.
+        raioX = (res.j.raio_x || []).filter(function (r) { return r.origem !== "teste-publicacao"; });
         document.getElementById("quando-li").textContent = "Lido às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) + ". Atualiza sozinho a cada minuto.";
         desenhar(!silencioso);
       })
@@ -264,6 +271,41 @@
       if (r.ultima_ativacao_em && r._s !== "comprou") linha.push("último uso em " + new Date(r.ultima_ativacao_em).toLocaleDateString("pt-BR"));
       c.appendChild(el("div", "meta", linha.join("  ·  ")));
       ps.appendChild(c);
+    });
+
+    // Raio-X da marca: quem fez, a nota, a frente mais fraca e o que trava a pessoa.
+    var FRENTE = { identidade: "Identidade", bastidores: "Bastidores e execução", ambiente: "Ambiente e pessoas", raciocinio: "Raciocínio técnico", clareza: "Clareza de quem atende" };
+    var TRAVA = { oab: "medo da OAB", camera: "vergonha da câmera", tempo: "falta de tempo", assunto: "não sabe o que falar", "0": "medo da OAB", "1": "vergonha da câmera", "2": "falta de tempo", "3": "não sabe o que falar" };
+    document.getElementById("raio-titulo").textContent = "Quem fez o Raio-X da marca (" + raioX.length + ")";
+    var ro = {}; raioX.forEach(function (r) { var o = r.origem || "sem origem"; ro[o] = (ro[o] || 0) + 1; });
+    document.getElementById("raio-origens").textContent = Object.keys(ro).sort(function (a, b) { return ro[b] - ro[a]; }).map(function (k) { return k + ": " + ro[k]; }).join("  ·  ");
+    var rx = document.getElementById("raio"); rx.innerHTML = "";
+    if (!raioX.length) rx.appendChild(el("p", "vazio", "Ninguém fez o Raio-X ainda."));
+    raioX.forEach(function (r) {
+      var c = el("div", "pessoa" + (animar ? " entra" : ""));
+      var topo = el("div", "topo");
+      topo.appendChild(el("span", "nome", r.nome || "(sem nome)"));
+      if (r.nota_geral != null) topo.appendChild(el("span", "selo", "nota " + r.nota_geral + "/100"));
+      c.appendChild(topo);
+      var m = el("div", "meta");
+      var zap = String(r.whatsapp || "").replace(/\D/g, "");
+      if (zap && zap.length <= 11) zap = "55" + zap;
+      if (zap) {
+        var a = el("a", null, "WhatsApp " + zap.replace(/^55(\d{2})(\d+)(\d{4})$/, "($1) $2-$3"));
+        a.href = "https://wa.me/" + zap; a.target = "_blank"; a.rel = "noopener";
+        m.appendChild(a);
+      }
+      var partes = [r.area ? "área: " + r.area : "", r.cidade, r.email, r.origem ? "veio de: " + r.origem : ""].filter(Boolean).join("  ·  ");
+      if (partes) m.appendChild(document.createTextNode((zap ? "  ·  " : "") + partes));
+      c.appendChild(m);
+      var l2 = [];
+      if (r.frente_fraca) l2.push("frente mais fraca: " + (FRENTE[r.frente_fraca] || r.frente_fraca));
+      if (r.trava != null && r.trava !== "") l2.push("o que trava: " + (TRAVA[String(r.trava)] || r.trava));
+      var q = r.updated_at || r.created_at;
+      if (q) { var dq = new Date(q); l2.push("fez em " + dq.toLocaleDateString("pt-BR") + " às " + dq.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })); }
+      if (r.vezes > 1) l2.push("refez " + r.vezes + " vezes");
+      c.appendChild(el("div", "meta", l2.join("  ·  ")));
+      rx.appendChild(c);
     });
   }
 
