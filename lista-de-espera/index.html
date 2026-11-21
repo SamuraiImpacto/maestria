@@ -44,6 +44,19 @@
   .kicker{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
   h1{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,7vw,2.9rem);line-height:1.08;margin:12px 0 0;text-wrap:balance}
   .lead{margin:16px 0 0;color:var(--muted);font-size:1.05rem;max-width:56ch}
+  .explica{margin:28px 0 0;display:flex;flex-direction:column;gap:22px}
+  .explica h2{font-family:var(--serif);font-weight:800;font-size:1.45rem;line-height:1.2;margin:0 0 8px}
+  .explica p{margin:0;color:var(--txt)}
+  .explica .muted{color:var(--muted)}
+  .explica ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .explica li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .explica li strong{display:block}
+  .explica li span{color:var(--muted);font-size:.95rem}
+  .compara{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .compara div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.95rem}
+  .compara div.sim{border-color:var(--red-ink);background:var(--red-soft)}
+  .compara b{display:block;margin-bottom:4px}
+  @media (max-width:520px){.compara{grid-template-columns:1fr}}
   .aviso{margin:18px 0 0;padding:14px 16px;border:1px solid var(--line-strong);border-radius:12px;background:var(--panel);font-size:.98rem}
   form{padding:28px 0 64px;display:flex;flex-direction:column;gap:26px}
   .campo{display:flex;flex-direction:column;gap:8px;border:0;padding:0;margin:0;min-width:0}
@@ -84,6 +97,43 @@
       <h1>MaestrIA Cohort Essentials</h1>
       <p class="lead"><strong>Implementação de IA em grupo.</strong> Encontros ao vivo, uma implementação por semana. Todo mundo implementa junto, no encontro.</p>
       <p class="aviso">Previsão: dezembro e janeiro. Ainda sem valor definido. Quem entrar na lista fica sabendo primeiro. As suas respostas definem o que vai entrar no conteúdo.</p>
+
+      <div class="explica">
+        <section>
+          <h2>O que é, na prática</h2>
+          <p>Não é curso para assistir. É uma turma pequena de advogados que coloca a IA para trabalhar dentro do próprio escritório, junto, ao vivo. Cada encontro tem uma implementação: a gente mostra, você faz no seu computador durante o encontro, e sai com aquilo funcionando.</p>
+        </section>
+
+        <section>
+          <h2>Curso comum contra o Cohort</h2>
+          <div class="compara">
+            <div><b>Curso gravado</b>Você assiste, anota, promete que vai aplicar e a semana passa.</div>
+            <div class="sim"><b>Cohort</b>Você aplica no encontro, com ajuda na hora em que trava, e confere o resultado antes de ir embora.</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>O que dá para implementar</h2>
+          <p class="muted">A grade final sai das respostas desta lista. Estes são os tipos de implementação em estudo:</p>
+          <ul>
+            <li><strong>Documentos e casos</strong><span>Ler a pasta do cliente, montar a linha do tempo, achar o que falta e preparar o caso para você revisar.</span></li>
+            <li><strong>O cérebro do escritório</strong><span>Modelos, decisões e orientações guardados num lugar onde a IA encontra, para o conhecimento não depender da memória do sócio.</span></li>
+            <li><strong>Conteúdo com a cara do escritório</strong><span>Posts e carrosséis na voz e na identidade visual do escritório, revisados por você.</span></li>
+            <li><strong>Atendimento</strong><span>Respostas e roteiros para o cliente que chega, sem soar como robô.</span></li>
+            <li><strong>Rotina da equipe</strong><span>Quem faz, quem confere e o que fazer quando a ferramenta falha, para a IA continuar rodando depois que a turma acaba.</span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Para quem é</h2>
+          <p>Para o advogado que sabe que precisa usar IA, mas não é de tecnologia e não tem tempo de aprender sozinho. Não precisa saber programar. A MaestrIA, a IA que eu criei para advogados, é a ferramenta que a gente usa nos encontros.</p>
+        </section>
+
+        <section>
+          <h2>O que ainda não está definido</h2>
+          <p class="muted">Datas exatas, número de encontros e valor. Quem está na lista recebe tudo isso primeiro, antes de abrir para o público.</p>
+        </section>
+      </div>
     </header>
 
     <form id="f" novalidate>
