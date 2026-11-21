@@ -180,7 +180,7 @@ def estrutura(h, a):
     ci = h.index('      <div class="teste-form reveal" id="cartao">')
     cf = h.index('      <div class="teste-inclui reveal">', ci)
     cartao = h[ci:cf].rstrip()
-    cartao = troca(cartao, "O acesso chega na hora.</p>", f"O acesso chega na hora. Você testa <b>{nome} + Marketing</b>.</p>")
+    cartao = troca(cartao, "também no seu WhatsApp.</p>", f"também no seu WhatsApp. Você testa <b>{nome} + Marketing</b>.</p>")
     segundo = re.sub(r'\b(id|for)="([\w-]+)"', lambda m: f'{m.group(1)}="{m.group(2)}2"', cartao)
     topo = cartao.replace('class="teste-form reveal"', 'class="teste-form"')
     h = h[:ci] + segundo + "\n" + h[cf:]
