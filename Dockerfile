@@ -76,6 +76,8 @@ COPY aula/ ./aula/
 COPY lista-de-espera/ ./lista-de-espera/
 # Teste grátis de 7 dias (20/11/2026): página de entrada do teste.
 COPY teste/ ./teste/
+# Raio-X da marca do advogado (21/11/2026): diagnóstico que grava pela edge raio-x-marca.
+COPY raio-x/ ./raio-x/
 
 EXPOSE 80
 
