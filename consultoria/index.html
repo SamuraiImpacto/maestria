@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Consultoria de tráfego com o Samurai</title>
+<meta name="description" content="Me conta o gargalo do seu escritório: tráfego, atendimento ou operação. Eu olho o seu caso e te chamo no WhatsApp.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#050506; --card:#0d0d10; --card2:#15151a; --txt:#f6f3ee; --muted:#b9b6b0; --dim:#7d7a75;
+  --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.08); --redbd:rgba(239,39,39,.32);
+  --cta:#14a44d; --cta2:#1cc25c; --ok:#4ade80; --bd:rgba(255,255,255,.07); --bd2:rgba(255,255,255,.13); --r:20px; --rs:12px; }
+* { box-sizing:border-box; margin:0; padding:0; }
+[hidden] { display:none !important; }
+body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+body::before { content:""; position:absolute; inset:0 0 auto 0; height:700px; pointer-events:none; z-index:0;
+  background:radial-gradient(640px 380px at 82% 4%, rgba(239,39,39,.18), transparent 70%); }
+main { position:relative; z-index:1; max-width:640px; margin:0 auto; padding:34px 16px 90px; display:flex; flex-direction:column; gap:28px; }
+.marca { display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--txt); }
+.marca i { width:9px; height:9px; border-radius:50%; background:var(--red); box-shadow:0 0 0 5px rgba(239,39,39,.18); }
+h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(34px,7vw,52px); line-height:1.05; text-wrap:balance; letter-spacing:-.02em; }
+h1 em { color:var(--red2); }
+.sub { font-size:18px; max-width:56ch; }
+form, .ok { background:linear-gradient(180deg,#111115,var(--card)); border:1px solid var(--bd); border-radius:var(--r); padding:22px; display:flex; flex-direction:column; gap:18px; }
+label, fieldset { display:flex; flex-direction:column; gap:7px; font-size:15px; font-weight:700; color:var(--txt); border:0; }
+legend { margin-bottom:8px; font-weight:700; color:var(--txt); }
+input[type=text], input[type=tel], select, textarea { font:inherit; font-size:16px; font-weight:500; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:13px 14px; width:100%; }
+textarea { min-height:120px; resize:vertical; }
+.opcoes { display:grid; gap:8px; }
+.opcoes label { flex-direction:row; align-items:center; gap:10px; font-weight:500; color:var(--muted); background:var(--card2); border:1px solid var(--bd2); border-radius:var(--rs); padding:11px 13px; cursor:pointer; transition:border-color .15s, background .15s; }
+.opcoes label:has(input:checked) { border-color:var(--redbd); background:var(--redbg); color:var(--txt); }
+.aceite { flex-direction:row !important; align-items:flex-start; gap:10px; font-weight:500 !important; color:var(--muted) !important; }
+.isca { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+.botao { font:inherit; font-weight:800; font-size:18px; color:#fff; background:linear-gradient(180deg,var(--cta2),var(--cta)); border:0; border-radius:var(--rs); padding:17px 24px; cursor:pointer; box-shadow:0 10px 30px -12px rgba(28,194,92,.7); transition:transform .15s, filter .15s; }
+.botao:hover { transform:translateY(-2px); filter:brightness(1.07); }
+.botao:disabled { opacity:.6; cursor:wait; transform:none; }
+:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
+.erro { color:var(--red2); font-weight:700; font-size:15px; }
+.ok h2 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:30px; line-height:1.15; }
+.surge { animation:surge .5s ease both; }
+@keyframes surge { from { opacity:.001; transform:translateY(10px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { .surge { animation:none; } .botao, .opcoes label { transition:none; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="marca"><i></i>Samurai do Jurídico</div>
+  <header class="surge" style="display:flex;flex-direction:column;gap:14px">
+    <h1>Consultoria de tráfego com o <em>Samurai</em></h1>
+    <p class="sub">Me conta onde o seu escritório trava hoje: contato que não chega, contato que não fecha ou operação que não dá conta. Eu olho o seu caso e te chamo no WhatsApp.</p>
+  </header>
+
+  <form id="form" class="surge" style="animation-delay:.06s" novalidate>
+    <label>Seu nome<input type="text" name="nome" autocomplete="name" required></label>
+    <label>Nome do escritório<input type="text" name="escritorio" autocomplete="organization"></label>
+    <label>Área de atuação
+      <select name="area" required>
+        <option value="">Escolha</option>
+        <option>Previdenciário</option><option>Trabalhista</option><option>Família</option><option>Bancário</option><option>Consumidor</option>
+        <option>Criminal</option><option>Empresarial</option><option>Imobiliário</option><option>Tributário</option><option>Outra</option>
+      </select>
+    </label>
+    <label>Cidade e estado<input type="text" name="cidade" autocomplete="address-level2"></label>
+    <label>WhatsApp com DDD<input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" required></label>
+
+    <fieldset><legend>Você já roda tráfego pago?</legend>
+      <div class="opcoes">
+        <label><input type="radio" name="roda_trafego" value="Sim, rodo hoje">Sim, rodo hoje</label>
+        <label><input type="radio" name="roda_trafego" value="Já rodei e parei">Já rodei e parei</label>
+        <label><input type="radio" name="roda_trafego" value="Nunca rodei">Nunca rodei</label>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>Quanto investe em anúncio por mês hoje?</legend>
+      <div class="opcoes">
+        <label><input type="radio" name="investimento" value="Nada">Nada</label>
+        <label><input type="radio" name="investimento" value="Até R$ 1 mil">Até R$ 1 mil</label>
+        <label><input type="radio" name="investimento" value="De R$ 1 a 3 mil">De R$ 1 a 3 mil</label>
+        <label><input type="radio" name="investimento" value="De R$ 3 a 10 mil">De R$ 3 a 10 mil</label>
+        <label><input type="radio" name="investimento" value="Acima de R$ 10 mil">Acima de R$ 10 mil</label>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>Qual é o maior gargalo hoje?</legend>
+      <div class="opcoes">
+        <label><input type="radio" name="gargalo" value="Poucos contatos chegando">Poucos contatos chegando</label>
+        <label><input type="radio" name="gargalo" value="Contatos que não fecham">Contatos chegam, mas não fecham</label>
+        <label><input type="radio" name="gargalo" value="Atendimento lento ou sem processo">Atendimento lento ou sem processo</label>
+        <label><input type="radio" name="gargalo" value="Tráfego que gasta e não traz retorno">Tráfego que gasta e não traz retorno</label>
+        <label><input type="radio" name="gargalo" value="Operação bagunçada que trava o crescimento">Operação bagunçada que trava o crescimento</label>
+        <label><input type="radio" name="gargalo" value="Outro">Outro</label>
+      </div>
+    </fieldset>
+
+    <label>Me conta o gargalo com as suas palavras<textarea name="relato" maxlength="1500" placeholder="O que acontece hoje e o que você já tentou"></textarea></label>
+    <div class="isca" aria-hidden="true"><input type="text" name="site" tabindex="-1" autocomplete="off"></div>
+    <label class="aceite"><input type="checkbox" name="aceite">Aceito receber contato do Samurai pelo WhatsApp sobre este pedido.</label>
+    <p class="erro" id="erro" role="alert" hidden></p>
+    <button class="botao" type="submit">Enviar meu caso</button>
+  </form>
+
+  <div class="ok surge" id="ok" hidden>
+    <h2>Recebi.</h2>
+    <p>Vou olhar o seu caso e te chamo no WhatsApp.</p>
+  </div>
+</main>
+<script>
+(function () {
+  var FUNCAO = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/consultoria-trafego";
+  var qs = new URLSearchParams(location.search), utm = [];
+  qs.forEach(function (v, k) { if (/^utm_/.test(k)) utm.push(k + "=" + v); });
+  var f = document.getElementById("form"), erro = document.getElementById("erro"), bt = f.querySelector("button");
+  function falha(msg) { erro.textContent = msg; erro.hidden = false; erro.scrollIntoView({ block: "center", behavior: "smooth" }); }
+  f.addEventListener("submit", function (e) {
+    e.preventDefault(); erro.hidden = true;
+    var d = new FormData(f), v = function (k) { return (d.get(k) || "").toString().trim(); };
+    if (v("nome").length < 2) return falha("Escreva o seu nome.");
+    if (!v("area")) return falha("Escolha a sua área.");
+    if (v("whatsapp").replace(/\D/g, "").length < 10) return falha("Confira o WhatsApp: precisa do DDD e do número.");
+    if (!v("roda_trafego")) return falha("Diga se você já roda tráfego pago.");
+    if (!v("investimento")) return falha("Escolha quanto você investe em anúncio por mês.");
+    if (!v("gargalo")) return falha("Escolha o maior gargalo de hoje.");
+    if (!d.get("aceite")) return falha("Marque que aceita o contato pelo WhatsApp.");
+    var corpo = { nome: v("nome"), escritorio: v("escritorio"), area: v("area"), cidade: v("cidade"), whatsapp: v("whatsapp"),
+      roda_trafego: v("roda_trafego"), investimento: v("investimento"), gargalo: v("gargalo"), relato: v("relato"),
+      site: v("site"), aceite: true, origem: qs.get("o") || "", utm: utm.join("&") };
+    bt.disabled = true; bt.textContent = "Enviando...";
+    fetch(FUNCAO, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok || !x.j.ok) throw new Error((x.j && x.j.erro) || "Não consegui enviar agora. Tente de novo em um minuto.");
+        f.hidden = true; document.getElementById("ok").hidden = false; window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .catch(function (err) { bt.disabled = false; bt.textContent = "Enviar meu caso"; falha(err.message || "Não consegui enviar agora."); });
+  });
+})();
+</script>
+</body>
+</html>
