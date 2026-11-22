@@ -81,6 +81,10 @@ COPY raio-x/ ./raio-x/
 # Maratona de Lives do Samurai (21/11/2026): convite, agenda, arte e legenda. Grava pela edge lives-maratona.
 COPY lives/ ./lives/
 
+# O navegador guardava a página antiga e o Samurai via versão velha (22/11/2026).
+# Manda o navegador conferir com o servidor a cada visita; se nada mudou, a resposta é curta (304).
+RUN printf 'add_header Cache-Control "no-cache" always;\n' > /etc/nginx/conf.d/00-sem-pagina-velha.conf && nginx -t
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
