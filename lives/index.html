@@ -138,8 +138,10 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
   var CONVIDADO = (qs.get("c") || "").replace(/[^A-Za-zÀ-ÿ' ]/g, "").slice(0, 40);
   var HORA = "19h", PERFIL = "@samuraidojuridico";
 
-  // De 01 a 19/12/2026, às 19h: dias úteis, sem o dia 17 e com o sábado 19.
-  var DIAS = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-14","2026-12-15","2026-12-16","2026-12-18","2026-12-19"];
+  // De 01 a 19/12/2026, às 19h: dias úteis, sem o dia 17 e com os sábados 12 e 19.
+  // O número da live é fixo por data: entrar data nova não muda o número de quem já baixou a arte.
+  var NUMERO = {"2026-12-01":1,"2026-12-02":2,"2026-12-03":3,"2026-12-04":4,"2026-12-07":5,"2026-12-08":6,"2026-12-09":7,"2026-12-10":8,"2026-12-11":9,"2026-12-14":10,"2026-12-15":11,"2026-12-16":12,"2026-12-18":13,"2026-12-19":14,"2026-12-12":15};
+  var DIAS = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-14","2026-12-15","2026-12-16","2026-12-18","2026-12-19"];
   var SEMANA = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
   var SEMANA_LONGA = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
 
@@ -350,10 +352,10 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
       erro.hidden = true; botao.disabled = true; botao.textContent = "Reservando a sua data...";
       var corpo = { acao: "reservar", dia: estado.dia, tema: estado.tema, titulo: estado.titulo, recorte: estado.recorte, nome: estado.nome.trim(), instagram: arroba(estado.insta),
         whatsapp: estado.zap.replace(/\D/g, ""), email: estado.email.trim(), bio: estado.bio.trim(), foto: estado.foto, convite: qs.get("o") === "teste-publicacao" ? "teste-publicacao" : CONVIDADO, site: (document.getElementById("site") || {}).value || "" };
-      (ENSAIO ? Promise.resolve({ ok: true, j: { ok: true, numero: DIAS.indexOf(estado.dia) + 1 } }) : chamar(corpo))
+      (ENSAIO ? Promise.resolve({ ok: true, j: { ok: true, numero: NUMERO[estado.dia] } }) : chamar(corpo))
         .then(function (x) {
           if (!x.ok || !x.j.ok) throw new Error((x.j && x.j.erro) || "Não consegui reservar agora.");
-          mostrarResultado(x.j.numero || DIAS.indexOf(estado.dia) + 1);
+          mostrarResultado(x.j.numero || NUMERO[estado.dia]);
         })
         .catch(function (e) { botao.disabled = false; botao.textContent = "Confirmar a minha live"; erro.textContent = e.message || "Não consegui reservar agora. Tente de novo em um minuto."; erro.hidden = false; });
     });
