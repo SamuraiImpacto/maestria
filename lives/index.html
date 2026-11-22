@@ -298,7 +298,7 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
     c.appendChild(b);
     var f = el("div", "foto"), img = el("img"); img.alt = "Prévia da sua foto"; img.hidden = !estado.foto; if (estado.foto) img.src = estado.foto;
     var lf = el("label", null, "Sua foto "); lf.appendChild(el("span", null, "(de rosto, bem iluminada; ela entra na arte)"));
-    var inp = el("input"); inp.type = "file"; inp.accept = "image/*"; lf.appendChild(inp);
+    var inp = el("input"); inp.type = "file"; inp.accept = "image/*,.heic,.heif"; lf.appendChild(inp);
     f.appendChild(img); f.appendChild(lf); c.appendChild(f);
     // Enquadramento: a pessoa aproxima e sobe ou desce a foto vendo como fica no cartão da arte.
     var aj = el("div", "ajuste"); aj.hidden = !estado.foto;
@@ -324,22 +324,43 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
       var zap = estado.zap.replace(/\D/g, "");
       seguir.disabled = !(estado.nome.trim().length >= 3 && estado.insta.trim().length >= 3 && zap.length >= 10 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(estado.email.trim()) && estado.bio.trim().length >= 60 && estado.foto);
     }
+    var avisoFoto = el("p", "nota"); avisoFoto.setAttribute("role", "status"); f.appendChild(avisoFoto);
+    // Abre a foto como imagem; se o navegador não abrir (HEIC do iPhone fora do Safari), devolve erro.
+    function abrir(blob) {
+      return new Promise(function (ok, erro) {
+        var u = URL.createObjectURL(blob), im = new Image();
+        im.onload = function () { ok(im); }; im.onerror = function () { URL.revokeObjectURL(u); erro(new Error("formato")); };
+        im.src = u;
+      });
+    }
+    // Converte HEIC/HEIF em JPEG carregando o conversor só quando precisa.
+    function heicParaJpeg(arq) {
+      var pronto = window.heic2any ? Promise.resolve() : new Promise(function (ok, erro) {
+        var s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js";
+        s.onload = ok; s.onerror = erro; document.head.appendChild(s);
+      });
+      return pronto.then(function () { return window.heic2any({ blob: arq, toType: "image/jpeg", quality: .9 }); })
+        .then(function (r) { return Array.isArray(r) ? r[0] : r; });
+    }
     inp.addEventListener("change", function () {
       var arq = inp.files && inp.files[0]; if (!arq) return;
-      var r = new FileReader();
-      r.onload = function () {
-        var im = new Image();
-        im.onload = function () {
-          // Reduz a foto no navegador: lado maior de 1000 px, em JPEG.
-          var m = Math.min(1, 1000 / Math.max(im.width, im.height)), cv = document.createElement("canvas");
-          cv.width = Math.round(im.width * m); cv.height = Math.round(im.height * m);
-          cv.getContext("2d").drawImage(im, 0, 0, cv.width, cv.height);
-          estado.foto = cv.toDataURL("image/jpeg", .86); estado.fotoImg = null;
-          img.src = estado.foto; img.hidden = false; aj.hidden = false; previa(); conf();
-        };
-        im.src = r.result;
-      };
-      r.readAsDataURL(arq);
+      var heic = /hei[cf]/i.test(arq.type) || /\.hei[cf]$/i.test(arq.name || "");
+      avisoFoto.className = "nota"; avisoFoto.textContent = heic ? "Convertendo a foto do iPhone, só um instante..." : "Carregando a foto...";
+      abrir(arq).catch(function () {
+        if (!heic) throw new Error("formato");
+        return heicParaJpeg(arq).then(abrir);
+      }).then(function (im) {
+        // Reduz a foto no navegador: lado maior de 1000 px, em JPEG.
+        var m = Math.min(1, 1000 / Math.max(im.width, im.height)), cv = document.createElement("canvas");
+        cv.width = Math.round(im.width * m); cv.height = Math.round(im.height * m);
+        cv.getContext("2d").drawImage(im, 0, 0, cv.width, cv.height);
+        estado.foto = cv.toDataURL("image/jpeg", .86); estado.fotoImg = null;
+        img.src = estado.foto; img.hidden = false; aj.hidden = false; avisoFoto.textContent = ""; previa(); conf();
+      }).catch(function () {
+        avisoFoto.className = "erro";
+        avisoFoto.textContent = "Não consegui abrir essa foto. Tente uma em JPG ou PNG, ou tire um print da foto e envie o print.";
+        inp.value = "";
+      });
     });
     conf();
   }
