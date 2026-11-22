@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel da Maratona de Lives</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050506">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#050506; --card:#0d0d10; --card2:#15151a; --txt:#f6f3ee; --muted:#b9b6b0; --dim:#7d7a75; --red:#ef2727; --red2:#ff5d5d; --redbg:rgba(239,39,39,.09); --redbd:rgba(239,39,39,.34);
+  --ok:#4ade80; --okbg:rgba(74,222,128,.08); --okbd:rgba(74,222,128,.35); --amar:#facc15; --bd:rgba(255,255,255,.08); --bd2:rgba(255,255,255,.15); }
+* { box-sizing:border-box; margin:0; padding:0; }
+[hidden] { display:none !important; }
+body { background:var(--bg); color:var(--muted); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+main { max-width:1080px; margin:0 auto; padding:28px 20px 90px; display:flex; flex-direction:column; gap:40px; }
+header { display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; justify-content:space-between; padding-bottom:18px; border-bottom:1px solid var(--bd); }
+.marca { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--red2); }
+h1 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(28px,4.6vw,42px); line-height:1.08; }
+h1 em { font-style:italic; color:var(--red2); }
+h2 { color:var(--txt); font-size:19px; font-weight:800; }
+.sub { font-size:14px; color:var(--dim); }
+.acoes { display:flex; flex-wrap:wrap; gap:8px; }
+.btn { font:inherit; font-size:14px; font-weight:700; color:var(--txt); background:var(--card2); border:1px solid var(--bd2); border-radius:999px; padding:9px 15px; cursor:pointer; text-decoration:none; }
+.btn:hover { border-color:var(--red2); }
+.btn.verde { background:#14a44d; border-color:#14a44d; }
+.btn:focus-visible, a:focus-visible, input:focus-visible { outline:3px solid var(--ok); outline-offset:3px; }
+section { display:flex; flex-direction:column; gap:14px; }
+.numeros { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr)); gap:12px; }
+.num { background:var(--card); border:1px solid var(--bd); border-radius:16px; padding:16px 18px; }
+.num b { display:block; font-family:'Playfair Display',serif; font-size:34px; line-height:1.1; color:var(--txt); }
+.num span { font-size:13.5px; }
+.num.dest { border-color:var(--redbd); background:var(--redbg); }
+.num.dest b { font-size:24px; font-family:'Inter',sans-serif; font-weight:800; }
+
+/* As três semanas */
+.semana { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+.semana + .semana { margin-top:10px; }
+.dia { background:var(--card); border:1px solid var(--bd); border-radius:14px; padding:12px; min-height:112px; display:flex; flex-direction:column; gap:4px; text-decoration:none; color:inherit; min-width:0; }
+.dia.vazio { background:transparent; border-style:dashed; opacity:.35; }
+.dia .d { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); }
+.dia .n { font-family:'Playfair Display',serif; font-size:26px; line-height:1; color:var(--txt); }
+.dia .q { font-size:13.5px; font-weight:700; color:var(--txt); overflow-wrap:anywhere; }
+.dia .t { font-size:12.5px; color:var(--muted); overflow-wrap:anywhere; }
+.dia.marcada { border-color:var(--okbd); background:var(--okbg); }
+.dia.livre .q { color:var(--red2); font-weight:700; }
+.dia.passou { opacity:.5; }
+@media (max-width:760px) { .semana { grid-template-columns:repeat(2,minmax(0,1fr)); } .dia.vazio { display:none; } }
+
+/* Cartão de cada live */
+.live { background:linear-gradient(180deg,#111115,var(--card)); border:1px solid var(--bd2); border-radius:22px; padding:22px; display:grid; gap:20px; scroll-margin-top:16px; }
+@media (min-width:760px) { .live { grid-template-columns:200px minmax(0,1fr); } }
+.live .foto { width:100%; max-width:200px; aspect-ratio:3/4; border-radius:16px; object-fit:cover; object-position:50% 25%; border:2px solid var(--red); background:var(--card2); display:block; }
+.live .semfoto { display:grid; place-items:center; color:var(--dim); font-size:13px; }
+.live .corpo { display:flex; flex-direction:column; gap:12px; min-width:0; }
+.live .cab { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; }
+.selo { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; border-radius:999px; padding:5px 11px; border:1px solid var(--bd2); color:var(--muted); }
+.selo.verm { color:var(--red2); border-color:var(--redbd); background:var(--redbg); }
+.selo.ok { color:var(--ok); border-color:var(--okbd); background:var(--okbg); }
+.selo.falta { color:var(--amar); border-color:rgba(250,204,21,.4); background:rgba(250,204,21,.07); }
+.live h3 { font-family:'Playfair Display',serif; font-weight:900; color:var(--txt); font-size:clamp(22px,3vw,28px); line-height:1.15; }
+.live .quem { color:var(--txt); font-weight:700; }
+.live .quem a { color:var(--ok); text-decoration:none; font-weight:700; }
+.campo { font-size:15px; overflow-wrap:anywhere; }
+.campo b { color:var(--txt); }
+.roteiro { background:#08080a; border:1px solid var(--bd); border-radius:14px; padding:16px 18px; color:#e6e2dc; font-size:15px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { font-size:13.5px; border:1px solid var(--bd2); border-radius:999px; padding:6px 12px; color:var(--txt); }
+.chip.usado { opacity:.4; text-decoration:line-through; }
+.entrada { max-width:420px; margin:12vh auto 0; display:flex; flex-direction:column; gap:14px; padding:0 20px; }
+input[type=password] { font:inherit; color:var(--txt); background:#08080a; border:1px solid var(--bd2); border-radius:12px; padding:13px; width:100%; }
+.erro { color:var(--red2); font-weight:700; font-size:14.5px; }
+.esq { height:18px; border-radius:8px; background:linear-gradient(90deg,var(--card2),#22222a,var(--card2)); background-size:200% 100%; animation:brilho 1.2s linear infinite; margin-bottom:12px; }
+@keyframes brilho { from { background-position:200% 0; } to { background-position:-200% 0; } }
+.entra { animation:entra .4s ease both; }
+@keyframes entra { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<div id="entrada" class="entrada" hidden>
+  <span class="marca">Samurai do Jurídico</span>
+  <h1>Painel da <em>Maratona</em></h1>
+  <label class="sub" for="chave">Chave do painel (a mesma do painel do teste)</label>
+  <input id="chave" type="password" autocomplete="current-password">
+  <button class="btn verde" id="entrar">Abrir o painel</button>
+  <p class="erro" id="erro-entrada" hidden></p>
+</div>
+
+<main id="carregando" hidden aria-label="Carregando"><div class="esq" style="width:40%"></div><div class="esq"></div><div class="esq" style="width:70%"></div></main>
+
+<main id="painel" hidden>
+  <header>
+    <div>
+      <span class="marca">Samurai do Jurídico</span>
+      <h1>Maratona de <em>Lives</em></h1>
+      <p class="sub" id="quando-li"></p>
+    </div>
+    <div class="acoes">
+      <button class="btn" id="copiar-link">Copiar o link do convite</button>
+      <a class="btn" href="/lives/" target="_blank" rel="noopener">Abrir a página</a>
+      <button class="btn" id="atualizar">Atualizar</button>
+      <button class="btn" id="sair">Sair</button>
+    </div>
+  </header>
+  <p class="erro" id="erro" hidden></p>
+
+  <section><div class="numeros" id="numeros"></div></section>
+
+  <section>
+    <h2>As três semanas</h2>
+    <p class="sub">Dias úteis de 01 a 18/12, sempre às 19h. Toque numa noite marcada para ver os detalhes.</p>
+    <div id="semanas"></div>
+  </section>
+
+  <section>
+    <h2 id="lives-titulo">Lives marcadas</h2>
+    <div id="lives" style="display:flex;flex-direction:column;gap:16px"></div>
+  </section>
+
+  <section>
+    <h2>Temas</h2>
+    <p class="sub">Os riscados já têm dono. Quem ainda não marcou só enxerga os outros.</p>
+    <div class="chips" id="temas"></div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
+  // A mesma guarda do painel do teste: quem já entrou lá entra aqui sem digitar de novo.
+  var GUARDA = "maestria-painel-teste", GUARDA_LISTA = "maestria-painel-lista";
+  var NOITES = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18"];
+  var GRADE = [[null,"2026-12-01","2026-12-02","2026-12-03","2026-12-04"],["2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11"],["2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18"]];
+  var DIA = ["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+  var TEMAS = { "ia-escritorio":"IA no escritório","atendimento":"Atendimento que vira contrato","trafego":"Tráfego pago sem ilusão","posicionamento":"Ser escolhido, não só encontrado","conteudo":"Aparecer sem medo da OAB","equipe":"Montar equipe sem criar passivo","gestao":"O escritório como empresa","honorarios":"Cobrar o que o trabalho vale","nicho":"Escolher uma área","vendas":"Fechar contrato sem empurrar","previdenciario":"Previdenciário na prática","carreira":"Do advogado sozinho ao escritório" };
+  var lives = [], relogio = null;
+
+  function ler() { try { return localStorage.getItem(GUARDA) || localStorage.getItem(GUARDA_LISTA) || ""; } catch (e) { return ""; } }
+  function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function mostrar(id) { ["entrada", "carregando", "painel"].forEach(function (x) { document.getElementById(x).hidden = x !== id; }); }
+  function dataDe(iso) { var p = iso.split("-"); return new Date(+p[0], +p[1] - 1, +p[2], 19, 0); }
+  function ddmm(iso) { return iso.slice(8) + "/" + iso.slice(5, 7); }
+  function faltam(iso) { return Math.ceil((dataDe(iso).getTime() - Date.now()) / 864e5); }
+  function prazo(iso) { var f = faltam(iso); return f > 1 ? "faltam " + f + " dias" : f === 1 ? "é amanhã" : f === 0 ? "é hoje" : "já aconteceu"; }
+  function link(txt, href) { var a = el("a", null, txt); a.href = href; a.target = "_blank"; a.rel = "noopener"; return a; }
+
+  var h = location.hash.match(/chave=([^&]+)/);
+  if (h) { gravar(decodeURIComponent(h[1])); history.replaceState(null, "", location.pathname); }
+
+  function entrada(msg) { mostrar("entrada"); var e = document.getElementById("erro-entrada"); e.hidden = !msg; e.textContent = msg || ""; }
+
+  function carregar(silencioso) {
+    var chave = ler();
+    if (!chave) return entrada();
+    if (!silencioso) mostrar("carregando");
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "painel", chave: chave }) })
+      .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
+      .then(function (res) {
+        if (res.s === 401) { gravar(""); return entrada("Chave inválida."); }
+        mostrar("painel");
+        var e = document.getElementById("erro");
+        if (!res.j.ok) { e.hidden = false; e.textContent = res.j.erro || "Não consegui ler agora."; return; }
+        e.hidden = true;
+        lives = res.j.lives || [];
+        document.getElementById("quando-li").textContent = "Lido às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) + ". Atualiza sozinho a cada minuto.";
+        desenhar(!silencioso);
+      })
+      .catch(function () { mostrar("painel"); var e = document.getElementById("erro"); e.hidden = false; e.textContent = "Sem conexão agora. Tente atualizar."; });
+  }
+
+  function desenhar(animar) {
+    var porDia = {}; lives.forEach(function (l) { porDia[l.dia] = l; });
+    var futuras = lives.filter(function (l) { return faltam(l.dia) >= 0; }).sort(function (a, b) { return a.dia < b.dia ? -1 : 1; });
+    var comRoteiro = lives.filter(function (l) { return l.roteiro; }).length;
+    var semConvite = lives.filter(function (l) { return !l.convite_email_em; }).length;
+
+    var nums = document.getElementById("numeros"); nums.innerHTML = "";
+    function num(valor, rot, dest) { var d = el("div", "num" + (dest ? " dest" : "")); d.appendChild(el("b", null, valor)); d.appendChild(el("span", null, rot)); nums.appendChild(d); }
+    num(lives.length + " de " + NOITES.length, "noites marcadas");
+    num(String(NOITES.length - lives.length), "noites ainda livres");
+    num(futuras.length ? ddmm(futuras[0].dia) + " · " + futuras[0].nome : "nenhuma ainda", futuras.length ? "próxima live, " + prazo(futuras[0].dia) : "próxima live", true);
+    num(comRoteiro + " de " + lives.length, "roteiros prontos");
+    num(String(semConvite), "sem convite de agenda");
+
+    var sm = document.getElementById("semanas"); sm.innerHTML = "";
+    GRADE.forEach(function (linha) {
+      var s = el("div", "semana");
+      linha.forEach(function (iso) {
+        if (!iso) { s.appendChild(el("div", "dia vazio")); return; }
+        var l = porDia[iso], d = dataDe(iso), c = el(l ? "a" : "div", "dia " + (l ? "marcada" : "livre") + (faltam(iso) < 0 ? " passou" : ""));
+        if (l) c.href = "#live-" + iso;
+        c.appendChild(el("span", "d", DIA[d.getDay()])); c.appendChild(el("span", "n", ddmm(iso)));
+        c.appendChild(el("span", "q", l ? l.nome : "livre")); if (l) c.appendChild(el("span", "t", l.titulo));
+        s.appendChild(c);
+      });
+      sm.appendChild(s);
+    });
+
+    document.getElementById("lives-titulo").textContent = "Lives marcadas (" + lives.length + ")";
+    var lv = document.getElementById("lives"); lv.innerHTML = "";
+    if (!lives.length) lv.appendChild(el("p", "sub", "Ninguém marcou ainda. Assim que alguém confirmar, aparece aqui e você recebe o aviso no WhatsApp."));
+    lives.slice().sort(function (a, b) { return a.dia < b.dia ? -1 : 1; }).forEach(function (l) {
+      var d = dataDe(l.dia), c = el("article", "live" + (animar ? " entra" : "")); c.id = "live-" + l.dia;
+      if (l.foto_url) { var im = el("img", "foto"); im.src = l.foto_url; im.alt = "Foto de " + l.nome; im.loading = "lazy"; c.appendChild(im); }
+      else c.appendChild(el("div", "foto semfoto", "sem foto"));
+      var b = el("div", "corpo");
+      var cab = el("div", "cab");
+      cab.appendChild(el("span", "selo verm", "Live " + String(NOITES.indexOf(l.dia) + 1).padStart(2, "0")));
+      cab.appendChild(el("span", "selo", DIA[d.getDay()] + ", " + ddmm(l.dia) + ", 19h"));
+      cab.appendChild(el("span", "selo", prazo(l.dia)));
+      cab.appendChild(el("span", "selo " + (l.convite_email_em ? "ok" : "falta"), l.convite_email_em ? "agenda enviada" : "agenda não saiu"));
+      cab.appendChild(el("span", "selo " + (l.roteiro ? "ok" : "falta"), l.roteiro ? "roteiro pronto" : "roteiro pendente"));
+      b.appendChild(cab);
+      b.appendChild(el("h3", null, l.titulo));
+      var q = el("p", "quem"); q.appendChild(document.createTextNode(l.nome + "  ·  "));
+      var ig = String(l.instagram || "").replace(/^@/, ""); if (ig) q.appendChild(link("@" + ig, "https://instagram.com/" + ig));
+      b.appendChild(q);
+      function campo(rot, txt) { var p = el("p", "campo"); p.appendChild(el("b", null, rot + ": ")); p.appendChild(document.createTextNode(txt)); b.appendChild(p); }
+      campo("Tema da lista", TEMAS[l.tema] || "outro tema, proposto pelo convidado");
+      campo("O recorte dele", l.recorte);
+      campo("Bio", l.bio);
+      var zap = String(l.whatsapp || "").replace(/\D/g, ""); if (zap && zap.length <= 11) zap = "55" + zap;
+      var ac = el("div", "acoes");
+      if (zap) {
+        var primeiro = l.nome.replace(/^(Dra?\.?|Doutora?)\s+/i, "").split(" ")[0];
+        var msg = "Fala, " + primeiro + "! Vi que você marcou a nossa live para " + DIA[d.getDay()] + ", " + ddmm(l.dia) + ", às 19h. Fechado! Vou te mandar o roteiro com os pontos da conversa.";
+        var w = link("Chamar no WhatsApp", "https://wa.me/" + zap + "?text=" + encodeURIComponent(msg)); w.className = "btn verde"; ac.appendChild(w);
+      }
+      if (l.foto_url) { var f = link("Abrir a foto", l.foto_url); f.className = "btn"; ac.appendChild(f); }
+      if (l.email) { var m = link(l.email, "mailto:" + l.email); m.className = "btn"; ac.appendChild(m); }
+      b.appendChild(ac);
+      if (l.roteiro) {
+        b.appendChild(el("p", "campo")).appendChild(el("b", null, "Roteiro da live"));
+        b.appendChild(el("div", "roteiro", l.roteiro));
+        var cp = el("button", "btn", "Copiar o roteiro"); cp.type = "button";
+        cp.addEventListener("click", function () { (navigator.clipboard ? navigator.clipboard.writeText(l.roteiro) : Promise.reject()).then(function () { cp.textContent = "Copiado ✓"; }, function () { cp.textContent = "Selecione o texto e copie"; }); });
+        var a2 = el("div", "acoes"); a2.appendChild(cp); b.appendChild(a2);
+      } else campo("Roteiro", "ainda não escrito. Peça \"olha as lives\" na conversa com o Claude que ele escreve os blocos pensados para corte.");
+      if (l.created_at) { var cr = new Date(l.created_at); b.appendChild(el("p", "sub", "Marcou em " + cr.toLocaleDateString("pt-BR") + " às " + cr.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }))); }
+      c.appendChild(b); lv.appendChild(c);
+    });
+
+    var usados = lives.map(function (l) { return l.tema; }), tm = document.getElementById("temas"); tm.innerHTML = "";
+    Object.keys(TEMAS).forEach(function (k) { tm.appendChild(el("span", "chip" + (usados.indexOf(k) >= 0 ? " usado" : ""), TEMAS[k])); });
+  }
+
+  document.getElementById("entrar").addEventListener("click", function () { var v = document.getElementById("chave").value.trim(); if (!v) return; gravar(v); carregar(); });
+  document.getElementById("chave").addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("entrar").click(); });
+  document.getElementById("atualizar").addEventListener("click", function () { carregar(); });
+  document.getElementById("sair").addEventListener("click", function () { gravar(""); entrada(); });
+  document.getElementById("copiar-link").addEventListener("click", function () {
+    var b = this, u = "https://maestria.samurailab.com.br/lives/";
+    (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(function () { b.textContent = "Link copiado ✓"; }, function () { b.textContent = u; });
+  });
+  carregar();
+  relogio = setInterval(function () { if (!document.hidden && ler()) carregar(true); }, 60000);
+})();
+</script>
+</body>
+</html>
