@@ -112,7 +112,7 @@ input[type=password] { font:inherit; color:var(--txt); background:#08080a; borde
 
   <section>
     <h2>As três semanas</h2>
-    <p class="sub">De 01 a 19/12, sempre às 19h: segunda a sexta, mais os sábados 05, 12 e 19. Sem o dia 17. Toque numa noite marcada para ver os detalhes.</p>
+    <p class="sub">De 30/11 a 19/12, sempre às 19h: segunda a sexta, mais os sábados 05, 12 e 19. Sem o dia 17. Toque numa noite marcada para ver os detalhes.</p>
     <div id="semanas"></div>
   </section>
 
@@ -134,9 +134,9 @@ input[type=password] { font:inherit; color:var(--txt); background:#08080a; borde
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
   // A mesma guarda do painel do teste: quem já entrou lá entra aqui sem digitar de novo.
   var GUARDA = "maestria-painel-teste", GUARDA_LISTA = "maestria-painel-lista";
-  var NOITES = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-14","2026-12-15","2026-12-16","2026-12-18","2026-12-19"];
-  var NUMERO = {"2026-12-01":1,"2026-12-02":2,"2026-12-03":3,"2026-12-04":4,"2026-12-07":5,"2026-12-08":6,"2026-12-09":7,"2026-12-10":8,"2026-12-11":9,"2026-12-14":10,"2026-12-15":11,"2026-12-16":12,"2026-12-18":13,"2026-12-19":14,"2026-12-12":15,"2026-12-05":16};
-  var GRADE = [[null,"2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05"],["2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12"],["2026-12-14","2026-12-15","2026-12-16",null,"2026-12-18","2026-12-19"]];
+  var NOITES = ["2026-11-30","2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-14","2026-12-15","2026-12-16","2026-12-18","2026-12-19"];
+  var NUMERO = {"2026-12-01":1,"2026-12-02":2,"2026-12-03":3,"2026-12-04":4,"2026-12-07":5,"2026-12-08":6,"2026-12-09":7,"2026-12-10":8,"2026-12-11":9,"2026-12-14":10,"2026-12-15":11,"2026-12-16":12,"2026-12-18":13,"2026-12-19":14,"2026-12-12":15,"2026-12-05":16,"2026-11-30":17};
+  var GRADE = [["2026-11-30","2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05"],["2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12"],["2026-12-14","2026-12-15","2026-12-16",null,"2026-12-18","2026-12-19"]];
   var DIA = ["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
   var TEMAS = { "ia-escritorio":"IA no escritório","atendimento":"Atendimento que vira contrato","trafego":"Tráfego pago sem ilusão","posicionamento":"Ser escolhido, não só encontrado","conteudo":"Aparecer sem medo da OAB","equipe":"Montar equipe sem criar passivo","gestao":"O escritório como empresa","honorarios":"Cobrar o que o trabalho vale","nicho":"Escolher uma área","vendas":"Fechar contrato sem empurrar","previdenciario":"Previdenciário na prática","carreira":"Do advogado sozinho ao escritório","dados":"Decidir com dado, não com achismo","atendimento-ia":"IA atendendo por voz e por texto","video":"Vídeo sem estúdio e sem roteiro","indicacao":"Crescer por indicação e parceria","experiencia":"O cliente depois do contrato","rotina":"A rotina de quem não apaga incêndio","sociedade":"Sociedade que dá certo","retomada":"Recuperar o lead que sumiu" };
   var lives = [], relogio = null;

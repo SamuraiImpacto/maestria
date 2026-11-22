@@ -107,7 +107,7 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
 
   <section class="entra" id="topo">
     <div class="marca"><i></i>Samurai do Jurídico</div>
-    <span class="selo">Maratona de Lives do Samurai · 01 a 19 de dezembro · 19h</span>
+    <span class="selo">Maratona de Lives do Samurai · 30/11 a 19/12 · 19h</span>
     <h1 id="titulo">Bora fazer uma <em>live</em> comigo?</h1>
     <p class="sub">Para fechar o ano e começar 2027 com força total, eu vou fazer uma maratona de lives no Instagram: <b>uma conversa por noite, às 19h</b>, cada uma com alguém que eu admiro. Quero você numa delas.</p>
     <p class="sub">Aqui embaixo você escolhe o dia e o assunto. Em 3 minutos sai com a data na agenda e com a arte e a legenda prontas para postar.</p>
@@ -138,10 +138,10 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
   var CONVIDADO = (qs.get("c") || "").replace(/[^A-Za-zÀ-ÿ' ]/g, "").slice(0, 40);
   var HORA = "19h", PERFIL = "@samuraidojuridico";
 
-  // De 01 a 19/12/2026, às 19h: dias úteis, sem o dia 17 e com os sábados 05, 12 e 19.
+  // De 30/11 a 19/12/2026, às 19h: dias úteis, sem o dia 17 e com os sábados 05, 12 e 19.
   // O número da live é fixo por data: entrar data nova não muda o número de quem já baixou a arte.
-  var NUMERO = {"2026-12-01":1,"2026-12-02":2,"2026-12-03":3,"2026-12-04":4,"2026-12-07":5,"2026-12-08":6,"2026-12-09":7,"2026-12-10":8,"2026-12-11":9,"2026-12-14":10,"2026-12-15":11,"2026-12-16":12,"2026-12-18":13,"2026-12-19":14,"2026-12-12":15,"2026-12-05":16};
-  var DIAS = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-14","2026-12-15","2026-12-16","2026-12-18","2026-12-19"];
+  var NUMERO = {"2026-12-01":1,"2026-12-02":2,"2026-12-03":3,"2026-12-04":4,"2026-12-07":5,"2026-12-08":6,"2026-12-09":7,"2026-12-10":8,"2026-12-11":9,"2026-12-14":10,"2026-12-15":11,"2026-12-16":12,"2026-12-18":13,"2026-12-19":14,"2026-12-12":15,"2026-12-05":16,"2026-11-30":17};
+  var DIAS = ["2026-11-30","2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-14","2026-12-15","2026-12-16","2026-12-18","2026-12-19"];
   var SEMANA = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
   var SEMANA_LONGA = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
 
@@ -231,7 +231,7 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
     DIAS.forEach(function (iso) {
       var d = dataDe(iso), b = el("button", "data" + (estado.dia === iso ? " marcada" : "")); b.type = "button";
       var tomada = ocupadas.indexOf(iso) >= 0; b.disabled = tomada;
-      b.appendChild(el("small", null, SEMANA[d.getDay()])); b.appendChild(el("b", null, iso.slice(8))); b.appendChild(el("span", null, tomada ? "ocupada" : "dezembro"));
+      b.appendChild(el("small", null, SEMANA[d.getDay()])); b.appendChild(el("b", null, iso.slice(8))); b.appendChild(el("span", null, tomada ? "ocupada" : (iso.slice(5, 7) === "11" ? "novembro" : "dezembro")));
       b.addEventListener("click", function () { estado.dia = iso; desenhar(); });
       g.appendChild(b);
     });
