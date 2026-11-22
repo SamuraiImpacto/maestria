@@ -90,7 +90,12 @@ input[type=range] { width:100%; accent-color:var(--red); }
 /* Resultado */
 .artes { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); align-items:start; }
 .arte { display:flex; flex-direction:column; gap:10px; }
-.arte canvas { width:100%; height:auto; border-radius:16px; border:1px solid var(--bd2); display:block; background:#000; }
+.arte canvas, .arte img { width:100%; height:auto; border-radius:16px; border:1px solid var(--bd2); display:block; background:#000; -webkit-touch-callout:default; }
+.dica { background:var(--redbg); border:1px solid var(--redbd); border-radius:14px; padding:12px 16px; font-size:15px; }
+.link-arte { font-size:14px; color:var(--ok); text-decoration:underline; text-underline-offset:3px; overflow-wrap:anywhere; }
+.cheia { position:fixed; inset:0; z-index:50; background:rgba(5,5,6,.96); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:18px; overflow:auto; }
+.cheia img { max-width:100%; max-height:76vh; border-radius:12px; -webkit-touch-callout:default; }
+.cheia p { color:var(--txt); font-weight:700; text-align:center; }
 .legenda { background:#0b141a; border:1px solid #1f2c33; border-radius:4px 18px 18px 18px; padding:18px 20px; color:#e9edef; font-size:16px; white-space:pre-wrap; }
 .lista { display:flex; flex-direction:column; gap:10px; list-style:none; counter-reset:n; }
 .lista li { counter-increment:n; padding-left:40px; position:relative; }
@@ -137,6 +142,7 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
   var ENSAIO = qs.get("ensaio") === "1";
   var CONVIDADO = (qs.get("c") || "").replace(/[^A-Za-zÀ-ÿ' ]/g, "").slice(0, 40);
   var HORA = "19h", PERFIL = "@samuraidojuridico";
+  var CELULAR = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "") || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent || ""));
 
   // De 30/11 a 22/12/2026, às 19h: dias úteis, sem o dia 17 e com os sábados 05, 12 e 19.
   // O número da live é fixo por data: entrar data nova não muda o número de quem já baixou a arte.
@@ -355,7 +361,7 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
       (ENSAIO ? Promise.resolve({ ok: true, j: { ok: true, numero: NUMERO[estado.dia] } }) : chamar(corpo))
         .then(function (x) {
           if (!x.ok || !x.j.ok) throw new Error((x.j && x.j.erro) || "Não consegui reservar agora.");
-          mostrarResultado(x.j.numero || NUMERO[estado.dia]);
+          mostrarResultado(x.j.numero || NUMERO[estado.dia], x.j.id || null);
         })
         .catch(function (e) { botao.disabled = false; botao.textContent = "Confirmar a minha live"; erro.textContent = e.message || "Não consegui reservar agora. Tente de novo em um minuto."; erro.hidden = false; });
     });
@@ -443,7 +449,7 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
     ctx.font = "600 25px Inter"; ctx.letterSpacing = "2px"; ctx.fillStyle = "rgba(255,255,255,.88)"; ctx.fillText("NO INSTAGRAM " + PERFIL, tx, fy0 + 122); ctx.letterSpacing = "0px";
   }
 
-  function mostrarResultado(numero) {
+  function mostrarResultado(numero, idLive) {
     document.getElementById("fluxo").hidden = true; document.getElementById("topo").hidden = true;
     var alvo = document.getElementById("resultado"); alvo.hidden = false; alvo.innerHTML = "";
     var d = dataDe(estado.dia), primeiro = estado.nome.trim().replace(/^(Dra?\.?|Doutora?)\s+/i, "").split(" ")[0];
@@ -459,7 +465,8 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
     alvo.appendChild(s1);
 
     var s2 = el("section", "entra");
-    s2.innerHTML = "<h2>A sua <em>arte</em> está pronta</h2><p>Uma para o feed e uma para os stories. É só baixar.</p>";
+    s2.innerHTML = "<h2>A sua <em>arte</em> está pronta</h2><p>Uma para o feed e uma para os stories.</p>" +
+      (CELULAR ? "<p class='dica'><b>No celular:</b> toque e segure a imagem e escolha <b>Salvar imagem</b>. Se estiver dentro do Instagram ou do WhatsApp e a opção não aparecer, toque em <b>Abrir a arte</b> embaixo dela.</p>" : "");
     var artes = el("div", "artes"); s2.appendChild(artes); alvo.appendChild(s2);
     var s3 = el("section", "entra");
     s3.innerHTML = "<h2>A <em>legenda</em> do post</h2><p>Escrevi na sua voz, a partir do tema e do recorte que você escolheu. Mude o que quiser.</p>";
@@ -476,13 +483,60 @@ footer { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0
 
     Promise.all([estado.fotoImg ? Promise.resolve(estado.fotoImg) : carregar(estado.foto), carregar(document.getElementById("foto-samurai").src), document.fonts ? document.fonts.ready : null]).then(function (r) {
       estado.fotoImg = r[0];
-      [["Feed (4:5)", false, "live-feed"], ["Stories (9:16)", true, "live-stories"]].forEach(function (a) {
-        var bloco = el("div", "arte"), cv = document.createElement("canvas"); pintar(cv, a[1], numero, r[0], r[1]); bloco.appendChild(cv);
-        var b = el("a", "botao sec", "Baixar: " + a[0]); b.download = a[2] + "-" + ddmm(estado.dia).replace("/", "-") + ".png"; b.href = cv.toDataURL("image/png"); bloco.appendChild(b);
+      var envio = {};
+      [["Feed (4:5)", false, "live-feed", "feed"], ["Stories (9:16)", true, "live-stories", "stories"]].forEach(function (a) {
+        var bloco = el("div", "arte"), cv = document.createElement("canvas"); pintar(cv, a[1], numero, r[0], r[1]);
+        var dados = cv.toDataURL("image/png"), nomeArq = a[2] + "-" + ddmm(estado.dia).replace("/", "-") + ".png";
+        envio[a[3]] = dados;
+        // Imagem de verdade, e não o desenho: no celular, tocar e segurar salva direto na galeria.
+        var img = el("img"); img.src = dados; img.alt = "Arte da live para o " + a[0]; bloco.appendChild(img);
+        var nav = el("div", "nav");
+        var arquivo = null;
+        try { arquivo = new File([dataParaBlob(dados)], nomeArq, { type: "image/png" }); } catch (e) {}
+        if (arquivo && navigator.canShare && navigator.canShare({ files: [arquivo] })) {
+          var sh = el("button", "botao", "Salvar ou enviar: " + a[0]); sh.type = "button";
+          sh.addEventListener("click", function () { navigator.share({ files: [arquivo] }).catch(function () {}); });
+          nav.appendChild(sh);
+        }
+        if (!CELULAR) { var b = el("a", "botao sec", "Baixar: " + a[0]); b.download = nomeArq; b.href = dados; nav.appendChild(b); }
+        var abrir = el("button", "botao sec", "Abrir a arte"); abrir.type = "button";
+        abrir.addEventListener("click", function () { telaCheia(dados, bloco.dataset.link); });
+        nav.appendChild(abrir);
+        bloco.appendChild(nav);
+        bloco.dataset.chave = a[3];
         artes.appendChild(bloco);
       });
-    }).catch(function () { artes.appendChild(el("p", "erro", "Não consegui montar a arte neste navegador. Eu te mando pelo WhatsApp.")); });
+      // Guarda as duas artes num endereço fixo: abre em qualquer navegador e o Samurai também recebe.
+      if (idLive && !ENSAIO) {
+        envio.acao = "artes"; envio.id = idLive;
+        chamar(envio).then(function (x) {
+          if (!x.j || !x.j.ok) return;
+          [].slice.call(artes.querySelectorAll(".arte")).forEach(function (bl) {
+            var u = x.j[bl.dataset.chave]; if (!u) return;
+            bl.dataset.link = u;
+            var l = el("a", "link-arte", "Link da arte, para abrir em qualquer navegador"); l.href = u; l.target = "_blank"; l.rel = "noopener";
+            bl.appendChild(l);
+          });
+        }).catch(function () {});
+      }
+    }).catch(function () { artes.appendChild(el("p", "erro", "Não consegui montar a arte neste navegador. O Samurai te manda pelo WhatsApp.")); });
     alvo.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+
+  function dataParaBlob(d) {
+    var p = d.split(","), bin = atob(p[1]), n = bin.length, u = new Uint8Array(n);
+    while (n--) u[n] = bin.charCodeAt(n);
+    return new Blob([u], { type: "image/png" });
+  }
+  // Tela cheia com a arte e a instrução: funciona até no navegador de dentro do Instagram e do WhatsApp.
+  function telaCheia(dados, link) {
+    var f = el("div", "cheia"); f.setAttribute("role", "dialog"); f.setAttribute("aria-label", "Arte da live em tela cheia");
+    var t = el("p", null, "Toque e segure a imagem e escolha Salvar imagem.");
+    var img = el("img"); img.src = dados; img.alt = "Arte da live";
+    var n = el("div", "nav");
+    if (link) { var l = el("a", "botao sec", "Abrir no navegador"); l.href = link; l.target = "_blank"; l.rel = "noopener"; n.appendChild(l); }
+    var x = el("button", "botao", "Fechar"); x.type = "button"; x.addEventListener("click", function () { f.remove(); }); n.appendChild(x);
+    f.appendChild(t); f.appendChild(img); f.appendChild(n); document.body.appendChild(f); x.focus();
   }
 
   // ---------------------------------------------------------------- início

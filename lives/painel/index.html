@@ -234,6 +234,8 @@ input[type=password] { font:inherit; color:var(--txt); background:#08080a; borde
         var w = link("Chamar no WhatsApp", "https://wa.me/" + zap + "?text=" + encodeURIComponent(msg)); w.className = "btn verde"; ac.appendChild(w);
       }
       if (l.foto_url) { var f = link("Abrir a foto", l.foto_url); f.className = "btn"; ac.appendChild(f); }
+      if (l.arte_feed_url) { var af = link("Arte do feed", l.arte_feed_url); af.className = "btn"; ac.appendChild(af); }
+      if (l.arte_stories_url) { var as = link("Arte dos stories", l.arte_stories_url); as.className = "btn"; ac.appendChild(as); }
       if (l.email) { var m = link(l.email, "mailto:" + l.email); m.className = "btn"; ac.appendChild(m); }
       b.appendChild(ac);
       if (l.roteiro) {
