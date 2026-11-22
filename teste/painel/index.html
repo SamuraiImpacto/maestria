@@ -85,7 +85,8 @@
     <header>
       <div><span class="kicker">MaestrIA, a área que a pessoa escolhe + Marketing</span><h1>Teste grátis de 7 dias</h1></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn" id="atualizar">Atualizar</button>
+        <a class="btn" href="/lives/painel/">Maratona de Lives</a>
+      <button class="btn" id="atualizar">Atualizar</button>
         <button class="btn" id="sair">Sair</button>
       </div>
     </header>
@@ -101,11 +102,6 @@
       <h2>Quem se cadastrou</h2>
       <div class="filtros" id="filtros"></div>
       <div id="pessoas"></div>
-    </section>
-    <section>
-      <h2 id="lives-titulo">Maratona de Lives</h2>
-      <div id="lives-resumo" class="meta" style="margin:0 0 12px"></div>
-      <div id="lives"></div>
     </section>
     <section>
       <h2 id="raio-titulo">Quem fez o Raio-X da marca</h2>
@@ -124,7 +120,7 @@
   var SITUACOES = {
     comprou: "Comprou", usando: "Instalou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
   };
-  var dados = [], visitas = {}, raioX = [], lives = [], filtro = "todos", relogio = null;
+  var dados = [], visitas = {}, raioX = [], filtro = "todos", relogio = null;
 
   function ler() { try { return localStorage.getItem(GUARDA) || localStorage.getItem(GUARDA_LISTA) || ""; } catch (e) { return ""; } }
   function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
@@ -183,7 +179,6 @@
         visitas = res.j.visitas || {};
         // O cadastro fictício do ensaio de publicação não entra na conta.
         raioX = (res.j.raio_x || []).filter(function (r) { return r.origem !== "teste-publicacao"; });
-        lives = res.j.lives || [];
         document.getElementById("quando-li").textContent = "Lido às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) + ". Atualiza sozinho a cada minuto.";
         desenhar(!silencioso);
       })
@@ -277,38 +272,6 @@
       if (r.ultima_ativacao_em && r._s !== "comprou") linha.push("último uso em " + new Date(r.ultima_ativacao_em).toLocaleDateString("pt-BR"));
       c.appendChild(el("div", "meta", linha.join("  ·  ")));
       ps.appendChild(c);
-    });
-
-    // Maratona de Lives: as 14 noites, quem já marcou e o que falta preencher.
-    var NOITES = ["2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18"];
-    var DIA = ["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
-    var porDia = {}; lives.forEach(function (l) { porDia[l.dia] = l; });
-    document.getElementById("lives-titulo").textContent = "Maratona de Lives (" + lives.length + " de " + NOITES.length + " noites marcadas)";
-    document.getElementById("lives-resumo").textContent = "Dias úteis de 01 a 18/12, às 19h. Faltam " + (NOITES.length - lives.length) + " noites. Convite: maestria.samurailab.com.br/lives/";
-    var lv = document.getElementById("lives"); lv.innerHTML = "";
-    NOITES.forEach(function (iso, k) {
-      var p = iso.split("-"), d = new Date(+p[0], +p[1] - 1, +p[2]), l = porDia[iso];
-      var c = el("div", "pessoa" + (animar ? " entra" : ""));
-      var topo = el("div", "topo");
-      topo.appendChild(el("span", "nome", p[2] + "/" + p[1] + ", " + DIA[d.getDay()] + (l ? "  ·  " + l.nome : "")));
-      topo.appendChild(el("span", "selo " + (l ? "comprou" : ""), l ? "live " + String(k + 1).padStart(2, "0") : "livre"));
-      c.appendChild(topo);
-      if (l) {
-        c.appendChild(el("div", "meta", "Tema: " + l.titulo));
-        c.appendChild(el("div", "meta", "Recorte: " + l.recorte));
-        var m = el("div", "meta");
-        var zap = String(l.whatsapp || "").replace(/\D/g, ""); if (zap && zap.length <= 11) zap = "55" + zap;
-        if (zap) { var a = el("a", null, "WhatsApp " + zap.replace(/^55(\d{2})(\d+)(\d{4})$/, "($1) $2-$3")); a.href = "https://wa.me/" + zap; a.target = "_blank"; a.rel = "noopener"; m.appendChild(a); m.appendChild(document.createTextNode("  ·  ")); }
-        var ig = String(l.instagram || "").replace(/^@/, "");
-        if (ig) { var ai = el("a", null, "@" + ig); ai.href = "https://instagram.com/" + ig; ai.target = "_blank"; ai.rel = "noopener"; m.appendChild(ai); m.appendChild(document.createTextNode("  ·  ")); }
-        if (l.foto_url) { var af = el("a", null, "ver a foto"); af.href = l.foto_url; af.target = "_blank"; af.rel = "noopener"; m.appendChild(af); m.appendChild(document.createTextNode("  ·  ")); }
-        m.appendChild(document.createTextNode(l.email || ""));
-        c.appendChild(m);
-        c.appendChild(el("div", "meta", "Bio: " + l.bio));
-        var q = l.created_at ? new Date(l.created_at) : null;
-        c.appendChild(el("div", "meta", (q ? "Marcou em " + q.toLocaleDateString("pt-BR") + " às " + q.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) : "") + (l.convite_email_em ? "  ·  convite de agenda enviado" : "  ·  convite de agenda não saiu")));
-      }
-      lv.appendChild(c);
     });
 
     // Raio-X da marca: quem fez, a nota, a frente mais fraca e o que trava a pessoa.
