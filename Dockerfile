@@ -78,6 +78,8 @@ COPY lista-de-espera/ ./lista-de-espera/
 COPY teste/ ./teste/
 # Raio-X da marca do advogado (21/11/2026): diagnóstico que grava pela edge raio-x-marca.
 COPY raio-x/ ./raio-x/
+# Consultoria de tráfego com o Samurai (22/11/2026): formulário que grava pela edge consultoria-trafego.
+COPY consultoria/ ./consultoria/
 # Maratona de Lives do Samurai (21/11/2026): convite, agenda, arte e legenda. Grava pela edge lives-maratona.
 COPY lives/ ./lives/
 
