@@ -7,7 +7,7 @@
 <title>MaestrIA Cohort Essentials</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="/img/favicon.ico" sizes="any">
 <meta name="theme-color" content="#FAFAF7">
 <style>
@@ -18,16 +18,16 @@
   --acc:#E5262A;--acc2:#B9141B;--acc-l:#FF6B57;--grad:linear-gradient(120deg,#E5262A 0%,#FF6B57 100%);
   --rosa:#FCE5E1;--areia:#F5EDDB;--menta:#E2F0E7;--lavanda:#ECE7F5;--ceu:#E2ECF5;--pessego:#FDEBDD;
   --ok:#1E9E5A;
-  --serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',-apple-system,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,'Segoe UI',Roboto,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
   --sh:0 1px 2px rgba(20,16,24,.04),0 8px 20px -8px rgba(20,16,24,.10),0 30px 60px -30px rgba(20,16,24,.22);
   --sh-d:0 1px 0 rgba(255,255,255,.04) inset,0 40px 80px -40px rgba(0,0,0,.9)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--txt);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:1140px;margin:0 auto;padding:0 20px}.narrow{max-width:760px}
 a{color:inherit}:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:8px}
-h1,h2{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;text-wrap:balance;margin:0}
-h1{font-size:clamp(3rem,8.6vw,5.9rem);line-height:.98}
-h2{font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.02;margin-top:18px}
+h1,h2{font-family:var(--serif);font-weight:800;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,7.4vw,5.2rem);line-height:1.04}
+h2{font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.1;margin-top:18px}
 h1 em,h2 em{font-style:italic;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
 .lbl{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t70)}
 .lbl i{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(229,38,42,.14)}
@@ -54,12 +54,23 @@ section{position:relative;padding:110px 0}
 .btn.ghost{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1px rgba(20,16,24,.16)}
 /* hero */
 .hero{padding:150px 0 100px;background:radial-gradient(900px 500px at 85% 10%,rgba(255,107,87,.13),transparent 65%),var(--paper)}
-.hero-g{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
-@media(max-width:940px){.hero-g{grid-template-columns:1fr;gap:48px}}
+.hero-g{display:flex;flex-direction:column;align-items:center;gap:60px}
+/* centralizado: títulos e chamadas no meio, conteúdo dos cartões alinhado à esquerda para ler */
+.wrap{text-align:center}.sub{margin-left:auto;margin-right:auto}
+.acts,.fatos{justify-content:center}
+.card,.cam,.q,.cel,.passo,details,.form-box,.central,.fone{text-align:left}
+.quote{margin-left:auto;margin-right:auto}
+/* o que fica no escritório */
+.fica{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+@media(max-width:900px){.fica{grid-template-columns:1fr 1fr}}@media(max-width:560px){.fica{grid-template-columns:1fr}}
+.fi{border:1px solid var(--dline);background:var(--ink2);border-radius:22px;padding:28px 24px;box-shadow:var(--sh-d);text-align:center}
+.fi .ico{width:52px;height:52px;border-radius:16px;margin:0 auto 16px;background:var(--grad);display:grid;place-items:center;color:#fff;font-size:24px;box-shadow:0 10px 24px -10px rgba(229,38,42,.8)}
+.fi b{display:block;font-family:var(--serif);font-weight:700;font-size:1.3rem;line-height:1.2;color:var(--dtxt)}
+.fi span{display:block;color:var(--d50);margin-top:8px;font-size:.95rem}
 .hero h1{margin-top:22px}
 .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
 .fatos{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:38px;padding-top:24px;border-top:1px solid var(--line)}
-.fato{font-size:.95rem;color:var(--t70)}.fato b{display:block;font-family:var(--serif);font-weight:400;font-size:1.9rem;color:var(--txt);line-height:1.1}
+.fato{font-size:.95rem;color:var(--t70)}.fato b{display:block;font-family:var(--serif);font-weight:800;font-size:1.9rem;color:var(--txt);line-height:1.1}
 /* conversa animada */
 .fone{background:var(--ink);border-radius:30px;padding:12px;box-shadow:0 50px 90px -40px rgba(20,16,24,.55),0 0 0 1px rgba(20,16,24,.06);max-width:400px;margin:0 auto;width:100%}
 .fone-top{display:flex;align-items:center;gap:10px;padding:10px 12px 12px;color:var(--dtxt)}
@@ -79,9 +90,9 @@ section{position:relative;padding:110px 0}
 .esp{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
 @media(max-width:860px){.esp{grid-template-columns:1fr}}
 .q{border:1px solid var(--dline);background:var(--ink2);border-radius:22px;padding:28px;box-shadow:var(--sh-d)}
-.q b{display:block;font-family:var(--serif);font-weight:400;font-size:1.65rem;line-height:1.15}
+.q b{display:block;font-family:var(--serif);font-weight:700;font-size:1.4rem;line-height:1.15}
 .q span{display:block;color:var(--d50);margin-top:12px}
-.quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.2;margin:56px 0 0;max-width:30ch}
+.quote{font-family:var(--serif);font-style:italic;font-weight:700;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.2;margin:56px 0 0;max-width:30ch}
 .quote small{display:block;font-family:var(--sans);font-style:normal;font-size:1rem;color:var(--d50);margin-top:14px;max-width:60ch;line-height:1.6}
 /* central */
 .central{margin-top:50px;background:#fff;border-radius:26px;box-shadow:var(--sh);overflow:hidden;border:1px solid var(--line)}
@@ -92,7 +103,7 @@ section{position:relative;padding:110px 0}
 .cel{border-radius:18px;padding:20px}
 .cel small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t50);margin-bottom:10px}
 .cel .v{font-weight:600;line-height:1.35}.cel .t{color:var(--t70);font-size:.9rem;margin-top:8px}
-.cel .big{font-family:var(--serif);font-size:3rem;line-height:1;font-variant-numeric:tabular-nums}
+.cel .big{font-family:var(--serif);font-weight:800;font-size:3rem;line-height:1;font-variant-numeric:tabular-nums}
 .ok{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px;box-shadow:0 0 0 4px rgba(30,158,90,.15)}
 .nota{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t50);margin-top:16px}
 /* sábados */
@@ -102,7 +113,7 @@ section{position:relative;padding:110px 0}
 .card:hover{transform:translateY(-3px)}
 .card .n{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t70)}
 .card .n b{color:var(--acc2);font-weight:500}
-.card h3{font-family:var(--serif);font-weight:400;font-size:1.95rem;line-height:1.08;margin:14px 0 16px;letter-spacing:-.01em}
+.card h3{font-family:var(--serif);font-weight:700;font-size:1.55rem;line-height:1.08;margin:14px 0 16px;letter-spacing:-.01em}
 .card p{margin:0}
 .card .de{color:var(--t70);font-size:.97rem;margin-bottom:8px}
 .card .de::before,.card .pa::before{font-family:var(--mono);font-size:10px;letter-spacing:.12em;margin-right:6px}
@@ -121,7 +132,7 @@ section{position:relative;padding:110px 0}
 .cam{border:1px solid var(--dline);background:var(--ink2);border-radius:24px;padding:28px;box-shadow:var(--sh-d);display:flex;flex-direction:column;gap:12px}
 .cam.rec{background:linear-gradient(160deg,rgba(229,38,42,.22),var(--ink2) 60%);border-color:rgba(255,107,87,.4)}
 .cam .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-l)}
-.cam h3{font-family:var(--serif);font-weight:400;font-size:1.8rem;line-height:1.1;margin:0}
+.cam h3{font-family:var(--serif);font-weight:700;font-size:1.5rem;line-height:1.1;margin:0}
 .cam p{margin:0;color:var(--d70)}
 .cam .r{font-size:.92rem;color:var(--d50);border-top:1px solid var(--dline);padding-top:12px;margin-top:auto}
 /* maestria */
@@ -142,11 +153,10 @@ ul.l.no li::before{background:transparent;border:1.5px solid var(--t50)}
 .hora span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:.95rem}
 .hora b{font-weight:600}
 /* samurai */
-.samurai{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-@media(max-width:860px){.samurai{grid-template-columns:1fr;gap:20px}}
+.samurai{max-width:820px}
 /* perguntas */
 details{border-bottom:1px solid var(--line);padding:22px 0}
-summary{cursor:pointer;font-family:var(--serif);font-size:1.55rem;line-height:1.2;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary{cursor:pointer;font-family:var(--serif);font-weight:700;font-size:1.25rem;line-height:1.2;list-style:none;display:flex;justify-content:space-between;gap:16px}
 summary::-webkit-details-marker{display:none}summary::after{content:"+";font-family:var(--mono);font-size:1.1rem;color:var(--acc);transition:transform .2s;flex:none}
 details[open] summary::after{transform:rotate(45deg)}details p{margin:12px 0 0;color:var(--t70)}
 /* formulário */
@@ -184,7 +194,7 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
   <div>
     <span class="lbl"><i></i>Só para clientes MaestrIA · 16 vagas</span>
     <h1>O escritório que roda <em>sem você em cima.</em></h1>
-    <p class="sub">8 sábados. No primeiro, o sistema do seu escritório fica de pé. Em cada um dos outros, um módulo novo pluga nele, com a MaestrIA como cérebro. Ao lado do ADVBOX ou do Astrea, sem trocar nada.</p>
+    <p class="sub">Você entra num sábado com um escritório que depende de você para tudo. Oito sábados depois, ele atende, cobra, organiza e mostra os números sozinho. Com a MaestrIA como cérebro, e sem largar o ADVBOX ou o Astrea.</p>
     <div class="acts"><a class="btn" href="#lista">Quero a conversa com o Samurai <span class="ar">→</span></a><a class="btn ghost" href="#sabados">Ver os 8 sábados</a></div>
     <div class="fatos">
       <div class="fato"><b>16/01</b>primeiro sábado</div>
@@ -211,7 +221,8 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
 
 <section id="sistema" class="rv"><div class="wrap">
   <span class="lbl"><i></i>Veja o sistema antes do método</span>
-  <h2>Uma terça-feira qualquer, <em>depois do Cohort.</em></h2>
+  <h2>Terça, 8h02. <em>Você ainda nem chegou.</em></h2>
+  <p class="sub">E o escritório já respondeu quem chamou de madrugada, cobrou o documento que faltava e avisou que o êxito do João sai em março.</p>
   <div class="central" role="img" aria-label="Exemplo ilustrativo do painel do escritório">
     <div class="cbar"><i></i><i></i><i></i><span style="margin-left:8px">SISTEMA DO ESCRITÓRIO · TERÇA, 08:02</span></div>
     <div class="cgrid">
@@ -224,9 +235,23 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
   <p class="nota">Exemplo ilustrativo, com dados fictícios</p>
 </div></section>
 
+<section class="dark rv"><div class="wrap">
+  <span class="lbl"><i></i>O que fica no seu escritório em 13/03</span>
+  <h2>Não é aula. <em>É o seu escritório funcionando.</em></h2>
+  <p class="sub">Cada sábado deixa uma coisa rodando que antes dependia de você.</p>
+  <div class="fica">
+    <div class="fi"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><b>Contato respondido em segundos</b><span>Às 22h, no domingo, no feriado. No seu tom.</span></div>
+    <div class="fi"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg></div><b>Êxito que chega na sua conta</b><span>Carteira com o mês previsto, destaque pedido, cobrança no dia certo.</span></div>
+    <div class="fi"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg></div><b>A equipe pede, a MaestrIA faz</b><span>Ficha, cálculo e peça prontos na pasta, sem ninguém entrar na sua conta.</span></div>
+    <div class="fi"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><b>Nenhuma senha no grupo</b><span>Cofre com o código do autenticador, por pessoa, com histórico.</span></div>
+    <div class="fi"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><b>Pasta que ninguém apaga</b><span>Documento do WhatsApp cai no lugar certo, com o nome certo.</span></div>
+    <div class="fi"><div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><b>Os seus números na tela</b><span>5 números toda semana. Você sabe o que melhorou, e o que travou.</span></div>
+  </div>
+</div></section>
+
 <section id="sabados" class="soft rv"><div class="wrap">
   <span class="lbl"><i></i>Os 8 sábados · das 9h às 11h e das 14h às 16h</span>
-  <h2>Um sistema só. <em>Um módulo novo por sábado.</em></h2>
+  <h2>8 sábados. <em>8 coisas que saem da sua mão.</em></h2>
   <p class="sub">Tudo chega construído e testado antes da turma. No sábado você instala no seu escritório, lapida do seu jeito e só sai quando passa no teste de saída.</p>
   <div class="sab">
     <div class="card base"><div class="n"><span>Sábado 01 · a base</span><b>16/01</b></div><h3>Fundação: o sistema do escritório</h3><p class="de">senha no grupo do WhatsApp, arquivo que some e uma conta do Claude para a equipe inteira.</p><p class="pa">o sistema na conta do escritório, cada pessoa com o próprio login, cofre de senhas e códigos do autenticador, pasta do cliente que a equipe edita e não apaga, e a MaestrIA conectada, atendendo os pedidos da equipe numa máquina só.</p></div>
@@ -253,7 +278,7 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
 
 <section id="maestria" class="rv"><div class="wrap narrow">
   <span class="lbl"><i></i>Você já tem a MaestrIA</span>
-  <h2>Então o que muda? <em>Quem trabalha.</em></h2>
+  <h2>Hoje a MaestrIA trabalha quando você pede. <em>Depois do Cohort, trabalha sozinha.</em></h2>
   <div class="duas">
     <div class="card um"><div class="n"><span>MaestrIA</span></div><h3>Quando você pede</h3><p style="color:var(--t70)">No seu computador: caso, cálculo, peça e conteúdo.</p></div>
     <div class="card sim"><div class="n"><span>O que você instala no Cohort</span></div><h3>Sozinho, o tempo todo</h3><p>Na nuvem, para a equipe inteira, chamando a MaestrIA quando precisa e guardando tudo no sistema do escritório.</p></div>
@@ -263,7 +288,7 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
 
 <section class="soft rv"><div class="wrap">
   <span class="lbl"><i></i>Como funciona um sábado</span>
-  <h2>Só termina <em>quando funciona.</em></h2>
+  <h2>Você não sai com anotação. <em>Sai com sistema rodando.</em></h2>
   <div class="passos">
     <div class="passo"><b>MANHÃ</b>Placar da semana: o que mudou nos seus números.</div>
     <div class="passo"><b>MANHÃ</b>O método por trás do módulo e a demonstração ao vivo.</div>
@@ -309,7 +334,7 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
 <section id="lista"><div class="wrap narrow">
   <div id="tela-form">
     <span class="lbl" style="color:var(--d70)"><i></i>Lista da primeira turma</span>
-    <h2 style="color:var(--dtxt)">Quero a conversa <em>com o Samurai.</em></h2>
+    <h2 style="color:var(--dtxt)">16 escritórios. <em>Uma conversa antes.</em></h2>
     <p class="sub" style="color:var(--d70)">30 minutos, só você e ele. Primeiro ele entende o seu escritório. Depois mostra o que entra.</p>
     <span class="vagas"><span class="ok"></span><b>16 vagas</b> · só para clientes MaestrIA</span>
     <div class="form-box">
