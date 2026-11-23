@@ -40,7 +40,8 @@ section{position:relative;padding:110px 0}
 .top{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9;width:min(1100px,calc(100% - 24px));display:flex;align-items:center;justify-content:space-between;gap:12px;
   background:rgba(250,250,247,.72);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(20,16,24,.07);border-radius:999px;padding:7px 8px 7px 20px;box-shadow:0 10px 30px -18px rgba(20,16,24,.35)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;font-size:15px;white-space:nowrap}
-.brand .mk{width:22px;height:22px;border-radius:7px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:var(--serif);font-style:italic;font-size:15px}
+.brand .mk{width:26px;height:auto;display:block}
+.brand .nm{font-weight:300;font-size:17px;letter-spacing:.16em;color:var(--txt)}.brand .nm i{font-style:normal;font-weight:500;color:var(--acc)}
 .brand b{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t50)}
 .menu{display:flex;gap:24px;font-size:14px;color:var(--t70)}.menu a{text-decoration:none}.menu a:hover{color:var(--txt)}
 @media(max-width:820px){.menu{display:none}.brand b{display:none}}
@@ -173,7 +174,7 @@ footer{padding:30px 0 50px;background:var(--ink);color:var(--d50);font-family:va
 </style>
 
 <header class="top">
-  <a class="brand" href="#topo"><span class="mk" aria-hidden="true">M</span><span class="nm">MaestrIA</span> <b>Cohort Essentials</b></a>
+  <a class="brand" href="#topo"><img class="mk" src="/img/logo-sym.png" alt="" width="26" height="23"><span class="nm" aria-label="MaestrIA">MAESTR<i>IA</i></span> <b>Cohort Essentials</b></a>
   <nav class="menu" aria-label="Seções"><a href="#sistema">Sistema</a><a href="#sabados">Os 8 sábados</a><a href="#whatsapp">WhatsApp</a><a href="#perguntas">Perguntas</a></nav>
   <a class="btn sm" href="#lista">Quero a conversa</a>
 </header>
