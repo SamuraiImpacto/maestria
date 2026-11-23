@@ -86,7 +86,8 @@ COPY cohort/ ./cohort/
 
 # O navegador guardava a página antiga e o Samurai via versão velha (22/11/2026).
 # Manda o navegador conferir com o servidor a cada visita; se nada mudou, a resposta é curta (304).
-RUN printf 'add_header Cache-Control "no-cache" always;\n' > /etc/nginx/conf.d/00-sem-pagina-velha.conf && nginx -t
+# Endereço sem barra no fim (/cohort) redireciona relativo, sem cair em http.
+RUN printf 'add_header Cache-Control "no-cache" always;\nabsolute_redirect off;\n' > /etc/nginx/conf.d/00-sem-pagina-velha.conf && nginx -t
 
 EXPOSE 80
 
