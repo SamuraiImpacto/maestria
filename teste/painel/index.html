@@ -53,6 +53,7 @@
   .selo.comprou{color:var(--green)}
   .selo.usando{color:var(--blue)}
   .selo.parado{color:var(--amber)}
+.selo.instalou{color:var(--amber)}
   .selo.fim{color:var(--muted)}
   .entrada{max-width:420px;margin:60px auto;display:flex;flex-direction:column;gap:12px}
   .entrada input{background:var(--panel);color:var(--txt);border:1px solid var(--line-strong);border-radius:12px;padding:14px;font:inherit;font-size:16px}
@@ -118,7 +119,7 @@
   // Guarda própria deste painel. Quem já entrou no painel da lista de espera entra aqui com a chave de lá.
   var GUARDA = "maestria-painel-teste", GUARDA_LISTA = "maestria-painel-lista";
   var SITUACOES = {
-    comprou: "Comprou", usando: "Instalou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
+    comprou: "Comprou", usando: "Usando", instalou: "Instalou, ainda não usou", parado: "Ainda não instalou", fim: "Terminou sem comprar"
   };
   var dados = [], visitas = {}, raioX = [], filtro = "todos", relogio = null;
 
@@ -141,7 +142,9 @@
   function situacao(r) {
     if (r.teste_convertido_em) return "comprou";
     if (r.expires_at && new Date(r.expires_at).getTime() < Date.now()) return "fim";
-    return r.primeira_ativacao_em ? "usando" : "parado";
+    // Desde 25/11/2026 o teste conta do primeiro uso; instalar sem abrir a MaestrIA não conta como uso.
+    if (r.teste_uso_em) return "usando";
+    return r.primeira_ativacao_em ? "instalou" : "parado";
   }
 
   // O navegador guarda a página do painel. A cada leitura, confere se saiu versão nova e recarrega sozinho.
@@ -207,6 +210,7 @@
     function conta(s) { return dados.filter(function (r) { return r._s === s; }).length; }
     var dia = dados.filter(function (r) { return r.teste_criado_em && agora - new Date(r.teste_criado_em).getTime() < 864e5; }).length;
     var instalaram = dados.filter(function (r) { return r.primeira_ativacao_em; }).length;
+    var usaram = dados.filter(function (r) { return r.teste_uso_em; }).length;
     var compraram = conta("comprou");
 
     var abriram = 0, comecaram = 0;
@@ -224,7 +228,7 @@
     });
 
     var nums = document.getElementById("numeros"); nums.innerHTML = "";
-    [[abriram, "abriram a página"], [comecaram, "começaram a preencher"], [n, "cadastros"], [dia, "nas últimas 24 horas"], [instalaram, "instalaram"], [conta("parado"), "ainda não instalaram"], [conta("fim"), "terminaram sem comprar"], [compraram, "compraram", true]].forEach(function (x) {
+    [[abriram, "abriram a página"], [comecaram, "começaram a preencher"], [n, "cadastros"], [dia, "nas últimas 24 horas"], [instalaram, "instalaram"], [usaram, "começaram a usar"], [conta("parado"), "ainda não instalaram"], [conta("fim"), "terminaram sem comprar"], [compraram, "compraram", true]].forEach(function (x) {
       var d = el("div", "num" + (x[2] ? " destaque" : "")); d.appendChild(el("b", null, x[0])); d.appendChild(el("span", null, x[1])); nums.appendChild(d);
     });
 
