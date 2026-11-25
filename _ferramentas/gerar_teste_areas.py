@@ -387,6 +387,19 @@ CSS_TODOS = """
   @keyframes hvbrilho{to{background-position:-150% 0}}
   /* a ficha com a escolha da área */
   #teste{scroll-margin-top:12px}
+  #area{scroll-margin-top:12px;padding-bottom:10px}
+  .seletor-area{border:0;margin:30px auto 0;padding:0;max-width:900px}
+  .seletor-area .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .seletor-area .op{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .seletor-area label{position:relative;cursor:pointer;display:block}
+  .seletor-area input{position:absolute;opacity:0;width:1px;height:1px}
+  .seletor-area span{display:flex;align-items:center;justify-content:center;min-height:62px;padding:12px;border-radius:14px;border:1px solid var(--line-strong);background:var(--panel);font-weight:800;font-size:16px;transition:border-color .2s,background .2s,transform .2s}
+  .seletor-area label:hover span{border-color:var(--red);transform:translateY(-2px)}
+  .seletor-area input:checked+span{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 14px 40px -18px rgba(239,39,39,.8)}
+  .seletor-area input:focus-visible+span{outline:2px solid #fff;outline-offset:3px}
+  @media (max-width:700px){.seletor-area .op{grid-template-columns:1fr 1fr;gap:8px}.seletor-area span{min-height:52px;font-size:15px}}
+  @media (prefers-reduced-motion:reduce){.seletor-area span{transition:none}.seletor-area label:hover span{transform:none}}
+  #nicho.vazio{display:none}
   #nicho{transition:opacity .25s;min-height:60vh}
   #nicho.trocando{opacity:.25;pointer-events:none}
   @media (prefers-reduced-motion:reduce){#nicho{transition:none}}
@@ -425,7 +438,7 @@ HERO_VSL = """<header class="hero hero-vsl" id="topo">
       <button type="button" class="hv-play" id="hvPlay" aria-label="Assistir ao vídeo com som"><span class="hv-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="t">Assistir com som &nbsp;•&nbsp; 3 min</span></button>
     </div>
     <div class="hv-cta hv-entra d4">
-      <a href="#teste" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
+      <a href="#area" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
       <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
     </div>
   </div>
@@ -443,7 +456,7 @@ JS_VSL = """<script>
     var p = v.play(); if (p && p.catch) p.catch(function () { box.classList.remove("tocando"); });
   });
   v.addEventListener("ended", function () {
-    var alvo = document.getElementById("teste"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
+    var alvo = document.getElementById("area"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
   });
 })();
 </script>"""
@@ -467,17 +480,33 @@ JS_NICHO = """<script>
   var box = document.getElementById("nicho");
   if (!box) return;
   var atual = box.getAttribute("data-area"), cache = {};
+  var NOMES = __NOMES__;
+  function mostrar(a) {
+    box.classList.remove("vazio");
+    var n = document.getElementById("area-nome"); if (n && NOMES[a]) n.textContent = NOMES[a];
+  }
   function rodarScripts(el) {
     [].slice.call(el.querySelectorAll("script")).forEach(function (s) {
       var n = document.createElement("script"); n.text = s.textContent; s.parentNode.replaceChild(n, s);
     });
   }
   function trocar(a) {
-    if (!a || a === atual) return;
+    if (!a) return;
+    mostrar(a);
+    if (a === atual) return;
     atual = a;
     box.classList.add("trocando");
     box.setAttribute("aria-busy", "true");
-    var pega = cache[a] ? Promise.resolve(cache[a]) : fetch("/teste/nicho/" + a + ".html").then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    function baixar() {
+      // conexão travada não pode deixar a página parada: depois de 6 s, desiste e tenta de novo
+      var ctl = window.AbortController ? new AbortController() : null;
+      var t = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
+      return fetch("/teste/nicho/" + a + ".html", ctl ? { signal: ctl.signal } : {})
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function (x) { clearTimeout(t); return x; }, function (e) { clearTimeout(t); throw e; });
+    }
+    // se a rede falhar, tenta de novo uma vez antes de desistir
+    var pega = cache[a] ? Promise.resolve(cache[a]) : baixar().catch(function () { return new Promise(function (ok) { setTimeout(ok, 800); }).then(baixar); });
     pega.then(function (t) {
       cache[a] = t;
       if (atual !== a) return;
@@ -493,7 +522,12 @@ JS_NICHO = """<script>
     });
     try { var u = new URL(location.href); u.searchParams.set("a", a); history.replaceState(null, "", u); } catch (e) {}
   }
-  document.addEventListener("change", function (e) { if (e.target && e.target.name === "area") trocar(e.target.value); });
+  document.addEventListener("change", function (e) {
+    if (!e.target || e.target.name !== "area") return;
+    trocar(e.target.value);
+    var t = document.getElementById("nicho");
+    if (t) setTimeout(function () { t.scrollIntoView({ behavior: "smooth" }); }, 150);
+  });
   var marcada = document.querySelector('input[name="area"]:checked');
   if (marcada) trocar(marcada.value);
 })();
@@ -515,22 +549,28 @@ def todos(h):
     nav = nav[:i] + '''<div class="nav-links">
       <a href="#topo">Assista</a>
       <a href="#faq">Perguntas</a>
-      <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
+      <a href="#area" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>''' + nav[f:]
 
     # a ficha: a mesma do topo das páginas por área, com a escolha da área no começo
     ci = h.index('<div class="teste-form" id="cartao">')
     cf = h.index("\n  </div>\n</header>", ci)
     cartao = h[ci:cf].rstrip()
-    cartao = troca(cartao, "Você testa <b>Previdenciário + Marketing</b>.", "Você testa <b>a sua área + o Marketing</b>.")
-    escolha = '\n            <fieldset class="tf-areas"><legend>Qual é a sua área?</legend><div class="op">' + "".join(
-        f'<label><input type="radio" name="area" value="{x}"><span>{AREAS[x]["nome"]}</span></label>' for x in ORDEM) + "</div></fieldset>"
-    cartao = troca(cartao, '<form id="f" novalidate>', '<form id="f" novalidate>' + escolha)
+    cartao = troca(cartao, "Você testa <b>Previdenciário + Marketing</b>.", 'Você testa <b><span id="area-nome">a sua área</span> + Marketing</b>.')
+    secao_area = '''<section id="area">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><span>Para começar</span></span>
+    <h2 class="sec reveal">Escolha a sua área e teste <span class="red">por 7 dias, sem pagar nada</span>.</h2>
+    <p class="lead reveal">A página se ajusta à sua área: logo abaixo você vê o que ela faz no seu dia a dia. O cadastro do teste fica no fim.</p>
+    <fieldset class="seletor-area reveal"><legend class="sr">Qual é a sua área?</legend><div class="op">''' + "".join(
+        f'<label><input type="radio" name="area" value="{x}"><span>{AREAS[x]["nome"]}</span></label>' for x in ORDEM) + '''</div></fieldset>
+  </div>
+</section>'''
     li = lambda t: f'<li><span class="ck">✓</span><span>{t}</span></li>'
     secao_teste = f'''<section id="teste">
   <div class="wrap sec-center">
     <span class="kicker reveal"><span>Liberar o teste</span></span>
-    <h2 class="sec reveal">Escolha a sua área e teste <span class="red">por 7 dias, sem pagar nada</span>.</h2>
+    <h2 class="sec reveal">Gostou do que viu? <span class="red">Teste por 7 dias, sem pagar nada.</span></h2>
     <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira da sua área, com o Marketing junto, no seu computador.</p>
     <div class="teste-grade">
       {cartao}
@@ -563,6 +603,7 @@ def todos(h):
     final = h[h.index('<section class="final">'):h.index("</section>", h.index('<section class="final">')) + len("</section>")]
     final = re.sub(r'\n    <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu.*?</p>', "", final)
     final = troca(final, "<span>Os dois pacotes completos</span>", "<span>A sua área + o Marketing</span>")
+    final = troca(final, '<a href="#teste" class="btn btn-red btn-lg reveal">', '<a href="#area" class="btn btn-red btn-lg reveal">')
     rodape = h[h.index("<footer>"):h.index("</footer>") + len("</footer>")]
     rodape = troca(rodape, '<a href="/prev/">Só o Previdenciário</a><a href="/marketing/">Só o Marketing</a>', '<a href="/">Todas as áreas</a><a href="/marketing/">Só o Marketing</a>')
 
@@ -579,12 +620,13 @@ def todos(h):
 ''')
     js_form = troca(js_form, "whatsapp: zap.value, area: AREA,", "whatsapp: zap.value, area: areaEscolhida(),")
     js_form = troca(js_form, 'if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");',
-                    'if (!dados.area) return mostrarErro("Escolha a sua área, no começo da ficha.");\n      if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");')
+                    'if (!dados.area) { var sel = document.getElementById("area"); if (sel) sel.scrollIntoView({ behavior: "smooth" }); return mostrarErro("Escolha a sua área, logo acima."); }\n      if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");')
     principal = [x for x in scripts if "var EDGE" not in x]
     assert len(principal) == len(scripts) - 1, len(scripts)
 
-    nicho = '<div id="nicho" data-area="prev">\n' + miolo(h) + "\n</div>"
-    corpo = "\n\n".join([nav, HERO_VSL, secao_teste, nicho, faq, final, rodape] + principal + [js_form, JS_VSL, JS_NICHO])
+    nicho = '<div id="nicho" class="vazio" data-area="prev">\n' + miolo(h) + "\n</div>"
+    js_nicho = JS_NICHO.replace("__NOMES__", json.dumps({x: AREAS[x]["nome"] for x in ORDEM}, ensure_ascii=False))
+    corpo = "\n\n".join([nav, HERO_VSL, secao_area, nicho, secao_teste, faq, final, rodape] + principal + [js_form, JS_VSL, js_nicho])
     pagina = cabeca + corpo + "\n</body>\n</html>\n" if "<body" in cabeca else cabeca + corpo + "\n</html>\n"
     ids = re.findall(r'\bid="([^"]+)"', pagina)
     assert len(ids) == len(set(ids)), sorted({x for x in ids if ids.count(x) > 1})

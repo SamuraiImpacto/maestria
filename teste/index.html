@@ -949,6 +949,19 @@
   @keyframes hvbrilho{to{background-position:-150% 0}}
   /* a ficha com a escolha da área */
   #teste{scroll-margin-top:12px}
+  #area{scroll-margin-top:12px;padding-bottom:10px}
+  .seletor-area{border:0;margin:30px auto 0;padding:0;max-width:900px}
+  .seletor-area .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .seletor-area .op{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .seletor-area label{position:relative;cursor:pointer;display:block}
+  .seletor-area input{position:absolute;opacity:0;width:1px;height:1px}
+  .seletor-area span{display:flex;align-items:center;justify-content:center;min-height:62px;padding:12px;border-radius:14px;border:1px solid var(--line-strong);background:var(--panel);font-weight:800;font-size:16px;transition:border-color .2s,background .2s,transform .2s}
+  .seletor-area label:hover span{border-color:var(--red);transform:translateY(-2px)}
+  .seletor-area input:checked+span{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 14px 40px -18px rgba(239,39,39,.8)}
+  .seletor-area input:focus-visible+span{outline:2px solid #fff;outline-offset:3px}
+  @media (max-width:700px){.seletor-area .op{grid-template-columns:1fr 1fr;gap:8px}.seletor-area span{min-height:52px;font-size:15px}}
+  @media (prefers-reduced-motion:reduce){.seletor-area span{transition:none}.seletor-area label:hover span{transform:none}}
+  #nicho.vazio{display:none}
   #nicho{transition:opacity .25s;min-height:60vh}
   #nicho.trocando{opacity:.25;pointer-events:none}
   @media (prefers-reduced-motion:reduce){#nicho{transition:none}}
@@ -982,7 +995,7 @@
     <div class="nav-links">
       <a href="#topo">Assista</a>
       <a href="#faq">Perguntas</a>
-      <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
+      <a href="#area" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>
   </div>
 </nav>
@@ -998,56 +1011,22 @@
       <button type="button" class="hv-play" id="hvPlay" aria-label="Assistir ao vídeo com som"><span class="hv-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="t">Assistir com som &nbsp;•&nbsp; 3 min</span></button>
     </div>
     <div class="hv-cta hv-entra d4">
-      <a href="#teste" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
+      <a href="#area" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
       <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
     </div>
   </div>
 </header>
 
-<section id="teste">
+<section id="area">
   <div class="wrap sec-center">
-    <span class="kicker reveal"><span>Liberar o teste</span></span>
+    <span class="kicker reveal"><span>Para começar</span></span>
     <h2 class="sec reveal">Escolha a sua área e teste <span class="red">por 7 dias, sem pagar nada</span>.</h2>
-    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira da sua área, com o Marketing junto, no seu computador.</p>
-    <div class="teste-grade">
-      <div class="teste-form" id="cartao">
-        <div id="tela-form">
-          <h3>Liberar meu teste de 7 dias</h3>
-          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora, também no seu WhatsApp. Você testa <b>a sua área + o Marketing</b>.</p>
-          <form id="f" novalidate>
-            <fieldset class="tf-areas"><legend>Qual é a sua área?</legend><div class="op"><label><input type="radio" name="area" value="prev"><span>Previdenciário</span></label><label><input type="radio" name="area" value="trab"><span>Trabalhista</span></label><label><input type="radio" name="area" value="familia"><span>Família</span></label><label><input type="radio" name="area" value="consumidor"><span>Consumidor</span></label><label><input type="radio" name="area" value="bancario"><span>Bancário</span></label><label><input type="radio" name="area" value="criminal"><span>Criminal</span></label><label><input type="radio" name="area" value="imobiliario"><span>Imobiliário</span></label><label><input type="radio" name="area" value="empresarial"><span>Empresarial</span></label></div></fieldset>
-            <div class="tf-campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
-            <div class="tf-campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
-            <div class="tf-campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
-            <div class="tf-isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
-            <p class="tf-erro tf-oculto" id="erro" role="alert"></p>
-            <button type="submit" class="btn btn-red btn-lg" id="enviar"><span class="tf-gira"></span><span id="enviar-txt">Quero testar por 7 dias</span></button>
-            <p class="tf-legal">O acesso chega no seu e-mail e no seu WhatsApp. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA, por esses dois canais. Sem cartão e sem cobrança automática.</p>
-          </form>
-        </div>
-        <div id="tela-ok" class="tf-oculto">
-          <span class="tf-selo">✓</span>
-          <h3 id="ok-titulo">Teste liberado!</h3>
-          <p class="sub" id="ok-texto"></p>
-          <a class="btn btn-red btn-lg" id="ok-btn" href="/membros/">Instalar agora, passo a passo</a>
-          <p class="tf-legal" style="margin-top:14px">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
-        </div>
-      </div>
-      <div class="teste-inclui reveal">
-        <div class="h">O que vem no teste</div>
-        <ul>
-          <li><span class="ck">✓</span><span><b>A ferramenta completa da sua área:</b> petição no seu timbrado, cálculo com memória aberta e jurisprudência conferida em fonte oficial</span></li>
-          <li><span class="ck">✓</span><span><b>O Marketing junto:</b> carrossel, calendário do mês, roteiro de vídeo e legenda, com a sua voz e dentro das regras da OAB</span></li>
-          <li><span class="ck">✓</span><span><b>Com os seus casos:</b> os arquivos ficam em pastas suas, no seu computador</span></li>
-          <li><span class="ck">✓</span><span><b>Instalação guiada:</b> imagem de cada tela e suporte no grupo da comunidade</span></li>
-          <li><span class="ck">✓</span><span><b>Sem cartão:</b> no fim dos 7 dias o teste pausa sozinho, e você decide</span></li>
-        </ul>
-      </div>
-    </div>
+    <p class="lead reveal">A página se ajusta à sua área: logo abaixo você vê o que ela faz no seu dia a dia. O cadastro do teste fica no fim.</p>
+    <fieldset class="seletor-area reveal"><legend class="sr">Qual é a sua área?</legend><div class="op"><label><input type="radio" name="area" value="prev"><span>Previdenciário</span></label><label><input type="radio" name="area" value="trab"><span>Trabalhista</span></label><label><input type="radio" name="area" value="familia"><span>Família</span></label><label><input type="radio" name="area" value="consumidor"><span>Consumidor</span></label><label><input type="radio" name="area" value="bancario"><span>Bancário</span></label><label><input type="radio" name="area" value="criminal"><span>Criminal</span></label><label><input type="radio" name="area" value="imobiliario"><span>Imobiliário</span></label><label><input type="radio" name="area" value="empresarial"><span>Empresarial</span></label></div></fieldset>
   </div>
 </section>
 
-<div id="nicho" data-area="prev">
+<div id="nicho" class="vazio" data-area="prev">
 <div class="marq" aria-hidden="true">
   <div class="marq-track">
     <span>Nunca inventa jurisprudência</span><span>Dado do cliente no seu computador</span><span>Cálculo com memória aberta</span><span>Intimações pela sua OAB</span><span>Conteúdo com a sua voz</span><span>Provimento 205 da OAB</span><span>Site no seu domínio</span><span>Licença no seu CPF</span>
@@ -1665,6 +1644,48 @@
 </section>
 </div>
 
+<section id="teste">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><span>Liberar o teste</span></span>
+    <h2 class="sec reveal">Gostou do que viu? <span class="red">Teste por 7 dias, sem pagar nada.</span></h2>
+    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira da sua área, com o Marketing junto, no seu computador.</p>
+    <div class="teste-grade">
+      <div class="teste-form" id="cartao">
+        <div id="tela-form">
+          <h3>Liberar meu teste de 7 dias</h3>
+          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora, também no seu WhatsApp. Você testa <b><span id="area-nome">a sua área</span> + Marketing</b>.</p>
+          <form id="f" novalidate>
+            <div class="tf-campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
+            <div class="tf-campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
+            <div class="tf-campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
+            <div class="tf-isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
+            <p class="tf-erro tf-oculto" id="erro" role="alert"></p>
+            <button type="submit" class="btn btn-red btn-lg" id="enviar"><span class="tf-gira"></span><span id="enviar-txt">Quero testar por 7 dias</span></button>
+            <p class="tf-legal">O acesso chega no seu e-mail e no seu WhatsApp. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA, por esses dois canais. Sem cartão e sem cobrança automática.</p>
+          </form>
+        </div>
+        <div id="tela-ok" class="tf-oculto">
+          <span class="tf-selo">✓</span>
+          <h3 id="ok-titulo">Teste liberado!</h3>
+          <p class="sub" id="ok-texto"></p>
+          <a class="btn btn-red btn-lg" id="ok-btn" href="/membros/">Instalar agora, passo a passo</a>
+          <p class="tf-legal" style="margin-top:14px">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
+        </div>
+      </div>
+      <div class="teste-inclui reveal">
+        <div class="h">O que vem no teste</div>
+        <ul>
+          <li><span class="ck">✓</span><span><b>A ferramenta completa da sua área:</b> petição no seu timbrado, cálculo com memória aberta e jurisprudência conferida em fonte oficial</span></li>
+          <li><span class="ck">✓</span><span><b>O Marketing junto:</b> carrossel, calendário do mês, roteiro de vídeo e legenda, com a sua voz e dentro das regras da OAB</span></li>
+          <li><span class="ck">✓</span><span><b>Com os seus casos:</b> os arquivos ficam em pastas suas, no seu computador</span></li>
+          <li><span class="ck">✓</span><span><b>Instalação guiada:</b> imagem de cada tela e suporte no grupo da comunidade</span></li>
+          <li><span class="ck">✓</span><span><b>Sem cartão:</b> no fim dos 7 dias o teste pausa sozinho, e você decide</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg><span>Perguntas comuns</span></span>
@@ -1686,7 +1707,7 @@
   <div class="wrap">
     <h2 class="reveal">Sete dias, com os seus casos, <span class="red">sem pagar nada</span>.</h2>
     <p class="reveal">Instale hoje e rode o primeiro caso ainda hoje. Se não for para você, é só não fazer nada: o teste pausa sozinho.</p>
-    <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar por 7 dias</a>
+    <a href="#area" class="btn btn-red btn-lg reveal">Quero testar por 7 dias</a>
     <p class="cta-meta reveal"><span>Sem cartão</span><span>A sua área + o Marketing</span><span>No seu computador</span><span>Você decide no fim</span></p>
   </div>
 </section>
@@ -1998,7 +2019,7 @@
         whatsapp: zap.value, area: areaEscolhida(),
         site: g("site").value, origem: origem
       };
-      if (!dados.area) return mostrarErro("Escolha a sua área, no começo da ficha.");
+      if (!dados.area) { var sel = document.getElementById("area"); if (sel) sel.scrollIntoView({ behavior: "smooth" }); return mostrarErro("Escolha a sua área, logo acima."); }
       if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
       if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
@@ -2046,7 +2067,7 @@
     var p = v.play(); if (p && p.catch) p.catch(function () { box.classList.remove("tocando"); });
   });
   v.addEventListener("ended", function () {
-    var alvo = document.getElementById("teste"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
+    var alvo = document.getElementById("area"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
   });
 })();
 </script>
@@ -2057,17 +2078,33 @@
   var box = document.getElementById("nicho");
   if (!box) return;
   var atual = box.getAttribute("data-area"), cache = {};
+  var NOMES = {"prev": "Previdenciário", "trab": "Trabalhista", "familia": "Família", "consumidor": "Consumidor", "bancario": "Bancário", "criminal": "Criminal", "imobiliario": "Imobiliário", "empresarial": "Empresarial"};
+  function mostrar(a) {
+    box.classList.remove("vazio");
+    var n = document.getElementById("area-nome"); if (n && NOMES[a]) n.textContent = NOMES[a];
+  }
   function rodarScripts(el) {
     [].slice.call(el.querySelectorAll("script")).forEach(function (s) {
       var n = document.createElement("script"); n.text = s.textContent; s.parentNode.replaceChild(n, s);
     });
   }
   function trocar(a) {
-    if (!a || a === atual) return;
+    if (!a) return;
+    mostrar(a);
+    if (a === atual) return;
     atual = a;
     box.classList.add("trocando");
     box.setAttribute("aria-busy", "true");
-    var pega = cache[a] ? Promise.resolve(cache[a]) : fetch("/teste/nicho/" + a + ".html").then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    function baixar() {
+      // conexão travada não pode deixar a página parada: depois de 6 s, desiste e tenta de novo
+      var ctl = window.AbortController ? new AbortController() : null;
+      var t = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
+      return fetch("/teste/nicho/" + a + ".html", ctl ? { signal: ctl.signal } : {})
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function (x) { clearTimeout(t); return x; }, function (e) { clearTimeout(t); throw e; });
+    }
+    // se a rede falhar, tenta de novo uma vez antes de desistir
+    var pega = cache[a] ? Promise.resolve(cache[a]) : baixar().catch(function () { return new Promise(function (ok) { setTimeout(ok, 800); }).then(baixar); });
     pega.then(function (t) {
       cache[a] = t;
       if (atual !== a) return;
@@ -2083,7 +2120,12 @@
     });
     try { var u = new URL(location.href); u.searchParams.set("a", a); history.replaceState(null, "", u); } catch (e) {}
   }
-  document.addEventListener("change", function (e) { if (e.target && e.target.name === "area") trocar(e.target.value); });
+  document.addEventListener("change", function (e) {
+    if (!e.target || e.target.name !== "area") return;
+    trocar(e.target.value);
+    var t = document.getElementById("nicho");
+    if (t) setTimeout(function () { t.scrollIntoView({ behavior: "smooth" }); }, 150);
+  });
   var marcada = document.querySelector('input[name="area"]:checked');
   if (marcada) trocar(marcada.value);
 })();
