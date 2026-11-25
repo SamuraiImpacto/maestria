@@ -941,6 +941,9 @@
   .hv-play span.t{margin-bottom:17px;background:rgba(11,10,10,.78);padding:9px 16px;border-radius:999px}
   .hv-video.tocando .hv-play{display:none}
   .hero-vsl .hv-cta{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hv-preco{color:var(--muted);font-size:14px;text-decoration:underline;text-decoration-color:rgba(239,39,39,.6);text-underline-offset:4px}
+  .hv-preco:hover{color:var(--text,#fff)}
+  #preco{scroll-margin-top:12px}
   header.hero.hero-vsl .hero-fatos{display:flex}header.hero.hero-vsl .eyebrow{display:inline-flex}
   .hero-vsl .hero-fatos{margin-top:0;justify-content:center}
   .hero-vsl .hv-entra{opacity:0;transform:translateY(14px);animation:hventra .6s cubic-bezier(.2,.7,.2,1) forwards}
@@ -994,6 +997,7 @@
     <a class="logo" href="#topo" aria-label="MaestrIA: voltar ao topo"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
     <div class="nav-links">
       <a href="#topo">Assista</a>
+      <a href="#preco">Preço</a>
       <a href="#faq">Perguntas</a>
       <a href="#area" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>
@@ -1013,6 +1017,7 @@
     <div class="hv-cta hv-entra d4">
       <a href="#area" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
       <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
+      <a href="#preco" class="hv-preco">Depois do teste: a sua área + o Marketing por R$ 997, ou 12x de R$ 103,11</a>
     </div>
   </div>
 </header>
@@ -1686,6 +1691,24 @@
   </div>
 </section>
 
+<section id="preco" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><span>Quanto custa</span></span>
+    <h2 class="sec reveal">Depois do teste, <span class="red">a sua área + o Marketing</span>.</h2>
+    <p class="lead reveal">Sempre os dois juntos: a ferramenta da sua área para o trabalho do processo e o Marketing para o escritório aparecer para o cliente certo. Já quer garantir? Pode comprar agora, sem fazer o teste.</p>
+    <div class="emb combo reveal" style="margin-top:34px">
+      <span class="emb-tag">A sua área + o Marketing</span>
+      <div class="emb-name" id="preco-nome">MaestrIA da sua área + Marketing</div>
+      <div class="emb-price">
+        <span class="now"><span class="cur">R$</span><span class="val">997</span><span class="per">12 meses de acesso</span></span>
+      </div>
+      <p class="emb-parcel">ou <b>12x de R$ 103,11</b> no cartão, com todas as atualizações do período</p>
+      <a href="#area" id="comprar" class="btn btn-red">Escolha a sua área para comprar</a>
+      <div class="seals"><span><span class="s-ck">✓</span> Licença no seu CPF, em até 3 computadores</span><span><span class="s-ck">✓</span> Não é mensalidade por usuário</span><span><span class="s-ck">✓</span> Fora isso, só a assinatura do Claude</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg><span>Perguntas comuns</span></span>
@@ -1696,7 +1719,7 @@
     <details class="faq reveal"><summary>Posso usar com casos reais?</summary><div class="ans">Pode. É a ferramenta completa. Os arquivos ficam em pastas suas, no seu computador. A inteligência artificial é a do Claude e segue as regras da sua conta lá.</div></details>
     <details class="faq reveal"><summary>Não entendo nada de tecnologia. Consigo?</summary><div class="ans">Consegue. A instalação é guiada, com a imagem de cada tela, e o suporte é no grupo da comunidade: você manda um print e a gente diz o que fazer. No uso, você escreve o pedido em português comum.</div></details>
     <details class="faq reveal"><summary>Inventa acórdão como o ChatGPT?</summary><div class="ans">Não. Toda decisão passa pela base do CNJ e pelo site do tribunal, e leis, súmulas e temas são conferidos em fonte oficial. Quando não dá para confirmar, ela avisa em vez de inventar.</div></details>
-    <details class="faq reveal"><summary>Quanto custa depois do teste?</summary><div class="ans">O pacote da sua área com o Marketing custa R$ 997 por 12 meses, com as atualizações do período. Não é mensalidade por usuário. Fora isso, só a assinatura do Claude, que você paga direto à Anthropic.</div></details>
+    <details class="faq reveal"><summary>Quanto custa depois do teste?</summary><div class="ans">O pacote da sua área com o Marketing custa R$ 997 por 12 meses (12x de R$ 103,11 no cartão), com as atualizações do período. Não é mensalidade por usuário. Fora isso, só a assinatura do Claude, que você paga direto à Anthropic.</div></details>
     <details class="faq reveal"><summary>Os dados dos meus clientes ficam seguros?</summary><div class="ans">Os arquivos ficam em pastas suas, no seu computador. A MaestrIA não tem servidor que recebe documento de cliente: pela internet ela confere só o código da licença e o nome do computador. Para trabalhar, a inteligência artificial do Claude lê o texto dos documentos, pela sua própria conta, seguindo as configurações de privacidade que você controla lá.</div></details>
     <details class="faq reveal"><summary>Em quantos computadores posso testar?</summary><div class="ans">O teste vale para um computador. A licença comprada vale para até 3.</div></details>
     <details class="faq reveal"><summary>A MaestrIA substitui o advogado?</summary><div class="ans">Não. Ela faz o trabalho operacional e mostra os caminhos. Quem revisa, decide e assina é você.</div></details>
@@ -2128,6 +2151,26 @@
   });
   var marcada = document.querySelector('input[name="area"]:checked');
   if (marcada) trocar(marcada.value);
+})();
+</script>
+
+<script>
+(function () {
+  // O botão de compra leva ao checkout da área escolhida + Marketing; sem área, leva à escolha.
+  var C = {"prev": {"nome": "Previdenciário", "url": "https://pay.kiwify.com.br/urkdMlQ"}, "trab": {"nome": "Trabalhista", "url": "https://pay.kiwify.com.br/3J6V58l"}, "familia": {"nome": "Família", "url": "https://pay.kiwify.com.br/DqlfgtF"}, "consumidor": {"nome": "Consumidor", "url": "https://pay.kiwify.com.br/Tta4Ybk"}, "bancario": {"nome": "Bancário", "url": "https://pay.kiwify.com.br/ISMiVVJ"}, "criminal": {"nome": "Criminal", "url": "https://pay.kiwify.com.br/bee3JLu"}, "imobiliario": {"nome": "Imobiliário", "url": "https://pay.kiwify.com.br/JpqjpOD"}, "empresarial": {"nome": "Empresarial", "url": "https://pay.kiwify.com.br/X5KjoQ0"}};
+  var b = document.getElementById("comprar"), n = document.getElementById("preco-nome");
+  if (!b) return;
+  var o = ""; try { o = (new URLSearchParams(location.search).get("o") || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 40); } catch (e) {}
+  function ajusta(a) {
+    var x = C[a]; if (!x) return;
+    b.href = x.url + "?src=teste" + (o ? "-" + o : "");
+    b.removeAttribute("data-sem-area");
+    b.textContent = "Quero " + x.nome + " + Marketing por R$ 997";
+    b.setAttribute("data-pacote", a + "-mkt");
+    if (n) n.textContent = "MaestrIA " + x.nome + " + Marketing";
+  }
+  document.addEventListener("change", function (e) { if (e.target && e.target.name === "area") ajusta(e.target.value); });
+  var m = document.querySelector('input[name="area"]:checked'); if (m) ajusta(m.value);
 })();
 </script>
 </html>

@@ -379,6 +379,9 @@ CSS_TODOS = """
   .hv-play span.t{margin-bottom:17px;background:rgba(11,10,10,.78);padding:9px 16px;border-radius:999px}
   .hv-video.tocando .hv-play{display:none}
   .hero-vsl .hv-cta{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hv-preco{color:var(--muted);font-size:14px;text-decoration:underline;text-decoration-color:rgba(239,39,39,.6);text-underline-offset:4px}
+  .hv-preco:hover{color:var(--text,#fff)}
+  #preco{scroll-margin-top:12px}
   header.hero.hero-vsl .hero-fatos{display:flex}header.hero.hero-vsl .eyebrow{display:inline-flex}
   .hero-vsl .hero-fatos{margin-top:0;justify-content:center}
   .hero-vsl .hv-entra{opacity:0;transform:translateY(14px);animation:hventra .6s cubic-bezier(.2,.7,.2,1) forwards}
@@ -440,9 +443,40 @@ HERO_VSL = """<header class="hero hero-vsl" id="topo">
     <div class="hv-cta hv-entra d4">
       <a href="#area" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
       <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
+      <a href="#preco" class="hv-preco">Depois do teste: a sua área + o Marketing por R$ 997, ou 12x de R$ 103,11</a>
     </div>
   </div>
 </header>"""
+
+PRECO = "997"
+PARCELA = "12x de R$ 103,11"
+# checkout da área + Marketing, o mesmo dos cartões "com o Marketing junto" de cada página de área (conferido em 25/11/2026)
+COMPRA = {
+    "prev": "https://pay.kiwify.com.br/urkdMlQ", "trab": "https://pay.kiwify.com.br/3J6V58l",
+    "familia": "https://pay.kiwify.com.br/DqlfgtF", "consumidor": "https://pay.kiwify.com.br/Tta4Ybk",
+    "bancario": "https://pay.kiwify.com.br/ISMiVVJ", "criminal": "https://pay.kiwify.com.br/bee3JLu",
+    "imobiliario": "https://pay.kiwify.com.br/JpqjpOD", "empresarial": "https://pay.kiwify.com.br/X5KjoQ0",
+}
+
+JS_COMPRA = """<script>
+(function () {
+  // O botão de compra leva ao checkout da área escolhida + Marketing; sem área, leva à escolha.
+  var C = __COMPRA__;
+  var b = document.getElementById("comprar"), n = document.getElementById("preco-nome");
+  if (!b) return;
+  var o = ""; try { o = (new URLSearchParams(location.search).get("o") || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 40); } catch (e) {}
+  function ajusta(a) {
+    var x = C[a]; if (!x) return;
+    b.href = x.url + "?src=teste" + (o ? "-" + o : "");
+    b.removeAttribute("data-sem-area");
+    b.textContent = "Quero " + x.nome + " + Marketing por R$ __PRECO__";
+    b.setAttribute("data-pacote", a + "-mkt");
+    if (n) n.textContent = "MaestrIA " + x.nome + " + Marketing";
+  }
+  document.addEventListener("change", function (e) { if (e.target && e.target.name === "area") ajusta(e.target.value); });
+  var m = document.querySelector('input[name="area"]:checked'); if (m) ajusta(m.value);
+})();
+</script>""".replace("__PRECO__", PRECO)
 
 JS_VSL = """<script>
 (function () {
@@ -548,6 +582,7 @@ def todos(h):
     f = nav.index("</div>", i) + len("</div>")
     nav = nav[:i] + '''<div class="nav-links">
       <a href="#topo">Assista</a>
+      <a href="#preco">Preço</a>
       <a href="#faq">Perguntas</a>
       <a href="#area" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>''' + nav[f:]
@@ -597,9 +632,28 @@ def todos(h):
   </div>
 </section>'''
 
+    # 25/11/2026, ordem do Samurai: o preço fica à vista, com o parcelado, e a compra é sempre a área + o Marketing
+    secao_preco = f'''<section id="preco" style="padding-top:0">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><span>Quanto custa</span></span>
+    <h2 class="sec reveal">Depois do teste, <span class="red">a sua área + o Marketing</span>.</h2>
+    <p class="lead reveal">Sempre os dois juntos: a ferramenta da sua área para o trabalho do processo e o Marketing para o escritório aparecer para o cliente certo. Já quer garantir? Pode comprar agora, sem fazer o teste.</p>
+    <div class="emb combo reveal" style="margin-top:34px">
+      <span class="emb-tag">A sua área + o Marketing</span>
+      <div class="emb-name" id="preco-nome">MaestrIA da sua área + Marketing</div>
+      <div class="emb-price">
+        <span class="now"><span class="cur">R$</span><span class="val">{PRECO}</span><span class="per">12 meses de acesso</span></span>
+      </div>
+      <p class="emb-parcel">ou <b>{PARCELA}</b> no cartão, com todas as atualizações do período</p>
+      <a href="#area" id="comprar" class="btn btn-red">Escolha a sua área para comprar</a>
+      <div class="seals"><span><span class="s-ck">✓</span> Licença no seu CPF, em até 3 computadores</span><span><span class="s-ck">✓</span> Não é mensalidade por usuário</span><span><span class="s-ck">✓</span> Fora isso, só a assinatura do Claude</span></div>
+    </div>
+  </div>
+</section>'''
+
     faq = h[h.index('<section id="faq"'):h.index("</section>", h.index('<section id="faq"')) + len("</section>")]
     faq = troca(faq, "O pacote Previdenciário + Marketing custa R$ 997 por 12 meses, com as atualizações do período.",
-                "O pacote da sua área com o Marketing custa R$ 997 por 12 meses, com as atualizações do período.")
+                f"O pacote da sua área com o Marketing custa R$ {PRECO} por 12 meses ({PARCELA} no cartão), com as atualizações do período.")
     final = h[h.index('<section class="final">'):h.index("</section>", h.index('<section class="final">')) + len("</section>")]
     final = re.sub(r'\n    <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu.*?</p>', "", final)
     final = troca(final, "<span>Os dois pacotes completos</span>", "<span>A sua área + o Marketing</span>")
@@ -626,7 +680,8 @@ def todos(h):
 
     nicho = '<div id="nicho" class="vazio" data-area="prev">\n' + miolo(h) + "\n</div>"
     js_nicho = JS_NICHO.replace("__NOMES__", json.dumps({x: AREAS[x]["nome"] for x in ORDEM}, ensure_ascii=False))
-    corpo = "\n\n".join([nav, HERO_VSL, secao_area, nicho, secao_teste, faq, final, rodape] + principal + [js_form, JS_VSL, js_nicho])
+    js_compra = JS_COMPRA.replace("__COMPRA__", json.dumps({x: {"nome": AREAS[x]["nome"], "url": COMPRA[x]} for x in ORDEM}, ensure_ascii=False))
+    corpo = "\n\n".join([nav, HERO_VSL, secao_area, nicho, secao_teste, secao_preco, faq, final, rodape] + principal + [js_form, JS_VSL, js_nicho, js_compra])
     pagina = cabeca + corpo + "\n</body>\n</html>\n" if "<body" in cabeca else cabeca + corpo + "\n</html>\n"
     ids = re.findall(r'\bid="([^"]+)"', pagina)
     assert len(ids) == len(set(ids)), sorted({x for x in ids if ids.count(x) > 1})
