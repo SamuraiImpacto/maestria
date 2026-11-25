@@ -5,12 +5,12 @@
 <title>Teste a MaestrIA por 7 dias</title>
 <script>
 (function () {
-  // Endereço antigo do teste por área. Leva para a página única, mantendo a área e a origem.
-  var areas = { prev: 1, trab: 1, familia: 1, consumidor: 1, bancario: 1, criminal: 1, imobiliario: 1, empresarial: 1 };
-  var p = new URLSearchParams(location.search), a = (p.get("a") || "").toLowerCase();
-  p.delete("a");
+  // Desde 25/11/2026 o teste tem uma página só: /teste/. Este endereço leva para ela com a área marcada,
+  // mantendo a origem (?o=) de quem divulgou.
+  var p = new URLSearchParams(location.search);
+  if ("") p.set("a", "");
   var resto = p.toString();
-  location.replace("/teste/" + (areas[a] ? a + "/" : "") + (resto ? "?" + resto : ""));
+  location.replace("/teste/" + (resto ? "?" + resto : ""));
 })();
 </script>
 <noscript><meta http-equiv="refresh" content="0;url=/teste/"></noscript>
