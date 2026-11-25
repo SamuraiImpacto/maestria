@@ -3,9 +3,9 @@
 <meta charset="UTF-8">
 <script src="/js/pixel.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Teste por 7 dias, sem cartão, a MaestrIA Previdenciário + Marketing: cálculo do INSS com memória aberta, petição no seu timbrado, jurisprudência conferida, conteúdo com a sua voz. Roda no seu computador, dentro do Claude.">
+<meta name="description" content="Teste por 7 dias, sem cartão, a MaestrIA da sua área com o Marketing: petição no seu timbrado, cálculo com memória aberta, jurisprudência conferida e conteúdo com a sua voz. Roda no seu computador, dentro do Claude.">
 <meta name="robots" content="noindex">
-<title>Teste a MaestrIA por 7 dias: Previdenciário + Marketing</title>
+<title>Teste a MaestrIA por 7 dias, na sua área</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta name="theme-color" content="#0a0a0c">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Teste a MaestrIA por 7 dias, sem cartão">
-<meta property="og:description" content="Previdenciário e Marketing completos, no seu computador, por 7 dias. Você só decide depois de usar.">
+<meta property="og:title" content="Teste a MaestrIA por 7 dias, na sua área">
+<meta property="og:description" content="A sua área e o Marketing completos, no seu computador, por 7 dias. Você só decide depois de usar.">
 <meta property="og:url" content="https://maestria.samurailab.com.br/teste/">
 <meta property="og:image" content="https://maestria.samurailab.com.br/img/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -902,7 +902,25 @@
     .teste-form{position:static}
   }
   @media (max-width:560px){.precisa,.dias{grid-template-columns:1fr}}
-  /* ===== primeira dobra com o vídeo (25/11/2026): título, vídeo e botão numa tela só ===== */
+
+
+  /* Barra de áreas e formulário na primeira dobra (21/11/2026) */
+  .areas-barra{position:relative;z-index:2;max-width:1180px;margin:0 auto 26px;padding:0 24px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+  .areas-barra .rot{font-weight:800;font-size:14px;color:var(--muted);margin-right:6px}
+  .areas-barra a{font-size:14px;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);color:inherit;text-decoration:none;background:rgba(255,255,255,.03);transition:border-color .2s,background .2s}
+  .areas-barra a:hover{border-color:var(--red)}
+  .areas-barra a.on{background:var(--red);border-color:var(--red);color:#fff}
+  header.hero .teste-form{position:static;margin-top:30px}
+  header.hero .teste-form,header.hero .teste-form h3,header.hero .teste-form p,header.hero .teste-form label{text-align:left}
+  header.hero .teste-form .btn{justify-content:center;text-align:center}
+  .term-faixa{padding:34px 0 0}
+  .term-faixa .term{max-width:860px;margin:0 auto}
+  @media(min-width:981px){header.hero .teste-form{margin-top:0}}
+  @media(max-width:980px){header.hero .eyebrow,header.hero .hero-cta,header.hero .hero-fatos,header.hero .hero-prova{display:none}header.hero h1.big{margin-top:0}header.hero .teste-form{max-width:520px;margin:22px auto 0}}
+  @media(max-width:560px){.areas-barra{gap:6px;padding:0 16px;margin-bottom:18px}.areas-barra .rot{width:100%;text-align:center;margin:0 0 2px}.areas-barra a{font-size:13px;padding:6px 11px}}
+  @media(prefers-reduced-motion:reduce){.areas-barra a{transition:none}}
+
+  /* primeira dobra com o vídeo: título, vídeo e botão numa tela só */
   header.hero.hero-vsl{padding:18px 0 22px;min-height:calc(100svh - 64px);display:flex;align-items:center}
   header.hero.hero-vsl .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
   header.hero.hero-vsl .hero-art{opacity:.14!important}
@@ -923,30 +941,45 @@
   .hv-play span.t{margin-bottom:17px;background:rgba(11,10,10,.78);padding:9px 16px;border-radius:999px}
   .hv-video.tocando .hv-play{display:none}
   .hero-vsl .hv-cta{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  header.hero.hero-vsl .hero-fatos{display:flex}header.hero.hero-vsl .eyebrow{display:inline-flex}
   .hero-vsl .hero-fatos{margin-top:0;justify-content:center}
   .hero-vsl .hv-entra{opacity:0;transform:translateY(14px);animation:hventra .6s cubic-bezier(.2,.7,.2,1) forwards}
   .hero-vsl .hv-entra.d1{animation-delay:.08s}.hero-vsl .hv-entra.d2{animation-delay:.16s}.hero-vsl .hv-entra.d3{animation-delay:.26s}.hero-vsl .hv-entra.d4{animation-delay:.36s}
   @keyframes hventra{to{opacity:1;transform:none}}
   @keyframes hvbrilho{to{background-position:-150% 0}}
+  /* a ficha com a escolha da área */
+  #teste{scroll-margin-top:12px}
+  .tf-areas{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .tf-areas legend{font-weight:700;font-size:15px;margin-bottom:8px;padding:0}
+  .tf-areas .op{display:flex;flex-wrap:wrap;gap:8px}
+  .tf-areas label{position:relative;cursor:pointer}
+  .tf-areas input{position:absolute;opacity:0;width:1px;height:1px}
+  .tf-areas span{display:inline-block;font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;border:1px solid var(--line-strong);background:rgba(255,255,255,.03);transition:border-color .2s,background .2s}
+  .tf-areas label:hover span{border-color:var(--red)}
+  .tf-areas input:checked+span{background:var(--red);border-color:var(--red);color:#fff}
+  .tf-areas input:focus-visible+span{outline:2px solid #fff;outline-offset:2px}
+  .areas-ver{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;text-align:left}
+  .areas-ver a{display:block;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s,transform .2s}
+  .areas-ver a:hover{border-color:var(--red);transform:translateY(-2px)}
+  .areas-ver b{display:block;font-size:16px}
+  .areas-ver small{display:block;margin-top:6px;color:var(--red-ink);font-weight:700;font-size:13px}
+  @media (max-width:900px){.areas-ver{grid-template-columns:1fr 1fr}}
   @media (max-width:700px){
     header.hero.hero-vsl{min-height:auto;padding-top:14px}
     .hv-video{width:100%;min-width:0;border-radius:12px}
     .hv-ic{width:52px;height:52px}.hv-ic svg{width:22px;height:22px}.hv-play{gap:10px;font-size:13px}.hv-play span.t{padding:7px 12px;margin-bottom:12px}
     .hero-vsl .btn-lg{width:100%}
   }
-  @media (prefers-reduced-motion:reduce){.hero-vsl .hv-entra{animation:none;opacity:1;transform:none}.hv-video{animation:none}.hv-ic,.hv-play{transition:none}}
-  #teste{scroll-margin-top:12px}
-
+  @media (prefers-reduced-motion:reduce){.hero-vsl .hv-entra{animation:none;opacity:1;transform:none}.hv-video{animation:none}.hv-ic,.hv-play,.tf-areas span,.areas-ver a{transition:none}}
 </style>
 
 <nav>
   <div class="wrap nav-in">
     <a class="logo" href="#topo" aria-label="MaestrIA: voltar ao topo"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
     <div class="nav-links">
-      <a href="#funcoes">O que ela faz</a>
-      <a href="#quem-usa">Quem já usa</a>
-      <a href="#seguranca">Segurança</a>
-      <a href="#custo">Quanto custa</a>
+      <a href="#topo">Assista</a>
+      <a href="#areas">As áreas</a>
+      <a href="#faq">Perguntas</a>
       <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>
   </div>
@@ -955,7 +988,7 @@
 <header class="hero hero-vsl" id="topo">
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
-    <span class="eyebrow hv-entra"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
+    <span class="eyebrow hv-entra"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Escolha a sua área</span>
     <h1 class="big hv-entra d1">Uma equipe de assistentes jurídicos <span class="red">dentro do seu computador.</span></h1>
     <p class="hv-sub hv-entra d2">Dê o play: em 3 minutos você vê um caso sair da pasta do cliente pronto para protocolar. Você só revisa e assina.</p>
     <div class="hv-video hv-entra d3" id="hvVideo">
@@ -971,22 +1004,23 @@
 
 <section id="teste">
   <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg><span>Liberar o teste</span></span>
-    <h2 class="sec reveal">Os dois pacotes completos, <span class="red">por 7 dias, sem pagar nada</span>.</h2>
-    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira, no seu computador.</p>
+    <span class="kicker reveal"><span>Liberar o teste</span></span>
+    <h2 class="sec reveal">Escolha a sua área e teste <span class="red">por 7 dias, sem pagar nada</span>.</h2>
+    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira da sua área, com o Marketing junto, no seu computador.</p>
     <div class="teste-grade">
-      <div class="teste-form reveal" id="cartao">
+      <div class="teste-form" id="cartao">
         <div id="tela-form">
           <h3>Liberar meu teste de 7 dias</h3>
-          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora.</p>
+          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora, também no seu WhatsApp. Você testa <b>a sua área + o Marketing</b>.</p>
           <form id="f" novalidate>
+            <fieldset class="tf-areas"><legend>Qual é a sua área?</legend><div class="op"><label><input type="radio" name="area" value="prev"><span>Previdenciário</span></label><label><input type="radio" name="area" value="trab"><span>Trabalhista</span></label><label><input type="radio" name="area" value="familia"><span>Família</span></label><label><input type="radio" name="area" value="consumidor"><span>Consumidor</span></label><label><input type="radio" name="area" value="bancario"><span>Bancário</span></label><label><input type="radio" name="area" value="criminal"><span>Criminal</span></label><label><input type="radio" name="area" value="imobiliario"><span>Imobiliário</span></label><label><input type="radio" name="area" value="empresarial"><span>Empresarial</span></label></div></fieldset>
             <div class="tf-campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
             <div class="tf-campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
             <div class="tf-campo"><label for="whatsapp">WhatsApp com DDD</label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
             <div class="tf-isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
             <p class="tf-erro tf-oculto" id="erro" role="alert"></p>
             <button type="submit" class="btn btn-red btn-lg" id="enviar"><span class="tf-gira"></span><span id="enviar-txt">Quero testar por 7 dias</span></button>
-            <p class="tf-legal">Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA. Sem cartão e sem cobrança automática.</p>
+            <p class="tf-legal">O acesso chega no seu e-mail e no seu WhatsApp. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA, por esses dois canais. Sem cartão e sem cobrança automática.</p>
           </form>
         </div>
         <div id="tela-ok" class="tf-oculto">
@@ -998,624 +1032,33 @@
         </div>
       </div>
       <div class="teste-inclui reveal">
-        <div class="h">Previdenciário</div>
+        <div class="h">O que vem no teste</div>
         <ul>
-            <li><span class="ck">✓</span><span><b>Cálculo previdenciário completo:</b> RMI, auxílio-acidente, atrasados e tempo especial, com memória aberta</span></li>
-            <li><span class="ck">✓</span><span><b>Auditor de CNIS:</b> vínculo faltante e contribuição não computada, apontados em minutos</span></li>
-            <li><span class="ck">✓</span><span><b>Perícia de ponta a ponta:</b> quesitos, impugnação de PPP e de laudo e o cliente preparado</span></li>
-            <li><span class="ck">✓</span><span><b>Qualificador de auxílio-acidente:</b> acidente, sequela e qualidade de segurado, com o veredito na hora</span></li>
-            <li><span class="ck">✓</span><span><b>Petições no seu timbrado:</b> gerador de documentos e revisor treinado nos seus critérios</span></li>
-            <li><span class="ck">✓</span><span><b>Jurisprudência conferida:</b> cada decisão checada no CNJ e no site do tribunal</span></li>
-            <li><span class="ck">✓</span><span><b>Jurimetria oficial do CNJ:</b> procedência e acordo por vara, antes de ajuizar</span></li>
-            <li><span class="ck">✓</span><span><b>Intimações pela sua OAB:</b> publicações do dia com o vencimento calculado</span></li>
-        </ul>
-        <div class="h">Marketing</div>
-        <ul>
-            <li><span class="ck">✓</span><span><b>Conteúdo com a sua voz:</b> reels, carrosséis, estáticos e artigos calibrados nas suas personas</span></li>
-            <li><span class="ck">✓</span><span><b>Arte pronta:</b> imagens com a sua marca ou o design direto na sua conta do Canva</span></li>
-            <li><span class="ck">✓</span><span><b>Edição de vídeo:</b> pausas fora, legenda e gancho no vídeo que você gravou</span></li>
-            <li><span class="ck">✓</span><span><b>Calendário editorial:</b> o mês inteiro de pauta da sua área em minutos</span></li>
-            <li><span class="ck">✓</span><span><b>Site do escritório no ar:</b> com blog, no seu domínio, hospedado de graça</span></li>
-            <li><span class="ck">✓</span><span><b>Páginas de campanha:</b> prontas para receber o anúncio do seu gestor de tráfego, com Pixel e WhatsApp</span></li>
-            <li><span class="ck">✓</span><span><b>Google Meu Negócio:</b> da criação à rotina de quem procura advogado perto de casa</span></li>
-            <li><span class="ck">✓</span><span><b>Compliance OAB automático:</b> tudo filtrado pelo Provimento 205 antes de sair</span></li>
+          <li><span class="ck">✓</span><span><b>A ferramenta completa da sua área:</b> petição no seu timbrado, cálculo com memória aberta e jurisprudência conferida em fonte oficial</span></li>
+          <li><span class="ck">✓</span><span><b>O Marketing junto:</b> carrossel, calendário do mês, roteiro de vídeo e legenda, com a sua voz e dentro das regras da OAB</span></li>
+          <li><span class="ck">✓</span><span><b>Com os seus casos:</b> os arquivos ficam em pastas suas, no seu computador</span></li>
+          <li><span class="ck">✓</span><span><b>Instalação guiada:</b> imagem de cada tela e suporte no grupo da comunidade</span></li>
+          <li><span class="ck">✓</span><span><b>Sem cartão:</b> no fim dos 7 dias o teste pausa sozinho, e você decide</span></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<div class="marq" aria-hidden="true">
-  <div class="marq-track">
-    <span>Nunca inventa jurisprudência</span><span>Dado do cliente no seu computador</span><span>Cálculo com memória aberta</span><span>Intimações pela sua OAB</span><span>Conteúdo com a sua voz</span><span>Provimento 205 da OAB</span><span>Site no seu domínio</span><span>Licença no seu CPF</span>
-    <span>Nunca inventa jurisprudência</span><span>Dado do cliente no seu computador</span><span>Cálculo com memória aberta</span><span>Intimações pela sua OAB</span><span>Conteúdo com a sua voz</span><span>Provimento 205 da OAB</span><span>Site no seu domínio</span><span>Licença no seu CPF</span>
-  </div>
-</div>
-
-<section id="funcoes">
+<section id="areas" style="padding-top:0">
   <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9Z"/></svg><span>Tudo o que ela faz</span></span>
-    <h2 class="sec reveal">Você pede em português. <span class="red">Ela entrega pronto.</span></h2>
-    <p class="lead reveal">Sem comando difícil e sem tela nova para aprender. Você escreve o que precisa, como falaria com um estagiário, e recebe em Word, Excel e PDF.</p>
-    <div class="fx-rot reveal">Previdenciário</div>
-    <div class="fx reveal">
-      <div class="cardy topo">
-        <span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>
-        <div><h3>O caso completo, do zero ao protocolo</h3><p>Ela lê a pasta do cliente, monta a linha do tempo, aponta o documento que falta, mostra os caminhos possíveis, calcula, escreve a petição, os quesitos, a procuração, a declaração e o contrato. No fim, entrega a pasta de protocolo em PDF.</p></div>
-        <div class="fx-pedido"><small>Você escreve</small>faz tudo desse cliente até o protocolo</div>
-      </div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01"/><path d="M12 11h.01"/><path d="M16 11h.01"/><path d="M8 15h.01"/><path d="M12 15h.01"/><path d="M16 15h.01"/></svg></span><h3>Cálculo com a memória aberta</h3><p>RMI, auxílio-acidente, atrasados e tempo especial. Mês a mês, em Excel, com a fonte de cada índice.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/></svg></span><h3>Petição no seu timbrado</h3><p>Escrita do jeito do seu escritório, com um revisor treinado nos seus critérios.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0Z"/><path d="m19 7-3 7a4 4 0 0 0 6 0Z"/></svg></span><h3>Jurisprudência que existe</h3><p>Cada decisão é conferida no CNJ e no site do tribunal. O que não existe, ela joga fora.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><h3>Auditor de CNIS</h3><p>Vínculo faltando e contribuição não computada, apontados em minutos.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Perícia de ponta a ponta</h3><p>Quesitos, impugnação de PPP e de laudo, e o cliente preparado para o dia.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><h3>Qualificador de auxílio-acidente</h3><p>Acidente, sequela e qualidade de segurado. Tem direito ou não tem? A resposta sai na hora.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16v-4"/><path d="M12 16V8"/><path d="M17 16v-7"/></svg></span><h3>Jurimetria por vara</h3><p>Procedência e acordo com dados oficiais do CNJ, antes de você ajuizar.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><h3>Intimações pela sua OAB</h3><p>As publicações do dia, com o vencimento de cada prazo já calculado.</p></div>
+    <h2 class="sec reveal">Quer ver antes o que ela faz <span class="red">na sua área</span>?</h2>
+    <p class="lead reveal">Cada área tem a sua página, com as demonstrações de petição, cálculo e jurisprudência.</p>
+    <div class="areas-ver reveal">
+      <a href="/teste/prev/"><b>Previdenciário</b><small>Ver o teste de Previdenciário ›</small></a>
+      <a href="/teste/trab/"><b>Trabalhista</b><small>Ver o teste de Trabalhista ›</small></a>
+      <a href="/teste/familia/"><b>Família</b><small>Ver o teste de Família ›</small></a>
+      <a href="/teste/consumidor/"><b>Consumidor</b><small>Ver o teste de Consumidor ›</small></a>
+      <a href="/teste/bancario/"><b>Bancário</b><small>Ver o teste de Bancário ›</small></a>
+      <a href="/teste/criminal/"><b>Criminal</b><small>Ver o teste de Criminal ›</small></a>
+      <a href="/teste/imobiliario/"><b>Imobiliário</b><small>Ver o teste de Imobiliário ›</small></a>
+      <a href="/teste/empresarial/"><b>Empresarial</b><small>Ver o teste de Empresarial ›</small></a>
     </div>
-    <div class="fx-rot reveal">Marketing</div>
-    <div class="fx reveal">
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg></span><h3>Conteúdo com a sua voz</h3><p>Reels, carrosséis, estáticos e artigos que soam como você, e não como robô.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="m17 10 5-3v10l-5-3Z"/></svg></span><h3>Edição de vídeo</h3><p>Você grava no celular. Ela tira pausa e gagueira, põe legenda e animação.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-8 8"/></svg></span><h3>Arte pronta</h3><p>Imagens com a sua marca, ou o design direto na sua conta do Canva.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><h3>Calendário do mês inteiro</h3><p>A pauta da sua área para 30 dias, em minutos.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></span><h3>Site do escritório no ar</h3><p>Com blog, no seu domínio, hospedado de graça.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9Z"/></svg></span><h3>Página de campanha</h3><p>Pronta para receber o anúncio, com Pixel e botão de WhatsApp.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><h3>Google Meu Negócio</h3><p>Da criação à rotina, para quem procura advogado perto de casa.</p></div>
-      <div class="cardy"><span class="fx-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Filtro do Provimento 205</h3><p>Tudo passa pelas regras da OAB antes de chegar em você.</p></div>
-    </div>
-    <div class="cta-meio" style="padding-top:34px">
-      <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar tudo isso por 7 dias</a>
-      <p class="reveal">Tudo liberado no teste. Sem cartão.</p>
-    </div>
-  </div>
-</section>
-
-<section id="quem-usa" style="padding-top:0">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg><span>Quem já usa</span></span>
-    <h2 class="sec reveal">Feita e testada por previdenciaristas. <span class="red">Mais de 30 escritórios</span> na fase piloto.</h2>
-    <p class="lead reveal">Antes de abrir este teste, a MaestrIA rodou em escritório de verdade, com caso de verdade. As falas abaixo são de advogados que usam, ditas na aula ao vivo de 11 de novembro de 2026.</p>
-    <div class="deps reveal">
-      <figure class="dep"><blockquote>Teve uma cliente que chegou num dia de manhã. No outro dia, a gente já tinha mandado o protocolo para ela. <b>Literalmente em 24 horas.</b> Isso jamais na história da humanidade iria acontecer manualmente.</blockquote><figcaption><b>Jean Piaça</b>Advogado previdenciarista</figcaption></figure>
-      <figure class="dep"><blockquote>Antes ficava ali 30 dias esperando para sair a inicial. Agora, se está tudo na mão, <b>sai no dia, com certeza.</b> Eu consigo fazer muito mais sem contratar ninguém.</blockquote><figcaption><b>Cleice Wiedthauger</b>Advogada previdenciarista, auxílio-acidente</figcaption></figure>
-      <figure class="dep"><blockquote>Se tem uma coisa que eu não gosto é gravar vídeo. Abri a câmera, falei o que tinha que falar e coloquei na MaestrIA. Ela tirou a gagueira, tirou tudo. <b>Não parecia eu, parecia uma jornalista falando.</b></blockquote><figcaption><b>Érika Neves</b>Advogada de família, usa a parte de Marketing</figcaption></figure>
-      <figure class="dep"><blockquote>A MaestrIA me ajudou muito. <b>Em questão de horas</b> está pronta toda a documentação, as petições. Eu não tinha habilidade com tecnologia. Agora estou aprendendo e usando, pelo bem do escritório.</blockquote><figcaption><b>Joel Sidney de Christo Machado</b>Advogado, atua sozinho</figcaption></figure>
-    </div>
-    <p class="seg-nota reveal">São relatos da experiência de cada escritório, e não promessa de resultado. Cada caso depende dos documentos e da revisão do advogado.</p>
-  </div>
-</section>
-
-<section class="acoes" id="acoes" style="padding-top:0">
-  <div class="wrap">
-    <div class="acoes-head">
-      <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 3 3-3 3"/><path d="M13 15h4"/></svg><span>Não tem um jeito certo de pedir</span></span>
-      <h2 class="sec reveal">Tem o <span class="red">seu</span> jeito.</h2>
-      <p class="lead reveal">Digite <span class="cmd">/maestria</span> e fale em português. Com uma frase, você pode:</p>
-    </div>
-    <div class="acoes-lista reveal">
-      <button class="acao on" data-ac="calculo">Calcular RMI e atrasados<i>›</i></button>
-      <button class="acao" data-ac="pericia">Preparar a perícia<i>›</i></button>
-      <button class="acao" data-ac="lead">Qualificar o caso de auxílio-acidente<i>›</i></button>
-      <button class="acao" data-ac="vara">Descobrir a melhor vara<i>›</i></button>
-      <button class="acao" data-ac="carrossel">Escrever o carrossel da semana<i>›</i></button>
-      <button class="acao" data-ac="calendario">Montar o calendário do mês<i>›</i></button>
-      <button class="acao" data-ac="site">Construir o site do escritório<i>›</i></button>
-      <button class="acao" data-ac="landing">Criar a página da campanha<i>›</i></button>
-    </div>
-
-    <div class="term term-acoes">
-      <div class="term-bar">
-        <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-        <span class="term-title" id="acTitulo">Claude Code: MaestrIA</span>
-      </div>
-      <div class="term-body" id="acCorpo"></div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-meio">
-  <div class="wrap">
-    <a href="#teste" class="btn btn-red btn-lg reveal">Quero ver isso no meu escritório</a>
-    <p class="reveal">7 dias grátis, sem cartão. Você libera o teste em um minuto.</p>
-  </div>
-</section>
-
-<section class="divisor">
-  <div class="wrap">
-    <span class="pilula reveal"><i></i>Parte 1 · Previdenciário</span>
-    <h2 class="sec reveal">O trabalho mecânico que vem <span class="red">antes da tese</span>.</h2>
-  </div>
-</section>
-
-<section id="peticao" style="padding-top:56px">
-  <div class="wrap">
-    <div class="row">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg><span>Petições no seu timbrado</span></span>
-        <h2 class="rt">O indeferimento chega de manhã. O recurso sai <span class="red">no mesmo dia</span>.</h2>
-        <p class="rp">Gerador completo de documentos e um revisor treinado nos SEUS critérios. Ela lê os documentos do caso, argumenta com os dados dele e devolve em Word, no seu timbrado.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Lê carta de concessão, CNIS e laudo e extrai sozinha</li>
-          <li><span class="ck">✓</span> Escreve no seu tom, calibrado com 1 ou 2 modelos seus</li>
-          <li><span class="ck">✓</span> Cada súmula e tema conferidos na fonte antes de entrar</li>
-          <li><span class="ck">✓</span> O revisor aponta o risco antes de você assinar</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="doc">
-          <div class="hd"><b>SEU ESCRITÓRIO</b><span class="oab">OAB 000.000</span></div>
-          <h4>RECURSO CONTRA O INDEFERIMENTO DO BENEFÍCIO</h4>
-          <div class="ln m"></div><div class="ln"></div><div class="ln s"></div>
-          <div class="ln"></div><div class="ln m"></div><div class="ln s"></div>
-          <span class="tag">✓ Tema 416 do STJ validado na fonte</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="calculo" style="padding-top:0">
-  <div class="wrap">
-    <div class="row rev">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01"/><path d="M12 11h.01"/><path d="M16 11h.01"/><path d="M8 15h.01"/><path d="M12 15h.01"/><path d="M16 15v4"/></svg><span>Cálculo com memória</span></span>
-        <h2 class="rt">A planilha que tomava sua tarde, <span class="red">com a memória aberta</span>.</h2>
-        <p class="rp">RMI, atrasados, tempo especial e simulação de aposentadoria. Sai em Excel, com a memória linha a linha, apresentável ao juízo. Não é estimativa de IA: é motor de cálculo testado caso a caso.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Memória aberta, linha por linha</li>
-          <li><span class="ck">✓</span> Reajustes pelos índices oficiais do INSS</li>
-          <li><span class="ck">✓</span> Avisa quando o dado de entrada não fecha</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="xls">
-          <div class="xls-bar">
-            <span class="xls-nome">AuxilioAcidente_Calculo.xlsx</span>
-            <span class="xls-badge">gerado pela skill</span>
-          </div>
-          <table class="xls-tab">
-            <thead><tr><th>Verba</th><th>Base</th><th>Valor</th></tr></thead>
-            <tbody>
-              <tr><td>RMI do auxílio-doença</td><td>carta de concessão</td><td>2.104,33</td></tr>
-              <tr><td>Auxílio-acidente na cessação</td><td>50% da RMI</td><td>1.052,17</td></tr>
-              <tr><td>Valor atual</td><td>reajustes oficiais</td><td>1.243,80</td></tr>
-              <tr><td>Atrasados desde a cessação</td><td>mês a mês, corrigidos</td><td>21.487,66</td></tr>
-              <tr class="xls-total"><td>Total na data do cálculo</td><td></td><td>22.731,46</td></tr>
-            </tbody>
-          </table>
-          <div class="xls-pe">Exemplo ilustrativo. A memória sai aberta, mês a mês, pronta pra conferência e pra juntar aos autos.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="jurimetria" style="padding-top:0">
-  <div class="wrap">
-    <div class="row">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg><span>Jurimetria oficial do CNJ</span></span>
-        <h2 class="rt">Como cada vara tem <span class="red">decidido o seu tipo de benefício</span>?</h2>
-        <p class="rp">Inteligência que plataforma de jurimetria cobra R$ 300 por mês, respondida com o dado OFICIAL do CNJ, sem custo extra. Taxa de procedência por vara, taxa de acordo, tempo mediano até a sentença e comparação entre tribunais, antes de ajuizar.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Onde ajuizar: estadual ou federal, com o histórico real da tese</li>
-          <li><span class="ck">✓</span> Expectativa honesta pro cliente, com fonte oficial, na reunião de honorários</li>
-          <li><span class="ck">✓</span> Taxa de acordo por vara: mostra onde o INSS negocia</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="card" id="juriCard">
-          <div class="card-h"><span class="t">Auxílio-acidente • procedência 1ª instância</span><span class="src">fonte: DataJud/CNJ</span></div>
-          <div class="card-q">Onde ajuizar?</div>
-          <div class="bar-row"><span class="nm">Piracicaba (cível)</span><span class="bar-track"><span class="bar-fill" data-pc="76"></span></span><span class="pc">76%</span></div>
-          <div class="bar-row"><span class="nm">TRF1</span><span class="bar-track"><span class="bar-fill" data-pc="44"></span></span><span class="pc">44%</span></div>
-          <div class="bar-row"><span class="nm">Média TJSP</span><span class="bar-track"><span class="bar-fill" data-pc="38"></span></span><span class="pc">39%</span></div>
-          <div class="bar-row"><span class="nm">TRF4</span><span class="bar-track"><span class="bar-fill" data-pc="28"></span></span><span class="pc">29%</span></div>
-          <div class="card-note">Exemplo real, apurado na base pública em julho/2026. Indicador estatístico de tendência, nunca garantia de resultado.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="juris" style="padding-top:0">
-  <div class="wrap">
-    <div class="row rev">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 8.9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1 1 0 0 1 1.6 0C14.6 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg><span>Nunca inventa jurisprudência</span></span>
-        <h2 class="rt">Ela procura o acórdão. E <span class="red">joga fora</span> o que não existe.</h2>
-        <p class="rp">Todo candidato passa por duas conferências: o processo na base do CNJ e a ementa no site do tribunal. O que não passa é descartado antes de você ver.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Repetitivos do STJ e repercussão geral do STF, com a tese conferida palavra por palavra</li>
-          <li><span class="ck">✓</span> Quando não dá pra confirmar na fonte, ela avisa em vez de inventar</li>
-          <li><span class="ck">✓</span> É a regra mais rígida do produto: nenhuma citação entra sem fonte</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="card sem">
-          <div class="card-h"><span class="t">Auxílio-acidente, grau mínimo</span><span class="src">6 candidatos, 4 validados</span></div>
-          <div class="sem-item sem-ok">
-            <span class="sem-luz"></span>
-            <div>
-              <b>AC 5025142-79.2023.4.04.7205</b>
-              <span class="sem-meta">TRF4 · confirmado na base do CNJ e no site do tribunal</span>
-            </div>
-            <span class="sem-tag sem-tag-ok">USAR</span>
-          </div>
-          <div class="sem-item sem-ok">
-            <span class="sem-luz"></span>
-            <div>
-              <b>Tema 416 do STJ</b>
-              <span class="sem-meta">tese conferida literalmente no portal de precedentes</span>
-            </div>
-            <span class="sem-tag sem-tag-ok">USAR</span>
-          </div>
-          <div class="sem-item sem-med">
-            <span class="sem-luz"></span>
-            <div>
-              <b>AC 5002049-29.2024.4.04.7213</b>
-              <span class="sem-meta">achado no CNJ, mas o site do tribunal não respondeu agora</span>
-            </div>
-            <span class="sem-tag sem-tag-med">CONFERIR</span>
-          </div>
-          <div class="sem-item sem-nao">
-            <span class="sem-luz"></span>
-            <div>
-              <b>AC 9999999-99.2023.4.04.7205</b>
-              <span class="sem-meta">não existe em base nenhuma. Descartado antes de chegar em você</span>
-            </div>
-            <span class="sem-tag sem-tag-nao">DESCARTADO</span>
-          </div>
-          <div class="card-note">Este é o mecanismo por trás do "nunca inventa jurisprudência": não é uma promessa de comportamento, é uma peneira que roda em toda busca.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="divisor">
-  <div class="wrap">
-    <span class="pilula reveal"><i></i>Parte 2 · Marketing</span>
-    <h2 class="sec reveal">O escritório aparecendo <span class="red">para quem precisa dele</span>.</h2>
-  </div>
-</section>
-
-<section id="conteudo" style="padding-top:56px">
-  <div class="wrap">
-    <div class="row">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg><span>Conteúdo que vira post</span></span>
-        <h2 class="rt">O carrossel da semana sai pronto, <span class="red">legenda e arte incluídas</span>.</h2>
-        <p class="rp">Reels, carrosséis, estáticos e artigos, calibrados nas suas personas. Sai o roteiro, a legenda e a arte pronta pro seu Canva.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Conecta no Canva oficial e gera o design na SUA conta</li>
-          <li><span class="ck">✓</span> Direção de arte completa: cores, fontes e ordem dos slides</li>
-          <li><span class="ck">✓</span> Você revisa e publica: a palavra final é sua</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="doc">
-          <div class="hd"><b>SEU ESCRITÓRIO</b><span class="oab">OAB 000.000</span></div>
-          <h4>ARTIGO: QUANDO A REVISÃO DO BENEFÍCIO VALE A PENA</h4>
-          <div class="ln m"></div><div class="ln"></div><div class="ln s"></div>
-          <div class="ln"></div><div class="ln m"></div><div class="ln s"></div>
-          <span class="tag">✓ Filtro do Provimento 205 aplicado</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="calendario" style="padding-top:0">
-  <div class="wrap">
-    <div class="row rev">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><span>Calendário editorial</span></span>
-        <h2 class="rt">A pauta do mês inteiro, <span class="red">em minutos</span>.</h2>
-        <p class="rp">Chega de domingo à noite pensando no que postar. Ela monta a pauta do mês da sua área e depois escreve as peças, uma a uma.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Mês inteiro de pauta da sua área em minutos</li>
-          <li><span class="ck">✓</span> Cada tema nasce do mapa de personas, não de tendência genérica</li>
-          <li><span class="ck">✓</span> Você aprova a pauta, ela escreve no seu tom</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="xls">
-          <div class="xls-bar">
-            <span class="xls-nome">Calendario_Editorial.xlsx</span>
-            <span class="xls-badge">gerado pela skill</span>
-          </div>
-          <table class="xls-tab xls-cal">
-            <thead><tr><th>Dia</th><th>Formato</th><th>Tema</th></tr></thead>
-            <tbody>
-              <tr><td>04/08</td><td>Reel</td><td>3 mitos sobre a revisão de benefício</td></tr>
-              <tr><td>06/08</td><td>Carrossel</td><td>Quando a revisão vale a pena</td></tr>
-              <tr><td>11/08</td><td>Estático</td><td>Os documentos que o INSS vai pedir</td></tr>
-              <tr><td>13/08</td><td>Artigo</td><td>Guia da revisão, passo a passo</td></tr>
-              <tr class="xls-total"><td>Mês</td><td>pauta completa</td><td>pronta pra aprovar</td></tr>
-            </tbody>
-          </table>
-          <div class="xls-pe">Exemplo ilustrativo, pauta de uma previdenciarista. A sua sai da SUA área e das SUAS personas.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="compliance" style="padding-top:0">
-  <div class="wrap">
-    <div class="row">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 8.9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1 1 0 0 1 1.6 0C14.6 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg><span>Compliance OAB automático</span></span>
-        <h2 class="rt">Você posta sem a dúvida: <span class="red">isso fere o Provimento 205?</span></h2>
-        <p class="rp">A régua do Provimento 205 é aplicada antes de qualquer CTA sair: caráter informativo, sem promessa de resultado, sem mercantilização.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Calibrada pra advocacia brasileira</li>
-          <li><span class="ck">✓</span> Sem "garanta sua indenização", sem promessa de resultado</li>
-          <li><span class="ck">✓</span> O que fere a régua sai só na versão informativa</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="card sem">
-          <div class="card-h"><span class="t">CTAs da campanha • filtro do 205</span><span class="src">régua: Provimento 205 da OAB</span></div>
-          <div class="sem-item sem-ok">
-            <span class="sem-luz"></span>
-            <div>
-              <b>Entenda quando a revisão vale a pena</b>
-              <span class="sem-meta">caráter informativo · aprovado pela régua</span>
-            </div>
-            <span class="sem-tag sem-tag-ok">PASSA</span>
-          </div>
-          <div class="sem-item sem-ok">
-            <span class="sem-luz"></span>
-            <div>
-              <b>Fale com um advogado sobre o seu caso</b>
-              <span class="sem-meta">convite de contato, sem promessa</span>
-            </div>
-            <span class="sem-tag sem-tag-ok">PASSA</span>
-          </div>
-          <div class="sem-item sem-med">
-            <span class="sem-luz"></span>
-            <div>
-              <b>Não perca essa oportunidade!</b>
-              <span class="sem-meta">tom de mercantilização, ajustado pela régua</span>
-            </div>
-            <span class="sem-tag sem-tag-med">AJUSTA</span>
-          </div>
-          <div class="sem-item sem-nao">
-            <span class="sem-luz"></span>
-            <div>
-              <b>Garanta sua indenização agora</b>
-              <span class="sem-meta">promessa de resultado. Bloqueado antes de chegar em você</span>
-            </div>
-            <span class="sem-tag sem-tag-nao">BLOQUEADO</span>
-          </div>
-          <div class="card-note">O mecanismo por trás do "compliance automático": um filtro que roda antes de qualquer CTA sair.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="voz" style="padding-top:0">
-  <div class="wrap">
-    <div class="row rev">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg><span>Sua voz calibrada</span></span>
-        <h2 class="rt">Escrita por IA <span class="red">sem parecer</span> IA.</h2>
-        <p class="rp">Ela aprende com os seus textos e mapeia as suas personas: quem é seu cliente, a dor nas palavras dele e o tom que funciona com cada perfil.</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Calibra uma vez, com alguns textos seus</li>
-          <li><span class="ck">✓</span> Mapa de personas incluído</li>
-          <li><span class="ck">✓</span> Quanto mais você usa, mais ela soa como você</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="deb">
-          <div class="deb-cab">
-            <span class="deb-tit">O mesmo recado, duas vozes</span>
-            <span class="deb-caso">Post sobre revisão de benefício</span>
-          </div>
-          <div class="deb-fala deb-a">
-            <span class="deb-quem">Robô genérico</span>
-            <p>Você sabia que muitos beneficiários podem ter direito a revisão? Entre em contato conosco para saber mais!</p>
-          </div>
-          <div class="deb-fala deb-b">
-            <span class="deb-quem deb-quem-r">A sua voz, calibrada</span>
-            <p>Toda semana atendo aposentado que paga há anos por um cálculo que ninguém conferiu. Antes de aceitar o valor, vale entender o seu caso.</p>
-          </div>
-          <div class="deb-fecho">Exemplo ilustrativo. O seu sai calibrado nos SEUS textos.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="seu" style="padding-top:0">
-  <div class="wrap">
-    <div class="row">
-      <div class="col-txt reveal">
-        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Roda no SEU computador</span></span>
-        <h2 class="rt">Constrói na sua máquina. Publica <span class="red">no que é seu</span>.</h2>
-        <p class="rp">Nada de plataforma que segura seu site refém nem senha na mão de terceiro. A landing sai pronta pra receber o anúncio do seu gestor de tráfego, com Pixel e WhatsApp, e o Google Meu Negócio entra na rotina que rankeia no "advogado perto de mim".</p>
-        <ul class="checks">
-          <li><span class="ck">✓</span> Site no ar com o seu domínio, hospedado de graça</li>
-          <li><span class="ck">✓</span> Licença no seu CPF, ativa em até 3 computadores seus</li>
-          <li><span class="ck">✓</span> Atualiza com um comando: <span class="cmd">/atualizar-skill</span> traz as melhorias da semana</li>
-        </ul>
-      </div>
-      <div class="col-mock reveal">
-        <div class="card">
-          <div class="tree">
-            <div class="fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Marketing do escritório</div>
-            <div class="ind fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Site</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>index.html</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>blog/quando-a-revisao-vale.html</div>
-            <div class="ind fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Campanha da tese</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>landing.html, com Pixel e WhatsApp</div>
-            <div class="ind fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Conteúdo de agosto</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Carrossel_revisao_v1.docx</div>
-            <div class="ind2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Calendario_Editorial.xlsx</div>
-            <div class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>&nbsp;Construído no seu computador. Publicado no seu domínio e na sua conta Canva.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="seguranca" style="padding-top:0">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Segurança e sigilo</span></span>
-    <h2 class="sec reveal">Os documentos do seu cliente ficam <span class="red">no seu computador</span>.</h2>
-    <p class="lead reveal">Laudo médico, CPF e histórico de contribuição são o dado mais sensível da advocacia. Por isso a MaestrIA não é um site onde você envia arquivo: é uma ferramenta instalada na sua máquina.</p>
-    <div class="seg-grade reveal">
-      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span><h3>Nada de cliente vem para nós</h3><p>O que a MaestrIA confere pela internet é só o código da sua licença e o nome do computador. Nome de cliente, CPF, laudo e petição não passam por servidor nosso.</p></div>
-      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>A IA roda na sua conta</h3><p>A inteligência é a do Claude, da Anthropic, usada pela sua própria assinatura. O que a IA lê para trabalhar segue as regras e as configurações de privacidade da sua conta lá, que você controla.</p></div>
-      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Não inventa jurisprudência</h3><p>Cada decisão citada é conferida na base do CNJ e no site do tribunal. O que não se confirma fica fora da peça, e ela avisa.</p></div>
-      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><h3>Você vê de onde saiu cada dado</h3><p>O cálculo vem com a memória aberta, mês a mês, e a fonte de cada índice. A leitura dos documentos aponta a página de onde tirou a informação.</p></div>
-      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><h3>Nada sai sem a sua revisão</h3><p>A MaestrIA não protocola, não envia mensagem e não fala com o seu cliente. Ela entrega o trabalho pronto para você revisar, decidir e assinar.</p></div>
-      <div class="cardy"><span class="seg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 7a4 4 0 0 0 6 0Z"/><path d="m19 7-3 7a4 4 0 0 0 6 0Z"/></svg></span><h3>Dentro das regras da OAB</h3><p>O conteúdo de marketing passa por um filtro do Provimento 205/2021 antes de chegar em você: sem promessa de resultado e sem captação indevida.</p></div>
-    </div>
-    <p class="seg-nota reveal">Transparência: para a IA trabalhar, o texto dos documentos é lido pelo Claude, na sua conta. A MaestrIA não guarda cópia de nada disso.</p>
-  </div>
-</section>
-
-<section id="precisa">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Antes de começar</span></span>
-    <h2 class="sec reveal">O que você precisa ter para <span class="red">fazer o teste</span>.</h2>
-    <p class="lead reveal">São só três coisas. Se faltar alguma, a área de membros mostra como resolver, com a imagem de cada tela.</p>
-    <div class="precisa reveal">
-      <div class="cardy">
-        <span class="pre-ic"><svg  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg></span>
-        <h3>1. Um computador</h3>
-        <p>Windows ou Mac. A MaestrIA trabalha com os arquivos do seu computador, por isso <b>não funciona no celular</b>. Não precisa ser uma máquina potente.</p>
-      </div>
-      <div class="cardy red-edge">
-        <span class="pre-ic"><svg  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg></span>
-        <h3>2. O aplicativo Claude, com assinatura</h3>
-        <p>O Claude é o aplicativo de inteligência artificial onde a MaestrIA se instala. Ele tem uma <b>assinatura própria</b>, contratada direto em <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. É o único custo durante o teste, e você continua com ele mesmo se não ficar com a MaestrIA.</p>
-      </div>
-      <div class="cardy">
-        <span class="pre-ic"><svg  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-        <h3>3. Meia hora para instalar</h3>
-        <p>Uma vez só. Você baixa um arquivo, entrega ao Claude e escreve "instala pra mim". <b>Não precisa saber programar.</b> Travou? Manda um print no grupo e a gente resolve.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="dias" style="padding-top:0">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Os 7 dias</span></span>
-    <h2 class="sec reveal">Como é o teste, <span class="red">do primeiro ao último dia</span>.</h2>
-    <div class="dias reveal">
-      <div class="dia"><span class="q">Hoje</span><b>Você libera o teste</b><span>Preenche o formulário desta página. O acesso sai na hora e também vai para o seu e-mail.</span></div>
-      <div class="dia"><span class="q">Dia 1</span><b>Instala e faz o primeiro pedido</b><span>A área de membros guia cada passo. No mesmo dia você roda um caso seu ou cria um conteúdo.</span></div>
-      <div class="dia"><span class="q">Dias 2 a 7</span><b>Usa à vontade</b><span>Cálculo, petição, quesitos, carrossel, roteiro de vídeo. Tudo liberado, em um computador, com os seus casos.</span></div>
-      <div class="dia fim"><span class="q">Dia 8</span><b>Você decide</b><span>O teste pausa sozinho. O que você fez continua na sua pasta. Para seguir, é só comprar a licença: volta a funcionar sem instalar nada de novo.</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="instalacao" style="padding-top:0">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4Z"/></svg><span>Do zero ao primeiro caso</span></span>
-    <h2 class="sec reveal">Do cadastro ao primeiro resultado <span class="red">no mesmo dia</span>.</h2>
-    <p class="lead reveal">Sem reunião de implantação, sem consultor, sem TI. Se você digita no WhatsApp, você opera.</p>
-    <div class="trilha reveal">
-      <div class="tr-linha"></div>
-      <div class="tr-passo">
-        <span class="tr-t">2 min</span>
-        <span class="tr-bola">1</span>
-        <b>Libera o teste nesta página</b>
-        <span class="tr-d">o acesso sai na hora e vai para o seu e-mail</span>
-      </div>
-      <div class="tr-passo">
-        <span class="tr-t">1 min</span>
-        <span class="tr-bola">2</span>
-        <b>Arrasta o arquivo no Claude</b>
-        <span class="tr-d">escreve "instala pra mim" e ele faz o resto</span>
-      </div>
-      <div class="tr-passo">
-        <span class="tr-t">30 min</span>
-        <span class="tr-bola">3</span>
-        <b>Calibra com os seus modelos</b>
-        <span class="tr-d">seus dados, seu tom, suas pastas: no PC ou no seu Google Drive</span>
-      </div>
-      <div class="tr-passo tr-fim">
-        <span class="tr-t">no mesmo dia</span>
-        <span class="tr-bola">✓</span>
-        <b>Roda o primeiro caso</b>
-        <span class="tr-d">um cálculo, uma petição ou o carrossel da semana, pronto pra sua revisão</span>
-      </div>
-    </div>
-    <p class="lead-mini reveal">Travou em qualquer passo? Manda um print no grupo da comunidade e a gente te destrava.</p>
-  </div>
-</section>
-
-<section id="diferenca">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9Z"/></svg><span>Claude sozinho x Claude com MaestrIA</span></span>
-    <h2 class="sec reveal">O que a MaestrIA faz que a <span class="red">IA comum não faz</span>.</h2>
-    <p class="lead reveal">A MaestrIA funciona dentro do Claude, um aplicativo de inteligência artificial. Sozinho, o Claude conversa muito bem, mas não conhece o seu escritório, não tem o motor de cálculo do INSS e não confere se a decisão que citou existe. Veja a diferença, pedido por pedido.</p>
-    <div class="vs reveal" role="table" aria-label="Comparação entre o Claude sozinho e o Claude com a MaestrIA">
-      <div class="vs-head" role="row"><div role="columnheader">Você pede</div><div role="columnheader">Claude sozinho</div><div role="columnheader">Claude com MaestrIA</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Calcular o auxílio-acidente</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Faz a conta na conversa, sem índice oficial conferido. Você refaz para confiar.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Lê a carta de concessão, calcula com <b>motor testado</b> e os reajustes oficiais do INSS e entrega o Excel com a memória aberta, mês a mês.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Citar jurisprudência</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Pode citar número de processo que não existe, com toda a segurança do mundo.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Confere cada decisão <b>na base do CNJ e no site do tribunal</b>. O que não existe é descartado antes de chegar em você.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Escrever a petição</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Texto genérico, que você copia, ajusta e formata no Word.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Lê os documentos do caso e escreve <b>no seu estilo e no seu timbrado</b>, a partir de 1 ou 2 modelos seus. Sai em Word.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Escolher onde entrar com a ação</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Opinião geral, sem o número de nenhuma vara.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Taxa de procedência por vara com o <b>dado oficial do CNJ</b>, antes de ajuizar.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Acompanhar prazos</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Não acessa as suas publicações.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Busca as <b>intimações pela sua OAB</b> no Diário da Justiça todo dia e calcula o vencimento.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Postar no Instagram</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Texto com cara de robô e sem arte. Você ainda abre o Canva e monta tudo.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Carrossel e post <b>com a sua voz e a sua marca</b>, legenda e arte prontas, já passados pelo Provimento 205.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Editar o vídeo que você gravou</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Não edita vídeo.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Tira as pausas, põe <b>legenda e gancho</b> e devolve o MP4 para você revisar.</div></div>
-      <div class="vs-row" role="row"><div class="tema" role="cell"><span>Ter um site</span></div><div class="so" role="cell"><span class="rot">Claude sozinho</span>Te dá um código solto e você que se vire para colocar no ar.</div><div class="com" role="cell"><span class="rot">Com MaestrIA</span>Constrói o site com blog e te guia até o ar, <b>no seu domínio, com hospedagem gratuita</b>.</div></div>
-    </div>
-    <p class="vs-pe reveal">A MaestrIA se instala dentro do Claude: não é outro site, outro login nem outra tela para aprender.</p>
-  </div>
-</section>
-
-<section id="custo" style="padding-top:0">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M15 9.5h-4.5a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 1 0 3.5H9"/></svg><span>A conta</span></span>
-    <h2 class="sec reveal">Quanto custa, e por que sai <span class="red">mais barato</span> do que contratar cada coisa separada.</h2>
-    <p class="lead reveal">Para ter o que a MaestrIA entrega, o escritório costuma pagar vários fornecedores, quase todos com mensalidade. Veja a soma em um ano.</p>
-    <div class="conta reveal">
-      <div class="conta-l"><div><b>Social media terceirizado</b><span>R$ 800 a R$ 2.500 por mês, para postar no seu Instagram</span></div><div class="v">R$ 10 a 30 mil</div></div>
-      <div class="conta-l"><div><b>Site feito por web designer</b><span>pago uma vez, e você depende dele para mexer</span></div><div class="v">R$ 3 a 8 mil</div></div>
-      <div class="conta-l"><div><b>Plataforma de jurimetria</b><span>cerca de R$ 300 por mês</span></div><div class="v">R$ 3,6 mil</div></div>
-      <div class="conta-l"><div><b>Cálculo previdenciário feito na mão</b><span>2 a 3 horas de trabalho repetitivo por caso, toda vez</span></div><div class="v">as suas horas</div></div>
-      <div class="conta-l soma"><div><b>Em um ano, separado</b><span>sem contar as horas do cálculo e da petição</span></div><div class="v">R$ 16 a 41 mil</div></div>
-      <div class="conta-l nossa"><div><b>MaestrIA Previdenciário + Marketing</b><span>os dois pacotes, 12 meses, com as atualizações</span></div><div class="v">R$ 997<small>menos de R$ 84 por mês</small></div></div>
-    </div>
-    <h3 class="sub-h reveal">E a diferença para um sistema jurídico online comum</h3>
-    <div class="seg-vs reveal">
-      <div class="outro">
-        <span class="rot">Sistema jurídico online comum</span>
-        <ul>
-          <li>Você envia os documentos do cliente para o servidor da empresa.</li>
-          <li>Os casos ficam guardados em um banco de dados que não é seu.</li>
-          <li>Se você cancela, depende da empresa para tirar tudo de lá.</li>
-          <li>Mensalidade por usuário, para sempre.</li>
-        </ul>
-      </div>
-      <div class="nosso">
-        <span class="rot">MaestrIA</span>
-        <ul>
-          <li>Os arquivos ficam em pastas suas, no seu computador.</li>
-          <li>A MaestrIA não tem servidor que recebe documento de cliente.</li>
-          <li>Se você sair, tudo o que foi feito continua com você, em Word, Excel e PDF.</li>
-          <li>Sem mensalidade por usuário.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="porque reveal">
-      <div class="cardy"><h3>Não tem mensalidade por usuário</h3><p>A licença é do escritório, por 12 meses, em até 3 computadores. Não cresce a conta a cada pessoa que usa.</p></div>
-      <div class="cardy"><h3>Não mantemos servidor com os seus casos</h3><p>Como tudo roda no seu computador, não existe o custo de guardar e processar os seus documentos em um sistema nosso. Esse custo não vai para o seu preço.</p></div>
-      <div class="cardy"><h3>A inteligência você paga direto</h3><p>A assinatura do Claude é sua, contratada na Anthropic, sem intermediário cobrando por cima. É o único custo fora da MaestrIA.</p></div>
-    </div>
-    <p class="seg-nota reveal">Valores de mercado são referências médias e variam por cidade e fornecedor. O preço da MaestrIA é o da página oficial do pacote. Durante o teste de 7 dias você não paga nada à MaestrIA.</p>
   </div>
 </section>
 
@@ -1629,7 +1072,7 @@
     <details class="faq reveal"><summary>Posso usar com casos reais?</summary><div class="ans">Pode. É a ferramenta completa. Os arquivos ficam em pastas suas, no seu computador. A inteligência artificial é a do Claude e segue as regras da sua conta lá.</div></details>
     <details class="faq reveal"><summary>Não entendo nada de tecnologia. Consigo?</summary><div class="ans">Consegue. A instalação é guiada, com a imagem de cada tela, e o suporte é no grupo da comunidade: você manda um print e a gente diz o que fazer. No uso, você escreve o pedido em português comum.</div></details>
     <details class="faq reveal"><summary>Inventa acórdão como o ChatGPT?</summary><div class="ans">Não. Toda decisão passa pela base do CNJ e pelo site do tribunal, e leis, súmulas e temas são conferidos em fonte oficial. Quando não dá para confirmar, ela avisa em vez de inventar.</div></details>
-    <details class="faq reveal"><summary>Quanto custa depois do teste?</summary><div class="ans">O pacote Previdenciário + Marketing custa R$ 997 por 12 meses, com as atualizações do período. Não é mensalidade por usuário. Fora isso, só a assinatura do Claude, que você paga direto à Anthropic.</div></details>
+    <details class="faq reveal"><summary>Quanto custa depois do teste?</summary><div class="ans">O pacote da sua área com o Marketing custa R$ 997 por 12 meses, com as atualizações do período. Não é mensalidade por usuário. Fora isso, só a assinatura do Claude, que você paga direto à Anthropic.</div></details>
     <details class="faq reveal"><summary>Os dados dos meus clientes ficam seguros?</summary><div class="ans">Os arquivos ficam em pastas suas, no seu computador. A MaestrIA não tem servidor que recebe documento de cliente: pela internet ela confere só o código da licença e o nome do computador. Para trabalhar, a inteligência artificial do Claude lê o texto dos documentos, pela sua própria conta, seguindo as configurações de privacidade que você controla lá.</div></details>
     <details class="faq reveal"><summary>Em quantos computadores posso testar?</summary><div class="ans">O teste vale para um computador. A licença comprada vale para até 3.</div></details>
     <details class="faq reveal"><summary>A MaestrIA substitui o advogado?</summary><div class="ans">Não. Ela faz o trabalho operacional e mostra os caminhos. Quem revisa, decide e assina é você.</div></details>
@@ -1641,8 +1084,7 @@
     <h2 class="reveal">Sete dias, com os seus casos, <span class="red">sem pagar nada</span>.</h2>
     <p class="reveal">Instale hoje e rode o primeiro caso ainda hoje. Se não for para você, é só não fazer nada: o teste pausa sozinho.</p>
     <a href="#teste" class="btn btn-red btn-lg reveal">Quero testar por 7 dias</a>
-    <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu e prefere comprar direto? <a href="/prev-marketing/#pacotes" style="color:var(--red-ink)">Ver o pacote por R$ 997</a>.</p>
-    <p class="cta-meta reveal"><span>Sem cartão</span><span>Os dois pacotes completos</span><span>No seu computador</span><span>Você decide no fim</span></p>
+    <p class="cta-meta reveal"><span>Sem cartão</span><span>A sua área + o Marketing</span><span>No seu computador</span><span>Você decide no fim</span></p>
   </div>
 </section>
 
@@ -1654,7 +1096,7 @@
         <p>IA jurídica que roda no seu computador. Construída pra escritório crescer sem quebrar a entrega.</p>
         <p class="by">Um produto Samurai Lab</p>
       </div>
-      <div><h4>Produto</h4><a href="#teste">Testar 7 dias</a><a href="/prev/">Só o Previdenciário</a><a href="/marketing/">Só o Marketing</a><a href="/">Todas as áreas</a></div>
+      <div><h4>Produto</h4><a href="#teste">Testar 7 dias</a><a href="#areas">As áreas</a><a href="/marketing/">Só o Marketing</a><a href="/">Todas as áreas</a></div>
       <div><h4>Suporte</h4><a href="/suporte.html">Central de suporte</a><a href="/instalacao.html">Guia de instalação</a><a href="/membros/">Área de membros</a></div>
       <div><h4>Legal</h4><a href="/termos.html">Termos de uso</a><a href="/privacidade.html">Política de privacidade</a></div>
     </div>
@@ -1884,18 +1326,31 @@
     });
   })();
 </script>
+
 <script>
 (function () {
   var EDGE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
-  var f = document.getElementById("f");
-  if (!f) return;
-  var erro = document.getElementById("erro");
-  var btn = document.getElementById("enviar");
-  var btnTxt = document.getElementById("enviar-txt");
+  var AREA = "";
+  function areaEscolhida() { var r = document.querySelector('input[name="area"]:checked'); return r ? r.value : ""; }
+  // Quem chega com ?a=trab já encontra a área marcada.
+  try {
+    var pa = (new URLSearchParams(location.search).get("a") || "").toLowerCase();
+    var marca = pa && document.querySelector('input[name="area"][value="' + pa.replace(/[^a-z]/g, "") + '"]');
+    if (marca) marca.checked = true;
+  } catch (e) {}
+  // Os atalhos para a página de cada área levam junto a origem.
+  try { if (location.search) [].slice.call(document.querySelectorAll(".areas-ver a")).forEach(function (a) { a.href = a.getAttribute("href") + location.search; }); } catch (e) {}
   var celular = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "");
   // De onde a pessoa veio: /teste/?o=evento, ?o=grupo-melissa...
   var origem = "site";
   try { origem = (new URLSearchParams(location.search).get("o") || "site").slice(0, 60); } catch (e) {}
+
+  // A barra de áreas leva junto o que veio no endereço (origem e campanha).
+  try {
+    if (location.search) {
+      [].slice.call(document.querySelectorAll(".areas-barra a")).forEach(function (a) { a.href = a.getAttribute("href") + location.search; });
+    }
+  } catch (e) {}
 
   // Contador: avisa que a página foi aberta e, depois, que a pessoa começou a preencher.
   // Não manda nome nem e-mail: só a origem e um código sorteado neste navegador.
@@ -1914,59 +1369,69 @@
   }
   contar("visita");
   var comecou = false;
-  f.addEventListener("input", function () { if (!comecou) { comecou = true; contar("formulario"); } });
 
-  var zap = document.getElementById("whatsapp");
-  zap.addEventListener("input", function () {
-    var d = zap.value.replace(/\D/g, "").slice(0, 11);
-    zap.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4)
-      : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
-  });
-  function mostrarErro(msg) { erro.textContent = msg; erro.classList.remove("tf-oculto"); }
-  function carregando(sim) {
-    btn.disabled = sim; btn.classList.toggle("carregando", sim);
-    btnTxt.textContent = sim ? "Liberando o seu teste..." : "Quero testar por 7 dias";
+  // A página tem dois formulários iguais: o do topo e o do fim. O sufixo separa os campos.
+  function ligar(s) {
+    var f = document.getElementById("f" + s);
+    if (!f) return;
+    function g(id) { return document.getElementById(id + s); }
+    var erro = g("erro"), btn = g("enviar"), btnTxt = g("enviar-txt"), zap = g("whatsapp");
+    f.addEventListener("input", function () { if (!comecou) { comecou = true; contar("formulario"); } });
+    zap.addEventListener("input", function () {
+      var d = zap.value.replace(/\D/g, "").slice(0, 11);
+      zap.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4)
+        : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
+    });
+    function mostrarErro(msg) { erro.textContent = msg; erro.classList.remove("tf-oculto"); }
+    function carregando(sim) {
+      btn.disabled = sim; btn.classList.toggle("carregando", sim);
+      btnTxt.textContent = sim ? "Liberando o seu teste..." : "Quero testar por 7 dias";
+    }
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      erro.classList.add("tf-oculto");
+      var dados = {
+        nome: g("nome").value.trim(),
+        email: g("email").value.trim(),
+        whatsapp: zap.value, area: areaEscolhida(),
+        site: g("site").value, origem: origem
+      };
+      if (!dados.area) return mostrarErro("Escolha a sua área, no começo da ficha.");
+      if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
+      if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
+      carregando(true);
+      fetch(EDGE, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          carregando(false);
+          j = j || {};
+          if (!j.ok) return mostrarErro(j.erro || "Não consegui liberar agora. Tente de novo em instantes.");
+          // Cadastro feito: avisa o pixel, para a campanha otimizar por quem libera o teste.
+          try { if (window.fbq && j.token) fbq("track", "Lead", { content_name: "Teste 7 dias MaestrIA", content_category: origem }); } catch (e) {}
+          // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
+          if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.contato || dados.email })); } catch (e) {} }
+          var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
+          var pacote = j.plano_legivel ? j.plano_legivel + ", até " + ate + ". " : "Vale até " + ate + ". ";
+          g("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
+          if (celular) {
+            g("ok-texto").textContent = pacote + "A instalação é no computador: abra lá o e-mail que acabamos de mandar e clique no botão azul.";
+            g("ok-btn").classList.add("tf-oculto");
+          } else {
+            g("ok-texto").textContent = pacote + "Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
+          }
+          g("tela-form").classList.add("tf-oculto");
+          g("tela-ok").classList.remove("tf-oculto");
+          g("cartao").scrollIntoView({ block: "center" });
+        })
+        .catch(function () { carregando(false); mostrarErro("Sem conexão agora. Confira a internet e tente de novo."); });
+    });
   }
-  f.addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    erro.classList.add("tf-oculto");
-    var dados = {
-      nome: document.getElementById("nome").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      whatsapp: zap.value,
-      site: document.getElementById("site").value, origem: origem
-    };
-    if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
-    if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
-    carregando(true);
-    fetch(EDGE, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        carregando(false);
-        j = j || {};
-        if (!j.ok) return mostrarErro(j.erro || "Não consegui liberar agora. Tente de novo em instantes.");
-        // Cadastro feito: avisa o pixel, para a campanha otimizar por quem libera o teste.
-        try { if (window.fbq && j.token) fbq("track", "Lead", { content_name: "Teste 7 dias MaestrIA", content_category: origem }); } catch (e) {}
-        // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
-        if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.contato || dados.email })); } catch (e) {} }
-        var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
-        document.getElementById("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
-        var texto = document.getElementById("ok-texto");
-        if (celular) {
-          texto.textContent = "Vale até " + ate + ". A instalação é no computador: abra lá o e-mail que acabamos de mandar e clique no botão azul.";
-          document.getElementById("ok-btn").classList.add("tf-oculto");
-        } else {
-          texto.textContent = "Vale até " + ate + ". Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
-        }
-        document.getElementById("tela-form").classList.add("tf-oculto");
-        document.getElementById("tela-ok").classList.remove("tf-oculto");
-        document.getElementById("cartao").scrollIntoView({ block: "center" });
-      })
-      .catch(function () { carregando(false); mostrarErro("Sem conexão agora. Confira a internet e tente de novo."); });
-  });
+  ligar("");
+  ligar("2");
 })();
 </script>
+
 <script>
 (function () {
   var box = document.getElementById("hvVideo"), v = document.getElementById("vsl"), b = document.getElementById("hvPlay");
