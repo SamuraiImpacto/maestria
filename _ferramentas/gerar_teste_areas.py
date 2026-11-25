@@ -8,7 +8,9 @@ Entradas:
   <area>/index.html             a página de venda de cada pacote, de onde saem as demonstrações
 
 Saídas:
-  teste/index.html              previdenciário (endereço único divulgado)
+  teste/index.html              todas as áreas: o vídeo na primeira dobra e a ficha com a escolha da área
+                                (endereço divulgado como "o teste", desde 25/11/2026)
+  teste/prev/index.html         previdenciário (é para onde aponta o QR Code do teste de previdenciário)
   teste/<area>/index.html       as outras sete áreas
   teste/area/index.html         redirecionamento do endereço antigo
 
@@ -49,7 +51,7 @@ def secao(h, sid):
 
 
 def caminho(a):
-    return "/teste/" if a == "prev" else f"/teste/{a}/"
+    return f"/teste/{a}/"
 
 
 def minuscula(s):
@@ -338,7 +340,7 @@ REDIRECIONA = """<!DOCTYPE html>
 <script>
 (function () {
   // Endereço antigo do teste por área. Leva para a página única, mantendo a área e a origem.
-  var areas = { trab: 1, familia: 1, consumidor: 1, bancario: 1, criminal: 1, imobiliario: 1, empresarial: 1 };
+  var areas = { prev: 1, trab: 1, familia: 1, consumidor: 1, bancario: 1, criminal: 1, imobiliario: 1, empresarial: 1 };
   var p = new URLSearchParams(location.search), a = (p.get("a") || "").toLowerCase();
   p.delete("a");
   var resto = p.toString();
@@ -350,6 +352,192 @@ REDIRECIONA = """<!DOCTYPE html>
 </html>
 """
 
+# ---------------------------------------------------------------- /teste/: todas as áreas (25/11/2026)
+# Pedido do Samurai: o endereço /teste/ foi divulgado como o teste de todas as áreas. A primeira dobra
+# é só o título, o vídeo e o botão; o botão desce para a ficha, onde a pessoa escolhe a área.
+CSS_TODOS = """
+  /* primeira dobra com o vídeo: título, vídeo e botão numa tela só */
+  header.hero.hero-vsl{padding:18px 0 22px;min-height:calc(100svh - 64px);display:flex;align-items:center}
+  header.hero.hero-vsl .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
+  header.hero.hero-vsl .hero-art{opacity:.14!important}
+  header.hero.hero-vsl h1.big{font-size:clamp(1.7rem,2.7vw,2.6rem);line-height:1.08;max-width:32ch;margin:12px auto 0}
+  .hero-vsl .hv-sub{margin:10px auto 0;max-width:60ch;color:var(--muted);font-size:clamp(.98rem,1.15vw,1.08rem);line-height:1.5}
+  .hv-video{position:relative;margin:18px auto 0;width:min(100%,1000px,calc((100svh - 64px - 365px) * 16 / 9));min-width:min(100%,480px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+    border:1px solid rgba(239,39,39,.55);box-shadow:0 0 0 6px rgba(239,39,39,.07),0 30px 80px -30px rgba(239,39,39,.45);
+    background:linear-gradient(100deg,#141417 30%,#1d1d22 50%,#141417 70%);background-size:300% 100%;animation:hvbrilho 1.6s linear infinite}
+  .hv-video.pronto{animation:none;background:#0b0a0a}
+  .hv-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:transparent}
+  .hv-play{position:absolute;inset:0;display:flex;flex-direction:row;align-items:flex-end;justify-content:center;gap:14px;padding-bottom:5.5%;border:0;cursor:pointer;color:#fff;
+    background:radial-gradient(ellipse at center,rgba(11,10,10,0) 50%,rgba(11,10,10,.92) 92%);font:700 15px var(--sans);letter-spacing:.02em;transition:background .25s}
+  .hv-play:hover{background:radial-gradient(ellipse at center,rgba(11,10,10,0) 50%,rgba(11,10,10,.85) 92%)}
+  .hv-play:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+  .hv-ic{display:inline-flex;width:72px;height:72px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(239,39,39,.22);transition:transform .25s}
+  .hv-ic svg{width:30px;height:30px;margin-left:4px}
+  .hv-play:hover .hv-ic{transform:scale(1.07)}
+  .hv-play span.t{margin-bottom:17px;background:rgba(11,10,10,.78);padding:9px 16px;border-radius:999px}
+  .hv-video.tocando .hv-play{display:none}
+  .hero-vsl .hv-cta{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  header.hero.hero-vsl .hero-fatos{display:flex}header.hero.hero-vsl .eyebrow{display:inline-flex}
+  .hero-vsl .hero-fatos{margin-top:0;justify-content:center}
+  .hero-vsl .hv-entra{opacity:0;transform:translateY(14px);animation:hventra .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero-vsl .hv-entra.d1{animation-delay:.08s}.hero-vsl .hv-entra.d2{animation-delay:.16s}.hero-vsl .hv-entra.d3{animation-delay:.26s}.hero-vsl .hv-entra.d4{animation-delay:.36s}
+  @keyframes hventra{to{opacity:1;transform:none}}
+  @keyframes hvbrilho{to{background-position:-150% 0}}
+  /* a ficha com a escolha da área */
+  #teste{scroll-margin-top:12px}
+  .tf-areas{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .tf-areas legend{font-weight:700;font-size:15px;margin-bottom:8px;padding:0}
+  .tf-areas .op{display:flex;flex-wrap:wrap;gap:8px}
+  .tf-areas label{position:relative;cursor:pointer}
+  .tf-areas input{position:absolute;opacity:0;width:1px;height:1px}
+  .tf-areas span{display:inline-block;font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;border:1px solid var(--line-strong);background:rgba(255,255,255,.03);transition:border-color .2s,background .2s}
+  .tf-areas label:hover span{border-color:var(--red)}
+  .tf-areas input:checked+span{background:var(--red);border-color:var(--red);color:#fff}
+  .tf-areas input:focus-visible+span{outline:2px solid #fff;outline-offset:2px}
+  .areas-ver{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;text-align:left}
+  .areas-ver a{display:block;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:inherit;text-decoration:none;transition:border-color .2s,transform .2s}
+  .areas-ver a:hover{border-color:var(--red);transform:translateY(-2px)}
+  .areas-ver b{display:block;font-size:16px}
+  .areas-ver small{display:block;margin-top:6px;color:var(--red-ink);font-weight:700;font-size:13px}
+  @media (max-width:900px){.areas-ver{grid-template-columns:1fr 1fr}}
+  @media (max-width:700px){
+    header.hero.hero-vsl{min-height:auto;padding-top:14px}
+    .hv-video{width:100%;min-width:0;border-radius:12px}
+    .hv-ic{width:52px;height:52px}.hv-ic svg{width:22px;height:22px}.hv-play{gap:10px;font-size:13px}.hv-play span.t{padding:7px 12px;margin-bottom:12px}
+    .hero-vsl .btn-lg{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.hero-vsl .hv-entra{animation:none;opacity:1;transform:none}.hv-video{animation:none}.hv-ic,.hv-play,.tf-areas span,.areas-ver a{transition:none}}
+"""
+
+HERO_VSL = """<header class="hero hero-vsl" id="topo">
+  <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
+  <div class="wrap">
+    <span class="eyebrow hv-entra"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Escolha a sua área</span>
+    <h1 class="big hv-entra d1">Uma equipe de assistentes jurídicos <span class="red">dentro do seu computador.</span></h1>
+    <p class="hv-sub hv-entra d2">Dê o play: em 3 minutos você vê um caso sair da pasta do cliente pronto para protocolar. Você só revisa e assina.</p>
+    <div class="hv-video hv-entra d3" id="hvVideo">
+      <video id="vsl" preload="none" playsinline poster="/teste/vsl-capa.jpg" src="/teste/vsl-maestria.mp4" aria-label="Vídeo: o que é a MaestrIA, em 3 minutos"></video>
+      <button type="button" class="hv-play" id="hvPlay" aria-label="Assistir ao vídeo com som"><span class="hv-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="t">Assistir com som &nbsp;•&nbsp; 3 min</span></button>
+    </div>
+    <div class="hv-cta hv-entra d4">
+      <a href="#teste" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
+      <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
+    </div>
+  </div>
+</header>"""
+
+JS_VSL = """<script>
+(function () {
+  var box = document.getElementById("hvVideo"), v = document.getElementById("vsl"), b = document.getElementById("hvPlay");
+  if (!box || !v || !b) return;
+  var capa = new Image();
+  capa.onload = capa.onerror = function () { box.classList.add("pronto"); };
+  capa.src = v.getAttribute("poster");
+  b.addEventListener("click", function () {
+    box.classList.add("tocando"); v.controls = true; v.muted = false;
+    var p = v.play(); if (p && p.catch) p.catch(function () { box.classList.remove("tocando"); });
+  });
+  v.addEventListener("ended", function () {
+    var alvo = document.getElementById("teste"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
+  });
+})();
+</script>"""
+
+
+def todos(h):
+    cabeca = h[:h.index("<nav>")]
+    cabeca = re.sub(r"<title>.*?</title>", "<title>Teste a MaestrIA por 7 dias, na sua área</title>", cabeca)
+    cabeca = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="Teste por 7 dias, sem cartão, a MaestrIA da sua área com o Marketing: petição no seu timbrado, cálculo com memória aberta, jurisprudência conferida e conteúdo com a sua voz. Roda no seu computador, dentro do Claude.">', cabeca)
+    cabeca = re.sub(r'<meta property="og:title" content="[^"]*">', '<meta property="og:title" content="Teste a MaestrIA por 7 dias, na sua área">', cabeca)
+    cabeca = re.sub(r'<meta property="og:description" content="[^"]*">', '<meta property="og:description" content="A sua área e o Marketing completos, no seu computador, por 7 dias. Você só decide depois de usar.">', cabeca)
+    cabeca = cabeca.replace('content="https://maestria.samurailab.com.br/teste/prev/"', 'content="https://maestria.samurailab.com.br/teste/"')
+    cabeca = troca(cabeca, "</style>", CSS_TODOS + "</style>")
+
+    nav = h[h.index("<nav>"):h.index("</nav>") + len("</nav>")]
+    i = nav.index('<div class="nav-links">')
+    f = nav.index("</div>", i) + len("</div>")
+    nav = nav[:i] + '''<div class="nav-links">
+      <a href="#topo">Assista</a>
+      <a href="#areas">As áreas</a>
+      <a href="#faq">Perguntas</a>
+      <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
+    </div>''' + nav[f:]
+
+    # a ficha: a mesma do topo das páginas por área, com a escolha da área no começo
+    ci = h.index('<div class="teste-form" id="cartao">')
+    cf = h.index("\n  </div>\n</header>", ci)
+    cartao = h[ci:cf].rstrip()
+    cartao = troca(cartao, "Você testa <b>Previdenciário + Marketing</b>.", "Você testa <b>a sua área + o Marketing</b>.")
+    escolha = '\n            <fieldset class="tf-areas"><legend>Qual é a sua área?</legend><div class="op">' + "".join(
+        f'<label><input type="radio" name="area" value="{x}"><span>{AREAS[x]["nome"]}</span></label>' for x in ORDEM) + "</div></fieldset>"
+    cartao = troca(cartao, '<form id="f" novalidate>', '<form id="f" novalidate>' + escolha)
+    li = lambda t: f'<li><span class="ck">✓</span><span>{t}</span></li>'
+    secao_teste = f'''<section id="teste">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><span>Liberar o teste</span></span>
+    <h2 class="sec reveal">Escolha a sua área e teste <span class="red">por 7 dias, sem pagar nada</span>.</h2>
+    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira da sua área, com o Marketing junto, no seu computador.</p>
+    <div class="teste-grade">
+      {cartao}
+      <div class="teste-inclui reveal">
+        <div class="h">O que vem no teste</div>
+        <ul>
+          {li("<b>A ferramenta completa da sua área:</b> petição no seu timbrado, cálculo com memória aberta e jurisprudência conferida em fonte oficial")}
+          {li("<b>O Marketing junto:</b> carrossel, calendário do mês, roteiro de vídeo e legenda, com a sua voz e dentro das regras da OAB")}
+          {li("<b>Com os seus casos:</b> os arquivos ficam em pastas suas, no seu computador")}
+          {li("<b>Instalação guiada:</b> imagem de cada tela e suporte no grupo da comunidade")}
+          {li("<b>Sem cartão:</b> no fim dos 7 dias o teste pausa sozinho, e você decide")}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>'''
+    secao_areas = '''<section id="areas" style="padding-top:0">
+  <div class="wrap sec-center">
+    <h2 class="sec reveal">Quer ver antes o que ela faz <span class="red">na sua área</span>?</h2>
+    <p class="lead reveal">Cada área tem a sua página, com as demonstrações de petição, cálculo e jurisprudência.</p>
+    <div class="areas-ver reveal">''' + "".join(
+        f'\n      <a href="{caminho(x)}"><b>{AREAS[x]["nome"]}</b><small>Ver o teste de {AREAS[x]["nome"]} ›</small></a>' for x in ORDEM) + '''
+    </div>
+  </div>
+</section>'''
+
+    faq = h[h.index('<section id="faq"'):h.index("</section>", h.index('<section id="faq"')) + len("</section>")]
+    faq = troca(faq, "O pacote Previdenciário + Marketing custa R$ 997 por 12 meses, com as atualizações do período.",
+                "O pacote da sua área com o Marketing custa R$ 997 por 12 meses, com as atualizações do período.")
+    final = h[h.index('<section class="final">'):h.index("</section>", h.index('<section class="final">')) + len("</section>")]
+    final = re.sub(r'\n    <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu.*?</p>', "", final)
+    final = troca(final, "<span>Os dois pacotes completos</span>", "<span>A sua área + o Marketing</span>")
+    rodape = h[h.index("<footer>"):h.index("</footer>") + len("</footer>")]
+    rodape = troca(rodape, '<a href="/prev/">Só o Previdenciário</a><a href="/marketing/">Só o Marketing</a>', '<a href="#areas">As áreas</a><a href="/marketing/">Só o Marketing</a>')
+
+    scripts = re.findall(r"<script>.*?</script>", h[h.index("</footer>"):], flags=re.S)
+    js_form = JS_FORM.replace("__AREA__", "")
+    js_form = troca(js_form, 'var AREA = "";', '''var AREA = "";
+  function areaEscolhida() { var r = document.querySelector('input[name="area"]:checked'); return r ? r.value : ""; }
+  // Quem chega com ?a=trab já encontra a área marcada.
+  try {
+    var pa = (new URLSearchParams(location.search).get("a") || "").toLowerCase();
+    var marca = pa && document.querySelector('input[name="area"][value="' + pa.replace(/[^a-z]/g, "") + '"]');
+    if (marca) marca.checked = true;
+  } catch (e) {}
+  // Os atalhos para a página de cada área levam junto a origem.
+  try { if (location.search) [].slice.call(document.querySelectorAll(".areas-ver a")).forEach(function (a) { a.href = a.getAttribute("href") + location.search; }); } catch (e) {}''')
+    js_form = troca(js_form, "whatsapp: zap.value, area: AREA,", "whatsapp: zap.value, area: areaEscolhida(),")
+    js_form = troca(js_form, 'if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");',
+                    'if (!dados.area) return mostrarErro("Escolha a sua área, no começo da ficha.");\n      if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");')
+    principal = [x for x in scripts if "var EDGE" not in x]
+    assert len(principal) == len(scripts) - 1, len(scripts)
+
+    corpo = "\n\n".join([nav, HERO_VSL, secao_teste, secao_areas, faq, final, rodape] + principal + [js_form, JS_VSL])
+    pagina = cabeca + corpo + "\n</body>\n</html>\n" if "<body" in cabeca else cabeca + corpo + "\n</html>\n"
+    ids = re.findall(r'\bid="([^"]+)"', pagina)
+    assert len(ids) == len(set(ids)), sorted({x for x in ids if ids.count(x) > 1})
+    for alvo in set(re.findall(r'href="#([^"]+)"', pagina)):
+        assert alvo in ids, "âncora sem destino: " + alvo
+    return pagina
+
+
 SOBRAS = re.compile(r"previd|INSS|CNIS|aposent|benefício|auxílio|RMI|PPP|períci|segurado", re.I)
 
 
@@ -359,7 +547,7 @@ def main():
         if a != "prev":
             h = conteudo(h, a)
         assert chr(8212) not in h
-        destino = RAIZ / "teste" / ("index.html" if a == "prev" else f"{a}/index.html")
+        destino = RAIZ / "teste" / f"{a}/index.html"
         destino.parent.mkdir(parents=True, exist_ok=True)
         destino.write_text(h, encoding="utf-8", newline="\n")
         sobras = []
@@ -373,6 +561,10 @@ def main():
         if "--sobras" in sys.argv:
             for s in sorted(set(sobras)):
                 print("    ·", s)
+    h = todos(estrutura(BASE, "prev"))
+    assert chr(8212) not in h
+    (RAIZ / "teste" / "index.html").write_text(h, encoding="utf-8", newline="\n")
+    print(f"todas: {len(h)} bytes -> teste/index.html")
     (RAIZ / "teste" / "area" / "index.html").write_text(REDIRECIONA, encoding="utf-8", newline="\n")
     print("teste/area/index.html: redirecionamento")
 

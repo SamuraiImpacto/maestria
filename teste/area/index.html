@@ -6,7 +6,7 @@
 <script>
 (function () {
   // Endereço antigo do teste por área. Leva para a página única, mantendo a área e a origem.
-  var areas = { trab: 1, familia: 1, consumidor: 1, bancario: 1, criminal: 1, imobiliario: 1, empresarial: 1 };
+  var areas = { prev: 1, trab: 1, familia: 1, consumidor: 1, bancario: 1, criminal: 1, imobiliario: 1, empresarial: 1 };
   var p = new URLSearchParams(location.search), a = (p.get("a") || "").toLowerCase();
   p.delete("a");
   var resto = p.toString();
