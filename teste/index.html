@@ -2058,7 +2058,8 @@
           // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
           if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.contato || dados.email })); } catch (e) {} }
           var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
-          var pacote = j.plano_legivel ? j.plano_legivel + ", até " + ate + ". " : "Vale até " + ate + ". ";
+          // Desde 25/11/2026 os 7 dias contam da instalação, não do cadastro.
+          var pacote = (j.plano_legivel ? j.plano_legivel + ". " : "") + "Os 7 dias só começam a contar quando você instalar. ";
           g("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
           if (celular) {
             g("ok-texto").textContent = pacote + "A instalação é no computador: abra lá o e-mail que acabamos de mandar e clique no botão azul.";
