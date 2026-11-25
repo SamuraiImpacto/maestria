@@ -753,8 +753,8 @@ h2 {
 
   <!-- OFERTA -->
   <section class="tela" data-tela="oferta">
-    <div class="prazo" id="prazoBox">De R$ 997 por R$ 697</div>
-    <h1>MaestrIA <span class="vermelho">Previdenciário</span></h1>
+    <div class="prazo" id="prazoBox">Previdenciário + Marketing</div>
+    <h1>MaestrIA <span class="vermelho">Previdenciário</span> + Marketing</h1>
     <p class="sub">As 9 skills, instaladas no seu computador em uns 30 minutos. Uma vez só, sem mensalidade.</p>
 
     <div class="oferta-box">
@@ -764,15 +764,16 @@ h2 {
         <li><span class="ic">✅</span><span><strong>Calibragem no seu padrão</strong>: seu timbrado, seu estilo, seus modelos</span></li>
         <li><span class="ic">✅</span><span><strong>Atualizações incluídas</strong>: skill nova e melhoria entram sem custo</span></li>
         <li><span class="ic">✅</span><span><strong>Suporte pela própria skill</strong>, com a correção chegando pra todo mundo no /atualizar-skill</span></li>
+        <li><span class="ic">✅</span><span><strong>MaestrIA Marketing junto</strong>: conteúdo com a sua voz, edição de vídeo, site e Google Meu Negócio</span></li>
         <li><span class="ic">✅</span><span><strong>Grupo da comunidade</strong>, onde as dúvidas são respondidas</span></li>
       </ul>
       <div class="sep" style="margin:22px 0;"></div>
       <div class="preco-linha">
-        <span class="preco-cifra">R$</span><span class="preco-valor">697</span>
+        <span class="preco-cifra">R$</span><span class="preco-valor">997</span>
       </div>
-      <p class="preco-depois" id="precoDepois">em vez de R$ 997, com 12 meses de acesso</p>
-      <p class="preco-parcela">ou em até 12x no cartão</p>
-      <a href="https://pay.kiwify.com.br/q5QEizf?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO POR R$ 697</a>
+      <p class="preco-depois" id="precoDepois">pelos dois, com 12 meses de acesso</p>
+      <p class="preco-parcela">ou 12x de R$ 103,11 no cartão</p>
+      <a href="https://pay.kiwify.com.br/urkdMlQ?src=diagnostico" class="btn" id="btnCheckout">QUERO O PREVIDENCIÁRIO + MARKETING POR R$ 997</a>
       <div class="garantia">
         <span style="font-size:20px;">🛡️</span>
         <p><strong>7 dias de garantia.</strong> Instala, roda numa peça de verdade e vê. Se não fizer sentido pro seu escritório, você pede o reembolso e pronto. Sem justificativa, sem estresse.</p>
@@ -803,16 +804,16 @@ h2 {
   var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/capturar-lead-diagnostico";
   var TOTAL_PASSOS = 6;
 
-  // Preco do Previdenciario desde 03/11/2026: R$ 697, ancorado em R$ 997
+  // Desde 25/11/2026 o site vende sempre a área + Marketing (decisão do Samurai): R$ 997, ou 12x de R$ 103,11.
   // (esteira decidida pelo Samurai em 01/11/2026, Kiwify conferida em 03/11).
   // Sem prazo nem contagem: preco anunciado tem que ser o que o checkout cobra.
-  var PRECO = 697;
+  var PRECO = 997;
 
   function aplicaLote() {
     $(".preco-valor").textContent = PRECO;
-    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO POR R$ " + PRECO;
-    $("#prazoBox").textContent = "De R$ 997 por R$ " + PRECO;
-    $("#precoDepois").textContent = "em vez de R$ 997, com 12 meses de acesso";
+    $("#btnCheckout").textContent = "QUERO O PREVIDENCIÁRIO + MARKETING POR R$ " + PRECO;
+    $("#prazoBox").textContent = "Previdenciário + Marketing";
+    $("#precoDepois").textContent = "pelos dois, com 12 meses de acesso";
   }
 
   var respostas = {};
