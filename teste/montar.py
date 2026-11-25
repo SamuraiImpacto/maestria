@@ -170,6 +170,40 @@ CSS_TESTE = r'''
     .teste-form{position:static}
   }
   @media (max-width:560px){.precisa,.dias{grid-template-columns:1fr}}
+  /* ===== primeira dobra com o vídeo (25/11/2026): título, vídeo e botão numa tela só ===== */
+  header.hero.hero-vsl{padding:18px 0 22px;min-height:calc(100svh - 64px);display:flex;align-items:center}
+  header.hero.hero-vsl .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
+  header.hero.hero-vsl .hero-art{opacity:.14!important}
+  header.hero.hero-vsl h1.big{font-size:clamp(1.7rem,2.7vw,2.6rem);line-height:1.08;max-width:32ch;margin:12px auto 0}
+  .hero-vsl .hv-sub{margin:10px auto 0;max-width:60ch;color:var(--muted);font-size:clamp(.98rem,1.15vw,1.08rem);line-height:1.5}
+  .hv-video{position:relative;margin:18px auto 0;width:min(100%,1000px,calc((100svh - 64px - 365px) * 16 / 9));min-width:min(100%,480px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+    border:1px solid rgba(239,39,39,.55);box-shadow:0 0 0 6px rgba(239,39,39,.07),0 30px 80px -30px rgba(239,39,39,.45);
+    background:linear-gradient(100deg,#141417 30%,#1d1d22 50%,#141417 70%);background-size:300% 100%;animation:hvbrilho 1.6s linear infinite}
+  .hv-video.pronto{animation:none;background:#0b0a0a}
+  .hv-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:transparent}
+  .hv-play{position:absolute;inset:0;display:flex;flex-direction:row;align-items:flex-end;justify-content:center;gap:14px;padding-bottom:5.5%;border:0;cursor:pointer;color:#fff;
+    background:radial-gradient(ellipse at center,rgba(11,10,10,0) 50%,rgba(11,10,10,.92) 92%);font:700 15px var(--sans);letter-spacing:.02em;transition:background .25s}
+  .hv-play:hover{background:radial-gradient(ellipse at center,rgba(11,10,10,0) 50%,rgba(11,10,10,.85) 92%)}
+  .hv-play:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+  .hv-ic{display:inline-flex;width:72px;height:72px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(239,39,39,.22);transition:transform .25s}
+  .hv-ic svg{width:30px;height:30px;margin-left:4px}
+  .hv-play:hover .hv-ic{transform:scale(1.07)}
+  .hv-play span.t{margin-bottom:17px;background:rgba(11,10,10,.78);padding:9px 16px;border-radius:999px}
+  .hv-video.tocando .hv-play{display:none}
+  .hero-vsl .hv-cta{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hero-vsl .hero-fatos{margin-top:0;justify-content:center}
+  .hero-vsl .hv-entra{opacity:0;transform:translateY(14px);animation:hventra .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero-vsl .hv-entra.d1{animation-delay:.08s}.hero-vsl .hv-entra.d2{animation-delay:.16s}.hero-vsl .hv-entra.d3{animation-delay:.26s}.hero-vsl .hv-entra.d4{animation-delay:.36s}
+  @keyframes hventra{to{opacity:1;transform:none}}
+  @keyframes hvbrilho{to{background-position:-150% 0}}
+  @media (max-width:700px){
+    header.hero.hero-vsl{min-height:auto;padding-top:14px}
+    .hv-video{width:100%;min-width:0;border-radius:12px}
+    .hv-ic{width:52px;height:52px}.hv-ic svg{width:22px;height:22px}.hv-play{gap:10px;font-size:13px}.hv-play span.t{padding:7px 12px;margin-bottom:12px}
+    .hero-vsl .btn-lg{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.hero-vsl .hv-entra{animation:none;opacity:1;transform:none}.hv-video{animation:none}.hv-ic,.hv-play{transition:none}}
+  #teste{scroll-margin-top:12px}
 '''
 
 NAV = '''<nav>
@@ -185,7 +219,7 @@ NAV = '''<nav>
   </div>
 </nav>'''
 
-HERO = '''<header class="hero" id="topo">
+HERO_ANTIGO = '''<header class="hero" id="topo">
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
     <div class="hero-txt">
@@ -216,6 +250,25 @@ HERO = '''<header class="hero" id="topo">
         <p class="tl t-ok">✓ 8 lâminas com a sua marca e a legenda, dentro das regras da OAB</p>
         <p class="tl t-dim">Exemplo ilustrativo. O advogado revisa tudo antes de usar.<span class="cursor" id="cur"></span></p>
       </div>
+    </div>
+  </div>
+</header>'''
+
+# Primeira dobra (25/11/2026, pedido do Samurai): só o título, o vídeo e o botão, tudo numa tela.
+# O botão desce para a ficha de cadastro (#teste), que passa a ser a segunda dobra.
+HERO = '''<header class="hero hero-vsl" id="topo">
+  <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
+  <div class="wrap">
+    <span class="eyebrow hv-entra"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
+    <h1 class="big hv-entra d1">Uma equipe de assistentes jurídicos <span class="red">dentro do seu computador.</span></h1>
+    <p class="hv-sub hv-entra d2">Dê o play: em 3 minutos você vê um caso sair da pasta do cliente pronto para protocolar. Você só revisa e assina.</p>
+    <div class="hv-video hv-entra d3" id="hvVideo">
+      <video id="vsl" preload="none" playsinline poster="/teste/vsl-capa.jpg" src="/teste/vsl-maestria.mp4" aria-label="Vídeo: o que é a MaestrIA, em 3 minutos"></video>
+      <button type="button" class="hv-play" id="hvPlay" aria-label="Assistir ao vídeo com som"><span class="hv-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="t">Assistir com som &nbsp;•&nbsp; 3 min</span></button>
+    </div>
+    <div class="hv-cta hv-entra d4">
+      <a href="#teste" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
+      <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
     </div>
   </div>
 </header>'''
@@ -592,11 +645,28 @@ SCRIPT_FORM = r'''<script>
 })();
 </script>'''
 
+SCRIPT_VSL = '''<script>
+(function () {
+  var box = document.getElementById("hvVideo"), v = document.getElementById("vsl"), b = document.getElementById("hvPlay");
+  if (!box || !v || !b) return;
+  var capa = new Image();
+  capa.onload = capa.onerror = function () { box.classList.add("pronto"); };
+  capa.src = v.getAttribute("poster");
+  b.addEventListener("click", function () {
+    box.classList.add("tocando"); v.controls = true; v.muted = false;
+    var p = v.play(); if (p && p.catch) p.catch(function () { box.classList.remove("tocando"); });
+  });
+  v.addEventListener("ended", function () {
+    var alvo = document.getElementById("teste"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
+  });
+})();
+</script>'''
+
 html = '\n'.join([
     cabeca, '<style>', g('css_prev'), g('css_mkt'), g('CSS_COMBO'), CSS_TESTE, '</style>', '',
-    NAV, '', HERO, '', g('MARQ'), '', FUNCOES, '', DEPOIMENTOS, '', g('acoes'), '', CTA_MEIO, '',
+    NAV, '', HERO, '', TESTE, '', g('MARQ'), '', FUNCOES, '', DEPOIMENTOS, '', g('acoes'), '', CTA_MEIO, '',
     g('DIV_PREV'), '', g('prev_rows'), '', g('DIV_MKT'), '', g('mkt_rows'), '', SEGURANCA, '',
-    PRECISA, '', DIAS, '', instalacao, '', DIFERENCA, '', CUSTO, '', TESTE, '', FAQ, '', FINAL, '', rodape, '', g('script'), SCRIPT_FORM, '</html>', ''])
+    PRECISA, '', DIAS, '', instalacao, '', DIFERENCA, '', CUSTO, '', FAQ, '', FINAL, '', rodape, '', g('script'), SCRIPT_FORM, SCRIPT_VSL, '</html>', ''])
 
 # Travas: nada de checkout nem de preço na página do teste, nada de travessão, ids únicos
 corpo = html.split('</style>', 1)[1]
