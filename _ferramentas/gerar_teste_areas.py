@@ -10,8 +10,8 @@ Entradas:
 Saídas:
   teste/index.html              todas as áreas: o vídeo na primeira dobra e a ficha com a escolha da área
                                 (endereço divulgado como "o teste", desde 25/11/2026)
-  teste/prev/index.html         previdenciário (é para onde aponta o QR Code do teste de previdenciário)
-  teste/<area>/index.html       as outras sete áreas
+  teste/<area>/index.html       só redirecionam para /teste/?a=<area>, com a área já marcada na ficha
+                                (25/11/2026, ordem do Samurai: "deixa uma página só")
   teste/area/index.html         redirecionamento do endereço antigo
 
 Nenhum conteúdo jurídico é escrito aqui: petição, cálculo e jurisprudência de cada área
@@ -458,7 +458,6 @@ def todos(h):
     f = nav.index("</div>", i) + len("</div>")
     nav = nav[:i] + '''<div class="nav-links">
       <a href="#topo">Assista</a>
-      <a href="#areas">As áreas</a>
       <a href="#faq">Perguntas</a>
       <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>''' + nav[f:]
@@ -509,7 +508,7 @@ def todos(h):
     final = re.sub(r'\n    <p class="reveal" style="margin-top:16px;font-size:15px">Já decidiu.*?</p>', "", final)
     final = troca(final, "<span>Os dois pacotes completos</span>", "<span>A sua área + o Marketing</span>")
     rodape = h[h.index("<footer>"):h.index("</footer>") + len("</footer>")]
-    rodape = troca(rodape, '<a href="/prev/">Só o Previdenciário</a><a href="/marketing/">Só o Marketing</a>', '<a href="#areas">As áreas</a><a href="/marketing/">Só o Marketing</a>')
+    rodape = troca(rodape, '<a href="/prev/">Só o Previdenciário</a><a href="/marketing/">Só o Marketing</a>', '<a href="/">Todas as áreas</a><a href="/marketing/">Só o Marketing</a>')
 
     scripts = re.findall(r"<script>.*?</script>", h[h.index("</footer>"):], flags=re.S)
     js_form = JS_FORM.replace("__AREA__", "")
@@ -521,15 +520,14 @@ def todos(h):
     var marca = pa && document.querySelector('input[name="area"][value="' + pa.replace(/[^a-z]/g, "") + '"]');
     if (marca) marca.checked = true;
   } catch (e) {}
-  // Os atalhos para a página de cada área levam junto a origem.
-  try { if (location.search) [].slice.call(document.querySelectorAll(".areas-ver a")).forEach(function (a) { a.href = a.getAttribute("href") + location.search; }); } catch (e) {}''')
+''')
     js_form = troca(js_form, "whatsapp: zap.value, area: AREA,", "whatsapp: zap.value, area: areaEscolhida(),")
     js_form = troca(js_form, 'if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");',
                     'if (!dados.area) return mostrarErro("Escolha a sua área, no começo da ficha.");\n      if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");')
     principal = [x for x in scripts if "var EDGE" not in x]
     assert len(principal) == len(scripts) - 1, len(scripts)
 
-    corpo = "\n\n".join([nav, HERO_VSL, secao_teste, secao_areas, faq, final, rodape] + principal + [js_form, JS_VSL])
+    corpo = "\n\n".join([nav, HERO_VSL, secao_teste, faq, final, rodape] + principal + [js_form, JS_VSL])
     pagina = cabeca + corpo + "\n</body>\n</html>\n" if "<body" in cabeca else cabeca + corpo + "\n</html>\n"
     ids = re.findall(r'\bid="([^"]+)"', pagina)
     assert len(ids) == len(set(ids)), sorted({x for x in ids if ids.count(x) > 1})
@@ -541,32 +539,39 @@ def todos(h):
 SOBRAS = re.compile(r"previd|INSS|CNIS|aposent|benefício|auxílio|RMI|PPP|períci|segurado", re.I)
 
 
+VAI_PARA_TESTE = """<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Teste a MaestrIA por 7 dias</title>
+<script>
+(function () {
+  // Desde 25/11/2026 o teste tem uma página só: /teste/. Este endereço leva para ela com a área marcada,
+  // mantendo a origem (?o=) de quem divulgou.
+  var p = new URLSearchParams(location.search);
+  if ("__AREA__") p.set("a", "__AREA__");
+  var resto = p.toString();
+  location.replace("/teste/" + (resto ? "?" + resto : ""));
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=/teste/__Q__"></noscript>
+<p style="font-family:sans-serif;padding:24px">Abrindo o teste da MaestrIA. Se não abrir, <a href="/teste/__Q__">toque aqui</a>.</p>
+</html>
+"""
+
+
 def main():
-    for a in ORDEM:
-        h = estrutura(BASE, a)
-        if a != "prev":
-            h = conteudo(h, a)
-        assert chr(8212) not in h
-        destino = RAIZ / "teste" / f"{a}/index.html"
-        destino.parent.mkdir(parents=True, exist_ok=True)
-        destino.write_text(h, encoding="utf-8", newline="\n")
-        sobras = []
-        if a != "prev":
-            corpo = re.sub(r"<style>.*?</style>", "", h, flags=re.S)
-            corpo = re.sub(r'<div class="areas-barra".*?</div>', "", corpo, flags=re.S)
-            for linha in corpo.split("\n"):
-                for m in SOBRAS.finditer(linha):
-                    sobras.append(re.sub(r"<[^>]+>", " ", linha)[max(0, m.start() - 200):][:160].strip() if len(linha) < 400 else re.sub(r"<[^>]+>", " ", linha[max(0, m.start() - 60):m.start() + 90]).strip())
-        print(f"{a}: {len(h)} bytes -> {destino.relative_to(RAIZ)} | sobras de previdenciário: {len(sobras)}")
-        if "--sobras" in sys.argv:
-            for s in sorted(set(sobras)):
-                print("    ·", s)
     h = todos(estrutura(BASE, "prev"))
     assert chr(8212) not in h
     (RAIZ / "teste" / "index.html").write_text(h, encoding="utf-8", newline="\n")
-    print(f"todas: {len(h)} bytes -> teste/index.html")
-    (RAIZ / "teste" / "area" / "index.html").write_text(REDIRECIONA, encoding="utf-8", newline="\n")
-    print("teste/area/index.html: redirecionamento")
+    print(f"página única: {len(h)} bytes -> teste/index.html")
+    for a in ORDEM + ["area"]:
+        area = "" if a == "area" else a
+        q = f"?a={area}" if area else ""
+        destino = RAIZ / "teste" / a / "index.html"
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        destino.write_text(VAI_PARA_TESTE.replace("__AREA__", area).replace("__Q__", q), encoding="utf-8", newline="\n")
+        print(f"teste/{a}/ -> /teste/{q}")
 
 
 if __name__ == "__main__":

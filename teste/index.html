@@ -978,7 +978,6 @@
     <a class="logo" href="#topo" aria-label="MaestrIA: voltar ao topo"><img class="sym" src="/img/logo-sym.png" alt=""><img class="word" src="/img/logo-word.png" alt="MaestrIA"><span class="sub">Teste grátis</span></a>
     <div class="nav-links">
       <a href="#topo">Assista</a>
-      <a href="#areas">As áreas</a>
       <a href="#faq">Perguntas</a>
       <a href="#teste" class="btn btn-red btn-sm nav-cta">Testar 7 dias grátis</a>
     </div>
@@ -1045,23 +1044,6 @@
   </div>
 </section>
 
-<section id="areas" style="padding-top:0">
-  <div class="wrap sec-center">
-    <h2 class="sec reveal">Quer ver antes o que ela faz <span class="red">na sua área</span>?</h2>
-    <p class="lead reveal">Cada área tem a sua página, com as demonstrações de petição, cálculo e jurisprudência.</p>
-    <div class="areas-ver reveal">
-      <a href="/teste/prev/"><b>Previdenciário</b><small>Ver o teste de Previdenciário ›</small></a>
-      <a href="/teste/trab/"><b>Trabalhista</b><small>Ver o teste de Trabalhista ›</small></a>
-      <a href="/teste/familia/"><b>Família</b><small>Ver o teste de Família ›</small></a>
-      <a href="/teste/consumidor/"><b>Consumidor</b><small>Ver o teste de Consumidor ›</small></a>
-      <a href="/teste/bancario/"><b>Bancário</b><small>Ver o teste de Bancário ›</small></a>
-      <a href="/teste/criminal/"><b>Criminal</b><small>Ver o teste de Criminal ›</small></a>
-      <a href="/teste/imobiliario/"><b>Imobiliário</b><small>Ver o teste de Imobiliário ›</small></a>
-      <a href="/teste/empresarial/"><b>Empresarial</b><small>Ver o teste de Empresarial ›</small></a>
-    </div>
-  </div>
-</section>
-
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg><span>Perguntas comuns</span></span>
@@ -1096,7 +1078,7 @@
         <p>IA jurídica que roda no seu computador. Construída pra escritório crescer sem quebrar a entrega.</p>
         <p class="by">Um produto Samurai Lab</p>
       </div>
-      <div><h4>Produto</h4><a href="#teste">Testar 7 dias</a><a href="#areas">As áreas</a><a href="/marketing/">Só o Marketing</a><a href="/">Todas as áreas</a></div>
+      <div><h4>Produto</h4><a href="#teste">Testar 7 dias</a><a href="/">Todas as áreas</a><a href="/marketing/">Só o Marketing</a><a href="/">Todas as áreas</a></div>
       <div><h4>Suporte</h4><a href="/suporte.html">Central de suporte</a><a href="/instalacao.html">Guia de instalação</a><a href="/membros/">Área de membros</a></div>
       <div><h4>Legal</h4><a href="/termos.html">Termos de uso</a><a href="/privacidade.html">Política de privacidade</a></div>
     </div>
@@ -1338,8 +1320,7 @@
     var marca = pa && document.querySelector('input[name="area"][value="' + pa.replace(/[^a-z]/g, "") + '"]');
     if (marca) marca.checked = true;
   } catch (e) {}
-  // Os atalhos para a página de cada área levam junto a origem.
-  try { if (location.search) [].slice.call(document.querySelectorAll(".areas-ver a")).forEach(function (a) { a.href = a.getAttribute("href") + location.search; }); } catch (e) {}
+
   var celular = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "");
   // De onde a pessoa veio: /teste/?o=evento, ?o=grupo-melissa...
   var origem = "site";
