@@ -902,23 +902,41 @@
     .teste-form{position:static}
   }
   @media (max-width:560px){.precisa,.dias{grid-template-columns:1fr}}
+  /* ===== primeira dobra com o vídeo (25/11/2026): título, vídeo e botão numa tela só ===== */
+  header.hero.hero-vsl{padding:18px 0 22px;min-height:calc(100svh - 64px);display:flex;align-items:center}
+  header.hero.hero-vsl .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;width:100%}
+  header.hero.hero-vsl .hero-art{opacity:.14!important}
+  header.hero.hero-vsl h1.big{font-size:clamp(1.7rem,2.7vw,2.6rem);line-height:1.08;max-width:32ch;margin:12px auto 0}
+  .hero-vsl .hv-sub{margin:10px auto 0;max-width:60ch;color:var(--muted);font-size:clamp(.98rem,1.15vw,1.08rem);line-height:1.5}
+  .hv-video{position:relative;margin:18px auto 0;width:min(100%,1000px,calc((100svh - 64px - 365px) * 16 / 9));min-width:min(100%,480px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+    border:1px solid rgba(239,39,39,.55);box-shadow:0 0 0 6px rgba(239,39,39,.07),0 30px 80px -30px rgba(239,39,39,.45);
+    background:linear-gradient(100deg,#141417 30%,#1d1d22 50%,#141417 70%);background-size:300% 100%;animation:hvbrilho 1.6s linear infinite}
+  .hv-video.pronto{animation:none;background:#0b0a0a}
+  .hv-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:transparent}
+  .hv-play{position:absolute;inset:0;display:flex;flex-direction:row;align-items:flex-end;justify-content:center;gap:14px;padding-bottom:5.5%;border:0;cursor:pointer;color:#fff;
+    background:radial-gradient(ellipse at center,rgba(11,10,10,0) 50%,rgba(11,10,10,.92) 92%);font:700 15px var(--sans);letter-spacing:.02em;transition:background .25s}
+  .hv-play:hover{background:radial-gradient(ellipse at center,rgba(11,10,10,0) 50%,rgba(11,10,10,.85) 92%)}
+  .hv-play:focus-visible{outline:3px solid #fff;outline-offset:-6px}
+  .hv-ic{display:inline-flex;width:72px;height:72px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(239,39,39,.22);transition:transform .25s}
+  .hv-ic svg{width:30px;height:30px;margin-left:4px}
+  .hv-play:hover .hv-ic{transform:scale(1.07)}
+  .hv-play span.t{margin-bottom:17px;background:rgba(11,10,10,.78);padding:9px 16px;border-radius:999px}
+  .hv-video.tocando .hv-play{display:none}
+  .hero-vsl .hv-cta{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .hero-vsl .hero-fatos{margin-top:0;justify-content:center}
+  .hero-vsl .hv-entra{opacity:0;transform:translateY(14px);animation:hventra .6s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero-vsl .hv-entra.d1{animation-delay:.08s}.hero-vsl .hv-entra.d2{animation-delay:.16s}.hero-vsl .hv-entra.d3{animation-delay:.26s}.hero-vsl .hv-entra.d4{animation-delay:.36s}
+  @keyframes hventra{to{opacity:1;transform:none}}
+  @keyframes hvbrilho{to{background-position:-150% 0}}
+  @media (max-width:700px){
+    header.hero.hero-vsl{min-height:auto;padding-top:14px}
+    .hv-video{width:100%;min-width:0;border-radius:12px}
+    .hv-ic{width:52px;height:52px}.hv-ic svg{width:22px;height:22px}.hv-play{gap:10px;font-size:13px}.hv-play span.t{padding:7px 12px;margin-bottom:12px}
+    .hero-vsl .btn-lg{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.hero-vsl .hv-entra{animation:none;opacity:1;transform:none}.hv-video{animation:none}.hv-ic,.hv-play{transition:none}}
+  #teste{scroll-margin-top:12px}
 
-
-  /* Barra de áreas e formulário na primeira dobra (21/11/2026) */
-  .areas-barra{position:relative;z-index:2;max-width:1180px;margin:0 auto 26px;padding:0 24px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
-  .areas-barra .rot{font-weight:800;font-size:14px;color:var(--muted);margin-right:6px}
-  .areas-barra a{font-size:14px;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);color:inherit;text-decoration:none;background:rgba(255,255,255,.03);transition:border-color .2s,background .2s}
-  .areas-barra a:hover{border-color:var(--red)}
-  .areas-barra a.on{background:var(--red);border-color:var(--red);color:#fff}
-  header.hero .teste-form{position:static;margin-top:30px}
-  header.hero .teste-form,header.hero .teste-form h3,header.hero .teste-form p,header.hero .teste-form label{text-align:left}
-  header.hero .teste-form .btn{justify-content:center;text-align:center}
-  .term-faixa{padding:34px 0 0}
-  .term-faixa .term{max-width:860px;margin:0 auto}
-  @media(min-width:981px){header.hero .teste-form{margin-top:0}}
-  @media(max-width:980px){header.hero .eyebrow,header.hero .hero-cta,header.hero .hero-fatos,header.hero .hero-prova{display:none}header.hero h1.big{margin-top:0}header.hero .teste-form{max-width:520px;margin:22px auto 0}}
-  @media(max-width:560px){.areas-barra{gap:6px;padding:0 16px;margin-bottom:18px}.areas-barra .rot{width:100%;text-align:center;margin:0 0 2px}.areas-barra a{font-size:13px;padding:6px 11px}}
-  @media(prefers-reduced-motion:reduce){.areas-barra a{transition:none}}
 </style>
 
 <nav>
@@ -934,26 +952,33 @@
   </div>
 </nav>
 
-<header class="hero" id="topo">
-  <div class="areas-barra" role="navigation" aria-label="Escolha a sua área"><span class="rot">Qual é a sua área?</span><a href="/teste/" class="on" aria-current="page">Previdenciário</a><a href="/teste/trab/">Trabalhista</a><a href="/teste/familia/">Família</a><a href="/teste/consumidor/">Consumidor</a><a href="/teste/bancario/">Bancário</a><a href="/teste/criminal/">Criminal</a><a href="/teste/imobiliario/">Imobiliário</a><a href="/teste/empresarial/">Empresarial</a></div>
+<header class="hero hero-vsl" id="topo">
   <div class="hero-art" id="heroArt" aria-hidden="true"><img src="/img/logo-sym.png" alt=""></div>
   <div class="wrap">
-    <div class="hero-txt">
-      <span class="eyebrow"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
-      <h1 class="big">A pasta do cliente entra. <span class="red">O caso pronto para protocolar sai.</span></h1>
-      <p class="hero-sub">Linha do tempo, cálculo, petição, quesitos, procuração e contrato, no seu timbrado. Na aula ao vivo, um caso com 15 documentos, um deles com mais de 300 páginas, ficou montado em <b>22 minutos</b>. E ela ainda faz o conteúdo do seu Instagram.</p>
-      <div class="hero-cta">
-        <a href="#cartao" class="btn btn-red">Quero testar 7 dias grátis</a>
-        <a href="#funcoes" class="btn btn-ghost">Ver tudo o que ela faz</a>
-      </div>
-      <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
-      <p class="hero-prova"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Feita e testada por previdenciaristas.</b> Já rodou em mais de 30 escritórios na fase piloto.</span></p>
+    <span class="eyebrow hv-entra"><i></i>Teste grátis de 7 dias &nbsp;•&nbsp; Previdenciário + Marketing</span>
+    <h1 class="big hv-entra d1">Uma equipe de assistentes jurídicos <span class="red">dentro do seu computador.</span></h1>
+    <p class="hv-sub hv-entra d2">Dê o play: em 3 minutos você vê um caso sair da pasta do cliente pronto para protocolar. Você só revisa e assina.</p>
+    <div class="hv-video hv-entra d3" id="hvVideo">
+      <video id="vsl" preload="none" playsinline poster="/teste/vsl-capa.jpg" src="/teste/vsl-maestria.mp4" aria-label="Vídeo: o que é a MaestrIA, em 3 minutos"></video>
+      <button type="button" class="hv-play" id="hvPlay" aria-label="Assistir ao vídeo com som"><span class="hv-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span class="t">Assistir com som &nbsp;•&nbsp; 3 min</span></button>
     </div>
+    <div class="hv-cta hv-entra d4">
+      <a href="#teste" class="btn btn-red btn-lg">Quero testar 7 dias grátis</a>
+      <div class="hero-fatos"><span><b>✓</b> Sem cartão</span><span><b>✓</b> Sem cobrança automática</span><span><b>✓</b> Com os seus casos</span></div>
+    </div>
+  </div>
+</header>
 
-      <div class="teste-form" id="cartao">
+<section id="teste">
+  <div class="wrap sec-center">
+    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg><span>Liberar o teste</span></span>
+    <h2 class="sec reveal">Os dois pacotes completos, <span class="red">por 7 dias, sem pagar nada</span>.</h2>
+    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira, no seu computador.</p>
+    <div class="teste-grade">
+      <div class="teste-form reveal" id="cartao">
         <div id="tela-form">
           <h3>Liberar meu teste de 7 dias</h3>
-          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora, também no seu WhatsApp. Você testa <b>Previdenciário + Marketing</b>.</p>
+          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora.</p>
           <form id="f" novalidate>
             <div class="tf-campo"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required></div>
             <div class="tf-campo"><label for="email">E-mail</label><input type="email" id="email" name="email" autocomplete="email" maxlength="160" required></div>
@@ -961,7 +986,7 @@
             <div class="tf-isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site" tabindex="-1" autocomplete="off"></label></div>
             <p class="tf-erro tf-oculto" id="erro" role="alert"></p>
             <button type="submit" class="btn btn-red btn-lg" id="enviar"><span class="tf-gira"></span><span id="enviar-txt">Quero testar por 7 dias</span></button>
-            <p class="tf-legal">O acesso chega no seu e-mail e no seu WhatsApp. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA, por esses dois canais. Sem cartão e sem cobrança automática.</p>
+            <p class="tf-legal">Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA. Sem cartão e sem cobrança automática.</p>
           </form>
         </div>
         <div id="tela-ok" class="tf-oculto">
@@ -972,8 +997,33 @@
           <p class="tf-legal" style="margin-top:14px">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
         </div>
       </div>
+      <div class="teste-inclui reveal">
+        <div class="h">Previdenciário</div>
+        <ul>
+            <li><span class="ck">✓</span><span><b>Cálculo previdenciário completo:</b> RMI, auxílio-acidente, atrasados e tempo especial, com memória aberta</span></li>
+            <li><span class="ck">✓</span><span><b>Auditor de CNIS:</b> vínculo faltante e contribuição não computada, apontados em minutos</span></li>
+            <li><span class="ck">✓</span><span><b>Perícia de ponta a ponta:</b> quesitos, impugnação de PPP e de laudo e o cliente preparado</span></li>
+            <li><span class="ck">✓</span><span><b>Qualificador de auxílio-acidente:</b> acidente, sequela e qualidade de segurado, com o veredito na hora</span></li>
+            <li><span class="ck">✓</span><span><b>Petições no seu timbrado:</b> gerador de documentos e revisor treinado nos seus critérios</span></li>
+            <li><span class="ck">✓</span><span><b>Jurisprudência conferida:</b> cada decisão checada no CNJ e no site do tribunal</span></li>
+            <li><span class="ck">✓</span><span><b>Jurimetria oficial do CNJ:</b> procedência e acordo por vara, antes de ajuizar</span></li>
+            <li><span class="ck">✓</span><span><b>Intimações pela sua OAB:</b> publicações do dia com o vencimento calculado</span></li>
+        </ul>
+        <div class="h">Marketing</div>
+        <ul>
+            <li><span class="ck">✓</span><span><b>Conteúdo com a sua voz:</b> reels, carrosséis, estáticos e artigos calibrados nas suas personas</span></li>
+            <li><span class="ck">✓</span><span><b>Arte pronta:</b> imagens com a sua marca ou o design direto na sua conta do Canva</span></li>
+            <li><span class="ck">✓</span><span><b>Edição de vídeo:</b> pausas fora, legenda e gancho no vídeo que você gravou</span></li>
+            <li><span class="ck">✓</span><span><b>Calendário editorial:</b> o mês inteiro de pauta da sua área em minutos</span></li>
+            <li><span class="ck">✓</span><span><b>Site do escritório no ar:</b> com blog, no seu domínio, hospedado de graça</span></li>
+            <li><span class="ck">✓</span><span><b>Páginas de campanha:</b> prontas para receber o anúncio do seu gestor de tráfego, com Pixel e WhatsApp</span></li>
+            <li><span class="ck">✓</span><span><b>Google Meu Negócio:</b> da criação à rotina de quem procura advogado perto de casa</span></li>
+            <li><span class="ck">✓</span><span><b>Compliance OAB automático:</b> tudo filtrado pelo Provimento 205 antes de sair</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
-</header>
+</section>
 
 <div class="marq" aria-hidden="true">
   <div class="marq-track">
@@ -981,28 +1031,6 @@
     <span>Nunca inventa jurisprudência</span><span>Dado do cliente no seu computador</span><span>Cálculo com memória aberta</span><span>Intimações pela sua OAB</span><span>Conteúdo com a sua voz</span><span>Provimento 205 da OAB</span><span>Site no seu domínio</span><span>Licença no seu CPF</span>
   </div>
 </div>
-
-<section class="term-faixa">
-  <div class="wrap">
-    <div class="term" id="term">
-      <div class="term-bar">
-        <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-        <span class="term-title">Você pede. Ela devolve pronto.</span>
-      </div>
-      <div class="term-body" id="termbody">
-        <p class="tl t-cmd"><span class="p">&gt;</span>quero dar entrada no auxílio-acidente desse cliente, faz tudo até o protocolo</p>
-        <p class="tl t-resp">Lendo a pasta: carta de concessão, laudo, extrato de contribuições...</p>
-        <p class="tl t-resp">Linha do tempo montada. Faltam 2 documentos, já anotados para você pedir.</p>
-        <p class="tl t-ok">✓ Cálculo com a memória aberta, mês a mês, em Excel</p>
-        <p class="tl t-ok">✓ Petição no seu timbrado, quesitos, procuração e contrato, em Word</p>
-        <p class="tl t-ok">✓ Pasta de protocolo pronta, em PDF</p>
-        <p class="tl t-cmd"><span class="p">&gt;</span>cria um carrossel sobre quem tem direito ao auxílio-acidente</p>
-        <p class="tl t-ok">✓ 8 lâminas com a sua marca e a legenda, dentro das regras da OAB</p>
-        <p class="tl t-dim">Exemplo ilustrativo. O advogado revisa tudo antes de usar.<span class="cursor" id="cur"></span></p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section id="funcoes">
   <div class="wrap sec-center">
@@ -1591,62 +1619,6 @@
   </div>
 </section>
 
-<section id="teste">
-  <div class="wrap sec-center">
-    <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3 6.9 7.5 1-5.5 5.2 1.4 7.4L12 19l-6.4 3.5L7 15.1 1.5 9.9 9 8.9Z"/></svg><span>Liberar o teste</span></span>
-    <h2 class="sec reveal">Os dois pacotes completos, <span class="red">por 7 dias, sem pagar nada</span>.</h2>
-    <p class="lead reveal">Não é uma versão reduzida nem uma demonstração com caso inventado. É a ferramenta inteira, no seu computador.</p>
-    <div class="teste-grade">
-      <div class="teste-form reveal" id="cartao2">
-        <div id="tela-form2">
-          <h3>Liberar meu teste de 7 dias</h3>
-          <p class="sub">Só nome, e-mail e WhatsApp. O acesso chega na hora, também no seu WhatsApp. Você testa <b>Previdenciário + Marketing</b>.</p>
-          <form id="f2" novalidate>
-            <div class="tf-campo"><label for="nome2">Nome completo</label><input type="text" id="nome2" name="nome" autocomplete="name" maxlength="120" required></div>
-            <div class="tf-campo"><label for="email2">E-mail</label><input type="email" id="email2" name="email" autocomplete="email" maxlength="160" required></div>
-            <div class="tf-campo"><label for="whatsapp2">WhatsApp com DDD</label><input type="tel" id="whatsapp2" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required></div>
-            <div class="tf-isca" aria-hidden="true"><label>Site <input type="text" name="site" id="site2" tabindex="-1" autocomplete="off"></label></div>
-            <p class="tf-erro tf-oculto" id="erro2" role="alert"></p>
-            <button type="submit" class="btn btn-red btn-lg" id="enviar2"><span class="tf-gira"></span><span id="enviar-txt2">Quero testar por 7 dias</span></button>
-            <p class="tf-legal">O acesso chega no seu e-mail e no seu WhatsApp. Usamos os seus dados só para liberar o teste e falar com você sobre a MaestrIA, por esses dois canais. Sem cartão e sem cobrança automática.</p>
-          </form>
-        </div>
-        <div id="tela-ok2" class="tf-oculto">
-          <span class="tf-selo">✓</span>
-          <h3 id="ok-titulo2">Teste liberado!</h3>
-          <p class="sub" id="ok-texto2"></p>
-          <a class="btn btn-red btn-lg" id="ok-btn2" href="/membros/">Instalar agora, passo a passo</a>
-          <p class="tf-legal" style="margin-top:14px">Também mandamos o acesso para o seu e-mail. Confira o spam se não achar.</p>
-        </div>
-      </div>
-      <div class="teste-inclui reveal">
-        <div class="h">Previdenciário</div>
-        <ul>
-            <li><span class="ck">✓</span><span><b>Cálculo previdenciário completo:</b> RMI, auxílio-acidente, atrasados e tempo especial, com memória aberta</span></li>
-            <li><span class="ck">✓</span><span><b>Auditor de CNIS:</b> vínculo faltante e contribuição não computada, apontados em minutos</span></li>
-            <li><span class="ck">✓</span><span><b>Perícia de ponta a ponta:</b> quesitos, impugnação de PPP e de laudo e o cliente preparado</span></li>
-            <li><span class="ck">✓</span><span><b>Qualificador de auxílio-acidente:</b> acidente, sequela e qualidade de segurado, com o veredito na hora</span></li>
-            <li><span class="ck">✓</span><span><b>Petições no seu timbrado:</b> gerador de documentos e revisor treinado nos seus critérios</span></li>
-            <li><span class="ck">✓</span><span><b>Jurisprudência conferida:</b> cada decisão checada no CNJ e no site do tribunal</span></li>
-            <li><span class="ck">✓</span><span><b>Jurimetria oficial do CNJ:</b> procedência e acordo por vara, antes de ajuizar</span></li>
-            <li><span class="ck">✓</span><span><b>Intimações pela sua OAB:</b> publicações do dia com o vencimento calculado</span></li>
-        </ul>
-        <div class="h">Marketing</div>
-        <ul>
-            <li><span class="ck">✓</span><span><b>Conteúdo com a sua voz:</b> reels, carrosséis, estáticos e artigos calibrados nas suas personas</span></li>
-            <li><span class="ck">✓</span><span><b>Arte pronta:</b> imagens com a sua marca ou o design direto na sua conta do Canva</span></li>
-            <li><span class="ck">✓</span><span><b>Edição de vídeo:</b> pausas fora, legenda e gancho no vídeo que você gravou</span></li>
-            <li><span class="ck">✓</span><span><b>Calendário editorial:</b> o mês inteiro de pauta da sua área em minutos</span></li>
-            <li><span class="ck">✓</span><span><b>Site do escritório no ar:</b> com blog, no seu domínio, hospedado de graça</span></li>
-            <li><span class="ck">✓</span><span><b>Páginas de campanha:</b> prontas para receber o anúncio do seu gestor de tráfego, com Pixel e WhatsApp</span></li>
-            <li><span class="ck">✓</span><span><b>Google Meu Negócio:</b> da criação à rotina de quem procura advogado perto de casa</span></li>
-            <li><span class="ck">✓</span><span><b>Compliance OAB automático:</b> tudo filtrado pelo Provimento 205 antes de sair</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <span class="kicker reveal"><svg class="ki" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg><span>Perguntas comuns</span></span>
@@ -1915,18 +1887,15 @@
 <script>
 (function () {
   var EDGE = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/teste-gratis";
-  var AREA = "prev";
+  var f = document.getElementById("f");
+  if (!f) return;
+  var erro = document.getElementById("erro");
+  var btn = document.getElementById("enviar");
+  var btnTxt = document.getElementById("enviar-txt");
   var celular = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || "");
   // De onde a pessoa veio: /teste/?o=evento, ?o=grupo-melissa...
   var origem = "site";
   try { origem = (new URLSearchParams(location.search).get("o") || "site").slice(0, 60); } catch (e) {}
-
-  // A barra de áreas leva junto o que veio no endereço (origem e campanha).
-  try {
-    if (location.search) {
-      [].slice.call(document.querySelectorAll(".areas-barra a")).forEach(function (a) { a.href = a.getAttribute("href") + location.search; });
-    }
-  } catch (e) {}
 
   // Contador: avisa que a página foi aberta e, depois, que a pessoa começou a preencher.
   // Não manda nome nem e-mail: só a origem e um código sorteado neste navegador.
@@ -1945,65 +1914,73 @@
   }
   contar("visita");
   var comecou = false;
+  f.addEventListener("input", function () { if (!comecou) { comecou = true; contar("formulario"); } });
 
-  // A página tem dois formulários iguais: o do topo e o do fim. O sufixo separa os campos.
-  function ligar(s) {
-    var f = document.getElementById("f" + s);
-    if (!f) return;
-    function g(id) { return document.getElementById(id + s); }
-    var erro = g("erro"), btn = g("enviar"), btnTxt = g("enviar-txt"), zap = g("whatsapp");
-    f.addEventListener("input", function () { if (!comecou) { comecou = true; contar("formulario"); } });
-    zap.addEventListener("input", function () {
-      var d = zap.value.replace(/\D/g, "").slice(0, 11);
-      zap.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4)
-        : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
-    });
-    function mostrarErro(msg) { erro.textContent = msg; erro.classList.remove("tf-oculto"); }
-    function carregando(sim) {
-      btn.disabled = sim; btn.classList.toggle("carregando", sim);
-      btnTxt.textContent = sim ? "Liberando o seu teste..." : "Quero testar por 7 dias";
-    }
-    f.addEventListener("submit", function (ev) {
-      ev.preventDefault();
-      erro.classList.add("tf-oculto");
-      var dados = {
-        nome: g("nome").value.trim(),
-        email: g("email").value.trim(),
-        whatsapp: zap.value, area: AREA,
-        site: g("site").value, origem: origem
-      };
-      if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
-      if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
-      carregando(true);
-      fetch(EDGE, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
-        .then(function (r) { return r.json(); })
-        .then(function (j) {
-          carregando(false);
-          j = j || {};
-          if (!j.ok) return mostrarErro(j.erro || "Não consegui liberar agora. Tente de novo em instantes.");
-          // Cadastro feito: avisa o pixel, para a campanha otimizar por quem libera o teste.
-          try { if (window.fbq && j.token) fbq("track", "Lead", { content_name: "Teste 7 dias MaestrIA", content_category: origem }); } catch (e) {}
-          // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
-          if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.contato || dados.email })); } catch (e) {} }
-          var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
-          var pacote = j.plano_legivel ? j.plano_legivel + ", até " + ate + ". " : "Vale até " + ate + ". ";
-          g("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
-          if (celular) {
-            g("ok-texto").textContent = pacote + "A instalação é no computador: abra lá o e-mail que acabamos de mandar e clique no botão azul.";
-            g("ok-btn").classList.add("tf-oculto");
-          } else {
-            g("ok-texto").textContent = pacote + "Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
-          }
-          g("tela-form").classList.add("tf-oculto");
-          g("tela-ok").classList.remove("tf-oculto");
-          g("cartao").scrollIntoView({ block: "center" });
-        })
-        .catch(function () { carregando(false); mostrarErro("Sem conexão agora. Confira a internet e tente de novo."); });
-    });
+  var zap = document.getElementById("whatsapp");
+  zap.addEventListener("input", function () {
+    var d = zap.value.replace(/\D/g, "").slice(0, 11);
+    zap.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4)
+      : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
+  });
+  function mostrarErro(msg) { erro.textContent = msg; erro.classList.remove("tf-oculto"); }
+  function carregando(sim) {
+    btn.disabled = sim; btn.classList.toggle("carregando", sim);
+    btnTxt.textContent = sim ? "Liberando o seu teste..." : "Quero testar por 7 dias";
   }
-  ligar("");
-  ligar("2");
+  f.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    erro.classList.add("tf-oculto");
+    var dados = {
+      nome: document.getElementById("nome").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      whatsapp: zap.value,
+      site: document.getElementById("site").value, origem: origem
+    };
+    if (dados.nome.length < 3) return mostrarErro("Escreva o seu nome completo.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(dados.email)) return mostrarErro("Confira o e-mail: ele parece incompleto.");
+    if (zap.value.replace(/\D/g, "").length < 10) return mostrarErro("Confira o WhatsApp, com DDD.");
+    carregando(true);
+    fetch(EDGE, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        carregando(false);
+        j = j || {};
+        if (!j.ok) return mostrarErro(j.erro || "Não consegui liberar agora. Tente de novo em instantes.");
+        // Cadastro feito: avisa o pixel, para a campanha otimizar por quem libera o teste.
+        try { if (window.fbq && j.token) fbq("track", "Lead", { content_name: "Teste 7 dias MaestrIA", content_category: origem }); } catch (e) {}
+        // Guarda o acesso desta aba: a área de membros abre já logada, sem digitar nada.
+        if (j.token) { try { sessionStorage.setItem("maestria_membros", JSON.stringify({ token: j.token, cpf: j.contato || dados.email })); } catch (e) {} }
+        var ate = j.vence_em ? new Date(j.vence_em).toLocaleDateString("pt-BR") : "";
+        document.getElementById("ok-titulo").textContent = (j.nome ? j.nome + ", o" : "O") + " seu teste está liberado!";
+        var texto = document.getElementById("ok-texto");
+        if (celular) {
+          texto.textContent = "Vale até " + ate + ". A instalação é no computador: abra lá o e-mail que acabamos de mandar e clique no botão azul.";
+          document.getElementById("ok-btn").classList.add("tf-oculto");
+        } else {
+          texto.textContent = "Vale até " + ate + ". Agora é só instalar: a próxima tela mostra cada passo e onde clicar.";
+        }
+        document.getElementById("tela-form").classList.add("tf-oculto");
+        document.getElementById("tela-ok").classList.remove("tf-oculto");
+        document.getElementById("cartao").scrollIntoView({ block: "center" });
+      })
+      .catch(function () { carregando(false); mostrarErro("Sem conexão agora. Confira a internet e tente de novo."); });
+  });
+})();
+</script>
+<script>
+(function () {
+  var box = document.getElementById("hvVideo"), v = document.getElementById("vsl"), b = document.getElementById("hvPlay");
+  if (!box || !v || !b) return;
+  var capa = new Image();
+  capa.onload = capa.onerror = function () { box.classList.add("pronto"); };
+  capa.src = v.getAttribute("poster");
+  b.addEventListener("click", function () {
+    box.classList.add("tocando"); v.controls = true; v.muted = false;
+    var p = v.play(); if (p && p.catch) p.catch(function () { box.classList.remove("tocando"); });
+  });
+  v.addEventListener("ended", function () {
+    var alvo = document.getElementById("teste"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
+  });
 })();
 </script>
 </html>
