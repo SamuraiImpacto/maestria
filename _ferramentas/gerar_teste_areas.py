@@ -10,8 +10,10 @@ Entradas:
 Saídas:
   teste/index.html              todas as áreas: o vídeo na primeira dobra e a ficha com a escolha da área
                                 (endereço divulgado como "o teste", desde 25/11/2026)
-  teste/<area>/index.html       só redirecionam para /teste/?a=<area>, com a área já marcada na ficha
-                                (25/11/2026, ordem do Samurai: "deixa uma página só")
+  teste/nicho/<area>.html       o miolo de cada área (demonstrações, comparação, conta), que a /teste/
+                                troca na hora quando a pessoa escolhe a área na ficha
+  teste/<area>/index.html       só redirecionam para /teste/?a=<area>, com a área já marcada
+                                (25/11/2026, ordem do Samurai: um endereço só; a área escolhida muda o resto da página)
   teste/area/index.html         redirecionamento do endereço antigo
 
 Nenhum conteúdo jurídico é escrito aqui: petição, cálculo e jurisprudência de cada área
@@ -385,6 +387,9 @@ CSS_TODOS = """
   @keyframes hvbrilho{to{background-position:-150% 0}}
   /* a ficha com a escolha da área */
   #teste{scroll-margin-top:12px}
+  #nicho{transition:opacity .25s;min-height:60vh}
+  #nicho.trocando{opacity:.25;pointer-events:none}
+  @media (prefers-reduced-motion:reduce){#nicho{transition:none}}
   .tf-areas{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
   .tf-areas legend{font-weight:700;font-size:15px;margin-bottom:8px;padding:0}
   .tf-areas .op{display:flex;flex-wrap:wrap;gap:8px}
@@ -440,6 +445,57 @@ JS_VSL = """<script>
   v.addEventListener("ended", function () {
     var alvo = document.getElementById("teste"); if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
   });
+})();
+</script>"""
+
+
+def miolo(h):
+    m = h[h.index("</header>") + len("</header>"):h.index('<section id="faq"')]
+    i = m.index('<section id="teste">')
+    m = m[:i] + m[m.index("</section>", i) + len("</section>"):]
+    return m.strip()
+
+
+def scripts_da_pagina(h):
+    todos_ = re.findall(r"<script>.*?</script>", h[h.index("</footer>"):], flags=re.S)
+    return [x for x in todos_ if "var EDGE" not in x]
+
+
+JS_NICHO = """<script>
+(function () {
+  // A área marcada na ficha troca, na hora, tudo o que vem depois dela: demonstrações, comparação e conta.
+  var box = document.getElementById("nicho");
+  if (!box) return;
+  var atual = box.getAttribute("data-area"), cache = {};
+  function rodarScripts(el) {
+    [].slice.call(el.querySelectorAll("script")).forEach(function (s) {
+      var n = document.createElement("script"); n.text = s.textContent; s.parentNode.replaceChild(n, s);
+    });
+  }
+  function trocar(a) {
+    if (!a || a === atual) return;
+    atual = a;
+    box.classList.add("trocando");
+    box.setAttribute("aria-busy", "true");
+    var pega = cache[a] ? Promise.resolve(cache[a]) : fetch("/teste/nicho/" + a + ".html").then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    pega.then(function (t) {
+      cache[a] = t;
+      if (atual !== a) return;
+      box.innerHTML = t;
+      box.setAttribute("data-area", a);
+      rodarScripts(box);
+      box.classList.remove("trocando");
+      box.removeAttribute("aria-busy");
+    }).catch(function () {
+      atual = box.getAttribute("data-area");
+      box.classList.remove("trocando");
+      box.removeAttribute("aria-busy");
+    });
+    try { var u = new URL(location.href); u.searchParams.set("a", a); history.replaceState(null, "", u); } catch (e) {}
+  }
+  document.addEventListener("change", function (e) { if (e.target && e.target.name === "area") trocar(e.target.value); });
+  var marcada = document.querySelector('input[name="area"]:checked');
+  if (marcada) trocar(marcada.value);
 })();
 </script>"""
 
@@ -527,7 +583,8 @@ def todos(h):
     principal = [x for x in scripts if "var EDGE" not in x]
     assert len(principal) == len(scripts) - 1, len(scripts)
 
-    corpo = "\n\n".join([nav, HERO_VSL, secao_teste, faq, final, rodape] + principal + [js_form, JS_VSL])
+    nicho = '<div id="nicho" data-area="prev">\n' + miolo(h) + "\n</div>"
+    corpo = "\n\n".join([nav, HERO_VSL, secao_teste, nicho, faq, final, rodape] + principal + [js_form, JS_VSL, JS_NICHO])
     pagina = cabeca + corpo + "\n</body>\n</html>\n" if "<body" in cabeca else cabeca + corpo + "\n</html>\n"
     ids = re.findall(r'\bid="([^"]+)"', pagina)
     assert len(ids) == len(set(ids)), sorted({x for x in ids if ids.count(x) > 1})
@@ -565,6 +622,15 @@ def main():
     assert chr(8212) not in h
     (RAIZ / "teste" / "index.html").write_text(h, encoding="utf-8", newline="\n")
     print(f"página única: {len(h)} bytes -> teste/index.html")
+    (RAIZ / "teste" / "nicho").mkdir(exist_ok=True)
+    for a in ORDEM:
+        h = estrutura(BASE, a)
+        if a != "prev":
+            h = conteudo(h, a)
+        frag = miolo(h) + "\n" + "\n".join(scripts_da_pagina(h)) + "\n"
+        assert chr(8212) not in frag
+        (RAIZ / "teste" / "nicho" / f"{a}.html").write_text(frag, encoding="utf-8", newline="\n")
+        print(f"teste/nicho/{a}.html: {len(frag)} bytes")
     for a in ORDEM + ["area"]:
         area = "" if a == "area" else a
         q = f"?a={area}" if area else ""
