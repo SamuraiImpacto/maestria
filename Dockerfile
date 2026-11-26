@@ -83,6 +83,8 @@ COPY consultoria/ ./consultoria/
 # Maratona de Lives do Samurai (21/11/2026): convite, agenda, arte e legenda. Grava pela edge lives-maratona.
 COPY lives/ ./lives/
 COPY cohort/ ./cohort/
+# Painel das iscas (26/11/2026): leads e funil do Plano 2027 e do Raio-X. Lê a edge iscas.
+COPY iscas/ ./iscas/
 
 # O navegador guardava a página antiga e o Samurai via versão velha (22/11/2026).
 # Manda o navegador conferir com o servidor a cada visita; se nada mudou, a resposta é curta (304).
