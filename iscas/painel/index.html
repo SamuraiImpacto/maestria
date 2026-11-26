@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Painel das iscas</title>
+<link rel="icon" href="/img/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a0c">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#141417;--panel-2:#1b1b20;
+    --line:rgba(255,255,255,.09);--line-strong:rgba(255,255,255,.18);
+    --txt:#f4f4f5;--muted:#9a9aa4;--red:#ef2727;--red-ink:#ff5a48;--green:#46d17f;--amber:#f0b541;--blue:#6aa9ff;
+    --serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px 60px}
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:28px 0 18px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
+  h1{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.1;margin:6px 0 0}
+  h2{font-size:1rem;margin:0 0 12px;font-weight:700}
+  .quando-li{color:var(--muted);font-size:.85rem;margin:10px 0 0}
+  .btn{font:inherit;font-weight:700;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--txt);border-radius:999px;padding:10px 16px;text-decoration:none;display:inline-block}
+  .btn:hover{border-color:var(--red);color:var(--red-ink)}
+  .btn-red{background:var(--red);border-color:var(--red);color:#fff}
+  .numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:22px 0}
+  .num{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .num b{display:block;font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums}
+  .num span{color:var(--muted);font-size:.88rem}
+  .num.destaque b{color:var(--green)}
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px}
+  .bloco{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+  .barra{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin-bottom:10px;font-size:.92rem}
+  .barra .q{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right}
+  .barra .t{grid-column:1/-1;height:7px;background:var(--panel-2);border-radius:99px;overflow:hidden}
+  .barra .t i{display:block;height:100%;background:var(--red);border-radius:99px}
+  section{margin:26px 0}
+  .filtros{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+  .filtro{font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border:1px solid var(--line-strong);background:transparent;color:var(--muted);border-radius:999px;padding:7px 13px}
+  .filtro[aria-pressed="true"]{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+  .linha-lista{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+  .linha-lista h2{margin:0}
+  .busca{background:var(--panel);color:var(--txt);border:1px solid var(--line-strong);border-radius:999px;padding:8px 14px;font:inherit;font-size:.9rem;min-width:0;width:min(260px,100%)}
+  .pessoa{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+  .pessoa .topo{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 12px}
+  .pessoa .nome{font-weight:700}
+  .pessoa a{color:var(--green);font-weight:600;text-decoration:none}
+  .pessoa .meta{color:var(--muted);font-size:.88rem;margin-top:4px;overflow-wrap:anywhere}
+  .selos{display:flex;flex-wrap:wrap;gap:6px}
+  .selo{font-size:.78rem;font-weight:700;border-radius:99px;padding:3px 10px;border:1px solid currentColor;white-space:nowrap}
+  .selo.diag{color:var(--green)}
+  .selo.pdf{color:var(--blue)}
+  .selo.cli{color:var(--amber)}
+  .selo.fim{color:var(--muted)}
+  .entrada{max-width:420px;margin:60px auto;display:flex;flex-direction:column;gap:12px}
+  .entrada input{background:var(--panel);color:var(--txt);border:1px solid var(--line-strong);border-radius:12px;padding:14px;font:inherit;font-size:16px}
+  .erro{color:var(--red-ink);font-weight:600}
+  .vazio{color:var(--muted)}
+  .nota{color:var(--muted);font-size:.85rem;margin:8px 0 0}
+  .esqueleto{background:var(--panel);border:1px solid var(--line);border-radius:14px;height:74px;margin-bottom:10px;animation:pulsa 1.2s ease-in-out infinite}
+  @keyframes pulsa{50%{opacity:.45}}
+  .entra{animation:entra .25s ease-out}
+  @keyframes entra{from{opacity:0;transform:translateY(6px)}}
+  @media (prefers-reduced-motion:reduce){.esqueleto,.entra{animation:none}}
+  :focus-visible{outline:2px solid var(--red-ink);outline-offset:3px}
+</style>
+
+<div class="wrap">
+  <div id="entrada" class="entrada" hidden>
+    <span class="kicker">Painel</span>
+    <h1>Leads das iscas</h1>
+    <label for="chave">Chave do painel</label>
+    <input id="chave" type="password" autocomplete="current-password">
+    <button class="btn btn-red" id="entrar">Abrir o painel</button>
+    <p class="nota">É a mesma chave do painel do teste grátis.</p>
+    <p class="erro" id="erro-entrada" hidden></p>
+  </div>
+
+  <div id="carregando" hidden aria-label="Carregando">
+    <div class="esqueleto" style="height:110px;margin-top:28px"></div>
+    <div class="esqueleto"></div><div class="esqueleto"></div><div class="esqueleto"></div>
+  </div>
+
+  <div id="painel" hidden>
+    <header>
+      <div><span class="kicker">Iscas da Impacto e da MaestrIA</span><h1>Leads das iscas</h1></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="/teste/painel/">Teste grátis</a>
+        <button class="btn" id="atualizar">Atualizar</button>
+        <button class="btn" id="sair">Sair</button>
+      </div>
+    </header>
+    <p class="quando-li" id="quando-li"></p>
+    <p class="erro" id="erro" hidden></p>
+    <div class="filtros" id="iscas" role="group" aria-label="Escolher a isca"></div>
+    <div class="numeros" id="numeros"></div>
+    <section id="sec-funil"><div class="grade">
+      <div class="bloco"><h2>O caminho dentro da página</h2><div id="funil"></div><p class="nota" id="funil-nota"></p></div>
+      <div class="bloco"><h2>De onde veio cada um</h2><div id="origens"></div></div>
+    </div></section>
+    <section>
+      <div class="linha-lista">
+        <h2 id="titulo-lista">Quem deixou o contato</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end;flex:1 1 320px">
+          <input class="busca" id="busca" type="search" placeholder="Buscar nome, área, grupo" aria-label="Buscar na lista">
+          <button class="btn" id="csv" type="button">Baixar planilha</button>
+        </div>
+      </div>
+      <div id="pessoas"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = "https://xiwjtgyidguhvwpveokz.supabase.co/functions/v1/iscas";
+  // Guarda própria; quem já entrou no painel do teste ou da lista de espera entra aqui com a chave de lá.
+  var GUARDA = "maestria-painel-iscas", OUTRAS = ["maestria-painel-teste", "maestria-painel-lista"];
+  var ISCAS = [
+    { id: "plano2027", nome: "Plano 2027", publico: null },
+    { id: "plano2027", nome: "Plano 2027, não clientes", publico: "aberto" },
+    { id: "plano2027", nome: "Plano 2027, clientes", publico: "cliente" },
+    { id: "raio_x", nome: "Raio-X da marca", publico: null }
+  ];
+  var PASSOS = [
+    ["visita", "Abriram a página"], ["comecou", "Começaram a montar"], ["cadastro", "Chegaram ao cadastro"],
+    ["plano", "Geraram o plano"], ["pdf", "Baixaram o PDF"], ["diagnostico", "Clicaram no diagnóstico"]
+  ];
+  var DEGRAU = { decisao: "Decisão", ambiente: "Ambiente", comportamento: "Comportamento", capacidade: "Capacidade", crenca: "Crença", identidade: "Identidade", legado: "Legado" };
+  var FRENTE = { identidade: "Identidade", bastidores: "Bastidores e execução", ambiente: "Ambiente e pessoas", raciocinio: "Raciocínio técnico", clareza: "Clareza de quem atende" };
+  var TRAVA = { oab: "medo da OAB", camera: "vergonha da câmera", tempo: "falta de tempo", assunto: "não sabe o que falar" };
+  var leads = [], funil = {}, raioX = [], escolha = 0, busca = "", primeira = true;
+
+  function ler() { try { var v = localStorage.getItem(GUARDA); if (v) return v; for (var i = 0; i < OUTRAS.length; i++) { v = localStorage.getItem(OUTRAS[i]); if (v) return v; } } catch (e) {} return ""; }
+  function gravar(v) { try { v ? localStorage.setItem(GUARDA, v) : localStorage.removeItem(GUARDA); } catch (e) {} }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function mostrar(id) { ["entrada", "carregando", "painel"].forEach(function (x) { document.getElementById(x).hidden = x !== id; }); }
+  function quando(iso) { var d = new Date(iso); return d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }); }
+  function zapDe(v) { var z = String(v || "").replace(/\D/g, ""); if (z && z.length <= 11) z = "55" + z; return z; }
+  function zapLink(z) {
+    var a = el("a", null, "WhatsApp " + z.replace(/^55(\d{2})(\d+)(\d{4})$/, "($1) $2-$3"));
+    a.href = "https://wa.me/" + z; a.target = "_blank"; a.rel = "noopener"; return a;
+  }
+
+  // A chave pode chegar pelo fim do link (#chave=...), que o navegador não manda a servidor nenhum.
+  var h = location.hash.match(/chave=([^&]+)/);
+  if (h) { gravar(decodeURIComponent(h[1])); history.replaceState(null, "", location.pathname); }
+
+  function entrada(msg) {
+    mostrar("entrada");
+    var e = document.getElementById("erro-entrada"); e.hidden = !msg; e.textContent = msg || "";
+  }
+
+  function carregar(silencioso) {
+    var chave = ler();
+    if (!chave) return entrada();
+    if (!silencioso && !leads.length && !raioX.length) mostrar("carregando");
+    document.getElementById("atualizar").textContent = "Atualizando...";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "painel", chave: chave }) })
+      .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
+      .then(function (res) {
+        document.getElementById("atualizar").textContent = "Atualizar";
+        if (res.s === 401) { gravar(""); return entrada("Chave inválida."); }
+        mostrar("painel");
+        var e = document.getElementById("erro");
+        if (!res.j.ok) { e.hidden = false; e.textContent = res.j.erro || "Não consegui ler agora."; return; }
+        e.hidden = true;
+        // O cadastro fictício do ensaio de publicação não entra na conta.
+        leads = (res.j.leads || []).filter(function (r) { return r.origem !== "teste-publicacao"; });
+        funil = res.j.funil || {};
+        raioX = res.j.raio_x || [];
+        gravar(chave);
+        document.getElementById("quando-li").textContent = "Lido às " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) + ". Atualiza sozinho a cada minuto.";
+        desenhar(primeira); primeira = false;
+      })
+      .catch(function () {
+        document.getElementById("atualizar").textContent = "Atualizar";
+        mostrar("painel");
+        var e = document.getElementById("erro"); e.hidden = false; e.textContent = "Sem conexão. Tente de novo.";
+      });
+  }
+
+  function barras(caixa, linhas, total, rotulo) {
+    caixa.innerHTML = "";
+    if (!linhas.length) caixa.appendChild(el("p", "vazio", "Sem dados ainda."));
+    linhas.forEach(function (l) {
+      var pct = total ? Math.round(l[1] * 100 / total) : 0;
+      var bar = el("div", "barra");
+      bar.appendChild(el("span", null, l[0]));
+      bar.appendChild(el("span", "q", l[2] || (l[1] + (rotulo ? "" : " (" + pct + "%)"))));
+      var t = el("span", "t"); var i = el("i"); i.style.width = Math.min(100, pct) + "%"; t.appendChild(i); bar.appendChild(t);
+      caixa.appendChild(bar);
+    });
+  }
+
+  function filtrados() {
+    var f = ISCAS[escolha];
+    if (f.id === "raio_x") return [];
+    return leads.filter(function (r) { return r.isca === f.id && (!f.publico || r.publico === f.publico); });
+  }
+
+  // Soma o funil da isca escolhida: total por passo e por origem.
+  function somaFunil() {
+    var f = ISCAS[escolha], total = {}, porOrigem = {};
+    Object.keys(funil).forEach(function (k) {
+      var p = k.split("|"); if (p[0] !== f.id || (f.publico && p[1] !== f.publico)) return;
+      var o = p[2] || "direto";
+      porOrigem[o] = porOrigem[o] || {};
+      Object.keys(funil[k]).forEach(function (ev) { total[ev] = (total[ev] || 0) + funil[k][ev]; porOrigem[o][ev] = (porOrigem[o][ev] || 0) + funil[k][ev]; });
+    });
+    return { total: total, porOrigem: porOrigem };
+  }
+
+  function desenharFiltros() {
+    var fs = document.getElementById("iscas"); fs.innerHTML = "";
+    ISCAS.forEach(function (f, i) {
+      var n = f.id === "raio_x" ? raioX.length : leads.filter(function (r) { return r.isca === f.id && (!f.publico || r.publico === f.publico); }).length;
+      var b = el("button", "filtro", f.nome + " (" + n + ")"); b.type = "button"; b.setAttribute("aria-pressed", String(escolha === i));
+      b.addEventListener("click", function () { escolha = i; desenhar(true); });
+      fs.appendChild(b);
+    });
+  }
+
+  function desenhar(animar) {
+    desenharFiltros();
+    var f = ISCAS[escolha], agora = Date.now();
+    var nums = document.getElementById("numeros"); nums.innerHTML = "";
+    var raio = f.id === "raio_x";
+    document.getElementById("sec-funil").hidden = raio;
+
+    if (raio) {
+      var dia = raioX.filter(function (r) { return agora - new Date(r.created_at).getTime() < 864e5; }).length;
+      [[raioX.length, "fizeram o Raio-X"], [dia, "nas últimas 24 horas", true]].forEach(numero);
+    } else {
+      var lista = filtrados(), s = somaFunil();
+      var dia2 = lista.filter(function (r) { return agora - new Date(r.created_at).getTime() < 864e5; }).length;
+      var diag = lista.filter(function (r) { return r.clicou_diagnostico_em; }).length;
+      [[s.total.visita || 0, "abriram a página"], [s.total.comecou || 0, "começaram a montar"], [lista.length, "deixaram o contato"],
+       [dia2, "nas últimas 24 horas"], [s.total.pdf || 0, "baixaram o PDF"], [f.publico === "cliente" ? (s.total.plano || 0) : diag, f.publico === "cliente" ? "geraram o plano" : "clicaram no diagnóstico", true]].forEach(numero);
+
+      var max = s.total.visita || 0;
+      PASSOS.forEach(function (p) { max = Math.max(max, s.total[p[0]] || 0); });
+      barras(document.getElementById("funil"), max ? PASSOS.filter(function (p) { return !(f.publico === "cliente" && p[0] === "diagnostico"); }).map(function (p) { return [p[1], s.total[p[0]] || 0]; }) : [], max);
+      document.getElementById("funil-nota").textContent = "Últimos 60 dias. Cada pessoa conta uma vez por passo a cada 12 horas. A contagem começou em 26/11/2026.";
+
+      var os = Object.keys(s.porOrigem).map(function (o) {
+        var v = s.porOrigem[o], cad = lista.filter(function (r) { return (r.origem || "direto") === o; }).length;
+        return [o, v.visita || 0, (v.visita || 0) + " abriram · " + cad + " contatos" + (f.publico === "cliente" ? "" : " · " + (v.diagnostico || 0) + " no diagnóstico")];
+      }).sort(function (a, b) { return b[1] - a[1]; });
+      barras(document.getElementById("origens"), os, s.total.visita || 0, true);
+    }
+
+    pessoas(animar);
+  }
+
+  function numero(x) {
+    var d = el("div", "num" + (x[2] ? " destaque" : "")); d.appendChild(el("b", null, x[0])); d.appendChild(el("span", null, x[1])); document.getElementById("numeros").appendChild(d);
+  }
+
+  function casa(r) { var t = busca; if (!t) return true; return JSON.stringify([r.nome, r.area, r.origem, r.escritorio, r.cidade, r.tamanho]).toLowerCase().indexOf(t) >= 0; }
+
+  function pessoas(animar) {
+    var ps = document.getElementById("pessoas"); ps.innerHTML = "";
+    var f = ISCAS[escolha];
+    if (f.id === "raio_x") {
+      var rl = raioX.filter(casa);
+      document.getElementById("titulo-lista").textContent = "Quem fez o Raio-X da marca (" + rl.length + ")";
+      if (!rl.length) ps.appendChild(el("p", "vazio", "Ninguém por aqui ainda."));
+      rl.forEach(function (r) {
+        var c = el("div", "pessoa" + (animar ? " entra" : ""));
+        var topo = el("div", "topo"); topo.appendChild(el("span", "nome", r.nome || "(sem nome)"));
+        if (r.nota_geral != null) topo.appendChild(el("span", "selo", "nota " + r.nota_geral + "/100"));
+        c.appendChild(topo);
+        var m = el("div", "meta"), z = zapDe(r.whatsapp);
+        if (z) m.appendChild(zapLink(z));
+        var partes = [r.area ? "área: " + r.area : "", r.cidade, r.email, r.origem ? "veio de: " + r.origem : ""].filter(Boolean).join("  ·  ");
+        if (partes) m.appendChild(document.createTextNode((z ? "  ·  " : "") + partes));
+        c.appendChild(m);
+        var l2 = [];
+        if (r.frente_fraca) l2.push("frente mais fraca: " + (FRENTE[r.frente_fraca] || r.frente_fraca));
+        if (r.trava) l2.push("o que trava: " + (TRAVA[r.trava] || r.trava));
+        l2.push("fez em " + quando(r.updated_at || r.created_at));
+        if (r.vezes > 1) l2.push("refez " + r.vezes + " vezes");
+        c.appendChild(el("div", "meta", l2.join("  ·  ")));
+        ps.appendChild(c);
+      });
+      return;
+    }
+    var lista = filtrados().filter(casa);
+    document.getElementById("titulo-lista").textContent = "Quem deixou o contato (" + lista.length + ")";
+    if (!lista.length) ps.appendChild(el("p", "vazio", busca ? "Ninguém com essa busca." : "Ninguém deixou o contato ainda."));
+    lista.forEach(function (r) {
+      var c = el("div", "pessoa" + (animar ? " entra" : ""));
+      var topo = el("div", "topo"); topo.appendChild(el("span", "nome", r.nome || "(sem nome)"));
+      var sl = el("div", "selos");
+      if (r.publico === "cliente") sl.appendChild(el("span", "selo cli", "cliente"));
+      if (r.clicou_diagnostico_em) sl.appendChild(el("span", "selo diag", "clicou no diagnóstico"));
+      if (r.baixou_pdf_em) sl.appendChild(el("span", "selo pdf", "baixou o PDF"));
+      topo.appendChild(sl); c.appendChild(topo);
+      var m = el("div", "meta"), z = zapDe(r.whatsapp);
+      if (z) m.appendChild(zapLink(z));
+      var partes = [r.escritorio, r.area, r.tamanho, "veio de: " + (r.origem || "direto")].filter(Boolean).join("  ·  ");
+      m.appendChild(document.createTextNode((z ? "  ·  " : "") + partes));
+      c.appendChild(m);
+      var res = r.resumo || {}, l2 = [];
+      if (res.degrau) l2.push("travado em: " + (DEGRAU[res.degrau] || res.degrau));
+      if (res.metas && res.metas.length) l2.push("metas: " + res.metas.join("; "));
+      if (l2.length) c.appendChild(el("div", "meta", l2.join("  ·  ")));
+      if (res.h24) c.appendChild(el("div", "meta", "compromisso de 24 horas: " + res.h24));
+      var l3 = ["deixou o contato em " + quando(r.created_at)];
+      if (r.vezes > 1) l3.push("voltou " + r.vezes + " vezes");
+      c.appendChild(el("div", "meta", l3.join("  ·  ")));
+      ps.appendChild(c);
+    });
+  }
+
+  // Planilha da lista que está na tela, para trabalhar os leads fora daqui.
+  function baixarCsv() {
+    var f = ISCAS[escolha], linhas;
+    function q(v) { v = v == null ? "" : String(v); return '"' + v.replace(/"/g, '""') + '"'; }
+    if (f.id === "raio_x") {
+      linhas = [["nome", "whatsapp", "email", "cidade", "area", "nota", "frente_mais_fraca", "trava", "origem", "quando"]].concat(raioX.filter(casa).map(function (r) {
+        return [r.nome, zapDe(r.whatsapp), r.email, r.cidade, r.area, r.nota_geral, r.frente_fraca, r.trava, r.origem, quando(r.updated_at || r.created_at)];
+      }));
+    } else {
+      linhas = [["nome", "whatsapp", "escritorio", "area", "tamanho", "publico", "origem", "degrau_travado", "metas", "compromisso_24h", "clicou_diagnostico", "baixou_pdf", "quando"]].concat(filtrados().filter(casa).map(function (r) {
+        var res = r.resumo || {};
+        return [r.nome, zapDe(r.whatsapp), r.escritorio, r.area, r.tamanho, r.publico, r.origem, DEGRAU[res.degrau] || res.degrau, (res.metas || []).join("; "), res.h24, r.clicou_diagnostico_em ? "sim" : "não", r.baixou_pdf_em ? "sim" : "não", quando(r.created_at)];
+      }));
+    }
+    var csv = "﻿" + linhas.map(function (l) { return l.map(q).join(";"); }).join("\r\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    a.download = "leads-" + f.nome.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + new Date().toISOString().slice(0, 10) + ".csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  document.getElementById("entrar").addEventListener("click", function () {
+    var v = document.getElementById("chave").value.trim(); if (!v) return; gravar(v); carregar();
+  });
+  document.getElementById("chave").addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("entrar").click(); });
+  document.getElementById("atualizar").addEventListener("click", function () { carregar(); });
+  document.getElementById("sair").addEventListener("click", function () { try { localStorage.removeItem(GUARDA); OUTRAS.forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {} leads = []; raioX = []; entrada(); });
+  document.getElementById("busca").addEventListener("input", function (e) { busca = e.target.value.trim().toLowerCase(); pessoas(false); });
+  document.getElementById("csv").addEventListener("click", baixarCsv);
+  carregar();
+  setInterval(function () { if (!document.hidden && ler() && !document.getElementById("painel").hidden) carregar(true); }, 60000);
+})();
+</script>
+</html>
