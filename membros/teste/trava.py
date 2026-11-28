@@ -43,6 +43,8 @@ CONFERIR_A_CADA = 6 * 3600       # confere no servidor no máximo a cada 6 horas
 SEM_INTERNET_ATE = 24 * 3600     # sem conferir por mais de 24 horas, trava
 MARCA = "maestria-teste-trava"   # identifica os ganchos desta trava no settings.json
 LINK_PADRAO = "https://maestria.samurailab.com.br/"
+# As ações que a trava vigia quando o teste acaba. Ler ou rodar um arquivo que não é da MaestrIA passa direto.
+MATCHER_FERRAMENTAS = "Skill|SlashCommand|Read|Bash|PowerShell|Glob|Grep|NotebookRead"
 
 
 def agora():
@@ -79,9 +81,11 @@ def licencas_de_teste():
     return achadas
 
 
-def consultar(token):
+def consultar(token, versao="trava-teste"):
+    # "trava-conferir" é a conferência da instalação: o servidor não liga o relógio dos 7 dias com ela
+    # (desde 28/11/2026). "trava-teste" é a pessoa usando a MaestrIA de verdade.
     corpo = json.dumps({"token": token, "hostname": socket.gethostname(),
-                        "os_info": platform.platform(), "skill_version": "trava-teste"}).encode("utf-8")
+                        "os_info": platform.platform(), "skill_version": versao}).encode("utf-8")
     pedido = urllib.request.Request(CHECKIN, data=corpo, method="POST",
                                     headers={"Content-Type": "application/json", "User-Agent": "MaestrIA-Teste/1.0"})
     try:
@@ -111,7 +115,7 @@ def tirar_marca_de_teste(licencas):
         gravar_json(lic, dados)
 
 
-def situacao(forcar=False):
+def situacao(forcar=False, versao="trava-teste"):
     """Devolve (pode_usar: bool, mensagem: str | None)."""
     licencas = licencas_de_teste()
     if not licencas:
@@ -129,7 +133,7 @@ def situacao(forcar=False):
         return True, None
 
     try:
-        cod, resp = consultar(token)
+        cod, resp = consultar(token, versao)
     except Exception:
         cod, resp = 0, {}
 
@@ -172,7 +176,11 @@ def eh_da_maestria(evento):
         return "maestria" in texto
     if nome == "PreToolUse":
         entrada = evento.get("tool_input") or {}
-        alvo = " ".join(str(entrada.get(k) or "") for k in ("skill", "command", "name", "file_path", "path", "args")).lower()
+        # Além da chamada da ferramenta, vale ler os arquivos dela ou rodar os scripts direto (28/11/2026):
+        # Read, Bash, PowerShell, Glob e Grep chegam aqui com o caminho em file_path, path, pattern ou command.
+        alvo = " ".join(str(entrada.get(k) or "") for k in
+                        ("skill", "command", "name", "file_path", "path", "pattern", "notebook_path", "args")).lower()
+        alvo = alvo.replace("\\", "/")
         if "maestria" in alvo:
             return True
         # As ferramentas instaladas neste teste, seja qual for a área (cada uma tem a sua pasta com a licença).
@@ -222,7 +230,7 @@ def instalar():
         shutil.copy2(SETTINGS, copia)
     hooks = dados.setdefault("hooks", {})
     cmd = comando_do_gancho()
-    for evento, matcher in (("UserPromptSubmit", None), ("PreToolUse", "Skill|SlashCommand")):
+    for evento, matcher in (("UserPromptSubmit", None), ("PreToolUse", MATCHER_FERRAMENTAS)):
         lista = [g for g in hooks.get(evento, []) if MARCA not in json.dumps(g)]
         grupo = {"hooks": [{"type": "command", "command": cmd, "timeout": 20, "statusMessage": MARCA}]}
         if matcher:
@@ -263,7 +271,7 @@ def main():
         return instalar()
     if acao == "desinstalar":
         return desinstalar()
-    pode, msg = situacao(forcar=True)
+    pode, msg = situacao(forcar=True, versao="trava-conferir")
     print(json.dumps({"licenca_de_teste": bool(licencas_de_teste()), "pode_usar": pode, "mensagem": msg}, ensure_ascii=False, indent=2))
     return 0
 
