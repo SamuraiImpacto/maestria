@@ -179,7 +179,8 @@
         var e = document.getElementById("erro");
         if (!res.j.ok) { e.hidden = false; e.textContent = res.j.erro || "Não consegui ler agora."; return; }
         e.hidden = true;
-        dados = (res.j.testes || []).map(function (r) { r._s = situacao(r); return r; });
+        // Cadastros de mentira usados para provar a trava e o relógio (veio de: simulacao) não entram nos números.
+        dados = (res.j.testes || []).filter(function (r) { return r.teste_origem !== "simulacao"; }).map(function (r) { r._s = situacao(r); return r; });
         visitas = res.j.visitas || {};
         // O cadastro fictício do ensaio de publicação não entra na conta.
         raioX = (res.j.raio_x || []).filter(function (r) { return r.origem !== "teste-publicacao"; });
@@ -270,11 +271,15 @@
       var linha = [];
       if (r.teste_criado_em) { var d = new Date(r.teste_criado_em); linha.push("Cadastro em " + d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })); }
       if (r._s === "comprou") linha.push("comprou em " + new Date(r.teste_convertido_em).toLocaleDateString("pt-BR"));
+      else if (r.expires_at && !r.teste_uso_em && r._s !== "fim") {
+        // Sem uso, o prazo é só a reserva de 30 dias do cadastro: os 7 dias ainda não começaram (28/11/2026).
+        linha.push("ainda não usou: os 7 dias começam no primeiro uso (cadastro reservado até " + new Date(r.expires_at).toLocaleDateString("pt-BR") + ")");
+      }
       else if (r.expires_at) {
         var falta = Math.ceil((new Date(r.expires_at).getTime() - agora) / 864e5);
-        linha.push(falta > 1 ? "faltam " + falta + " dias" : falta === 1 ? "termina em menos de 1 dia" : "terminou em " + new Date(r.expires_at).toLocaleDateString("pt-BR"));
+        linha.push(falta > 1 ? "faltam " + falta + " dias de teste" : falta === 1 ? "termina em menos de 1 dia" : "terminou em " + new Date(r.expires_at).toLocaleDateString("pt-BR"));
       }
-      if (r.ultima_ativacao_em && r._s !== "comprou") linha.push("último uso em " + new Date(r.ultima_ativacao_em).toLocaleDateString("pt-BR"));
+      if (r.ultima_ativacao_em && r._s !== "comprou") linha.push((r.teste_uso_em ? "último uso em " : "instalou em ") + new Date(r.ultima_ativacao_em).toLocaleDateString("pt-BR"));
       c.appendChild(el("div", "meta", linha.join("  ·  ")));
       ps.appendChild(c);
     });
